@@ -2,6 +2,8 @@ body {
   font-size: .875rem;
 }
 
+
+
 h2 {
   margin-top: 1em;
 }
@@ -53,12 +55,14 @@ h2 {
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
-  border: 0.3em solid #fff;
   border-radius: 0.6em;
 }
 
 .sidebar .nav-link:hover {
   background: #ddd;
+}
+.sidebar.bg-dark .nav-link:hover {
+  background: #555;
 }
 
 .sidebar .nav-link .fas {
@@ -92,6 +96,9 @@ h2 {
   color: #000;
 }
 
+.sidebar.bg-dark .sidebar-heading .btn:hover {
+  color: #fff;
+}
 
 /*
  * Navbar
@@ -108,8 +115,7 @@ h2 {
 .navbar-brand img {
   height: 1.5em;
   width: auto;
-  padding: 0 0.4em 0 0;
-  margin-top: -0.4em;
+  padding: 0 0.1em 0 0;
 }
 
 .navbar .navbar-toggler {
@@ -132,4 +138,31 @@ h2 {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/* src/App.css */
+.navbar-dark .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-light .navbar-brand {
+  color: #212529;
+}
+
+.sidebar.bg-dark {
+  background-color: #343a40 !important;
+  color: #ffffff !important;
+}
+
+.sidebar.bg-light {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+}
+
+.sidebar .nav-link {
+  color: inherit;
+}
+
+.sidebar .nav-link.active {
+  font-weight: bold;
 }

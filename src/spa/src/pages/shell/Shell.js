@@ -8,7 +8,7 @@ import Dashboard from './panes/Dashboard';
 import Transactions from './panes/Transactions';
 import Documents from './panes/Documents';
 
-const Shell = () => {
+const Shell = ({ isDarkTheme }) => {
   const userName = "John Doe"; // Replace with actual user name
   const userAvatar = "user-avatar.svg"; // Replace with actual avatar URL
 
@@ -16,8 +16,8 @@ const Shell = () => {
     <Router>
       <div className="container-fluid">
         <div className="row">
-          <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div className="position-sticky pt-3">
+        <nav id="sidebarMenu" className={`col-md-3 col-lg-2 d-md-block sidebar collapse d-flex flex-column ${isDarkTheme ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
+        <div className="position-sticky pt-3">
               <ul className="nav flex-column">
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/" end>
@@ -35,7 +35,7 @@ const Shell = () => {
                   </NavLink>
                 </li>
               </ul>
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mb-1 text-muted">
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mb-1">
                 Reports
                 <button type="button" className="btn btn-sm btn-outline-secondary" title="New Report">
                   <i className="fas fa-plus"></i>

@@ -7,12 +7,12 @@ infra:
   bicep: ./infra/main.bicep
 services:
   UserPortal:
-    project: ../../src/spa
+    project: ../../src/userportal
     host: containerapp
     language: js
     docker:
-      context: ../../src/spa
+      context: ../../src/userportal
       path: DOCKERFILE
-      registry: ${containerRegistryEndpoint}
+      registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:
       - infra

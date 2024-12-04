@@ -14,6 +14,9 @@
       "userPortalExists": {
         "value": "${SERVICE_USERPORTAL_RESOURCE_EXISTS=false}"
       },
+      "postgresqlAdminPassword": {
+        "value": "${POSTGRESQL_ADMIN_PASSWORD}"
+      },
       "portalDefinition": {
         "value": {
           "settings": []

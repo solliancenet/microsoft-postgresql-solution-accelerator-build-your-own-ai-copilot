@@ -10,11 +10,36 @@ param location string
 @description('Id of the user or app to assign application roles')
 param principalId string
 
+@description('Name of the PostgreSQL database')
+param postgresqlDatabaseName string = 'mydatabase'
+
+@description('Administrator Login of the PostgreSQL server')
+param postgresqlAdminLogin string = 'adminUser'
+
+@description('Administrator Password for the PostgreSQL server')
+@secure()
+param postgresqlAdminPassword string
+
+
 param userPortalExists bool
 @secure()
 param portalDefinition object
 
+param existingOpenAiInstance object = {
+  name: ''
+  subscriptionId: ''
+  resourceGroup: ''
+}
 
+
+var deployOpenAi = empty(existingOpenAiInstance.name)
+var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
+var azureOpenAi = deployOpenAi ? openAiInstance : existingOpenAiInstance
+var openAiInstance = {
+  name: openAi.outputs.name
+  resourceGroup: rg.name
+  subscriptionId: subscription().subscriptionId
+}
 
 // Tags that should be applied to all resources.
 // 
@@ -36,6 +61,18 @@ var rg = resourceGroup()
 //   tags: tags
 // }
 
+resource customerOpenAiResourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' existing =
+  if (!deployOpenAi) {
+    scope: subscription(existingOpenAiInstance.subscriptionId)
+    name: existingOpenAiInstance.resourceGroup
+  }
+
+resource customerOpenAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing =
+  if (!deployOpenAi) {
+    name: existingOpenAiInstance.name
+    scope: customerOpenAiResourceGroup
+  }
+
 module keyVault './shared/keyvault.bicep' = {
   name: 'keyvault'
   params: {
@@ -46,9 +83,6 @@ module keyVault './shared/keyvault.bicep' = {
   }
   scope: rg
 }
-
-
-
 
 module monitoring './shared/monitoring.bicep' = {
   name: 'monitoring'
@@ -114,5 +148,92 @@ module userPortal './app/UserPortal.bicep' = {
 }
 
 
+module openAi './shared/openai.bicep' = if (deployOpenAi) {
+  name: 'openai'
+  params: {
+    deployments: [
+      {
+        name: 'completions'
+        sku: {
+          name: 'Standard'
+          capacity: 10
+        }
+        model: {
+          name: 'gpt-4o'
+          version: '2024-05-13'
+        }
+      }
+      {
+        name: 'embeddings'
+        sku: {
+          name: 'Standard'
+          capacity: 10
+        }
+        model: {
+          name: 'text-embedding-3-large'
+          version: '1'
+        }
+      }
+    ]
+    keyvaultName: keyVault.outputs.name
+    location: location
+    name: '${abbrs.openAiAccounts}${resourceToken}'
+    sku: 'S0'
+    tags: tags
+  }
+  scope: rg
+}
 
-output containerRegistryEndpoint string = registry.outputs.loginServer
+module openAiSecrets './shared/openai-secrets.bicep' = {
+  name: 'openaiSecrets'
+  params: {
+    keyvaultName: keyVault.outputs.name
+    openAiInstance: azureOpenAi
+    tags: tags
+  }
+  scope: rg
+}
+
+module postgresql './shared/postgresql.bicep' = {
+  name: 'postgresql'
+  params: {
+    location: location
+    serverName: '${abbrs.dBforPostgreSQLServers}${resourceToken}'
+    skuName: 'Standard_B2ms'
+    skuTier: 'Burstable'
+    highAvailabilityMode: 'Disabled'
+    administratorLogin: postgresqlAdminLogin
+    administratorLoginPassword: postgresqlAdminPassword
+    databaseName: postgresqlDatabaseName
+    tags: tags
+    keyvaultName: keyVault.outputs.name
+  }
+  scope: rg
+}
+
+
+module storage './shared/storage.bicep' = {
+  name: 'storage'
+  params: {
+    containers: [
+      {
+        name: 'documents'
+      }
+    ]
+    files: []
+    keyvaultName: keyVault.outputs.name
+    location: location
+    name: '${abbrs.storageStorageAccounts}${resourceToken}'
+    tags: tags
+  }
+  scope: rg
+}
+
+
+
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
+output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
+output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
+output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
+
+output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortal.outputs.uri

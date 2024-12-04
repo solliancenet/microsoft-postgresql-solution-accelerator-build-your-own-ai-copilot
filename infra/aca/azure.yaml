@@ -1,0 +1,7 @@
+name: react-app
+services:
+  web:
+    project: ../../../src/spa
+    language: node
+    host: containerapp
+    bicep: ./infra/main.bicep

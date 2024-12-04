@@ -13,6 +13,6 @@ services:
     docker:
       context: ../../src/spa
       path: DOCKERFILE
-      registry: $(infra.outputs.containerRegistryEndpoint)
+      registry: ${containerRegistryEndpoint}
     dependsOn:
       - infra

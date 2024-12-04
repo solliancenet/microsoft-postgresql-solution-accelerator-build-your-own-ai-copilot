@@ -14,7 +14,21 @@ param userPortalExists bool
 @secure()
 param portalDefinition object
 
+param existingOpenAiInstance object = {
+  name: ''
+  subscriptionId: ''
+  resourceGroup: ''
+}
 
+
+var deployOpenAi = empty(existingOpenAiInstance.name)
+var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
+var azureOpenAi = deployOpenAi ? openAiInstance : existingOpenAiInstance
+var openAiInstance = {
+  name: openAi.outputs.name
+  resourceGroup: rg.name
+  subscriptionId: subscription().subscriptionId
+}
 
 // Tags that should be applied to all resources.
 // 
@@ -36,6 +50,18 @@ var rg = resourceGroup()
 //   tags: tags
 // }
 
+resource customerOpenAiResourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' existing =
+  if (!deployOpenAi) {
+    scope: subscription(existingOpenAiInstance.subscriptionId)
+    name: existingOpenAiInstance.resourceGroup
+  }
+
+resource customerOpenAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing =
+  if (!deployOpenAi) {
+    name: existingOpenAiInstance.name
+    scope: customerOpenAiResourceGroup
+  }
+
 module keyVault './shared/keyvault.bicep' = {
   name: 'keyvault'
   params: {
@@ -46,9 +72,6 @@ module keyVault './shared/keyvault.bicep' = {
   }
   scope: rg
 }
-
-
-
 
 module monitoring './shared/monitoring.bicep' = {
   name: 'monitoring'
@@ -111,6 +134,56 @@ module userPortal './app/UserPortal.bicep' = {
   }
   scope: rg
   dependsOn: [ monitoring ]
+}
+
+
+module openAi './shared/openai.bicep' = if (deployOpenAi) {
+  name: 'openai'
+  params: {
+    deployments: [
+      {
+        name: 'completions'
+        sku: {
+          name: 'Standard'
+          capacity: 10
+        }
+        model: {
+          name: 'gpt-4o'
+          version: '2024-05-13'
+        }
+      }
+      {
+        name: 'embeddings'
+        sku: {
+          name: 'Standard'
+          capacity: 10
+        }
+        model: {
+          name: 'text-embedding-3-large'
+          version: '1'
+        }
+      }
+    ]
+    keyvaultName: keyVault.outputs.name
+    location: location
+    name: '${abbrs.openAiAccounts}${resourceToken}'
+    sku: 'S0'
+    tags: tags
+  }
+  scope: rg
+}
+
+
+module postgresql './shared/postgresql.bicep' = {
+  name: 'postgresql'
+  params: {
+    location: location
+    serverName: 'pg-${resourceToken}'
+    administratorLogin: 'adminUser'
+    administratorLoginPassword: 'your-secure-password' // Replace with a secure password
+    databaseName: 'mydatabase'
+    tags: tags
+  }
 }
 
 

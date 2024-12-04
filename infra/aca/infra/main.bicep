@@ -119,15 +119,42 @@ module appsEnv './shared/apps-env.bicep' = {
 }
 
 
-module userPortal './app/UserPortal.bicep' = {
+module userPortalApp './app/UserPortal.bicep' = {
   name: 'UserPortal'
   params: {
-    apiUri: 'localhost' //chatAPI.outputs.uri
+    apiUri: apiApp.outputs.uri
     name: '${abbrs.appContainerApps}portal-${resourceToken}'
     location: location
     tags: tags
     keyvaultName: keyVault.outputs.name
     identityName: '${abbrs.managedIdentityUserAssignedIdentities}portal-${resourceToken}'
+    applicationInsightsName: monitoring.outputs.applicationInsightsName
+    containerAppsEnvironmentName: appsEnv.outputs.name
+    containerRegistryName: registry.outputs.name
+    exists: userPortalExists
+    appDefinition: portalDefinition
+    envSettings: [
+    ]
+    secretSettings: [
+      {
+        name: 'ApplicationInsights__ConnectionString'
+        value: monitoring.outputs.applicationInsightsConnectionSecretRef
+        secretRef: monitoring.outputs.applicationInsightsConnectionSecretName
+      }
+    ]
+  }
+  scope: rg
+  dependsOn: [ apiApp, monitoring ]
+}
+
+module apiApp './app/API.bicep' = {
+  name: 'API'
+  params: {
+    name: '${abbrs.appContainerApps}api-${resourceToken}'
+    location: location
+    tags: tags
+    keyvaultName: keyVault.outputs.name
+    identityName: '${abbrs.managedIdentityUserAssignedIdentities}api-${resourceToken}'
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     containerAppsEnvironmentName: appsEnv.outputs.name
     containerRegistryName: registry.outputs.name
@@ -236,4 +263,5 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 
-output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortal.outputs.uri
+output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortalApp.outputs.uri
+output SERVICE_API_ENDPOINT_URL string = apiApp.outputs.uri

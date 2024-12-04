@@ -10,7 +10,7 @@ param location string
 @description('Id of the user or app to assign application roles')
 param principalId string
 
-param portalExists bool = true
+param userPortalExists bool
 @secure()
 param portalDefinition object
 
@@ -77,7 +77,7 @@ module appsEnv './shared/apps-env.bicep' = {
   params: {
     name: '${abbrs.appManagedEnvironments}${resourceToken}'
     location: location
-    tags: tags
+    tags: tags //union(tags, { 'azd-service-name': 'web' })
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     logAnalyticsWorkspaceName: monitoring.outputs.logAnalyticsWorkspaceName
   }
@@ -97,7 +97,7 @@ module userPortal './app/UserPortal.bicep' = {
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     containerAppsEnvironmentName: appsEnv.outputs.name
     containerRegistryName: registry.outputs.name
-    exists: portalExists
+    exists: userPortalExists
     appDefinition: portalDefinition
     envSettings: [
     ]
@@ -112,3 +112,7 @@ module userPortal './app/UserPortal.bicep' = {
   scope: rg
   dependsOn: [ monitoring ]
 }
+
+
+
+output containerRegistryEndpoint string = registry.outputs.loginServer

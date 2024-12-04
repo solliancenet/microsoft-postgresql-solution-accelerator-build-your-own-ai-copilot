@@ -1,7 +1,18 @@
 name: react-app
+metadata:
+  subscription: ${AZURE_SUBSCRIPTION_ID}
+  resourceGroup: ${AZURE_RESOURCE_GROUP}
+  location: ${AZURE_LOCATION}
+infra:
+  bicep: ./infra/main.bicep
 services:
-  web:
-    project: ../../../src/spa
-    language: node
+  UserPortal:
+    project: ../../src/spa
     host: containerapp
-    bicep: ./infra/main.bicep
+    language: js
+    docker:
+      context: ../../src/spa
+      path: DOCKERFILE
+      registry: $(infra.outputs.containerRegistryEndpoint)
+    dependsOn:
+      - infra

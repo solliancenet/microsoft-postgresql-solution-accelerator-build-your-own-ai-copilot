@@ -16,3 +16,13 @@ services:
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:
       - infra
+  API:
+    project: ../../src/api
+    host: containerapp
+    language: python
+    docker:
+      context: ../../src/api
+      path: DOCKERFILE
+      registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
+    dependsOn:
+      - infra

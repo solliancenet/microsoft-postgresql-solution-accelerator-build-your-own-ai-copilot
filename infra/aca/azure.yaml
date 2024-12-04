@@ -13,6 +13,6 @@ services:
     docker:
       context: ../../src/userportal
       path: DOCKERFILE
-      registry: ${containerRegistryEndpoint}
+      registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:
       - infra

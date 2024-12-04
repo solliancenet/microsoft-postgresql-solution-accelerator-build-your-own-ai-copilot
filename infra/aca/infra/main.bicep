@@ -10,6 +10,17 @@ param location string
 @description('Id of the user or app to assign application roles')
 param principalId string
 
+@description('Name of the PostgreSQL database')
+param postgresqlDatabaseName string = 'mydatabase'
+
+@description('Administrator Login of the PostgreSQL server')
+param postgresqlAdminLogin string = 'adminUser'
+
+@description('Administrator Password for the PostgreSQL server')
+@secure()
+param postgresqlAdminPassword string
+
+
 param userPortalExists bool
 @secure()
 param portalDefinition object
@@ -173,19 +184,56 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
   scope: rg
 }
 
+module openAiSecrets './shared/openai-secrets.bicep' = {
+  name: 'openaiSecrets'
+  params: {
+    keyvaultName: keyVault.outputs.name
+    openAiInstance: azureOpenAi
+    tags: tags
+  }
+  scope: rg
+}
 
 module postgresql './shared/postgresql.bicep' = {
   name: 'postgresql'
   params: {
     location: location
-    serverName: 'pg-${resourceToken}'
-    administratorLogin: 'adminUser'
-    administratorLoginPassword: 'your-secure-password' // Replace with a secure password
-    databaseName: 'mydatabase'
+    serverName: '${abbrs.dBforPostgreSQLServers}${resourceToken}'
+    skuName: 'Standard_B2ms'
+    skuTier: 'Burstable'
+    highAvailabilityMode: 'Disabled'
+    administratorLogin: postgresqlAdminLogin
+    administratorLoginPassword: postgresqlAdminPassword
+    databaseName: postgresqlDatabaseName
+    tags: tags
+    keyvaultName: keyVault.outputs.name
+  }
+  scope: rg
+}
+
+
+module storage './shared/storage.bicep' = {
+  name: 'storage'
+  params: {
+    containers: [
+      {
+        name: 'documents'
+      }
+    ]
+    files: []
+    keyvaultName: keyVault.outputs.name
+    location: location
+    name: '${abbrs.storageStorageAccounts}${resourceToken}'
     tags: tags
   }
+  scope: rg
 }
 
 
 
-output containerRegistryEndpoint string = registry.outputs.loginServer
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
+output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
+output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
+output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
+
+output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortal.outputs.uri

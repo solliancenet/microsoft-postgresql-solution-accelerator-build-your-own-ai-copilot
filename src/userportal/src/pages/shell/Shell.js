@@ -2,6 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 
+import { APIUrl } from './../../api/APIConfig';
+
 import UserProfile from './../../components/UserProfile';
 
 import Dashboard from './panes/Dashboard';
@@ -55,6 +57,7 @@ const Shell = ({ isDarkTheme }) => {
 
             <div className="sidebar-sticky-bottom pt-3">
               <UserProfile name={userName} avatar={userAvatar} />
+              <br/><small>{APIUrl}</small>
             </div>
           </nav>
 

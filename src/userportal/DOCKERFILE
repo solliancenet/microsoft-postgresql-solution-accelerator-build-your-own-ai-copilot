@@ -1,16 +1,13 @@
 
 # Stage 1: Build the React app
 FROM node:14 AS build
+ARG SERVICE_API_ENDPOINT_URL
+ENV REACT_APP_SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 COPY . ./
-
-ARG SERVICE_API_ENDPOINT_URL
-ENV SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
-RUN echo "window._env_ = {API_URL: '${SERVICE_API_ENDPOINT_URL}'}" > ./public/env-config.js
-
 RUN npm run build
 
 

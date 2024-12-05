@@ -122,7 +122,6 @@ module appsEnv './shared/apps-env.bicep' = {
 module userPortalApp './app/UserPortal.bicep' = {
   name: 'UserPortal'
   params: {
-    apiUri: apiApp.outputs.uri
     name: '${abbrs.appContainerApps}portal-${resourceToken}'
     location: location
     tags: tags
@@ -134,6 +133,10 @@ module userPortalApp './app/UserPortal.bicep' = {
     exists: userPortalExists
     appDefinition: portalDefinition
     envSettings: [
+      {
+        name: 'REACT_APP_SERVICE_API_ENDPOINT_URL'
+        value: apiApp.outputs.uri
+      }
     ]
     secretSettings: [
       {
@@ -161,8 +164,17 @@ module apiApp './app/API.bicep' = {
     exists: userPortalExists
     appDefinition: portalDefinition
     envSettings: [
+      {
+        name: 'AZURE_KEY_VAULT_NAME'
+        value: keyVault.outputs.name
+      }
     ]
     secretSettings: [
+      {
+        name: 'POSTGRESQL_DB_CONNECTION_STRING'
+        value: postgresql.outputs.postgresqlConnectionStringSecretRef
+        secretRef: postgresql.outputs.postgresqlConnectionStringSecretName
+      }
       {
         name: 'ApplicationInsights__ConnectionString'
         value: monitoring.outputs.applicationInsightsConnectionSecretRef
@@ -171,7 +183,7 @@ module apiApp './app/API.bicep' = {
     ]
   }
   scope: rg
-  dependsOn: [ monitoring ]
+  dependsOn: [ monitoring, keyVault ]
 }
 
 
@@ -266,6 +278,6 @@ output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortalApp.outputs.uri
 output SERVICE_API_ENDPOINT_URL string = apiApp.outputs.uri
 
-output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
-output POSTGRESQL_DATABASE_NAME string = postgresql.outputs.databaseName
-output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin
+// output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
+// output POSTGRESQL_DATABASE_NAME string = postgresql.outputs.databaseName
+// output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin

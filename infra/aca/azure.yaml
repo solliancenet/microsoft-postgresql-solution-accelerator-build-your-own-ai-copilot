@@ -16,8 +16,7 @@ services:
       path: DOCKERFILE
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     environmentVariables:
-      - name: SERVICE_API_ENDPOINT_URL
-        value: ${SERVICE_API_ENDPOINT_URL}
+        SERVICE_API_ENDPOINT_URL: ${SERVICE_API_ENDPOINT_URL}
     dependsOn:
       - infra
 
@@ -30,8 +29,7 @@ services:
       path: DOCKERFILE
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     environmentVariables:
-      - name: AZURE_KEY_VAULT_NAME
-        value: ${AZURE_KEY_VAULT_NAME}
+        AZURE_KEY_VAULT_NAME: ${AZURE_KEY_VAULT_NAME}
     dependsOn:
       - infra
 

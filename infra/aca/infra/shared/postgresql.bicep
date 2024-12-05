@@ -104,6 +104,7 @@ resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/servers/databases@2017-12
     collation: 'English_United States.1252'
   }
   tags: tags
+  dependsOn: [ postgresqlServer]
 }
 
 

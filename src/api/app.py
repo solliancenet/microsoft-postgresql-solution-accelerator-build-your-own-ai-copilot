@@ -45,9 +45,12 @@ def root():
     """
 
     key_vault_name = os.getenv("AZURE_KEY_VAULT_NAME")
-    key_vault_uri = f"https://{key_vault_name}.vault.azure.net"
-    credential = DefaultAzureCredential()
-    client = SecretClient(vault_url=key_vault_uri, credential=credential)
-    postgresql_server_name = client.get_secret("postgresql-server").value 
 
-    return {"status": "ready", "keyvault-name": key_vault_name, "postgresql-server-name": postgresql_server_name}
+    return {"status": "ready", "keyvault-name": key_vault_name}
+
+    # key_vault_uri = f"https://{key_vault_name}.vault.azure.net"
+    # credential = DefaultAzureCredential()
+    # client = SecretClient(vault_url=key_vault_uri, credential=credential)
+    # postgresql_server_name = client.get_secret("postgresql-server").value 
+
+    # return {"status": "ready", "keyvault-name": key_vault_name, "postgresql-server-name": postgresql_server_name}

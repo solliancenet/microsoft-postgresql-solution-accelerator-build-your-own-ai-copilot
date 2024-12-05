@@ -1,4 +1,3 @@
-param apiUri string
 param name string
 param location string = resourceGroup().location
 param tags object = {}
@@ -117,10 +116,6 @@ resource app 'Microsoft.App/containerApps@2023-04-01-preview' = {
           image: fetchLatestImage.outputs.?containers[?0].?image ?? 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
           name: 'main'
           env: union([
-            {
-              name: 'APIUrl'
-              value: apiUri
-            }
             {
               name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
               value: applicationInsights.properties.ConnectionString

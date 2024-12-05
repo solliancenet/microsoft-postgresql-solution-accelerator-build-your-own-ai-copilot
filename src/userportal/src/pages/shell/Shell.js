@@ -57,10 +57,10 @@ const Shell = ({ isDarkTheme }) => {
 
             <div className="sidebar-sticky-bottom pt-3">
               <UserProfile name={userName} avatar={userAvatar} />
-              <br/><small>{APIUrl}</small>
+              <div className="row"><small>{APIUrl}</small></div>
             </div>
           </nav>
-
+          
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <Routes>
               <Route exact path="/" element={<Dashboard />} />

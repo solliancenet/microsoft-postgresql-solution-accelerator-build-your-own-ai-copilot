@@ -47,7 +47,6 @@ function App() {
           </div>
         </div>
       </header>
-
       <div className={`container-fluid ${isDarkTheme ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
         {isLoggedIn ? <Shell isDarkTheme={isDarkTheme} /> : <Login onLogin={handleLogin} />}
       </div>

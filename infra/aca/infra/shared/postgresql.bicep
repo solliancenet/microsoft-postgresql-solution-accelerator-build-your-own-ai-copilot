@@ -151,3 +151,6 @@ resource secretConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' =
 output serverName string = postgresqlServer.name
 output fqdn string = postgresqlServer.properties.fullyQualifiedDomainName
 output databaseName string = postgresqlDatabase.name
+
+output postgresqlConnectionStringSecretRef string = secretConnectionString.id
+output postgresqlConnectionStringSecretName string = secretConnectionString.name

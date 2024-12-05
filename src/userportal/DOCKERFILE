@@ -1,3 +1,4 @@
+
 # Stage 1: Build the React app
 FROM node:14 AS build
 WORKDIR /app
@@ -5,7 +6,13 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 COPY . ./
+
+ARG SERVICE_API_ENDPOINT_URL
+ENV SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
+RUN echo "window._env_ = {API_URL: '${SERVICE_API_ENDPOINT_URL}'}" > ./public/env-config.js
+
 RUN npm run build
+
 
 # Stage 2: Serve the React app with Nginx
 FROM nginx:alpine

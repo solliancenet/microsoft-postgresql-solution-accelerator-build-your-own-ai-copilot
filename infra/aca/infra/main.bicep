@@ -265,3 +265,7 @@ output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 
 output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortalApp.outputs.uri
 output SERVICE_API_ENDPOINT_URL string = apiApp.outputs.uri
+
+output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
+output POSTGRESQL_DATABASE_NAME string = postgresql.outputs.databaseName
+output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin

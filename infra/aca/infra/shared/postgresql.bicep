@@ -104,6 +104,7 @@ resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/servers/databases@2017-12
     collation: 'English_United States.1252'
   }
   tags: tags
+  dependsOn: [ postgresqlServer]
 }
 
 
@@ -111,7 +112,34 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyvaultName
 }
 
-resource storageConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+resource secretAdminUser 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'postgresql-adminuser'
+  parent: keyvault
+  tags: tags
+  properties: {
+    value: administratorLogin
+  }
+}
+
+resource secretAdminPassword 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'postgresql-adminpassword'
+  parent: keyvault
+  tags: tags
+  properties: {
+    value: administratorLoginPassword
+  }
+}
+
+resource secretServer 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'postgresql-server'
+  parent: keyvault
+  tags: tags
+  properties: {
+    value: postgresqlServer.properties.fullyQualifiedDomainName
+  }
+}
+
+resource secretConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   name: 'postgresql-connection'
   parent: keyvault
   tags: tags

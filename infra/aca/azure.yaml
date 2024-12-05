@@ -5,6 +5,7 @@ metadata:
   location: ${AZURE_LOCATION}
 infra:
   bicep: ./infra/main.bicep
+
 services:
   UserPortal:
     project: ../../src/userportal
@@ -16,6 +17,7 @@ services:
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:
       - infra
+
   API:
     project: ../../src/api
     host: containerapp
@@ -26,3 +28,10 @@ services:
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:
       - infra
+
+hooks:
+  postdeploy:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./azd-hooks/postdeploy.ps1

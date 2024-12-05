@@ -118,7 +118,7 @@ resource app 'Microsoft.App/containerApps@2023-04-01-preview' = {
           name: 'main'
           env: union([
             {
-              name: 'APIUrl'
+              name: 'REACT_APP_SERVICE_API_ENDPOINT_URL'
               value: apiUri
             }
             {

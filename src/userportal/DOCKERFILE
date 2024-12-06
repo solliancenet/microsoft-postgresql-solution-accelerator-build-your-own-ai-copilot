@@ -12,8 +12,11 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
-ENV SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
-RUN echo "window._env_ = {SERVICE_API_ENDPOINT_URL: '${SERVICE_API_ENDPOINT_URL}'};" > /usr/share/nginx/html/env-config.js
+ARG SERVICE_API_ENDPOINT_URL
+
+# Create a startup script to generate `env-config.js`
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/start.sh"]

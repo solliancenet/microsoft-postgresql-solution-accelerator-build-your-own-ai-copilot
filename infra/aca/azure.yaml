@@ -23,8 +23,6 @@ services:
       context: ../../src/userportal
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
       path: DOCKERFILE
-    environmentVariables:
-      SERVICE_API_ENDPOINT_URL: ${SERVICE_API_ENDPOINT_URL} 
     dependsOn:
       - infra
 

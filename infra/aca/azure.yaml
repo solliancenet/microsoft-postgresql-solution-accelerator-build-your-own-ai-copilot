@@ -3,8 +3,16 @@ metadata:
   subscription: ${AZURE_SUBSCRIPTION_ID}
   resourceGroup: ${AZURE_RESOURCE_GROUP}
   location: ${AZURE_LOCATION}
+
 infra:
   bicep: ./infra/main.bicep
+
+hooks:
+  postdeploy:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./azd-hooks/postdeploy.ps1
 
 services:
   UserPortal:
@@ -13,8 +21,8 @@ services:
     language: js
     docker:
       context: ../../src/userportal
-      path: DOCKERFILE
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
+      path: DOCKERFILE
     environmentVariables:
       REACT_APP_SERVICE_API_ENDPOINT_URL: ${REACT_APP_SERVICE_API_ENDPOINT_URL}
     dependsOn:
@@ -30,10 +38,3 @@ services:
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:
       - infra
-
-hooks:
-  postdeploy:
-    shell: pwsh
-    continueOnError: false
-    interactive: true
-    run: ./azd-hooks/postdeploy.ps1

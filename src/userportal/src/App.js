@@ -6,7 +6,8 @@ import Shell from './pages/shell/Shell';
 import './App.css'; // Import the CSS file
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // default to be logged in, if login is required, set it to false
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const handleLogin = () => {

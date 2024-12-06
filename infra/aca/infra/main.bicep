@@ -133,6 +133,10 @@ module userPortalApp './app/UserPortal.bicep' = {
     exists: userPortalExists
     appDefinition: portalDefinition
     envSettings: [
+      {
+        name: 'SERVICE_API_ENDPOINT_URL'
+        value: apiApp.outputs.uri
+      }
     ]
     secretSettings: [
       {

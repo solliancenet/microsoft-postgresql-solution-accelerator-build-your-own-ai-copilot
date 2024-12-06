@@ -6,13 +6,14 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 COPY . ./
-
-ENV REACT_APP_SERVICE_API_ENDPOINT_URL=${REACT_APP_SERVICE_API_ENDPOINT_URL}
-
 RUN npm run build
 
 # Stage 2: Serve the React app with Nginx
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
+
+ENV SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
+RUN echo "window._env_ = {SERVICE_API_ENDPOINT_URL: '${SERVICE_API_ENDPOINT_URL}'};" > /usr/share/nginx/html/env-config.js
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

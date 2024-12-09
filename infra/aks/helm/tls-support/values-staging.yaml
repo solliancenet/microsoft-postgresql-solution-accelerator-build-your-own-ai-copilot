@@ -1,0 +1,8 @@
+applicationName: ms-openai-postgresql-tls
+issuerName: ms-openai-postgresql-tls-staging
+certName: ms-openai-postgresql-tls-cert-staging
+environment: staging
+server: https://acme-v02.api.letsencrypt.org/directory
+certSecretName: tls-staging
+issuerSecretName: letsencrypt-staging
+ingressClass: webapprouting.kubernetes.azure.com

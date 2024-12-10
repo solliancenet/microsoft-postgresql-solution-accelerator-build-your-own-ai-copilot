@@ -7,6 +7,8 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+param resourceGroupName string
+
 @description('Id of the user or app to assign application roles')
 param principalId string
 
@@ -51,15 +53,14 @@ var tags = {
 }
 
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, resourceGroup().name))
+var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, resourceGroupName))
 
-var rg = resourceGroup()
-// targetScope = 'subscription'
-// resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-//   name: 'rg-${environmentName}'
-//   location: location
-//   tags: tags
-// }
+targetScope = 'subscription'
+resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
+  name: '${resourceGroupName}'
+  location: location
+  tags: tags
+}
 
 resource customerOpenAiResourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' existing =
   if (!deployOpenAi) {

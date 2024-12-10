@@ -99,7 +99,7 @@ resource grafana 'Microsoft.Dashboard/grafana@2022-08-01' = {
   location: location
   tags: tags
   sku: {
-    name: 'Essential'
+    name: 'Standard'
   }
   identity: {
     type: 'SystemAssigned'

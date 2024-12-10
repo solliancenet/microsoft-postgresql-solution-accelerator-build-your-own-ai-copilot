@@ -1,0 +1,62 @@
+name: aks-app-template # change this to the name of your app
+metadata:
+    template: aks-app-template@0.0.1-beta
+
+infra:
+  bicep: ./infra/main.bicep
+  path: infra
+  module: main
+
+hooks:
+    preprovision:
+        interactive: false
+        shell: pwsh
+        run: infra/azd-hooks/preprovision.ps1 # Registers any required features on the subscription
+    predeploy:
+        interactive: false
+        shell: pwsh
+        run: infra/azd-hooks/predeploy.ps1 # installs additional components on the cluster
+    postdeploy:
+        interactive: false
+        shell: pwsh
+        run: infra/azd-hooks/postdeploy.ps1 # installs additional components on the cluster
+
+services:
+  UserPortal:
+    project: ../../src/userportal
+    host: aks
+    language: js
+    docker:
+      context: ../../src/userportal
+      path: DOCKERFILE
+    k8s:
+      deploymentPath: ../userportal/manifests
+      deployment:
+        name: web
+      services:
+        name: web
+      ingress:
+        name: web
+    dependsOn:
+      - infra
+
+  API:
+    project: ../../src/api
+    host: aks
+    language: python
+    docker:
+      context: ../../src/api
+      path: DOCKERFILE
+    k8s:
+      deployment:
+        name: api
+      services:
+        name: api
+      ingress:
+        name: api
+        relativePath: /api/
+    dependsOn:
+      - infra
+
+pipeline:
+  provider: github

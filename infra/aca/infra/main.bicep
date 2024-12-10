@@ -51,7 +51,7 @@ var tags = {
 }
 
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, resourceGroup().name))
 
 var rg = resourceGroup()
 // targetScope = 'subscription'

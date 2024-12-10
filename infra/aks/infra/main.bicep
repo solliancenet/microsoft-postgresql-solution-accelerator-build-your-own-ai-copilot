@@ -9,6 +9,8 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+param resourceGroupName string
+
 param existingOpenAiInstance object
 
 @description('Id of the user or app to assign application roles')
@@ -29,12 +31,12 @@ param postgresqlAdminPassword string
 
 
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, resourceGroupName))
 var tags = { 'azd-env-name': environmentName }
 
 // Resource group to hold all resources
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: '${abbrs.resourcesResourceGroups}${environmentName}'
+  name: '${resourceGroupName}'
   location: location
   tags: tags
 }

@@ -1,7 +1,6 @@
 name: react-app
 metadata:
   subscription: ${AZURE_SUBSCRIPTION_ID}
-  resourceGroup: ${AZURE_RESOURCE_GROUP}
   location: ${AZURE_LOCATION}
 
 infra:

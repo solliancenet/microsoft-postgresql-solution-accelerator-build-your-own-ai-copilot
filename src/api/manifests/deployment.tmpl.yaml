@@ -21,8 +21,6 @@ spec:
           image: "{{.Env.SERVICE_API_IMAGE_NAME}}"
           imagePullPolicy: Always
           env:
-            - name: ASPNETCORE_ENVIRONMENT
-              value: Production
             - name: AZURE_KEY_VAULT_NAME
               valueFrom:
                 secretKeyRef:

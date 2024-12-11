@@ -135,6 +135,9 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-02-02-preview' = {
       upgradeChannel: 'patch'
     }
     addonProfiles: {
+      httpApplicationRouting: {
+        enabled: false // disable this since we are using Ingress for each service
+      }
       azurepolicy: {
         enabled: true
       }

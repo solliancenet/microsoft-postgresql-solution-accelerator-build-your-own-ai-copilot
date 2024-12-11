@@ -17,7 +17,7 @@ hooks:
         shell: pwsh
         run: infra/azd-hooks/predeploy.ps1 # installs additional components on the cluster
     postdeploy:
-        interactive: false
+        interactive: true
         shell: pwsh
         run: infra/azd-hooks/postdeploy.ps1 # installs additional components on the cluster
 
@@ -38,7 +38,12 @@ services:
       ingress:
         name: web
     dependsOn:
-      - infra
+      - infra, API
+    hooks:
+      postdeploy:
+        interactive: false
+        shell: pwsh
+        run: ../../infra/aks/infra/azd-hooks/postdeploy-UserPortal.ps1
 
   API:
     project: ../../src/api
@@ -57,6 +62,11 @@ services:
         relativePath: /api/
     dependsOn:
       - infra
+    hooks:
+      postdeploy:
+        interactive: false
+        shell: pwsh
+        run: ../../infra/aks/infra/azd-hooks/postdeploy-API.ps1
 
 pipeline:
   provider: github

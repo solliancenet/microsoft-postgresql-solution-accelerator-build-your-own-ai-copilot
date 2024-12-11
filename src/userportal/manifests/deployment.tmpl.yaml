@@ -16,11 +16,9 @@ spec:
     spec:
       containers:
         - name: web
-          image: "{{ .Env.SERVICE_WEB_IMAGE_NAME }}"
+          image: "{{ .Env.SERVICE_USERPORTAL_IMAGE_NAME }}"
           imagePullPolicy: Always
           env:
-            - name: ASPNETCORE_ENVIRONMENT
-              value: Production
             - name: SERVICE_API_ENDPOINT_URL
               valueFrom:
                 configMapKeyRef:

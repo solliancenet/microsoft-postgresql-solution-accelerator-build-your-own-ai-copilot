@@ -97,14 +97,13 @@ resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01'
   tags: tags
 }
 
-resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/servers/databases@2017-12-01' = {
-  name: '${serverName}/${databaseName}'
+resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2024-08-01' = {
+  name: databaseName
+  parent: postgresqlServer
   properties: {
     charset: 'UTF8'
     collation: 'English_United States.1252'
   }
-  tags: tags
-  dependsOn: [ postgresqlServer]
 }
 
 

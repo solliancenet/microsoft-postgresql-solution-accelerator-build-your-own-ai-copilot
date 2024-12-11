@@ -151,5 +151,5 @@ output serverName string = postgresqlServer.name
 output fqdn string = postgresqlServer.properties.fullyQualifiedDomainName
 output databaseName string = postgresqlDatabase.name
 
-output postgresqlConnectionStringSecretRef string = '${keyvault.name}.vault.azure.net/secrets/${secretConnectionString.name}'
+output postgresqlConnectionStringSecretRef string = secretConnectionString.properties.secretUri
 output postgresqlConnectionStringSecretName string = secretConnectionString.name

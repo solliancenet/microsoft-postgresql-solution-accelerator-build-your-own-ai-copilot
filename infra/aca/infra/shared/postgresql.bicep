@@ -102,7 +102,7 @@ resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases
   parent: postgresqlServer
   properties: {
     charset: 'UTF8'
-    collation: 'English_United States.1252'
+    collation: 'en_US.utf8'
   }
 }
 

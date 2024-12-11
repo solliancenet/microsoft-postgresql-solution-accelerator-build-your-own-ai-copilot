@@ -13,7 +13,7 @@ from azure.keyvault.secrets import SecretClient
 
 load_dotenv()
 
-app = FastAPI(docs_url="/")
+app = FastAPI()
 
 origins = [
     "*"
@@ -30,6 +30,13 @@ app.add_middleware(
 # Agent pool keyed by session_id to retain memories/history in-memory.
 # Note: the context is lost every time the service is restarted.
 agent_pool = {}
+
+@app.get("/")
+def root():
+    """
+    Redirect to the API documentation.
+    """
+    return RedirectResponse(url="/docs")
 
 @app.get("/status")
 def root():

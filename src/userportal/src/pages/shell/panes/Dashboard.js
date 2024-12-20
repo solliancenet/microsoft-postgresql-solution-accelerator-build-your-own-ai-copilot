@@ -1,5 +1,8 @@
 // src/DashboardView.js
 import React from 'react';
+
+import api from '../../../api/Api'; // Adjust the path as necessary
+
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -42,6 +45,19 @@ const DashboardView = () => {
     }
   };
 
+  const handleCheckAPIConnection = async () => {
+    try {
+      const status = await api.getStatus();
+      if (status.status === true) {
+        alert('API is up and running');
+      } else {
+        alert(`API Status: ${JSON.stringify(status)}`);
+      }
+    } catch (error) {
+      alert('Error fetching API status');
+    }
+  };
+
   return (
     <div className="table-responsive">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -62,6 +78,13 @@ const DashboardView = () => {
       </div>
 
       <Line data={data} options={options} />
+
+      <h2>App Status Test</h2>
+      <div>
+        <button type="button" className="btn btn-primary" onClick={handleCheckAPIConnection}>
+          Check API Connection
+        </button>
+      </div>
 
       <h2>Section title</h2>
       <div className="table-responsive">

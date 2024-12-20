@@ -13,7 +13,7 @@ from azure.keyvault.secrets import SecretClient
 
 load_dotenv()
 
-app = FastAPI()
+app = FastAPI(docs_url="/")
 
 origins = [
     "*"
@@ -31,14 +31,7 @@ app.add_middleware(
 # Note: the context is lost every time the service is restarted.
 agent_pool = {}
 
-@app.get("/")
-def root():
-    """
-    Redirect to the API documentation.
-    """
-    return RedirectResponse(url="/docs")
-
-@app.get("/status")
+@app.get("/v1/status")
 def root():
     """
     Health probe endpoint.

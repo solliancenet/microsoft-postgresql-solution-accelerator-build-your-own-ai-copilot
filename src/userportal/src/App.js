@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Cookies from 'js-cookie';
 import Login from './pages/Login';
 import Shell from './pages/shell/Shell';
 import './App.css'; // Import the CSS file
@@ -8,7 +8,11 @@ import './App.css'; // Import the CSS file
 function App() {
   // default to be logged in, if login is required, set it to false
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    // Load the theme setting from the cookie on page load
+    const savedTheme = Cookies.get('theme');
+    return savedTheme === 'dark';
+  });
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -19,7 +23,12 @@ function App() {
   };
 
   const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
+    setIsDarkTheme(prevTheme => {
+      const newTheme = !prevTheme;
+      // Save the new theme setting in a cookie
+      Cookies.set('theme', newTheme ? 'dark' : 'light', { expires: 365 });
+      return newTheme;
+    });
   };
 
   useEffect(() => {

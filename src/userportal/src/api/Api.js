@@ -55,6 +55,21 @@ const uploadDocument = async (file) => {
     }
 }
 
+const deleteDocument = async (blobName) => {
+    try {
+        const response = await fetch(`${apiConfig.APIUrl}/v1/documents/${blobName}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return;
+    } catch (error) {
+        console.error('Error deleting document:', error);
+        throw error;
+    }
+}
+
 
 module.exports = {
     getStatus,
@@ -62,5 +77,6 @@ module.exports = {
         list: listDocuments,
         getUrl: getDocumentDownloadUrl,
         upload: uploadDocument,
+        delete: deleteDocument,
     }
 };

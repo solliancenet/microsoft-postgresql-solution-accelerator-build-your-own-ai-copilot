@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException, UploadFile, File, Response
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 from config import KeyVaultConfigProvider
 import os
@@ -56,8 +56,15 @@ def read_document(document_name: str):
     """
     try:
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=document_name)
+        blob_properties = blob_client.get_blob_properties()
+        content_type = blob_properties.content_settings.content_type
+        filename = blob_properties.metadata.get("filename", document_name)
         download_stream = blob_client.download_blob()
-        return download_stream.readall()
+        headers = {
+            "Content-Type": content_type,
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+        return Response(content=download_stream.readall(), headers=headers)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -79,5 +86,17 @@ def write_document(file: UploadFile = File(...)):
         blob_client.upload_blob(file.file, overwrite=True, metadata=metadata)
         
         return {"message": f"Document {file.filename} uploaded successfully."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/documents/{document_name}")
+def delete_document(document_name: str):
+    """
+    Delete a document from the container.
+    """
+    try:
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob=document_name)
+        blob_client.delete_blob()
+        return {"message": f"Document {document_name} deleted successfully."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -1,7 +1,7 @@
 // src/Documents.js
 import React, { useEffect, useState } from 'react';
-import api from '../../../api/Api'; // Adjust the path as necessary
-
+import api from '../../../api/Api';
+import ConfirmModal from '../../../components/ConfirmModal'; 
 import { Table, Button, Modal, Form } from 'react-bootstrap';
 import { useTable, useSortBy } from 'react-table';
 
@@ -11,7 +11,9 @@ const Documents = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [file, setFile] = useState(null);
+  const [blobToDelete, setBlobToDelete] = useState(null);
 
   const fetchDocuments = async () => {
     try {
@@ -38,7 +40,19 @@ const Documents = () => {
     try {
       await api.documents.upload(file);
       setShowModal(false);
-      await fetchDocuments(); // Refresh the document list
+      fetchDocuments(); // Refresh the document list
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!blobToDelete) return;
+
+    try {
+      await api.documents.delete(blobToDelete);
+      setShowConfirmModal(false);
+      fetchDocuments(); // Refresh the document list
     } catch (err) {
       setError(err.message);
     }
@@ -60,12 +74,19 @@ const Documents = () => {
         Cell: ({ value }) => new Date(value).toLocaleString(),
       },
       {
-        Header: '',
-        accessor: 'blob_name',
-        Cell: ({ value }) => (
-          <a href={`${api.documents.getUrl(value)}`} target="_blank" rel="noopener noreferrer">Download</a>
+        Header: 'Actions',
+        accessor: 'actions',
+        Cell: ({ row }) => (
+          <div>
+            <a href={`${api.documents.getUrl(row.original.blob_name)}`} target="_blank" rel="noopener noreferrer" className="btn btn-link" aria-label="Download">
+              <i className="fas fa-download"></i>
+            </a>
+            <Button variant="danger" onClick={() => { setBlobToDelete(row.original.blob_name); setShowConfirmModal(true); }} aria-label="Delete">
+              <i className="fas fa-trash-alt"></i>
+            </Button>
+          </div>
         ),
-      }
+      },
     ],
     []
   );
@@ -100,11 +121,11 @@ const Documents = () => {
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   <span>
-                    {column.isSorted
+                  {column.isSorted
                       ? column.isSortedDesc
-                        ? ' 🔽'
-                        : ' 🔼'
-                      : ''}
+                        ? <i className="ms-2 fas fa-sort-down text-muted"></i>
+                        : <i className="ms-2 fas fa-sort-up text-muted"></i>
+                      : <i className="ms-2 fas fa-sort text-muted"></i>}
                   </span>
                 </th>
               ))}
@@ -142,6 +163,13 @@ const Documents = () => {
           <Button variant="primary" onClick={handleUpload}>Upload</Button>
         </Modal.Footer>
       </Modal>
+
+      <ConfirmModal
+        show={showConfirmModal}
+        handleClose={() => setShowConfirmModal(false)}
+        handleConfirm={handleDelete}
+        message="Are you sure you want to delete this document?"
+      />
     </div>
   );
 };

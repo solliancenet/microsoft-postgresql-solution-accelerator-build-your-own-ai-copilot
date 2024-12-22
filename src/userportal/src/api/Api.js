@@ -35,15 +35,14 @@ const getDocumentDownloadUrl = (blobName) => {
 const uploadDocument = async (file) => {
     if (!file) return;
 
+    console.info('Uploading document:', file);
+
     const formData = new FormData();
     formData.append('file', file);
 
     try {
         const response = await fetch(`${apiConfig.APIUrl}/v1/documents`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
             body: formData,
         });
         if (!response.ok) {

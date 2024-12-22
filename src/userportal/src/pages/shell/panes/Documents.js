@@ -35,14 +35,10 @@ const Documents = () => {
 
   const handleUpload = async () => {
     if (!file) return;
-
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-      api.documents.upload(file);
+      await api.documents.upload(file);
       setShowModal(false);
-      fetchDocuments(); // Refresh the document list
+      await fetchDocuments(); // Refresh the document list
     } catch (err) {
       setError(err.message);
     }
@@ -53,6 +49,10 @@ const Documents = () => {
       {
         Header: 'Filename',
         accessor: 'filename',
+      },
+      {
+        Header: 'Content Type',
+        accessor: 'content_type',
       },
       {
         Header: 'Created',
@@ -125,15 +125,15 @@ const Documents = () => {
         </tbody>
       </Table>
 
-
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Upload Document</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group>
-              <Form.File label="Choose document" onChange={handleFileChange} />
+          <Form.Group>
+              <Form.Label>Choose document</Form.Label>
+              <Form.Control type="file" onChange={handleFileChange} />
             </Form.Group>
           </Form>
         </Modal.Body>

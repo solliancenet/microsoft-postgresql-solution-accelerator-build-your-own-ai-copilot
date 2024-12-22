@@ -39,7 +39,8 @@ def list_documents():
             metadata = blob_properties.metadata
             documents.append({
                 "blob_name": blob.name,
-                "filename": metadata.get("filename", "N/A"),
+                "filename": metadata.get("filename", ""),
+                "content_type": metadata.get("content_type", ""),
                 "created": blob_properties.creation_time.strftime("%Y-%m-%dT%H:%M:%SZ")
             })
         # Sort documents by filename
@@ -71,7 +72,10 @@ def write_document(file: UploadFile = File(...)):
 
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=blobName)
 
-        metadata = {"filename": file.filename}
+        metadata = {
+            "filename": file.filename,
+            "content_type": file.content_type
+        }
         blob_client.upload_blob(file.file, overwrite=True, metadata=metadata)
         
         return {"message": f"Document {file.filename} uploaded successfully."}

@@ -8,10 +8,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
-from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
+from config import KeyVaultConfigProvider
 
 load_dotenv()
+
+# Initialize Key Vault Config Provider
+config_provider = KeyVaultConfigProvider()
+
 
 app = FastAPI(docs_url="/")
 
@@ -27,6 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Agent pool keyed by session_id to retain memories/history in-memory.
 # Note: the context is lost every time the service is restarted.
 agent_pool = {}
@@ -36,10 +40,11 @@ def root():
     """
     Health probe endpoint.
     """
-
-    key_vault_name = os.getenv("AZURE_KEY_VAULT_NAME")
-
-    return {"status": "ready", "keyvault-name": key_vault_name}
+    return {
+        "status": "ready",
+        "keyvault-name": config_provider.get_key_vault_name(),
+        "postgresql-server-name": config_provider.get_postgresql_server_name()
+    }
 
     # key_vault_uri = f"https://{key_vault_name}.vault.azure.net"
     # credential = DefaultAzureCredential()

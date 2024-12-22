@@ -2,6 +2,11 @@ from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 import os
 
+# Usage example:
+# key_vault_provider = KeyVaultConfigProvider(os.getenv("AZURE_KEY_VAULT_NAME"))
+# secret_value = key_vault_provider.get_secret("my-secret")
+# postgresql_server_name = key_vault_provider.get_postgresql_server_name()
+
 class KeyVaultConfigProvider:
     def __init__(self, key_vault_name: str = None):
         self.key_vault_name = key_vault_name
@@ -28,10 +33,9 @@ class KeyVaultConfigProvider:
     def get_postgresql_server_name(self) -> str:
         return self.get_secret("postgresql-server")
 
-    def get_storage_connection(self) -> str:
+    def get_storage_connection_string(self) -> str:
         return self.get_secret("storage-connection")
 
+    def get_document_container_name(self) -> str:
+        return "documents"
 
-# Usage example:
-# key_vault_provider = KeyVaultConfigProvider(os.getenv("AZURE_KEY_VAULT_NAME"))
-# secret_value = key_vault_provider.get_secret("my-secret")

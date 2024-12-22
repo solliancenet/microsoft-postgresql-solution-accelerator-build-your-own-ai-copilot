@@ -60,11 +60,11 @@ const Shell = ({ isDarkTheme }) => {
                       <i className="fas fa-home"></i> Dashboard
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/transactions">
                       <i className="fas fa-chart-bar"></i> Transactions
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
                       <i className="fas fa-file-alt"></i> Documents

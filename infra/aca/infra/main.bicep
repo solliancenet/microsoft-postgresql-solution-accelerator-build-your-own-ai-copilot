@@ -13,7 +13,7 @@ param resourceGroupName string
 param principalId string
 
 @description('Name of the PostgreSQL database')
-param postgresqlDatabaseName string = 'mydatabase'
+param postgresqlDatabaseName string = 'db-claimsdata'
 
 @description('Administrator Login of the PostgreSQL server')
 param postgresqlAdminLogin string = 'adminUser'

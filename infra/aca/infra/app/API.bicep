@@ -4,6 +4,7 @@ param tags object = {}
 
 param keyvaultName string
 param identityName string
+param storageAccountName string
 param containerRegistryName string
 param containerAppsEnvironmentName string
 param applicationInsightsName string
@@ -42,12 +43,16 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
   name: applicationInsightsName
 }
 
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' existing = {
+  name: storageAccountName
+}
+
 resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: containerRegistry
   name: guid(subscription().id, resourceGroup().id, identity.id, 'acrPullRole')
   properties: {
     roleDefinitionId:  subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
+      'Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d') // ACR Pull role
     principalType: 'ServicePrincipal'
     principalId: identity.properties.principalId
   }
@@ -58,9 +63,19 @@ resource kvSecretsRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(subscription().id, resourceGroup().id, identity.id, 'kvSecretsRole')
   properties: {
     roleDefinitionId:  subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
+      'Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User role
     principalType: 'ServicePrincipal'
     principalId: identity.properties.principalId
+  }
+}
+
+resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storageAccount
+  name: guid(subscription().id, resourceGroup().id, identity.id, 'storageBlobDataContributorRole')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
+    principalId: identity.properties.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 
@@ -134,6 +149,10 @@ resource app 'Microsoft.App/containerApps@2023-04-01-preview' = {
             {
               name: 'PORT'
               value: '80'
+            }
+            {
+              name: 'AZURE_CLIENT_ID'
+              value: identity.properties.clientId
             }
           ],
           env,

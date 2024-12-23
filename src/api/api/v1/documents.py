@@ -41,7 +41,8 @@ def list_documents():
                 "blob_name": blob.name,
                 "filename": metadata.get("filename", ""),
                 "content_type": metadata.get("content_type", ""),
-                "created": blob_properties.creation_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+                "created": blob_properties.creation_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "size": blob_properties.size
             })
         # Sort documents by filename
         documents.sort(key=lambda x: (x["filename"], x["created"]))

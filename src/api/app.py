@@ -10,6 +10,9 @@ from fastapi.responses import RedirectResponse
 
 from config import KeyVaultConfigProvider
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 load_dotenv()
 
 # Initialize Key Vault Config Provider

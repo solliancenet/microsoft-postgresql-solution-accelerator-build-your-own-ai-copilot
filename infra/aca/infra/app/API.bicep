@@ -53,6 +53,17 @@ resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
+resource kvSecretsRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: keyvault
+  name: guid(subscription().id, resourceGroup().id, identity.id, 'kvSecretsRole')
+  properties: {
+    roleDefinitionId:  subscriptionResourceId(
+      'Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
+    principalType: 'ServicePrincipal'
+    principalId: identity.properties.principalId
+  }
+}
+
 resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyvaultName
 }

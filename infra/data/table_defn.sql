@@ -1,7 +1,6 @@
 /*  File to load table DDL for Claims Data  */
 
 -- Contract Companies table: information about companies (e.g., tags, industry codes, preferences)
-
 DROP TABLE IF EXISTS contract_companies;
 
 CREATE TABLE contract_companies (
@@ -14,6 +13,7 @@ CREATE TABLE contract_companies (
 );
 
 -- MSA table; information about payment terms, special clauses, or additional legal notes
+
 
 DROP TABLE IF EXISTS msas;
 

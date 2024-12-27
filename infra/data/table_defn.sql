@@ -19,7 +19,6 @@ DROP TABLE IF EXISTS msas;
 
 CREATE TABLE msas (
     msa_id INT PRIMARY KEY,
-    company_id INT REFERENCES Contract_Companies(company_id),
     msa_title VARCHAR(255),
     start_date DATE,
     end_date DATE,
@@ -33,7 +32,6 @@ DROP TABLE IF EXISTS sows;
 
 CREATE TABLE sows (
     sow_id INT PRIMARY KEY,
-    msa_id INT REFERENCES MSAs(msa_id),
     sow_title VARCHAR(255),
     start_date DATE,
     end_date DATE,
@@ -48,7 +46,6 @@ DROP TABLE IF EXISTS invoices;
 
 CREATE TABLE invoices (
     invoice_id INT PRIMARY KEY,
-    sow_id INT REFERENCES SOWs(sow_id),
     invoice_number VARCHAR(50),
     amount DECIMAL(18,2),
     invoice_date DATE,

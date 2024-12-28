@@ -1,20 +1,21 @@
 // src/Transactions.js
 import React, { useEffect, useState } from 'react';
 import api from '../../../api/Api';
+import Table from '../../../components/Table';
 
 const Vendors = () => {
-  const [vendors, setVendors] = useState([]);
+  const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(10);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchVendors = async (skip, limit) => {
+  const fetchData = async (skip, limit) => {
     setLoading(true);
     try {
       const response = await api.vendors.list(skip, limit);
-      setVendors(response.data);
+      setData(response.data);
       setTotal(response.total);
       setSkip(response.skip);
       setLimit(response.limit);
@@ -26,7 +27,7 @@ const Vendors = () => {
   };
 
   useEffect(() => {
-    fetchVendors(skip, limit);
+    fetchData(skip, limit);
   }, [skip, limit]);
 
   const handlePrevious = () => {
@@ -41,6 +42,40 @@ const Vendors = () => {
     }
   };
 
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'ID',
+        accessor: 'id',
+      },
+      {
+        Header: 'Vendor Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Address',
+        accessor: 'address',
+      },
+      {
+        Header: 'Contact Person',
+        accessor: 'contact_name',
+      },
+      {
+        Header: 'Contact Email',
+        accessor: 'contact_email',
+      },
+      {
+        Header: 'Contact Phone',
+        accessor: 'contact_phone',
+      },
+      {
+        Header: 'Type',
+        accessor: 'type',
+      },
+    ],
+    []
+  );
+
   return (
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -52,32 +87,7 @@ const Vendors = () => {
         <p>Error: {error}</p>
       ) : (
         <div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Vendor Name</th>
-                <th>Address</th>
-                <th>Contact Person</th>
-                <th>Contact Email</th>
-                <th>Contact Phone</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vendors.map((vendor) => (
-                <tr key={vendor.id}>
-                  <td>{vendor.id}</td>
-                  <td>{vendor.name}</td>
-                  <td>{vendor.address}</td>
-                  <td>{vendor.contact_name}</td>
-                  <td>{vendor.contact_email}</td>
-                  <td>{vendor.contact_phone}</td>
-                  <td>{vendor.contact_type}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Table columns={columns} data={data} />
           <div className="d-flex justify-content-between">
             <button className="btn btn-primary" onClick={handlePrevious} disabled={skip === 0}>
               Previous

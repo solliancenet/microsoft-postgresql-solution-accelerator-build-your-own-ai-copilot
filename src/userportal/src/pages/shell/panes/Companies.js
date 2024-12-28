@@ -1,20 +1,20 @@
-// src/Transactions.js
 import React, { useEffect, useState } from 'react';
 import api from '../../../api/Api';
+import Table from '../../../components/Table';
 
 const Companies = () => {
-  const [companies, setCompanies] = useState([]);
+  const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(10);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchCompanies = async (skip, limit) => {
+  const fetchData = async (skip, limit) => {
     setLoading(true);
     try {
       const response = await api.companies.list(skip, limit);
-      setCompanies(response.data);
+      setData(response.data);
       setTotal(response.total);
       setSkip(response.skip);
       setLimit(response.limit);
@@ -26,7 +26,7 @@ const Companies = () => {
   };
 
   useEffect(() => {
-    fetchCompanies(skip, limit);
+    fetchData(skip, limit);
   }, [skip, limit]);
 
   const handlePrevious = () => {
@@ -41,6 +41,32 @@ const Companies = () => {
     }
   };
 
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'ID',
+        accessor: 'id',
+      },
+      {
+        Header: 'Company Name',
+        accessor: 'company_name',
+      },
+      {
+        Header: 'Address',
+        accessor: 'address',
+      },
+      {
+        Header: 'Contact Person',
+        accessor: 'contact_person',
+      },
+      {
+        Header: 'Contact Email',
+        accessor: 'contact_email',
+      },
+    ],
+    []
+  );
+
   return (
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -52,28 +78,7 @@ const Companies = () => {
         <p>Error: {error}</p>
       ) : (
         <div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Company Name</th>
-                <th>Address</th>
-                <th>Contact Person</th>
-                <th>Contact Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {companies.map((company) => (
-                <tr key={company.id}>
-                  <td>{company.id}</td>
-                  <td>{company.company_name}</td>
-                  <td>{company.address}</td>
-                  <td>{company.contact_person}</td>
-                  <td>{company.contact_email}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Table columns={columns} data={data} />
           <div className="d-flex justify-content-between">
             <button className="btn btn-primary" onClick={handlePrevious} disabled={skip === 0}>
               Previous

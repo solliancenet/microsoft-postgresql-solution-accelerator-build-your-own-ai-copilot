@@ -21,8 +21,8 @@ def get_db():
         db.close()
 
 @router.get("/company", response_model=ListResponse)
-def list_companies(skip: int = 0, limit: int = 10, sortby: str = None, db: Session = Depends(get_db)):
-    companies = crud.get_companies(db, skip=skip, limit=limit, sortby=sortby)
+def list_companies(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, db: Session = Depends(get_db)):
+    companies = crud.get_companies(db, skip=skip, limit=limit, sortby=sortby, search=search)
     total = db.query(models.ContractCompany).count()
     data_pydantic = [schemas.ContractCompany.from_orm(company) for company in companies]
     return ListResponse[schemas.ContractCompany](data=data_pydantic, total=total, skip=skip, limit=limit)

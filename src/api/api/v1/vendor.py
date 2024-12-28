@@ -21,8 +21,8 @@ def get_db():
         db.close()
 
 @router.get("/vendor", response_model=ListResponse)
-def list_vendors(skip: int = 0, limit: int = 10, sortby: str = None, db: Session = Depends(get_db)):
-    vendors = crud.get_vendors(db, skip=skip, limit=limit, sortby=sortby)
+def list_vendors(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, db: Session = Depends(get_db)):
+    vendors = crud.get_vendors(db, skip=skip, limit=limit, sortby=sortby, search=search)
     total = db.query(models.Vendor).count()
     data_pydantic = [schemas.Vendor.from_orm(vendor) for vendor in vendors]
     return ListResponse[schemas.Vendor](data=data_pydantic, total=total, skip=skip, limit=limit)

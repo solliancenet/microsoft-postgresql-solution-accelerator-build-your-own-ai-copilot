@@ -79,9 +79,9 @@ const deleteDocument = async (blobName) => {
 /* *************** */
 
 // Function to fetch companies with pagination
-const listCompanies = async (skip = 0, limit = 10, sortBy = '') => {
+const listCompanies = async (skip = 0, limit = 10, sortBy = '', search = '') => {
     try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/company?skip=${skip}&limit=${limit}&sortby=${sortBy}`);
+        const response = await fetch(`${apiConfig.APIUrl}/v1/company?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -97,9 +97,9 @@ const listCompanies = async (skip = 0, limit = 10, sortBy = '') => {
 /* *************** */
 
 // Function to fetch companies with pagination
-const listVendors = async (skip = 0, limit = 10, sortBy = '') => {
+const listVendors = async (skip = 0, limit = 10, sortBy = '', search = '') => {
     try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}`);
+        const response = await fetch(`${apiConfig.APIUrl}/v1/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

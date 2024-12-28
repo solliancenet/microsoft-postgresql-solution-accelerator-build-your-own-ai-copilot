@@ -38,8 +38,8 @@ const Vendors = () => {
     []
   );
 
-  const fetchVendors = async (skip, limit, sortBy) => {
-    const response = await api.vendors.list(skip, limit, sortBy);
+  const fetchVendors = async (skip, limit, sortBy, search) => {
+    const response = await api.vendors.list(skip, limit, sortBy, search);
     return response;
   };
 

@@ -29,8 +29,8 @@ const Companies = () => {
     []
   );
 
-  const fetchCompanies = async (skip, limit, sortBy) => {
-    const response = await api.companies.list(skip, limit, sortBy);
+  const fetchCompanies = async (skip, limit, sortBy, search) => {
+    const response = await api.companies.list(skip, limit, sortBy, search);
     return response;
   };
 

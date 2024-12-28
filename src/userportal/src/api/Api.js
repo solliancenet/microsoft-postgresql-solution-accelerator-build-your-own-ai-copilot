@@ -1,8 +1,10 @@
 const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
 
+const apiVersion = 'v1';
+
 const fetchData = async (url) => {
     try {
-        const response = await fetch(`${apiConfig.APIUrl}${url}`);
+        const response = await fetch(`${apiConfig.APIUrl}/${apiVersion}${url}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -20,7 +22,7 @@ const fetchData = async (url) => {
 /* *************** */
 
 const getStatus = async () => {
-    return await fetchData(`/v1/status`);
+    return await fetchData(`/status`);
 };
 
 /* *************** */
@@ -28,11 +30,11 @@ const getStatus = async () => {
 /* *************** */
 
 const listDocuments = async () => {
-    return await fetchData(`/v1/documents`);
+    return await fetchData(`/documents`);
 };
 
 const getDocumentDownloadUrl = (blobName) => {
-    return `${apiConfig.APIUrl}/v1/documents/${blobName}`;
+    return `${apiConfig.APIUrl}/${apiVersion}/documents/${blobName}`;
 }
 
 const uploadDocument = async (file) => {
@@ -44,7 +46,7 @@ const uploadDocument = async (file) => {
     formData.append('file', file);
 
     try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/documents`, {
+        const response = await fetch(`${apiConfig.APIUrl}/${apiVersion}/documents`, {
             method: 'POST',
             body: formData,
         });
@@ -60,7 +62,7 @@ const uploadDocument = async (file) => {
 
 const deleteDocument = async (blobName) => {
     try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/documents/${blobName}`, {
+        const response = await fetch(`${apiConfig.APIUrl}/${apiVersion}/documents/${blobName}`, {
             method: 'DELETE',
         });
         if (!response.ok) {
@@ -79,7 +81,7 @@ const deleteDocument = async (blobName) => {
 
 // Function to fetch companies with pagination
 const listCompanies = async (skip = 0, limit = 10, sortBy = '', search = '') => {
-    return await fetchData(`/v1/company?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
+    return await fetchData(`/company?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
 
 /* *************** */
@@ -88,7 +90,7 @@ const listCompanies = async (skip = 0, limit = 10, sortBy = '', search = '') => 
 
 // Function to fetch companies with pagination
 const listVendors = async (skip = 0, limit = 10, sortBy = '', search = '') => {
-    return await fetchData(`/v1/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
+    return await fetchData(`/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
 
 /* *************** */
@@ -96,7 +98,15 @@ const listVendors = async (skip = 0, limit = 10, sortBy = '', search = '') => {
 /* *************** */
 
 const listSOWs = async (skip = 0, limit = 10, sortBy = '', search = '') => {
-    return await fetchData(`/v1/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
+    return await fetchData(`/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
+};
+
+/* *************** */
+/* Invoice API */
+/* *************** */
+
+const listInvoices = async (skip = 0, limit = 10, sortBy = '', search = '') => {
+    return await fetchData(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
 
 
@@ -120,5 +130,8 @@ module.exports = {
     },
     sows: {
         list: listSOWs,
+    },
+    invoices: {
+        list: listInvoices,
     }
 };

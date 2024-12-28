@@ -31,3 +31,12 @@ class Sow(Base):
     budget = Column(Float)
     sow_document = Column(String)
     details = Column(JSON)
+
+class Invoice(Base):
+    __tablename__ = 'invoices'
+    id = Column(Integer, primary_key=True, index=True)
+    invoice_number = Column(String, index=True)
+    amount = Column(Float)
+    invoice_date = Column(Date)
+    payment_status = Column(String)
+    invoice_details = Column(String)

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
 from sqlalchemy import or_
-from data.models import ContractCompany, Vendor, Sow
+from data.models import ContractCompany, Vendor, Sow, Invoice
 
 
 # ########################################################################################################################
@@ -98,6 +98,37 @@ def get_sows(db: Session, skip: int = 0, limit: int = 10, sortby: str = None, se
                 query = query.order_by(desc(getattr(Sow, sort_column)))
             else:
                 query = query.order_by(asc(getattr(Sow, sort_column)))
+        except ValueError:
+            pass  # Handle the case where sortby is not correctly formatted
+    
+    return query.offset(skip).limit(limit).all()
+
+# ########################################################################################################################
+# Invoice CRUD
+# ########################################################################################################################
+
+def get_invoice(db: Session, invoice_id: int):
+    return db.query(Invoice).filter(Invoice.id == invoice_id).first()
+
+def get_invoices(db: Session, skip: int = 0, limit: int = 10, sortby: str = None, search: str = None):
+    query = db.query(Invoice)
+    
+    if search:
+        search = f"%{search}%"
+        query = query.filter(
+            or_(
+                Invoice.invoice_number.ilike(search),
+                Invoice.payment_status.ilike(search)
+            )
+        )
+    
+    if sortby:
+        try:
+            sort_column, sort_order = sortby.split(':')
+            if sort_order == 'desc':
+                query = query.order_by(desc(getattr(Invoice, sort_column)))
+            else:
+                query = query.order_by(asc(getattr(Invoice, sort_column)))
         except ValueError:
             pass  # Handle the case where sortby is not correctly formatted
     

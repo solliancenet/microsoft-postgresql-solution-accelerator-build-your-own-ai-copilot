@@ -32,14 +32,14 @@ const Vendors = () => {
       },
       {
         Header: 'Type',
-        accessor: 'type',
+        accessor: 'contact_type',
       },
     ],
     []
   );
 
-  const fetchVendors = async (skip, limit) => {
-    const response = await api.vendors.list(skip, limit);
+  const fetchVendors = async (skip, limit, sortBy) => {
+    const response = await api.vendors.list(skip, limit, sortBy);
     return response;
   };
 

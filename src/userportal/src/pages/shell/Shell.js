@@ -7,6 +7,7 @@ import UserProfile from './../../components/UserProfile';
 import Dashboard from './panes/Dashboard';
 import Companies from './panes/Companies';
 import Documents from './panes/Documents';
+import SOWs from './panes/SOWs';
 import Vendors from './panes/Vendors';
 
 const Shell = ({ isDarkTheme }) => {
@@ -72,6 +73,11 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                   <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/sows">
+                      <i className="fas fa-file-contract"></i> SOWs
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/vendors">
                       <i className="fas fa-briefcase"></i> Vendors
                     </NavLink>
@@ -116,6 +122,7 @@ const Shell = ({ isDarkTheme }) => {
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/companies" element={<Companies />} />
               <Route path="/documents" element={<Documents />} />
+              <Route path="/sows" element={<SOWs />} />
               <Route path="/vendors" element={<Vendors />} />
             </Routes>
           </main>

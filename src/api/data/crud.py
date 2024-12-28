@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
 from sqlalchemy import or_
-from data.models import ContractCompany, Vendor
+from data.models import ContractCompany, Vendor, Sow
 
 
 # ########################################################################################################################
@@ -67,6 +67,37 @@ def get_vendors(db: Session, skip: int = 0, limit: int = 10, sortby: str = None,
                 query = query.order_by(desc(getattr(Vendor, sort_column)))
             else:
                 query = query.order_by(asc(getattr(Vendor, sort_column)))
+        except ValueError:
+            pass  # Handle the case where sortby is not correctly formatted
+    
+    return query.offset(skip).limit(limit).all()
+
+# ########################################################################################################################
+# SOW CRUD
+# ########################################################################################################################
+
+def get_sow(db: Session, sow_id: int):
+    return db.query(Sow).filter(Sow.id == sow_id).first()
+
+def get_sows(db: Session, skip: int = 0, limit: int = 10, sortby: str = None, search: str = None):
+    query = db.query(Sow)
+    
+    if search:
+        search = f"%{search}%"
+        query = query.filter(
+            or_(
+                Sow.sow_title.ilike(search),
+                Sow.sow_document.ilike(search)
+            )
+        )
+    
+    if sortby:
+        try:
+            sort_column, sort_order = sortby.split(':')
+            if sort_order == 'desc':
+                query = query.order_by(desc(getattr(Sow, sort_column)))
+            else:
+                query = query.order_by(asc(getattr(Sow, sort_column)))
         except ValueError:
             pass  # Handle the case where sortby is not correctly formatted
     

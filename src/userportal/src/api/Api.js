@@ -1,17 +1,26 @@
 const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
 
-const getStatus = async () => {
+const fetchData = async (url) => {
     try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/status`);
+        const response = await fetch(`${apiConfig.APIUrl}${url}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Error fetching status:', error);
+        console.error('Error fetching data:', error);
         throw error;
     }
+};
+
+
+/* *************** */
+/* Status API */
+/* *************** */
+
+const getStatus = async () => {
+    return await fetchData(`/v1/status`);
 };
 
 /* *************** */
@@ -19,17 +28,7 @@ const getStatus = async () => {
 /* *************** */
 
 const listDocuments = async () => {
-    try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/documents`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching documents:', error);
-        throw error;
-    }
+    return await fetchData(`/v1/documents`);
 };
 
 const getDocumentDownloadUrl = (blobName) => {
@@ -80,16 +79,7 @@ const deleteDocument = async (blobName) => {
 
 // Function to fetch companies with pagination
 const listCompanies = async (skip = 0, limit = 10, sortBy = '', search = '') => {
-    try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/company?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error listing companies:', error);
-        throw error;
-    }
+    return await fetchData(`/v1/company?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
 
 /* *************** */
@@ -98,17 +88,17 @@ const listCompanies = async (skip = 0, limit = 10, sortBy = '', search = '') => 
 
 // Function to fetch companies with pagination
 const listVendors = async (skip = 0, limit = 10, sortBy = '', search = '') => {
-    try {
-        const response = await fetch(`${apiConfig.APIUrl}/v1/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error listing companies:', error);
-        throw error;
-    }
+    return await fetchData(`/v1/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
+
+/* *************** */
+/* SOW API */
+/* *************** */
+
+const listSOWs = async (skip = 0, limit = 10, sortBy = '', search = '') => {
+    return await fetchData(`/v1/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
+};
+
 
 /* *************** */
 /* Exported API */
@@ -127,5 +117,8 @@ module.exports = {
     },
     vendors: {
         list: listVendors,
+    },
+    sows: {
+        list: listSOWs,
     }
 };

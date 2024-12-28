@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException, UploadFile, File, Response
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, ContentSettings
 from config import KeyVaultConfigProvider
 import os
-import uuid
 import re
 from typing import List
 
@@ -69,9 +68,8 @@ def read_document(document_name: str):
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=document_name)
         blob_properties = blob_client.get_blob_properties()
 
-        filename = blob_properties.metadata.get("filename", document_name)
         content_type = blob_properties.content_settings.content_type
-        content_disposition = blob_properties.content_settings.content_disposition or f'attachment; filename="{filename}"'
+        content_disposition = blob_properties.content_settings.content_disposition or f'attachment; filename="{document_name}"'
 
         download_stream = blob_client.download_blob()
         headers = {
@@ -89,7 +87,7 @@ def write_document(file: UploadFile = File(...)):
     """
     try:
         # generate guid for blog name
-        blobName = str(uuid.uuid4())
+        blobName = file.filename
 
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=blobName)
 

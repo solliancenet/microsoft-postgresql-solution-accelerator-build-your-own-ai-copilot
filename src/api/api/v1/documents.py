@@ -1,8 +1,9 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Response
-from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, ContentSettings
 from config import KeyVaultConfigProvider
 import os
 import uuid
+import re
 from typing import List
 
 router = APIRouter()
@@ -24,6 +25,14 @@ else:
 
 
 
+def extract_filename(content_disposition):
+    if content_disposition:
+        match = re.search(r'filename="([^"]+)"', content_disposition)
+        if match:
+            return match.group(1)
+    return None
+
+
 @router.get("/documents", response_model=List[dict])
 def list_documents():
     """
@@ -36,11 +45,12 @@ def list_documents():
         for blob in blob_list:
             blob_client = container_client.get_blob_client(blob)
             blob_properties = blob_client.get_blob_properties()
-            metadata = blob_properties.metadata
+            content_disposition = blob_properties.content_settings.content_disposition or None
+            filename = extract_filename(content_disposition) or blob.name
             documents.append({
                 "blob_name": blob.name,
-                "filename": metadata.get("filename", ""),
-                "content_type": metadata.get("content_type", ""),
+                "filename": filename,
+                "content_type": blob_properties.content_settings.content_type,
                 "created": blob_properties.creation_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "size": blob_properties.size
             })
@@ -58,12 +68,15 @@ def read_document(document_name: str):
     try:
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=document_name)
         blob_properties = blob_client.get_blob_properties()
-        content_type = blob_properties.content_settings.content_type
+
         filename = blob_properties.metadata.get("filename", document_name)
+        content_type = blob_properties.content_settings.content_type
+        content_disposition = blob_properties.content_settings.content_disposition or f'attachment; filename="{filename}"'
+
         download_stream = blob_client.download_blob()
         headers = {
             "Content-Type": content_type,
-            "Content-Disposition": f'attachment; filename="{filename}"'
+            "Content-Disposition": content_disposition
         }
         return Response(content=download_stream.readall(), headers=headers)
     except Exception as e:
@@ -80,11 +93,12 @@ def write_document(file: UploadFile = File(...)):
 
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=blobName)
 
-        metadata = {
-            "filename": file.filename,
-            "content_type": file.content_type
-        }
-        blob_client.upload_blob(file.file, overwrite=True, metadata=metadata)
+        content_settings = ContentSettings(
+            content_type=file.content_type,
+            content_disposition=f'attachment; filename="{file.filename}"'
+            )
+
+        blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
         
         return {"message": f"Document {file.filename} uploaded successfully."}
     except Exception as e:

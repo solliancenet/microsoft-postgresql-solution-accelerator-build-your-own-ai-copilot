@@ -47,10 +47,6 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true }) => {
     setSortBy(newSortBy || '');
   };
 
-  // const handleSearch = () => {
-  //   loadData(0, limit, sortBy, searchQuery);
-  // };
-
   const updateSearch = (value) => {
     setSkip(0);
     setSearchQuery(value);

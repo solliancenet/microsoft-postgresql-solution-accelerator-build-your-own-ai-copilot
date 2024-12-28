@@ -62,18 +62,18 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/companies">
-                      <i className="fas fa-chart-bar"></i> Companies
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
                       <i className="fas fa-file-alt"></i> Documents
                     </NavLink>
                   </li>
                   <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/companies">
+                      <i className="fas fa-building"></i> Companies
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/vendors">
-                      <i className="fas fa-chart-bar"></i> Vendors
+                      <i className="fas fa-briefcase"></i> Vendors
                     </NavLink>
                   </li>
                 </ul>

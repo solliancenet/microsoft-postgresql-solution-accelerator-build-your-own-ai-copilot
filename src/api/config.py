@@ -32,6 +32,9 @@ class KeyVaultConfigProvider:
 
     def get_postgresql_server_name(self) -> str:
         return self.get_secret("postgresql-server")
+    
+    def get_postgresql_connection_string(self) -> str:
+        return self.get_secret("postgresql-connection")
 
     def get_storage_connection_string(self) -> str:
         return self.get_secret("storage-connection")

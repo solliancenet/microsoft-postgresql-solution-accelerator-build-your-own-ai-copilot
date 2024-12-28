@@ -143,7 +143,7 @@ resource secretConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' =
   parent: keyvault
   tags: tags
   properties: {
-    value: 'postgresql://${administratorLogin}:${administratorLoginPassword}@${postgresqlServer.properties.fullyQualifiedDomainName}:5432/${databaseName}'
+    value: 'postgresql://${administratorLogin}:${uriComponent(administratorLoginPassword)}@${postgresqlServer.properties.fullyQualifiedDomainName}:5432/${databaseName}'
   }
 }
 

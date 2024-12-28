@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 import UserProfile from './../../components/UserProfile';
 
 import Dashboard from './panes/Dashboard';
-import Transactions from './panes/Transactions';
+import Companies from './panes/Companies';
 import Documents from './panes/Documents';
+import Vendors from './panes/Vendors';
 
 const Shell = ({ isDarkTheme }) => {
   const userName = "John Doe"; // Replace with actual user name
@@ -60,14 +61,19 @@ const Shell = ({ isDarkTheme }) => {
                       <i className="fas fa-home"></i> Dashboard
                     </NavLink>
                   </li>
-                  {/* <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/transactions">
-                      <i className="fas fa-chart-bar"></i> Transactions
+                  <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/companies">
+                      <i className="fas fa-chart-bar"></i> Companies
                     </NavLink>
-                  </li> */}
+                  </li>
                   <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
                       <i className="fas fa-file-alt"></i> Documents
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/vendors">
+                      <i className="fas fa-chart-bar"></i> Vendors
                     </NavLink>
                   </li>
                 </ul>
@@ -108,8 +114,9 @@ const Shell = ({ isDarkTheme }) => {
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
-              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/companies" element={<Companies />} />
               <Route path="/documents" element={<Documents />} />
+              <Route path="/vendors" element={<Vendors />} />
             </Routes>
           </main>
         </div>

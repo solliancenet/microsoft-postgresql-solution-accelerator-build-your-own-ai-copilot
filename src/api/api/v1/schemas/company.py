@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import List, Optional
 
 class ContractCompanyBase(BaseModel):
     company_name: str
@@ -16,3 +16,10 @@ class ContractCompany(ContractCompanyBase):
 
     class Config:
         orm_mode: True
+        from_attributes = True
+
+class ContractCompanyListResponse(BaseModel):
+    data: List[ContractCompany]
+    total: int
+    skip: int
+    limit: int

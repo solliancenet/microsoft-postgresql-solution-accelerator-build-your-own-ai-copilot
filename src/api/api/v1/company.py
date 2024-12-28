@@ -2,8 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
-from data import models, crud, schemas
+from data import models, crud
 from data.database import SessionLocal, engine
+
+import api.v1.schemas.company as schemas
+from api.v1.schemas.shared import ListResponse
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -17,10 +20,12 @@ def get_db():
     finally:
         db.close()
 
-@router.get("/company", response_model=List[schemas.ContractCompany])
+@router.get("/company", response_model=ListResponse)
 def list_companies(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     companies = crud.get_companies(db, skip=skip, limit=limit)
-    return companies
+    total = db.query(models.ContractCompany).count()
+    data_pydantic = [schemas.ContractCompany.from_orm(company) for company in companies]
+    return ListResponse[schemas.ContractCompany](data=data_pydantic, total=total, skip=skip, limit=limit)
 
 @router.get("/company/{company_id}", response_model=schemas.ContractCompany)
 def read_company(company_id: int, db: Session = Depends(get_db)):

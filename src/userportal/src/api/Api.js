@@ -14,6 +14,10 @@ const getStatus = async () => {
     }
 };
 
+/* *************** */
+/* Documents API */
+/* *************** */
+
 const listDocuments = async () => {
     try {
         const response = await fetch(`${apiConfig.APIUrl}/v1/documents`);
@@ -70,6 +74,45 @@ const deleteDocument = async (blobName) => {
     }
 }
 
+/* *************** */
+/* Companies API */
+/* *************** */
+
+// Function to fetch companies with pagination
+const listCompanies = async (skip = 0, limit = 10) => {
+    try {
+        const response = await fetch(`${apiConfig.APIUrl}/v1/company?skip=${skip}&limit=${limit}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error listing companies:', error);
+        throw error;
+    }
+};
+
+/* *************** */
+/* Vendors API */
+/* *************** */
+
+// Function to fetch companies with pagination
+const listVendors = async (skip = 0, limit = 10) => {
+    try {
+        const response = await fetch(`${apiConfig.APIUrl}/v1/vendor?skip=${skip}&limit=${limit}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error listing companies:', error);
+        throw error;
+    }
+};
+
+/* *************** */
+/* Exported API */
+/* *************** */
 
 module.exports = {
     getStatus,
@@ -78,5 +121,11 @@ module.exports = {
         getUrl: getDocumentDownloadUrl,
         upload: uploadDocument,
         delete: deleteDocument,
+    },
+    companies: {
+        list: listCompanies,
+    },
+    vendors: {
+        list: listVendors,
     }
 };

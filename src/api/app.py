@@ -35,13 +35,15 @@ app.add_middleware(
 
 
 
-from api.v1.status import router as api_v1_status_router
-from api.v1.documents import router as api_v1_documents_router
 from api.v1.company import router as api_v1_company_router
+from api.v1.documents import router as api_v1_documents_router
+from api.v1.status import router as api_v1_status_router
+from api.v1.vendor import router as api_v1_vendor_router
 
-app.include_router(api_v1_status_router, prefix="/v1", tags=["Status"])
-app.include_router(api_v1_documents_router, prefix="/v1", tags=["Documents"])
 app.include_router(api_v1_company_router, prefix="/v1", tags=["Company"])
+app.include_router(api_v1_documents_router, prefix="/v1", tags=["Documents"])
+app.include_router(api_v1_vendor_router, prefix="/v1", tags=["Vendor"])
+app.include_router(api_v1_status_router, prefix="/v1", tags=["Status"])
 
 
 # Agent pool keyed by session_id to retain memories/history in-memory.

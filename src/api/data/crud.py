@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
 from sqlalchemy import or_
 from data.models import ContractCompany, Vendor, Sow, Invoice
-
+from schemas.sows import SowCreate
 
 # ########################################################################################################################
 # Company CRUD
@@ -102,6 +102,20 @@ def get_sows(db: Session, skip: int = 0, limit: int = 10, sortby: str = None, se
             pass  # Handle the case where sortby is not correctly formatted
     
     return query.offset(skip).limit(limit).all()
+
+def create_sow(db: Session, sow: SowCreate):
+    db_sow = Sow(
+        sow_title=sow.sow_title,
+        start_date=sow.start_date,
+        end_date=sow.end_date,
+        budget=sow.budget,
+        sow_document=sow.sow_document,
+        details=sow.details
+    )
+    db.add(db_sow)
+    db.commit()
+    db.refresh(db_sow)
+    return db_sow
 
 # ########################################################################################################################
 # Invoice CRUD

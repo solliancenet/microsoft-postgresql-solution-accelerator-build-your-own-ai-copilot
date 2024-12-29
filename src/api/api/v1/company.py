@@ -5,8 +5,8 @@ from typing import List
 from data import models, crud
 from data.database import SessionLocal, engine
 
-import api.v1.schemas.company as schemas
-from api.v1.schemas.shared import ListResponse
+import schemas.company as schemas
+from schemas.shared import ListResponse
 
 models.Base.metadata.create_all(bind=engine)
 

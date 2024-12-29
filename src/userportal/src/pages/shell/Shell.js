@@ -9,6 +9,7 @@ import Companies from './panes/Companies';
 import Documents from './panes/Documents';
 import Invoices from './panes/Invoices';
 import SOWs from './panes/SOWs';
+import SOWCreate from './panes/sows/create';
 import Vendors from './panes/Vendors';
 
 const Shell = ({ isDarkTheme }) => {
@@ -130,6 +131,7 @@ const Shell = ({ isDarkTheme }) => {
               <Route path="/documents" element={<Documents />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/sows" element={<SOWs />} />
+              <Route path="/sows/create" element={<SOWCreate />} />
               <Route path="/vendors" element={<Vendors />} />
             </Routes>
           </main>

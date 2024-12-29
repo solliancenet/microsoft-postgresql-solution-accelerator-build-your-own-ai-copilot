@@ -101,6 +101,34 @@ const listSOWs = async (skip = 0, limit = 10, sortBy = '', search = '') => {
     return await fetchData(`/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
 
+const createSOW = async (file, sowTitle, startDate, endDate, budget) => {
+    if (!file) return;
+
+    console.info('Creating SOW:', file);
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('sow_title', sowTitle);
+    formData.append('start_date', startDate);
+    formData.append('end_date', endDate);
+    formData.append('budget', budget);
+
+    try {
+        const response = await fetch(`${apiConfig.APIUrl}/${apiVersion}/sows/create`, {
+            method: 'POST',
+            body: formData,
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return;
+    } catch (error) {
+        console.error('Error creating SOW:', error);
+        throw error;
+    }
+}
+
+
 /* *************** */
 /* Invoice API */
 /* *************** */
@@ -108,6 +136,8 @@ const listSOWs = async (skip = 0, limit = 10, sortBy = '', search = '') => {
 const listInvoices = async (skip = 0, limit = 10, sortBy = '', search = '') => {
     return await fetchData(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`);
 };
+
+
 
 
 /* *************** */
@@ -130,6 +160,7 @@ module.exports = {
     },
     sows: {
         list: listSOWs,
+        create: createSOW,
     },
     invoices: {
         list: listInvoices,

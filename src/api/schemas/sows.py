@@ -13,9 +13,6 @@ class SowBase(BaseModel):
 class SowCreate(SowBase):
     pass
 
-class SowUpdate(SowBase):
-    pass
-
 class Sow(SowBase):
     id: int
 

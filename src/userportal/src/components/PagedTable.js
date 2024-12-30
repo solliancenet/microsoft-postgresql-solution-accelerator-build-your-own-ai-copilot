@@ -56,6 +56,9 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
     updateSearch('');
   }
 
+  const pageIndex = Math.floor(skip / limit) + 1;
+  const pageCount = Math.ceil(total / limit);
+
   return (
     <div>
       {searchEnabled && (
@@ -79,11 +82,19 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
         <p>Error: {error}</p>
       ) : (
         <div>
-          <Table columns={columns} data={data} onSortChange={handleSortChange} />
+          <Table
+            columns={columns}
+            data={data}
+            loading={loading}
+            onSortChange={handleSortChange}
+          />
           <div className="d-flex justify-content-between">
             <button className="btn btn-primary" onClick={handlePrevious} disabled={skip === 0}>
               Previous
             </button>
+            <div className="pagination-info">
+              Page {pageIndex} of {pageCount}
+            </div>
             <button className="btn btn-primary" onClick={handleNext} disabled={skip + limit >= total}>
               Next
             </button>

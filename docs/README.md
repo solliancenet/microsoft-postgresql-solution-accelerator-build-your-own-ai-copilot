@@ -322,8 +322,9 @@ The sample has a `docs/workshop` folder with step-by-step guidance for developer
 1. **View Workshop Locally** - The workshop is built using Mkdocs. To preview it locally, 
     - install mkdocs: `pip install mkdocs-material`
     - switch to folder: `cd docs/workshop`
-    - launch preview: `mkdocs serve` 
+    - launch preview: `mkdocs serve`
     - open browser to the preview URL specified
+    - (optional) deploy to GitHub Pages: `mkdocs gh-deploy`
 
 Have issues or questions about the workshop? Submit [a new issue](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/issues/new) with a `documentation` tag.
 

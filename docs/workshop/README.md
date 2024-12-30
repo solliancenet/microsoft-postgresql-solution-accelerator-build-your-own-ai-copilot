@@ -25,7 +25,7 @@ You can view [a hosted version of the workshop guide](https://solliancenet.githu
     pip install mkdocs-material
     ```
 
-2. Run the `mkdocs serve` command from the `workshop` folder
+1. Run the `mkdocs serve` command from the `workshop` folder
 
     ```bash
     cd docs/workshop
@@ -35,3 +35,5 @@ You can view [a hosted version of the workshop guide](https://solliancenet.githu
 This should open the dev server with a preview of the workshop guide on the specified local address. Simply open a browser and navigate to `http://localhost:5000` to view the content.
 
 **Note:** If you are currently viewing the repo from GitHub Codespaces, then you should already have the `mkdocs-material` package installed - and can go directly to step 2.
+
+(Optional) If you want to deploy the workshop guide to a live site, you can use the `mkdocs gh-deploy` command to push the content to a GitHub Pages site.

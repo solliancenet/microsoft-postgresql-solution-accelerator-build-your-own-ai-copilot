@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTable, useSortBy } from 'react-table';
 
-const Table = ({ columns, data, loading }) => {
+const Table = ({ columns, data, loading, onSortChange }) => {
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
+    state: { sortBy }
   } = useTable({ columns, data }, useSortBy);
+
+  useEffect(() => {
+    onSortChange(sortBy);
+  }, [sortBy]);
 
   return (
     <div>
       <table {...getTableProps()} className="table">
         <thead>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
                   {column.render('Header')}
                   <span>
                     {column.isSorted
@@ -35,9 +40,11 @@ const Table = ({ columns, data, loading }) => {
           {rows.map(row => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} key={row.id}>
                 {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  <td {...cell.getCellProps()} key={cell.column.id}>
+                    {cell.render('Cell')}
+                  </td>
                 ))}
               </tr>
             );

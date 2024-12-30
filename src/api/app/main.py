@@ -5,6 +5,7 @@ from app.routers import (
     documents,
     embeddings,
     status,
+    validation,
     vendors
 )
 
@@ -21,6 +22,7 @@ app.include_router(completions.router)
 app.include_router(documents.router)
 app.include_router(embeddings.router)
 app.include_router(status.router)
+app.include_router(validation.router)
 app.include_router(vendors.router)
 
 @app.get("/")

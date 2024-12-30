@@ -20,7 +20,7 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     # TODO: Move ths system prompt into blob storage or somewhere it can be updated without redeploying the app.
     # Define the system prompt that contains the assistant's persona.
     system_prompt = """
-    You are an intelligent copilot for Woodgrove designed to help users gain insights from vendor statements of work (SOWs) and invoices.
+    You are an intelligent copilot for Woodgrove Bank designed to help users gain insights from vendor statements of work (SOWs) and invoices.
     You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove's contracts and associated invoices.
     """
     # Provide the copilot with a persona using the system prompt.
@@ -45,9 +45,7 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     
     # TODO: Define tools for the agent
     tools = [
-         StructuredTool.from_function(coroutine=get_vendors),
-    #     StructuredTool.from_function(coroutine=get_category_names),
-    #     StructuredTool.from_function(coroutine=get_similar_products)
+         StructuredTool.from_function(coroutine=get_vendors)
     ]
     
     # Create an agent

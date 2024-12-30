@@ -1,8 +1,14 @@
-azure-identity==1.17.1
+asyncpg==0.30.0
+azure-identity==1.19.0
 azure-keyvault-secrets==4.9.0
 azure-storage-blob==12.21.0
+fastapi==0.115.6
+langchain==0.3.13
+langchain-openai==0.2.14
+openai==1.58.1
+psycopg==3.2.3
+pydantic==2.10.4
 python-dotenv==1.0.1
 python-multipart==0.0.20
 requests==2.32.3
-fastapi==0.114.2
-uvicorn==0.30.6
+uvicorn==0.34.0

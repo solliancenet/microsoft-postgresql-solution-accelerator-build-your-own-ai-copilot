@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
 from sqlalchemy import or_
 from data.models import ContractCompany, Vendor, Sow, Invoice
-from schemas.sows import SowCreate
+from schemas.sows import SowEdit
 
 # ########################################################################################################################
 # Company CRUD
@@ -103,7 +103,7 @@ def get_sows(db: Session, skip: int = 0, limit: int = 10, sortby: str = None, se
     
     return query.offset(skip).limit(limit).all()
 
-def create_sow(db: Session, sow: SowCreate):
+def create_sow(db: Session, sow: SowEdit):
     db_sow = Sow(
         sow_title=sow.sow_title,
         start_date=sow.start_date,
@@ -115,6 +115,24 @@ def create_sow(db: Session, sow: SowCreate):
     db.add(db_sow)
     db.commit()
     db.refresh(db_sow)
+    return db_sow
+
+def update_sow(db: Session, sow_id: int, sow_update: SowEdit):
+    db_sow = db.query(Sow).filter(Sow.id == sow_id).first()
+    if db_sow:
+        db_sow.sow_title = sow_update.sow_title
+        db_sow.start_date = sow_update.start_date
+        db_sow.end_date = sow_update.end_date
+        db_sow.budget = sow_update.budget
+        db.commit()
+        db.refresh(db_sow)
+    return db_sow
+
+def delete_sow(db: Session, sow_id: int):
+    db_sow = db.query(Sow).filter(Sow.id == sow_id).first()
+    if db_sow:
+        db.delete(db_sow)
+        db.commit()
     return db_sow
 
 # ########################################################################################################################

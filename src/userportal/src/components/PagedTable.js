@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Table from './Table';
 
-const PagedTable = ({ columns, fetchData, searchEnabled = true }) => {
+const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
@@ -29,7 +29,7 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true }) => {
 
   useEffect(() => {
     loadData(skip, limit, sortBy, searchQuery);
-  }, [skip, limit, sortBy, searchQuery]);
+  }, [skip, limit, sortBy, searchQuery, reload]);
 
   const handlePrevious = () => {
     if (skip > 0) {

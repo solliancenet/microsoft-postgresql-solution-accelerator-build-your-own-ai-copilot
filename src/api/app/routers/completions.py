@@ -1,26 +1,27 @@
-from app.lifespan_manager import get_azure_openai_chat_client
-from app.models import CompletionRequest
+from langchain.agents import AgentExecutor, create_openai_functions_agent
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.tools import StructuredTool
+
+from app.lifespan_manager import get_chat_client, get_db_connection_pool
+from app.models import CompletionRequest, Vendor
 from fastapi import APIRouter, Depends, HTTPException
 
 # Initialize the router
 router = APIRouter(
     prefix = "/completions",
     tags = ["Completions"],
-    dependencies = [Depends(get_azure_openai_chat_client)],
+    dependencies = [Depends(get_chat_client)],
     responses = {404: {"description": "Not found"}}
 )
 
 @router.post('/chat', response_model = str)
-async def generate_chat_completion(request: CompletionRequest, client = Depends(get_azure_openai_chat_client)):
+async def generate_chat_completion(request: CompletionRequest, llm = Depends(get_chat_client)):
     """Generate a chat completion using the Azure OpenAI API."""
-    # TODO: Get the Azure OpenAI API deployment names from app settings    
-    COMPLETION_DEPLOYMENT_NAME = "completions"
-
+    # TODO: Move ths system prompt into blob storage or somewhere it can be updated without redeploying the app.
     # Define the system prompt that contains the assistant's persona.
     system_prompt = """
-    You are an intelligent copilot for Woodgrove designed to help users manage statements of work (SOWs) and invoices.
+    You are an intelligent copilot for Woodgrove designed to help users gain insights from vendor statements of work (SOWs) and invoices.
     You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove's contracts and associated invoices.
-    You are not able to provide legal advice or financial information.
     """
     # Provide the copilot with a persona using the system prompt.
     messages = [{ "role": "system", "content": system_prompt }]
@@ -32,10 +33,33 @@ async def generate_chat_completion(request: CompletionRequest, client = Depends(
     # Add the current user message to the messages list
     messages.append({"role": "user", "content": request.message})
 
-    # Create Azure OpenAI client
-    async with client:
-        response = await client.embeddings.create(
-            input = text,
-            model = EMBEDDING_DEPLOYMENT_NAME
-        )
-        return response.data[0].embedding
+    # Create a chat prompt template
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            MessagesPlaceholder("chat_history", optional=True),
+            ("user", "{input}"),
+            MessagesPlaceholder("agent_scratchpad")
+        ]
+    )
+    
+    # TODO: Define tools for the agent
+    tools = [
+         StructuredTool.from_function(coroutine=get_vendors),
+    #     StructuredTool.from_function(coroutine=get_category_names),
+    #     StructuredTool.from_function(coroutine=get_similar_products)
+    ]
+    
+    # Create an agent
+    agent = create_openai_functions_agent(llm=llm, tools=tools, prompt=prompt)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, return_intermediate_steps=True)
+    completion = await agent_executor.ainvoke({"input": request.message, "chat_history": request.chat_history[-request.max_history:]})
+    return completion['output']
+
+async def get_vendors():
+    """Retrieves a list of vendors from the database."""
+    pool = await get_db_connection_pool()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM vendors;')
+        vendors = [Vendor(**dict(row)) for row in rows]
+    return vendors

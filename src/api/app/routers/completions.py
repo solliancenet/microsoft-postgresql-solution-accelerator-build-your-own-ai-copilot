@@ -17,7 +17,7 @@ router = APIRouter(
 @router.post('/chat', response_model = str)
 async def generate_chat_completion(request: CompletionRequest, llm = Depends(get_chat_client)):
     """Generate a chat completion using the Azure OpenAI API."""
-    # TODO: Move ths system prompt into blob storage or somewhere it can be updated without redeploying the app.
+    # TODO: Move this system prompt into blob storage or somewhere it can be updated without redeploying the app.
     # Define the system prompt that contains the assistant's persona.
     system_prompt = """
     You are an intelligent copilot for Woodgrove Bank designed to help users gain insights from vendor statements of work (SOWs) and invoices.

@@ -19,7 +19,7 @@ router = APIRouter(
 @router.post('/validate_invoice', response_model = str)
 async def validate_invoice(request: ValidationRequest, llm = Depends(get_chat_client)):
     """Generate a chat completion using the Azure OpenAI API."""
-    # TODO: Move ths system prompt into blob storage or somewhere it can be updated without redeploying the app.
+    # TODO: Move this system prompt into blob storage or somewhere it can be updated without redeploying the app.
     # Define the system prompt that contains the assistant's persona.
     system_prompt = """
     You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).

@@ -32,7 +32,7 @@ def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, search: str = 
     sows_pydantic = [schemas.Sow.from_orm(sow) for sow in sows]
     return ListResponse[schemas.Sow](data=sows_pydantic, total=total, skip=skip, limit=limit)
 
-@router.post("/sows/create", response_model=schemas.Sow)
+@router.post("/sows", response_model=schemas.Sow)
 def create_sow(
     sow_title: str = Form(...),
     start_date: str = Form(...),

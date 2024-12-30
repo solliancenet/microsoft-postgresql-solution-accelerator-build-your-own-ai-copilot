@@ -90,7 +90,7 @@ module.exports = {
             formData.append('budget', budget);
         
             try {
-                const response = await fetch(getUrl(`/sows/create`), {
+                const response = await fetch(getUrl(`/sows`), {
                     method: 'POST',
                     body: formData,
                 });

@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS contract_companies CASCADE;
 
 CREATE TABLE contract_companies (
-    company_id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     company_name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
     contact_person VARCHAR(255),
@@ -18,7 +18,7 @@ CREATE TABLE contract_companies (
 DROP TABLE IF EXISTS msas CASCADE;
 
 CREATE TABLE msas (
-    msa_id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     msa_title VARCHAR(255),
     start_date DATE,
     end_date DATE,
@@ -31,7 +31,7 @@ CREATE TABLE msas (
 DROP TABLE IF EXISTS sows CASCADE;
 
 CREATE TABLE sows (
-    sow_id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     sow_title VARCHAR(255),
     start_date DATE,
     end_date DATE,
@@ -45,7 +45,7 @@ CREATE TABLE sows (
 DROP TABLE IF EXISTS invoices CASCADE;
 
 CREATE TABLE invoices (
-    invoice_id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     invoice_number VARCHAR(50),
     amount DECIMAL(18,2),
     invoice_date DATE,

@@ -10,7 +10,7 @@ class SowBase(BaseModel):
     sow_document: Optional[str] = None
     details: Optional[dict] = None
 
-class SowCreate(SowBase):
+class SowEdit(SowBase):
     pass
 
 class Sow(SowBase):

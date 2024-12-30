@@ -1,10 +1,33 @@
 // src/Transactions.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../api/Api';
+import { Button } from 'react-bootstrap';
+import ConfirmModal from '../../../components/ConfirmModal'; 
 import PagedTable from '../../../components/PagedTable';
 
 const SOWs = () => {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [sowToDelete, setSowToDelete] = useState(null);
+  const [reload, setReload] = useState(false);
+
+  const handleDelete = async () => {
+    if (!sowToDelete) return;
+
+    try {
+      await api.sows.delete(sowToDelete);
+      setSuccess('SOW deleted successfully!');
+      setError(null);
+      setShowDeleteModal(false);
+      setReload(true); // Refresh the data
+    } catch (err) {
+      setSuccess(null);
+      setError(err.message);
+    }
+  }
+
   const columns = React.useMemo(
     () => [
       {
@@ -26,6 +49,13 @@ const SOWs = () => {
       {
         Header: 'Budget',
         accessor: 'budget',
+        Cell: ({ value }) => {
+          const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          });
+          return formatter.format(value);
+        },
       },
       {
         Header: 'Actions',
@@ -35,6 +65,12 @@ const SOWs = () => {
             <a href={`${api.documents.getUrl(row.original.sow_document)}`} target="_blank" rel="noopener noreferrer" className="btn btn-link" aria-label="Download">
               <i className="fas fa-download"></i>
             </a>
+            <a href={`/sows/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+              <i className="fas fa-edit"></i>
+            </a>
+            <Button variant="danger" onClick={() => { setSowToDelete(row.original.id); setShowDeleteModal(true); }} aria-label="Delete">
+              <i className="fas fa-trash-alt"></i>
+            </Button>
           </div>
         ),
       },
@@ -42,7 +78,7 @@ const SOWs = () => {
     []
   );
 
-  const fetchVendors = async (skip, limit, sortBy, search) => {
+  const fetchData = async (skip, limit, sortBy, search) => {
     const response = await api.sows.list(skip, limit, sortBy, search);
     return response;
   };
@@ -53,7 +89,17 @@ const SOWs = () => {
         <h1 className="h2">SOWs</h1>
         <Link to="/sows/create" className="btn btn-primary">New <i className="fas fa-plus" /></Link>
       </div>
-      <PagedTable columns={columns} fetchData={fetchVendors} />
+      {error && <div className="alert alert-danger">{error}</div>}
+      {success && <div className="alert alert-success">{success}</div>}
+
+      <PagedTable columns={columns} fetchData={fetchData} reload={reload} />
+
+      <ConfirmModal
+        show={showDeleteModal}
+        handleClose={() => setShowDeleteModal(false)}
+        handleConfirm={handleDelete}
+        message="Are you sure you want to delete this SOW?"
+      />
     </div>
   );
 };

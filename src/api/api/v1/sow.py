@@ -61,7 +61,7 @@ def create_sow(
     blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
 
     # Create SOW in the database
-    sow_create = schemas.SowCreate(
+    sow_create = schemas.SowEdit(
         sow_title=sow_title,
         start_date=start_date_parsed,
         end_date=end_date_parsed,
@@ -79,9 +79,16 @@ def read_sow(sow_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Sow not found")
     return schemas.Sow.from_orm(sow)
 
-# @router.put("/sows/{sow_id}", response_model=schemas.Sow)
-# def update_sow(sow_id: int, sow_update: schemas.SowUpdate, db: Session = Depends(get_db)):
-#     sow = crud.update_sow(db, sow_id=sow_id, sow_update=sow_update)
-#     if sow is None:
-#         raise HTTPException(status_code=404, detail="Sow not found")
-#     return schemas.Sow.from_orm(sow)
+@router.put("/sows/{sow_id}", response_model=schemas.Sow)
+def update_sow(sow_id: int, sow_update: schemas.SowEdit, db: Session = Depends(get_db)):
+    sow = crud.update_sow(db, sow_id=sow_id, sow_update=sow_update)
+    if sow is None:
+        raise HTTPException(status_code=404, detail="Sow not found")
+    return schemas.Sow.from_orm(sow)
+
+@router.delete("/sows/{sow_id}", response_model=schemas.Sow)
+def delete_sow(sow_id: int, db: Session = Depends(get_db)):
+    sow = crud.delete_sow(db, sow_id=sow_id)
+    if sow is None:
+        raise HTTPException(status_code=404, detail="Sow not found")
+    return schemas.Sow.from_orm(sow)

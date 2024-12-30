@@ -56,7 +56,7 @@ For a more comprehensive list of best practices and security recommendations for
 
 ## Overview
 
-In the financial services industry, validating contracts, statements of work (SOWs), and invoices poses distinct challenges. This is particularly true when it comes to ensuring that invoices align with SOWs, especially for milestone-based payments and other specific deliverables. Traditionally, this validation process is manual, requiring meticulous comparison and cross-checking, often leading to delays, errors, and elevated operational costs. This article explores a high-level architectural solution utilizing Microsoft Azure's comprehensive suite of services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
+In the financial services industry, validating contracts, statements of work (SOWs), and invoices poses distinct challenges. This is particularly true when it comes to ensuring that invoices align with SOWs, especially for milestone-based payments and other specific deliverables. Traditionally, this validation process is manual, requiring meticulous comparison and cross-checking, often leading to delays, errors, and elevated operational costs. This accelerator explores a high-level architectural solution utilizing Microsoft Azure's comprehensive suite of services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
 
 The objective of this solution is to automate the extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.
 
@@ -83,6 +83,8 @@ The high-level solution architecture is represented by this diagram:
 4. **Document enrichment**: The Azure AI extension for PostreSQL also enables data to be enhanced using Azure AI Services directly from the database. This capability provides rich AI functionality, such as text translation and entity and keyword extraction.
 
 5. **Copilot chat**: An Azure OpenAI + LangChain copilot enables project managers and leadership to quickly get metrics, trends and processing timelines for contracts, SOWs, invoices, and vendors using a user friendly chat interface. Function calling via LangChain tools enables the copilot to implement a RAG (retrieval-augmented generation) pattern over data in the PostgreSQL database, using vector search to efficiently retrieve relevant documents and data.
+
+This diagram highlights a comprehensive workflow for handling document processing and data enrichment using Azure services, integrating AI and machine learning capabilities with PostgreSQL for efficient data management and storage.
 
 ## Pre-requisites
 

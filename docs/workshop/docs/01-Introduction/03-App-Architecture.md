@@ -13,9 +13,10 @@ Click on each tab to understand the archtiecture components and processing workf
 === "1. Architecture Components"
 
     The architecture has these core components:
-
-    - _Azure AI Search_ → the **information retrieval** service (product index)
-    - _Azure Database for PostgreSQL_ → the **database** (customer profile, order history)
+    
+    - _UI_ → the **user interface** for interacting with the system
+    - _API_ → a Python API for integrating backend services
+    - _Azure Database for PostgreSQL_ → the project **database** (vendors, invoices, statements of work (SOWs))
     - _Azure OpenAI_ → the **model deployments** (embedding, chat, eval)
     - _Azure Container Apps_ → the **app hosting** service (API endpoint)
     - _Azure Managed Identity_ → for **keyless authentication** (trustworthy AI)

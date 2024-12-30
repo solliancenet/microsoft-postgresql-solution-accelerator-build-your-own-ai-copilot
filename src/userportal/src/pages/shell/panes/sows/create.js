@@ -16,9 +16,9 @@ const CreateSOW = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.createSOW(file, sowTitle, startDate, endDate, parseFloat(budget), details);
+      var data = await api.sows.create(file, sowTitle, startDate, endDate, parseFloat(budget), details);
       setSuccess('SOW created successfully!');
-      window.location.href = '/sows';
+      window.location.href = `/sows/${data.id}`;
       setError(null);
     } catch (err) {
       setError('Failed to create SOW');
@@ -85,7 +85,7 @@ const CreateSOW = () => {
         <Button type="submit" variant="primary">
           <i className="fas fa-plus"></i> Create
         </Button>
-        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.history.back()}>
+        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/sows' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
       </Form>

@@ -126,7 +126,7 @@ const EditSOW = () => {
         <Button type="submit" variant="primary">
           <i className="fas fa-save"></i> Save
         </Button>
-        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.history.back()}>
+        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/sows' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
       </Form>

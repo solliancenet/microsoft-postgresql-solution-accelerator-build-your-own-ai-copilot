@@ -14,7 +14,7 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
   const loadData = async (skip, limit, sortBy, searchQuery) => {
     setLoading(true);
     try {
-      const sortbyParam = sortBy.length > 0 ? `${sortBy[0].id}:${sortBy[0].desc ? 'desc' : 'asc'}` : '';
+      const sortbyParam = (sortBy && sortBy.length > 0) ? `${sortBy[0].id}:${sortBy[0].desc ? 'desc' : 'asc'}` : '';
       const response = await fetchData(skip, limit, sortbyParam, searchQuery);
       setData(response.data);
       setTotal(response.total);
@@ -44,7 +44,9 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
   };
 
   const handleSortChange = (newSortBy) => {
-    setSortBy(newSortBy || '');
+    if (JSON.stringify(sortBy) !== JSON.stringify(newSortBy)) {
+      setSortBy(newSortBy);
+    }
   };
 
   const updateSearch = (value) => {
@@ -55,6 +57,9 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
   const clearSearch = () => {
     updateSearch('');
   }
+
+  const pageIndex = Math.floor(skip / limit) + 1;
+  const pageCount = Math.ceil(total / limit);
 
   return (
     <div>
@@ -79,11 +84,19 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
         <p>Error: {error}</p>
       ) : (
         <div>
-          <Table columns={columns} data={data} onSortChange={handleSortChange} />
+          <Table
+            columns={columns}
+            data={data}
+            loading={loading}
+            onSortChange={handleSortChange}
+          />
           <div className="d-flex justify-content-between">
             <button className="btn btn-primary" onClick={handlePrevious} disabled={skip === 0}>
               Previous
             </button>
+            <div className="pagination-info">
+              Page {pageIndex} of {pageCount}
+            </div>
             <button className="btn btn-primary" onClick={handleNext} disabled={skip + limit >= total}>
               Next
             </button>

@@ -55,7 +55,7 @@ const Shell = ({ isDarkTheme }) => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3 col-lg-2 p-0">
-            <div className={`sidebar offcanvas-md offcanvas-start ${isDarkTheme ? 'bg-dark text-white' : 'bg-light text-dark'}`} tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+            <div className={`sidebar offcanvas-md offcanvas-start ${isDarkTheme ? 'bg-dark text-white' : 'bg-light text-dark'}`} id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
               <div className="offcanvas-header">
               </div>
               <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">

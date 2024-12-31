@@ -285,6 +285,9 @@ output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
 output POSTGRESQL_DATABASE_NAME string = postgresqlDatabaseName
 
+output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
+output AZURE_OPENAI_KEY string = openAi.outputs.key
+
 output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrincipalName
 
 output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortalApp.outputs.uri

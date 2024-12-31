@@ -20,9 +20,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS vendors
     OWNER to "adminUser";
 
-GRANT ALL ON TABLE vendors TO "adminUser";
-GRANT ALL ON TABLE vendors TO "id-api-uemjxng3p6up6";
-
 -- MSA table; information about payment terms, special clauses, or additional legal notes
 DROP TABLE IF EXISTS msas CASCADE;
 

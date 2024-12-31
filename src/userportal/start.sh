@@ -22,7 +22,7 @@ fi
 TARGET_DIR="/usr/share/nginx/html"
 
 # Old value to replace
-OLD_VALUE="http://localhost:4242"
+OLD_VALUE="http://localhost:8000"
 
 # Replace all instances of the old value with the new value
 echo "Replacing '$OLD_VALUE' with '$SERVICE_API_ENDPOINT_URL' in files under $TARGET_DIR..."

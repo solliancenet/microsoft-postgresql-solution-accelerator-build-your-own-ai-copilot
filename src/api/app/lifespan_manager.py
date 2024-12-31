@@ -1,4 +1,4 @@
-from app.services import AzureOpenAIService, DatabaseService, StorageService
+from app.services import AzureOpenAIService, DatabaseService, StorageService, ConfigService
 from azure.identity.aio import DefaultAzureCredential
 from contextlib import asynccontextmanager
 
@@ -11,19 +11,28 @@ blob_service_client = None
 # Create a global async Microsoft Entra ID RBAC credential
 credential = None
 # Create a global async PostgreSQL connection pool
+db = None
 db_connection_pool = None
+
+# Create a global AppConfig
+appConfig = None
 
 @asynccontextmanager
 async def lifespan(app):
     """Async context manager for the FastAPI application lifespan."""
+    global appConfig
     global blob_service_client
     global chat_client
     global credential
+    global db
     global db_connection_pool
     global embedding_client
     
     # Create an async Microsoft Entra ID RBAC credential
     credential = DefaultAzureCredential()
+
+    # Create ConfigService instance
+    appConfig = ConfigService(credential)
 
     # Create an async Azure OpenAI chat and embeddings clients
     aoai_service = AzureOpenAIService(credential)
@@ -31,11 +40,11 @@ async def lifespan(app):
     embedding_client = await aoai_service.get_embedding_client()
 
     # Create an async Azure Blob Service client
-    storage_service = StorageService(credential)
+    storage_service = StorageService(credential, await appConfig.get_storage_account())
     blob_service_client = await storage_service.get_blob_service_client()
 
     # Create a connection to the Azure Database for PostgreSQL server
-    db = DatabaseService(credential)
+    db = DatabaseService(credential, await appConfig.get_postgresql_server_name(), await appConfig.get_postgresql_database_name())
     db_connection_pool = await db.get_connection_pool()
     
     yield
@@ -52,6 +61,9 @@ async def lifespan(app):
     await credential.close()
 
 # Provide methods for retrieving the global async objects from the lifespan manager.
+async def get_app_config():
+    return appConfig
+
 async def get_credential():
     return credential
 
@@ -65,4 +77,8 @@ async def get_blob_service_client():
     return blob_service_client
 
 async def get_db_connection_pool():
+    global db
+    global db_connection_pool
+    if (db_connection_pool is None or db_connection_pool._closed):
+        db_connection_pool = await db.get_connection_pool()
     return db_connection_pool

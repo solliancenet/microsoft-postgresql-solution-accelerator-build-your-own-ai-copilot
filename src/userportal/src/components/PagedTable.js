@@ -14,7 +14,7 @@ const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
   const loadData = async (skip, limit, sortBy, searchQuery) => {
     setLoading(true);
     try {
-      const sortbyParam = (sortBy && sortBy.length > 0) ? `${sortBy[0].id}:${sortBy[0].desc ? 'desc' : 'asc'}` : '';
+      const sortbyParam = (sortBy && sortBy.length > 0) ? `${sortBy[0].id} ${sortBy[0].desc ? 'desc' : 'asc'}` : '';
       const response = await fetchData(skip, limit, sortbyParam, searchQuery);
       setData(response.data);
       setTotal(response.total);

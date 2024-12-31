@@ -1,8 +1,9 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Optional
 from datetime import date
 
-class SowBase(BaseModel):
+class Sow(BaseModel):
+    id: int
     sow_title: str
     start_date: Optional[date] = None
     end_date: Optional[date] = None
@@ -10,12 +11,8 @@ class SowBase(BaseModel):
     sow_document: Optional[str] = None
     details: Optional[dict] = None
 
-class SowEdit(SowBase):
-    pass
-
-class Sow(SowBase):
-    id: int
-
-    class Config:
-        orm_mode = True
-        from_attributes = True
+class SowEdit(BaseModel):
+    sow_title: str
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
+    budget: Optional[float] = None

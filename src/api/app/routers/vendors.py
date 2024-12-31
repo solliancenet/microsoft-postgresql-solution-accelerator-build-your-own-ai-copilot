@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool
-from app.models import Vendor
+from app.models import Vendor, ListResponse
 from fastapi import APIRouter, Depends, HTTPException
 
 # Initialize the router
@@ -10,13 +10,16 @@ router = APIRouter(
     responses = {404: {"description": "Not found"}}
 )
 
-@router.get('/', response_model = list[Vendor])
-async def get(pool = Depends(get_db_connection_pool)):
+@router.get('/', response_model = ListResponse[Vendor])
+async def get(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of vendors from the database."""
     async with pool.acquire() as conn:
-        rows = await conn.fetch('SELECT * FROM vendors;')
+        orderby = 'id'
+        if (sortby):
+            orderby = sortby
+        rows = await conn.fetch('SELECT * FROM vendors ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
         vendors = [Vendor(**dict(row)) for row in rows]
-    return vendors
+    return ListResponse[Vendor](data = vendors, total = len(vendors), skip = 0, limit = len(vendors))
 
 @router.get('/{id:int}', response_model = Vendor)
 async def get_by_id(id: int, pool = Depends(get_db_connection_pool)):

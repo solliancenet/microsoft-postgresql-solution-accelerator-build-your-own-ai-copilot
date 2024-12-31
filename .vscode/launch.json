@@ -1,21 +1,25 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: API",
-            "type": "python",
+            "name": "Python Debugger: FastAPI",
+            "type": "debugpy",
             "request": "launch",
-            "module": "uvicorn",
+            "program": "${workspaceFolder}/src/api/app/main.py",
             "args": [
-                "src.api.app:app",
-                "--host", "0.0.0.0",
-                "--port", "4242",
-                "--forwarded-allow-ips", "*",
-                "--proxy-headers",
+                "run",
+                "uvicorn",
+                "main:app",
                 "--reload"
             ],
             "jinja": true,
-            "preLaunchTask": "Install API Dependencies"
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src/api"
+            },
+            "python": "${workspaceFolder}/src/api/.venv/Scripts/python.exe",
         }
     ]
 }

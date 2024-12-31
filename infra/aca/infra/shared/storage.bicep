@@ -57,11 +57,11 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
 }
 
 resource storageConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'storage-connection'
+  name: 'storage-account'
   parent: keyvault
   tags: tags
   properties: {
-    value: 'DefaultEndpointsProtocol=https;AccountName=${name};AccountKey=${storage.listKeys().keys[0].value};EndpointSuffix=core.windows.net'
+    value: storage.name
   }
 }
 

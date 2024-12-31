@@ -8,7 +8,7 @@ The objective of this solution is to automate the extraction, validation, and st
 
 The high-level solution architecture is represented by this diagram:
 
-![High-level architecture diagram for the solution](./media/solution-architecture-diagram.png)
+![High-level architecture diagram for the solution](./docs/workshop/docs/img/solution-architecture-diagram.png)
 
 **High-Level Workflow**:
 

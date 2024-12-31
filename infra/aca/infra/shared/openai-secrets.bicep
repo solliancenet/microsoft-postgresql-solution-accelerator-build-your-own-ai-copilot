@@ -2,7 +2,7 @@ param keyvaultName string
 param openAiInstance object
 param tags object = {}
 
-resource apiKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+resource openaiServiceSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   name: 'openai-service'
   parent: keyvault
   tags: tags

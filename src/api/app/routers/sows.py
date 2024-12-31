@@ -1,7 +1,9 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
+from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
 from app.models import Sow, SowEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
+from azure.storage.blob import ContentSettings
 import json
+from datetime import datetime
 
 # Initialize the router
 router = APIRouter(
@@ -38,7 +40,9 @@ async def create_sow(
     end_date: str = Form(...),
     budget: float = Form(...),
     file: UploadFile = File(...),
-    pool = Depends(get_db_connection_pool)
+    pool = Depends(get_db_connection_pool),
+    appConfig = Depends(get_app_config),
+    blob_service_client = Depends(get_blob_service_client)
 ):
     # Parse dates
     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
@@ -48,7 +52,7 @@ async def create_sow(
     budget_parsed = float(budget)
 
     # Upload file to Azure Blob Storage
-    container_name = config_provider.get_document_container_name()
+    container_name = appConfig.get_document_container_name()
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
 
     content_settings = ContentSettings(
@@ -76,7 +80,9 @@ async def read_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
         row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        sow = Sow(**dict(row))
+        row_dict = dict(row)
+        row_dict['details'] = json.loads(row_dict['details'])
+        sow = Sow(**row_dict)
     return sow
 
 @router.put("/{sow_id}", response_model=Sow)
@@ -86,14 +92,23 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
         row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        sow = Sow(**dict(row))
-        for key, value in sow_update.dict().items():
-            setattr(sow, key, value)
+        
+        row_dict = dict(row)
+        row_dict['details'] = json.loads(row_dict['details'])
+        sow = Sow(**row_dict)
+
+        sow.sow_title = sow_update.sow_title
+        sow.start_date = sow_update.start_date
+        sow.end_date = sow_update.end_date
+        sow.budget = sow_update.budget
+
+        # for key, value in sow_update.dict().items():
+        #     setattr(sow, key, value)
         await conn.execute('''
             UPDATE sows
-            SET sow_title = $1, start_date = $2, end_date = $3, budget = $4, sow_document = $5, details = $6
-            WHERE id = $7;
-        ''', sow.sow_title, sow.start_date, sow.end_date, sow.budget, sow.sow_document, sow.details, sow_id)
+            SET sow_title = $1, start_date = $2, end_date = $3, budget = $4
+            WHERE id = $5;
+        ''', sow.sow_title, sow.start_date, sow.end_date, sow.budget, sow_id)
     return sow
 
 @router.delete("/{sow_id}", response_model=Sow)
@@ -103,6 +118,6 @@ async def delete_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
         row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        sow = Sow(**dict(row))
+        
         await conn.execute('DELETE FROM sows WHERE id = $1;', sow_id)
     return sow

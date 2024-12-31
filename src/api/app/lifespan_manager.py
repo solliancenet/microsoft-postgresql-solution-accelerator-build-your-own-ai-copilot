@@ -14,10 +14,13 @@ credential = None
 db = None
 db_connection_pool = None
 
+# Create a global AppConfig
+appConfig = None
+
 @asynccontextmanager
 async def lifespan(app):
     """Async context manager for the FastAPI application lifespan."""
-    global app_config
+    global appConfig
     global blob_service_client
     global chat_client
     global credential
@@ -59,7 +62,7 @@ async def lifespan(app):
 
 # Provide methods for retrieving the global async objects from the lifespan manager.
 async def get_app_config():
-    return app_config
+    return appConfig
 
 async def get_credential():
     return credential

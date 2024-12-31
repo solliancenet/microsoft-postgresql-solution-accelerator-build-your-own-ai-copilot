@@ -35,6 +35,6 @@ class ConfigService:
     async def get_storage_account(self) -> str:
         return await self.__get_secret("storage-account")
 
-    async def get_document_container_name(self) -> str:
-        return await "documents"
+    def get_document_container_name(self) -> str:
+        return "documents"
 

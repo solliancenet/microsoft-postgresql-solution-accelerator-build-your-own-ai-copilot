@@ -1,6 +1,7 @@
 from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
 from app.models import Sow, SowEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
+import json
 
 # Initialize the router
 router = APIRouter(
@@ -14,14 +15,21 @@ router = APIRouter(
 @router.get("/", response_model=ListResponse[Sow])
 async def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, pool = Depends(get_db_connection_pool), blob_service_client = Depends(get_blob_service_client)):
     """Retrieves a list of SOWs from the database."""
-    async def get_sows():
-        async with pool.acquire() as conn:
-            orderby = 'id'
-            if (sortby):
-                orderby = sortby
-            rows = await conn.fetch('SELECT * FROM sows ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
-            sows = [SOW(**dict(row)) for row in rows]
-        return ListResponse[Sow](data=sows, total = len(sows), skip = skip, limit = limit)
+    async with pool.acquire() as conn:
+        orderby = 'id'
+        if (sortby):
+            orderby = sortby
+        rows = await conn.fetch('SELECT * FROM sows ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+        #sows = [SOW(**dict(row)) for row in rows]
+        sows = []
+        for row in rows:
+            row_dict = dict(row)
+            row_dict['details'] = json.loads(row_dict['details'])  # Parse JSON string to dictionary
+            sows.append(Sow(**row_dict))
+
+        total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
+
+    return ListResponse[Sow](data=sows, total = total, skip = skip, limit = limit)
 
 @router.post("/", response_model=Sow)
 async def create_sow(

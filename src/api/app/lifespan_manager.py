@@ -11,6 +11,7 @@ blob_service_client = None
 # Create a global async Microsoft Entra ID RBAC credential
 credential = None
 # Create a global async PostgreSQL connection pool
+db = None
 db_connection_pool = None
 
 @asynccontextmanager
@@ -20,6 +21,7 @@ async def lifespan(app):
     global blob_service_client
     global chat_client
     global credential
+    global db
     global db_connection_pool
     global embedding_client
     
@@ -72,4 +74,8 @@ async def get_blob_service_client():
     return blob_service_client
 
 async def get_db_connection_pool():
+    global db
+    global db_connection_pool
+    if (db_connection_pool is None or db_connection_pool._closed):
+        db_connection_pool = await db.get_connection_pool()
     return db_connection_pool

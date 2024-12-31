@@ -4,18 +4,18 @@ import api from '../../../api/Api'; // Adjust the path as necessary
 import AIChat from '../../../components/AIChat'; // Adjust the path as necessary
 
 const DashboardView = () => {
-  const handleCheckAPIConnection = async () => {
-    try {
-      const status = await api.getStatus();
-      if (status.status === true) {
-        alert('API is up and running');
-      } else {
-        alert(`API Status: ${JSON.stringify(status)}`);
-      }
-    } catch (error) {
-      alert('Error fetching API status');
-    }
-  };
+  // const handleCheckAPIConnection = async () => {
+  //   try {
+  //     const status = await api.getStatus();
+  //     if (status.status === true) {
+  //       alert('API is up and running');
+  //     } else {
+  //       alert(`API Status: ${JSON.stringify(status)}`);
+  //     }
+  //   } catch (error) {
+  //     alert('Error fetching API status');
+  //   }
+  // };
 
   return (
     <div className="table-responsive">
@@ -25,12 +25,12 @@ const DashboardView = () => {
       
       <AIChat />
 
-      <h2 className="mt-5">App Status Test</h2>
+      {/* <h2 className="mt-5">App Status Test</h2>
       <div>
         <button type="button" className="btn btn-primary" onClick={handleCheckAPIConnection}>
           Check API Connection
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

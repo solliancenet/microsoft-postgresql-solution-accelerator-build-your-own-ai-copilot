@@ -13,6 +13,7 @@ param exists bool
 param appDefinition object
 param envSettings array = []
 param secretSettings array = []
+param postgresqlServerName string
 
 var appSettingsArray = filter(array(appDefinition.settings), i => i.name != '')
 var secrets = union(map(filter(appSettingsArray, i => i.?secret != null), i => {
@@ -178,3 +179,5 @@ output defaultDomain string = containerAppsEnvironment.properties.defaultDomain
 output name string = app.name
 output uri string = 'https://${app.properties.configuration.ingress.fqdn}'
 output id string = app.id
+output identityPrincipalId string = identity.properties.principalId
+output identityPrincipalName string = identity.name

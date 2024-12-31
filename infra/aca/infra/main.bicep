@@ -165,6 +165,7 @@ module apiApp './app/API.bicep' = {
     containerRegistryName: registry.outputs.name
     exists: userPortalExists
     appDefinition: portalDefinition
+    postgresqlServerName: postgresql.outputs.serverName
     envSettings: [
       {
         name: 'AZURE_KEY_VAULT_NAME'
@@ -172,11 +173,6 @@ module apiApp './app/API.bicep' = {
       }
     ]
     secretSettings: [
-      {
-        name: 'POSTGRESQL_DB_CONNECTION_STRING'
-        value: postgresql.outputs.postgresqlConnectionStringSecretRef
-        secretRef: postgresql.outputs.postgresqlConnectionStringSecretName
-      }
       {
         name: 'ApplicationInsights__ConnectionString'
         value: monitoring.outputs.applicationInsightsConnectionSecretRef
@@ -188,6 +184,15 @@ module apiApp './app/API.bicep' = {
   dependsOn: [ monitoring, keyVault ]
 }
 
+module apiAppPostgresqlAdmin './shared/postgresql_administrator.bicep' = {
+  name: 'apiAppPostgresqlAdmin'
+  params: {
+    postgresqlServerName: postgresql.outputs.serverName
+    principalId: apiApp.outputs.identityPrincipalId
+    principalName: apiApp.outputs.identityPrincipalName
+  }
+  scope: rg
+}
 
 module openAi './shared/openai.bicep' = if (deployOpenAi) {
   name: 'openai'
@@ -277,9 +282,10 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 
+output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
+output POSTGRESQL_DATABASE_NAME string = postgresqlDatabaseName
+
+output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrincipalName
+
 output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortalApp.outputs.uri
 output SERVICE_API_ENDPOINT_URL string = apiApp.outputs.uri
-
-// output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
-// output POSTGRESQL_DATABASE_NAME string = postgresql.outputs.databaseName
-// output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin

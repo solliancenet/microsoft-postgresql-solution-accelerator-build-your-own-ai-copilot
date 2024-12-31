@@ -7,6 +7,17 @@ infra:
   bicep: ./infra/main.bicep
 
 hooks:
+  postprovision:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./azd-hooks/postprovision.ps1
+    env:
+      AZURE_RESOURCE_GROUP: ${AZURE_RESOURCE_GROUP}
+      SERVICE_API_IDENTITY_PRINCIPAL_NAME: ${SERVICE_API_IDENTITY_PRINCIPAL_NAME}
+      POSTGRESQL_SERVER_NAME: ${POSTGRESQL_SERVER_NAME}
+      POSTGRESQL_DATABASE_NAME: ${POSTGRESQL_DATABASE_NAME}
+
   postdeploy:
     shell: pwsh
     continueOnError: false

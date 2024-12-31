@@ -47,7 +47,7 @@ param keyvaultName string
 param subnetId string = ''
 
 @description('Name for DNS Private Zone when connecting to Subnet')
-param dnsZoneName string = '${serverName}'
+param dnsZoneName string = serverName
 
 @description('Fully Qualified DNS Private Zone')
 param dnsZoneFqdn string = '${dnsZoneName}.postgres.database.azure.com'
@@ -138,18 +138,15 @@ resource secretServer 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 
-resource secretConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'postgresql-connection'
+resource secretDatabase 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'postgresql-database'
   parent: keyvault
   tags: tags
   properties: {
-    value: 'postgresql://${administratorLogin}:${uriComponent(administratorLoginPassword)}@${postgresqlServer.properties.fullyQualifiedDomainName}:5432/${databaseName}'
+    value: databaseName
   }
 }
 
 output serverName string = postgresqlServer.name
 output fqdn string = postgresqlServer.properties.fullyQualifiedDomainName
 output databaseName string = postgresqlDatabase.name
-
-output postgresqlConnectionStringSecretRef string = secretConnectionString.properties.secretUri
-output postgresqlConnectionStringSecretName string = secretConnectionString.name

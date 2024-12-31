@@ -1,4 +1,4 @@
-from app.services import AzureOpenAIService, DatabaseService, StorageService
+from app.services import AzureOpenAIService, DatabaseService, StorageService, ConfigService
 from azure.identity.aio import DefaultAzureCredential
 from contextlib import asynccontextmanager
 
@@ -16,6 +16,7 @@ db_connection_pool = None
 @asynccontextmanager
 async def lifespan(app):
     """Async context manager for the FastAPI application lifespan."""
+    global app_config
     global blob_service_client
     global chat_client
     global credential
@@ -25,17 +26,20 @@ async def lifespan(app):
     # Create an async Microsoft Entra ID RBAC credential
     credential = DefaultAzureCredential()
 
+    # Create ConfigService instance
+    appConfig = ConfigService(credential)
+
     # Create an async Azure OpenAI chat and embeddings clients
     aoai_service = AzureOpenAIService(credential)
     chat_client = await aoai_service.get_chat_client()
     embedding_client = await aoai_service.get_embedding_client()
 
     # Create an async Azure Blob Service client
-    storage_service = StorageService(credential)
+    storage_service = StorageService(credential, await appConfig.get_storage_account())
     blob_service_client = await storage_service.get_blob_service_client()
 
     # Create a connection to the Azure Database for PostgreSQL server
-    db = DatabaseService(credential)
+    db = DatabaseService(credential, await appConfig.get_postgresql_server_name(), await appConfig.get_postgresql_database_name())
     db_connection_pool = await db.get_connection_pool()
     
     yield
@@ -52,6 +56,9 @@ async def lifespan(app):
     await credential.close()
 
 # Provide methods for retrieving the global async objects from the lifespan manager.
+async def get_app_config():
+    return app_config
+
 async def get_credential():
     return credential
 

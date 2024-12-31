@@ -1,11 +1,9 @@
 const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
 
-const apiVersion = 'v1';
-
 const RESTHelper = require('./RESTHelper');
 
 const getUrl = (url) => {
-    return `${apiConfig.APIUrl}/${apiVersion}${url}`;
+    return `${apiConfig.APIUrl}${url}`;
 };
 
 /* *************** */
@@ -18,10 +16,10 @@ module.exports = {
     },
     documents: {
         list: async () => {
-            return await RESTHelper.get(getUrl(`/documents`));
+            return await RESTHelper.get(getUrl(`/documents/documents`));
         },
         getUrl: (blobName) => {
-            return getUrl(`/documents/${blobName}`);
+            return getUrl(`/documents/documents/${blobName}`);
         },
         upload: async (file) => {
             if (!file) return;
@@ -32,7 +30,7 @@ module.exports = {
             formData.append('file', file);
         
             try {
-                const response = await fetch(getUrl(`/documents`), {
+                const response = await fetch(getUrl(`/documents/documents`), {
                     method: 'POST',
                     body: formData,
                 });
@@ -47,7 +45,7 @@ module.exports = {
         },
         delete: async (blobName) => {
             try {
-                const response = await fetch(getUrl(`/documents/${blobName}`), {
+                const response = await fetch(getUrl(`/documents/documents/${blobName}`), {
                     method: 'DELETE',
                 });
                 if (!response.ok) {
@@ -62,12 +60,12 @@ module.exports = {
     },
     companies: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/company?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+            return await RESTHelper.get(getUrl(`/companies?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
     },
     vendors: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/vendor?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+            return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
     },
     sows: {

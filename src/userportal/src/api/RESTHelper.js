@@ -15,6 +15,25 @@ module.exports = {
             throw error;
         }
     },
+    post: async (url, data) => {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const returnData = await response.json();
+            return returnData;
+        } catch (error) {
+            console.error('Error posting data:', error);
+            throw error;
+        }
+    },
     update: async (url, data) => {
         try {
             const response = await fetch(url, {

@@ -14,6 +14,21 @@ module.exports = {
     getStatus: async () => {
         return await RESTHelper.get(getUrl(`/status`));
     },
+    completions: {
+        chat: async (message, history) => {
+            const chat_history = [];
+            if (history && history.length > 0){
+                for(let i in history) {
+                    chat_history.push(history[i].text);
+                }
+            }
+
+            return await RESTHelper.post(getUrl(`/completions/chat`), {
+                message,
+                chat_history,
+            });
+        },
+    },
     documents: {
         list: async () => {
             return await RESTHelper.get(getUrl(`/documents/documents`));

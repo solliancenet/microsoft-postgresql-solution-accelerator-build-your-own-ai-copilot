@@ -42,7 +42,7 @@ const AIChat = () => {
 
   return (
     <div className="ai-chat container mt-4">
-      <div className="messages mb-3 border p-3" style={{ minHeight: '17em', maxHeight: '17em', overflowY: 'scroll' }}>
+      <div className="messages mb-3 border p-3" style={{ minHeight: '20em', maxHeight: '20em', overflowY: 'scroll' }}>
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender} mb-2 d-flex ${msg.sender === 'user' ? 'justify-content-end' : 'justify-content-start'}`}>
             {!error && index === messages.length - 1 && <div ref={messagesEndRef} />}
@@ -60,14 +60,12 @@ const AIChat = () => {
           </div>}
       </div>
       <div className="input-container d-flex">
-        <input
-          type="text"
-          className="form-control me-2"
+        <textarea className="form-control me-2"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => { if (e.key === 'Enter') handleSendMessage(); }}
           placeholder="Type a message..."
-        />
+        ></textarea>
         <button className="btn btn-primary" onClick={handleSendMessage}>Send</button>
       </div>
     </div>

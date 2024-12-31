@@ -165,7 +165,7 @@ module apiApp './app/API.bicep' = {
     containerRegistryName: registry.outputs.name
     exists: userPortalExists
     appDefinition: portalDefinition
-    postgresqlServerName: postgresql.outputs.serverName
+    openAIServiceName: openAi.outputs.name
     envSettings: [
       {
         name: 'AZURE_KEY_VAULT_NAME'

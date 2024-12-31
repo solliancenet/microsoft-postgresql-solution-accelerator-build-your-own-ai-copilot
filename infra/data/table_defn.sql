@@ -30,7 +30,7 @@ CREATE TABLE sows (
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     budget DECIMAL(18,2) NOT NULL,
-    document text,
+    document text NOT NULL,
     details JSONB -- Flexible for deliverables, milestones, and notes
 );
 
@@ -44,6 +44,7 @@ CREATE TABLE invoices (
     amount DECIMAL(18,2) NOT NULL,
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
+    document text NOT NULL,
     invoice_details JSONB -- Tax info, discounts, or itemized breakdown
 );
 

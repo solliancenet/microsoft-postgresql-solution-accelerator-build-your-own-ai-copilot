@@ -2,11 +2,11 @@ from azure.identity.aio import DefaultAzureCredential, get_bearer_token_provider
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 
 class AzureOpenAIService:
-    def __init__(self, credential: DefaultAzureCredential):
+    def __init__(self, credential: DefaultAzureCredential, openAiService: str):
         self.credential = credential
 
         # TODO: Get Azure OpenAI configuration from app configuration.
-        self.azure_openai_endpoint = "https://openai-uemjxng3p6up6.openai.azure.com/" #"<AZURE_OPENAI_ENDPOINT>"
+        self.azure_openai_endpoint = f"https://{openAiService}.openai.azure.com/"
         self.azure_openai_api_version = "2024-10-21"
         self.completion_deployment_name = "completions"
         self.embedding_deployment_name = "embeddings"

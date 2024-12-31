@@ -57,7 +57,7 @@ resource apiAppRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-0
   scope: openAIService
   name: guid(subscription().id, resourceGroup().id, identity.id, 'Cognitive Services OpenAI User')
   properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'c1aebd3d-0a8d-4a1c-8d3e-0b5e6f3c3b9c') // Cognitive Services OpenAI User role ID
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd') // Cognitive Services OpenAI User role ID
     principalId: identity.properties.principalId
     principalType: 'ServicePrincipal'
   }
@@ -67,7 +67,7 @@ resource apiAppOpenAIContributorRoleAssignment 'Microsoft.Authorization/roleAssi
   scope: openAIService
   name: guid(subscription().id, resourceGroup().id, identity.id, 'Cognitive Services OpenAI Contributor')
   properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b1e3f5c1-7d4e-4d1d-8b4e-1e6f9c6f3c3b') // Cognitive Services OpenAI Contributor role ID
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a001fd3d-188f-4b5d-821b-7da978bf7442') // Cognitive Services OpenAI Contributor role ID
     principalId: identity.properties.principalId
     principalType: 'ServicePrincipal'
   }

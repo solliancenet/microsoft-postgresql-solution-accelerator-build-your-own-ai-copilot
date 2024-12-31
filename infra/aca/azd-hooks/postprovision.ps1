@@ -2,8 +2,27 @@
 az extension add -y -n "rdbms-connect"
 
 $username=(az account show -o tsv --query "user.name")
-
 $token=(az account get-access-token --resource=https://ossrdbms-aad.database.windows.net -o tsv --query "accessToken")
+
+# Add local Public IP Address to PostgreSQL Firewall, so that we can connect to the PostgreSQL Server and run scripts
+$publicIpAddress =  (Invoke-RestMethod -Uri "http://ipinfo.io/ip")
+az postgres flexible-server firewall-rule create `
+    --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+    --name "${env:POSTGRESQL_SERVER_NAME}" `
+    --rule-name "AllowAZDLocalMachine" `
+    --start-ip-address $publicIpAddress `
+    --end-ip-address $publicIpAddress
+
+# Add account running AZD as Administrator on PostgreSQL Server, so that we can run scripts
+az postgres flexible-server ad-admin create `
+    --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+    --server-name "${env:POSTGRESQL_SERVER_NAME}" `
+    --display-name "$username" `
+    --object-id "$(az ad user show --id $username --query id -o tsv)"
+
+
+
+# Run Scripts
 
 $query = "DO $`$
 BEGIN

@@ -10,6 +10,7 @@ from app.routers import (
     invoices,
     sows,
     status,
+    validation,
     vendors
 )
 
@@ -39,6 +40,7 @@ app.include_router(embeddings.router)
 app.include_router(invoices.router)
 app.include_router(sows.router)
 app.include_router(status.router)
+app.include_router(validation.router)
 app.include_router(vendors.router)
 
 @app.get("/")

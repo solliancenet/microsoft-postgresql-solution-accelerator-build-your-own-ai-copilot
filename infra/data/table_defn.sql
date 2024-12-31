@@ -20,17 +20,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS vendors
     OWNER to "adminUser";
 
--- MSA table; information about payment terms, special clauses, or additional legal notes
-DROP TABLE IF EXISTS msas CASCADE;
-
-CREATE TABLE msas (
-    id BIGSERIAL PRIMARY KEY,
-    title text NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE,
-    additional_info JSONB -- Stores special clauses, terms, etc.
-);
-
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 
 DROP TABLE IF EXISTS sows CASCADE;
@@ -56,4 +45,15 @@ CREATE TABLE invoices (
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
     invoice_details JSONB -- Tax info, discounts, or itemized breakdown
+);
+
+-- MSA table; information about payment terms, special clauses, or additional legal notes
+DROP TABLE IF EXISTS msas CASCADE;
+
+CREATE TABLE msas (
+    id BIGSERIAL PRIMARY KEY,
+    title text NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE,
+    additional_info JSONB -- Stores special clauses, terms, etc.
 );

@@ -13,7 +13,7 @@ param exists bool
 param appDefinition object
 param envSettings array = []
 param secretSettings array = []
-param postgresqlServerName string
+param openAIServiceName string
 
 var appSettingsArray = filter(array(appDefinition.settings), i => i.name != '')
 var secrets = union(map(filter(appSettingsArray, i => i.?secret != null), i => {
@@ -46,6 +46,31 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' existing = {
   name: storageAccountName
+}
+
+
+resource openAIService 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAIServiceName
+}
+
+resource apiAppRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  scope: openAIService
+  name: guid(subscription().id, resourceGroup().id, identity.id, 'Cognitive Services OpenAI User')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd') // Cognitive Services OpenAI User role ID
+    principalId: identity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource apiAppOpenAIContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  scope: openAIService
+  name: guid(subscription().id, resourceGroup().id, identity.id, 'Cognitive Services OpenAI Contributor')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a001fd3d-188f-4b5d-821b-7da978bf7442') // Cognitive Services OpenAI Contributor role ID
+    principalId: identity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
 }
 
 resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {

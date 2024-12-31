@@ -53,6 +53,7 @@ resource apiKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 
 output endpoint string = openAi.properties.endpoint
+output key string = openAi.listKeys().key1
 output keySecretName string = apiKeySecret.name
 output keySecretRef string = apiKeySecret.properties.secretUri
 output name string = openAi.name

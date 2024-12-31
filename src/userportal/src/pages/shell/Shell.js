@@ -91,7 +91,7 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                 </ul>
-                <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                {/* <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
                   Reports
                   <button type="button" className="btn btn-sm btn-outline-secondary" title="New Report">
                     <i className="fas fa-plus"></i>
@@ -109,9 +109,9 @@ const Shell = ({ isDarkTheme }) => {
                     </a>
                   </li>
                 </ul>
-                <hr className="my-3" />
+                <hr className="my-3" /> */}
               </div>
-              <div className="sidebar-sticky-bottom pt-3">
+              {/* <div className="sidebar-sticky-bottom pt-3">
                 <ul className="nav flex-column">
                 <li className="nav-item">
                     <a className="nav-link d-flex align-items-center gap-2" to="#">
@@ -122,7 +122,7 @@ const Shell = ({ isDarkTheme }) => {
                     <UserProfile name={userName} avatar={userAvatar} />
                   </li>
                 </ul>               
-              </div>
+              </div> */}
             </div>
           </div>
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

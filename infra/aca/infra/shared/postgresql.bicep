@@ -105,6 +105,15 @@ resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01'
   tags: tags
 }
 
+resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2023-12-01-preview' = {
+  parent: postgresqlServer
+  name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
+  properties: {
+    startIpAddress: '0.0.0.0'
+    endIpAddress: '0.0.0.0'
+  }
+}
+
 // Enable these extensions for the PostgreSQL server
 resource postgresqlExtensions 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2024-11-01-preview' = {
   parent: postgresqlServer
@@ -123,6 +132,7 @@ resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases
     collation: 'en_US.utf8'
   }
 }
+
 
 
 resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {

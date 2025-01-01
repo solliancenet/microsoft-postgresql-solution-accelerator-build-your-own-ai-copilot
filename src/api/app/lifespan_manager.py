@@ -49,10 +49,6 @@ async def lifespan(app):
     
     yield
 
-    # Close the async Azure OpenAI client
-    await embedding_client.close()
-    # Close the async Azure OpenAI client
-    await chat_client.close()
     # Close the async Azure Blob Service client
     await blob_service_client.close()
     # Close the async PostgreSQL connection pool

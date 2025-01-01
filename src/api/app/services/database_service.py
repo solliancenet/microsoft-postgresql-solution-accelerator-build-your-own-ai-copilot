@@ -22,12 +22,9 @@ class DatabaseService:
     async def __get_username(self, token):
         """get username from token or Entra if token does not have username"""
         decoded_token = jwt.decode(token, options={"verify_signature": False})
-        # When running as a User, this will be populated
-        username = decoded_token.get("preferred_username") or decoded_token.get("upn")
-        if username is None:
-            # When running as an App with Managed Identity configured, this will be populated instead
-            # load app Identity principal name from environment variable
-            username = os.getenv('AZURE_IDENTITY_NAME')
+        # When running as a User, 'upn' will be populated
+        # When running as an App, in Azure with Managed Identity, 'AZURE_IDENTITY_NAME" environment variable must be used
+        username = decoded_token.get("upn") or os.getenv('AZURE_IDENTITY_NAME')
         return username
 
     async def __get_connection_uri(self):

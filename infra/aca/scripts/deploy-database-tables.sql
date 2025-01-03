@@ -1,8 +1,6 @@
-/*  File to load table DDL for Claims Data  */
+/*  File to idempotently load table DDL for Claims Data  */
 
 -- Vendors table: information about companies (e.g., tags, industry codes, preferences)
-DROP TABLE IF EXISTS vendors CASCADE;
-
 CREATE TABLE IF NOT EXISTS vendors
 (
     id BIGSERIAL PRIMARY KEY,
@@ -14,17 +12,11 @@ CREATE TABLE IF NOT EXISTS vendors
     type text NOT NULL,
     metadata jsonb -- additional information about the vendor
 )
-
-TABLESPACE pg_default;
-
 ALTER TABLE IF EXISTS vendors
     OWNER to "adminUser";
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
-
-DROP TABLE IF EXISTS sows CASCADE;
-
-CREATE TABLE sows (
+CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
     title text NOT NULL,
     start_date DATE NOT NULL,
@@ -33,12 +25,11 @@ CREATE TABLE sows (
     document text NOT NULL,
     details JSONB -- Flexible for deliverables, milestones, and notes
 );
+ALTER TABLE IF EXISTS vendors
+    OWNER to "adminUser";
 
 -- Invoices table; tax details, discounts, or additional metadata
-
-DROP TABLE IF EXISTS invoices CASCADE;
-
-CREATE TABLE invoices (
+CREATE TABLE IF NOT EXISTS invoices (
     id BIGSERIAL PRIMARY KEY,
     invoice_number text NOT NULL,
     amount DECIMAL(18,2) NOT NULL,
@@ -47,14 +38,16 @@ CREATE TABLE invoices (
     document text NOT NULL,
     invoice_details JSONB -- Tax info, discounts, or itemized breakdown
 );
+ALTER TABLE IF EXISTS vendors
+    OWNER to "adminUser";
 
 -- MSA table; information about payment terms, special clauses, or additional legal notes
-DROP TABLE IF EXISTS msas CASCADE;
-
-CREATE TABLE msas (
+CREATE TABLE IF NOT EXISTS msas (
     id BIGSERIAL PRIMARY KEY,
     title text NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE,
     additional_info JSONB -- Stores special clauses, terms, etc.
 );
+ALTER TABLE IF EXISTS vendors
+    OWNER to "adminUser";

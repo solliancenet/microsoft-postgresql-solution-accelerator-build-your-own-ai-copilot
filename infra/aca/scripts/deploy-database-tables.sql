@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS vendors
     contact_phone text NOT NULL,
     type text NOT NULL,
     metadata jsonb -- additional information about the vendor
-)
+);
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (

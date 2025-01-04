@@ -2,7 +2,7 @@
 
 ## Contents
 
-**Company Contract**
+**Vendors**
 
 **Invoice**
 

@@ -2,8 +2,8 @@ from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
 from app.models import Sow, SowEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from azure.storage.blob import ContentSettings
-import json
 from datetime import datetime
+from pydantic import parse_obj_as
 
 # Initialize the router
 router = APIRouter(
@@ -22,12 +22,7 @@ async def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, search: 
         if (sortby):
             orderby = sortby
         rows = await conn.fetch('SELECT * FROM sows ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
-        #sows = [SOW(**dict(row)) for row in rows]
-        sows = []
-        for row in rows:
-            row_dict = dict(row)
-            row_dict['details'] = json.loads(row_dict['details'])  # Parse JSON string to dictionary
-            sows.append(Sow(**row_dict))
+        sows = parse_obj_as(list[Sow], [dict(row) for row in rows])
 
         total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
 
@@ -70,7 +65,7 @@ async def create_sow(
             RETURNING *;
         ''', sow_title, start_date_parsed, end_date_parsed, budget_parsed, file.filename, None)
         
-        sow = Sow(**dict(sow))
+        sow = parse_obj_as(Sow, dict(sow))
     return sow
 
 @router.get("/{sow_id}", response_model=Sow)
@@ -80,9 +75,7 @@ async def read_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
         row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        row_dict = dict(row)
-        row_dict['details'] = json.loads(row_dict['details'])
-        sow = Sow(**row_dict)
+        sow = parse_obj_as(Sow, dict(row))
     return sow
 
 @router.put("/{sow_id}", response_model=Sow)
@@ -93,9 +86,7 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
         
-        row_dict = dict(row)
-        row_dict['details'] = json.loads(row_dict['details'])
-        sow = Sow(**row_dict)
+        sow = parse_obj_as(Sow, dict(row))
 
         sow.sow_title = sow_update.sow_title
         sow.start_date = sow_update.start_date

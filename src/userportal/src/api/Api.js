@@ -73,14 +73,14 @@ module.exports = {
             }
         },
     },
-    companies: {
+    invoices: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/companies?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+            return await RESTHelper.get(getUrl(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
     },
-    vendors: {
+    msas: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+            return await RESTHelper.get(getUrl(`/msas?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
     },
     sows: {
@@ -129,9 +129,9 @@ module.exports = {
             return await RESTHelper.delete(getUrl(`/sows/${sowId}`));
         }
     },
-    invoices: {
+    vendors: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+            return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
     }
 };

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS vendors
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
-    title text NOT NULL,
+    msa_itle text NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     budget DECIMAL(18,2) NOT NULL,

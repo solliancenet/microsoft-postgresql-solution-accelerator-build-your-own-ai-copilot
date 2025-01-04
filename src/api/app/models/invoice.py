@@ -1,11 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Json, Field
 from typing import List, Optional
 from datetime import date
 
 class Invoice(BaseModel):
     id: int
     invoice_number: str
-    amount: Optional[float] = None
-    invoice_date: Optional[date] = None
-    payment_status: Optional[str] = None
-    invoice_details: Optional[dict] = None
+    amount: float
+    invoice_date: date
+    payment_status: str
+    document: Optional[str] = None
+    invoice_details: Optional[Json[dict]] = None

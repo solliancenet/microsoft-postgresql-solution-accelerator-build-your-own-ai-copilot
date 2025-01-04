@@ -11,3 +11,6 @@ BEGIN
     CREATE EXTENSION vector;
   END IF;
 END $$;
+
+select azure_ai.set_setting('azure_openai.endpoint', '${env:AZURE_OPENAI_ENDPOINT}');
+select azure_ai.set_setting('azure_openai.subscription_key', '${env:AZURE_OPENAI_KEY}');

@@ -12,8 +12,6 @@ CREATE TABLE IF NOT EXISTS vendors
     type text NOT NULL,
     metadata jsonb -- additional information about the vendor
 )
-ALTER TABLE IF EXISTS vendors
-    OWNER to "adminUser";
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (
@@ -25,8 +23,6 @@ CREATE TABLE IF NOT EXISTS sows (
     document text NOT NULL,
     details JSONB -- Flexible for deliverables, milestones, and notes
 );
-ALTER TABLE IF EXISTS sows
-    OWNER to "adminUser";
 
 -- Invoices table; tax details, discounts, or additional metadata
 CREATE TABLE IF NOT EXISTS invoices (
@@ -38,8 +34,6 @@ CREATE TABLE IF NOT EXISTS invoices (
     document text NOT NULL,
     invoice_details JSONB -- Tax info, discounts, or itemized breakdown
 );
-ALTER TABLE IF EXISTS invoices
-    OWNER to "adminUser";
 
 -- MSA table; information about payment terms, special clauses, or additional legal notes
 CREATE TABLE IF NOT EXISTS msas (
@@ -49,5 +43,3 @@ CREATE TABLE IF NOT EXISTS msas (
     end_date DATE,
     additional_info JSONB -- Stores special clauses, terms, etc.
 );
-ALTER TABLE IF EXISTS msas
-    OWNER to "adminUser";

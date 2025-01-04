@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../../../api/Api';
@@ -29,8 +29,8 @@ const EditSOW = () => {
   }, [id]);
 
   const updateDisplay = (data) => {
-    setSowTitle(data.sow_title);
-    setSowDocument(data.sow_document);
+    setSowTitle(data.title);
+    setSowDocument(data.document);
     setStartDate(data.start_date);
     setEndDate(data.end_date);
     setBudget(data.budget);
@@ -68,58 +68,66 @@ const EditSOW = () => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Start Date</Form.Label>
-          <Form.Control
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>End Date</Form.Label>
-          <Form.Control
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Budget</Form.Label>
-          <NumericFormat
-            className="form-control"
-            value={budget}
-            thousandSeparator={true}
-            prefix={'$'}
-            onValueChange={(values) => {
-              const { value } = values;
-              setBudget(value);
-            }}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Document</Form.Label>
-          <div className="d-flex">
-            <Form.Control
-              type="text"
-              value={sowDocument}
-              readOnly
-              className="form-control-plaintext"
-            />
-            <a href={api.documents.getUrl(sowDocument)} target="_blank" rel="noreferrer">
-              <i className="fas fa-download"></i>
-            </a>
-          </div>
-        </Form.Group>
+        <Row className="mb-3">
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>Start Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>End Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>Budget</Form.Label>
+              <NumericFormat
+                className="form-control"
+                value={budget}
+                thousandSeparator={true}
+                prefix={'$'}
+                onValueChange={(values) => {
+                  const { value } = values;
+                  setBudget(value);
+                }}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>Document</Form.Label>
+              <div className="d-flex">
+                <code>{sowDocument}</code>
+                <a href={api.documents.getUrl(sowDocument)} target="_blank" rel="noreferrer">
+                  <i className="fas fa-download ms-3"></i>
+                </a>
+              </div>
+            </Form.Group>
+          </Col>
+        </Row>
         <Form.Group className="mb-3">
           <Form.Label>Details</Form.Label>
           <Form.Control
             as="textarea"
             value={details}
             onChange={(e) => setDetails(e.target.value)}
+            style={{ height: '8em' }}
             readOnly
           />
         </Form.Group>

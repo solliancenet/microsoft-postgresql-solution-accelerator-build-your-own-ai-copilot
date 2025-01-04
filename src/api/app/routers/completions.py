@@ -45,7 +45,10 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     
     # TODO: Define tools for the agent
     tools = [
-         StructuredTool.from_function(coroutine=get_vendors)
+        StructuredTool.from_function(coroutine=get_invoices),
+        StructuredTool.from_function(coroutine=get_msas),
+        StructuredTool.from_function(coroutine=get_sows),
+        StructuredTool.from_function(coroutine=get_vendors)         
     ]
     
     # Create an agent
@@ -53,6 +56,30 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, return_intermediate_steps=True)
     completion = await agent_executor.ainvoke({"input": request.message, "chat_history": request.chat_history[-request.max_history:]})
     return completion['output']
+
+async def get_invoices():
+    """Retrieves a list of invoices from the database."""
+    pool = await get_db_connection_pool()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM invoices;')
+        invoices = [dict(row) for row in rows]
+    return invoices
+
+async def get_msas():
+    """Retrieves a list of master services agreements (MSAs) from the database."""
+    pool = await get_db_connection_pool()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM msas;')
+        msas = [dict(row) for row in rows]
+    return msas
+
+async def get_sows():
+    """Retrieves a list of statements of work (SOWs) from the database."""
+    pool = await get_db_connection_pool()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM sows;')
+        sows = [dict(row) for row in rows]
+    return sows
 
 async def get_vendors():
     """Retrieves a list of vendors from the database."""

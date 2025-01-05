@@ -43,6 +43,9 @@ param tags object
 @description('The name of the key vault to store the connection string.')
 param keyvaultName string
 
+@description('The name of the app config to store the connection string.')
+param appConfigName string
+
 @description('The subnet ID for the PostgreSQL server.')
 param subnetId string = ''
 
@@ -157,21 +160,23 @@ resource secretAdminPassword 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 
-resource secretServer 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' existing = if (!empty(appConfigName)) {
+  name: appConfigName
+}
+
+resource appConfigPostgresqlServerName 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' = if (!empty(appConfigName)) {
+  parent: appConfig
   name: 'postgresql-server'
-  parent: keyvault
-  tags: tags
   properties: {
     value: postgresqlServer.properties.fullyQualifiedDomainName
   }
 }
 
-resource secretDatabase 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+resource appConfigPostgresqlDatabaseName 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' = if (!empty(appConfigName)) {
+  parent: appConfig
   name: 'postgresql-database'
-  parent: keyvault
-  tags: tags
   properties: {
-    value: databaseName
+    value: postgresqlDatabase.name
   }
 }
 

@@ -1,10 +1,10 @@
 param deployments array
-param keyvaultName string
 param location string = resourceGroup().location
 param name string
 param sku string = 'S0'
 param tags object = {}
-
+param keyvaultName string = ''
+param appConfigName string = ''
 
 resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: name
@@ -39,11 +39,11 @@ resource openAiDeployments 'Microsoft.CognitiveServices/accounts/deployments@202
   }
 ]
 
-resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = if (!empty(keyvaultName)) {
   name: keyvaultName
 }
 
-resource apiKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+resource apiKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = if (!empty(keyvaultName)) {
   name: 'openai-apikey'
   parent: keyvault
   tags: tags
@@ -52,8 +52,34 @@ resource apiKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 
+resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' existing = if (!empty(appConfigName)) {
+  name: appConfigName
+}
+
+resource appConfigOpenApiKey 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' =  if (!empty(appConfigName)) {
+  parent: appConfig
+  name: 'openai-apikey'
+  properties: {
+    value: '@Microsoft.KeyVault(VaultName=${keyvault.name};SecretName=openai-apikey)'
+    contentType: 'text/plain'
+    tags: {
+      environment: 'production'
+    }
+  }
+}
+
+resource appConfigOpenApiName 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' =  if (!empty(appConfigName)) {
+  parent: appConfig
+  name: 'openai-endpoint'
+  properties: {
+    value: openAi.properties.endpoint
+    contentType: 'text/plain'
+    tags: {
+      environment: 'production'
+    }
+  }
+}
+
 output endpoint string = openAi.properties.endpoint
-output key string = openAi.listKeys().key1
-output keySecretName string = apiKeySecret.name
-output keySecretRef string = apiKeySecret.properties.secretUri
 output name string = openAi.name
+output key string = openAi.listKeys().key1

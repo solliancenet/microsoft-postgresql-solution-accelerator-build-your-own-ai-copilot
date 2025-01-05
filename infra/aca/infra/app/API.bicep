@@ -3,6 +3,7 @@ param location string = resourceGroup().location
 param tags object = {}
 
 param keyvaultName string
+param appConfigName string
 param identityName string
 param storageAccountName string
 param containerRegistryName string
@@ -84,17 +85,6 @@ resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-resource kvSecretsRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: keyvault
-  name: guid(subscription().id, resourceGroup().id, identity.id, 'kvSecretsRole')
-  properties: {
-    roleDefinitionId:  subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User role
-    principalType: 'ServicePrincipal'
-    principalId: identity.properties.principalId
-  }
-}
-
 resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
   name: guid(subscription().id, resourceGroup().id, identity.id, 'storageBlobDataContributorRole')
@@ -105,23 +95,19 @@ resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments
   }
 }
 
-resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
-  name: keyvaultName
+resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' existing = {
+  name: appConfigName
 }
 
-resource secretsAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
-  parent: keyvault
-  name: 'add'
+resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  name: guid(subscription().id, resourceGroup().id, identity.id, 'AppConfigDataReader')
+  scope: appConfig
   properties: {
-    accessPolicies: [
-      {
-        objectId: identity.properties.principalId
-        permissions: { secrets: [ 'get', 'list' ] }
-        tenantId: subscription().tenantId
-      }
-    ]
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '516239f1-63e1-4d78-a4de-a74fb236a071') // App Configuration Data Reader role
+    principalId: identity.properties.principalId
   }
 }
+
 
 module fetchLatestImage '../modules/fetch-container-image.bicep' = {
   name: '${name}-fetch-image'
@@ -183,6 +169,10 @@ resource app 'Microsoft.App/containerApps@2023-04-01-preview' = {
             {
               name: 'AZURE_IDENTITY_NAME'
               value: identity.name
+            }
+            {
+              name: 'AZURE_APP_CONFIG_ENDPOINT'
+              value: appConfig.properties.endpoint
             }
           ],
           env,

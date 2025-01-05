@@ -1,6 +1,5 @@
 from azure.identity.aio import DefaultAzureCredential
 from azure.appconfiguration.aio import AzureAppConfigurationClient
-from azure.keyvault.secrets.aio import SecretClient
 from azure.core.exceptions import ResourceNotFoundError
 import os
 

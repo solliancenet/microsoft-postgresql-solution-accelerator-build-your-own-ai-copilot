@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
-import api from '../../../../api/Api';
+import api from '../../api/Api';
 
-const EditSOW = () => {
+const SOWEdit = () => {
   const { id } = useParams(); // Extract SOW ID from URL
   const [sowTitle, setSowTitle] = useState('');
   const [sowDocument, setSowDocument] = useState('');
@@ -142,4 +142,4 @@ const EditSOW = () => {
   );
 };
 
-export default EditSOW;
+export default SOWEdit;

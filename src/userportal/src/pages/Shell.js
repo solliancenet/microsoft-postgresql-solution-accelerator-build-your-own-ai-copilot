@@ -2,16 +2,14 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 
-import UserProfile from './../../components/UserProfile';
+// import UserProfile from './../../components/UserProfile';
 
-import Dashboard from './panes/Dashboard';
-import Documents from './panes/Documents';
-import Invoices from './panes/Invoices';
-import Msas from './panes/Msas';
-import SOWs from './panes/SOWs';
-import SOWCreate from './panes/sows/create';
-import SOWEdit from './panes/sows/edit';
-import Vendors from './panes/Vendors';
+import { Dashboard } from './dashboard';
+import { DocumentList } from './documents';
+import { InvoiceList } from './invoices';
+import { MSAList } from './msas';
+import { SOWList, SOWCreate, SOWEdit } from './sows';
+import { VendorList } from './vendors';
 
 const Shell = ({ isDarkTheme }) => {
   const userName = "John Doe"; // Replace with actual user name
@@ -128,13 +126,15 @@ const Shell = ({ isDarkTheme }) => {
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
-              <Route path="/documents" element={<Documents />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/msas" element={<Msas />} />
-              <Route path="/sows" element={<SOWs />} />
+              <Route path="/documents" element={<DocumentList />} />
+              <Route path="/invoices" element={<InvoiceList />} />
+              <Route path="/msas" element={<MSAList />} />
+              
+              <Route path="/sows" element={<SOWList />} />
               <Route path="/sows/create" element={<SOWCreate />} />
               <Route path="/sows/:id" element={<SOWEdit />} />
-              <Route path="/vendors" element={<Vendors />} />
+
+              <Route path="/vendors" element={<VendorList />} />
             </Routes>
           </main>
         </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../../api/Api';
+import api from '../../api/Api';
 import { Button } from 'react-bootstrap';
-import ConfirmModal from '../../../components/ConfirmModal'; 
-import PagedTable from '../../../components/PagedTable';
+import ConfirmModal from '../../components/ConfirmModal'; 
+import PagedTable from '../../components/PagedTable';
 
 const Msas = () => {
   const [error, setError] = useState(null);

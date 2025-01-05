@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../../api/Api';
+import api from '../../api/Api';
 import { Button } from 'react-bootstrap';
-import ConfirmModal from '../../../components/ConfirmModal'; 
-import PagedTable from '../../../components/PagedTable';
+import ConfirmModal from '../../components/ConfirmModal'; 
+import PagedTable from '../../components/PagedTable';
 
-const Vendors = () => {
+const SOWList = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [sowToDelete, setSowToDelete] = useState(null);
   const [reload, setReload] = useState(false);
-  
+
   const handleDelete = async () => {
     if (!sowToDelete) return;
 
     try {
-      await api.vendors.delete(sowToDelete);
-      setSuccess('Vendor deleted successfully!');
+      await api.sows.delete(sowToDelete);
+      setSuccess('SOW deleted successfully!');
       setError(null);
       setShowDeleteModal(false);
       setReload(true); // Refresh the data
@@ -34,35 +34,37 @@ const Vendors = () => {
         accessor: 'id',
       },
       {
-        Header: 'Vendor Name',
-        accessor: 'name',
+        Header: 'Title',
+        accessor: 'sow_title',
       },
       {
-        Header: 'Address',
-        accessor: 'address',
+        Header: 'Start Date',
+        accessor: 'start_date',
       },
       {
-        Header: 'Contact Person',
-        accessor: 'contact_name',
+        Header: 'End Date',
+        accessor: 'end_date',
       },
       {
-        Header: 'Contact Email',
-        accessor: 'contact_email',
-      },
-      {
-        Header: 'Contact Phone',
-        accessor: 'contact_phone',
-      },
-      {
-        Header: 'Type',
-        accessor: 'contact_type',
+        Header: 'Budget',
+        accessor: 'budget',
+        Cell: ({ value }) => {
+          const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          });
+          return formatter.format(value);
+        },
       },
       {
         Header: 'Actions',
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
-            <a href={`/vendors/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+            <a href={`${api.documents.getUrl(row.original.document)}`} target="_blank" rel="noopener noreferrer" className="btn btn-link" aria-label="Download">
+              <i className="fas fa-download"></i>
+            </a>
+            <a href={`/sows/${row.original.id}`} className="btn btn-link" aria-label="Edit">
               <i className="fas fa-edit"></i>
             </a>
             <Button variant="danger" onClick={() => { setSowToDelete(row.original.id); setShowDeleteModal(true); }} aria-label="Delete">
@@ -75,19 +77,21 @@ const Vendors = () => {
     []
   );
 
-  const fetchVendors = async (skip, limit, sortBy, search) => {
-    const response = await api.vendors.list(skip, limit, sortBy, search);
+  const fetchData = async (skip, limit, sortBy, search) => {
+    const response = await api.sows.list(skip, limit, sortBy, search);
     return response;
   };
 
   return (
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Vendors</h1>
-        <Link to="/vendoes/create" className="btn btn-primary">New <i className="fas fa-plus" /></Link>
+        <h1 className="h2">SOWs</h1>
+        <Link to="/sows/create" className="btn btn-primary">New <i className="fas fa-plus" /></Link>
       </div>
-      
-      <PagedTable columns={columns} fetchData={fetchVendors} reload={reload} />
+      {error && <div className="alert alert-danger">{error}</div>}
+      {success && <div className="alert alert-success">{success}</div>}
+
+      <PagedTable columns={columns} fetchData={fetchData} reload={reload} />
 
       <ConfirmModal
         show={showDeleteModal}
@@ -99,4 +103,4 @@ const Vendors = () => {
   );
 };
 
-export default Vendors;
+export default SOWList;

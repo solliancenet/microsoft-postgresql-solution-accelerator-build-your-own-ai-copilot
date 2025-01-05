@@ -28,6 +28,16 @@ async def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, search: 
 
     return ListResponse[Sow](data=sows, total = total, skip = skip, limit = limit)
 
+@router.get("/{sow_id}", response_model=Sow)
+async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
+    """Retrieves a SOW by ID from the database."""
+    async with pool.acquire() as conn:
+        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
+        if row is None:
+            raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
+        sow = parse_obj_as(Sow, dict(row))
+    return sow
+
 @router.post("/", response_model=Sow)
 async def create_sow(
     sow_title: str = Form(...),
@@ -68,16 +78,6 @@ async def create_sow(
         sow = parse_obj_as(Sow, dict(sow))
     return sow
 
-@router.get("/{sow_id}", response_model=Sow)
-async def read_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
-    """Retrieves a SOW by ID from the database."""
-    async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
-        if row is None:
-            raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        sow = parse_obj_as(Sow, dict(row))
-    return sow
-
 @router.put("/{sow_id}", response_model=Sow)
 async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_connection_pool)):
     """Updates a SOW in the database."""
@@ -95,18 +95,22 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
 
         # for key, value in sow_update.dict().items():
         #     setattr(sow, key, value)
-        await conn.execute('''
+        row = await conn.fetchrow('''
             UPDATE sows
             SET sow_title = $1, start_date = $2, end_date = $3, budget = $4
-            WHERE id = $5;
-        ''', sow.sow_title, sow.start_date, sow.end_date, sow.budget, sow_id)
-    return sow
+            WHERE id = $5
+            RETURNING *;''',
+            sow.sow_title, sow.start_date, sow.end_date, sow.budget, sow_id)
+        if row is None:
+            raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
+        updated_sow = parse_obj_as(Sow, dict(row))
+    return updated_sow
 
 @router.delete("/{sow_id}", response_model=Sow)
 async def delete_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
     """Deletes a SOW from the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
+        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1 RETURNING *;', sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
         

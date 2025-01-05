@@ -12,15 +12,18 @@ const AIChat = () => {
   const handleSendMessage = async () => {
     if (input.trim() === '') return;
 
+    const prompt = input;
+    setInput('');
+
     setIsThinking(true);
 
-    const userMessage = { sender: 'user', text: input };
+    const userMessage = { sender: 'user', text: prompt };
     setMessages([...messages, userMessage]);
 
     setError('');
 
     try {
-      const response = await api.completions.chat(input, messages);
+      const response = await api.completions.chat(prompt, messages);
 
       const agentMessage = { sender: 'agent', text: response };
       setMessages([...messages, userMessage, agentMessage]);
@@ -31,7 +34,6 @@ const AIChat = () => {
         setIsThinking(false);
     }
 
-    setInput('');
   };
 
   useEffect(() => {
@@ -63,7 +65,7 @@ const AIChat = () => {
         <textarea className="form-control me-2"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => { if (e.key === 'Enter') handleSendMessage(); }}
+          onKeyDown={(e) => { if (e.key === 'Enter') { handleSendMessage(e); e.preventDefault(); return false; } }}
           placeholder="Type a message..."
         ></textarea>
         <button className="btn btn-primary" onClick={handleSendMessage}>Send</button>

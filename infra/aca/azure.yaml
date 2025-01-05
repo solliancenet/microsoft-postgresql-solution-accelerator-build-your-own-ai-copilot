@@ -7,11 +7,11 @@ infra:
   bicep: ./infra/main.bicep
 
 hooks:
-  postprovision:
+  postdeploy:
     shell: pwsh
     continueOnError: false
     interactive: true
-    run: ./azd-hooks/postprovision.ps1
+    run: ./azd-hooks/postdeploy.ps1
     env:
       AZURE_RESOURCE_GROUP: ${AZURE_RESOURCE_GROUP}
       SERVICE_API_IDENTITY_PRINCIPAL_NAME: ${SERVICE_API_IDENTITY_PRINCIPAL_NAME}
@@ -19,12 +19,6 @@ hooks:
       POSTGRESQL_DATABASE_NAME: ${POSTGRESQL_DATABASE_NAME}
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_KEY: ${AZURE_OPENAI_KEY}
-
-  postdeploy:
-    shell: pwsh
-    continueOnError: false
-    interactive: true
-    run: ./azd-hooks/postdeploy.ps1
 
 services:
   UserPortal:

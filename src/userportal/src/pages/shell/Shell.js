@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 import UserProfile from './../../components/UserProfile';
 
 import Dashboard from './panes/Dashboard';
-import Companies from './panes/Companies';
 import Documents from './panes/Documents';
 import Invoices from './panes/Invoices';
+import Msas from './panes/Msas';
 import SOWs from './panes/SOWs';
 import SOWCreate from './panes/sows/create';
 import SOWEdit from './panes/sows/edit';
@@ -71,13 +71,13 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/companies">
-                      <i className="fas fa-building"></i> Companies
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/invoices">
+                      <i className="fas fa-file-invoice"></i> Invoices
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/invoices">
-                      <i className="fas fa-file-invoice"></i> Invoices
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/msas">
+                      <i className="fas fa-building"></i> MSAs
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -128,9 +128,9 @@ const Shell = ({ isDarkTheme }) => {
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
-              <Route path="/companies" element={<Companies />} />
               <Route path="/documents" element={<Documents />} />
               <Route path="/invoices" element={<Invoices />} />
+              <Route path="/msas" element={<Msas />} />
               <Route path="/sows" element={<SOWs />} />
               <Route path="/sows/create" element={<SOWCreate />} />
               <Route path="/sows/:id" element={<SOWEdit />} />

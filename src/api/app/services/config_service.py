@@ -26,6 +26,9 @@ class ConfigService:
         secret = await self.client.get_secret(secret_name)
         return secret.value
 
+    async def get_openai_service(self) -> str:
+        return await self.__get_secret("openai-service")
+
     async def get_postgresql_server_name(self) -> str:
         return await self.__get_secret("postgresql-server")
     

@@ -3,11 +3,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.lifespan_manager import lifespan
 from app.routers import (
-    companies,
     completions,
     documents,
     embeddings,
     invoices,
+    msas,
     sows,
     status,
     validation,
@@ -33,11 +33,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(companies.router)
 app.include_router(completions.router)
 app.include_router(documents.router)
 app.include_router(embeddings.router)
 app.include_router(invoices.router)
+app.include_router(msas.router)
 app.include_router(sows.router)
 app.include_router(status.router)
 app.include_router(validation.router)

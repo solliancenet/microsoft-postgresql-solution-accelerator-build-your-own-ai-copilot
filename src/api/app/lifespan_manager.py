@@ -35,7 +35,7 @@ async def lifespan(app):
     appConfig = ConfigService(credential)
 
     # Create an async Azure OpenAI chat and embeddings clients
-    aoai_service = AzureOpenAIService(credential)
+    aoai_service = AzureOpenAIService(credential, await appConfig.get_openai_service())
     chat_client = await aoai_service.get_chat_client()
     embedding_client = await aoai_service.get_embedding_client()
 
@@ -49,10 +49,6 @@ async def lifespan(app):
     
     yield
 
-    # Close the async Azure OpenAI client
-    await embedding_client.close()
-    # Close the async Azure OpenAI client
-    await chat_client.close()
     # Close the async Azure Blob Service client
     await blob_service_client.close()
     # Close the async PostgreSQL connection pool

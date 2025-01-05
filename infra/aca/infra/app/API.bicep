@@ -180,6 +180,10 @@ resource app 'Microsoft.App/containerApps@2023-04-01-preview' = {
               name: 'AZURE_CLIENT_ID'
               value: identity.properties.clientId
             }
+            {
+              name: 'AZURE_IDENTITY_NAME'
+              value: identity.name
+            }
           ],
           env,
           map(secrets, secret => {

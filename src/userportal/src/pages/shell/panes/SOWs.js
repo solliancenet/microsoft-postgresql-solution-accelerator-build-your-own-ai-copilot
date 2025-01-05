@@ -62,7 +62,7 @@ const SOWs = () => {
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
-            <a href={`${api.documents.getUrl(row.original.sow_document)}`} target="_blank" rel="noopener noreferrer" className="btn btn-link" aria-label="Download">
+            <a href={`${api.documents.getUrl(row.original.document)}`} target="_blank" rel="noopener noreferrer" className="btn btn-link" aria-label="Download">
               <i className="fas fa-download"></i>
             </a>
             <a href={`/sows/${row.original.id}`} className="btn btn-link" aria-label="Edit">

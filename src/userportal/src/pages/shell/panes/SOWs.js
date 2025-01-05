@@ -1,5 +1,4 @@
-// src/Transactions.js
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../api/Api';
 import { Button } from 'react-bootstrap';

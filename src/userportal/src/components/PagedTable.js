@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Table from './Table';
 
-const PagedTable = ({ columns, fetchData, searchEnabled = true, reload }) => {
+const PagedTable = ({ columns, fetchData, searchEnabled = false, reload }) => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);

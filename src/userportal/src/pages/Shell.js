@@ -9,11 +9,11 @@ import { DocumentList } from './documents';
 import { InvoiceList } from './invoices';
 import { MSAList } from './msas';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
-import { VendorList } from './vendors';
+import { VendorList, VendorCreate, VendorEdit } from './vendors';
 
 const Shell = ({ isDarkTheme }) => {
-  const userName = "John Doe"; // Replace with actual user name
-  const userAvatar = "user-avatar.svg"; // Replace with actual avatar URL
+  //const userName = "John Doe"; // Replace with actual user name
+  //const userAvatar = "user-avatar.svg"; // Replace with actual avatar URL
 
   useEffect(() => {
     const handleResize = () => {
@@ -135,6 +135,8 @@ const Shell = ({ isDarkTheme }) => {
               <Route path="/sows/:id" element={<SOWEdit />} />
 
               <Route path="/vendors" element={<VendorList />} />
+              <Route path="/vendors/create" element={<VendorCreate />} />
+              <Route path="/vendors/:id" element={<VendorEdit />} />
             </Routes>
           </main>
         </div>

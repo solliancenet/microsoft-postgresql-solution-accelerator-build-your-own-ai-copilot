@@ -40,7 +40,6 @@ const SOWEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(budget);
       var data = await api.sows.update(id, sowTitle, startDate, endDate, parseFloat(budget));
       updateDisplay(data);
       setSuccess('SOW updated successfully!');

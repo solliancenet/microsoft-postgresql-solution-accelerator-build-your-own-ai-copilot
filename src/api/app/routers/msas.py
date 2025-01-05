@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
-from app.models import Msa, ListResponse
+from app.models import Msa, MsaEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from pydantic import parse_obj_as
 
@@ -68,10 +68,10 @@ async def create_msa(
     return new_msa
 
 @router.put("/{msas_id}", response_model=Msa)
-async def update_msa(msas_id: int, msa_update: Msa, pool = Depends(get_db_connection_pool)):
+async def update_msa(msas_id: int, msa_update: MsaEdit, pool = Depends(get_db_connection_pool)):
     """Updates a msa in the database."""
 
-    msa = self.get_by_id(msas_id)
+    msa = await get_by_id(msas_id, pool)
     if msa is None:
         raise HTTPException(status_code=404, detail=f'A msa with an id of {msas_id} was not found.')
 

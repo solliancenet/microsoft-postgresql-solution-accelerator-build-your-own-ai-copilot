@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
-from app.models import Invoice, ListResponse
+from app.models import Invoice, InvoiceEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from pydantic import parse_obj_as
 
@@ -69,10 +69,10 @@ async def create_invoice(
     return new_invoice
 
 @router.put("/{invoice_id}", response_model=Invoice)
-async def update_invoice(invoice_id: int, invoice_update: Invoice, pool = Depends(get_db_connection_pool)):
+async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = Depends(get_db_connection_pool)):
     """Updates an invoice in the database."""
 
-    invoice = self.get_by_id(invoice_id)
+    invoice = await get_by_id(invoice_id, pool)
     if invoice is None:
         raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
 

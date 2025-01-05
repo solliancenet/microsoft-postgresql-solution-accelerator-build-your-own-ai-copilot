@@ -82,11 +82,9 @@ async def create_sow(
 async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_connection_pool)):
     """Updates a SOW in the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', sow_id)
-        if row is None:
+        sow = await get_by_id(sow_id, pool)
+        if sow is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        
-        sow = parse_obj_as(Sow, dict(row))
 
         sow.sow_title = sow_update.sow_title
         sow.start_date = sow_update.start_date

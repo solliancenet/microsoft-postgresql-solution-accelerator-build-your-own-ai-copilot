@@ -208,19 +208,16 @@ module.exports = {
         get: async (vendorId) => {
             return await RESTHelper.get(getUrl(`/vendors/${vendorId}`));
         },
-        create: async (file, name, address, contact_name, contact_email, contact_phone, type) => {
-            if (!file) return;
-
-            console.info('Creating vendor:', file);
+        create: async (name, address, contact_name, contact_email, contact_phone, type) => {
+            console.info('Creating vendor');
 
             const formData = new FormData();
-            formData.append('file', file);
             formData.append('name', name);
             formData.append('address', address);
             formData.append('contact_name', contact_name);
             formData.append('contact_email', contact_email);
             formData.append('contact_phone', contact_phone);
-            formData.append('type', type);
+            formData.append('contact_type', type);
 
             try {
                 const response = await fetch(getUrl(`/vendors`), {

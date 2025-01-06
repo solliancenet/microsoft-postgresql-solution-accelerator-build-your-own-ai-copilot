@@ -1,8 +1,7 @@
 from pydantic import BaseModel, Json
 from typing import Optional
 
-class Vendor(BaseModel):
-    id: int
+class VendorEdit(BaseModel):
     name: str
     address: str
     contact_name: str
@@ -10,3 +9,8 @@ class Vendor(BaseModel):
     contact_phone: str
     type: str
     metadata: Optional[Json[dict]] = None
+
+class Vendor(VendorEdit):
+    id: int
+
+

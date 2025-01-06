@@ -1,5 +1,6 @@
 from azure.identity.aio import DefaultAzureCredential
-from azure.keyvault.secrets.aio import SecretClient
+from azure.appconfiguration.aio import AzureAppConfigurationClient
+from azure.core.exceptions import ResourceNotFoundError
 import os
 
 # Usage example:
@@ -8,35 +9,33 @@ import os
 # postgresql_server_name = appConfig.get_postgresql_server_name()
 
 class ConfigService:
-    def __init__(self, credential: DefaultAzureCredential, key_vault_name: str = None):
+    def __init__(self, credential: DefaultAzureCredential, app_config_endpoint: str = None):
         self.credential = credential
 
-        self.key_vault_name = key_vault_name
-        if self.key_vault_name is None:
-            self.key_vault_name = os.getenv("AZURE_KEY_VAULT_NAME")
+        self.app_config_endpoint = app_config_endpoint
+        if self.app_config_endpoint is None:
+            self.app_config_endpoint = os.getenv("AZURE_APP_CONFIG_ENDPOINT")
         
-        self.key_vault_uri = f"https://{self.key_vault_name}.vault.azure.net"
+        self.client = AzureAppConfigurationClient(self.app_config_endpoint, credential=self.credential)
 
-        self.client = SecretClient(vault_url=self.key_vault_uri, credential=self.credential)
+    async def __get_setting(self, key: str) -> str:
+        try:
+            setting = await self.client.get_configuration_setting(key=key)
+            return setting.value
+        except ResourceNotFoundError:
+            raise Exception(f"Setting '{key}' not found in Azure App Configuration.")
 
-    async def get_key_vault_name(self) -> str:
-        return await self.key_vault_name
-
-    async def __get_secret(self, secret_name: str) -> str:
-        secret = await self.client.get_secret(secret_name)
-        return secret.value
-
-    async def get_openai_service(self) -> str:
-        return await self.__get_secret("openai-service")
+    async def get_openai_endpoint(self) -> str:
+        return await self.__get_setting("openai-endpoint")
 
     async def get_postgresql_server_name(self) -> str:
-        return await self.__get_secret("postgresql-server")
+        return await self.__get_setting("postgresql-server")
     
     async def get_postgresql_database_name(self) -> str:
-        return await self.__get_secret("postgresql-database")
+        return await self.__get_setting("postgresql-database")
 
     async def get_storage_account(self) -> str:
-        return await self.__get_secret("storage-account")
+        return await self.__get_setting("storage-account")
 
     def get_document_container_name(self) -> str:
         return "documents"

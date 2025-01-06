@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import Login from './pages/Login';
-import Shell from './pages/shell/Shell';
+import Shell from './pages/Shell';
 import './App.css'; // Import the CSS file
 
 function App() {

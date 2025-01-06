@@ -1,6 +1,6 @@
 param containers array = []
 param files array = []
-param keyvaultName string
+param appConfigName string
 param location string = resourceGroup().location
 param name string
 param tags object = {}
@@ -52,19 +52,16 @@ resource blobFiles 'Microsoft.Resources/deploymentScripts@2020-10-01' = [
   }
 ]
 
-resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
-  name: keyvaultName
+resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' existing = if (!empty(appConfigName)) {
+  name: appConfigName
 }
 
-resource storageConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+resource appConfigStorageAccountName 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' = if (!empty(appConfigName)) {
+  parent: appConfig
   name: 'storage-account'
-  parent: keyvault
-  tags: tags
   properties: {
     value: storage.name
   }
 }
 
-output connectionSecretName string = storageConnectionString.name
-output connectionSecretRef string = storageConnectionString.properties.secretUri
 output name string = storage.name

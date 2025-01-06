@@ -1,9 +1,9 @@
 // src/DashboardView.js
 import React from 'react';
-import api from '../../../api/Api'; // Adjust the path as necessary
-import AIChat from '../../../components/AIChat'; // Adjust the path as necessary
+//import api from '../../api/Api'; // Adjust the path as necessary
+import AIChat from '../../components/AIChat'; // Adjust the path as necessary
 
-const DashboardView = () => {
+const Dashboard = () => {
   // const handleCheckAPIConnection = async () => {
   //   try {
   //     const status = await api.getStatus();
@@ -35,4 +35,4 @@ const DashboardView = () => {
   );
 };
 
-export default DashboardView;
+export default Dashboard;

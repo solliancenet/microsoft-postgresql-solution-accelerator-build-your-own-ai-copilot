@@ -1,12 +1,12 @@
 // src/Documents.js
 import React, { useEffect, useState } from 'react';
-import api from '../../../api/Api';
-import ConfirmModal from '../../../components/ConfirmModal'; 
+import api from '../../api/Api';
+import ConfirmModal from '../../components/ConfirmModal'; 
 import { Table, Button, Modal, Form } from 'react-bootstrap';
 import { useTable, useSortBy } from 'react-table';
 
 
-const Documents = () => {
+const DocumentList = () => {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -187,4 +187,4 @@ const Documents = () => {
   );
 };
 
-export default Documents;
+export default DocumentList;

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
-import api from '../../../../api/Api';
+import api from '../../api/Api';
 
-const EditSOW = () => {
+const SOWEdit = () => {
   const { id } = useParams(); // Extract SOW ID from URL
   const [sowTitle, setSowTitle] = useState('');
   const [sowDocument, setSowDocument] = useState('');
@@ -16,8 +16,8 @@ const EditSOW = () => {
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
-    // Fetch SOW data when component mounts
-    const fetchSOW = async () => {
+    // Fetch data when component mounts
+    const fetchData = async () => {
       try {
         const data = await api.sows.get(id);
         updateDisplay(data);
@@ -25,7 +25,7 @@ const EditSOW = () => {
         setError('Failed to load SOW data');
       }
     };
-    fetchSOW();
+    fetchData();
   }, [id]);
 
   const updateDisplay = (data) => {
@@ -40,7 +40,6 @@ const EditSOW = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(budget);
       var data = await api.sows.update(id, sowTitle, startDate, endDate, parseFloat(budget));
       updateDisplay(data);
       setSuccess('SOW updated successfully!');
@@ -142,4 +141,4 @@ const EditSOW = () => {
   );
 };
 
-export default EditSOW;
+export default SOWEdit;

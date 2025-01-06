@@ -1,5 +1,4 @@
 param applicationInsightsName string
-param keyvaultName string
 param location string = resourceGroup().location
 param logAnalyticsName string
 param tags object = {}
@@ -30,21 +29,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
-  name: keyvaultName
-}
-
-resource connectionSecretRef 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'appinsights-connection'
-  parent: keyvault
-  tags: tags
-  properties: {
-    value: applicationInsights.properties.ConnectionString
-  }
-}
-
 output applicationInsightsName string = applicationInsights.name
-output applicationInsightsConnectionSecretName string = connectionSecretRef.name
-output applicationInsightsConnectionSecretRef string = connectionSecretRef.properties.secretUri
 output logAnalyticsWorkspaceId string = logAnalytics.id
 output logAnalyticsWorkspaceName string = logAnalytics.name
+output appInsightsConnectionString string = applicationInsights.properties.ConnectionString

@@ -22,6 +22,9 @@ param postgresqlAdminLogin string = 'adminUser'
 @secure()
 param postgresqlAdminPassword string
 
+@description('OwnerId of the user running the deployment')
+param ownerId string = ''
+
 
 param userPortalExists bool
 @secure()
@@ -35,13 +38,13 @@ param existingOpenAiInstance object = {
 
 
 var deployOpenAi = empty(existingOpenAiInstance.name)
-var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
-var azureOpenAi = deployOpenAi ? openAiInstance : existingOpenAiInstance
-var openAiInstance = {
-  name: openAi.outputs.name
-  resourceGroup: rg.name
-  subscriptionId: subscription().subscriptionId
-}
+// var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
+// var azureOpenAi = deployOpenAi ? openAiInstance : existingOpenAiInstance
+// var openAiInstance = {
+//   name: openAi.outputs.name
+//   resourceGroup: rg.name
+//   subscriptionId: subscription().subscriptionId
+// }
 
 // Tags that should be applied to all resources.
 // 
@@ -68,11 +71,11 @@ resource customerOpenAiResourceGroup 'Microsoft.Resources/resourceGroups@2021-04
     name: existingOpenAiInstance.resourceGroup
   }
 
-resource customerOpenAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing =
-  if (!deployOpenAi) {
-    name: existingOpenAiInstance.name
-    scope: customerOpenAiResourceGroup
-  }
+// resource customerOpenAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing =
+//   if (!deployOpenAi) {
+//     name: existingOpenAiInstance.name
+//     scope: customerOpenAiResourceGroup
+//   }
 
 module keyVault './shared/keyvault.bicep' = {
   name: 'keyvault'
@@ -85,15 +88,31 @@ module keyVault './shared/keyvault.bicep' = {
   scope: rg
 }
 
+module appConfig './shared/appconfiguration.bicep' = {
+  name: 'appConfig'
+  params: {
+    location: location
+    tags: tags
+    name: '${abbrs.appConfigurationConfigurationStores}${resourceToken}'
+    ownerId: ownerId
+    keyVaultName: keyVault.outputs.name
+  }
+  scope: rg
+}
+
 module monitoring './shared/monitoring.bicep' = {
   name: 'monitoring'
   params: {
-    keyvaultName: keyVault.outputs.name
     location: location
     tags: tags
     logAnalyticsName: '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
     applicationInsightsName: '${abbrs.insightsComponents}${resourceToken}'
   }
+  scope: rg
+}
+
+resource appInsights 'Microsoft.Insights/components@2022-05-01' existing = {
+  name: monitoring.outputs.applicationInsightsName
   scope: rg
 }
 
@@ -138,14 +157,12 @@ module userPortalApp './app/UserPortal.bicep' = {
         name: 'SERVICE_API_ENDPOINT_URL'
         value: apiApp.outputs.uri
       }
-    ]
-    secretSettings: [
       {
         name: 'ApplicationInsights__ConnectionString'
-        value: monitoring.outputs.applicationInsightsConnectionSecretRef
-        secretRef: monitoring.outputs.applicationInsightsConnectionSecretName
+        value: monitoring.outputs.appInsightsConnectionString
       }
     ]
+    secretSettings: []
   }
   scope: rg
   dependsOn: [ apiApp, monitoring ]
@@ -158,6 +175,7 @@ module apiApp './app/API.bicep' = {
     location: location
     tags: tags
     keyvaultName: keyVault.outputs.name
+    appConfigName: appConfig.outputs.name
     identityName: '${abbrs.managedIdentityUserAssignedIdentities}api-${resourceToken}'
     storageAccountName: storage.outputs.name
     applicationInsightsName: monitoring.outputs.applicationInsightsName
@@ -168,17 +186,11 @@ module apiApp './app/API.bicep' = {
     openAIServiceName: openAi.outputs.name
     envSettings: [
       {
-        name: 'AZURE_KEY_VAULT_NAME'
-        value: keyVault.outputs.name
-      }
-    ]
-    secretSettings: [
-      {
         name: 'ApplicationInsights__ConnectionString'
-        value: monitoring.outputs.applicationInsightsConnectionSecretRef
-        secretRef: monitoring.outputs.applicationInsightsConnectionSecretName
+        value: monitoring.outputs.appInsightsConnectionString
       }
     ]
+    secretSettings: []
   }
   scope: rg
   dependsOn: [ monitoring, keyVault ]
@@ -222,19 +234,10 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
       }
     ]
     keyvaultName: keyVault.outputs.name
+    appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.openAiAccounts}${resourceToken}'
     sku: 'S0'
-    tags: tags
-  }
-  scope: rg
-}
-
-module openAiSecrets './shared/openai-secrets.bicep' = {
-  name: 'openaiSecrets'
-  params: {
-    keyvaultName: keyVault.outputs.name
-    openAiInstance: azureOpenAi
     tags: tags
   }
   scope: rg
@@ -253,6 +256,7 @@ module postgresql './shared/postgresql.bicep' = {
     databaseName: postgresqlDatabaseName
     tags: tags
     keyvaultName: keyVault.outputs.name
+    appConfigName: appConfig.outputs.name
   }
   scope: rg
 }
@@ -261,13 +265,9 @@ module postgresql './shared/postgresql.bicep' = {
 module storage './shared/storage.bicep' = {
   name: 'storage'
   params: {
-    containers: [
-      {
-        name: 'documents'
-      }
-    ]
+    containers: []
     files: []
-    keyvaultName: keyVault.outputs.name
+    appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.storageStorageAccounts}${resourceToken}'
     tags: tags
@@ -280,6 +280,7 @@ output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
+output AZURE_APP_CONFIG_ENDPOINT string = appConfig.outputs.endpoint
 output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 
 output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName

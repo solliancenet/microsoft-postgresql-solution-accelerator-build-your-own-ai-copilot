@@ -77,11 +77,91 @@ module.exports = {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
             return await RESTHelper.get(getUrl(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/invoices/${id}`));
+        },
+        create: async (file, invoice_number, amount, invoice_date, payment_status) => {
+            if (!file) return;
+        
+            console.info('Creating invoice:', file);
+        
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('invoice_number', invoice_number);
+            formData.append('amount', amount);
+            formData.append('invoice_date', invoice_date);
+            formData.append('payment_status', payment_status);
+        
+            try {
+                const response = await fetch(getUrl(`/invoices`), {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error creating invoice:', error);
+                throw error;
+            }
+        },
+        update: async (id, invoice_number, amount, invoice_date, payment_status) => {
+            return await RESTHelper.update(getUrl(`/invoices/${id}`), {
+                invoice_number: invoice_number,
+                amount: amount,
+                invoice_date: invoice_date,
+                payment_status: payment_status,
+            });
+        },
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/invoices/${id}`));
+        }
     },
     msas: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
             return await RESTHelper.get(getUrl(`/msas?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
+        get: async (msaId) => {
+            return await RESTHelper.get(getUrl(`/msas/${msaId}`));
+        },
+        create: async (file, msa_title, start_date, end_date) => {
+            if (!file) return;
+
+            console.info('Creating MSA:', file);
+        
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('msa_title', msa_title);
+            formData.append('start_date', start_date);
+            formData.append('end_date', end_date);
+        
+            try {
+                const response = await fetch(getUrl(`/msas`), {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error creating MSA:', error);
+                throw error;
+            }
+        },
+        update: async(id, msa_title, start_date, end_date) => {
+            return await RESTHelper.update(getUrl(`/msas/${id}`), {
+                msa_title: msa_title,
+                start_date: start_date,
+                end_date: end_date,
+            });
+        },
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/msas/${id}`));
+        }
     },
     sows: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
@@ -97,7 +177,7 @@ module.exports = {
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('sow_title', sowTitle);
+            formData.append('title', sowTitle);
             formData.append('start_date', startDate);
             formData.append('end_date', endDate);
             formData.append('budget', budget);
@@ -117,9 +197,9 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (sowId, sowTitle, startDate, endDate, budget) => {
+        update: async (sowId, title, startDate, endDate, budget) => {
             return await RESTHelper.update(getUrl(`/sows/${sowId}`), {
-                sow_title: sowTitle,
+                title: title,
                 start_date: startDate,
                 end_date: endDate,
                 budget: budget,
@@ -133,5 +213,47 @@ module.exports = {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
             return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
         },
+        get: async (vendorId) => {
+            return await RESTHelper.get(getUrl(`/vendors/${vendorId}`));
+        },
+        create: async (name, address, contact_name, contact_email, contact_phone, type) => {
+            console.info('Creating vendor');
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('address', address);
+            formData.append('contact_name', contact_name);
+            formData.append('contact_email', contact_email);
+            formData.append('contact_phone', contact_phone);
+            formData.append('contact_type', type);
+
+            try {
+                const response = await fetch(getUrl(`/vendors`), {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error creating vendor:', error);
+                throw error;
+            }
+        },
+        update: async (id, name, address, contact_name, contact_email, contact_phone, type) => {
+            return await RESTHelper.update(getUrl(`/vendors/${id}`), {
+                name: name,
+                address: address,
+                contact_name: contact_name,
+                contact_email: contact_email,
+                contact_phone: contact_phone,
+                type: type,
+            });
+        }, 
+        delete: async (vendorId) => {
+            return await RESTHelper.delete(getUrl(`/vendors/${vendorId}`));
+        }
     }
 };

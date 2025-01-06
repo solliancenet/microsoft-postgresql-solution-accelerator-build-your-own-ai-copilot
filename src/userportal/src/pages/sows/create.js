@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
-import api from '../../../../api/Api';
+import api from '../../api/Api';
 
-const CreateSOW = () => {
+const SOWCreate = () => {
   const [sowTitle, setSowTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -21,6 +21,7 @@ const CreateSOW = () => {
       window.location.href = `/sows/${data.id}`;
       setError(null);
     } catch (err) {
+      console.error(err);
       setError('Failed to create SOW');
       setSuccess(null);
     }
@@ -99,4 +100,4 @@ const CreateSOW = () => {
   );
 };
 
-export default CreateSOW;
+export default SOWCreate;

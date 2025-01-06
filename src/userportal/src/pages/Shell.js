@@ -1,13 +1,12 @@
 // src/Shell.js
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
-
 // import UserProfile from './../../components/UserProfile';
 
 import { Dashboard } from './dashboard';
 import { DocumentList } from './documents';
-import { InvoiceList } from './invoices';
-import { MSAList } from './msas';
+import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
+import { MSAList, MSACreate, MSAEdit } from './msas';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
 import { VendorList, VendorCreate, VendorEdit } from './vendors';
 
@@ -127,8 +126,14 @@ const Shell = ({ isDarkTheme }) => {
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/documents" element={<DocumentList />} />
+              
               <Route path="/invoices" element={<InvoiceList />} />
+              <Route path="/invoices/create" element={<InvoiceCreate />} />
+              <Route path="/invoices/:id" element={<InvoiceEdit />} />
+
               <Route path="/msas" element={<MSAList />} />
+              <Route path="/msas/create" element={<MSACreate />} />
+              <Route path="/msas/:id" element={<MSAEdit />} />
               
               <Route path="/sows" element={<SOWList />} />
               <Route path="/sows/create" element={<SOWCreate />} />

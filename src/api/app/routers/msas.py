@@ -1,7 +1,9 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
+from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
 from app.models import Msa, MsaEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
+from azure.storage.blob import ContentSettings
 from pydantic import parse_obj_as
+from datetime import datetime
 
 # Initialize the router
 router = APIRouter(
@@ -35,11 +37,14 @@ async def get_by_id(msas_id: int, pool = Depends(get_db_connection_pool)):
 
 @router.post("/", response_model=Msa)
 async def create_msa(
-    name: str = Form(...),
+    msa_title: str = Form(...),
     start_date: str = Form(...),
     end_date: str = Form(...),
     file: UploadFile = File(...),
-    pool = Depends(get_db_connection_pool), blob_service_client = Depends(get_blob_service_client)):
+    pool = Depends(get_db_connection_pool),
+    blob_service_client = Depends(get_blob_service_client),
+    appConfig = Depends(get_app_config)
+    ):
     """Creates a new msa in the database."""
 
     # Parse dates
@@ -62,7 +67,7 @@ async def create_msa(
         row = await conn.fetchrow('''
         INSERT INTO msas (msa_title, start_date, end_date, msa_document)
         VALUES ($1, $2, $3, $4) RETURNING *;
-        ''', name, start_date_parsed, end_date_parsed, file.filename)
+        ''', msa_title, start_date_parsed, end_date_parsed, file.filename)
 
         new_msa = parse_obj_as(Msa, dict(row))
     return new_msa

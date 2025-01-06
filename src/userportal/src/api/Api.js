@@ -107,6 +107,14 @@ module.exports = {
                 throw error;
             }
         },
+        update: async (id, invoice_number, amount, invoice_date, payment_status) => {
+            return await RESTHelper.update(getUrl(`/invoices/${id}`), {
+                invoice_number: invoice_number,
+                amount: amount,
+                invoice_date: invoice_date,
+                payment_status: payment_status,
+            });
+        },
         delete: async (id) => {
             return await RESTHelper.delete(getUrl(`/invoices/${id}`));
         }
@@ -120,7 +128,7 @@ module.exports = {
         },
         create: async (file, msa_title, start_date, end_date) => {
             if (!file) return;
-        
+
             console.info('Creating MSA:', file);
         
             const formData = new FormData();
@@ -169,7 +177,7 @@ module.exports = {
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('sow_title', sowTitle);
+            formData.append('title', sowTitle);
             formData.append('start_date', startDate);
             formData.append('end_date', endDate);
             formData.append('budget', budget);
@@ -189,9 +197,9 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (sowId, sowTitle, startDate, endDate, budget) => {
+        update: async (sowId, title, startDate, endDate, budget) => {
             return await RESTHelper.update(getUrl(`/sows/${sowId}`), {
-                sow_title: sowTitle,
+                title: title,
                 start_date: startDate,
                 end_date: endDate,
                 budget: budget,

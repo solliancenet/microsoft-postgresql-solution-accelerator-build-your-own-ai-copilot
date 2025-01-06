@@ -1,6 +1,7 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
+from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
 from app.models import Invoice, InvoiceEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
+from azure.storage.blob import ContentSettings
 from pydantic import parse_obj_as
 
 # Initialize the router
@@ -29,9 +30,7 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
         row = await conn.fetchrow('SELECT * FROM invoices WHERE id = $1;', invoice_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
-        row_dict = dict(row)
-        row_dict['invoice_details'] = json.loads(row_dict['invoice_details'])  # Parse JSON string to dictionary
-        invoice = parse_obj_as(Invoice, row_dict)
+        invoice = parse_obj_as(Invoice, dict(row))
     return invoice
 
 @router.post("/", response_model=Invoice)
@@ -41,7 +40,10 @@ async def create_invoice(
     invoice_date: str = Form(...),
     payment_status: str = Form(...),
     file: UploadFile = File(...),
-    pool = Depends(get_db_connection_pool)):
+    pool = Depends(get_db_connection_pool),
+    blob_service_client = Depends(get_blob_service_client),
+    appConfig = Depends(get_app_config)
+    ):
     """Creates a new invoice in the database."""
 
     # Parse date

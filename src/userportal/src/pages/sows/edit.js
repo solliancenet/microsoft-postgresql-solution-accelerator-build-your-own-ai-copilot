@@ -16,8 +16,8 @@ const SOWEdit = () => {
   const [success, setSuccess] = useState(null);
 
   useEffect(() => {
-    // Fetch SOW data when component mounts
-    const fetchSOW = async () => {
+    // Fetch data when component mounts
+    const fetchData = async () => {
       try {
         const data = await api.sows.get(id);
         updateDisplay(data);
@@ -25,7 +25,7 @@ const SOWEdit = () => {
         setError('Failed to load SOW data');
       }
     };
-    fetchSOW();
+    fetchData();
   }, [id]);
 
   const updateDisplay = (data) => {

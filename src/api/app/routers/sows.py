@@ -71,10 +71,10 @@ async def create_sow(
     # # Create SOW in the database
     async with pool.acquire() as conn:
         sow = await conn.fetchrow('''
-            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, msa_id)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, msa_id, msa_title)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *;
-        ''', number, start_date_parsed, end_date_parsed, budget_parsed, file.filename, None, msa_id)
+        ''', number, start_date_parsed, end_date_parsed, budget_parsed, file.filename, '{}', msa_id, 'N/A')
         
         sow = parse_obj_as(Sow, dict(sow))
     return sow
@@ -106,14 +106,12 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
         updated_sow = parse_obj_as(Sow, dict(row))
     return updated_sow
 
-@router.delete("/{sow_id}", response_model=Sow)
-async def delete_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
-    """Deletes a SOW from the database."""
+@router.delete("/{id}", response_model=Sow)
+async def delete_sow(id: int, pool = Depends(get_db_connection_pool)):
+    """Deletes a SOW from the database."""   
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1 RETURNING *;', sow_id)
+        row = await conn.fetchrow('DELETE FROM sows WHERE id = $1 RETURNING *;', id)
         if row is None:
-            raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
-        sow = parse_obj_as(Sow, dict(row))
-        
-        await conn.execute('DELETE FROM sows WHERE id = $1;', sow_id)
-    return sow
+            raise HTTPException(status_code=404, detail=f'A SOW with an id of {id} was not found.')
+        deleted_sow = parse_obj_as(Sow, dict(row))
+    return deleted_sow

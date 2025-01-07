@@ -170,14 +170,15 @@ module.exports = {
         get: async (sowId) => {
             return await RESTHelper.get(getUrl(`/sows/${sowId}`));
         },
-        create: async (file, sowTitle, startDate, endDate, budget) => {
+        create: async (file, sowNumber, msaId, startDate, endDate, budget) => {
             if (!file) return;
         
             console.info('Creating SOW:', file);
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('title', sowTitle);
+            formData.append('sow_number', sowNumber);
+            formData.append('msa_id', msaId);
             formData.append('start_date', startDate);
             formData.append('end_date', endDate);
             formData.append('budget', budget);
@@ -197,9 +198,10 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (sowId, title, startDate, endDate, budget) => {
+        update: async (sowId, sowNumber, msaId, startDate, endDate, budget) => {
             return await RESTHelper.update(getUrl(`/sows/${sowId}`), {
-                title: title,
+                sow_number: sowNumber,
+                msa_id: msaId,
                 start_date: startDate,
                 end_date: endDate,
                 budget: budget,

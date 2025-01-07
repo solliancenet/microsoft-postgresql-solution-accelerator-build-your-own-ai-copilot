@@ -40,7 +40,8 @@ async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
 
 @router.post("/", response_model=Sow)
 async def create_sow(
-    title: str = Form(...),
+    sow_number: str = Form(...),
+    msa_id: int = Form(...),
     start_date: str = Form(...),
     end_date: str = Form(...),
     budget: float = Form(...),
@@ -70,8 +71,8 @@ async def create_sow(
     # # Create SOW in the database
     async with pool.acquire() as conn:
         sow = await conn.fetchrow('''
-            INSERT INTO sows (title, start_date, end_date, budget, sow_document, details)
-            VALUES ($1, $2, $3, $4, $5, $6)
+            INSERT INTO sows (sow_number, start_date, end_date, budget, sow_document, details, msa_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;
         ''', title, start_date_parsed, end_date_parsed, budget_parsed, file.filename, None)
         
@@ -86,19 +87,20 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
         if sow is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
 
-        sow.title = sow_update.title
+        sow.sow_number = sow_update.sow_number
         sow.start_date = sow_update.start_date
         sow.end_date = sow_update.end_date
         sow.budget = sow_update.budget
+        sow.msa_id = sow_update.msa_id
 
         # for key, value in sow_update.dict().items():
         #     setattr(sow, key, value)
         row = await conn.fetchrow('''
             UPDATE sows
-            SET title = $1, start_date = $2, end_date = $3, budget = $4
-            WHERE id = $5
+            SET sow_number = $1, start_date = $2, end_date = $3, budget = $4, msa_id = $5
+            WHERE id = $6
             RETURNING *;''',
-            sow.title, sow.start_date, sow.end_date, sow.budget, sow_id)
+            sow.title, sow.start_date, sow.end_date, sow.budget, sow.msa_id, sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
         updated_sow = parse_obj_as(Sow, dict(row))

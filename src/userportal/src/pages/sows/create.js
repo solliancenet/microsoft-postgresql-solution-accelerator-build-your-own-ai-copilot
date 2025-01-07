@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
 
 const SOWCreate = () => {
-  const [sowTitle, setSowTitle] = useState('');
+  const [sowNumber, setSowNumber] = useState('');
+  const [msaId, setMsaId] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
@@ -13,10 +14,27 @@ const SOWCreate = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  const [msas, setMsas] = useState([]);
+
+  useEffect(() => {
+    const fetchMsas = async () => {
+      try {
+        const data = await api.msas.list(0, -1); // No pagination limit
+        setMsas(data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching MSAs');
+        setSuccess(null);
+      }
+    };
+
+    fetchMsas();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.sows.create(file, sowTitle, startDate, endDate, parseFloat(budget), details);
+      var data = await api.sows.create(file, sowNumber, msaId, startDate, endDate, parseFloat(budget), details);
       setSuccess('SOW created successfully!');
       window.location.href = `/sows/${data.id}`;
       setError(null);
@@ -43,13 +61,29 @@ const SOWCreate = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>SOW Title</Form.Label>
+          <Form.Label>SOW Number</Form.Label>
           <Form.Control
             type="text"
-            value={sowTitle}
-            onChange={(e) => setSowTitle(e.target.value)}
+            value={sowNumber}
+            onChange={(e) => setSowNumber(e.target.value)}
             required
           />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>MSA</Form.Label>
+          <Form.Control
+            as="select"
+            value={msaId}
+            onChange={(e) => setMsaId(e.target.value)}
+            required
+          >
+            <option value="">Select MSA</option>
+            {msas.map((msa) => (
+              <option key={msa.id} value={msa.id}>
+                {msa.title}
+              </option>
+            ))}
+          </Form.Control>
         </Form.Group>
         <Row className="mb-3">
           <Col md={6}>

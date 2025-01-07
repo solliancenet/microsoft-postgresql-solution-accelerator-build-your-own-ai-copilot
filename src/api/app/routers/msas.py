@@ -21,8 +21,14 @@ async def list_msas(skip: int = 0, limit: int = 10, sortby: str = None, search: 
         if (sortby):
             orderby = sortby
         print (f'orderby: {orderby}')
-        rows = await conn.fetch('SELECT * FROM msas ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+        
+        if (limit >= 0):
+            rows = await conn.fetch('SELECT * FROM msas ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+        else: # If Limit == -1 then No Limit
+            rows = await conn.fetch('SELECT * FROM msas ORDER BY $1;', orderby)
+
         msas = parse_obj_as(list[Msa], [dict(row) for row in rows])
+
     return ListResponse[Msa](data=msas, total = len(msas), skip = skip, limit = limit)
 
 @router.get("/{msas_id}", response_model=Msa)

@@ -29,6 +29,49 @@ module.exports = {
             });
         },
     },
+    deliverables: {
+        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
+            return await RESTHelper.get(getUrl(`/deliverables?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        },
+        get: async (deliverableId) => {
+            return await RESTHelper.get(getUrl(`/deliverables/${deliverableId}`));
+        },
+        create: async (deliverable_name, description, amount, deliverable_status) => {       
+            console.info('Creating deliverable:');
+        
+            const formData = new FormData();
+            formData.append('deliverable_name', deliverable_name);
+            formData.append('description', description);
+            formData.append('amount', amount);
+            formData.append('deliverable_status', deliverable_status);
+        
+            try {
+                const response = await fetch(getUrl(`/deliverables`), {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error creating deliverable:', error);
+                throw error;
+            }
+        },
+        update: async (deliverableId, deliverable_name, description, amount, deliverable_status) => {
+            return await RESTHelper.update(getUrl(`/deliverables/${deliverableId}`), {
+                deliverable_name: deliverable_name,
+                description: description,
+                amount: amount,
+                deliverable_status: deliverable_status,
+            });
+        },
+        delete: async (deliverableId) => {
+            return await RESTHelper.delete(getUrl(`/deliverables/${deliverableId}`));
+        }
+    },
     documents: {
         list: async () => {
             return await RESTHelper.get(getUrl(`/documents/documents`));
@@ -117,6 +160,49 @@ module.exports = {
         },
         delete: async (id) => {
             return await RESTHelper.delete(getUrl(`/invoices/${id}`));
+        }
+    },
+    milestones: {
+        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
+            return await RESTHelper.get(getUrl(`/milestones?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        },
+        get: async (milestoneId) => {
+            return await RESTHelper.get(getUrl(`/milestones/${milestoneId}`));
+        },
+        create: async (sow_id, milestone_name, milestone_status, due_date) => {
+            console.info('Creating milestone');
+        
+            const formData = new FormData();
+            formData.append('sow_id', sow_id);
+            formData.append('milestone_name', milestone_name);
+            formData.append('milestone_status', milestone_status);
+            formData.append('due_date', due_date);
+        
+            try {
+                const response = await fetch(getUrl(`/milestones`), {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error creating milestone:', error);
+                throw error;
+            }
+        },
+        update: async (milestoneId, sow_id, milestone_name, milestone_status, due_date) => {
+            return await RESTHelper.update(getUrl(`/milestones/${milestoneId}`), {
+                sow_id: sow_id,
+                milestone_name: milestone_name,
+                milestone_status: milestone_status,
+                due_date: due_date,
+            });
+        },
+        delete: async (milestoneId) => {
+            return await RESTHelper.delete(getUrl(`/milestones/${milestoneId}`));
         }
     },
     msas: {

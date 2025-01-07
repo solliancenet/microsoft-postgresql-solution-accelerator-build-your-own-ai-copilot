@@ -126,14 +126,11 @@ module.exports = {
         get: async (msaId) => {
             return await RESTHelper.get(getUrl(`/msas/${msaId}`));
         },
-        create: async (file, msa_title, start_date, end_date) => {
-            if (!file) return;
-
-            console.info('Creating MSA:', file);
+        create: async (title, start_date, end_date) => {
+            console.info('Creating MSA');
         
             const formData = new FormData();
-            formData.append('file', file);
-            formData.append('msa_title', msa_title);
+            formData.append('title', title);
             formData.append('start_date', start_date);
             formData.append('end_date', end_date);
         
@@ -152,9 +149,9 @@ module.exports = {
                 throw error;
             }
         },
-        update: async(id, msa_title, start_date, end_date) => {
+        update: async(id, title, start_date, end_date) => {
             return await RESTHelper.update(getUrl(`/msas/${id}`), {
-                msa_title: msa_title,
+                title: title,
                 start_date: start_date,
                 end_date: end_date,
             });

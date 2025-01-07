@@ -43,13 +43,10 @@ async def get_by_id(msas_id: int, pool = Depends(get_db_connection_pool)):
 
 @router.post("/", response_model=Msa)
 async def create_msa(
-    msa_title: str = Form(...),
+    title: str = Form(...),
     start_date: str = Form(...),
     end_date: str = Form(...),
-    file: UploadFile = File(...),
-    pool = Depends(get_db_connection_pool),
-    blob_service_client = Depends(get_blob_service_client),
-    appConfig = Depends(get_app_config)
+    pool = Depends(get_db_connection_pool)
     ):
     """Creates a new msa in the database."""
 
@@ -57,23 +54,12 @@ async def create_msa(
     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
     end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
 
-    # Upload file to Azure Blob Storage
-    container_name = appConfig.get_document_container_name()
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
-
-    content_settings = ContentSettings(
-        content_type=file.content_type,
-        content_disposition=f'attachment; filename="{file.filename}"'
-    )
-
-    blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
-
     # Create MSA in the database
     async with pool.acquire() as conn:
         row = await conn.fetchrow('''
-        INSERT INTO msas (msa_title, start_date, end_date, msa_document)
-        VALUES ($1, $2, $3, $4) RETURNING *;
-        ''', msa_title, start_date_parsed, end_date_parsed, file.filename)
+        INSERT INTO msas (title, start_date, end_date)
+        VALUES ($1, $2, $3) RETURNING *;
+        ''', title, start_date_parsed, end_date_parsed)
 
         new_msa = parse_obj_as(Msa, dict(row))
     return new_msa
@@ -86,7 +72,7 @@ async def update_msa(msas_id: int, msa_update: MsaEdit, pool = Depends(get_db_co
     if msa is None:
         raise HTTPException(status_code=404, detail=f'A msa with an id of {msas_id} was not found.')
 
-    msa.msa_title = msa_update.msa_title
+    msa.title = msa_update.title
     msa.start_date = msa_update.start_date
     msa.end_date = msa_update.end_date
 

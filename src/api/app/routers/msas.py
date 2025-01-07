@@ -78,10 +78,10 @@ async def update_msa(msas_id: int, msa_update: MsaEdit, pool = Depends(get_db_co
 
     async with pool.acquire() as conn:
         row = await conn.fetchrow('''UPDATE msas
-        SET msa_title = $1, start_date = $2, end_date = $3
+        SET title = $1, start_date = $2, end_date = $3
         WHERE id = $4
         RETURNING *;''',
-        msa.msa_title, msa.start_date, msa.end_date, msas_id)
+        msa.title, msa.start_date, msa.end_date, msas_id)
         updated_msa = parse_obj_as(Msa, dict(row))
     return updated_msa
 

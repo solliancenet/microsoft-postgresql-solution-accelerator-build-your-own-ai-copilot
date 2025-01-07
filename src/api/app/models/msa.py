@@ -6,7 +6,7 @@ class MsaEdit(BaseModel):
     title: str
     start_date: date
     end_date: Optional[date] = None
-    additional_info: Optional[Json[dict]] = None
+    metadata: Optional[Json[dict]] = None
 
 class Msa(MsaEdit):
     id: int

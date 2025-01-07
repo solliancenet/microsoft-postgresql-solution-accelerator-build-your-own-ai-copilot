@@ -123,14 +123,14 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));
         },
-        create: async (file, invoice_number, amount, invoice_date, payment_status) => {
+        create: async (file, number, amount, invoice_date, payment_status) => {
             if (!file) return;
         
             console.info('Creating invoice:', file);
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('invoice_number', invoice_number);
+            formData.append('number', number);
             formData.append('amount', amount);
             formData.append('invoice_date', invoice_date);
             formData.append('payment_status', payment_status);
@@ -150,9 +150,9 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (id, invoice_number, amount, invoice_date, payment_status) => {
+        update: async (id, number, amount, invoice_date, payment_status) => {
             return await RESTHelper.update(getUrl(`/invoices/${id}`), {
-                invoice_number: invoice_number,
+                number: number,
                 amount: amount,
                 invoice_date: invoice_date,
                 payment_status: payment_status,
@@ -253,14 +253,14 @@ module.exports = {
         get: async (sowId) => {
             return await RESTHelper.get(getUrl(`/sows/${sowId}`));
         },
-        create: async (file, sowNumber, msaId, startDate, endDate, budget) => {
+        create: async (file, number, msaId, startDate, endDate, budget) => {
             if (!file) return;
         
             console.info('Creating SOW:', file);
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('sow_number', sowNumber);
+            formData.append('number', number);
             formData.append('msa_id', msaId);
             formData.append('start_date', startDate);
             formData.append('end_date', endDate);
@@ -281,9 +281,9 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (sowId, sowNumber, msaId, startDate, endDate, budget) => {
+        update: async (sowId, number, msaId, startDate, endDate, budget) => {
             return await RESTHelper.update(getUrl(`/sows/${sowId}`), {
-                sow_number: sowNumber,
+                number: number,
                 msa_id: msaId,
                 start_date: startDate,
                 end_date: endDate,

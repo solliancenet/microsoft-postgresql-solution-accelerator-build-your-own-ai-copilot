@@ -30,7 +30,7 @@ const MSAEdit = () => {
       setTitle(data.title);
       setStartDate(data.start_date);
       setEndDate(data.end_date);
-      setAdditionalInfo(data.additional_info ? JSON.stringify(data.additional_info) : '');
+      setAdditionalInfo(data.metadata ? JSON.stringify(data.metadata) : '');
     }
   
     const handleSubmit = async (e) => {

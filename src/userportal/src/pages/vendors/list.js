@@ -93,7 +93,7 @@ const VendorList = () => {
         show={showDeleteModal}
         handleClose={() => setShowDeleteModal(false)}
         handleConfirm={handleDelete}
-        message="Are you sure you want to delete this SOW?"
+        message="Are you sure you want to delete this Vendor?"
       />
     </div>
   );

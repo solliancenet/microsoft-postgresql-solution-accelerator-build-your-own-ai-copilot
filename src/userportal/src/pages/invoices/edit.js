@@ -29,11 +29,11 @@ const InvoiceEdit = () => {
     }, [id]);
   
     const updateDisplay = (data) => {
-      setInvoiceNumber(data.invoice_number);
+      setInvoiceNumber(data.number);
       setAmount(data.amount);
       setInvoiceDate(data.invoice_date);
       setPaymentStatus(data.payment_status);
-      setInvoiceDetails(data.invoice_details ? JSON.stringify(data.invoice_details) : '');
+      setInvoiceDetails(data.metadata ? JSON.stringify(data.metadata) : '');
     }
   
     const handleSubmit = async (e) => {

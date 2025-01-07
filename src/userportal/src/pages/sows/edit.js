@@ -12,17 +12,17 @@ const SOWEdit = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
-  const [details, setDetails] = useState('');
+  const [metadata, setMetadata] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   const [msas, setMsas] = useState([]);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await api.msas.list(0, -1); // No pagination limit
-        setMsas(data);
+        setMsas(data.data);
       } catch (err) {
         console.error(err);
         setError('Error fetching MSAs');
@@ -31,7 +31,7 @@ const SOWEdit = () => {
     };
 
     fetchData();
-  });
+  }, [id]);
 
   useEffect(() => {
     // Fetch data when component mounts
@@ -48,13 +48,13 @@ const SOWEdit = () => {
   }, [id]);
 
   const updateDisplay = (data) => {
-    setSowNumber(data.sow_number);
+    setSowNumber(data.number);
     setMsaId(data.msa_id);
     setSowDocument(data.document);
     setStartDate(data.start_date);
     setEndDate(data.end_date);
     setBudget(data.budget);
-    setDetails(data.details ? JSON.stringify(data.details) : '');
+    setMetadata(data.metadata ? JSON.stringify(data.metadata) : '');
   }
 
   const handleSubmit = async (e) => {
@@ -160,8 +160,8 @@ const SOWEdit = () => {
           <Form.Label>Details</Form.Label>
           <Form.Control
             as="textarea"
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
+            value={metadata}
+            onChange={(e) => setMetadata(e.target.value)}
             style={{ height: '8em' }}
             readOnly
           />

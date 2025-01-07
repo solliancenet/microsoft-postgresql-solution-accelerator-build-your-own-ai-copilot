@@ -35,7 +35,7 @@ const SOWList = () => {
       },
       {
         Header: 'SOW NUmber',
-        accessor: 'sow_number',
+        accessor: 'number',
       },
       {
         Header: 'Start Date',

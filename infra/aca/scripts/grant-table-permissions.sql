@@ -16,5 +16,21 @@ BEGIN
       WHEN OTHERS THEN
         RAISE NOTICE 'Error granting privileges on tables: %', SQLERRM;
     END;
+
+    BEGIN
+      EXECUTE format('GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO %I', username);
+    EXCEPTION
+      WHEN OTHERS THEN
+        RAISE NOTICE 'Error granting privileges on sequences: %', SQLERRM;
+    END;
+
+    BEGIN
+      EXECUTE format('GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO %I', username);
+    EXCEPTION
+      WHEN OTHERS THEN
+        RAISE NOTICE 'Error granting privileges on functions: %', SQLERRM;
+    END;
+  ELSE
+    RAISE NOTICE 'User % does not exist', username;
   END IF;
 END $$;

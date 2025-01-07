@@ -12,6 +12,12 @@ CREATE TABLE IF NOT EXISTS vendors (
     metadata jsonb -- additional information about the vendor
 );
 
+CREATE TABLE status (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
 -- MSA table; information about payment terms, special clauses, or additional legal notes
 CREATE TABLE IF NOT EXISTS msas (
     id BIGSERIAL PRIMARY KEY,
@@ -24,7 +30,7 @@ CREATE TABLE IF NOT EXISTS msas (
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
-    sow_number text NOT NULL,
+    number text NOT NULL,
     msa_id BIGINT NOT NULL,
     msa_title text NOT NULL,
     start_date DATE NOT NULL,
@@ -38,7 +44,7 @@ CREATE TABLE IF NOT EXISTS sows (
 -- Invoices table; tax details, discounts, or additional metadata
 CREATE TABLE IF NOT EXISTS invoices (
     id BIGSERIAL PRIMARY KEY,
-    invoice_number text NOT NULL,
+    number text NOT NULL,
     amount DECIMAL(18,2) NOT NULL,
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
@@ -50,8 +56,8 @@ CREATE TABLE IF NOT EXISTS invoices (
 CREATE TABLE IF NOT EXISTS milestones (
     id BIGSERIAL PRIMARY KEY,
     sow_id BIGINT NOT NULL,
-    milestone_name text NOT NULL,
-    milestone_status text NOT NULL,
+    name text NOT NULL,
+    status VARCHAR(50) NOT NULL,
     due_date DATE,
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
@@ -60,9 +66,10 @@ CREATE TABLE IF NOT EXISTS milestones (
 CREATE TABLE IF NOT EXISTS deliverables (
     id SERIAL PRIMARY KEY,
     milestone_id BIGINT NOT NULL,
-    deliverable_name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     description TEXT,
     amount NUMERIC(10, 2),
-    deliverable_status text NOT NULL,
+    status VARCHAR(50) NOT NULL,
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
 );
+

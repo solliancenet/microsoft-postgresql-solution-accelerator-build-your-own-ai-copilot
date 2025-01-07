@@ -35,7 +35,7 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
 
 @router.post("/", response_model=Invoice)
 async def create_invoice(
-    invoice_number: str = Form(...),
+    number: str = Form(...),
     amount: float = Form(...),
     invoice_date: str = Form(...),
     payment_status: str = Form(...),
@@ -63,9 +63,9 @@ async def create_invoice(
     # Create invoice in the database
     async with pool as conn:
         row = await conn.fetchrow('''
-        INSERT INTO invoices (invoice_number, amount, invoice_date, payment_status, document)
+        INSERT INTO invoices (number, amount, invoice_date, payment_status, document)
         VALUES ($1, $2, $3, $4, $5) RETURNING *;
-        ''', invoice_number, amount, invoice_date_parsed, payment_status, file.filename)
+        ''', number, amount, invoice_date_parsed, payment_status, file.filename)
         
         new_invoice = parse_obj_as(Invoice, dict(row))
     return new_invoice
@@ -78,7 +78,7 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
     if invoice is None:
         raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
 
-    invoice.invoice_number = invoice_update.invoice_number
+    invoice.number = invoice_update.number
     invoice.amount = invoice_update.amount
     invoice.invoice_date = invoice_update.invoice_date
     invoice.payment_status = invoice_update.payment_status
@@ -86,10 +86,10 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
     async with pool as conn:
         row = await conn.fetchrow('''
         UPDATE invoices
-        SET invoice_number = $1, amount = $2, invoice_date = $3, payment_status = $4
+        SET number = $1, amount = $2, invoice_date = $3, payment_status = $4
         WHERE id = $5
         RETURNING *;
-        ''', invoice.invoice_number, invoice.amount, invoice.invoice_date, invoice.payment_status, invoice_id)
+        ''', invoice.number, invoice.amount, invoice.invoice_date, invoice.payment_status, invoice_id)
         
         updated_invoice = parse_obj_as(Invoice, dict(row))
     return updated_invoice

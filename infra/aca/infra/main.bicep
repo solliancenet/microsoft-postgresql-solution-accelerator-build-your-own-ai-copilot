@@ -285,6 +285,7 @@ output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
 
 output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
 output POSTGRESQL_DATABASE_NAME string = postgresqlDatabaseName
+output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin
 
 output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_OPENAI_KEY string = openAi.outputs.key

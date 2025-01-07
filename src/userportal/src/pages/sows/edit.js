@@ -6,14 +6,32 @@ import api from '../../api/Api';
 
 const SOWEdit = () => {
   const { id } = useParams(); // Extract SOW ID from URL
-  const [sowTitle, setSowTitle] = useState('');
+  const [sowNumber, setSowNumber] = useState('');
+  const [msaId, setMsaId] = useState('');
   const [sowDocument, setSowDocument] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
-  const [details, setDetails] = useState('');
+  const [metadata, setMetadata] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  const [msas, setMsas] = useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await api.msas.list(0, -1); // No pagination limit
+        setMsas(data.data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching MSAs');
+        setSuccess(null);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   useEffect(() => {
     // Fetch data when component mounts
@@ -22,6 +40,7 @@ const SOWEdit = () => {
         const data = await api.sows.get(id);
         updateDisplay(data);
       } catch (err) {
+        console.error(err);
         setError('Failed to load SOW data');
       }
     };
@@ -29,18 +48,19 @@ const SOWEdit = () => {
   }, [id]);
 
   const updateDisplay = (data) => {
-    setSowTitle(data.title);
+    setSowNumber(data.number);
+    setMsaId(data.msa_id);
     setSowDocument(data.document);
     setStartDate(data.start_date);
     setEndDate(data.end_date);
     setBudget(data.budget);
-    setDetails(data.details ? JSON.stringify(data.details) : '');
+    setMetadata(data.metadata ? JSON.stringify(data.metadata) : '');
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.sows.update(id, sowTitle, startDate, endDate, parseFloat(budget));
+      var data = await api.sows.update(id, sowNumber, msaId, startDate, endDate, parseFloat(budget));
       updateDisplay(data);
       setSuccess('SOW updated successfully!');
       setError(null);
@@ -59,13 +79,29 @@ const SOWEdit = () => {
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>SOW Title</Form.Label>
+          <Form.Label>SOW Number</Form.Label>
           <Form.Control
             type="text"
-            value={sowTitle}
-            onChange={(e) => setSowTitle(e.target.value)}
+            value={sowNumber}
+            onChange={(e) => setSowNumber(e.target.value)}
             required
           />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>MSA</Form.Label>
+          <Form.Control
+            as="select"
+            value={msaId}
+            onChange={(e) => setMsaId(e.target.value)}
+            required
+          >
+            <option value="">Select MSA</option>
+            {msas.map((msa) => (
+              <option key={msa.id} value={msa.id}>
+                {msa.title}
+              </option>
+            ))}
+          </Form.Control>
         </Form.Group>
         <Row className="mb-3">
           <Col md={6}>
@@ -124,8 +160,8 @@ const SOWEdit = () => {
           <Form.Label>Details</Form.Label>
           <Form.Control
             as="textarea"
-            value={details}
-            onChange={(e) => setDetails(e.target.value)}
+            value={metadata}
+            onChange={(e) => setMetadata(e.target.value)}
             style={{ height: '8em' }}
             readOnly
           />

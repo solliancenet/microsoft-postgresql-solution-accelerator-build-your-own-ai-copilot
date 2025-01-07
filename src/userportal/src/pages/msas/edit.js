@@ -6,13 +6,12 @@ import api from '../../api/Api';
 
 const MSAEdit = () => {
   const { id } = useParams(); // Extract MSA ID from URL
-  const [msaTitle, setMsaTitle] = useState('');
+  const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [msaDocument, setMsaDocument] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+  const [success, setSuccess] = useState(null);
   
     useEffect(() => {
       // Fetch data when component mounts
@@ -28,17 +27,16 @@ const MSAEdit = () => {
     }, [id]);
   
     const updateDisplay = (data) => {
-      setMsaTitle(data.msa_title);
+      setTitle(data.title);
       setStartDate(data.start_date);
       setEndDate(data.end_date);
-      setMsaDocument(data.msa_document);
-      setAdditionalInfo(data.additional_info ? JSON.stringify(data.additional_info) : '');
+      setAdditionalInfo(data.metadata ? JSON.stringify(data.metadata) : '');
     }
   
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        var data = await api.msas.update(id, msaTitle, startDate, endDate);
+        var data = await api.msas.update(id, title, startDate, endDate);
         updateDisplay(data);
         setSuccess('MSA updated successfully!');
         setError(null);
@@ -60,8 +58,8 @@ const MSAEdit = () => {
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
-            value={msaTitle}
-            onChange={(e) => setMsaTitle(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
         </Form.Group>
@@ -89,15 +87,6 @@ const MSAEdit = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Form.Group className="mb-3">
-          <Form.Label>Document</Form.Label>
-          <div className="d-flex">
-            <code>{msaDocument}</code>
-            <a href={api.documents.getUrl(msaDocument)} target="_blank" rel="noreferrer">
-              <i className="fas fa-download ms-3"></i>
-            </a>
-          </div>
-        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Details</Form.Label>
           <Form.Control

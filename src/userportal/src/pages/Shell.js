@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 // import UserProfile from './../../components/UserProfile';
 
 import { Dashboard } from './dashboard';
+import { DeliverableList } from './deliverables';
 import { DocumentList } from './documents';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
+import { MilestoneList } from './milestones';
 import { MSAList, MSACreate, MSAEdit } from './msas';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
 import { VendorList, VendorCreate, VendorEdit } from './vendors';
@@ -127,9 +129,13 @@ const Shell = ({ isDarkTheme }) => {
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/documents" element={<DocumentList />} />
               
+              <Route path="/deliverables" element={<DeliverableList />} />
+
               <Route path="/invoices" element={<InvoiceList />} />
               <Route path="/invoices/create" element={<InvoiceCreate />} />
               <Route path="/invoices/:id" element={<InvoiceEdit />} />
+
+              <Route path="/milestones" element={<MilestoneList />} />
 
               <Route path="/msas" element={<MSAList />} />
               <Route path="/msas/create" element={<MSACreate />} />

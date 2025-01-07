@@ -3,7 +3,8 @@ from typing import Optional
 from datetime import date
 
 class SowEdit(BaseModel):
-    title: str
+    number: str
+    msa_id: int
     start_date: date
     end_date: date
     budget: float
@@ -11,7 +12,7 @@ class SowEdit(BaseModel):
 class Sow(SowEdit):
     id: int
     document: str
-    details: Optional[Json[dict]] = None
+    metadata: Optional[Json[dict]] = None
     
 
 

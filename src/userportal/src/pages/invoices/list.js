@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import ConfirmModal from '../../components/ConfirmModal'; 
 import PagedTable from '../../components/PagedTable';
 
-const SOWs = () => {
+const InvoiceList = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -34,8 +34,8 @@ const SOWs = () => {
         accessor: 'id',
       },
       {
-        Header: 'Invoice Number',
-        accessor: 'invoice_number',
+        Header: 'Number',
+        accessor: 'number',
       },
       {
         Header: 'Amount',
@@ -88,10 +88,10 @@ const SOWs = () => {
         show={showDeleteModal}
         handleClose={() => setShowDeleteModal(false)}
         handleConfirm={handleDelete}
-        message="Are you sure you want to delete this SOW?"
+        message="Are you sure you want to delete this Invoice?"
       />
     </div>
   );
 };
 
-export default SOWs;
+export default InvoiceList;

@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS msas (
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
+    sow_number text NOT NULL,
     msa_id BIGINT NOT NULL,
     msa_title text NOT NULL,
     start_date DATE NOT NULL,
@@ -51,6 +52,7 @@ CREATE TABLE IF NOT EXISTS milestones (
     id BIGSERIAL PRIMARY KEY,
     sow_id BIGINT NOT NULL,
     milestone_name text NOT NULL,
+    milestone_status text NOT NULL,
     due_date DATE,
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
@@ -62,5 +64,6 @@ CREATE TABLE IF NOT EXISTS deliverables (
     deliverable_name VARCHAR(100) NOT NULL,
     description TEXT,
     amount NUMERIC(10, 2),
+    deliverable_status text NOT NULL,
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
 );

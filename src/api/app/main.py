@@ -4,9 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.lifespan_manager import lifespan
 from app.routers import (
     completions,
+    deliverables,
     documents,
     embeddings,
     invoices,
+    milestones,
     msas,
     sows,
     status,
@@ -34,9 +36,11 @@ app.add_middleware(
 )
 
 app.include_router(completions.router)
+app.include_router(deliverables.router)
 app.include_router(documents.router)
 app.include_router(embeddings.router)
 app.include_router(invoices.router)
+app.include_router(milestones.router)
 app.include_router(msas.router)
 app.include_router(sows.router)
 app.include_router(status.router)

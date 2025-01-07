@@ -1,5 +1,6 @@
 """Models module"""
 from .completion_request import CompletionRequest
+from .deliverable import Deliverable, DeliverableEdit
 from .invoice import Invoice, InvoiceEdit
 from .list_response import ListResponse
 from .milestone import Milestone, MilestoneEdit

@@ -59,7 +59,7 @@ async def create_milestone(
 @router.put("/{milestone_id}", response_model=Milestone)
 async def update_milestone(
     milestone_id: int,
-    sow_id: int: Form(...),
+    sow_id: int = Form(...),
     milestone_name: str = Form(...),
     milestone_status: str = Form(...),
     due_date: str = Form(None),

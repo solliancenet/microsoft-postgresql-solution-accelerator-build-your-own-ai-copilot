@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS msas (
     title text NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE,
-    additional_info JSONB -- Stores special clauses, terms, etc.
+    metadata JSONB -- Stores special clauses, terms, etc.
 );
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS sows (
     budget DECIMAL(18,2) NOT NULL,
     document text NOT NULL,
     FOREIGN KEY (msa_id) REFERENCES msas (id) ON DELETE CASCADE,
-    details JSONB -- Flexible for deliverables, milestones, and notes
+    metadata JSONB -- Flexible for deliverables, milestones, and notes
 );
 
 -- Invoices table; tax details, discounts, or additional metadata
@@ -43,9 +43,8 @@ CREATE TABLE IF NOT EXISTS invoices (
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
     document text NOT NULL,
-    invoice_details JSONB -- Tax info, discounts, or itemized breakdown
+    metadata JSONB -- Tax info, discounts, or itemized breakdown
 );
-
 
 -- Milestones table
 CREATE TABLE IF NOT EXISTS milestones (

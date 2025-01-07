@@ -113,6 +113,7 @@ async def delete_sow(sow_id: int, pool = Depends(get_db_connection_pool)):
         row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1 RETURNING *;', sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
+        sow = parse_obj_as(Sow, dict(row))
         
         await conn.execute('DELETE FROM sows WHERE id = $1;', sow_id)
     return sow

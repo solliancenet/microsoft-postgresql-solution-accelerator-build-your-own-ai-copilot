@@ -67,7 +67,7 @@ const PromptEdit = () => {
         <Button type="submit" variant="primary">
             <i className="fas fa-save"></i> Save
         </Button>
-        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/msas' }>
+        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/prompts' }>
             <i className="fas fa-times"></i> Cancel
         </Button>
         </Form>

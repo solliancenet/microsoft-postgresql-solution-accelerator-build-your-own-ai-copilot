@@ -11,7 +11,7 @@ const InvoiceEdit = () => {
   const [invoiceDate, setInvoiceDate] = useState('');
   const [paymentStatus, setPaymentStatus] = useState('');
   const [document, setDocument] = useState('');
-  const [invoiceDetails, setInvoiceDetails] = useState('');
+  const [metadata, setMetadata] = useState('');
   const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
   
@@ -33,7 +33,7 @@ const InvoiceEdit = () => {
       setAmount(data.amount);
       setInvoiceDate(data.invoice_date);
       setPaymentStatus(data.payment_status);
-      setInvoiceDetails(data.metadata ? JSON.stringify(data.metadata) : '');
+      setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
     }
   
     const handleSubmit = async (e) => {
@@ -111,11 +111,11 @@ const InvoiceEdit = () => {
           </div>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Invoice Details</Form.Label>
+          <Form.Label>Metadata</Form.Label>
           <Form.Control
             as="textarea"
-            value={invoiceDetails}
-            onChange={(e) => setInvoiceDetails(e.target.value)}
+            value={metadata}
+            onChange={(e) => setMetadata(e.target.value)}
             style={{ height: '8em' }}
             readOnly
           />

@@ -54,7 +54,7 @@ const SOWEdit = () => {
     setStartDate(data.start_date);
     setEndDate(data.end_date);
     setBudget(data.budget);
-    setMetadata(data.metadata ? JSON.stringify(data.metadata) : '');
+    setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
   }
 
   const handleSubmit = async (e) => {
@@ -157,7 +157,7 @@ const SOWEdit = () => {
           </Col>
         </Row>
         <Form.Group className="mb-3">
-          <Form.Label>Details</Form.Label>
+          <Form.Label>Metadata</Form.Label>
           <Form.Control
             as="textarea"
             value={metadata}

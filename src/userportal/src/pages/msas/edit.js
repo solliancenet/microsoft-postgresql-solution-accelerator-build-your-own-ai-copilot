@@ -9,43 +9,43 @@ const MSAEdit = () => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [additionalInfo, setAdditionalInfo] = useState('');
-  const [error, setError] = useState(null);
+  const [metadata, setMetadata] = useState(null);
   const [success, setSuccess] = useState(null);
-  
-    useEffect(() => {
-      // Fetch data when component mounts
-      const fetchData = async () => {
-        try {
-          const data = await api.msas.get(id);
-          updateDisplay(data);
-        } catch (err) {
-          setError('Failed to load MSA data');
-        }
-      };
-      fetchData();
-    }, [id]);
-  
-    const updateDisplay = (data) => {
-      setTitle(data.title);
-      setStartDate(data.start_date);
-      setEndDate(data.end_date);
-      setAdditionalInfo(data.metadata ? JSON.stringify(data.metadata) : '');
-    }
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch data when component mounts
+    const fetchData = async () => {
       try {
-        var data = await api.msas.update(id, title, startDate, endDate);
+        const data = await api.msas.get(id);
         updateDisplay(data);
-        setSuccess('MSA updated successfully!');
-        setError(null);
       } catch (err) {
-        console.error(err);
-        setError('Failed to update MSA');
-        setSuccess(null);
+        setError('Failed to load MSA data');
       }
     };
+    fetchData();
+  }, [id]);
+
+  const updateDisplay = (data) => {
+    setTitle(data.title);
+    setStartDate(data.start_date);
+    setEndDate(data.end_date);
+    setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      var data = await api.msas.update(id, title, startDate, endDate);
+      updateDisplay(data);
+      setSuccess('MSA updated successfully!');
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to update MSA');
+      setSuccess(null);
+    }
+  };
 
   return (
     <div>
@@ -88,11 +88,11 @@ const MSAEdit = () => {
           </Col>
         </Row>
         <Form.Group className="mb-3">
-          <Form.Label>Details</Form.Label>
+          <Form.Label>Metadata</Form.Label>
           <Form.Control
             as="textarea"
-            value={additionalInfo}
-            onChange={(e) => setAdditionalInfo(e.target.value)}
+            value={metadata}
+            onChange={(e) => setMetadata(e.target.value)}
             style={{ height: '8em' }}
             readOnly
           />

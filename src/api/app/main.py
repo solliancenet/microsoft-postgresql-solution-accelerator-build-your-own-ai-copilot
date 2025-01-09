@@ -13,6 +13,7 @@ from app.routers import (
     prompts,
     sows,
     status,
+    statuses,
     validation,
     vendors
 )
@@ -46,6 +47,7 @@ app.include_router(msas.router)
 app.include_router(prompts.router)
 app.include_router(sows.router)
 app.include_router(status.router)
+app.include_router(statuses.router)
 app.include_router(validation.router)
 app.include_router(vendors.router)
 

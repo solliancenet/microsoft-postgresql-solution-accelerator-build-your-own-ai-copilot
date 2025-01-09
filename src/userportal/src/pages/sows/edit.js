@@ -3,6 +3,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
+import ConfirmModal from '../../components/ConfirmModal';
+import PagedTable from '../../components/PagedTable';
 
 const SOWEdit = () => {
   const { id } = useParams(); // Extract SOW ID from URL
@@ -17,9 +19,13 @@ const SOWEdit = () => {
   const [success, setSuccess] = useState(null);
 
   const [msas, setMsas] = useState([]);
+
+  const [showDeleteMilestoneModal, setShowDeleteMilestoneModal] = useState(false);
+  const [milestoneToDelete, setMilestoneToDelete] = useState(null);
+  const [reloadMilestones, setReloadMilestones] = useState(false);
   
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMSAs = async () => {
       try {
         const data = await api.msas.list(0, -1); // No pagination limit
         setMsas(data.data);
@@ -29,8 +35,7 @@ const SOWEdit = () => {
         setSuccess(null);
       }
     };
-
-    fetchData();
+    fetchMSAs();
   }, [id]);
 
   useEffect(() => {
@@ -70,6 +75,71 @@ const SOWEdit = () => {
       setSuccess(null);
     }
   };
+
+  const handleDeleteMilestone = async () => {
+    try {
+      await api.milestones.delete(milestoneToDelete);
+      setSuccess('Milestone deleted successfully!');
+      setError(null);
+      setShowDeleteMilestoneModal(false);
+      setReloadMilestones(true);
+    } catch (err) {
+      setSuccess(null);
+      setError(err.message);
+    }
+  }
+  
+  const milestoneColumns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Due Date',
+        accessor: 'due_date',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+      },
+      {
+        Header: 'Actions',
+        accessor: 'actions',
+        Cell: ({ row }) => {
+          return (
+            <div>
+              <a href={`/milestones/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+                <i className="fas fa-edit"></i>
+              </a>
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => {
+                  setMilestoneToDelete(row.original.id);
+                  setShowDeleteMilestoneModal(true);
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const fetchMilestones = async () => {
+    try {
+      const data = await api.milestones.list(id, 0, -1); // No pagination limit
+      return data;
+    } catch (err) {
+      console.error(err);
+      setError('Error fetching milestones');
+      setSuccess(null);
+    }
+  }
 
   return (
     <div>
@@ -173,6 +243,29 @@ const SOWEdit = () => {
           <i className="fas fa-times"></i> Cancel
         </Button>
       </Form>
+
+      <hr />
+
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 className="h2">Milestones</h2>
+        <Button variant="primary" onClick={() => window.location.href = `/milestones/create?sow_id=${id}`}>
+          New Milestone <i className="fas fa-plus" />
+        </Button>
+      </div>
+
+      <PagedTable columns={milestoneColumns}
+        fetchData={fetchMilestones}
+        reload={reloadMilestones}
+        showPagination={false}
+        />
+
+      <ConfirmModal
+        show={showDeleteMilestoneModal}
+        handleClose={() => setShowDeleteMilestoneModal(false)}
+        handleConfirm={handleDeleteMilestone}
+        title="Delete Milestone"
+        message="Are you sure you want to delete this milestone?"
+      />
     </div>
   );
 };

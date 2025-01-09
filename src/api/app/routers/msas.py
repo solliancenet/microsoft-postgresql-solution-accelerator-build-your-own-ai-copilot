@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=ListResponse[Msa])
-async def list_msas(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, pool = Depends(get_db_connection_pool)):
+async def list_msas(skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of msas from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'

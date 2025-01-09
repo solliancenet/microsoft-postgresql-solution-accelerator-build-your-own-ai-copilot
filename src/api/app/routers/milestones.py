@@ -14,13 +14,24 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=ListResponse[Milestone])
-async def list_milestones(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, pool = Depends(get_db_connection_pool)):
+async def list_milestones(sow_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of milestones from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'
         if (sortby):
             orderby = sortby
-        rows = await conn.fetch('SELECT * FROM milestones ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
+        if limit == -1:
+            if sow_id == -1:
+                rows = await conn.fetch('SELECT * FROM milestones ORDER BY $1;', orderby)
+            else:
+                rows = await conn.fetch('SELECT * FROM milestones WHERE sow_id = $1 ORDER BY $2;', sow_id, orderby)
+        else:
+            if sow_id == -1:
+                rows = await conn.fetch('SELECT * FROM milestones ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+            else:
+                rows = await conn.fetch('SELECT * FROM milestones WHERE sow_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', sow_id, orderby, limit, skip)
+
         milestones = parse_obj_as(list[Milestone], [dict(row) for row in rows])
 
         total = await conn.fetchval('SELECT COUNT(*) FROM milestones;')
@@ -40,8 +51,8 @@ async def get_by_id(milestone_id: int, pool = Depends(get_db_connection_pool)):
 @router.post("/", response_model=Milestone)
 async def create_milestone(
     sow_id: int = Form(...),
-    milestone_name: str = Form(...),
-    milestone_status: str = Form(...),
+    name: str = Form(...),
+    status: str = Form(...),
     due_date: str = Form(None),
     pool = Depends(get_db_connection_pool)
 ):
@@ -51,7 +62,7 @@ async def create_milestone(
         due_date_parsed = datetime.strptime(due_date, '%Y-%m-%d').date()
 
     async with pool.acquire() as conn:
-        milestone_id = await conn.fetchval('INSERT INTO milestones (sow_id, milestone_name, milestone_status, due_date) VALUES ($1, $2, $3, $4) RETURNING id;', sow_id, milestone_name, milestone_status, due_date_parsed)
+        milestone_id = await conn.fetchval('INSERT INTO milestones (sow_id, name, status, due_date) VALUES ($1, $2, $3, $4) RETURNING id;', sow_id, name, status, due_date_parsed)
         row = await conn.fetchrow('SELECT * FROM milestones WHERE id = $1;', milestone_id)
         milestone = parse_obj_as(Milestone, dict(row))
     return milestone
@@ -59,22 +70,14 @@ async def create_milestone(
 @router.put("/{milestone_id}", response_model=Milestone)
 async def update_milestone(
     milestone_id: int,
-    sow_id: int = Form(...),
-    milestone_name: str = Form(...),
-    milestone_status: str = Form(...),
-    due_date: str = Form(None),
+    milestone: MilestoneEdit,
     pool = Depends(get_db_connection_pool)
 ):
-    # Parse dates
-    due_date_parsed = None
-    if due_date:
-        due_date_parsed = datetime.strptime(due_date, '%Y-%m-%d').date()
-
     async with pool.acquire() as conn:
         await conn.execute('''
-        UPDATE milestones SET sow_id = $1, milestone_name = $2, milestone_status = $3, due_date = $4 
-        WHERE id = $5;
-        ''', sow_id, milestone_name, milestone_status, due_date_parsed, milestone_id)
+        UPDATE milestones SET name = $1, status = $2, due_date = $3 
+        WHERE id = $4;
+        ''', milestone.name, milestone.status, milestone.due_date, milestone_id)
         row = await conn.fetchrow('SELECT * FROM milestones WHERE id = $1;', milestone_id)
         milestone = parse_obj_as(Milestone, dict(row))
     return milestone

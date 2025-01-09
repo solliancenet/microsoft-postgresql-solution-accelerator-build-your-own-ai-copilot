@@ -30,20 +30,21 @@ module.exports = {
         },
     },
     deliverables: {
-        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/deliverables?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        list: async (milestoneId = -1, skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/deliverables?milestone_id=${milestoneId}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (deliverableId) => {
             return await RESTHelper.get(getUrl(`/deliverables/${deliverableId}`));
         },
-        create: async (deliverable_name, description, amount, deliverable_status) => {       
+        create: async (milestone_id, name, description, amount, status) => {       
             console.info('Creating deliverable:');
         
             const formData = new FormData();
-            formData.append('deliverable_name', deliverable_name);
+            formData.append('milestone_id', milestone_id);
+            formData.append('name', name);
             formData.append('description', description);
             formData.append('amount', amount);
-            formData.append('deliverable_status', deliverable_status);
+            formData.append('status', status);
         
             try {
                 const response = await fetch(getUrl(`/deliverables`), {
@@ -60,12 +61,12 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (deliverableId, deliverable_name, description, amount, deliverable_status) => {
+        update: async (deliverableId, name, description, amount, status) => {
             return await RESTHelper.update(getUrl(`/deliverables/${deliverableId}`), {
-                deliverable_name: deliverable_name,
+                name: name,
                 description: description,
                 amount: amount,
-                deliverable_status: deliverable_status,
+                status: status,
             });
         },
         delete: async (deliverableId) => {
@@ -117,8 +118,8 @@ module.exports = {
         },
     },
     invoices: {
-        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        list: async (skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));
@@ -163,19 +164,19 @@ module.exports = {
         }
     },
     milestones: {
-        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/milestones?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        list: async (sowId = -1, skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/milestones?sow_id=${sowId}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (milestoneId) => {
             return await RESTHelper.get(getUrl(`/milestones/${milestoneId}`));
         },
-        create: async (sow_id, milestone_name, milestone_status, due_date) => {
+        create: async (sow_id, name, status, due_date) => {
             console.info('Creating milestone');
         
             const formData = new FormData();
             formData.append('sow_id', sow_id);
-            formData.append('milestone_name', milestone_name);
-            formData.append('milestone_status', milestone_status);
+            formData.append('name', name);
+            formData.append('status', status);
             formData.append('due_date', due_date);
         
             try {
@@ -193,11 +194,10 @@ module.exports = {
                 throw error;
             }
         },
-        update: async (milestoneId, sow_id, milestone_name, milestone_status, due_date) => {
+        update: async (milestoneId, name, status, due_date) => {
             return await RESTHelper.update(getUrl(`/milestones/${milestoneId}`), {
-                sow_id: sow_id,
-                milestone_name: milestone_name,
-                milestone_status: milestone_status,
+                name: name,
+                status: status,
                 due_date: due_date,
             });
         },
@@ -206,8 +206,8 @@ module.exports = {
         }
     },
     msas: {
-        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/msas?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        list: async (skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/msas?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (msaId) => {
             return await RESTHelper.get(getUrl(`/msas/${msaId}`));
@@ -258,8 +258,8 @@ module.exports = {
         }
     },
     sows: {
-        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        list: async (skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (sowId) => {
             return await RESTHelper.get(getUrl(`/sows/${sowId}`));
@@ -306,8 +306,8 @@ module.exports = {
         }
     },
     vendors: {
-        list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
-            return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));
+        list: async (skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (vendorId) => {
             return await RESTHelper.get(getUrl(`/vendors/${vendorId}`));

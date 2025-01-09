@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Table from './Table';
 
-const PagedTable = ({ columns, fetchData, searchEnabled = false, reload }) => {
+const PagedTable = ({ columns, fetchData, searchEnabled = false, showPagination = true, reload }) => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
@@ -90,17 +90,19 @@ const PagedTable = ({ columns, fetchData, searchEnabled = false, reload }) => {
             loading={loading}
             onSortChange={handleSortChange}
           />
-          <div className="d-flex justify-content-between">
-            <button className="btn btn-primary" onClick={handlePrevious} disabled={skip === 0}>
-              Previous
-            </button>
-            <div className="pagination-info">
-              Page {pageIndex} of {pageCount}
+          {showPagination ? (
+            <div className="d-flex justify-content-between">
+              <button className="btn btn-primary" onClick={handlePrevious} disabled={skip === 0}>
+                Previous
+              </button>
+              <div className="pagination-info">
+                Page {pageIndex} of {pageCount}
+              </div>
+              <button className="btn btn-primary" onClick={handleNext} disabled={skip + limit >= total}>
+                Next
+              </button>
             </div>
-            <button className="btn btn-primary" onClick={handleNext} disabled={skip + limit >= total}>
-              Next
-            </button>
-          </div>
+          ) : null}
         </div>
       )}
     </div>

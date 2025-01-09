@@ -15,7 +15,7 @@ router = APIRouter(
 
 
 @router.get("/", response_model=ListResponse[Sow])
-async def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, pool = Depends(get_db_connection_pool), blob_service_client = Depends(get_blob_service_client)):
+async def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool), blob_service_client = Depends(get_blob_service_client)):
     """Retrieves a list of SOWs from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'

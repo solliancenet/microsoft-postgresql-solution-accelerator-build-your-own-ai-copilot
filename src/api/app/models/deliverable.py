@@ -3,11 +3,11 @@ from typing import Optional
 from datetime import date
 
 class DeliverableEdit(BaseModel):
-    milestone_id: int
-    deliverable_name: str
+    name: str
     description: str
     amount: Optional[float]
-    deliverable_status: str
+    status: str
 
 class Deliverable(DeliverableEdit):
     id: int
+    milestone_id: int

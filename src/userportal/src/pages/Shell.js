@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 // import UserProfile from './../../components/UserProfile';
 
 import { Dashboard } from './dashboard';
+import { DocumentList } from './documents';
 import { PromptEdit } from './prompts';
 
-import { DeliverableList } from './deliverables';
-import { DocumentList } from './documents';
+import { DeliverableEdit } from './deliverables';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
-import { MilestoneList } from './milestones';
+import { MilestoneEdit } from './milestones';
 import { MSAList, MSACreate, MSAEdit } from './msas';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
 import { VendorList, VendorCreate, VendorEdit } from './vendors';
@@ -143,13 +143,13 @@ const Shell = ({ isDarkTheme }) => {
               <Route path="/documents" element={<DocumentList />} />
               <Route path="/prompts" element={<PromptEdit />} />
               
-              <Route path="/deliverables" element={<DeliverableList />} />
+              <Route path="/deliverables/:id" element={<DeliverableEdit />} />
 
               <Route path="/invoices" element={<InvoiceList />} />
               <Route path="/invoices/create" element={<InvoiceCreate />} />
               <Route path="/invoices/:id" element={<InvoiceEdit />} />
 
-              <Route path="/milestones" element={<MilestoneList />} />
+              <Route path="/milestones/:id" element={<MilestoneEdit />} />
 
               <Route path="/msas" element={<MSAList />} />
               <Route path="/msas/create" element={<MSACreate />} />

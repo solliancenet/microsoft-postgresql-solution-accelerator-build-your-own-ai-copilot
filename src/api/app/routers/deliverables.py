@@ -14,13 +14,24 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=ListResponse[Deliverable])
-async def list_deliverables(skip: int = 0, limit: int = 10, sortby: str = None, search: str = None, pool = Depends(get_db_connection_pool)):
+async def list_deliverables(milestone_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of deliverables from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'
         if (sortby):
             orderby = sortby
-        rows = await conn.fetch('SELECT * FROM deliverables ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
+        if limit == -1:
+            if milestone_id == -1:
+                rows = await conn.fetch('SELECT * FROM deliverables ORDER BY $1;', orderby)
+            else:
+                rows = await conn.fetch('SELECT * FROM deliverables WHERE milestone_id = $1 ORDER BY $2;', milestone_id, orderby)
+        else:
+            if milestone_id == -1:
+                rows = await conn.fetch('SELECT * FROM deliverables ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+            else:
+                rows = await conn.fetch('SELECT * FROM deliverables WHERE milestone_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', milestone_id, orderby, limit, skip)
+        
         deliverables = parse_obj_as(list[Deliverable], [dict(row) for row in rows])
 
         total = await conn.fetchval('SELECT COUNT(*) FROM deliverables;')
@@ -40,18 +51,18 @@ async def get_by_id(deliverable_id: int, pool = Depends(get_db_connection_pool))
 @router.post("/", response_model=Deliverable)
 async def create_deliverable(
     milestone_id: int = Form(...),
-    deliverable_name: str = Form(...),
+    name: str = Form(...),
     description: str = Form(...),
     amount: float = Form(None),
-    deliverable_status: str = Form(...),
+    status: str = Form(...),
     pool = Depends(get_db_connection_pool)
 ):
     async with pool.acquire() as conn:
         deliverable_id = await conn.fetchval('''
         INSERT INTO deliverables 
-        (milestone_id, deliverable_name, description, amount, deliverable_status) 
+        (milestone_id, name, description, amount, status) 
         VALUES ($1, $2, $3, $4, $5) RETURNING id;
-        ''', milestone_id, deliverable_name, description, amount, deliverable_status)
+        ''', milestone_id, name, description, amount, status)
         row = await conn.fetchrow('SELECT * FROM deliverables WHERE id = $1;', deliverable_id)
         deliverable = parse_obj_as(Deliverable, dict(row))
     return deliverable
@@ -59,20 +70,16 @@ async def create_deliverable(
 @router.put("/{deliverable_id}", response_model=Deliverable)
 async def update_deliverable(
     deliverable_id: int,
-    milestone_id: int = Form(None),
-    deliverable_name: str = Form(None),
-    description: str = Form(None),
-    amount: float = Form(None),
-    deliverable_status: str = Form(None),
+    deliverable: DeliverableEdit,
     pool = Depends(get_db_connection_pool)
 ):
     async with pool.acquire() as conn:
         # Save the updated deliverable
         await conn.execute('''
         UPDATE deliverables 
-        SET milestone_id, deliverable_name = $1, description = $2, amount = $3, deliverable_status = $4 
+        SET name = $1, description = $2, amount = $3, status = $4 
         WHERE id = $5;
-        ''', milestone_id, deliverable_name, description, amount, deliverable_status, deliverable_id)
+        ''', deliverable.name, deliverable.description, deliverable.amount, deliverable.status, deliverable_id)
 
         row = await conn.fetchrow('SELECT * FROM deliverables WHERE id = $1;', deliverable_id)
         deliverable = parse_obj_as(Deliverable, dict(row))

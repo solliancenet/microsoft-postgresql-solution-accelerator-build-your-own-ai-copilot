@@ -86,7 +86,7 @@ async def update_milestone(
 async def delete_milestone(milestone_id: int, pool = Depends(get_db_connection_pool)):
     """Deletes a milestone from the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM milestones WHERE id = $1 RETURNING *;', milestone_id)
+        row = await conn.fetchrow('SELECT * FROM milestones WHERE id = $1;', milestone_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A milestone with an id of {milestone_id} was not found.')
         milestone = parse_obj_as(Milestone, dict(row))

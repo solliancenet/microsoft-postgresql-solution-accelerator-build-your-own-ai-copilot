@@ -89,8 +89,10 @@ async def update_msa(msas_id: int, msa_update: MsaEdit, pool = Depends(get_db_co
 async def delete_msas(msas_id: int, pool = Depends(get_db_connection_pool)):
     """Deletes a msa from the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('DELETE FROM msas WHERE id = $1 RETURNING *;', msas_id)
+        row = await conn.fetchrow('SELECT * FROM msas WHERE id = $1;', deliverable_id)
         if row is None:
-            raise HTTPException(status_code=404, detail=f'A msa with an id of {msas_id} was not found.')
-        deleted_vendor = parse_obj_as(Msa, dict(row))
-    return deleted_vendor
+            raise HTTPException(status_code=404, detail=f'A msa with an id of {deliverable_id} was not found.')
+        msa = parse_obj_as(Msa, dict(row))
+
+        await conn.execute('DELETE FROM msas WHERE id = $1;', deliverable_id)
+    return msa

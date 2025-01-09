@@ -110,8 +110,10 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
 async def delete_sow(id: int, pool = Depends(get_db_connection_pool)):
     """Deletes a SOW from the database."""   
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('DELETE FROM sows WHERE id = $1 RETURNING *;', id)
+        row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', id)
         if row is None:
-            raise HTTPException(status_code=404, detail=f'A SOW with an id of {id} was not found.')
-        deleted_sow = parse_obj_as(Sow, dict(row))
-    return deleted_sow
+            raise HTTPException(status_code=404, detail=f'A sow with an id of {id} was not found.')
+        sow = parse_obj_as(Sow, dict(row))
+
+        await conn.execute('DELETE FROM sows WHERE id = $1;', id)
+    return sow

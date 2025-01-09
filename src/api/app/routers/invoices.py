@@ -97,9 +97,11 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
 @router.delete("/{invoice_id}", response_model=Invoice)
 async def delete_invoice(invoice_id: int, pool = Depends(get_db_connection_pool)):
     """Deletes an invoice from the database."""
-    async with pool as conn:
-        row = await conn.fetchrow('DELETE FROM invoices WHERE id = $1 RETURNING *;', invoice_id)
+    async with pool.acquire() as conn:
+        row = await conn.fetchrow('SELECT * FROM invoices WHERE id = $1;', id)
         if row is None:
-            raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
-        deleted_invoice = parse_obj_as(Invoice, dict(row))
-    return deleted_invoice
+            raise HTTPException(status_code=404, detail=f'A invoice with an id of {id} was not found.')
+        invoice = parse_obj_as(Invoice, dict(row))
+
+        await conn.execute('DELETE FROM invoices WHERE id = $1;', id)
+    return invoice

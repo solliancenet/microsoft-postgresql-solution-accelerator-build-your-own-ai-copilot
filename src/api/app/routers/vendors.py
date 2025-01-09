@@ -92,8 +92,10 @@ async def update_vendor(vendor_id: int, vendor_update: VendorEdit, pool = Depend
 async def delete_vendor(id: int, pool = Depends(get_db_connection_pool)):
     """Deletes a vendor from the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('DELETE FROM vendors WHERE id = $1 RETURNING *;', id)
+        row = await conn.fetchrow('SELECT * FROM vendors WHERE id = $1;', id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A vendor with an id of {id} was not found.')
-        deleted_vendor = parse_obj_as(Vendor, dict(row))
-    return deleted_vendor
+        vendor = parse_obj_as(Vendor, dict(row))
+
+        await conn.execute('DELETE FROM vendors WHERE id = $1;', id)
+    return vendor

@@ -161,7 +161,7 @@ const MilestoneEdit = () => {
                 <i className="fas fa-save"></i> Save
             </Button>
             <a href={`/sows/${sowId}`} className="btn btn-secondary ms-2" aria-label="Edit">
-                <i className="fas fa-times"></i> Cancel
+                <i className="fas fa-arrow-left"></i> Back to SOW
             </a>
         </Form>
 
@@ -169,7 +169,7 @@ const MilestoneEdit = () => {
 
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h2 className="h2">Deliverables</h2>
-            <Button variant="primary" onClick={() => window.location.href = `/deliverables/create?milestone_id=${id}`}>
+            <Button variant="primary" onClick={() => window.location.href = `/deliverables/create/${id}`}>
                 New Deliverable <i className="fas fa-plus" />
             </Button>
         </div>

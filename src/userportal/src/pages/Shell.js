@@ -7,9 +7,9 @@ import { Dashboard } from './dashboard';
 import { DocumentList } from './documents';
 import { PromptEdit } from './prompts';
 
-import { DeliverableEdit } from './deliverables';
+import { DeliverableCreate, DeliverableEdit } from './deliverables';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
-import { MilestoneEdit } from './milestones';
+import { MilestoneCreate, MilestoneEdit } from './milestones';
 import { MSAList, MSACreate, MSAEdit } from './msas';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
 import { VendorList, VendorCreate, VendorEdit } from './vendors';
@@ -143,12 +143,14 @@ const Shell = ({ isDarkTheme }) => {
               <Route path="/documents" element={<DocumentList />} />
               <Route path="/prompts" element={<PromptEdit />} />
               
+              <Route path="/deliverables/create/:milestoneId" element={<DeliverableCreate />} />
               <Route path="/deliverables/:id" element={<DeliverableEdit />} />
-
+              
               <Route path="/invoices" element={<InvoiceList />} />
               <Route path="/invoices/create" element={<InvoiceCreate />} />
               <Route path="/invoices/:id" element={<InvoiceEdit />} />
 
+              <Route path="/milestones/create/:sowId" element={<MilestoneCreate />} />
               <Route path="/milestones/:id" element={<MilestoneEdit />} />
 
               <Route path="/msas" element={<MSAList />} />

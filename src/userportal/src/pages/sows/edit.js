@@ -248,7 +248,7 @@ const SOWEdit = () => {
 
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 className="h2">Milestones</h2>
-        <Button variant="primary" onClick={() => window.location.href = `/milestones/create?sow_id=${id}`}>
+        <Button variant="primary" onClick={() => window.location.href = `/milestones/create/${id}`}>
           New Milestone <i className="fas fa-plus" />
         </Button>
       </div>

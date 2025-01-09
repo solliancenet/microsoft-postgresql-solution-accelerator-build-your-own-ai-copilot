@@ -57,50 +57,50 @@ const DeliverableEdit = () => {
         {error && <div className="alert alert-danger">{error}</div>}
         {success && <div className="alert alert-success">{success}</div>}
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            />
-        </Form.Group>
-        <Form.Group className="mb-3">
-            <Form.Label>Status</Form.Label>
-            <Form.Control
-            type="text"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            required
-            />
-        </Form.Group>
-        <Form.Group className="mb-3">
-            <Form.Label>Amount</Form.Label>
-            <NumericFormat
-                className="form-control"
-                value={amount}
-                onValueChange={(values) => {
-                    const { value } = values;
-                    setAmount(value);
-                }}
+            <Form.Group className="mb-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
-            />
-        </Form.Group>
-        <Form.Group className="mb-3">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-                as="textarea"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                type="text"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
                 required
-              />
-        </Form.Group>
+                />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Amount</Form.Label>
+                <NumericFormat
+                    className="form-control"
+                    value={amount}
+                    onValueChange={(values) => {
+                        const { value } = values;
+                        setAmount(value);
+                    }}
+                    required
+                />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                    as="textarea"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
+            </Form.Group>
             <Button type="submit" variant="primary">
                 <i className="fas fa-save"></i> Save
             </Button>
-            <a href={`/milestones/${milestoneId}`} className="btn btn-secondary ms-2" aria-label="Edit">
-                <i className="fas fa-times"></i> Cancel
+            <a href={`/milestones/${milestoneId}`} className="btn btn-secondary ms-2" aria-label="Cancel">
+                <i className="fas fa-arrow-left"></i> Back to Milestone
             </a>
         </Form>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
@@ -11,6 +11,22 @@ const InvoiceCreate = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  const [statuses, setStatuses] = useState([]);
+  
+  useEffect(() => {
+    // Fetch data when component mounts
+    const fetchStatuses = async () => {
+      try {
+        const data = await api.statuses.list();
+        setStatuses(data);
+      } catch (err) {
+        setError('Failed to load statuses');
+      }
+    }
+    fetchStatuses();
+  }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,11 +70,13 @@ const InvoiceCreate = () => {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Amount</Form.Label>
-              <Form.Control
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                required
+              <NumericFormat
+                  className="form-control"
+                  value={amount}
+                  onValueChange={(values) => setAmount(values.floatValue)}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                  required
                 />
             </Form.Group>
           </Col>
@@ -66,11 +84,18 @@ const InvoiceCreate = () => {
             <Form.Group className="mb-3">
               <Form.Label>Payment Status</Form.Label>
               <Form.Control
-                type="text"
+                as="select"
                 value={paymentStatus}
                 onChange={(e) => setPaymentStatus(e.target.value)}
                 required
-              />
+                >
+                  <option value="">Select Status</option>
+                  {statuses.map((status) => (
+                    <option key={status.name} value={status.name}>
+                      {status.name}
+                    </option>
+                  ))}
+                </Form.Control>
             </Form.Group>
           </Col>
         </Row>

@@ -305,6 +305,11 @@ module.exports = {
             return await RESTHelper.delete(getUrl(`/sows/${sowId}`));
         }
     },
+    statuses: {
+        list: async () => {
+            return await RESTHelper.get(getUrl(`/statuses`));
+        }
+    },
     vendors: {
         list: async (skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}`));

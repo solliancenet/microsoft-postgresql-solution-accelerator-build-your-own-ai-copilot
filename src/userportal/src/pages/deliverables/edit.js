@@ -80,6 +80,8 @@ const DeliverableEdit = () => {
                 <NumericFormat
                     className="form-control"
                     value={amount}
+                    thousandSeparator={true}
+                    prefix={'$'}
                     onValueChange={(values) => {
                         const { value } = values;
                         setAmount(value);

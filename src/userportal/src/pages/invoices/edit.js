@@ -13,42 +13,54 @@ const InvoiceEdit = () => {
   const [document, setDocument] = useState('');
   const [metadata, setMetadata] = useState('');
   const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const [statuses, setStatuses] = useState([]);
   
-    useEffect(() => {
-      // Fetch data when component mounts
-      const fetchData = async () => {
-        try {
-          const data = await api.invoices.get(id);
-          updateDisplay(data);
-        } catch (err) {
-          setError('Failed to load Invoice data');
-        }
-      };
-      fetchData();
-    }, [id]);
-  
-    const updateDisplay = (data) => {
-      setInvoiceNumber(data.number);
-      setAmount(data.amount);
-      setInvoiceDate(data.invoice_date);
-      setPaymentStatus(data.payment_status);
-      setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
-    }
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  useEffect(() => {
+    // Fetch data when component mounts
+    const fetchData = async () => {
       try {
-        var data = await api.invoices.update(id, invoiceNumber, amount, invoiceDate, paymentStatus);
+        const data = await api.invoices.get(id);
         updateDisplay(data);
-        setSuccess('Invoice updated successfully!');
-        setError(null);
       } catch (err) {
-        console.error(err);
-        setError('Failed to update Invoice');
-        setSuccess(null);
+        setError('Failed to load Invoice data');
       }
     };
+    fetchData();
+
+    const fetchStatuses = async () => {
+      try {
+        const data = await api.statuses.list();
+        setStatuses(data);
+      } catch (err) {
+        setError('Failed to load statuses');
+      }
+    }
+    fetchStatuses();
+  }, [id]);
+
+  const updateDisplay = (data) => {
+    setInvoiceNumber(data.number);
+    setAmount(data.amount);
+    setInvoiceDate(data.invoice_date);
+    setPaymentStatus(data.payment_status);
+    setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      var data = await api.invoices.update(id, invoiceNumber, amount, invoiceDate, paymentStatus);
+      updateDisplay(data);
+      setSuccess('Invoice updated successfully!');
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to update Invoice');
+      setSuccess(null);
+    }
+  };
 
   return (
     <div>
@@ -93,11 +105,18 @@ const InvoiceEdit = () => {
             <Form.Group className="mb-3">
               <Form.Label>Payment Status</Form.Label>
               <Form.Control
-                type="text"
+                as="select"
                 value={paymentStatus}
                 onChange={(e) => setPaymentStatus(e.target.value)}
                 required
-              />
+                >
+                  <option value="">Select Status</option>
+                  {statuses.map((status) => (
+                    <option key={status.name} value={status.name}>
+                      {status.name}
+                    </option>
+                  ))}
+                </Form.Control>
             </Form.Group>
           </Col>
         </Row>
@@ -123,7 +142,7 @@ const InvoiceEdit = () => {
         <Button type="submit" variant="primary">
           <i className="fas fa-save"></i> Save
         </Button>
-        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/msas' }>
+        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/invoices' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
       </Form>

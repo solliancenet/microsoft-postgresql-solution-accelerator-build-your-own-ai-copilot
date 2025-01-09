@@ -19,6 +19,9 @@ const MilestoneEdit = () => {
     const [deliverableToDelete, setDeliverableToDelete] = useState(null);
     const [reloadDeliverables, setReloadDeliverables] = useState(false);
 
+    const [statuses, setStatuses] = useState([]);
+
+
     useEffect(() => {
         // Fetch data when component mounts
         const fetchData = async () => {
@@ -31,6 +34,16 @@ const MilestoneEdit = () => {
             }
         };
         fetchData();
+
+        const fetchStatuses = async () => {
+            try {
+            const data = await api.statuses.list();
+            setStatuses(data);
+            } catch (err) {
+            setError('Failed to load statuses');
+            }
+        }
+        fetchStatuses();
     }, [id]);
 
     const updateDisplay = (data) => {
@@ -142,11 +155,18 @@ const MilestoneEdit = () => {
             <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
                 <Form.Control
-                type="text"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                required
-                />
+                    as="select"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    required
+                    >
+                        <option value="">Select Status</option>
+                        {statuses.map((status) => (
+                        <option key={status.name} value={status.name}>
+                            {status.name}
+                        </option>
+                        ))}
+                    </Form.Control>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Due Date</Form.Label>

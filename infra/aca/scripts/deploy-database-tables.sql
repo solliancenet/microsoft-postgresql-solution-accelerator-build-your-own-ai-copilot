@@ -12,11 +12,26 @@ CREATE TABLE IF NOT EXISTS vendors (
     metadata jsonb -- additional information about the vendor
 );
 
+-- Status table: information about the status of a invoice, milestone, etc
 CREATE TABLE status (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT
 );
+-- Insert default status values - if table hasn't been populated yet
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM status) THEN
+        INSERT INTO status (id, name, description) VALUES (1, 'Pending', 'Awaiting action');
+        INSERT INTO status (id, name, description) VALUES (2, 'In Progress', 'In progress');
+        INSERT INTO status (id, name, description) VALUES (3, 'In Review', 'Review is required');
+        INSERT INTO status (id, name, description) VALUES (4, 'Cancelled', 'The process was stopped');
+        INSERT INTO status (id, name, description) VALUES (5, 'Overdue', 'The invoice has passed the due date without payment');
+        INSERT INTO status (id, name, description) VALUES (6, 'Paid', 'The invoice has been fully paid');
+        INSERT INTO status (id, name, description) VALUES (7, 'Completed', 'Work has been finished');
+    END IF;
+END $$;
+
 
 -- MSA table; information about payment terms, special clauses, or additional legal notes
 CREATE TABLE IF NOT EXISTS msas (

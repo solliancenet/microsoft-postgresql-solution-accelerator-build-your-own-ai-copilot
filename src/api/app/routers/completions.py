@@ -14,15 +14,29 @@ router = APIRouter(
     responses = {404: {"description": "Not found"}}
 )
 
+async def get_system_prompt():
+    """Retrieves the copilot system prompt from the database."""
+    pool = await get_db_connection_pool()
+    async with pool.acquire() as conn:
+        # select first prompt value
+        row = await conn.fetchrow('SELECT * FROM prompts WHERE id = $1;', 'COPILOT_SYSTEM_PROMPT')
+        if row is None:
+            raise HTTPException(status_code=404, detail="Prompt not found")
+        return row['prompt']
+
 @router.post('/chat', response_model = str)
 async def generate_chat_completion(request: CompletionRequest, llm = Depends(get_chat_client)):
     """Generate a chat completion using the Azure OpenAI API."""
-    # TODO: Move this system prompt into blob storage or somewhere it can be updated without redeploying the app.
-    # Define the system prompt that contains the assistant's persona.
-    system_prompt = """
-    You are an intelligent copilot for Woodgrove Bank designed to help users gain insights from vendor statements of work (SOWs) and invoices.
-    You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove's contracts and associated invoices.
-    """
+        
+    # Example of the system prompt that contains the assistant's persona.
+    # system_prompt = """
+    # You are an intelligent copilot for Woodgrove Bank designed to help users gain insights from vendor statements of work (SOWs) and invoices.
+    # You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove's contracts and associated invoices.
+    # """
+
+    # Load Copilot System Prompt from database
+    system_prompt = await get_system_prompt()
+
     # Provide the copilot with a persona using the system prompt.
     messages = [{ "role": "system", "content": system_prompt }]
 

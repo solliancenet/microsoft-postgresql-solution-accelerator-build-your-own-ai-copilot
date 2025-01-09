@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 // import UserProfile from './../../components/UserProfile';
 
 import { Dashboard } from './dashboard';
+import { PromptEdit } from './prompts';
+
 import { DeliverableList } from './deliverables';
 import { DocumentList } from './documents';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
@@ -90,6 +92,17 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                 </ul>
+                <hr />
+                <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                  Settings
+                </h6>
+                <ul className="nav flex-column">
+                  <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/prompts">
+                      <i className="fas fa-cog"></i> Prompts
+                    </NavLink>
+                  </li>
+                </ul>
                 {/* <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
                   Reports
                   <button type="button" className="btn btn-sm btn-outline-secondary" title="New Report">
@@ -128,6 +141,7 @@ const Shell = ({ isDarkTheme }) => {
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/documents" element={<DocumentList />} />
+              <Route path="/prompts" element={<PromptEdit />} />
               
               <Route path="/deliverables" element={<DeliverableList />} />
 

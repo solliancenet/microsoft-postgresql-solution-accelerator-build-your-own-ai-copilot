@@ -73,3 +73,20 @@ CREATE TABLE IF NOT EXISTS deliverables (
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE IF NOT EXISTS prompts (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    prompt TEXT
+);
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM prompts WHERE id = 'COPILOT_SYSTEM_PROMPT') THEN
+        INSERT INTO prompts (id, name, prompt) VALUES (
+            'COPILOT_SYSTEM_PROMPT',
+            'Copilot System Prompt', 
+            E'You are an intelligent copilot for Woodgrove Bank designed to help users gain insights from vendor statements of work (SOWs) and invoices.\nYou are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove''s contracts and associated invoices.'
+        );
+    END IF;
+END $$;

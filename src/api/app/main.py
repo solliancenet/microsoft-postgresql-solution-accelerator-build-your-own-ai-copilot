@@ -10,6 +10,7 @@ from app.routers import (
     invoices,
     milestones,
     msas,
+    prompts,
     sows,
     status,
     validation,
@@ -42,6 +43,7 @@ app.include_router(embeddings.router)
 app.include_router(invoices.router)
 app.include_router(milestones.router)
 app.include_router(msas.router)
+app.include_router(prompts.router)
 app.include_router(sows.router)
 app.include_router(status.router)
 app.include_router(validation.router)

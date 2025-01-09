@@ -246,6 +246,17 @@ module.exports = {
             return await RESTHelper.delete(getUrl(`/msas/${id}`));
         }
     },
+    prompts: {
+        list: async () => {
+            return await RESTHelper.get(getUrl(`/prompts`));
+        },
+        get: async (promptId) => {
+            return await RESTHelper.get(getUrl(`/prompts/${promptId}`));
+        },
+        update: async (prompts) => {
+            return await RESTHelper.update(getUrl(`/prompts/`), prompts);
+        }
+    },
     sows: {
         list: async (skip = 0, limit = 10, sortBy = '', search = '') => {
             return await RESTHelper.get(getUrl(`/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}&search=${search}`));

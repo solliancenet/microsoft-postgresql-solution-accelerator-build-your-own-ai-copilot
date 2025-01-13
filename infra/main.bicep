@@ -22,9 +22,6 @@ param postgresqlAdminLogin string = 'adminUser'
 @secure()
 param postgresqlAdminPassword string
 
-@description('OwnerId of the user running the deployment')
-param ownerId string = ''
-
 
 param userPortalExists bool
 @secure()
@@ -94,11 +91,12 @@ module appConfig './shared/appconfiguration.bicep' = {
     location: location
     tags: tags
     name: '${abbrs.appConfigurationConfigurationStores}${resourceToken}'
-    ownerId: ownerId
+    principalId: principalId
     keyVaultName: keyVault.outputs.name
   }
   scope: rg
 }
+
 
 module monitoring './shared/monitoring.bicep' = {
   name: 'monitoring'

@@ -2,7 +2,9 @@ param name string
 param location string = resourceGroup().location
 param tags object = {}
 param keyVaultName string = ''
-param ownerId string = ''
+
+@description('The principal ID of the user to assign the App Configuration Data Owner role to')
+param principalId string = ''
 
 @allowed([
   'Enabled', 'Disabled'
@@ -54,13 +56,13 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
   }
 }
 
-// Assign the App Configuration Data Owner role to ownerId passed in for the user running the deployment
-resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (!empty(ownerId)) {
-  name: guid(subscription().id, resourceGroup().id, ownerId, 'AppConfigDataOwner')
+// Assign the App Configuration Data Owner role to principalId passed in for the user running the deployment
+resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (!empty(principalId)) {
+  name: guid(subscription().id, resourceGroup().id, principalId, 'AppConfigDataOwner')
   scope: appConfig
   properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5ae67dd6-50cb-40e7-96ff-dc2bfa4b606b') // App Configuration Data Owner role ID
-    principalId: ownerId
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5ae67dd6-50cb-40e7-96ff-dc2bfa4b606b') // App Configuration Data Owner role
+    principalId: principalId
     principalType: 'User'
   }
 }

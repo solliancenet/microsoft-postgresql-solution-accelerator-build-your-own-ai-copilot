@@ -5,18 +5,8 @@ metadata:
 
 infra:
   bicep: ./infra/main.bicep
-  parameters:
-    ownerId: ${OWNER_ID} # pass the OWNER_ID environment variable to the Bicep template
 
 hooks:
-  preprovision:
-      shell: pwsh
-      # Get the OwnerId of the signed-in user and set it as an environment variable
-      run: |
-        $ownerId = $(az ad signed-in-user show --query id -o tsv)
-        Write-Output "Setting OWNER_ID environment variable to $ownerId"
-        azd env set OWNER_ID $ownerId
-
   postdeploy:
     shell: pwsh
     continueOnError: false

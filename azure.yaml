@@ -32,22 +32,22 @@ hooks:
 
 services:
   UserPortal:
-    project: ../../src/userportal
+    project: ./src/userportal
     host: containerapp
     language: js
     docker:
-      context: ../../src/userportal
+      context: ./
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
       path: DOCKERFILE
     dependsOn:
       - infra
 
   API:
-    project: ../../src/api
+    project: ./src/api
     host: containerapp
     language: python
     docker:
-      context: ../../src/api
+      context: ./
       path: DOCKERFILE
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
     dependsOn:

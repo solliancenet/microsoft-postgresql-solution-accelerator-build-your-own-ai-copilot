@@ -109,7 +109,7 @@ resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-0
 }
 
 
-module fetchLatestImage '../modules/fetch-container-image.bicep' = {
+module fetchLatestImage '../shared/fetch-container-image.bicep' = {
   name: '${name}-fetch-image'
   params: {
     exists: exists

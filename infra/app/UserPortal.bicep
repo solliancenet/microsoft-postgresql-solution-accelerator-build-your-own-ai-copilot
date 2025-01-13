@@ -71,7 +71,7 @@ resource secretsAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-0
   }
 }
 
-module fetchLatestImage '../modules/fetch-container-image.bicep' = {
+module fetchLatestImage '../shared/fetch-container-image.bicep' = {
   name: '${name}-fetch-image'
   params: {
     exists: exists

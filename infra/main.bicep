@@ -274,6 +274,20 @@ module storage './shared/storage.bicep' = {
   scope: rg
 }
 
+module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
+  name: 'eventGridSystemTopic-Storage'
+  params: {
+    topicType: 'Microsoft.Storage.StorageAccounts'
+    systemTopicName: '${abbrs.eventGridDomainsTopics}${storage.outputs.name}'
+    sourceResourceId: storage.outputs.id
+    location: location
+  }
+  scope: rg
+}
+
+
+
+
 
 output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
@@ -281,6 +295,8 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_APP_CONFIG_ENDPOINT string = appConfig.outputs.endpoint
 output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
+
+output STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME string = eventGridSystemTopicStorage.outputs.name
 
 output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
 output POSTGRESQL_DATABASE_NAME string = postgresqlDatabaseName

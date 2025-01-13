@@ -65,3 +65,4 @@ resource appConfigStorageAccountName 'Microsoft.AppConfiguration/configurationSt
 }
 
 output name string = storage.name
+output id string = storage.id

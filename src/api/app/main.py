@@ -15,7 +15,8 @@ from app.routers import (
     status,
     statuses,
     validation,
-    vendors
+    vendors,
+    webhooks
 )
 
 load_dotenv()
@@ -50,6 +51,7 @@ app.include_router(status.router)
 app.include_router(statuses.router)
 app.include_router(validation.router)
 app.include_router(vendors.router)
+app.include_router(webhooks.router)
 
 @app.get("/")
 async def get():

@@ -90,3 +90,23 @@ az postgres flexible-server execute `
           --querytext $sqlScript
 
 Write-Host "PostgreSQL Server Extensions Configured"
+
+
+
+# # ##############################################################################
+# # Create Event Grid Subscription with BlobCreated & BlobUpdated Webhook
+# # - this must be created after the app is deployed, otherwise the webhook validation will fail
+# # ##############################################################################
+# Write-Host "Creating Event Grid Subscription with BlobCreated & BlobUpdated Webhook..."
+
+# az deployment group create `
+#     --name "eventGridSub-StorageBlob" `
+#     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+#     --template-file "./infra/shared/eventgrid-system-topic-subscription-webhook.bicep" `
+#     --parameters `
+#         systemTopicName="${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+#         subscriptionName="StorageBlob" `
+#         endpointUrl="${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
+#         includedEventTypes="['Microsoft.Storage.BlobCreated','Microsoft.Storage.BlobUpdated']"
+
+# Write-Host "Event Grid Subscription 'StorageBlob' Created"

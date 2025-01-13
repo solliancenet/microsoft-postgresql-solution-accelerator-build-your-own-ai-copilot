@@ -51,7 +51,7 @@ az postgres flexible-server execute `
           --admin-password "$token" `
           --name "${env:POSTGRESQL_SERVER_NAME}" `
           --database-name "${env:POSTGRESQL_DATABASE_NAME}" `
-          --file-path "./scripts/deploy-database-tables.sql"
+          --file-path "./sql-scripts/deploy-database-tables.sql"
 
 Write-Host "Database Schema Configured"
 
@@ -60,7 +60,7 @@ Write-Host "Database Schema Configured"
 # ##############################################################################
 Write-Host "Granting Database Permissions to API App Managed Identity..."
 # Load script
-$sqlScript = Get-Content -Path "./scripts/grant-table-permissions.sql" -Raw
+$sqlScript = Get-Content -Path "./sql-scripts/grant-table-permissions.sql" -Raw
 # Replace environment variable placeholders
 $sqlScript = $sqlScript.Replace('${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}', "${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}")
 # Run script
@@ -78,7 +78,7 @@ Write-Host "Database Permissions Granted to API App Managed Identity"
 # ##############################################################################
 Write-Host "Configuring PostgreSQL Server Extensions for OpenAI and Vector..."
 # Load script
-$sqlScript = Get-Content -Path "./scripts/setup_azure_ai.sql" -Raw
+$sqlScript = Get-Content -Path "./sql-scripts/setup_azure_ai.sql" -Raw
 # Replace environment variable placeholders
 $sqlScript = $sqlScript.Replace('${env:AZURE_OPENAI_ENDPOINT}', "${env:AZURE_OPENAI_ENDPOINT}").Replace('${env:AZURE_OPENAI_KEY}', "${env:AZURE_OPENAI_KEY}")
 # Run script

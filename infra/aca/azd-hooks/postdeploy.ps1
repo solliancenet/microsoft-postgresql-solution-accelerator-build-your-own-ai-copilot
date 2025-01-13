@@ -78,7 +78,7 @@ Write-Host "Database Permissions Granted to API App Managed Identity"
 # ##############################################################################
 Write-Host "Configuring PostgreSQL Server Extensions for OpenAI and Vector..."
 # Load script
-$sqlScript = Get-Content -Path "./scripts/configure-db-extensions.sql" -Raw
+$sqlScript = Get-Content -Path "./scripts/setup_azure_ai.sql" -Raw
 # Replace environment variable placeholders
 $sqlScript = $sqlScript.Replace('${env:AZURE_OPENAI_ENDPOINT}', "${env:AZURE_OPENAI_ENDPOINT}").Replace('${env:AZURE_OPENAI_KEY}', "${env:AZURE_OPENAI_KEY}")
 # Run script

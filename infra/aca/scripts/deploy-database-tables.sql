@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS vendors (
     contact_email text NOT NULL,
     contact_phone text NOT NULL,
     type text NOT NULL,
-    metadata jsonb -- additional information about the vendor
+    metadata jsonb, -- additional information about the vendor
+    embeddings vector(3072) -- embeddings for the vendor
 );
 
 -- Status table: information about the status of a invoice, milestone, etc
@@ -39,7 +40,8 @@ CREATE TABLE IF NOT EXISTS msas (
     title text NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE,
-    metadata JSONB -- Stores special clauses, terms, etc.
+    metadata JSONB, -- Stores special clauses, terms, etc.
+    embeddings vector(3072) -- embeddings for the vendor
 );
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
@@ -53,7 +55,8 @@ CREATE TABLE IF NOT EXISTS sows (
     budget DECIMAL(18,2) NOT NULL,
     document text NOT NULL,
     FOREIGN KEY (msa_id) REFERENCES msas (id) ON DELETE CASCADE,
-    metadata JSONB -- Flexible for deliverables, milestones, and notes
+    metadata JSONB, -- Flexible for deliverables, milestones, and notes
+    embeddings vector(3072) -- embeddings for the vendor
 );
 
 -- Invoices table; tax details, discounts, or additional metadata
@@ -64,7 +67,8 @@ CREATE TABLE IF NOT EXISTS invoices (
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
     document text NOT NULL,
-    metadata JSONB -- Tax info, discounts, or itemized breakdown
+    metadata JSONB, -- Tax info, discounts, or itemized breakdown
+    embeddings vector(3072) -- embeddings for the vendor
 );
 
 -- Milestones table
@@ -105,3 +109,4 @@ BEGIN
         );
     END IF;
 END $$;
+

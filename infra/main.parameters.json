@@ -14,8 +14,14 @@
       "userPortalExists": {
         "value": "${SERVICE_USERPORTAL_RESOURCE_EXISTS=false}"
       },
+      "postgresqlAdminLogin": {
+        "value": "adminUser"
+      },
       "postgresqlAdminPassword": {
         "value": "${POSTGRESQL_ADMIN_PASSWORD}"
+      },
+      "postgresqlDatabaseName": {
+        "value": "db-claimsdata"
       },
       "portalDefinition": {
         "value": {

@@ -7,16 +7,17 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+@description('Name of the resource group')
 param resourceGroupName string
 
 @description('Id of the user or app to assign application roles')
 param principalId string
 
 @description('Name of the PostgreSQL database')
-param postgresqlDatabaseName string = 'db-claimsdata'
+param postgresqlDatabaseName string
 
 @description('Administrator Login of the PostgreSQL server')
-param postgresqlAdminLogin string = 'adminUser'
+param postgresqlAdminLogin string
 
 @description('Administrator Password for the PostgreSQL server')
 @secure()

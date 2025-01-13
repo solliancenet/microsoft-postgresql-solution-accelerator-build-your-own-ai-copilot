@@ -1,8 +1,0 @@
-applicationName: ms-openai-postgresql-tls
-issuerName: ms-openai-postgresql-tls-prod
-certName: ms-openai-postgresql-tls-cert-prod
-environment: prod
-server: https://acme-v02.api.letsencrypt.org/directory
-certSecretName: tls-prod
-issuerSecretName: letsencrypt-prod
-ingressClass: webapprouting.kubernetes.azure.com

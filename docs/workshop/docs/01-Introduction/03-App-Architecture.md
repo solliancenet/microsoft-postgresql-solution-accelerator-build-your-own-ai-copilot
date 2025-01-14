@@ -2,9 +2,45 @@
 
 The objective of this solution is to automate the extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.
 
-The high-level solution architecture is represented by this diagram:
+The high-level solution architecture is represented by the following diagrams:
 
-![High-level architecture diagram for the solution](./../img/solution-architecture-diagram.png)
+## Data ingestion and validation architecture
+
+The attached image is a detailed flowchart illustrating the architecture of a data ingestion and AI processing system integrated with an AI copilot using Retrieval-Augmented Generation (RAG). The system is divided into two main sections: "Data Ingestion & AI Processing" and "AI Copilot with RAG." The flowchart shows how users interact with the system, how data is processed, and how AI-generated insights are delivered back to the users.
+
+![](./../img/data-ingestion-validation-architecture-diagram.png)
+
+## Copilot architecture
+
+The second part of the application is an AI copilot, which allows users to ask questions and gain actionable insights over the data in the PostgreSQL database by leveraging a RAG architecture pattern. When users submit  questions through the Copilot's chat interface, the query is processed by the SPA Web App and sent to the API. The API then communicates with Azure OpenAI to generate a prompt embedding, which is used to perform a vector search in the Azure Database for PostgreSQL Flexible Server. The search results are retrieved and used to generate a completion response containing AI-generated insights. This response is sent back to the API and displayed to the user, providing them with relevant and actionable information based on the data stored in the Postgres database. This process enables users to efficiently query and analyze large datasets, making it easier to derive meaningful insights and make informed decisions.
+
+![](./../img/copilot-architecture-diagram.png)
+
+The attached image is a flowchart illustrating the architecture of an AI Copilot with Retrieval-Augmented Generation (RAG). The flowchart shows how users interact with the system through a browser-based Copilot Chat interface. The users' queries are sent to a Single Page Application (SPA) Web App, which communicates with an API. The API interacts with Azure OpenAI to generate prompt embeddings and perform vector searches. The vector search results are retrieved from an Azure Database for PostgreSQL Flexible Server (Vector Store). The completion response, which contains AI-generated insights, is then sent back to the API and displayed to the users through the SPA Web App. The system also includes components like Key Vault and Azure App Configuration for secure and efficient management of application settings and secrets.
+
+## Information flow diagrm
+
+Tying the two architecture components together...
+
+![High-level architecture diagram for the solution](./../img/solution-flow-diagram.png)
+
+### Into the System
+
+1. Users upload documents, such as SOWs and invoices, through a Single Page Application (SPA) via a web browser.
+2. The SPA web app communicates directly with a backend API.
+3. The API saves uploaded documents into a Blob Storage container.
+4. When new documents are added into blob storage an Event Grid trigger is fired, which launches a Data Ingestion Worker Process. This worker process sends the uploaded documents to the Azure AI Document Intelligence service, which uses custom models to efficiently extract text and structure from the documents. Using the built in semantic chunking capability of Document Intelligence, document content is chunked based on document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences, ensuring the chunks are of higher quality for use in RAG pattern queries.
+5. Once processed, the data is validated by a Validation worker process, which uses Azure OpenAI to validate the incoming data conforms to expected standards and is accurate based on other data already in the system.
+6. The output from the Document Ingestion and Validation worker processes is written into Azure Database for PostgreSQL flexible server, which serves as both a relation database and vector store. The data is accessible for further analysis. Azure OpenAI is utilized to generate text embeddings, which are stored for efficient retrieval during the querying process.
+
+### Out of the System
+
+7. Users interact with a Copilot Chat through a browser interface to pose queries or seek information.
+8. These chat requests are sent to the SPA Web App and then to the API.
+9. The request query is embedded using the `text-embedding-3-large` model in Azure OpenAI.
+10. A hybrid search is performed on the Azure Database for PostgreSQL Flexible Server, where the system searches for relevant data using the previously generated embeddings.
+11. The search results are combined with additional data if necessary and used to generate a comprehensive response.
+12. This AI-generated completion response is then sent back to the user through the browser interface, providing them with actionable insights based on the data stored in the system. The efficient flow of information ensures users can quickly and accurately obtain the information they need.
 
 Click on each tab to understand the archtiecture components and processing workflow.
 

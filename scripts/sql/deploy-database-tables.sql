@@ -34,14 +34,16 @@ BEGIN
 END $$;
 
 
--- MSA table; information about payment terms, special clauses, or additional legal notes
 CREATE TABLE IF NOT EXISTS msas (
     id BIGSERIAL PRIMARY KEY,
     title text NOT NULL,
+    vendor_id BIGINT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE,
+    document text NOT NULL,
     metadata JSONB, -- Stores special clauses, terms, etc.
-    embeddings vector(3072) -- embeddings for the vendor
+    embeddings vector(3072), -- embeddings for the vendor
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE CASCADE
 );
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
@@ -49,7 +51,6 @@ CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
     number text NOT NULL,
     msa_id BIGINT NOT NULL,
-    msa_title text NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     budget DECIMAL(18,2) NOT NULL,

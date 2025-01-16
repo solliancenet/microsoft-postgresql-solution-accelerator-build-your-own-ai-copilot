@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=ListResponse[Msa])
-async def list_msas(skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
+async def list_msas(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of msas from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'
@@ -23,13 +23,24 @@ async def list_msas(skip: int = 0, limit: int = 10, sortby: str = None, pool = D
         print (f'orderby: {orderby}')
         
         if (limit >= 0):
-            rows = await conn.fetch('SELECT * FROM msas ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+            if (vendor_id >= 0):
+                rows = await conn.fetch('SELECT * FROM msas WHERE vendor_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', vendor_id, orderby, limit, skip)
+            else:
+                rows = await conn.fetch('SELECT * FROM msas ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
         else: # If Limit == -1 then No Limit
-            rows = await conn.fetch('SELECT * FROM msas ORDER BY $1;', orderby)
+            if (vendor_id >= 0):
+                rows = await conn.fetch('SELECT * FROM msas WHERE vendor_id = $1 ORDER BY $2;', vendor_id, orderby)
+            else:
+                rows = await conn.fetch('SELECT * FROM msas ORDER BY $1;', orderby)
+
+        if (vendor_id >= 0):
+            totalCount = await conn.fetchval('SELECT COUNT(*) FROM msas WHERE vendor_id = $1;', vendor_id)
+        else:
+            totalCount = await conn.fetchval('SELECT COUNT(*) FROM msas;')
 
         msas = parse_obj_as(list[Msa], [dict(row) for row in rows])
 
-    return ListResponse[Msa](data=msas, total = len(msas), skip = skip, limit = limit)
+    return ListResponse[Msa](data=msas, total = totalCount, skip = skip, limit = limit)
 
 @router.get("/{msas_id}", response_model=Msa)
 async def get_by_id(msas_id: int, pool = Depends(get_db_connection_pool)):
@@ -44,6 +55,7 @@ async def get_by_id(msas_id: int, pool = Depends(get_db_connection_pool)):
 @router.post("/", response_model=Msa)
 async def create_msa(
     title: str = Form(...),
+    vendor_id: int = Form(...),
     start_date: str = Form(...),
     end_date: str = Form(...),
     pool = Depends(get_db_connection_pool)
@@ -57,9 +69,9 @@ async def create_msa(
     # Create MSA in the database
     async with pool.acquire() as conn:
         row = await conn.fetchrow('''
-        INSERT INTO msas (title, start_date, end_date)
-        VALUES ($1, $2, $3) RETURNING *;
-        ''', title, start_date_parsed, end_date_parsed)
+        INSERT INTO msas (title, start_date, end_date, vendor_id)
+        VALUES ($1, $2, $3, $4) RETURNING *;
+        ''', title, start_date_parsed, end_date_parsed, vendor_id)
 
         new_msa = parse_obj_as(Msa, dict(row))
     return new_msa

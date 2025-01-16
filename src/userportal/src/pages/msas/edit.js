@@ -6,12 +6,30 @@ import api from '../../api/Api';
 
 const MSAEdit = () => {
   const { id } = useParams(); // Extract MSA ID from URL
+  const [msaVendorId, setMsaVendorId] = useState('');
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [metadata, setMetadata] = useState(null);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+
+  const [vendors, setVendors] = useState([]);
+  
+  useEffect(() => {
+    const fetchVendors = async () => {
+      try {
+        const data = await api.vendors.list(0, -1); // No pagination limit
+        setVendors(data.data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching vendors');
+        setSuccess(null);
+      }
+    };
+
+    fetchVendors();
+  }, []);
 
   useEffect(() => {
     // Fetch data when component mounts
@@ -27,6 +45,7 @@ const MSAEdit = () => {
   }, [id]);
 
   const updateDisplay = (data) => {
+    setMsaVendorId(data.vendor_id);
     setTitle(data.title);
     setStartDate(data.start_date);
     setEndDate(data.end_date);
@@ -54,6 +73,23 @@ const MSAEdit = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Vendor</Form.Label>
+          <Form.Control
+            as="select"
+            value={msaVendorId}
+            onChange={(e) => setMsaVendorId(e.target.value)}
+            required
+            disabled
+          >
+            <option value="">Select Vendor</option>
+            {vendors.map((vendor) => (
+              <option key={vendor.id} value={vendor.id}>
+                {vendor.name}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Title</Form.Label>
           <Form.Control
@@ -103,6 +139,9 @@ const MSAEdit = () => {
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/msas' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
+        <a href={`/vendors/${msaVendorId}`} className="btn btn-link ms-2">
+          Go to Vendor
+        </a>
       </Form>
     </div>
   );

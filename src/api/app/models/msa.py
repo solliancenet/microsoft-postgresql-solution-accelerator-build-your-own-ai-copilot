@@ -10,5 +10,6 @@ class MsaEdit(BaseModel):
 
 class Msa(MsaEdit):
     id: int
+    vendor_id: int
     
 

@@ -27,7 +27,7 @@ const SOWEdit = () => {
   useEffect(() => {
     const fetchMSAs = async () => {
       try {
-        const data = await api.msas.list(0, -1); // No pagination limit
+        const data = await api.msas.list(-1, 0, -1); // No pagination limit
         setMsas(data.data);
       } catch (err) {
         console.error(err);
@@ -242,6 +242,9 @@ const SOWEdit = () => {
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/sows' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
+        <a href={`/msas/${msaId}`} className="btn btn-link ms-2">
+          Go to MSA
+        </a>
       </Form>
 
       <hr />

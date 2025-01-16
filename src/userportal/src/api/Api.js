@@ -206,16 +206,17 @@ module.exports = {
         }
     },
     msas: {
-        list: async (skip = 0, limit = 10, sortBy = '') => {
-            return await RESTHelper.get(getUrl(`/msas?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
+        list: async (vendor_id = -1, skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/msas?vendor_id=${vendor_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (msaId) => {
             return await RESTHelper.get(getUrl(`/msas/${msaId}`));
         },
-        create: async (title, start_date, end_date) => {
+        create: async (vendor_id, title, start_date, end_date) => {
             console.info('Creating MSA');
         
             const formData = new FormData();
+            formData.append('vendor_id', vendor_id);
             formData.append('title', title);
             formData.append('start_date', start_date);
             formData.append('end_date', end_date);

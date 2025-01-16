@@ -67,13 +67,8 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
-                      <i className="fas fa-file-alt"></i> Documents
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/invoices">
-                      <i className="fas fa-file-invoice"></i> Invoices
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/vendors">
+                      <i className="fas fa-briefcase"></i> Vendors
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -87,8 +82,13 @@ const Shell = ({ isDarkTheme }) => {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/vendors">
-                      <i className="fas fa-briefcase"></i> Vendors
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/invoices">
+                      <i className="fas fa-file-invoice"></i> Invoices
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
+                      <i className="fas fa-file-alt"></i> Documents
                     </NavLink>
                   </li>
                 </ul>
@@ -155,6 +155,7 @@ const Shell = ({ isDarkTheme }) => {
 
               <Route path="/msas" element={<MSAList />} />
               <Route path="/msas/create" element={<MSACreate />} />
+              <Route path="/msas/create/:vendorId" element={<MSACreate />} />
               <Route path="/msas/:id" element={<MSAEdit />} />
               
               <Route path="/sows" element={<SOWList />} />

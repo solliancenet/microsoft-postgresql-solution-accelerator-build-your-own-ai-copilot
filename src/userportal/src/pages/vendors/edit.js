@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
+import ConfirmModal from '../../components/ConfirmModal';
+import PagedTable from '../../components/PagedTable';
 
 const VendorEdit = () => {
     const { id } = useParams(); // Extract Vendor ID from URL
@@ -14,6 +16,11 @@ const VendorEdit = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
+    
+    const [showDeleteMsaModal, setShowDeleteMsaModal] = useState(false);
+    const [msaToDelete, setMsaToDelete] = useState(null);
+    const [reloadMsas, setReloadMsas] = useState(false);
+    
     useEffect(() => {
         // Fetch SOW data when component mounts
         const fetchSOW = async () => {
@@ -49,6 +56,72 @@ const VendorEdit = () => {
           setSuccess(null);
         }
       };
+
+
+  const msasColumns = React.useMemo(
+    () => [
+      {
+        Header: 'Title',
+        accessor: 'title',
+      },
+      {
+        Header: 'Start Date',
+        accessor: 'start_date',
+      },
+      {
+        Header: 'End Date',
+        accessor: 'end_date',
+      },
+      {
+        Header: 'Actions',
+        accessor: 'actions',
+        Cell: ({ row }) => {
+          return (
+            <div>
+              <a href={`/msas/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+                <i className="fas fa-edit"></i>
+              </a>
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => {
+                  setMsaToDelete(row.original.id);
+                  setShowDeleteMsaModal(true);
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const handleDeleteMsa = async () => {
+      try {
+        await api.msas.delete(msaToDelete);
+        setSuccess('MSA deleted successfully!');
+        setError(null);
+        setShowDeleteMsaModal(false);
+        setReloadMsas(true);
+      } catch (err) {
+        setSuccess(null);
+        setError(err.message);
+      }
+    }
+      
+  const fetchMsas = async () => {
+    try {
+      const data = await api.msas.list(id, 0, -1); // No pagination limit
+      return data;
+    } catch (err) {
+      console.error(err);
+      setError('Error fetching MSAs');
+      setSuccess(null);
+    }
+  }
 
   return (
     <div>
@@ -118,6 +191,29 @@ const VendorEdit = () => {
           <i className="fas fa-times"></i> Cancel
         </Button>
       </Form>
+
+      <hr />
+
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 className="h2">MSAs</h2>
+        <Button variant="primary" onClick={() => window.location.href = `/msas/create/${id}`}>
+          New MSA <i className="fas fa-plus" />
+        </Button>
+      </div>
+
+      <PagedTable columns={msasColumns}
+        fetchData={fetchMsas}
+        reload={reloadMsas}
+        showPagination={false}
+        />
+
+      <ConfirmModal
+        show={showDeleteMsaModal}
+        handleClose={() => setShowDeleteMsaModal(false)}
+        handleConfirm={handleDeleteMsa}
+        title="Delete MSA"
+        message="Are you sure you want to delete this MSA?"
+      />
     </div>
   );
 };

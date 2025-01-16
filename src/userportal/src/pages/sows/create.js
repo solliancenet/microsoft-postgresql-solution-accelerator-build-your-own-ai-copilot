@@ -19,7 +19,7 @@ const SOWCreate = () => {
   useEffect(() => {
     const fetchMsas = async () => {
       try {
-        const data = await api.msas.list(0, -1); // No pagination limit
+        const data = await api.msas.list(-1, 0, -1); // No pagination limit
         setMsas(data.data);
       } catch (err) {
         console.error(err);

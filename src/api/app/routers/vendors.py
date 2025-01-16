@@ -18,7 +18,12 @@ async def list_vendors(skip: int = 0, limit: int = 10, sortby: str = None, pool 
         orderby = 'id'
         if (sortby):
             orderby = sortby
-        rows = await conn.fetch('SELECT * FROM vendors ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
+        if limit == -1:
+            rows = await conn.fetch('SELECT * FROM vendors ORDER BY $1;', orderby)
+        else:
+            rows = await conn.fetch('SELECT * FROM vendors ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
         vendors = parse_obj_as(list[Vendor], [dict(row) for row in rows])
     return ListResponse[Vendor](data = vendors, total = len(vendors), skip = 0, limit = len(vendors))
 

@@ -64,7 +64,7 @@ const Msas = () => {
   );
 
   const fetchData = async (skip, limit, sortBy, search) => {
-    const response = await api.msas.list(skip, limit, sortBy, search);
+    const response = await api.msas.list(-1, skip, limit, sortBy, search);
     return response;
   };
 

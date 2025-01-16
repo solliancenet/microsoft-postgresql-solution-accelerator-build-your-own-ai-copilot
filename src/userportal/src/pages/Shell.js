@@ -88,21 +88,18 @@ const Shell = ({ isDarkTheme }) => {
                   </li>
                 </ul>
                 <hr />
-                <ul className="nav flex-column">
-                  <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
-                      <i className="fas fa-file-alt"></i> Documents
-                    </NavLink>
-                  </li>
-                </ul>
-                <hr />
                 <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                  Settings
+                  Tools
                 </h6>
                 <ul className="nav flex-column">
                   <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/prompts">
                       <i className="fas fa-cog"></i> Prompts
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
+                      <i className="fas fa-file-alt"></i> Documents
                     </NavLink>
                   </li>
                 </ul>

@@ -10,6 +10,7 @@ const MSACreate = () => {
   const [msaTitle, setMsaTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -33,7 +34,7 @@ const MSACreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.msas.create(msaVendorId, msaTitle, startDate, endDate);
+      var data = await api.msas.create(file, msaVendorId, msaTitle, startDate, endDate);
       setSuccess('MSA created successfully!');
       window.location.href = `/msas/${data.id}`;
       setError(null);
@@ -51,6 +52,14 @@ const MSACreate = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Document</Form.Label>
+          <Form.Control
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            required
+          />
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Vendor</Form.Label>
           <Form.Control
@@ -95,7 +104,6 @@ const MSACreate = () => {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                required
               />
             </Form.Group>
           </Col>

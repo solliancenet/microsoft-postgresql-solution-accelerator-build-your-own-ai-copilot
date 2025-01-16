@@ -212,10 +212,13 @@ module.exports = {
         get: async (msaId) => {
             return await RESTHelper.get(getUrl(`/msas/${msaId}`));
         },
-        create: async (vendor_id, title, start_date, end_date) => {
+        create: async (file, vendor_id, title, start_date, end_date) => {
+            if (!file) return;
+
             console.info('Creating MSA');
         
             const formData = new FormData();
+            formData.append('file', file);
             formData.append('vendor_id', vendor_id);
             formData.append('title', title);
             formData.append('start_date', start_date);
@@ -236,8 +239,9 @@ module.exports = {
                 throw error;
             }
         },
-        update: async(id, title, start_date, end_date) => {
+        update: async(vendor_id, id, title, start_date, end_date) => {
             return await RESTHelper.update(getUrl(`/msas/${id}`), {
+                vendor_id: vendor_id,
                 title: title,
                 start_date: start_date,
                 end_date: end_date,

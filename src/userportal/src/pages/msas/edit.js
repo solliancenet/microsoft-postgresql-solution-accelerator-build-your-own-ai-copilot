@@ -10,6 +10,7 @@ const MSAEdit = () => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [document, setDocument] = useState(null);
   const [metadata, setMetadata] = useState(null);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
@@ -49,13 +50,14 @@ const MSAEdit = () => {
     setTitle(data.title);
     setStartDate(data.start_date);
     setEndDate(data.end_date);
+    setDocument(data.document);
     setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.msas.update(id, title, startDate, endDate);
+      var data = await api.msas.update(msaVendorId, id, title, startDate, endDate);
       updateDisplay(data);
       setSuccess('MSA updated successfully!');
       setError(null);
@@ -80,7 +82,6 @@ const MSAEdit = () => {
             value={msaVendorId}
             onChange={(e) => setMsaVendorId(e.target.value)}
             required
-            disabled
           >
             <option value="">Select Vendor</option>
             {vendors.map((vendor) => (
@@ -118,11 +119,19 @@ const MSAEdit = () => {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                required
               />
             </Form.Group>
           </Col>
         </Row>
+        <Form.Group className="mb-3">
+          <Form.Label>Document</Form.Label>
+          <div className="d-flex">
+            <code>{document}</code>
+            <a href={api.documents.getUrl(document)} target="_blank" rel="noreferrer">
+              <i className="fas fa-download ms-3"></i>
+            </a>
+          </div>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Metadata</Form.Label>
           <Form.Control

@@ -68,7 +68,7 @@ async def create_sow(
 
     blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
 
-    # # Create SOW in the database
+    # Create SOW in the database
     async with pool.acquire() as conn:
         sow = await conn.fetchrow('''
             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, msa_id, msa_title)

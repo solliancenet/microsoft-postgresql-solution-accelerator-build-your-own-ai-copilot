@@ -86,6 +86,9 @@ const Shell = ({ isDarkTheme }) => {
                       <i className="fas fa-file-invoice"></i> Invoices
                     </NavLink>
                   </li>
+                </ul>
+                <hr />
+                <ul className="nav flex-column">
                   <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
                       <i className="fas fa-file-alt"></i> Documents

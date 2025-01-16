@@ -58,7 +58,10 @@ async def create_msa(
     vendor_id: int = Form(...),
     start_date: str = Form(...),
     end_date: str = Form(...),
-    pool = Depends(get_db_connection_pool)
+    file: UploadFile = File(...),
+    pool = Depends(get_db_connection_pool),
+    appConfig = Depends(get_app_config),
+    blob_service_client = Depends(get_blob_service_client)
     ):
     """Creates a new msa in the database."""
 
@@ -66,12 +69,23 @@ async def create_msa(
     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
     end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
 
+    # Upload file to Azure Blob Storage
+    container_name = appConfig.get_document_container_name()
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
+
+    content_settings = ContentSettings(
+        content_type=file.content_type,
+        content_disposition=f'attachment; filename="{file.filename}"'
+    )
+
+    blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
+
     # Create MSA in the database
     async with pool.acquire() as conn:
         row = await conn.fetchrow('''
-        INSERT INTO msas (title, start_date, end_date, vendor_id)
-        VALUES ($1, $2, $3, $4) RETURNING *;
-        ''', title, start_date_parsed, end_date_parsed, vendor_id)
+        INSERT INTO msas (title, start_date, end_date, vendor_id, document)
+        VALUES ($1, $2, $3, $4, $5) RETURNING *;
+        ''', title, start_date_parsed, end_date_parsed, vendor_id, file.filename)
 
         new_msa = parse_obj_as(Msa, dict(row))
     return new_msa
@@ -84,16 +98,17 @@ async def update_msa(msas_id: int, msa_update: MsaEdit, pool = Depends(get_db_co
     if msa is None:
         raise HTTPException(status_code=404, detail=f'A msa with an id of {msas_id} was not found.')
 
+    msa.vendor_id = msa_update.vendor_id
     msa.title = msa_update.title
     msa.start_date = msa_update.start_date
     msa.end_date = msa_update.end_date
 
     async with pool.acquire() as conn:
         row = await conn.fetchrow('''UPDATE msas
-        SET title = $1, start_date = $2, end_date = $3
-        WHERE id = $4
+        SET title = $1, start_date = $2, end_date = $3, vendor_id = $4
+        WHERE id = $5
         RETURNING *;''',
-        msa.title, msa.start_date, msa.end_date, msas_id)
+        msa.title, msa.start_date, msa.end_date, msa.vendor_id, msas_id)
         updated_msa = parse_obj_as(Msa, dict(row))
     return updated_msa
 

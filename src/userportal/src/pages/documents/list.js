@@ -124,7 +124,7 @@ const DocumentList = () => {
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Documents</h1>
-        <Button variant="primary" onClick={() => setShowModal(true)}>Upload</Button>
+        {/* <Button variant="primary" onClick={() => setShowModal(true)}>Upload</Button> */}
       </div>
       <Table striped bordered hover {...getTableProps()}>
         <thead>

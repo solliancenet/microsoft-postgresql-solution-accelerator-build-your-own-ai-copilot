@@ -6,27 +6,26 @@ from contextlib import asynccontextmanager
 embedding_client = None
 # Create an Azure OpenAI chat client
 chat_client = None
-# Create a global async Azure Blob Service client
-blob_service_client = None
 # Create a global async Microsoft Entra ID RBAC credential
 credential = None
 # Create a global async PostgreSQL connection pool
 db = None
 db_connection_pool = None
-
-# Create a global AppConfig
+# Create a global async AppConfig
 appConfig = None
+# Create a global async StorageService
+storage_service = None
 
 @asynccontextmanager
 async def lifespan(app):
     """Async context manager for the FastAPI application lifespan."""
     global appConfig
-    global blob_service_client
     global chat_client
     global credential
     global db
     global db_connection_pool
     global embedding_client
+    global storage_service
     
     # Create an async Microsoft Entra ID RBAC credential
     credential = DefaultAzureCredential()
@@ -40,8 +39,7 @@ async def lifespan(app):
     embedding_client = await aoai_service.get_embedding_client()
 
     # Create an async Azure Blob Service client
-    storage_service = StorageService(credential, await appConfig.get_storage_account())
-    blob_service_client = await storage_service.get_blob_service_client()
+    storage_service = StorageService(credential, await appConfig.get_storage_account(), appConfig.get_document_container_name())
 
     # Create a connection to the Azure Database for PostgreSQL server
     db = DatabaseService(credential, await appConfig.get_postgresql_server_name(), await appConfig.get_postgresql_database_name())
@@ -49,8 +47,6 @@ async def lifespan(app):
     
     yield
 
-    # Close the async Azure Blob Service client
-    await blob_service_client.close()
     # Close the async PostgreSQL connection pool
     await db_connection_pool.close()
     # Close the async Microsoft Entra ID RBAC credential
@@ -69,8 +65,8 @@ async def get_chat_client():
 async def get_embedding_client():
     return embedding_client
 
-async def get_blob_service_client():
-    return blob_service_client
+async def get_storage_service():
+    return storage_service
 
 async def get_db_connection_pool():
     global db

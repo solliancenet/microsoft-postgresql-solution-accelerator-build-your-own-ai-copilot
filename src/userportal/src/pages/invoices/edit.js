@@ -45,6 +45,7 @@ const InvoiceEdit = () => {
     setAmount(data.amount);
     setInvoiceDate(data.invoice_date);
     setPaymentStatus(data.payment_status);
+    setDocument(data.document);
     setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
   }
 
@@ -89,37 +90,31 @@ const InvoiceEdit = () => {
             required
           />
         </Form.Group>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Invoice Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={invoiceDate}
-                onChange={(e) => setInvoiceDate(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Payment Status</Form.Label>
-              <Form.Control
-                as="select"
-                value={paymentStatus}
-                onChange={(e) => setPaymentStatus(e.target.value)}
-                required
-                >
-                  <option value="">Select Status</option>
-                  {statuses.map((status) => (
-                    <option key={status.name} value={status.name}>
-                      {status.name}
-                    </option>
-                  ))}
-                </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+        <Form.Group className="mb-3">
+          <Form.Label>Invoice Date</Form.Label>
+          <Form.Control
+            type="date"
+            value={invoiceDate}
+            onChange={(e) => setInvoiceDate(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Payment Status</Form.Label>
+          <Form.Control
+            as="select"
+            value={paymentStatus}
+            onChange={(e) => setPaymentStatus(e.target.value)}
+            required
+            >
+              <option value="">Select Status</option>
+              {statuses.map((status) => (
+                <option key={status.name} value={status.name}>
+                  {status.name}
+                </option>
+              ))}
+            </Form.Control>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Document</Form.Label>
           <div className="d-flex">

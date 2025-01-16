@@ -75,10 +75,10 @@ module.exports = {
     },
     documents: {
         list: async () => {
-            return await RESTHelper.get(getUrl(`/documents/documents`));
+            return await RESTHelper.get(getUrl(`/documents`));
         },
         getUrl: (blobName) => {
-            return getUrl(`/documents/documents/${blobName}`);
+            return getUrl(`/documents/${blobName}`);
         },
         upload: async (file) => {
             if (!file) return;
@@ -89,7 +89,7 @@ module.exports = {
             formData.append('file', file);
         
             try {
-                const response = await fetch(getUrl(`/documents/documents`), {
+                const response = await fetch(getUrl(`/documents`), {
                     method: 'POST',
                     body: formData,
                 });
@@ -104,7 +104,7 @@ module.exports = {
         },
         delete: async (blobName) => {
             try {
-                const response = await fetch(getUrl(`/documents/documents/${blobName}`), {
+                const response = await fetch(getUrl(`/documents/${blobName}`), {
                     method: 'DELETE',
                 });
                 if (!response.ok) {
@@ -263,8 +263,8 @@ module.exports = {
         }
     },
     sows: {
-        list: async (skip = 0, limit = 10, sortBy = '') => {
-            return await RESTHelper.get(getUrl(`/sows?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
+        list: async (msa_id = -1, skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/sows?msa_id=${msa_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (sowId) => {
             return await RESTHelper.get(getUrl(`/sows/${sowId}`));

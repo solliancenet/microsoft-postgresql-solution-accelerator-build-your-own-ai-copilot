@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
+import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
 
 const SOWCreate = () => {
+  const { msaId } = useParams();
   const [sowNumber, setSowNumber] = useState('');
-  const [msaId, setMsaId] = useState('');
+  const [sowMsaId, setSowMsaId] = useState(msaId);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
@@ -34,7 +36,7 @@ const SOWCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.sows.create(file, sowNumber, msaId, startDate, endDate, parseFloat(budget), metadata);
+      var data = await api.sows.create(file, sowNumber, sowMsaId, startDate, endDate, parseFloat(budget), metadata);
       setSuccess('SOW created successfully!');
       window.location.href = `/sows/${data.id}`;
       setError(null);
@@ -60,21 +62,12 @@ const SOWCreate = () => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>SOW Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={sowNumber}
-            onChange={(e) => setSowNumber(e.target.value)}
-            required
-          />
-        </Form.Group>
         <Form.Group>
           <Form.Label>MSA</Form.Label>
           <Form.Control
             as="select"
-            value={msaId}
-            onChange={(e) => setMsaId(e.target.value)}
+            value={sowMsaId}
+            onChange={(e) => setSowMsaId(e.target.value)}
             required
           >
             <option value="">Select MSA</option>
@@ -84,6 +77,15 @@ const SOWCreate = () => {
               </option>
             ))}
           </Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>SOW Number</Form.Label>
+          <Form.Control
+            type="text"
+            value={sowNumber}
+            onChange={(e) => setSowNumber(e.target.value)}
+            required
+          />
         </Form.Group>
         <Row className="mb-3">
           <Col md={6}>

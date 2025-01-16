@@ -1,47 +1,47 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Response
-from app.lifespan_manager import get_blob_service_client
+from app.lifespan_manager import get_storage_service, get_app_config
 from azure.core.exceptions import ResourceNotFoundError
 import os
 
 router = APIRouter(
     prefix = "/documents",
     tags = ["Documents"],
-    dependencies = [Depends(get_blob_service_client)],
+    dependencies = [Depends(get_storage_service)],
 )
 
-@router.get("/{container_name}", response_model = list[dict])
-async def get(container_name: str, blob_service_client = Depends(get_blob_service_client)):
+@router.get("/", response_model = list[dict])
+async def get(storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
     """
     Retrieves a list of all documents in the specified blob container.
     Blobs are returned in an alphabetically sorted list by filename.
     """
     try:
-        container_client = blob_service_client.get_container_client(container_name)
+        container_client = await storage_service.get_container_client(app_config.get_document_container_name())
         blobs = []
         async for blob in container_client.list_blobs():
             blob_properties = await container_client.get_blob_client(blob).get_blob_properties()
             blobs.append({
                 "blob_name": blob.name,
-                "filename": os.path.basename(blob.name),
                 "content_type": blob_properties.content_settings.content_type,
                 "created": blob_properties.creation_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "size": blob_properties.size
             })
         # Sort documents by filename
-        blobs.sort(key=lambda x: (x["filename"], x["created"]))
+        blobs.sort(key=lambda x: (x["blob_name"], x["created"]))
         return blobs
     except ResourceNotFoundError as e:
         raise HTTPException(status_code=404, detail=e.reason)
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail=str(e))
     
-@router.get("/{container_name}/{blob_name}")
-async def get_document(container_name: str, blob_name: str, blob_service_client = Depends(get_blob_service_client)):
+@router.get("/{blob_name:path}")
+async def get_document(blob_name: str, storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
     """
     Reads the specified document from the container.
     """
     try:
-        blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+        blob_client = await storage_service.get_blob_client(container=app_config.get_document_container_name(), blob=blob_name)
         blob_properties = await blob_client.get_blob_properties()
         download_stream = await blob_client.download_blob()
         content = await download_stream.readall()
@@ -55,13 +55,13 @@ async def get_document(container_name: str, blob_name: str, blob_service_client 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/{container_name}")
-async def upload_document(container_name: str, file: UploadFile = File(...), blob_service_client = Depends(get_blob_service_client)):
+@router.post("/")
+async def upload_document(file: UploadFile = File(...), storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
     """
     Upload a document to the specified container.
     """
     try:
-        container_client = blob_service_client.get_container_client(container_name)
+        container_client = storage_service.get_container_client(app_config.get_document_container_name())
 
         # Check if the container exists, if not create it
         if not await container_client.exists():
@@ -74,13 +74,13 @@ async def upload_document(container_name: str, file: UploadFile = File(...), blo
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.delete("/{container_name}/{blob_name}")
-async def delete_document(container_name: str, blob_name: str, blob_service_client = Depends(get_blob_service_client)):
+@router.delete("/{blob_name:path}")
+async def delete_document(blob_name: str, storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
     """
     Delete a document from the container.
     """
     try:
-        blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+        blob_client = await storage_service.get_blob_client(container=app_config.get_document_container_name(), blob=blob_name)
         await blob_client.delete_blob()
         return {"message": f"Document {blob_name} deleted successfully."}
     except ResourceNotFoundError as e:

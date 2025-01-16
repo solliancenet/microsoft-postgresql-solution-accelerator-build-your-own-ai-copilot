@@ -1,4 +1,4 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client
+from app.lifespan_manager import get_db_connection_pool, get_storage_service
 from fastapi import APIRouter, Depends, HTTPException, Request
 from typing import List
 from pydantic import parse_obj_as
@@ -10,7 +10,7 @@ router = APIRouter(
     tags = ["Webhooks"],
     dependencies = [
         Depends(get_db_connection_pool),
-        Depends(get_blob_service_client)
+        Depends(get_storage_service)
     ],
     responses = {404: {"description": "Not found"}}
 )
@@ -19,7 +19,7 @@ router = APIRouter(
 async def storage_blob_webhook(
     request: Request,
     pool = Depends(get_db_connection_pool),
-    blob_service_client = Depends(get_blob_service_client)
+    storage_service = Depends(get_storage_service)
 ):
     """Handles incoming webhooks from Azure Blob Storage."""
     # Validate Event Grid Subscription confirmation

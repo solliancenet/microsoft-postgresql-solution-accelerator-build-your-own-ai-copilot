@@ -87,7 +87,7 @@ const SOWEdit = () => {
       setSuccess(null);
       setError(err.message);
     }
-  }
+  };
   
   const milestoneColumns = React.useMemo(
     () => [
@@ -148,15 +148,6 @@ const SOWEdit = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>SOW Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={sowNumber}
-            onChange={(e) => setSowNumber(e.target.value)}
-            required
-          />
-        </Form.Group>
         <Form.Group>
           <Form.Label>MSA</Form.Label>
           <Form.Control
@@ -172,6 +163,15 @@ const SOWEdit = () => {
               </option>
             ))}
           </Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>SOW Number</Form.Label>
+          <Form.Control
+            type="text"
+            value={sowNumber}
+            onChange={(e) => setSowNumber(e.target.value)}
+            required
+          />
         </Form.Group>
         <Row className="mb-3">
           <Col md={6}>

@@ -1,8 +1,8 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
+from app.lifespan_manager import get_db_connection_pool, get_storage_service
 from app.models import Invoice, InvoiceEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
-from azure.storage.blob import ContentSettings
 from pydantic import parse_obj_as
+from datetime import datetime
 
 # Initialize the router
 router = APIRouter(
@@ -41,31 +41,23 @@ async def create_invoice(
     payment_status: str = Form(...),
     file: UploadFile = File(...),
     pool = Depends(get_db_connection_pool),
-    blob_service_client = Depends(get_blob_service_client),
-    appConfig = Depends(get_app_config)
+    storage_service = Depends(get_storage_service)
     ):
     """Creates a new invoice in the database."""
 
     # Parse date
     invoice_date_parsed = datetime.strptime(invoice_date, '%Y-%m-%d').date()
 
+
     # Upload file to Azure Blob Storage
-    container_name = appConfig.get_document_container_name()
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
-
-    content_settings = ContentSettings(
-        content_type=file.content_type,
-        content_disposition=f'attachment; filename="{file.filename}"'
-    )
-
-    blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
-
+    documentName = await storage_service.save_invoice_document(file)
+    
     # Create invoice in the database
     async with pool as conn:
         row = await conn.fetchrow('''
         INSERT INTO invoices (number, amount, invoice_date, payment_status, document)
         VALUES ($1, $2, $3, $4, $5) RETURNING *;
-        ''', number, amount, invoice_date_parsed, payment_status, file.filename)
+        ''', number, amount, invoice_date_parsed, payment_status, documentName)
         
         new_invoice = parse_obj_as(Invoice, dict(row))
     return new_invoice
@@ -95,13 +87,17 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
     return updated_invoice
 
 @router.delete("/{invoice_id}", response_model=Invoice)
-async def delete_invoice(invoice_id: int, pool = Depends(get_db_connection_pool)):
+async def delete_invoice(invoice_id: int, pool = Depends(get_db_connection_pool), storage_service = Depends(get_storage_service)):
     """Deletes an invoice from the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM invoices WHERE id = $1;', id)
+        row = await conn.fetchrow('SELECT * FROM invoices WHERE id = $1;', invoice_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A invoice with an id of {id} was not found.')
         invoice = parse_obj_as(Invoice, dict(row))
 
-        await conn.execute('DELETE FROM invoices WHERE id = $1;', id)
+        # Delete file from Azure Blob Storage
+        await storage_service.delete_document(invoice.document)
+
+        # Delete invoice from the database
+        await conn.execute('DELETE FROM invoices WHERE id = $1;', invoice_id)
     return invoice

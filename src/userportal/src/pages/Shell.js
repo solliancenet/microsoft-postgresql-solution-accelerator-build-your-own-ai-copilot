@@ -160,6 +160,7 @@ const Shell = ({ isDarkTheme }) => {
               
               <Route path="/sows" element={<SOWList />} />
               <Route path="/sows/create" element={<SOWCreate />} />
+              <Route path="/sows/create/:msaId" element={<SOWCreate />} />
               <Route path="/sows/:id" element={<SOWEdit />} />
 
               <Route path="/vendors" element={<VendorList />} />

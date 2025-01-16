@@ -1,7 +1,6 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
+from app.lifespan_manager import get_db_connection_pool, get_storage_service
 from app.models import Msa, MsaEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
-from azure.storage.blob import ContentSettings
 from pydantic import parse_obj_as
 from datetime import datetime
 
@@ -60,32 +59,32 @@ async def create_msa(
     end_date: str = Form(...),
     file: UploadFile = File(...),
     pool = Depends(get_db_connection_pool),
-    appConfig = Depends(get_app_config),
-    blob_service_client = Depends(get_blob_service_client)
+    storage_service = Depends(get_storage_service)
     ):
     """Creates a new msa in the database."""
 
     # Parse dates
     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
-    end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
+    if  end_date == None or end_date == '':
+        end_date_parsed = None
+    else:
+        end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
+
+    # check that Vendor exists
+    async with pool.acquire() as conn:
+        vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
+        if vendor_id is None:
+            raise HTTPException(status_code=404, detail=f'A Vendor with an id of {vendor_id} was not found.')
 
     # Upload file to Azure Blob Storage
-    container_name = appConfig.get_document_container_name()
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
-
-    content_settings = ContentSettings(
-        content_type=file.content_type,
-        content_disposition=f'attachment; filename="{file.filename}"'
-    )
-
-    blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
-
+    documentName = await storage_service.save_msa_document(vendor_id, file)
+    
     # Create MSA in the database
     async with pool.acquire() as conn:
         row = await conn.fetchrow('''
         INSERT INTO msas (title, start_date, end_date, vendor_id, document)
         VALUES ($1, $2, $3, $4, $5) RETURNING *;
-        ''', title, start_date_parsed, end_date_parsed, vendor_id, file.filename)
+        ''', title, start_date_parsed, end_date_parsed, vendor_id, documentName)
 
         new_msa = parse_obj_as(Msa, dict(row))
     return new_msa
@@ -113,13 +112,17 @@ async def update_msa(msas_id: int, msa_update: MsaEdit, pool = Depends(get_db_co
     return updated_msa
 
 @router.delete("/{msas_id}")
-async def delete_msas(msas_id: int, pool = Depends(get_db_connection_pool)):
+async def delete_msas(msas_id: int, pool = Depends(get_db_connection_pool), storage_service = Depends(get_storage_service)):
     """Deletes a msa from the database."""
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('SELECT * FROM msas WHERE id = $1;', deliverable_id)
+        row = await conn.fetchrow('SELECT * FROM msas WHERE id = $1;', msas_id)
         if row is None:
-            raise HTTPException(status_code=404, detail=f'A msa with an id of {deliverable_id} was not found.')
+            raise HTTPException(status_code=404, detail=f'A msa with an id of {msas_id} was not found.')
         msa = parse_obj_as(Msa, dict(row))
 
-        await conn.execute('DELETE FROM msas WHERE id = $1;', deliverable_id)
+        # Delete the document from Azure Blob Storage
+        await storage_service.delete_document(msa.document)
+
+        # Delete the document from Azure Blob Storage   
+        await conn.execute('DELETE FROM msas WHERE id = $1;', msas_id)
     return msa

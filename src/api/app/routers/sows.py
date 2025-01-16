@@ -1,7 +1,6 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
+from app.lifespan_manager import get_db_connection_pool, get_storage_service
 from app.models import Sow, SowEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
-from azure.storage.blob import ContentSettings
 from datetime import datetime
 from pydantic import parse_obj_as
 
@@ -15,16 +14,30 @@ router = APIRouter(
 
 
 @router.get("/", response_model=ListResponse[Sow])
-async def list_sows(skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool), blob_service_client = Depends(get_blob_service_client)):
+async def list_sows(msa_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of SOWs from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'
         if (sortby):
             orderby = sortby
-        rows = await conn.fetch('SELECT * FROM sows ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+        
+        if (limit < 0):
+            if(msa_id > 0):
+                rows = await conn.fetch('SELECT * FROM sows WHERE msa_id = $1 ORDER BY $2;', msa_id, orderby)
+            else:
+                rows = await conn.fetch('SELECT * FROM sows ORDER BY $1;', orderby)
+        else:
+            if(msa_id > 0):
+                rows = await conn.fetch('SELECT * FROM sows WHERE msa_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', msa_id, orderby, limit, skip)
+            else:
+                rows = await conn.fetch('SELECT * FROM sows ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
         sows = parse_obj_as(list[Sow], [dict(row) for row in rows])
 
-        total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
+        if (msa_id > 0):
+            total = await conn.fetchval('SELECT COUNT(*) FROM sows WHERE msa_id = $1;', msa_id)
+        else:
+            total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
 
     return ListResponse[Sow](data=sows, total = total, skip = skip, limit = limit)
 
@@ -47,8 +60,7 @@ async def create_sow(
     budget: float = Form(...),
     file: UploadFile = File(...),
     pool = Depends(get_db_connection_pool),
-    appConfig = Depends(get_app_config),
-    blob_service_client = Depends(get_blob_service_client)
+    storage_service = Depends(get_storage_service)
 ):
     # Parse dates
     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
@@ -57,24 +69,20 @@ async def create_sow(
     # Parse budget
     budget_parsed = float(budget)
 
+    # Get vendor_id from msa_id
+    async with pool.acquire() as conn:
+        vendor_id = await conn.fetchval('SELECT vendor_id FROM msas WHERE id = $1;', msa_id)
+
     # Upload file to Azure Blob Storage
-    container_name = appConfig.get_document_container_name()
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
-
-    content_settings = ContentSettings(
-        content_type=file.content_type,
-        content_disposition=f'attachment; filename="{file.filename}"'
-    )
-
-    blob_client.upload_blob(file.file, overwrite=True, content_settings=content_settings)
+    documentName = await storage_service.save_sow_document(vendor_id, file)
 
     # Create SOW in the database
     async with pool.acquire() as conn:
         sow = await conn.fetchrow('''
-            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, msa_id, msa_title)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, msa_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;
-        ''', number, start_date_parsed, end_date_parsed, budget_parsed, file.filename, '{}', msa_id, 'N/A')
+        ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', msa_id)
         
         sow = parse_obj_as(Sow, dict(sow))
     return sow
@@ -107,7 +115,7 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
     return updated_sow
 
 @router.delete("/{id}", response_model=Sow)
-async def delete_sow(id: int, pool = Depends(get_db_connection_pool)):
+async def delete_sow(id: int, pool = Depends(get_db_connection_pool), storage_service = Depends(get_storage_service)):
     """Deletes a SOW from the database."""   
     async with pool.acquire() as conn:
         row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', id)
@@ -115,5 +123,9 @@ async def delete_sow(id: int, pool = Depends(get_db_connection_pool)):
             raise HTTPException(status_code=404, detail=f'A sow with an id of {id} was not found.')
         sow = parse_obj_as(Sow, dict(row))
 
+        # Delete the document from Azure Blob Storage
+        await storage_service.delete_document(sow.document)
+
+        # Delete the SOW
         await conn.execute('DELETE FROM sows WHERE id = $1;', id)
     return sow

@@ -69,8 +69,8 @@ const DocumentList = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Filename',
-        accessor: 'filename',
+        Header: 'Storage Blob Name',
+        accessor: 'blob_name',
       },
       {
         Header: 'Content Type',

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
+import ConfirmModal from '../../components/ConfirmModal';
+import PagedTable from '../../components/PagedTable';
 
 const MSAEdit = () => {
   const { id } = useParams(); // Extract MSA ID from URL
@@ -17,6 +18,10 @@ const MSAEdit = () => {
 
   const [vendors, setVendors] = useState([]);
   
+  const [showDeleteSowModal, setShowDeleteSowModal] = useState(false);
+  const [sowToDelete, setSowToDelete] = useState(null);
+  const [reloadSows, setReloadSows] = useState(false);
+
   useEffect(() => {
     const fetchVendors = async () => {
       try {
@@ -67,6 +72,77 @@ const MSAEdit = () => {
       setSuccess(null);
     }
   };
+
+  const handleDeleteSow = async () => {
+      try {
+        await api.sows.delete(sowToDelete);
+        setSuccess('SOW deleted successfully!');
+        setError(null);
+        setShowDeleteSowModal(false);
+        setReloadSows(true);
+      } catch (err) {
+        setSuccess(null);
+        setError(err.message);
+      }
+    };
+
+  
+    
+    const sowColumns = React.useMemo(
+      () => [
+        {
+          Header: 'Number',
+          accessor: 'number',
+        },
+        {
+          Header: 'Start Date',
+          accessor: 'start_date',
+        },
+        {
+          Header: 'End Date',
+          accessor: 'end_date',
+        },
+        {
+          Header: 'Budget',
+          accessor: 'budget',
+        },
+        {
+          Header: 'Actions',
+          accessor: 'actions',
+          Cell: ({ row }) => {
+            return (
+              <div>
+                <a href={`/sows/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+                  <i className="fas fa-edit"></i>
+                </a>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => {
+                    setSowToDelete(row.original.id);
+                    setShowDeleteSowModal(true);
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            );
+          },
+        },
+      ],
+      []
+    );
+    
+  const fetchSows = async () => {
+    try {
+      const data = await api.sows.list(id, 0, -1); // No pagination limit
+      return data;
+    } catch (err) {
+      console.error(err);
+      setError('Error fetching SOWs');
+      setSuccess(null);
+    }
+  }
 
   return (
     <div>
@@ -152,6 +228,29 @@ const MSAEdit = () => {
           Go to Vendor
         </a>
       </Form>
+
+      <hr />
+
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 className="h2">SOWs</h2>
+        <Button variant="primary" onClick={() => window.location.href = `/sows/create/${id}`}>
+          New Sow <i className="fas fa-plus" />
+        </Button>
+      </div>
+
+      <PagedTable columns={sowColumns}
+        fetchData={fetchSows}
+        reload={reloadSows}
+        showPagination={false}
+        />
+
+      <ConfirmModal
+        show={showDeleteSowModal}
+        handleClose={() => setShowDeleteSowModal(false)}
+        handleConfirm={handleDeleteSow}
+        title="Delete SOW"
+        message="Are you sure you want to delete this SOW?"
+      />
     </div>
   );
 };

@@ -78,7 +78,7 @@ const SOWList = () => {
   );
 
   const fetchData = async (skip, limit, sortBy, search) => {
-    const response = await api.sows.list(skip, limit, sortBy, search);
+    const response = await api.sows.list(-1, skip, limit, sortBy, search);
     return response;
   };
 

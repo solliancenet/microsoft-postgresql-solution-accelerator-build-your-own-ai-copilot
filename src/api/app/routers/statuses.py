@@ -1,4 +1,4 @@
-from app.lifespan_manager import get_db_connection_pool, get_blob_service_client, get_app_config
+from app.lifespan_manager import get_db_connection_pool
 from app.models import Status
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from azure.storage.blob import ContentSettings

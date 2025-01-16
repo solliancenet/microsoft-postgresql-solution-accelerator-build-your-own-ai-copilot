@@ -31,8 +31,8 @@ const InvoiceCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.invoice.create(file, invoiceNumber, amount, invoiceDate, paymentStatus);
-      setSuccess('MSA created successfully!');
+      var data = await api.invoices.create(file, invoiceNumber, amount, invoiceDate, paymentStatus);
+      setSuccess('Invoice created successfully!');
       window.location.href = `/invoices/${data.id}`;
       setError(null);
     } catch (err) {
@@ -66,39 +66,42 @@ const InvoiceCreate = () => {
             required
           />
         </Form.Group>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Amount</Form.Label>
-              <NumericFormat
-                  className="form-control"
-                  value={amount}
-                  onValueChange={(values) => setAmount(values.floatValue)}
-                  thousandSeparator={true}
-                  prefix={'$'}
-                  required
-                />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Payment Status</Form.Label>
-              <Form.Control
-                as="select"
-                value={paymentStatus}
-                onChange={(e) => setPaymentStatus(e.target.value)}
-                required
-                >
-                  <option value="">Select Status</option>
-                  {statuses.map((status) => (
-                    <option key={status.name} value={status.name}>
-                      {status.name}
-                    </option>
-                  ))}
-                </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+        <Form.Group className="mb-3">
+          <Form.Label>Amount</Form.Label>
+          <NumericFormat
+              className="form-control"
+              value={amount}
+              onValueChange={(values) => setAmount(values.floatValue)}
+              thousandSeparator={true}
+              prefix={'$'}
+              required
+            />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Invoice Date</Form.Label>
+          <Form.Control
+            type="date"
+            value={invoiceDate}
+            onChange={(e) => setInvoiceDate(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Payment Status</Form.Label>
+          <Form.Control
+            as="select"
+            value={paymentStatus}
+            onChange={(e) => setPaymentStatus(e.target.value)}
+            required
+            >
+              <option value="">Select Status</option>
+              {statuses.map((status) => (
+                <option key={status.name} value={status.name}>
+                  {status.name}
+                </option>
+              ))}
+            </Form.Control>
+        </Form.Group>
         <Button type="submit" variant="primary">
           <i className="fas fa-plus"></i> Create
         </Button>

@@ -1,8 +1,9 @@
 const RESTHelper = require('./RESTHelper');
-const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
+
+const APIUrl = process.env.REACT_APP_SERVICE_API_ENDPOINT_URL || 'http://localhost:8000';
 
 const getUrl = (url) => {
-    return `${apiConfig.APIUrl}${url}`;
+    return `${APIUrl}${url}`;
 };
 
 /* *************** */

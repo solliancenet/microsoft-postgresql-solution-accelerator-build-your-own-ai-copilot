@@ -10,7 +10,6 @@ chat_client = None
 credential = None
 # Create a global async PostgreSQL connection pool
 db = None
-db_connection_pool = None
 # Create a global async AppConfig
 appConfig = None
 # Create a global async StorageService
@@ -45,8 +44,6 @@ async def lifespan(app):
     
     yield
 
-    # Close the async PostgreSQL connection pool
-    await db_connection_pool.close()
     # Close the async Microsoft Entra ID RBAC credential
     await credential.close()
 

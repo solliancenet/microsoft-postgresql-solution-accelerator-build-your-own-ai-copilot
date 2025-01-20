@@ -46,8 +46,17 @@ const VendorEdit = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          var data = await api.vendors.update(id, name, address, contactName, contactEmail, contactPhone, contactType);
-          updateDisplay(data);
+          var data = {
+            name: name,
+            address: address,
+            contact_name: contactName,
+            contact_email: contactEmail,
+            contact_phone: contactPhone,
+            type: contactType
+          };
+          var updatedItem = await api.vendors.update(id, data);
+
+          updateDisplay(updatedItem);
           setSuccess('Vendor updated successfully!');
           setError(null);
         } catch (err) {

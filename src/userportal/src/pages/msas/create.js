@@ -34,9 +34,16 @@ const MSACreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.msas.create(file, msaVendorId, msaTitle, startDate, endDate);
+      var data = {
+        vendor_id: msaVendorId,
+        title: msaTitle,
+        start_date: startDate,
+        end_date: endDate
+      };
+      var newItem = await api.msas.create(file, data);
+
       setSuccess('MSA created successfully!');
-      window.location.href = `/msas/${data.id}`;
+      window.location.href = `/msas/${newItem.id}`;
       setError(null);
     } catch (err) {
       console.error(err);

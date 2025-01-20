@@ -52,8 +52,15 @@ const InvoiceEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.invoices.update(id, invoiceNumber, amount, invoiceDate, paymentStatus);
-      updateDisplay(data);
+      var data = {
+        number: invoiceNumber,
+        amount: amount,
+        invoice_date: invoiceDate,
+        payment_status: paymentStatus
+      };
+      var updatedItem = await api.invoices.update(id, data);
+      
+      updateDisplay(updatedItem);
       setSuccess('Invoice updated successfully!');
       setError(null);
     } catch (err) {

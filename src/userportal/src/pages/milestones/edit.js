@@ -56,8 +56,13 @@ const MilestoneEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            var data = await api.milestones.update(id, name, status, dueDate);
-            updateDisplay(data);
+            var data = {
+                name: name,
+                status: status,
+                due_date: dueDate
+            };
+            var updatedItem = await api.milestones.update(id, data);
+            updateDisplay(updatedItem);
             setSuccess('Milestone updated successfully!');
             setError(null);
         } catch (err) {

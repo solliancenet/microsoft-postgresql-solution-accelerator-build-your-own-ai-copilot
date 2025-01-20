@@ -29,9 +29,16 @@ const MilestoneCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.milestones.create(sowId, name, status, dueDate);
+      var data = {
+        sow_id: sowId,
+        name: name,
+        status: status,
+        due_date: dueDate
+      };
+      var newItem = await api.milestones.create(data);
+
       setSuccess('Milestone created successfully!');
-      window.location.href = `/milestones/${data.id}`;
+      window.location.href = `/milestones/${newItem.id}`;
       setError(null);
     } catch (err) {
       console.error(err);

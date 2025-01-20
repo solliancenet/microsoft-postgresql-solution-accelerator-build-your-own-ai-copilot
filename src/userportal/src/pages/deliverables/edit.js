@@ -51,8 +51,14 @@ const DeliverableEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            var data = await api.deliverables.update(id, name, description, amount, status);
-            updateDisplay(data);
+            var data = {
+                name: name,
+                description: description,
+                amount: amount,
+                status: status
+            };
+            var updatedItem = await api.deliverables.update(id, data);
+            updateDisplay(updatedItem);
             setSuccess('Deliverable updated successfully!');
             setError(null);
         } catch (err) {

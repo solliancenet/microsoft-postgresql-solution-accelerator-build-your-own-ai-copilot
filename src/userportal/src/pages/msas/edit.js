@@ -62,8 +62,15 @@ const MSAEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.msas.update(msaVendorId, id, title, startDate, endDate);
-      updateDisplay(data);
+      var data = {
+        vendor_id: msaVendorId,
+        title: title,
+        start_date: startDate,
+        end_date: endDate
+      };
+      var updatedItem = await api.msas.update(id, data);
+
+      updateDisplay(updatedItem);
       setSuccess('MSA updated successfully!');
       setError(null);
     } catch (err) {

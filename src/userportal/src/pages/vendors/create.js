@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
-import { NumericFormat } from 'react-number-format';
+import { Form, Button } from 'react-bootstrap';
 import api from '../../api/Api';
 
 const VendorCreate = () => {

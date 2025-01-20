@@ -1,7 +1,5 @@
-const { data } = require('react-router-dom');
-const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
-
 const RESTHelper = require('./RESTHelper');
+const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
 
 const getUrl = (url) => {
     return `${apiConfig.APIUrl}${url}`;

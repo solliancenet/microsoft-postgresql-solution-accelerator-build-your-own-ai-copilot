@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
 
 const MSACreate = () => {

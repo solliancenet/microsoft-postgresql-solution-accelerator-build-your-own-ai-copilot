@@ -33,43 +33,32 @@ BEGIN
     END IF;
 END $$;
 
-
-CREATE TABLE IF NOT EXISTS msas (
-    id BIGSERIAL PRIMARY KEY,
-    title text NOT NULL,
-    vendor_id BIGINT NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE,
-    document text NOT NULL,
-    metadata JSONB, -- Stores special clauses, terms, etc.
-    embeddings vector(3072), -- embeddings for the vendor
-    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE CASCADE
-);
-
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
     number text NOT NULL,
-    msa_id BIGINT NOT NULL,
+    vendor_id BIGINT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     budget DECIMAL(18,2) NOT NULL,
     document text NOT NULL,
-    FOREIGN KEY (msa_id) REFERENCES msas (id) ON DELETE CASCADE,
-    metadata JSONB, -- Flexible for deliverables, milestones, and notes
-    embeddings vector(3072) -- embeddings for the vendor
+    metadata JSONB, 
+    embeddings vector(3072), -- embeddings for sows
+    FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
 
 -- Invoices table; tax details, discounts, or additional metadata
 CREATE TABLE IF NOT EXISTS invoices (
     id BIGSERIAL PRIMARY KEY,
     number text NOT NULL,
+    vendor_id BIGINT NOT NULL,
     amount DECIMAL(18,2) NOT NULL,
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
     document text NOT NULL,
     metadata JSONB, -- Tax info, discounts, or itemized breakdown
-    embeddings vector(3072) -- embeddings for the vendor
+    embeddings vector(3072), -- embeddings for invoices
+    FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
 
 -- Milestones table
@@ -84,7 +73,7 @@ CREATE TABLE IF NOT EXISTS milestones (
 
 -- Deliverables table
 CREATE TABLE IF NOT EXISTS deliverables (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     milestone_id BIGINT NOT NULL,
     name VARCHAR(100) NOT NULL,
     description TEXT,

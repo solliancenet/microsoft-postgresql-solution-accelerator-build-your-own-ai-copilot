@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
@@ -51,8 +51,14 @@ const DeliverableEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            var data = await api.deliverables.update(id, name, description, amount, status);
-            updateDisplay(data);
+            var data = {
+                name: name,
+                description: description,
+                amount: amount,
+                status: status
+            };
+            var updatedItem = await api.deliverables.update(id, data);
+            updateDisplay(updatedItem);
             setSuccess('Deliverable updated successfully!');
             setError(null);
         } catch (err) {

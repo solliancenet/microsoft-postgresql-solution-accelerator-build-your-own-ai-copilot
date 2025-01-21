@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
-import { NumericFormat } from 'react-number-format';
+import { Form, Button } from 'react-bootstrap';
 import api from '../../api/Api';
 
 const VendorCreate = () => {
@@ -15,15 +14,25 @@ const VendorCreate = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            var data = await api.vendors.create(name, address, contactName, contactEmail, contactPhone, contactType);
-            setSuccess('Vendor created successfully!');
-            window.location.href = `/vendors/${data.id}`;
-            setError(null);
+        try
+        {
+          var data = {
+            name: name,
+            address: address,
+            contact_name: contactName,
+            contact_email: contactEmail,
+            contact_phone: contactPhone,
+            contact_type: contactType
+          };
+          var newItem = await api.vendors.create(data);
+
+          setSuccess('Vendor created successfully!');
+          window.location.href = `/vendors/${newItem.id}`;
+          setError(null);
         } catch (err) {
-            console.error(err);
-            setError('Failed to create Vendor' + err);
-            setSuccess(null);
+          console.error(err);
+          setError('Failed to create Vendor' + err);
+          setSuccess(null);
         }
     };
 

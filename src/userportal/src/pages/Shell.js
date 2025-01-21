@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 
 import { Dashboard } from './dashboard';
 import { DocumentList } from './documents';
-import { PromptEdit } from './prompts';
 
 import { DeliverableCreate, DeliverableEdit } from './deliverables';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
@@ -93,11 +92,6 @@ const Shell = ({ isDarkTheme }) => {
                 </h6>
                 <ul className="nav flex-column">
                   <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/prompts">
-                      <i className="fas fa-cog"></i> Prompts
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/documents">
                       <i className="fas fa-file-alt"></i> Documents
                     </NavLink>
@@ -141,7 +135,6 @@ const Shell = ({ isDarkTheme }) => {
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/documents" element={<DocumentList />} />
-              <Route path="/prompts" element={<PromptEdit />} />
               
               <Route path="/deliverables/create/:milestoneId" element={<DeliverableCreate />} />
               <Route path="/deliverables/:id" element={<DeliverableEdit />} />

@@ -1,6 +1,4 @@
 
-const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
-
 module.exports = {
     get: async (url) => {
         try {

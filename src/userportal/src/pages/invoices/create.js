@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
 
@@ -31,9 +31,16 @@ const InvoiceCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.invoices.create(file, invoiceNumber, amount, invoiceDate, paymentStatus);
+      var data = {
+        number: invoiceNumber,
+        amount: amount,
+        invoice_date: invoiceDate,
+        payment_status: paymentStatus
+      };
+      var newItem = await api.invoices.create(file, data);
+
       setSuccess('Invoice created successfully!');
-      window.location.href = `/invoices/${data.id}`;
+      window.location.href = `/invoices/${newItem.id}`;
       setError(null);
     } catch (err) {
       console.error(err);

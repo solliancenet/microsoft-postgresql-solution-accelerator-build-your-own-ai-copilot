@@ -27,7 +27,8 @@ description: Build, evaluate, and deploy, a RAG-based retail copilot that respon
   - [Table of Contents](#table-of-contents)
   - [Important Security Notice](#important-security-notice)
   - [Overview](#overview)
-  - [Pre-requisites](#pre-requisites)
+  - [Solution Architecture](#solution-architecture)
+  - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [GitHub Codespaces](#github-codespaces)
     - [Local environment](#local-environment)
@@ -56,7 +57,11 @@ For a more comprehensive list of best practices and security recommendations for
 
 ## Overview
 
+MKDocs link: <https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/01-App-Scenario/>
+
 In the financial services industry, validating contracts, statements of work (SOWs), and invoices poses distinct challenges. This is particularly true when it comes to ensuring that invoices align with SOWs, especially for milestone-based payments and other specific deliverables. Traditionally, this validation process is manual, requiring meticulous comparison and cross-checking, often leading to delays, errors, and elevated operational costs. This accelerator explores a high-level architectural solution utilizing Microsoft Azure's comprehensive suite of services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
+
+## Solution Architecture
 
 The objective of this solution is to automate the extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.
 
@@ -86,7 +91,7 @@ The high-level solution architecture is represented by this diagram:
 
 This diagram highlights a comprehensive workflow for handling document processing and data enrichment using Azure services, integrating AI and machine learning capabilities with PostgreSQL for efficient data management and storage.
 
-## Pre-requisites
+## Prerequisites
 
 To deploy and explore the sample, you will need:
 
@@ -130,7 +135,7 @@ You have two options for setting up your development environment:
 
 1. **Install the required tools** in your local device:
     - [Azure Developer CLI (azd)](https://aka.ms/install-azd)
-    - [Python 3.10+](https://www.python.org/downloads/)
+    - [Python 3.11+](https://www.python.org/downloads/)
     - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
     - [Git](https://git-scm.com/downloads)
 
@@ -143,8 +148,8 @@ You have two options for setting up your development environment:
 1. **Install dependencies** for the project, manually.
 
     ```bash
-        cd src/api
-        pip install -r requirements.txt
+    cd src/api
+    pip install -r requirements.txt
     ```
 
 You can now proceed to the next step - [Development](#development) - where we will provision the required Azure infrastructure and deploy the application from the template using `azd`.
@@ -216,7 +221,6 @@ We can now proceed with next steps - click to expand for detailed instructions.
     - Click the project resource - look at Deployments page to verify models
 1. ✅ | **Congratulations!** - Your Azure project infrastructure is ready! -->
 </details>
-
 
 <details>
 <summary> 4️⃣ | Validate the Deployment </summary>

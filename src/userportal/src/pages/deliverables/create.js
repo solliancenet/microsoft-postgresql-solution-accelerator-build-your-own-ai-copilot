@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
@@ -31,9 +31,17 @@ const DeliverableCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.deliverables.create(milestoneId, name, description, amount, status);
+      
+      var data = {
+        name: name,
+        description: description,
+        amount: amount,
+        status: status
+      };
+      var newItem = await api.deliverables.create(milestoneId, data);
+
       setSuccess('Deliverable created successfully!');
-      window.location.href = `/deliverables/${data.id}`;
+      window.location.href = `/deliverables/${newItem.id}`;
       setError(null);
     } catch (err) {
       console.error(err);

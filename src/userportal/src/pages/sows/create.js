@@ -11,7 +11,6 @@ const SOWCreate = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
-  const [metadata, setMetadata] = useState('');
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -36,9 +35,17 @@ const SOWCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.sows.create(file, sowNumber, sowMsaId, startDate, endDate, parseFloat(budget), metadata);
+      var data = {
+        number: sowNumber,
+        msa_id: sowMsaId,
+        start_date: startDate,
+        end_date: endDate,
+        budget: parseFloat(budget)
+      };
+      var newItem = await api.sows.create(file, data);
+      
       setSuccess('SOW created successfully!');
-      window.location.href = `/sows/${data.id}`;
+      window.location.href = `/sows/${newItem.id}`;
       setError(null);
     } catch (err) {
       console.error(err);

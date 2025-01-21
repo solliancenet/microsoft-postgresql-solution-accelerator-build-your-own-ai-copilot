@@ -26,7 +26,7 @@ param skuName string = 'Standard_D2ds_v4'
 param skuTier string = 'GeneralPurpose'
 
 @description('The version of the PostgreSQL server.')
-param version string = '14'
+param version string = '16'
 
 @description('Azure database for PostgreSQL storage Size ')
 param storageSizeGB int = 32

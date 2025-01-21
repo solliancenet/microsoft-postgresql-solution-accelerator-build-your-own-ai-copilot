@@ -1,9 +1,9 @@
-const apiConfig = require('./APIConfig'); // Assuming apiConfig is in the same directory
-
 const RESTHelper = require('./RESTHelper');
 
+const APIUrl = process.env.REACT_APP_SERVICE_API_ENDPOINT_URL || 'http://localhost:8000';
+
 const getUrl = (url) => {
-    return `${apiConfig.APIUrl}${url}`;
+    return `${APIUrl}${url}`;
 };
 
 /* *************** */
@@ -16,13 +16,7 @@ module.exports = {
     },
     completions: {
         chat: async (message, history) => {
-            const chat_history = [];
-            if (history && history.length > 0){
-                for(let i in history) {
-                    chat_history.push(history[i].text);
-                }
-            }
-
+            const chat_history = history || [];
             return await RESTHelper.post(getUrl(`/completions/chat`), {
                 message,
                 chat_history,
@@ -33,18 +27,18 @@ module.exports = {
         list: async (milestoneId = -1, skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/deliverables?milestone_id=${milestoneId}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
-        get: async (deliverableId) => {
-            return await RESTHelper.get(getUrl(`/deliverables/${deliverableId}`));
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/deliverables/${id}`));
         },
-        create: async (milestone_id, name, description, amount, status) => {       
+        create: async (id, data) => {       
             console.info('Creating deliverable:');
         
             const formData = new FormData();
-            formData.append('milestone_id', milestone_id);
-            formData.append('name', name);
-            formData.append('description', description);
-            formData.append('amount', amount);
-            formData.append('status', status);
+
+            formData.append('milestone_id', id);
+            for(var key in data){
+                formData.append(key, data[key]);
+            }
         
             try {
                 const response = await fetch(getUrl(`/deliverables`), {
@@ -54,23 +48,18 @@ module.exports = {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
-                return data;
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error creating deliverable:', error);
                 throw error;
             }
         },
-        update: async (deliverableId, name, description, amount, status) => {
-            return await RESTHelper.update(getUrl(`/deliverables/${deliverableId}`), {
-                name: name,
-                description: description,
-                amount: amount,
-                status: status,
-            });
+        update: async (id, data) => {
+            return await RESTHelper.update(getUrl(`/deliverables/${id}`), data);
         },
-        delete: async (deliverableId) => {
-            return await RESTHelper.delete(getUrl(`/deliverables/${deliverableId}`));
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/deliverables/${id}`));
         }
     },
     documents: {
@@ -124,17 +113,16 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));
         },
-        create: async (file, number, amount, invoice_date, payment_status) => {
+        create: async (file, data) => {
             if (!file) return;
         
             console.info('Creating invoice:', file);
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('number', number);
-            formData.append('amount', amount);
-            formData.append('invoice_date', invoice_date);
-            formData.append('payment_status', payment_status);
+            for(var key in data){
+                formData.append(key, data[key]);
+            }
         
             try {
                 const response = await fetch(getUrl(`/invoices`), {
@@ -144,20 +132,15 @@ module.exports = {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
-                return data;
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error creating invoice:', error);
                 throw error;
             }
         },
-        update: async (id, number, amount, invoice_date, payment_status) => {
-            return await RESTHelper.update(getUrl(`/invoices/${id}`), {
-                number: number,
-                amount: amount,
-                invoice_date: invoice_date,
-                payment_status: payment_status,
-            });
+        update: async (id, data) => {
+            return await RESTHelper.update(getUrl(`/invoices/${id}`), data);
         },
         delete: async (id) => {
             return await RESTHelper.delete(getUrl(`/invoices/${id}`));
@@ -167,17 +150,16 @@ module.exports = {
         list: async (sowId = -1, skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/milestones?sow_id=${sowId}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
-        get: async (milestoneId) => {
-            return await RESTHelper.get(getUrl(`/milestones/${milestoneId}`));
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/milestones/${id}`));
         },
-        create: async (sow_id, name, status, due_date) => {
+        create: async (data) => {
             console.info('Creating milestone');
         
             const formData = new FormData();
-            formData.append('sow_id', sow_id);
-            formData.append('name', name);
-            formData.append('status', status);
-            formData.append('due_date', due_date);
+            for(var key in data){
+                formData.append(key, data[key]);
+            }
         
             try {
                 const response = await fetch(getUrl(`/milestones`), {
@@ -187,42 +169,37 @@ module.exports = {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
-                return data;
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error creating milestone:', error);
                 throw error;
             }
         },
-        update: async (milestoneId, name, status, due_date) => {
-            return await RESTHelper.update(getUrl(`/milestones/${milestoneId}`), {
-                name: name,
-                status: status,
-                due_date: due_date,
-            });
+        update: async (id, data) => {
+            return await RESTHelper.update(getUrl(`/milestones/${id}`), data);
         },
-        delete: async (milestoneId) => {
-            return await RESTHelper.delete(getUrl(`/milestones/${milestoneId}`));
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/milestones/${id}`));
         }
     },
     msas: {
         list: async (vendor_id = -1, skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/msas?vendor_id=${vendor_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
-        get: async (msaId) => {
-            return await RESTHelper.get(getUrl(`/msas/${msaId}`));
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/msas/${id}`));
         },
-        create: async (file, vendor_id, title, start_date, end_date) => {
+        create: async (file, data) => {
             if (!file) return;
 
             console.info('Creating MSA');
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('vendor_id', vendor_id);
-            formData.append('title', title);
-            formData.append('start_date', start_date);
-            formData.append('end_date', end_date);
+            for(var key in data) {
+                formData.append(key, data[key]);
+            }
         
             try {
                 const response = await fetch(getUrl(`/msas`), {
@@ -232,56 +209,38 @@ module.exports = {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
-                return data;
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error creating MSA:', error);
                 throw error;
             }
         },
-        update: async(vendor_id, id, title, start_date, end_date) => {
-            return await RESTHelper.update(getUrl(`/msas/${id}`), {
-                vendor_id: vendor_id,
-                title: title,
-                start_date: start_date,
-                end_date: end_date,
-            });
+        update: async(id, data) => {
+            return await RESTHelper.update(getUrl(`/msas/${id}`), data);
         },
         delete: async (id) => {
             return await RESTHelper.delete(getUrl(`/msas/${id}`));
-        }
-    },
-    prompts: {
-        list: async () => {
-            return await RESTHelper.get(getUrl(`/prompts`));
-        },
-        get: async (promptId) => {
-            return await RESTHelper.get(getUrl(`/prompts/${promptId}`));
-        },
-        update: async (prompts) => {
-            return await RESTHelper.update(getUrl(`/prompts/`), prompts);
         }
     },
     sows: {
         list: async (msa_id = -1, skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/sows?msa_id=${msa_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
-        get: async (sowId) => {
-            return await RESTHelper.get(getUrl(`/sows/${sowId}`));
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/sows/${id}`));
         },
-        create: async (file, number, msaId, startDate, endDate, budget) => {
+        create: async (file, data) => {
             if (!file) return;
         
             console.info('Creating SOW:', file);
         
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('number', number);
-            formData.append('msa_id', msaId);
-            formData.append('start_date', startDate);
-            formData.append('end_date', endDate);
-            formData.append('budget', budget);
-        
+            for (var key in data) {
+                formData.append(key, data[key]);
+            }
+
             try {
                 const response = await fetch(getUrl(`/sows`), {
                     method: 'POST',
@@ -290,24 +249,18 @@ module.exports = {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
-                return data;
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error creating SOW:', error);
                 throw error;
             }
         },
-        update: async (sowId, number, msaId, startDate, endDate, budget) => {
-            return await RESTHelper.update(getUrl(`/sows/${sowId}`), {
-                number: number,
-                msa_id: msaId,
-                start_date: startDate,
-                end_date: endDate,
-                budget: budget,
-            });
+        update: async (id, data) => {
+            return await RESTHelper.update(getUrl(`/sows/${id}`), data);
         },
-        delete: async (sowId) => {
-            return await RESTHelper.delete(getUrl(`/sows/${sowId}`));
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/sows/${id}`));
         }
     },
     statuses: {
@@ -319,19 +272,16 @@ module.exports = {
         list: async (skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/vendors?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
-        get: async (vendorId) => {
-            return await RESTHelper.get(getUrl(`/vendors/${vendorId}`));
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/vendors/${id}`));
         },
-        create: async (name, address, contact_name, contact_email, contact_phone, type) => {
+        create: async (data) => {
             console.info('Creating vendor');
 
             const formData = new FormData();
-            formData.append('name', name);
-            formData.append('address', address);
-            formData.append('contact_name', contact_name);
-            formData.append('contact_email', contact_email);
-            formData.append('contact_phone', contact_phone);
-            formData.append('contact_type', type);
+            for(var key in data){
+                formData.append(key, data[key]);
+            }
 
             try {
                 const response = await fetch(getUrl(`/vendors`), {
@@ -341,25 +291,18 @@ module.exports = {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
-                return data;
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error creating vendor:', error);
                 throw error;
             }
         },
-        update: async (id, name, address, contact_name, contact_email, contact_phone, type) => {
-            return await RESTHelper.update(getUrl(`/vendors/${id}`), {
-                name: name,
-                address: address,
-                contact_name: contact_name,
-                contact_email: contact_email,
-                contact_phone: contact_phone,
-                type: type,
-            });
+        update: async (id, data) => {
+            return await RESTHelper.update(getUrl(`/vendors/${id}`), data);
         }, 
-        delete: async (vendorId) => {
-            return await RESTHelper.delete(getUrl(`/vendors/${vendorId}`));
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/vendors/${id}`));
         }
     }
 };

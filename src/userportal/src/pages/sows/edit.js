@@ -65,8 +65,16 @@ const SOWEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var data = await api.sows.update(id, sowNumber, msaId, startDate, endDate, parseFloat(budget));
-      updateDisplay(data);
+      var data = {
+        number: sowNumber,
+        msa_id: msaId,
+        start_date: startDate,
+        end_date: endDate,
+        budget: parseFloat(budget)
+      };
+      var updatedItem = await api.sows.update(id, data);
+
+      updateDisplay(updatedItem);
       setSuccess('SOW updated successfully!');
       setError(null);
     } catch (err) {

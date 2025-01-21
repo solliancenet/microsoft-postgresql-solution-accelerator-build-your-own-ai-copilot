@@ -10,14 +10,16 @@ You can complete it as a **self-guided** workshop at home. Instructor-led worksh
 
 === "Self-Guided"
 
-    - [ ] Requires you to use **your own Azure subscription** - you can [get one for free](https://aka.ms/free) 
-    - [ ] Requires you to **provision the infrastructure** in your Azure subscription - we provide instructions
-    - [ ] Requires you to use **your own computer**
-    - [ ] Requires you to **setup a development environment on your computer** - we provide instructions
-    - [X] You can complete the lab at your own pace - no time constraints!
+    The self-guided version of this workshop allows you complete the lab at your own pace, with no time constraints, using your own computer and Azure subscription. Completing the self-guided workshop:
+
+    - [ ] Requires using **your own GitHub account** - you can [get one for free](https://github.com/signup)
+    - [ ] Requires using **your own Azure subscription** - you can [get one for free](https://aka.ms/free) 
+    - [ ] Requires you to **provision the infrastructure** in your Azure subscription - we provide detailed instructions and [Bicep deployment scripts](https://learn.microsoft.com/azure/azure-resource-manager/bicep/deployment-script-bicep)
+    - [ ] Requires using **your own computer**
+    - [ ] Requires you to **setup a development environment on your computer** - we provide detaled instructions
 
 <!--
-=== "Microsoft AI Tour"
+=== "Instructor-Led Workshop"
 
     - [ ] Requires you to use **your own GitHub account** - you can [get one for free](https://github.com/signup)
     - [X] Uses the **built-in Azure subscription** from Skillable - you get auth credentials
@@ -25,15 +27,5 @@ You can complete it as a **self-guided** workshop at home. Instructor-led worksh
     - [ ] Requires you to use **your own laptop** - keep it charged for the session duration
     - [ ] You have 75 minutes for the entire session - assume 60 mins for the lab alone
 
-    !!! question "Are you currently in a Microsoft AI Tour session? [Go directly to Provision & Setup!](./02-Setup/1-Provision-And-Setup/02-Skillable.md)"      
-    
-=== "Microsoft Ignite"
-
-    - [ ] Requires you to use **your own GitHub account** - you can [get one for free](https://github.com/signup)
-    - [X] Uses the **built-in Azure subscription** from Skillable - you get auth credentials
-    - [X] Uses the **pre-provisioned infrastructure** from Skillable - you save setup time
-    - [X] Uses the **in-venue workstations** setup for event - just find an open seat to use
-    - [ ] You have 75 minutes for the entire session - assume 60 mins for the lab alone
-    
-    !!! question "Are you currently in a Microsoft Ignite session? [Go directly to Provision & Setup!](./02-Setup/1-Provision-And-Setup/02-Skillable.md)"      
+    !!! question "Are you currently in a Microsoft AI Tour session? [Go directly to Provision & Setup!](./02-Setup/1-Provision-And-Setup/02-Instructor-Led.md)"
 -->

@@ -23,7 +23,6 @@ param postgresqlAdminLogin string
 @secure()
 param postgresqlAdminPassword string
 
-
 param userPortalExists bool
 @secure()
 param portalDefinition object
@@ -33,7 +32,6 @@ param existingOpenAiInstance object = {
   subscriptionId: ''
   resourceGroup: ''
 }
-
 
 var deployOpenAi = empty(existingOpenAiInstance.name)
 // var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
@@ -58,7 +56,7 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 
 targetScope = 'subscription'
 resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: '${resourceGroupName}'
+  name: resourceGroupName
   location: location
   tags: tags
 }
@@ -136,7 +134,6 @@ module appsEnv './shared/apps-env.bicep' = {
   scope: rg
 }
 
-
 module userPortalApp './app/UserPortal.bicep' = {
   name: 'UserPortal'
   params: {
@@ -163,7 +160,6 @@ module userPortalApp './app/UserPortal.bicep' = {
     secretSettings: []
   }
   scope: rg
-  dependsOn: [ apiApp, monitoring ]
 }
 
 module apiApp './app/API.bicep' = {
@@ -191,7 +187,6 @@ module apiApp './app/API.bicep' = {
     secretSettings: []
   }
   scope: rg
-  dependsOn: [ monitoring, keyVault ]
 }
 
 module apiAppPostgresqlAdmin './shared/postgresql_administrator.bicep' = {
@@ -259,7 +254,6 @@ module postgresql './shared/postgresql.bicep' = {
   scope: rg
 }
 
-
 module storage './shared/storage.bicep' = {
   name: 'storage'
   params: {
@@ -293,9 +287,29 @@ module documentIntelligence './shared/document-intelligence.bicep' = {
   }
   scope: rg
 }
+module languageService './shared/language-service.bicep' = {
+  name: 'languageService'
+  params: {
+    location: location
+    name: '${abbrs.languageService}${resourceToken}'
+    restore: false
+  }
+  scope: rg
+}
 
-
-
+module amlWorkspace './shared/aml-workspace.bicep' = {
+  name: 'amlWorkspace'
+  params: {
+    location: location
+    workspaceName: '${abbrs.machineLearningServicesWorkspaces}${resourceToken}'
+    endpointName: '${abbrs.machineLearningServicesOnlineEndpoints}${resourceToken}'
+    keyVaultName: keyVault.outputs.name
+    appInsightsName: monitoring.outputs.applicationInsightsName
+    storageAccountName: storage.outputs.name
+    containerRegistryName: registry.outputs.name
+  }
+  scope: rg
+}
 
 output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer

@@ -237,42 +237,37 @@ You will need to install the required software locally and provision the Azure i
     
         The above command will create a `.venv` folder under the `api` folder, which will provide a dedicated Python environment for the `api` project that can be used throughout this lab.
     
-    4. Activate the virtual environment by selecting the appropriate command for your OS and shell from the table below and executing it at the terminal prompt.
+    4. Activate the virtual environment.
+
+        !!! task "Select the appropriate command for your OS and shell from the table below and execute it at the terminal prompt."
     
-        | Platform | Shell | Command to activate virtual environment |
-        | -------- | ----- | --------------------------------------- |
-        | POSIX | bash/zsh | `source .venv/bin/activate` |
-        | | fish | `source .venv/bin/activate.fish` |
-        | | csh/tcsh | `source .venv/bin/activate.csh` |
-        | | pwsh | `.venv/bin/Activate.ps1` |
-        | Windows | cmd.exe | `.venv\Scripts\activate.bat` |
-        | | PowerShell | `.venv\Scripts\Activate.ps1` |
+            | Platform | Shell | Command to activate virtual environment |
+            | -------- | ----- | --------------------------------------- |
+            | POSIX | bash/zsh | `source .venv/bin/activate` |
+            | | fish | `source .venv/bin/activate.fish` |
+            | | csh/tcsh | `source .venv/bin/activate.csh` |
+            | | pwsh | `.venv/bin/Activate.ps1` |
+            | Windows | cmd.exe | `.venv\Scripts\activate.bat` |
+            | | PowerShell | `.venv\Scripts\Activate.ps1` |
     
     ## **4.2 Install required Python libraries**
     
-        ```bash
+    The `requirements.txt` file in the `src\api` folder contains the set of Python libraries needed to run the Python components of the solution accelerator.
+
+    !!! tip "Open the `src\api\requirements.txt` file in the repo to review the required libraries and the versions that are being used."
+
+    1. From the integrated terminal window in VS Code, run the following command to install the required libraries in your virtual environment:
+
+        ```bash title=""
         pip install -r requirements.txt
         ```
-    
-        The `requirements.txt` file contains the set of Python libraries needed to run the solution accelerator.
-    
-        | Library | Version | Description |
-        | ------- | ------- | ----------- |
-        | `azure-identity` | 1.19.0 | Azure Identity SDK for Python |
-        | `fastapi` | 0.115.6 | Web framework for building APIs with Python |
-        | `langchain` | 0.3.13 | Framework for developing applications powered by large language models (LLMs) |
-        | `langchain-openai` | 0.2.14 | LangChain library for connecting to and interacting with Azure OpenAI |
-        | `openai` | 1.58.1 | Provides access to the Azure OpenAI REST API from Python apps. |
-        | `pydantic` | 2.10.4 | Data validation using Python type hints. |
-        | `requests` | 2.32.3 | Send HTTP requests. |
-        | `uvicorn` | 0.34.0 | An ASGI web server implementation for Python. |
 
     ## **4.3 Connect to your database from pgAdmin**
 
     You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
 
-    5. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
-    6. On the Azure Database for PostgreSQL - Flexible Server page:
+    8. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
+    9. On the Azure Database for PostgreSQL - Flexible Server page:
        1. Select **Connect** under **Settings** in the left-hand resource menu.
        2. Select the **TODO** database from the **Database name** dropdown.
        3. Expand the **pgAdmin 4** block.
@@ -281,6 +276,8 @@ You will need to install the required software locally and provision the Azure i
         TODO: Update screenshot with correct database name
 
         ![Screenshot of the steps to connect to Azure Database for PostgreSQL - Flexible Server from pgAdmin](../../img/connect-to-pgadmin.png)
+
+    !!! tip "Leave pgAdmin open as you will be using it throughout the remainder of the workshop."
 ---
 
 ## Next → [Validate Setup](./03-Validation.md)

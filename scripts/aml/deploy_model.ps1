@@ -19,7 +19,11 @@ $BASE_URL = "https://huggingface.co/BAAI/bge-reranker-v2-m3/resolve/main"
 foreach ($FILE in $FILES) {
   $FILE_PATH = Join-Path $MODEL_DIR $FILE
   if (-Not (Test-Path $FILE_PATH)) {
-    Invoke-WebRequest -Uri "$BASE_URL/$FILE?download=true" -OutFile $FILE_PATH
+    try {
+        Invoke-WebRequest -Uri "$BASE_URL/$FILE?download=true" -OutFile $FILE_PATH
+    } catch {
+        Write-Error "Failed to download $FILE from $BASE_URL"
+    }
   } else {
     Write-Output "- $FILE already exists - skipping download."
   }

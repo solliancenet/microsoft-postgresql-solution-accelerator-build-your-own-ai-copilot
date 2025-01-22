@@ -21,6 +21,7 @@ foreach ($FILE in $FILES) {
   if (-Not (Test-Path $FILE_PATH)) {
     try {
         Invoke-WebRequest -Uri "$BASE_URL/$FILE?download=true" -OutFile $FILE_PATH
+        Write-Output "- $FILE downloaded successfully."
     } catch {
         Write-Error "Failed to download $FILE from $BASE_URL"
     }

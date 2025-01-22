@@ -105,6 +105,7 @@ resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-0
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '516239f1-63e1-4d78-a4de-a74fb236a071') // App Configuration Data Reader role
     principalId: identity.properties.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 

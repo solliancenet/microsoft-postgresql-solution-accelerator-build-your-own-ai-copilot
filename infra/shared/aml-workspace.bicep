@@ -52,7 +52,7 @@ resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2024-10-01-p
   }
 }
 
-resource amlOnlineEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints@2024-07-01-preview' = {
+resource amlEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints@2024-07-01-preview' = {
   name: endpointName
   location: location
   identity: {
@@ -66,5 +66,5 @@ resource amlOnlineEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineE
 }
 
 output AML_WORKSPACE_NAME string = amlWorkspace.name
-output AML_ENDPOINT_NAME string amlOnlineEndpoint.name
-output AML_ENDPOINT_SCORING_URI string = amlOnlineEndpoint.properties.scoringUri
+output AML_ENDPOINT_NAME string = amlEndpoint.name
+output AML_ENDPOINT_SCORING_URI string = amlEndpoint.properties.scoringUri

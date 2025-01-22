@@ -92,6 +92,14 @@ az postgres flexible-server execute `
 Write-Host "Database Permissions Granted to API App Managed Identity"
 
 
+# ##############################################################################
+# Deploy Machine Learning Model to Azure ML Workspace
+# ##############################################################################
+Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."
+
+pwsh -File "./scripts/aml/deploy_model.ps1"
+
+Write-Host "Machine Learning Model Deployed"
 
 
 # # ##############################################################################

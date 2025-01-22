@@ -66,5 +66,5 @@ resource amlOnlineEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineE
 }
 
 output AML_WORKSPACE_NAME string = amlWorkspace.name
-output AML_ENDPOINT_NAME string amlOnlineEndpoint.name
+output AML_ENDPOINT_NAME string = amlOnlineEndpoint.name
 output AML_ENDPOINT_SCORING_URI string = amlOnlineEndpoint.properties.scoringUri

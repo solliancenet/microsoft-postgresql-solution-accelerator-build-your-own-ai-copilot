@@ -24,7 +24,7 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.1 Install Azure command-line tools**
 
-    !!! task "In this task, you will install the Azure CLI and the Azure Developer CLI (`azd`)."
+    !!! task "In this task, you will install both the Azure CLI and the Azure Developer CLI (`azd`)."
 
         - The Azure CLI enables you to execute Azure CLI commands from a command prompt or VS Code terminal on your local machine.
         - The Azure Developer CLI (`azd`) is an open-source tool that accelerates provisioning and deploying app resources on Azure.
@@ -172,17 +172,15 @@ You will need to install the required software locally and provision the Azure i
 
 === "3. Provision Azure infrastructure"
 
-    _This project uses an `azd-template`, which defines infrastructure-as-code assets that are used by the Azure Developer CLI to provision and manage your solution infrastructure resources_. On completing this step, you should have:
+    This solution contains an Azure Developer CLI `azd-template` that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single `azd up` command. On completing this step, you should have:
 
     - [X] Authenticated with Azure
     - [X] Provisioned Azure resources
     - [X] Deployed the starter solution
 
-    This solution contains an Azure Developer CLI template that provisions various required resources in Azure and deploys the starter app to Azure Container Apps (ACA).
-
-    You are now ready to connect your VS Code environment to Azure.
-
     ## 3.1 Authenticate With Azure
+
+    Before running the `azd up` command, you must connect your VS Code environment to Azure by authenticating.
     
     1. To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:
     
@@ -206,7 +204,7 @@ You will need to install the required software locally and provision the Azure i
         azd auth login
         ```
     
-    ## 3.2 Provision & Deploy App
+    ## 3.2 Provision Azure Resource and Deploy App (UI and API)
 
     Provision & deploy the solution with one command: ```azd up```
 
@@ -216,12 +214,16 @@ You will need to install the required software locally and provision the Azure i
         azd up
         ```
 
-        !!! task "You will be prompted for various inputs for the `azd up` command"
+        !!! task "You will be prompted for several inputs for the `azd up` command:"
     
-              - Subscription - specify your own active Azure subscription ID
-              - Environment name for resource group
-              - Location for deployment
+              - **Enter a new environment name**: Enter a value, such as `dev`.
+                - The environment for the `azd up` command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.
+              - **Select an Azure Subscription to use**: Select the Azure subscription you are using for this workshop using the up and down arrow keys.
+              - **Select an Azure location to use**: Select the Azure region into which resources should be deployed using the up and down arrow keys.
                 - Refer to [Region Availability](#region-availability) guidance and pick the option with desired models and quota available.
+              - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
+                - Ensure you copy the password in a secure location so you can use it later to access the database.
+              - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
     
     2. Wait for the process to complete. It may take 5-10 minutes or more.
  
@@ -285,15 +287,14 @@ You will need to install the required software locally and provision the Azure i
     8. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
     9. On the Azure Database for PostgreSQL - Flexible Server page:
        1. Select **Connect** under **Settings** in the left-hand resource menu.
-       2. Select the **TODO** database from the **Database name** dropdown.
+       2. Select the **contracts** database from the **Database name** dropdown.
        3. Expand the **pgAdmin 4** block.
        4. Follow the steps provided to connect to your database from pgAdmin.
-
-        TODO: Update screenshot with correct database name
 
         ![Screenshot of the steps to connect to Azure Database for PostgreSQL - Flexible Server from pgAdmin](../../img/connect-to-pgadmin.png)
 
     !!! tip "Leave pgAdmin open as you will be using it throughout the remainder of the workshop."
----
 
-## Next → [Validate Setup](./03-Validation.md)
+    ---
+
+    ## Next → [Validate Setup](./03-Validation.md)

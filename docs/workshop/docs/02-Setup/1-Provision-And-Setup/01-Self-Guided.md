@@ -17,9 +17,11 @@ You will need to install the required software locally and provision the Azure i
     - [X] Azure command-line tools
     - [X] Git
     - [X] Python 3.11+
+    - [X] Node.js
+    - [X] Docker desktop
     - [X] Visual Studio Code and required extensions
     - [X] pgAdmin
-    
+
     ## **1.1 Install Azure command-line tools**
 
     !!! task "In this task, you will install the Azure CLI and the Azure Developer CLI (`azd`)."
@@ -60,52 +62,66 @@ You will need to install the required software locally and provision the Azure i
         azd version
         ```
 
-    ## **1.2 Install Python**
+    ## **1.2 Install Git**
 
-    1. Download Python 3.11+ from <https://python.org/downloads>.
+    9. Download Git from <https://git-scm.com/downloads>.
 
-    2. Run the installer using the default options.
+    10. Run the installer using the default options.
 
-    3. Use the following command from a terminal prompt to verify Python was installed:
+    ## **1.3 Install Python**
+
+    6. Download Python 3.11+ from <https://python.org/downloads>.
+
+    7. Run the installer using the default options.
+
+    8. Use the following command from a terminal prompt to verify Python was installed:
 
         ```bash title=""
         python --version
         ```
 
-    ## **1.3 Install Git**
+    ## **1.4 Install Node.js**
 
-    5. Download Git from <https://git-scm.com/downloads>.
+    11. Download Node.js from <https://nodejs.org/en/download/>, ensuring you select the most recent LTS version and your correct OS.
 
-    6. Run the installer using the default options.
+    12. Run the installer using the default options.
 
-    ## **1.4 Install Visual Studio Code (and extensions)**
+    ## **1.5 Install Docker Desktop**
+
+    1. Download and install Docker Desktop for your OS using instructions provided on the <https://docs.docker.com/desktop/>:
+
+           - [Linux](https://docs.docker.com/desktop/setup/install/linux/)
+           - [Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
+           - [Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+
+    ## **1.6 Install Visual Studio Code (and extensions)**
 
     Visual Studio Code is a versatile, open-source code editor that combines powerful features with an intuitive interface to help developers efficiently write, debug, and customize their projects.
     
     The Prompty extension enhances productivity by providing intelligent code completions and suggestions, while the Python extension offers a comprehensive environment for Python development, including robust debugging, linting, and testing capabilities.
 
-    7. Download and install from <https://code.visualstudio.com/download>.
+    3.  Download and install from <https://code.visualstudio.com/download>.
 
         - Use the default options in the installer.
 
-    8. After installation completed, launch Visual Studio Code.
+    4.  After installation completed, launch Visual Studio Code.
 
-    9. In the **Extensions** menu, search for and install the following extensions from Microsoft:
+    5.  In the **Extensions** menu, search for and install the following extensions from Microsoft:
 
         - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
         - [Prompty](marketplace.visualstudio.com/items?itemName=ms-toolsai.prompty)
 
             !!! info "[Prompty](https://prompty.ai) is an open-source generative AI templating framework that makes it easy to experiment with prompts, context, parameters, and other ways to change the behavior of language models. The easiest way to get started with **Prompty**, is to use the Visual Studio Code Extension. The offers an intuitive prompt playground within VS Code to streamline the prompt engineering process."
 
-    10. Close VS Code.
+    6.  Close VS Code.
 
-    ## **1.5 Install pgAdmin**
+    ## **1.7 Install pgAdmin**
 
     Throughout this workshop, you will use pgAdmin to run queries against your PostgreSQL database. pgAdmin is the leading Open Source management tool for Postgres.
 
-    1. Download pgAdmin from <https://www.pgadmin.org/download/>.
+    7.  Download pgAdmin from <https://www.pgadmin.org/download/>.
 
-    2. Run the installer using the default options.
+    8.  Run the installer using the default options.
 
 === "2. Fork repo"
 

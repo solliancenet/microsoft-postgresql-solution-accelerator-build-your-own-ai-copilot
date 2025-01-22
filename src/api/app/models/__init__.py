@@ -4,7 +4,6 @@ from .deliverable import Deliverable, DeliverableEdit
 from .invoice import Invoice, InvoiceEdit
 from .list_response import ListResponse
 from .milestone import Milestone, MilestoneEdit
-from .msa import Msa, MsaEdit
 from .prompt import Prompt
 from .status import Status
 from .sow import Sow, SowEdit

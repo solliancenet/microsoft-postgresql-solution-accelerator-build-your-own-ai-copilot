@@ -47,7 +47,6 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     # TODO: Define tools for the agent
     tools = [
         StructuredTool.from_function(coroutine=get_invoices),
-        StructuredTool.from_function(coroutine=get_msas),
         StructuredTool.from_function(coroutine=get_sows),
         StructuredTool.from_function(coroutine=get_vendors)         
     ]
@@ -65,14 +64,6 @@ async def get_invoices():
         rows = await conn.fetch('SELECT * FROM invoices;')
         invoices = [dict(row) for row in rows]
     return invoices
-
-async def get_msas():
-    """Retrieves a list of master services agreements (MSAs) from the database."""
-    pool = await get_db_connection_pool()
-    async with pool.acquire() as conn:
-        rows = await conn.fetch('SELECT * FROM msas;')
-        msas = [dict(row) for row in rows]
-    return msas
 
 async def get_sows():
     """Retrieves a list of statements of work (SOWs) from the database."""

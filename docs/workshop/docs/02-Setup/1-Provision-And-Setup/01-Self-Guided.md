@@ -229,6 +229,13 @@ You will need to install the required software locally and provision the Azure i
               - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
                 - Ensure you copy the password in a secure location so you can use it later to access the database.
               - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
+
+        !!! info "Should you need to delete the `azd` environment"
+
+            - Locate the `.azure` folder created at the root of the project in VS Code.
+            - Expand the `.azure` folder and locate the folder matching the name of the environemnt you assigned.
+            - Delete the folder for the environment.
+            - The next time you run the `azd up` command, it will ask you to provide an environment name, along with the other values you were prompted for during setup.
     
     2. Wait for the process to complete. It may take 5-10 minutes or more.
  

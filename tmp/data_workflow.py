@@ -1,20 +1,31 @@
 import os
 import json
+import openai
 from azure.storage.blob import BlobServiceClient
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import openai
+from openai import AzureOpenAI
 import psycopg2
 import re
 from datetime import datetime
 
 # Environment Variables
-AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
-FORM_RECOGNIZER_ENDPOINT = os.getenv("FORM_RECOGNIZER_ENDPOINT")
-FORM_RECOGNIZER_KEY = os.getenv("FORM_RECOGNIZER_KEY")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-POSTGRESQL_CONNECTION = os.getenv("POSTGRESQL_CONNECTION")
+# Move to application config values
+# AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+# FORM_RECOGNIZER_ENDPOINT = os.getenv("FORM_RECOGNIZER_ENDPOINT")
+# FORM_RECOGNIZER_KEY = os.getenv("FORM_RECOGNIZER_KEY")
+# AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+# AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+# POSTGRESQL_CONNECTION = os.getenv("POSTGRESQL_CONNECTION")
+# DEPLOYMENT_NAME = "embeddings"
+
+# Create a client instance using API key
+client = AzureOpenAI(
+    azure_endpoint=AZURE_OPENAI_ENDPOINT,
+    api_key=AZURE_OPENAI_API_KEY,
+    api_version="2024-10-21"
+)
 
 # Initialize Clients
 blob_service_client = BlobServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
@@ -22,7 +33,6 @@ document_analysis_client = DocumentAnalysisClient(
     endpoint=FORM_RECOGNIZER_ENDPOINT,
     credential=AzureKeyCredential(FORM_RECOGNIZER_KEY)
 )
-openai.api_key = OPENAI_API_KEY
 
 # PostgreSQL Connection
 conn = psycopg2.connect(POSTGRESQL_CONNECTION)
@@ -86,11 +96,11 @@ def generate_embeddings(text_chunks):
     """Generate embeddings for each chunk using OpenAI."""
     embeddings = []
     for chunk in text_chunks:
-        response = openai.Embedding.create(
+        response = client.embeddings.create(
             input=chunk,
-            model="text-embedding-ada-002"  # Replace with "text-embedding-3-large" if available
+            model=DEPLOYMENT_NAME
         )
-        embeddings.append(response['data'][0]['embedding'])
+        embeddings.append(response.data[0].embedding)
     return embeddings
 
 def insert_into_postgresql(document_id, full_text, text_chunks, embeddings, metadata):
@@ -121,7 +131,9 @@ def insert_into_postgresql(document_id, full_text, text_chunks, embeddings, meta
 def process_document(container_name, blob_name, document_id):
     """Complete workflow for processing a document."""
     print(f"Processing document {document_id} from container {container_name}...")
-    
+
+## Replcae Step 1 with eventgrid trigger
+
     # Step 1: Download the PDF
     document_data = download_blob(container_name, blob_name)
 
@@ -141,8 +153,8 @@ def process_document(container_name, blob_name, document_id):
 
     print(f"Completed processing document {document_id}.")
 
-
-# Example Usage
+## replace with eventgrid trigger
+# Usage
 if __name__ == "__main__":
     container_name = "documents"
     blob_name = "INV-TWC2024-001.pdf"

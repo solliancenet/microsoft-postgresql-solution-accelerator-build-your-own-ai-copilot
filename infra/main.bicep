@@ -284,6 +284,7 @@ module documentIntelligence './shared/document-intelligence.bicep' = {
   params: {
     location: location
     name: '${abbrs.documentIntelligence}${resourceToken}'
+    skuName: 'S0'
   }
   scope: rg
 }

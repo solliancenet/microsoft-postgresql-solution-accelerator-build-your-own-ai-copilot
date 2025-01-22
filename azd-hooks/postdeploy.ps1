@@ -98,15 +98,22 @@ Write-Host "Database Permissions Granted to API App Managed Identity"
 # # ##############################################################################
 Write-Host "Creating Event Grid 'StorageBlob' Subscription with BlobCreated & BlobUpdated Webhook..."
 
-az deployment group create `
-    --name "eventGridSub-StorageBlob" `
-    --resource-group "${env:AZURE_RESOURCE_GROUP}" `
-    --template-file "./infra/shared/eventgrid-system-topic-subscription-webhook.bicep" `
-    --parameters `
-        systemTopicName="${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
-        subscriptionName="StorageBlob" `
-        endpointUrl="${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
-        includedEventTypes="['Microsoft.Storage.BlobCreated','Microsoft.Storage.BlobUpdated']"
+# az deployment group create `
+#     --name "eventGridSub-StorageBlob" `
+#     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+#     --template-file "./infra/shared/eventgrid-system-topic-subscription-webhook.bicep" `
+#     --parameters `
+#         systemTopicName="${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+#         subscriptionName="StorageBlob" `
+#         endpointUrl="${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
+#         includedEventTypes="['Microsoft.Storage.BlobCreated','Microsoft.Storage.BlobUpdated']"
+
+az eventgrid event-subscription create `
+  --source-resource-id "/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${env:AZURE_RESOURCE_GROUP}/providers/Microsoft.EventGrid/systemTopics/${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+  --name "StorageBlob" `
+  --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
+  --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
+  --event-delivery-schema EventGridSchema
 
 Write-Host "Event Grid Subscription 'StorageBlob' Created"
 

@@ -12,6 +12,9 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   sku: {
     name: 'Standard_LRS'
   }
+  identity: {
+    type: 'SystemAssigned'
+  }
   tags: tags
 }
 

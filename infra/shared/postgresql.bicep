@@ -62,7 +62,6 @@ param dnsZoneFqdn string = '${dnsZoneName}.postgres.database.azure.com'
 ])
 param highAvailabilityMode string = 'Disabled'
 
-
 var connectSubnet = !empty(subnetId)
 
 resource dnszone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (connectSubnet) {
@@ -135,8 +134,6 @@ resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases
     collation: 'en_US.utf8'
   }
 }
-
-
 
 resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyvaultName

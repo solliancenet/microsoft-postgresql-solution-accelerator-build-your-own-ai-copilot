@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Build a custom AI-powered solutions built on top of Azure Database for PostgreSQL and Azure AI.">
+        <meta name="description" content="Build custom AI-powered solutions on top of Azure Database for PostgreSQL and Azure AI.">
       
       
         <meta name="author" content="Solliance">
@@ -15,14 +15,14 @@
         <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/04-App-Lifecycle/">
       
       
-        <link rel="prev" href="../03-App-Architecture/">
+        <link rel="prev" href="../03-App-Data-Flow/">
       
       
         <link rel="next" href="../05-Dev-Workflow/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -203,7 +203,7 @@
         <a href="https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot
@@ -264,14 +264,8 @@
   
     
     
-      
-  
-  
-  
-    
-    
       <li class="md-tabs__item">
-        <a href="../../02-Setup/0-PreRequisites/" class="md-tabs__link">
+        <a href="../../02-Setup/" class="md-tabs__link">
           
   
     
@@ -283,9 +277,6 @@
     
   
 
-    
-  
-
       
         
   
@@ -294,12 +285,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-Ideate/" class="md-tabs__link">
+        <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
   
-  03 Ideate
+  03 Integrate GenAI Into PostgreSQL
 
         </a>
       </li>
@@ -314,12 +305,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../04-Evaluate/" class="md-tabs__link">
+        <a href="../../04-Validate-Data/" class="md-tabs__link">
           
   
     
   
-  04 Evaluate
+  04 Validate Data
 
         </a>
       </li>
@@ -334,12 +325,52 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../05-Deploy/" class="md-tabs__link">
+        <a href="../../05-Build-Copilot/" class="md-tabs__link">
           
   
     
   
-  05 Deploy
+  05 Build Copilot
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06-Deploy/" class="md-tabs__link">
+          
+  
+    
+  
+  06 Deploy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07-Evaluate-DELETE-THIS/" class="md-tabs__link">
+          
+  
+    
+  
+  07 Evaluate DELETE THIS
 
         </a>
       </li>
@@ -407,7 +438,7 @@
       <a href="https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot
@@ -517,7 +548,7 @@
         
   
   <span class="md-ellipsis">
-    1. The App Scenario
+    1.1 The App Scenario
   </span>
   
 
@@ -534,11 +565,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-RAG-Pattern/" class="md-nav__link">
+      <a href="../02-App-Architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2. The RAG Pattern
+    2. AI-enabled App Architecture
   </span>
   
 
@@ -555,11 +586,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-App-Architecture/" class="md-nav__link">
+      <a href="../03-App-Data-Flow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3. The App Architecture
+    3. Application Data Flow
   </span>
   
 
@@ -638,6 +669,10 @@
     
       
         
+          
+        
+      
+        
       
         
       
@@ -656,16 +691,24 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../02-Setup/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     02 Setup
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
@@ -673,6 +716,8 @@
             02 Setup
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
             
               
                 
@@ -699,16 +744,16 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    0 PreRequisites
+    0 Prerequisites
   </span>
   
 
@@ -716,10 +761,10 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_1">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
-            0 PreRequisites
+            0 Prerequisites
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -764,7 +809,7 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
         
           
           
@@ -780,14 +825,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             1 Provision And Setup
           </label>
@@ -823,11 +868,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/02-Skillable/" class="md-nav__link">
+      <a href="../../02-Setup/1-Provision-And-Setup/02-Instructor-Led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    B. Skillable-Based Setup
+    B. Instructor-Led Workshop Setup
   </span>
   
 
@@ -894,10 +939,6 @@
       
         
       
-        
-      
-        
-      
     
     
       
@@ -915,11 +956,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../03-Ideate/" class="md-nav__link ">
+            <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    03 Ideate
+    03 Integrate GenAI Into PostgreSQL
   </span>
   
 
@@ -935,7 +976,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            03 Ideate
+            03 Integrate GenAI Into PostgreSQL
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -948,11 +989,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Ideate/01/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.1 Create a New Prompty
+    3.1 Install extensions
   </span>
   
 
@@ -969,11 +1010,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Ideate/02/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.2: Update Prompt Metadata
+    3.2 Configure the Azure AI extension
   </span>
   
 
@@ -990,11 +1031,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Ideate/03/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.3: Update Prompt Template
+    3.3 Enable vector storage
   </span>
   
 
@@ -1011,53 +1052,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Ideate/04/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.4 Refine Prompt Template
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Ideate/05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.5 Convert Prompty To Code
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Ideate/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.6 Let's Connect The Dots! 💡
+    3.4 Enable Semantic Ranking
   </span>
   
 
@@ -1085,10 +1084,6 @@
       
         
           
-        
-      
-        
-      
         
       
         
@@ -1114,11 +1109,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../04-Evaluate/" class="md-nav__link ">
+            <a href="../../04-Validate-Data/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    04 Evaluate
+    04 Validate Data
   </span>
   
 
@@ -1134,7 +1129,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            04 Evaluate
+            04 Validate Data
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1147,11 +1142,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Evaluate/01/" class="md-nav__link">
+      <a href="../../04-Validate-Data/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.1 Understand Metrics
+    4.1 Extract Data with Document Intelligence
   </span>
   
 
@@ -1168,11 +1163,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Evaluate/02/" class="md-nav__link">
+      <a href="../../04-Validate-Data/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 Understand Evaluators
+    4.2 Prompt Engineering With Prompty
   </span>
   
 
@@ -1189,53 +1184,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Evaluate/03/" class="md-nav__link">
+      <a href="../../04-Validate-Data/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.3 Run Batch Evaluation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Evaluate/04/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.4 Understand Eval Workflow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Evaluate/05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.5. (Optional) Homework
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1263,10 +1216,6 @@
       
         
           
-        
-      
-        
-      
         
       
         
@@ -1296,11 +1245,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../05-Deploy/" class="md-nav__link ">
+            <a href="../../05-Build-Copilot/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    05 Deploy
+    05 Build Copilot
   </span>
   
 
@@ -1316,7 +1265,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            05 Deploy
+            05 Build Copilot
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1329,7 +1278,189 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/01/" class="md-nav__link">
+      <a href="../../05-Build-Copilot/01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.1 Implement A Chat Endpoint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.2 Create LangChain agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.3 Prompt engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.4 Add GraphRAG support in Azure Database for PostgreSQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.5 Create Copilot Chat UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../06-Deploy/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    06 Deploy
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            06 Deploy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-Deploy/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1350,7 +1481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/02/" class="md-nav__link">
+      <a href="../../06-Deploy/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1371,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/03/" class="md-nav__link">
+      <a href="../../06-Deploy/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1392,7 +1523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/04/" class="md-nav__link">
+      <a href="../../06-Deploy/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1413,7 +1544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/05/" class="md-nav__link">
+      <a href="../../06-Deploy/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1434,7 +1565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/06/" class="md-nav__link">
+      <a href="../../06-Deploy/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1455,7 +1586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Deploy/07/" class="md-nav__link">
+      <a href="../../06-Deploy/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1489,6 +1620,16 @@
           
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -1501,7 +1642,175 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../07-Evaluate-DELETE-THIS/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    07 Evaluate DELETE THIS
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            07 Evaluate DELETE THIS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-Evaluate-DELETE-THIS/01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.1 Understand Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-Evaluate-DELETE-THIS/02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.2 Understand Evaluators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-Evaluate-DELETE-THIS/03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 Run Batch Evaluation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-Evaluate-DELETE-THIS/04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Understand Eval Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-Evaluate-DELETE-THIS/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.5. (Optional) Homework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
         
           
           
@@ -1518,8 +1827,8 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Tear Down
           </label>
@@ -1616,7 +1925,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../03-App-Architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. The App Architecture">
+          <a href="../03-App-Data-Flow/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Application Data Flow">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1626,7 +1935,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                3. The App Architecture
+                3. Application Data Flow
               </div>
             </div>
           </a>
@@ -1675,12 +1984,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
   <!-- Add scripts that need to run before here -->
   
-      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   <!-- Add scripts that need to run afterwards here -->

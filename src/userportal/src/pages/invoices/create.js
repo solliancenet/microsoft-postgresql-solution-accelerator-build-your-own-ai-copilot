@@ -34,7 +34,7 @@ const InvoiceCreate = () => {
         setVendors(data.data);
       } catch (err) {
         console.error(err);
-        setError('Error fetching MSAs');
+        setError('Error fetching Vendors');
         setSuccess(null);
       }
     };

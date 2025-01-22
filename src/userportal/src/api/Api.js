@@ -183,46 +183,6 @@ module.exports = {
             return await RESTHelper.delete(getUrl(`/milestones/${id}`));
         }
     },
-    msas: {
-        list: async (vendor_id = -1, skip = 0, limit = 10, sortBy = '') => {
-            return await RESTHelper.get(getUrl(`/msas?vendor_id=${vendor_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
-        },
-        get: async (id) => {
-            return await RESTHelper.get(getUrl(`/msas/${id}`));
-        },
-        create: async (file, data) => {
-            if (!file) return;
-
-            console.info('Creating MSA');
-        
-            const formData = new FormData();
-            formData.append('file', file);
-            for(var key in data) {
-                formData.append(key, data[key]);
-            }
-        
-            try {
-                const response = await fetch(getUrl(`/msas`), {
-                    method: 'POST',
-                    body: formData,
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                return result;
-            } catch (error) {
-                console.error('Error creating MSA:', error);
-                throw error;
-            }
-        },
-        update: async(id, data) => {
-            return await RESTHelper.update(getUrl(`/msas/${id}`), data);
-        },
-        delete: async (id) => {
-            return await RESTHelper.delete(getUrl(`/msas/${id}`));
-        }
-    },
     sows: {
         list: async (vendor_id = -1, skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/sows?vendor_id=${vendor_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));

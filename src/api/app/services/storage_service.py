@@ -56,12 +56,6 @@ class StorageService:
         blobName = f"{vendor_id}/{docType}/{file.filename}"
         return await self.__save_file(blobName, file)
 
-    async def save_msa_document(self, vendor_id: int, file: UploadFile):
-        """
-        Saves a MSA document to Azure Blob Storage.
-        """
-        return await self.__save_vendor_document(vendor_id, "msas", file)
-
     async def save_sow_document(self, vendor_id: int, file: UploadFile):
         """
         Saves a SOW document to Azure Blob Storage.

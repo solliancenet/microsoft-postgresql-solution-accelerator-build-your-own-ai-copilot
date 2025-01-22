@@ -19,7 +19,7 @@ router = APIRouter(
 async def storage_blob_webhook(
     request: Request,
     pool = Depends(get_db_connection_pool),
-    storage_service = Depends(get_storage_service,
+    storage_service = Depends(get_storage_service),
     app_config = Depends(get_app_config)
 ):
     """Handles incoming webhooks from Azure Blob Storage."""

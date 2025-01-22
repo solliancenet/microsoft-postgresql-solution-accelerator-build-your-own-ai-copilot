@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
 
 const InvoiceEdit = () => {
-  const { id } = useParams(); // Extract MSA ID from URL
+  const { id } = useParams(); // Extract Vendor ID from URL
   const [vendorId, setVendorId] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [amount, setAmount] = useState('');
@@ -47,7 +47,7 @@ const InvoiceEdit = () => {
         setVendors(data.data);
       } catch (err) {
         console.error(err);
-        setError('Error fetching MSAs');
+        setError('Error fetching Vendors');
         setSuccess(null);
       }
     };

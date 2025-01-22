@@ -9,7 +9,6 @@ import { DocumentList } from './documents';
 import { DeliverableCreate, DeliverableEdit } from './deliverables';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
 import { MilestoneCreate, MilestoneEdit } from './milestones';
-import { MSAList, MSACreate, MSAEdit } from './msas';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
 import { VendorList, VendorCreate, VendorEdit } from './vendors';
 
@@ -68,11 +67,6 @@ const Shell = ({ isDarkTheme }) => {
                   <li className="nav-item">
                     <NavLink className="nav-link d-flex align-items-center gap-2" to="/vendors">
                       <i className="fas fa-briefcase"></i> Vendors
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link d-flex align-items-center gap-2" to="/msas">
-                      <i className="fas fa-building"></i> MSAs
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -145,15 +139,10 @@ const Shell = ({ isDarkTheme }) => {
 
               <Route path="/milestones/create/:sowId" element={<MilestoneCreate />} />
               <Route path="/milestones/:id" element={<MilestoneEdit />} />
-
-              <Route path="/msas" element={<MSAList />} />
-              <Route path="/msas/create" element={<MSACreate />} />
-              <Route path="/msas/create/:vendorId" element={<MSACreate />} />
-              <Route path="/msas/:id" element={<MSAEdit />} />
-              
+             
               <Route path="/sows" element={<SOWList />} />
               <Route path="/sows/create" element={<SOWCreate />} />
-              <Route path="/sows/create/:msaId" element={<SOWCreate />} />
+              <Route path="/sows/create/:vendorId" element={<SOWCreate />} />
               <Route path="/sows/:id" element={<SOWEdit />} />
 
               <Route path="/vendors" element={<VendorList />} />

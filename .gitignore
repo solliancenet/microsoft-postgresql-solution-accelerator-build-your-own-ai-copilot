@@ -2,3 +2,4 @@
 .DS_Store
 .venv
 docs/workshop/site
+scripts/aml/model_asset/model

@@ -32,7 +32,7 @@ foreach ($FILE in $FILES) {
 }
 
 # Deploy model to Azure Machine Learning Workspace
-az account set --subscription $env:AZURE_SUBSCRIPTION_ID
+az account set --subscription "$env:AZURE_SUBSCRIPTION_ID"
 
 # create variable for AML Deployment Name
 $DEPLOYMENT_NAME = "bgev2m3-v1"

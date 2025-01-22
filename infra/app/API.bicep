@@ -62,7 +62,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-prev
   name: guid(resourceGroup().id, identity.id, 'Cognitive Services Face Recognizer')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '9894cab4-e18a-44aa-828b-cb588cd6f2d7') // Cognitive Services Face Recognizer role
-    principalId: identity.id
+    principalId: identity.properties.principalId
     principalType: 'ServicePrincipal'
   }
 }

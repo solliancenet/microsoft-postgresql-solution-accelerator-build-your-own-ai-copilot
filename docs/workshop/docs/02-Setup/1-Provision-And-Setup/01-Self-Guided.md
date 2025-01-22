@@ -208,8 +208,14 @@ You will need to install the required software locally and provision the Azure i
 
     Provision & deploy the solution with one command: ```azd up```
 
+    !!! warning "You will be prompted to select the Azure region into which your resources should be deployed when running `azd up`.""
+        
+        Before selecting a region, you should refer to the regional availability guidance for both the [gpt-4o]([#region-availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint)) and [text-embedding-3-large](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI and select a region that supports both models and has quota available.
+        
+        **Selecting a region that does not support both models will result in deployment failure.**
+
     1. Use `azd up` to provision your Azure infrastructure and deploy the web application to Azure.
-    
+
         ```bash title=""
         azd up
         ```
@@ -220,7 +226,6 @@ You will need to install the required software locally and provision the Azure i
                 - The environment for the `azd up` command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.
               - **Select an Azure Subscription to use**: Select the Azure subscription you are using for this workshop using the up and down arrow keys.
               - **Select an Azure location to use**: Select the Azure region into which resources should be deployed using the up and down arrow keys.
-                - Refer to [Region Availability](#region-availability) guidance and pick the option with desired models and quota available.
               - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
                 - Ensure you copy the password in a secure location so you can use it later to access the database.
               - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.

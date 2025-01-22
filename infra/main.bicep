@@ -23,8 +23,6 @@ param postgresqlAdminLogin string
 @secure()
 param postgresqlAdminPassword string
 
-param amlDeploymentName string
-
 param userPortalExists bool
 @secure()
 param portalDefinition object
@@ -330,7 +328,7 @@ output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin
 output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_OPENAI_KEY string = openAi.outputs.key
 
-output AZURE_AML_WORKSPACE_NAME string = amlWorkspace.outputs.workspaceName
+output AZURE_AML_WORKSPACE_NAME string = amlWorkspace.outputs.AML_WORKSPACE_NAME
 output AZURE_AML_ENDPOINT_NAME string = amlWorkspace.outputs.AML_ENDPOINT_NAME
 
 output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrincipalName

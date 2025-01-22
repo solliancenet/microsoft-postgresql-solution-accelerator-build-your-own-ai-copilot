@@ -6,7 +6,7 @@ These instructions are forcontent owners of the Workshop "Build a Retail Copilot
 
 TODO: UPDATE SKILLABLE LAB TO POINT TO github.com/Azure-Samples/contoso-chat/docs/skillable-getstarted-deploy.md
 
-## Pre-Requisites
+## Prerequisites
 
 To participate in this workshop, you will need:
 

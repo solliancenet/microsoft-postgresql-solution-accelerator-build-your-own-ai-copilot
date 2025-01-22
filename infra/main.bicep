@@ -279,6 +279,14 @@ module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   scope: rg
 }
 
+module documentIntelligence './shared/document-intelligence.bicep' = {
+  name: 'documentIntelligence'
+  params: {
+    location: location
+    name: '${abbrs.documentIntelligence}${resourceToken}'
+  }
+  scope: rg
+}
 module languageService './shared/language-service.bicep' = {
   name: 'languageService'
   params: {

@@ -13,13 +13,18 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=ListResponse[Invoice])
-async def list_invoices(skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
+async def list_invoices(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of invoices from the database."""
     async with pool as conn:
         orderby = 'id'
         if (sortby):
             orderby = sortby
-        rows = await conn.fetch('SELECT * FROM invoices ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
+        if vendor_id > 0:
+            rows = await conn.fetch('SELECT * FROM invoices WHERE vendor_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', vendor_id, orderby, limit, skip)
+        else:
+            rows = await conn.fetch('SELECT * FROM invoices ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+
         invoices = parse_obj_as(list[Invoice], [dict(row) for row in rows])
     return ListResponse(data=invoices, total = len(invoices), skip = skip, limit = limit)
 
@@ -35,6 +40,7 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
 
 @router.post("/", response_model=Invoice)
 async def create_invoice(
+    vendor_id: int = Form(...),
     number: str = Form(...),
     amount: float = Form(...),
     invoice_date: str = Form(...),
@@ -55,9 +61,9 @@ async def create_invoice(
     # Create invoice in the database
     async with pool as conn:
         row = await conn.fetchrow('''
-        INSERT INTO invoices (number, amount, invoice_date, payment_status, document)
-        VALUES ($1, $2, $3, $4, $5) RETURNING *;
-        ''', number, amount, invoice_date_parsed, payment_status, documentName)
+        INSERT INTO invoices (number, amount, invoice_date, payment_status, document, vendor_id)
+        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
+        ''', number, amount, invoice_date_parsed, payment_status, documentName, vendor_id)
         
         new_invoice = parse_obj_as(Invoice, dict(row))
     return new_invoice
@@ -70,6 +76,7 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
     if invoice is None:
         raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
 
+    invoice.vendor_id = invoice_update.vendor_id
     invoice.number = invoice_update.number
     invoice.amount = invoice_update.amount
     invoice.invoice_date = invoice_update.invoice_date
@@ -78,10 +85,10 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
     async with pool as conn:
         row = await conn.fetchrow('''
         UPDATE invoices
-        SET number = $1, amount = $2, invoice_date = $3, payment_status = $4
-        WHERE id = $5
+        SET number = $1, amount = $2, invoice_date = $3, payment_status = $4, vendor_id = $5
+        WHERE id = $6
         RETURNING *;
-        ''', invoice.number, invoice.amount, invoice.invoice_date, invoice.payment_status, invoice_id)
+        ''', invoice.number, invoice.amount, invoice.invoice_date, invoice.payment_status, invoice.vendor_id, invoice_id)
         
         updated_invoice = parse_obj_as(Invoice, dict(row))
     return updated_invoice

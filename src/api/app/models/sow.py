@@ -4,7 +4,7 @@ from datetime import date
 
 class SowEdit(BaseModel):
     number: str
-    msa_id: int
+    vendor_id: int
     start_date: date
     end_date: date
     budget: float

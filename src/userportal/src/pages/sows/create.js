@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
 
 const SOWCreate = () => {
-  const { msaId } = useParams();
+  const { vendorId } = useParams();
   const [sowNumber, setSowNumber] = useState('');
-  const [sowMsaId, setSowMsaId] = useState(msaId);
+  const [sowVendorId, setSowVendorId] = useState(vendorId);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
@@ -15,21 +15,21 @@ const SOWCreate = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const [msas, setMsas] = useState([]);
+  const [vendors, setVendors] = useState([]);
 
   useEffect(() => {
-    const fetchMsas = async () => {
+    const fetchVendors = async () => {
       try {
-        const data = await api.msas.list(-1, 0, -1); // No pagination limit
-        setMsas(data.data);
+        const data = await api.vendors.list(0, -1); // No pagination limit
+        setVendors(data.data);
       } catch (err) {
         console.error(err);
-        setError('Error fetching MSAs');
+        setError('Error fetching Vendors');
         setSuccess(null);
       }
     };
 
-    fetchMsas();
+    fetchVendors();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const SOWCreate = () => {
     try {
       var data = {
         number: sowNumber,
-        msa_id: sowMsaId,
+        vendor_id: sowVendorId,
         start_date: startDate,
         end_date: endDate,
         budget: parseFloat(budget)
@@ -70,17 +70,17 @@ const SOWCreate = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>MSA</Form.Label>
+          <Form.Label>Vendor</Form.Label>
           <Form.Control
             as="select"
-            value={sowMsaId}
-            onChange={(e) => setSowMsaId(e.target.value)}
+            value={sowVendorId}
+            onChange={(e) => setSowVendorId(e.target.value)}
             required
           >
-            <option value="">Select MSA</option>
-            {msas.map((msa) => (
-              <option key={msa.id} value={msa.id}>
-                {msa.title}
+            <option value="">Select Vendor</option>
+            {vendors.map((vendor) => (
+              <option key={vendor.id} value={vendor.id}>
+                {vendor.name}
               </option>
             ))}
           </Form.Control>

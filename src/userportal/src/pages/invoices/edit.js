@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
 
 const InvoiceEdit = () => {
-  const { id } = useParams(); // Extract MSA ID from URL
+  const { id } = useParams(); // Extract Vendor ID from URL
+  const [vendorId, setVendorId] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [amount, setAmount] = useState('');
   const [invoiceDate, setInvoiceDate] = useState('');
@@ -16,7 +17,8 @@ const InvoiceEdit = () => {
   const [success, setSuccess] = useState(null);
 
   const [statuses, setStatuses] = useState([]);
-  
+  const [vendors, setVendors] = useState([]);
+
   useEffect(() => {
     // Fetch data when component mounts
     const fetchData = async () => {
@@ -38,9 +40,23 @@ const InvoiceEdit = () => {
       }
     }
     fetchStatuses();
+    
+    const fetchVendors = async () => {
+      try {
+        const data = await api.vendors.list(0, -1); // No pagination limit
+        setVendors(data.data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching Vendors');
+        setSuccess(null);
+      }
+    };
+
+    fetchVendors();
   }, [id]);
 
   const updateDisplay = (data) => {
+    setVendorId(data.vendor_id);
     setInvoiceNumber(data.number);
     setAmount(data.amount);
     setInvoiceDate(data.invoice_date);
@@ -53,6 +69,7 @@ const InvoiceEdit = () => {
     e.preventDefault();
     try {
       var data = {
+        vendor_id: vendorId,
         number: invoiceNumber,
         amount: amount,
         invoice_date: invoiceDate,
@@ -77,6 +94,22 @@ const InvoiceEdit = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>Vendor</Form.Label>
+          <Form.Control
+            as="select"
+            value={vendorId}
+            onChange={(e) => setVendorId(e.target.value)}
+            required
+          >
+            <option value="">Select Vendor</option>
+            {vendors.map((vendor) => (
+              <option key={vendor.id} value={vendor.id}>
+                {vendor.name}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Invoice Number</Form.Label>
           <Form.Control

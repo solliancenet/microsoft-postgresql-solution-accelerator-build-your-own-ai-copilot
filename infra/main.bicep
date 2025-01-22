@@ -23,6 +23,7 @@ param postgresqlAdminLogin string
 @secure()
 param postgresqlAdminPassword string
 
+param amlDeploymentName string
 
 param userPortalExists bool
 @secure()
@@ -33,7 +34,6 @@ param existingOpenAiInstance object = {
   subscriptionId: ''
   resourceGroup: ''
 }
-
 
 var deployOpenAi = empty(existingOpenAiInstance.name)
 // var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
@@ -58,7 +58,7 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 
 targetScope = 'subscription'
 resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: '${resourceGroupName}'
+  name: resourceGroupName
   location: location
   tags: tags
 }
@@ -98,7 +98,6 @@ module appConfig './shared/appconfiguration.bicep' = {
   scope: rg
 }
 
-
 module monitoring './shared/monitoring.bicep' = {
   name: 'monitoring'
   params: {
@@ -137,7 +136,6 @@ module appsEnv './shared/apps-env.bicep' = {
   scope: rg
 }
 
-
 module userPortalApp './app/UserPortal.bicep' = {
   name: 'UserPortal'
   params: {
@@ -164,7 +162,6 @@ module userPortalApp './app/UserPortal.bicep' = {
     secretSettings: []
   }
   scope: rg
-  dependsOn: [ apiApp, monitoring ]
 }
 
 module apiApp './app/API.bicep' = {
@@ -173,11 +170,11 @@ module apiApp './app/API.bicep' = {
     name: '${abbrs.appContainerApps}api-${resourceToken}'
     location: location
     tags: tags
-    keyvaultName: keyVault.outputs.name
     appConfigName: appConfig.outputs.name
     identityName: '${abbrs.managedIdentityUserAssignedIdentities}api-${resourceToken}'
     storageAccountName: storage.outputs.name
     applicationInsightsName: monitoring.outputs.applicationInsightsName
+    documentIntelligenceName: documentIntelligence.outputs.name
     containerAppsEnvironmentName: appsEnv.outputs.name
     containerRegistryName: registry.outputs.name
     exists: userPortalExists
@@ -192,7 +189,6 @@ module apiApp './app/API.bicep' = {
     secretSettings: []
   }
   scope: rg
-  dependsOn: [ monitoring, keyVault ]
 }
 
 module apiAppPostgresqlAdmin './shared/postgresql_administrator.bicep' = {
@@ -260,7 +256,6 @@ module postgresql './shared/postgresql.bicep' = {
   scope: rg
 }
 
-
 module storage './shared/storage.bicep' = {
   name: 'storage'
   params: {
@@ -286,8 +281,38 @@ module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
 }
 
 
+module documentIntelligence './shared/document-intelligence.bicep' = {
+  name: 'documentIntelligence'
+  params: {
+    location: location
+    name: '${abbrs.documentIntelligence}${resourceToken}'
+    skuName: 'S0'
+  }
+  scope: rg
+}
+module languageService './shared/language-service.bicep' = {
+  name: 'languageService'
+  params: {
+    location: location
+    name: '${abbrs.languageService}${resourceToken}'
+    restore: false
+  }
+  scope: rg
+}
 
-
+module amlWorkspace './shared/aml-workspace.bicep' = {
+  name: 'amlWorkspace'
+  params: {
+    location: location
+    workspaceName: '${abbrs.machineLearningServicesWorkspaces}${resourceToken}'
+    endpointName: '${abbrs.machineLearningServicesOnlineEndpoints}${resourceToken}'
+    keyVaultName: keyVault.outputs.name
+    appInsightsName: monitoring.outputs.applicationInsightsName
+    storageAccountName: storage.outputs.name
+    containerRegistryName: registry.outputs.name
+  }
+  scope: rg
+}
 
 output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
@@ -304,6 +329,9 @@ output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin
 
 output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_OPENAI_KEY string = openAi.outputs.key
+
+output AZURE_AML_WORKSPACE_NAME string = amlWorkspace.outputs.workspaceName
+output AZURE_AML_ENDPOINT_NAME string = amlWorkspace.outputs.AML_ENDPOINT_NAME
 
 output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrincipalName
 

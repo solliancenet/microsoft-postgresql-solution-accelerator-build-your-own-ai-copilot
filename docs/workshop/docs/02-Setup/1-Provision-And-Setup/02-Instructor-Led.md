@@ -1,6 +1,6 @@
-# B. Skillable-Based Setup
+# B. Instructor-Led Workshop Setup
 
-This is the start of the _instructor-guided_ track for this workshop. We use the [Skillable VM](https://skillable.com) - a _lab-on-demand_ platform with a built-in Azure subscription and pre-provisioned resources - to give you a fast start. 
+This is the start of the _instructor-guided_ track for this workshop. We use the [Skillable VM](https://skillable.com) - a _lab-on-demand_ platform with a built-in Azure subscription and pre-provisioned resources - to give you a fast start.
 
 !!! question "WERE YOU LOOKING FOR THE SELF-GUIDED OPTION INSTEAD? [You can find that here.](./01-Self-Guided.md)"
 
@@ -97,7 +97,7 @@ Your GitHub Codespaces is running on the _original_ Azure Samples repo for this 
     GITHUB_TOKEN="" gh auth login --hostname github.com --git-protocol https --web --scopes workflow 
     ```
 
-    The command ensures we complete the auth workflow from the web browser using the Git protocol over a secure HTTPS connection, and scope limited to workflow actions. Using an empty GITHUB_TOKEN ensure we don't use an existing token with broader scope. 
+    The command ensures we complete the auth workflow from the web browser using the Git protocol over a secure HTTPS connection, and scope limited to workflow actions. Using an empty GITHUB_TOKEN ensure we don't use an existing token with broader scope.
 
 1. Follow the prompts to complete auth flow. (Expand the sections below for an example)
 

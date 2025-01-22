@@ -16,14 +16,12 @@
 # https://squidfunk.github.io/mkdocs-material/setup/setting-up-a-blog/
 # ---------------------------------
 
-
-
 # Project information .........................................
 site_name: "Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide"
 site_url: https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot
 site_author: Solliance
 site_description: >-
-  Build a custom AI-powered solutions built on top of Azure Database for PostgreSQL and Azure AI.
+  Build custom AI-powered solutions on top of Azure Database for PostgreSQL and Azure AI.
 
 # Repository ..................................................
 repo_name: solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot

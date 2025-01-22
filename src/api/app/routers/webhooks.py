@@ -1,4 +1,4 @@
-from app.lifespan_manager import get_db_connection_pool, get_storage_service
+from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_app_config
 from fastapi import APIRouter, Depends, HTTPException, Request
 from typing import List
 from pydantic import parse_obj_as
@@ -19,7 +19,8 @@ router = APIRouter(
 async def storage_blob_webhook(
     request: Request,
     pool = Depends(get_db_connection_pool),
-    storage_service = Depends(get_storage_service)
+    storage_service = Depends(get_storage_service),
+    app_config = Depends(get_app_config)
 ):
     """Handles incoming webhooks from Azure Blob Storage."""
     # Validate Event Grid Subscription confirmation
@@ -43,6 +44,9 @@ async def storage_blob_webhook(
             print(f"BlobCreated - Container: {containerName} - Filename: {blobName}")
         if (eventType == 'Microsoft.Storage.BlobUpdated'):
             print(f"BlobUpdated - Container: {containerName} - Filename: {blobName}")
+
+
+    docIntelligenceEndpoint = app_config.get_doc_intelligence_endpoint()
 
     return {"message": "Webhook received."}
 

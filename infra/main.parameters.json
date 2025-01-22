@@ -21,7 +21,7 @@
         "value": "${POSTGRESQL_ADMIN_PASSWORD}"
       },
       "postgresqlDatabaseName": {
-        "value": "db-claimsdata"
+        "value": "contracts"
       },
       "portalDefinition": {
         "value": {

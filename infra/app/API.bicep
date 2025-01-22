@@ -2,13 +2,13 @@ param name string
 param location string = resourceGroup().location
 param tags object = {}
 
-param keyvaultName string
 param appConfigName string
 param identityName string
 param storageAccountName string
 param containerRegistryName string
 param containerAppsEnvironmentName string
 param applicationInsightsName string
+param documentIntelligenceName string
 param exists bool
 @secure()
 param appDefinition object
@@ -49,9 +49,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' existing 
   name: storageAccountName
 }
 
-
 resource openAIService 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAIServiceName
+}
+
+resource docIntelligence 'Microsoft.CognitiveServices/accounts@2024-06-01-preview' existing = {
+  name: documentIntelligenceName
+}
+
+resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  scope: docIntelligence
+  name: guid(resourceGroup().id, identity.id, 'Cognitive Services User')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908') // Cognitive Services User role
+    principalId: identity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
 }
 
 resource apiAppRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
@@ -105,6 +118,15 @@ resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-0
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '516239f1-63e1-4d78-a4de-a74fb236a071') // App Configuration Data Reader role
     principalId: identity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource appConfigDocIntelligenceEndpoint 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' = {
+  parent: appConfig
+  name: 'doc-intelligence-endpoint'
+  properties: {
+    value: docIntelligence.properties.endpoints.FormRecognizer
   }
 }
 

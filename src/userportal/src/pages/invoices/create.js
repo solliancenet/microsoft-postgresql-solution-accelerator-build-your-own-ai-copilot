@@ -4,6 +4,7 @@ import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
 
 const InvoiceCreate = () => {
+  const [vendorId, setVendorId] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [amount, setAmount] = useState('');
   const [invoiceDate, setInvoiceDate] = useState('');
@@ -13,7 +14,8 @@ const InvoiceCreate = () => {
   const [success, setSuccess] = useState(null);
 
   const [statuses, setStatuses] = useState([]);
-  
+  const [vendors, setVendors] = useState([]);
+
   useEffect(() => {
     // Fetch data when component mounts
     const fetchStatuses = async () => {
@@ -25,6 +27,19 @@ const InvoiceCreate = () => {
       }
     }
     fetchStatuses();
+
+    const fetchVendors = async () => {
+      try {
+        const data = await api.vendors.list(0, -1); // No pagination limit
+        setVendors(data.data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching Vendors');
+        setSuccess(null);
+      }
+    };
+
+    fetchVendors();
   }, []);
 
 
@@ -32,6 +47,7 @@ const InvoiceCreate = () => {
     e.preventDefault();
     try {
       var data = {
+        vendor_id: vendorId,
         number: invoiceNumber,
         amount: amount,
         invoice_date: invoiceDate,
@@ -63,6 +79,22 @@ const InvoiceCreate = () => {
             onChange={(e) => setFile(e.target.files[0])}
             required
           />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Vendor</Form.Label>
+          <Form.Control
+            as="select"
+            value={vendorId}
+            onChange={(e) => setVendorId(e.target.value)}
+            required
+          >
+            <option value="">Select Vendor</option>
+            {vendors.map((vendor) => (
+              <option key={vendor.id} value={vendor.id}>
+                {vendor.name}
+              </option>
+            ))}
+          </Form.Control>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Invoice Number</Form.Label>

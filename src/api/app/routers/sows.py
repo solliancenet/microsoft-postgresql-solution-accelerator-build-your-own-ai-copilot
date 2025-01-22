@@ -14,7 +14,7 @@ router = APIRouter(
 
 
 @router.get("/", response_model=ListResponse[Sow])
-async def list_sows(msa_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
+async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of SOWs from the database."""
     async with pool.acquire() as conn:
         orderby = 'id'
@@ -22,20 +22,20 @@ async def list_sows(msa_id: int = -1, skip: int = 0, limit: int = 10, sortby: st
             orderby = sortby
         
         if (limit < 0):
-            if(msa_id > 0):
-                rows = await conn.fetch('SELECT * FROM sows WHERE msa_id = $1 ORDER BY $2;', msa_id, orderby)
+            if(vendor_id > 0):
+                rows = await conn.fetch('SELECT * FROM sows WHERE vendor_id = $1 ORDER BY $2;', vendor_id, orderby)
             else:
                 rows = await conn.fetch('SELECT * FROM sows ORDER BY $1;', orderby)
         else:
-            if(msa_id > 0):
-                rows = await conn.fetch('SELECT * FROM sows WHERE msa_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', msa_id, orderby, limit, skip)
+            if(vendor_id > 0):
+                rows = await conn.fetch('SELECT * FROM sows WHERE vendor_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', vendor_id, orderby, limit, skip)
             else:
                 rows = await conn.fetch('SELECT * FROM sows ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
 
         sows = parse_obj_as(list[Sow], [dict(row) for row in rows])
 
-        if (msa_id > 0):
-            total = await conn.fetchval('SELECT COUNT(*) FROM sows WHERE msa_id = $1;', msa_id)
+        if (vendor_id > 0):
+            total = await conn.fetchval('SELECT COUNT(*) FROM sows WHERE vendor_id = $1;', vendor_id)
         else:
             total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
 
@@ -54,7 +54,7 @@ async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
 @router.post("/", response_model=Sow)
 async def create_sow(
     number: str = Form(...),
-    msa_id: int = Form(...),
+    vendor_id: int = Form(...),
     start_date: str = Form(...),
     end_date: str = Form(...),
     budget: float = Form(...),
@@ -69,9 +69,11 @@ async def create_sow(
     # Parse budget
     budget_parsed = float(budget)
 
-    # Get vendor_id from msa_id
+    # Get vendor_id from vendor_id
     async with pool.acquire() as conn:
-        vendor_id = await conn.fetchval('SELECT vendor_id FROM msas WHERE id = $1;', msa_id)
+        vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
+        if vendor_id is None:
+            raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
 
     # Upload file to Azure Blob Storage
     documentName = await storage_service.save_sow_document(vendor_id, file)
@@ -79,10 +81,10 @@ async def create_sow(
     # Create SOW in the database
     async with pool.acquire() as conn:
         sow = await conn.fetchrow('''
-            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, msa_id)
+            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;
-        ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', msa_id)
+        ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', vendor_id)
         
         sow = parse_obj_as(Sow, dict(sow))
     return sow
@@ -99,16 +101,16 @@ async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_con
         sow.start_date = sow_update.start_date
         sow.end_date = sow_update.end_date
         sow.budget = sow_update.budget
-        sow.msa_id = sow_update.msa_id
+        sow.vendor_id = sow_update.vendor_id
 
         # for key, value in sow_update.dict().items():
         #     setattr(sow, key, value)
         row = await conn.fetchrow('''
             UPDATE sows
-            SET number = $1, start_date = $2, end_date = $3, budget = $4, msa_id = $5
+            SET number = $1, start_date = $2, end_date = $3, budget = $4, vendor_id = $5
             WHERE id = $6
             RETURNING *;''',
-            sow.number, sow.start_date, sow.end_date, sow.budget, sow.msa_id, sow_id)
+            sow.number, sow.start_date, sow.end_date, sow.budget, sow.vendor_id, sow_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
         updated_sow = parse_obj_as(Sow, dict(row))

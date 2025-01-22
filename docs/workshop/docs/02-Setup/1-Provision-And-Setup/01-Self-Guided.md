@@ -1,147 +1,299 @@
 # A. Self-Guided Setup
 
-!!! info "Welcome to the Self-Guided Lab Track! · Want the In-Venue Skillable Track instead? [Go here](./02-Skillable.md)"
+Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/0-Prerequisites#self-guided) section if you need more details.
+
+!!! question "WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? [You can find that here.](./02-Instructor-Led.md)"
 
 ---
 
-## 1. Review Pre-Requisites
+You will need to install the required software locally and provision the Azure infrastructure yourself, as described on the tabs below.
 
-You need a valid Azure subscription, GitHub account, and access to relevant Azure OpenAI models, to complete this lab on your own. You'll need to provision the infrastructure yourself, as described below. Review the [Pre-Requisites](/contoso-chat/02-Setup/0-PreRequisites#self-guided) section if you need more details.
+!!! task "Select each of the tabs below, in order, to complete the required setup."
 
----
+=== "1. Install software"
 
-## 2. Launch GitHub Codespaces
+    The required development environment uses a Visual Studio (VS) Code editor with a Python runtime. To complete this lab on your own computer, you must install the following required software. On completing this step, you should have installed:
 
-Our development environment uses a Visual Studio Code editor with a Python runtime. The Contoso Chat sample repository is instrumented with a [dev container](https://containers.dev) which specifies all required tools and dependencies. At the end of this step you should have:
+    - [X] Azure command-line tools
+    - [X] Git
+    - [X] Python 3.11+
+    - [X] Node.js
+    - [X] Docker desktop
+    - [X] Visual Studio Code and required extensions
+    - [X] pgAdmin
 
-- [X] Launched GitHub Codespaces to get the pre-built dev environment.
-- [X] Fork the sample repo to your personal GitHub profile.
+    ## **1.1 Install Azure command-line tools**
 
----
+    !!! task "In this task, you will install the Azure CLI and the Azure Developer CLI (`azd`)."
 
-### 2.1 Navigate to GitHub & Login
-
-1. Open a browser tab (T1) and navigate to the link below.
-        ``` title="Tip: Click the icon at far right to copy link"
-        https://aka.ms/contoso-chat/prebuild
-        ```
-1. You will be prompted to log into GitHub. **Login now with your GitHub profile.**
-
----
-
-### 2.2 Setup GitHub Codespaces
-
-1. You will see a page titled **"Create codespace for Azure-Samples/contoso-chat"**
-    - Check that the Branch is `msignite-LAB401`
-    - Click dropdown for **2-core** and verify it is `Prebuild ready`
-
-    !!! tip "Using the pre-build makes the GitHub Codespaces load up faster."
-
-1. Click the green "Create codespace" button
-    - You should see a new browser tab open to a link ending in `*.github.dev`
-    - You should see a Visual Studio Code editor view loading (takes a few mins)
-    - When ready, you should see the README for the "Contoso Chat" repository
+        - The Azure CLI enables you to execute Azure CLI commands from a command prompt or VS Code terminal on your local machine.
+        - The Azure Developer CLI (`azd`) is an open-source tool that accelerates provisioning and deploying app resources on Azure.
     
-    !!! warning "Do NOT Follow those README instructions. Continue with this workshop guide!"
+    1. Download and install the latest version of the [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest).
 
----
+    2. Once installed, open a command prompt on your machine and verify the installation by running the following:
 
-### 2.3 Fork Repo To Your Profile
+        ```azurecli title=""
+        az version
+        ```
 
-The Codespaces is running on the original Azure Samples repo. Let's create a fork from Codespaces, so we have a personal copy to modify. For convenience, we'll follow [this process](https://docs.github.com/codespaces/developing-in-a-codespace/creating-a-codespace-from-a-template#publishing-to-a-repository-on-github) which streamlines the process once you make any edit.
+    3. Next, install the `ml` extension to the Azure CLI.
+ 
+        !!! info "The ml extension to the Azure CLI is the enhanced interface for Azure Machine Learning. It enables you to train and deploy models from the command line, with features that accelerate scaling data science up and out while tracking the model lifecycle.""
 
-1. Lets create an empty file from the VS Code Terminal.
+        To install the `ml` extensinon you should first remove any existing installation of the extension and also the CLI v1 `azure-cli-ml` extension:
+    
+        ```azurecli title=""
+        az extension remove -n azure-cli-ml
+        az extension remove -n ml
+        ```
 
-    ``` title="Tip: Click the icon at far right to copy command"
-    touch .workshop-notes.md
-    ```
+        Then, run the following to install the latest version of the `ml` extension:
+    
+        ```azurecli title=""
+        az extension add -n ml
+        ```
 
-1. This triggers a notification (blue "1") in Source Control icon on sidebar
-1. Click the notification to start the Commit workflow 
-1. Enter a commit message ("Forking Contoso Chat") and click "Commit"
-1. You will now be prompted to "Publish Branch" 
-    - You should see 2 options (remote = original repo, origin = your fork)
-    - Select the `origin` option (verify that the URL is to your profile)
-1. This will create a fork of the repository in your profile
-    - It also updates the GitHub Codespaces to use your fork for commits
-    - You are now ready to move to the next step!
+    4. Install Azure Developer CLI by following the instructions for your OS at <https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd>.
 
----
+    5. Execute the following command from a terminal prompt to verify the tools were installed:
+        
+        ```bash title=""
+        azd version
+        ```
 
-### 2.4 Verify Dependencies
+    ## **1.2 Install Git**
 
-Use the following commands in the VS Code terminal to verify these tools are installed.
+    9. Download Git from <https://git-scm.com/downloads>.
 
-```bash
-python --version
-```
-```bash
-fastapi --version
-```
-```bash
-prompty --version
-```
-```bash
-az version
-```
-```bash
-azd version
-```
+    10. Run the installer using the default options.
 
-You are now ready to connect your VS Code environment to Azure.
+    ## **1.3 Install Python**
 
----
+    6. Download Python 3.11+ from <https://python.org/downloads>.
 
-## 3. Authenticate With Azure 
+    7. Run the installer using the default options.
 
-To access our Azure resources, we need to be authenticated from VS Code. Return to the GitHub Codespaces tab, and open up a VS Code terminal. Then, complete these two steps:
+    8. Use the following command from a terminal prompt to verify Python was installed:
 
-!!! task "Step 1: Authenticate with `az` for post-provisioning tasks"
+        ```bash title=""
+        python --version
+        ```
 
-1. Log into the Azure CLI `az` using the command below. 
+    ## **1.4 Install Node.js**
 
-    ```
-    az login --use-device-code
-    ```
+    11. Download Node.js from <https://nodejs.org/en/download/>, ensuring you select the most recent LTS version and your correct OS.
 
-1. Copy the 8-character code shown to your clipboard, then control-click the link to visit [https://microsoft.com/devicelogin](https://microsoft.com/devicelogin) in a new browser tab.
+    12. Run the installer using the default options.
 
-1. Select the account with the Username shown in the Skillable Lab window. Click "Continue" at the `are you sure?` prompt, and then close the tab
+    ## **1.5 Install Docker Desktop**
 
-1. Back in the Terminal, press Enter to select the default presented subscription and tenant.
+    1. Download and install Docker Desktop for your OS using instructions provided on the <https://docs.docker.com/desktop/>:
+
+           - [Linux](https://docs.docker.com/desktop/setup/install/linux/)
+           - [Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
+           - [Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+
+    ## **1.6 Install Visual Studio Code (and extensions)**
+
+    Visual Studio Code is a versatile, open-source code editor that combines powerful features with an intuitive interface to help developers efficiently write, debug, and customize their projects.
+    
+    The Prompty extension enhances productivity by providing intelligent code completions and suggestions, while the Python extension offers a comprehensive environment for Python development, including robust debugging, linting, and testing capabilities.
+
+    3.  Download and install from <https://code.visualstudio.com/download>.
+
+        - Use the default options in the installer.
+
+    4.  After installation completed, launch Visual Studio Code.
+
+    5.  In the **Extensions** menu, search for and install the following extensions from Microsoft:
+
+        - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+        - [Prompty](marketplace.visualstudio.com/items?itemName=ms-toolsai.prompty)
+
+            !!! info "[Prompty](https://prompty.ai) is an open-source generative AI templating framework that makes it easy to experiment with prompts, context, parameters, and other ways to change the behavior of language models. The easiest way to get started with **Prompty**, is to use the Visual Studio Code Extension. The offers an intuitive prompt playground within VS Code to streamline the prompt engineering process."
+
+    6.  Close VS Code.
+
+    ## **1.7 Install pgAdmin**
+
+    Throughout this workshop, you will use pgAdmin to run queries against your PostgreSQL database. pgAdmin is the leading Open Source management tool for Postgres.
+
+    7.  Download pgAdmin from <https://www.pgadmin.org/download/>.
+
+    8.  Run the installer using the default options.
+
+=== "2. Fork repo"
+
+    You must create a copy (known as a fork) of the GitHub repo and then clone that onto your local computer so you can work with the contents of the repo.
+
+    At the end of this step, you should have:
+    
+    - [X] Forked the **PostgreSQL Solution Accelerator: Build your own AI Copilot** repo to your personal GitHub profile
+    - [X] Created a local clone of the repo
+    - [X] Opened the cloned repo in Visual Studio Code
 
 
-!!! task "Step 2: Authenticate with `azd` for provisioning & managing resources"
+    ## 2.1 Fork Repo To Your Profile
 
-1. Log into the Azure Developer CLI using the command below. 
+    Forking in GitHub refers to creating a personal copy of a public repository, which allows you to freely experiment with changes without affecting the original project.
 
-    ```
-    azd auth login --use-device-code
-    ```
+    1. To fork the **PostgreSQL Solution Accelerator: Build your own AI Copilot** repo, open a new browser window or tab and navigate to the repo at <https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot>.
 
-1. Follow the same process as before - copy code, paste it when prompted, select account.
-1. Note: you won't need to enter the password again. Just select the Skillable lab account.
+    2. Select the **Fork** button to create a copy of the repo in your GitHub profile.
 
----
+        ![The Fork button is highlighted on the GitHub toolbar.](../../img/git-hub-toolbar-fork.png)
 
-## 4. Provision & Deploy App
+    3. Login with your GitHub profile, if prompted.
 
-_This project is an `azd-template`! It defines infrastructure-as-code assets that are used by the Azure Developer CLI to provision and manage your solution infrastructure resources_.
+    3. On the **Create a new fork** page, select **Create fork** to make a copy of the repo under your GitHub profile.
 
+        ![Screenshot of the Create a new fork page in GitHub.](../../img/github-create-fork.png)
 
-1. Provision & deploy the solution with one command: ```azd up```
+    4. The forked repo will open within your profile. On the GitHub page for your fork that opens, select the **Code** button and select the **Copy URL to clipboard** button next to the repo's HTTPS clone link:
 
-1. You will be prompted for various inputs:
+        ![The GitHub Code menu is expanded and the copy button for the HTTPS clone link is highlighted.](../../img/github-code-clone-https.png)
 
-    - Subscription - specify your own active Azure subscription ID
-    - Environment name for resource group - we recommend using `AITOUR` 
-    - Location for deployment - we recommend using `francecentral`
+    5. Open a new command prompt and change directories to the folder within which you want to clone the repo (e.g., D:\repos).
 
-        !!! tip "Refer to [Region Availability](#region-availability) guidance and pick the option with desired models and quota available."
+    6. Once in the desired directory, run the following `git clone` command to download a copy of your fork onto your local machine. Ensure you replace the `[url_of_your_forked_repo]` token with the clone link you copied in the previous step.
 
-1. Wait for the process to complete. It may take 15-20 minutes or more.
-1. On successful completion you will see a **`SUCCESS: ...`** message on the console.
+        ```bash title=""
+        git clone [url_of_your_forked_repo]
+        ```
 
+    7. Once the repository has been cloned, change directories at the command prompt to the folder of the cloned repo, then run the following command to open the project in Visual Studio Code:
+
+        ```bash title=""
+        code .
+        ```
+
+    !!! tip "Leave Visual Studio Code open as you will be using it throughout the remainder of the workshop."
+
+=== "3. Provision Azure infrastructure"
+
+    _This project uses an `azd-template`, which defines infrastructure-as-code assets that are used by the Azure Developer CLI to provision and manage your solution infrastructure resources_. On completing this step, you should have:
+
+    - [X] Authenticated with Azure
+    - [X] Provisioned Azure resources
+    - [X] Deployed the starter solution
+
+    This solution contains an Azure Developer CLI template that provisions various required resources in Azure and deploys the starter app to Azure Container Apps (ACA).
+
+    You are now ready to connect your VS Code environment to Azure.
+
+    ## 3.1 Authenticate With Azure
+    
+    1. To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:
+    
+    !!! task "Step 1: Authenticate with `az` for post-provisioning tasks"
+    
+    1. Log into the Azure CLI `az` using the command below.
+    
+        ```bash  title=""
+        az login
+        ```
+
+    2. Complete the login process in the browser window that opens.
+
+        !!! info "If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id> to specify the correct subscription to use."
+
+    !!! task "Step 2: Authenticate with `azd` for provisioning & managing resources"
+    
+    3. Log in to Azure Developer CLI. This is only required once per-install.
+    
+        ```bash title=""
+        azd auth login
+        ```
+    
+    ## 3.2 Provision & Deploy App
+
+    Provision & deploy the solution with one command: ```azd up```
+
+    1. Use `azd up` to provision your Azure infrastructure and deploy the web application to Azure.
+    
+        ```bash title=""
+        azd up
+        ```
+
+        !!! task "You will be prompted for various inputs for the `azd up` command"
+    
+              - Subscription - specify your own active Azure subscription ID
+              - Environment name for resource group
+              - Location for deployment
+                - Refer to [Region Availability](#region-availability) guidance and pick the option with desired models and quota available.
+    
+    2. Wait for the process to complete. It may take 5-10 minutes or more.
+ 
+    3. On successful completion you will see a `SUCCESS: ...` message on the console.
+
+    !!! tip "After running `azd up` on the **ACA** deployment and the deployment finishes, you can locate the URL of the web application by navigating to the deployed resource group in the Azure portal. Click on the link to the new resource group in the output of the script to open the Azure portal."
+
+=== "4. Setup dev environment"
+
+    In this step, you will configure your Python development environment in Visual Studio Code. At the end of this step, you should have:
+
+    - [X] Created a Python virtual environment
+    - [X] Installed the required Python libraries from `requirements.txt`
+    - [X] Connected to your database using pgAdmin
+
+    ## **4.1 Create a Python virtual environment**
+
+    Virtual environments in Python are essential for maintaining a clean and organized development space, allowing individual projects to have their own set of dependencies, isolated from others. This prevents conflicts between different projects and ensures consistency in your development workflow. By using virtual environments, you can manage package versions easily, avoid dependency clashes, and keep your projects running smoothly. It's a best practice that keeps your coding environment stable and dependable, making your development process more efficient and less prone to issues.
+    
+    1. Return to Visual Studio Code, where you have the **PostgreSQL Solution Accelerator: Build your own AI Copilot** project open.
+    
+    2. In Visual Studio Code, open a new terminal window and change directories to the `src/api` folder of the repo.
+    
+    3. Create a virtual environment named `.venv` by running the following command at the terminal prompt:
+    
+        ```bash
+        python -m venv .venv 
+        ```
+    
+        The above command will create a `.venv` folder under the `api` folder, which will provide a dedicated Python environment for the `api` project that can be used throughout this lab.
+    
+    4. Activate the virtual environment.
+
+        !!! task "Select the appropriate command for your OS and shell from the table below and execute it at the terminal prompt."
+    
+            | Platform | Shell | Command to activate virtual environment |
+            | -------- | ----- | --------------------------------------- |
+            | POSIX | bash/zsh | `source .venv/bin/activate` |
+            | | fish | `source .venv/bin/activate.fish` |
+            | | csh/tcsh | `source .venv/bin/activate.csh` |
+            | | pwsh | `.venv/bin/Activate.ps1` |
+            | Windows | cmd.exe | `.venv\Scripts\activate.bat` |
+            | | PowerShell | `.venv\Scripts\Activate.ps1` |
+    
+    ## **4.2 Install required Python libraries**
+    
+    The `requirements.txt` file in the `src\api` folder contains the set of Python libraries needed to run the Python components of the solution accelerator.
+
+    !!! tip "Open the `src\api\requirements.txt` file in the repo to review the required libraries and the versions that are being used."
+
+    1. From the integrated terminal window in VS Code, run the following command to install the required libraries in your virtual environment:
+
+        ```bash title=""
+        pip install -r requirements.txt
+        ```
+
+    ## **4.3 Connect to your database from pgAdmin**
+
+    You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
+
+    8. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
+    9. On the Azure Database for PostgreSQL - Flexible Server page:
+       1. Select **Connect** under **Settings** in the left-hand resource menu.
+       2. Select the **TODO** database from the **Database name** dropdown.
+       3. Expand the **pgAdmin 4** block.
+       4. Follow the steps provided to connect to your database from pgAdmin.
+
+        TODO: Update screenshot with correct database name
+
+        ![Screenshot of the steps to connect to Azure Database for PostgreSQL - Flexible Server from pgAdmin](../../img/connect-to-pgadmin.png)
+
+    !!! tip "Leave pgAdmin open as you will be using it throughout the remainder of the workshop."
 ---
 
 ## Next → [Validate Setup](./03-Validation.md)

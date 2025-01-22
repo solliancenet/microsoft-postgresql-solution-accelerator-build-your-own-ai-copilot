@@ -17,9 +17,9 @@ const VendorEdit = () => {
     const [success, setSuccess] = useState(null);
 
     
-    const [showDeleteMsaModal, setShowDeleteMsaModal] = useState(false);
-    const [msaToDelete, setMsaToDelete] = useState(null);
-    const [reloadMsas, setReloadMsas] = useState(false);
+    const [showDeleteSowModal, setShowDeleteSowModal] = useState(false);
+    const [sowToDelete, setSowToDelete] = useState(null);
+    const [reloadSows, setReloadSows] = useState(false);
     
     useEffect(() => {
         // Fetch SOW data when component mounts
@@ -67,11 +67,11 @@ const VendorEdit = () => {
       };
 
 
-  const msasColumns = React.useMemo(
+  const sowColumns = React.useMemo(
     () => [
       {
-        Header: 'Title',
-        accessor: 'title',
+        Header: 'Number',
+        accessor: 'number',
       },
       {
         Header: 'Start Date',
@@ -82,20 +82,24 @@ const VendorEdit = () => {
         accessor: 'end_date',
       },
       {
+        Header: 'Budget',
+        accessor: 'budget',
+      },
+      {
         Header: 'Actions',
         accessor: 'actions',
         Cell: ({ row }) => {
           return (
             <div>
-              <a href={`/msas/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+              <a href={`/sows/${row.original.id}`} className="btn btn-link" aria-label="Edit">
                 <i className="fas fa-edit"></i>
               </a>
               <Button
                 variant="danger"
                 size="sm"
                 onClick={() => {
-                  setMsaToDelete(row.original.id);
-                  setShowDeleteMsaModal(true);
+                  setSowToDelete(row.original.id);
+                  setShowDeleteSowModal(true);
                 }}
               >
                 Delete
@@ -108,26 +112,26 @@ const VendorEdit = () => {
     []
   );
 
-  const handleDeleteMsa = async () => {
+  const handleDeleteSow = async () => {
       try {
-        await api.msas.delete(msaToDelete);
-        setSuccess('MSA deleted successfully!');
+        await api.sows.delete(sowToDelete);
+        setSuccess('SOW deleted successfully!');
         setError(null);
-        setShowDeleteMsaModal(false);
-        setReloadMsas(true);
+        setShowDeleteSowModal(false);
+        setReloadSows(true);
       } catch (err) {
         setSuccess(null);
         setError(err.message);
       }
     }
       
-  const fetchMsas = async () => {
+  const fetchSows = async () => {
     try {
-      const data = await api.msas.list(id, 0, -1); // No pagination limit
+      const data = await api.sows.list(id, 0, -1); // No pagination limit
       return data;
     } catch (err) {
       console.error(err);
-      setError('Error fetching MSAs');
+      setError('Error fetching SOWs');
       setSuccess(null);
     }
   }
@@ -204,24 +208,24 @@ const VendorEdit = () => {
       <hr />
 
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h2 className="h2">MSAs</h2>
-        <Button variant="primary" onClick={() => window.location.href = `/msas/create/${id}`}>
-          New MSA <i className="fas fa-plus" />
+        <h2 className="h2">SOWs</h2>
+        <Button variant="primary" onClick={() => window.location.href = `/sows/create/${id}`}>
+          New SOW <i className="fas fa-plus" />
         </Button>
       </div>
 
-      <PagedTable columns={msasColumns}
-        fetchData={fetchMsas}
-        reload={reloadMsas}
+      <PagedTable columns={sowColumns}
+        fetchData={fetchSows}
+        reload={reloadSows}
         showPagination={false}
         />
 
       <ConfirmModal
-        show={showDeleteMsaModal}
-        handleClose={() => setShowDeleteMsaModal(false)}
-        handleConfirm={handleDeleteMsa}
-        title="Delete MSA"
-        message="Are you sure you want to delete this MSA?"
+        show={showDeleteSowModal}
+        handleClose={() => setShowDeleteSowModal(false)}
+        handleConfirm={handleDeleteSow}
+        title="Delete SOW"
+        message="Are you sure you want to delete this SOW?"
       />
     </div>
   );

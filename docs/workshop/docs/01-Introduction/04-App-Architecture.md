@@ -1,4 +1,4 @@
-# 3. The App Architecture
+# 4. App Architecture
 
 The objective of this solution is to automate the extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.
 
@@ -18,7 +18,7 @@ The second part of the application is an AI copilot, which allows users to ask q
 
 The attached image is a flowchart illustrating the architecture of an AI Copilot with Retrieval-Augmented Generation (RAG). The flowchart shows how users interact with the system through a browser-based Copilot Chat interface. The users' queries are sent to a Single Page Application (SPA) Web App, which communicates with an API. The API interacts with Azure OpenAI to generate prompt embeddings and perform vector searches. The vector search results are retrieved from an Azure Database for PostgreSQL Flexible Server (Vector Store). The completion response, which contains AI-generated insights, is then sent back to the API and displayed to the users through the SPA Web App. The system also includes components like Key Vault and Azure App Configuration for secure and efficient management of application settings and secrets.
 
-## Information flow diagrm
+## Information flow diagram
 
 Tying the two architecture components together...
 
@@ -31,6 +31,7 @@ Tying the two architecture components together...
 3. The API saves uploaded documents into a Blob Storage container.
 4. When new documents are added into blob storage an Event Grid trigger is fired, which launches a Data Ingestion Worker Process. This worker process sends the uploaded documents to the Azure AI Document Intelligence service, which uses custom models to efficiently extract text and structure from the documents. Using the built in semantic chunking capability of Document Intelligence, document content is chunked based on document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences, ensuring the chunks are of higher quality for use in RAG pattern queries.
 5. Once processed, the data is validated by a Validation worker process, which uses Azure OpenAI to validate the incoming data conforms to expected standards and is accurate based on other data already in the system.
+   1. Call out the Azure AI extension & GraphRAG & Apache AGE
 6. The output from the Document Ingestion and Validation worker processes is written into Azure Database for PostgreSQL flexible server, which serves as both a relation database and vector store. The data is accessible for further analysis. Azure OpenAI is utilized to generate text embeddings, which are stored for efficient retrieval during the querying process.
 
 ### Out of the System
@@ -41,6 +42,11 @@ Tying the two architecture components together...
 10. A hybrid search is performed on the Azure Database for PostgreSQL Flexible Server, where the system searches for relevant data using the previously generated embeddings.
 11. The search results are combined with additional data if necessary and used to generate a comprehensive response.
 12. This AI-generated completion response is then sent back to the user through the browser interface, providing them with actionable insights based on the data stored in the system. The efficient flow of information ensures users can quickly and accurately obtain the information they need.
+
+TODO: Include details about SEMANTIC RANKER MODEL () and include in the text above
+    - Update data and flow diagrams to talk about semantic ranker for custom model inference.
+    - Blog post to use are reference: <https://techcommunity.microsoft.com/blog/adforpostgresql/introducing-the-semantic-ranking-solution-for-azure-database-for-postgresql/4298781>
+    - Model to use: <https://huggingface.co/BAAI/bge-reranker-v2-m3>
 
 Click on each tab to understand the archtiecture components and processing workflow.
 

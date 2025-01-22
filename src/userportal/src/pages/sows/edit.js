@@ -9,7 +9,7 @@ import PagedTable from '../../components/PagedTable';
 const SOWEdit = () => {
   const { id } = useParams(); // Extract SOW ID from URL
   const [sowNumber, setSowNumber] = useState('');
-  const [msaId, setMsaId] = useState('');
+  const [sowVendorId, setSowVendorId] = useState('');
   const [sowDocument, setSowDocument] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -18,24 +18,25 @@ const SOWEdit = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const [msas, setMsas] = useState([]);
+  const [vendors, setVendors] = useState([]);
 
   const [showDeleteMilestoneModal, setShowDeleteMilestoneModal] = useState(false);
   const [milestoneToDelete, setMilestoneToDelete] = useState(null);
   const [reloadMilestones, setReloadMilestones] = useState(false);
   
   useEffect(() => {
-    const fetchMSAs = async () => {
-      try {
-        const data = await api.msas.list(-1, 0, -1); // No pagination limit
-        setMsas(data.data);
-      } catch (err) {
-        console.error(err);
-        setError('Error fetching MSAs');
-        setSuccess(null);
-      }
-    };
-    fetchMSAs();
+    const fetchVendors = async () => {
+          try {
+            const data = await api.vendors.list(0, -1); // No pagination limit
+            setVendors(data.data);
+          } catch (err) {
+            console.error(err);
+            setError('Error fetching Vendors');
+            setSuccess(null);
+          }
+        };
+    
+        fetchVendors();
   }, [id]);
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const SOWEdit = () => {
 
   const updateDisplay = (data) => {
     setSowNumber(data.number);
-    setMsaId(data.msa_id);
+    setSowVendorId(data.vendor_id);
     setSowDocument(data.document);
     setStartDate(data.start_date);
     setEndDate(data.end_date);
@@ -67,7 +68,7 @@ const SOWEdit = () => {
     try {
       var data = {
         number: sowNumber,
-        msa_id: msaId,
+        vendor_id: sowVendorId,
         start_date: startDate,
         end_date: endDate,
         budget: parseFloat(budget)
@@ -157,17 +158,17 @@ const SOWEdit = () => {
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label>MSA</Form.Label>
+          <Form.Label>Vendor</Form.Label>
           <Form.Control
             as="select"
-            value={msaId}
-            onChange={(e) => setMsaId(e.target.value)}
+            value={sowVendorId}
+            onChange={(e) => setSowVendorId(e.target.value)}
             required
           >
-            <option value="">Select MSA</option>
-            {msas.map((msa) => (
-              <option key={msa.id} value={msa.id}>
-                {msa.title}
+            <option value="">Select Vendor</option>
+            {vendors.map((vendor) => (
+              <option key={vendor.id} value={vendor.id}>
+                {vendor.name}
               </option>
             ))}
           </Form.Control>
@@ -250,8 +251,8 @@ const SOWEdit = () => {
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/sows' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
-        <a href={`/msas/${msaId}`} className="btn btn-link ms-2">
-          Go to MSA
+        <a href={`/vendors/${sowVendorId}`} className="btn btn-link ms-2">
+          Go to Vendor
         </a>
       </Form>
 

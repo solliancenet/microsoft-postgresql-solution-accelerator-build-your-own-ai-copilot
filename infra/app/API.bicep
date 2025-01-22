@@ -59,9 +59,9 @@ resource docIntelligence 'Microsoft.CognitiveServices/accounts@2024-06-01-previe
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
   scope: docIntelligence
-  name: guid(resourceGroup().id, identity.id, 'Cognitive Services Face Recognizer')
+  name: guid(resourceGroup().id, identity.id, 'Cognitive Services User')
   properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '9894cab4-e18a-44aa-828b-cb588cd6f2d7') // Cognitive Services Face Recognizer role
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908') // Cognitive Services User role
     principalId: identity.properties.principalId
     principalType: 'ServicePrincipal'
   }

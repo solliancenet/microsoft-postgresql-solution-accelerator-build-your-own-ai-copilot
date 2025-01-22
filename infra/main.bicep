@@ -98,7 +98,6 @@ module appConfig './shared/appconfiguration.bicep' = {
   scope: rg
 }
 
-
 module monitoring './shared/monitoring.bicep' = {
   name: 'monitoring'
   params: {
@@ -173,11 +172,11 @@ module apiApp './app/API.bicep' = {
     name: '${abbrs.appContainerApps}api-${resourceToken}'
     location: location
     tags: tags
-    keyvaultName: keyVault.outputs.name
     appConfigName: appConfig.outputs.name
     identityName: '${abbrs.managedIdentityUserAssignedIdentities}api-${resourceToken}'
     storageAccountName: storage.outputs.name
     applicationInsightsName: monitoring.outputs.applicationInsightsName
+    documentIntelligenceName: documentIntelligence.outputs.name
     containerAppsEnvironmentName: appsEnv.outputs.name
     containerRegistryName: registry.outputs.name
     exists: userPortalExists
@@ -284,6 +283,7 @@ module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   }
   scope: rg
 }
+
 
 module documentIntelligence './shared/document-intelligence.bicep' = {
   name: 'documentIntelligence'

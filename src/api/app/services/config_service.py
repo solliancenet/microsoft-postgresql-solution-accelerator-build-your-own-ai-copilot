@@ -37,6 +37,9 @@ class ConfigService:
     async def get_storage_account(self) -> str:
         return await self.__get_setting("storage-account")
 
+    async def get_doc_intelligence_endpoint(self) -> str:
+        return await self.__get_setting("doc-intelligence-endpoint")
+
     def get_document_container_name(self) -> str:
         return "documents"
 

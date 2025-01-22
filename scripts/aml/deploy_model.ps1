@@ -25,10 +25,6 @@ foreach ($FILE in $FILES) {
   }
 }
 
-# Source environment variables
-$envVars = azd env get-values | ConvertFrom-Json
-$envVars.Keys | ForEach-Object { $env:$_ = $envVars.$_ }
-
 # Deploy model to Azure Machine Learning Workspace
 az account set --subscription $env:AZURE_SUBSCRIPTION_ID
 

@@ -31,9 +31,6 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     for message in request.chat_history[-request.max_history:]:
         messages.append({"role": message.role, "content": message.content})
 
-    # Add the current user message to the messages list
-    #messages.append({"role": "user", "content": request.message})
-
     # Create a chat prompt template
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -61,6 +58,21 @@ async def get_invoices(query: str = None):
     """Retrieves a list of invoices from the database."""
     pool = await get_db_connection_pool()
     async with pool.acquire() as conn:
+        # if query is not None:
+        #     rows = await conn.fetch('''
+        #         WITH
+        #         retrieval_result AS(
+        #             SELECT id
+        #             FROM invoices
+        #             ORDER BY
+        #                 invoices.embedding <=> azure_openai.create_embeddings('embeddings', $1, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)::vector
+        #             LIMIT 10
+        #         )
+        #         SELECT i.* FROM semantic_reranking($1, array (SELECT id FROM retrieval_result)) ranking
+        #         JOIN invoices i ON ranking.id = i.id
+        #         ORDER BY relevance DESC limit 3;
+        #     ''')
+        # else:
         rows = await conn.fetch('SELECT * FROM invoices;')
         invoices = [dict(row) for row in rows]
     return invoices

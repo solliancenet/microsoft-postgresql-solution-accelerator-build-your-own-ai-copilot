@@ -18,7 +18,7 @@
         <link rel="prev" href="../03/">
       
       
-        <link rel="next" href="../../04-Validate-Data/">
+        <link rel="next" href="../../04-Create-AI-Pipeline/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>3.4 Enable Semantic Ranking - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>4.4 Vectorize existing data - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#34-enable-semantic-ranking" class="md-skip">
+        <a href="#44-vectorize-existing-data" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3.4 Enable Semantic Ranking
+              4.4 Vectorize existing data
             
           </span>
         </div>
@@ -305,12 +305,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../04-Validate-Data/" class="md-tabs__link">
+        <a href="../../04-Create-AI-Pipeline/" class="md-tabs__link">
           
   
     
   
-  04 Validate Data
+  04 Create AI Pipeline
 
         </a>
       </li>
@@ -1035,7 +1035,7 @@
         
   
   <span class="md-ellipsis">
-    3.4 Enable Semantic Ranking
+    4.4 Vectorize existing data
   </span>
   
 
@@ -1072,6 +1072,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1089,11 +1093,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../04-Validate-Data/" class="md-nav__link ">
+            <a href="../../04-Create-AI-Pipeline/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    04 Validate Data
+    04 Create AI Pipeline
   </span>
   
 
@@ -1109,7 +1113,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            04 Validate Data
+            04 Create AI Pipeline
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1122,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Validate-Data/01/" class="md-nav__link">
+      <a href="../../04-Create-AI-Pipeline/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1143,11 +1147,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Validate-Data/02/" class="md-nav__link">
+      <a href="../../04-Create-AI-Pipeline/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4.2 Prompt Engineering With Prompty
+    4.2 Configure Semantic Chunking
   </span>
   
 
@@ -1164,7 +1168,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Validate-Data/03/" class="md-nav__link">
+      <a href="../../04-Create-AI-Pipeline/03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 Validate Data with Azure OpenAI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1196,6 +1242,8 @@
       
         
           
+        
+      
         
       
         
@@ -1347,6 +1395,27 @@
   
   <span class="md-ellipsis">
     5.5 Prompt engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.6 Use Semantic Ranking
   </span>
   
 
@@ -1681,22 +1750,8 @@
   
 
 
-<h1 id="34-enable-semantic-ranking">3.4 Enable Semantic Ranking<a class="headerlink" href="#34-enable-semantic-ranking" title="Permanent link">&para;</a></h1>
-<p>TODO: Figure out what to do here</p>
-<p>This solution accelerator is designed to extend your PostgreSQL instance on Azure with the ability to perform semantic ranking directly in the SQL query language. The solution accelerator provides two components:</p>
-<ol>
-<li>Automated Deployment Script: This script provisions the Semantic Ranker model as an Azure Machine Learning (AML) inference endpoint in your subscription.</li>
-<li>SQL Integration: A SQL User Defined Function (UDF) integrates the Semantic Ranker model directly into SQL queries. The function makes use of the azure_ai extension to make remote calls to the AML inference endpoint.</li>
-</ol>
-<p>The architecture of the Solution Accelerator is shown below:</p>
-<p><img alt="" src="../../img/semantic-ranking-solution-architecture.png" /></p>
-<div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You just learned how to enable semantic ranking capabilities in Azure Database for PostgreSQL!</p>
-</div>
-<div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You completed the integration of GenAI capabilities into your Azure Database for PostgreSQL flexible server!</p>
-<p><em>In this section, you saw how Prompty-based custom evaluators work with AI-Assisted evaluation, to assess the quality of your application using defined metrics like coherence, fluency, relevance, and groundedness. You got a sense for how these custom evaluators are crafted.</em></p>
-</div>
+<h1 id="44-vectorize-existing-data">4.4 Vectorize existing data<a class="headerlink" href="#44-vectorize-existing-data" title="Permanent link">&para;</a></h1>
+<p>TODO: Have users run a script to vectorize existing data in tables that had a <code>vector</code> column added.</p>
 
 
 
@@ -1751,7 +1806,7 @@
         
         
           
-          <a href="../../04-Validate-Data/" class="md-footer__link md-footer__link--next" aria-label="Next: AI-driven Data Validation">
+          <a href="../../04-Create-AI-Pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: AI-driven Data Validation">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next

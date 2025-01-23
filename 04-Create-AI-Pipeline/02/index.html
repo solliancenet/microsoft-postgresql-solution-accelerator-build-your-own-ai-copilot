@@ -12,28 +12,28 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/04-Validate-Data/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/04-Create-AI-Pipeline/02/">
       
       
-        <link rel="prev" href="../03-Integrate-GenAI-Into-PostgreSQL/04/">
+        <link rel="prev" href="../01/">
       
       
-        <link rel="next" href="01/">
+        <link rel="next" href="../03/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
-        <title>AI-driven Data Validation - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>4.2 Configure Semantic Chunking - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +52,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ai-driven-data-validation" class="md-skip">
+        <a href="#42-configure-semantic-chunking" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../img/postgresql.svg" alt="logo">
+  <img src="../../img/postgresql.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AI-driven Data Validation
+              4.2 Configure Semantic Chunking
             
           </span>
         </div>
@@ -224,7 +224,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -243,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../01-Introduction/" class="md-tabs__link">
+        <a href="../../01-Introduction/" class="md-tabs__link">
           
   
     
@@ -263,7 +263,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../02-Setup/" class="md-tabs__link">
+        <a href="../../02-Setup/" class="md-tabs__link">
           
   
     
@@ -283,7 +283,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
+        <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
@@ -305,12 +305,12 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
     
   
-  04 Validate Data
+  04 Create AI Pipeline
 
         </a>
       </li>
@@ -325,7 +325,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../05-Build-Copilot/" class="md-tabs__link">
+        <a href="../../05-Build-Copilot/" class="md-tabs__link">
           
   
     
@@ -345,7 +345,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../06-Add-GraphRAG/" class="md-tabs__link">
+        <a href="../../06-Add-GraphRAG/" class="md-tabs__link">
           
   
     
@@ -365,7 +365,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../Tear-Down/" class="md-tabs__link">
+        <a href="../../Tear-Down/" class="md-tabs__link">
           
   
     
@@ -406,9 +406,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../img/postgresql.svg" alt="logo">
+  <img src="../../img/postgresql.svg" alt="logo">
 
     </a>
     Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide
@@ -435,7 +435,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -488,7 +488,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../01-Introduction/" class="md-nav__link ">
+            <a href="../../01-Introduction/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -521,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-Introduction/01-App-Scenario/" class="md-nav__link">
+      <a href="../../01-Introduction/01-App-Scenario/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -542,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-Introduction/02-App-Architecture/" class="md-nav__link">
+      <a href="../../01-Introduction/02-App-Architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -563,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
+      <a href="../../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -584,7 +584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
+      <a href="../../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -605,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
+      <a href="../../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -660,7 +660,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../02-Setup/" class="md-nav__link ">
+            <a href="../../02-Setup/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -716,7 +716,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../02-Setup/0-Prerequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -781,7 +781,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../02-Setup/1-Provision-And-Setup/" class="md-nav__link ">
+            <a href="../../02-Setup/1-Provision-And-Setup/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -814,7 +814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-Setup/1-Provision-And-Setup/01-Self-Guided/" class="md-nav__link">
+      <a href="../../02-Setup/1-Provision-And-Setup/01-Self-Guided/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -835,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-Setup/1-Provision-And-Setup/02-Instructor-Led/" class="md-nav__link">
+      <a href="../../02-Setup/1-Provision-And-Setup/02-Instructor-Led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -856,7 +856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-Setup/1-Provision-And-Setup/03-Validation/" class="md-nav__link">
+      <a href="../../02-Setup/1-Provision-And-Setup/03-Validation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -923,7 +923,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
+            <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -956,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -977,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -998,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1019,11 +1019,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.4 Enable Semantic Ranking
+    4.4 Vectorize existing data
   </span>
   
 
@@ -1061,6 +1061,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1079,18 +1083,18 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    04 Validate Data
+    04 Create AI Pipeline
   </span>
   
 
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_5" id="__nav_5_label" tabindex="">
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -1099,7 +1103,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            04 Validate Data
+            04 Create AI Pipeline
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1112,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="01/" class="md-nav__link">
+      <a href="../01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1130,14 +1134,99 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="02/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4.2 Configure Semantic Chunking
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    4.2 Prompt Engineering With Prompty
+    4.2 Configure Semantic Chunking
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#write-chunks-to-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write Chunks to PostgreSQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write Chunks to PostgreSQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-api-endpoints-to-insert-chunks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update API Endpoints To Insert Chunks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1154,7 +1243,28 @@
   
   
     <li class="md-nav__item">
-      <a href="03/" class="md-nav__link">
+      <a href="../04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1198,6 +1308,8 @@
       
         
       
+        
+      
     
     
       
@@ -1215,7 +1327,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../05-Build-Copilot/" class="md-nav__link ">
+            <a href="../../05-Build-Copilot/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1248,7 +1360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-Build-Copilot/01/" class="md-nav__link">
+      <a href="../../05-Build-Copilot/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1269,7 +1381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-Build-Copilot/02/" class="md-nav__link">
+      <a href="../../05-Build-Copilot/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1290,7 +1402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-Build-Copilot/03/" class="md-nav__link">
+      <a href="../../05-Build-Copilot/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1311,7 +1423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-Build-Copilot/04/" class="md-nav__link">
+      <a href="../../05-Build-Copilot/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1332,11 +1444,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-Build-Copilot/05/" class="md-nav__link">
+      <a href="../../05-Build-Copilot/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     5.5 Prompt engineering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.6 Use Semantic Ranking
   </span>
   
 
@@ -1397,7 +1530,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../06-Add-GraphRAG/" class="md-nav__link ">
+            <a href="../../06-Add-GraphRAG/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1430,7 +1563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/01/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1451,7 +1584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/02/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1472,7 +1605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/03/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1493,7 +1626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/04/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1514,7 +1647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/05/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1535,7 +1668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/06/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1556,7 +1689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Add-GraphRAG/07/" class="md-nav__link">
+      <a href="../../06-Add-GraphRAG/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1607,7 +1740,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../Tear-Down/" class="md-nav__link ">
+            <a href="../../Tear-Down/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1655,6 +1788,38 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#write-chunks-to-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write Chunks to PostgreSQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write Chunks to PostgreSQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-api-endpoints-to-insert-chunks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update API Endpoints To Insert Chunks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1671,66 +1836,16 @@
   
 
 
-<h1 id="ai-driven-data-validation">AI-driven Data Validation<a class="headerlink" href="#ai-driven-data-validation" title="Permanent link">&para;</a></h1>
-<ol>
-<li>Data ingestion</li>
-<li>Document Intelligence<ol>
-<li>Create custom models in Azure Document Intelligence</li>
-<li>Configure semantic chunking</li>
-<li>Write chunks to Postgres, generating embeddings for each chunk on insert</li>
-<li>Update API endpoints for inserting chunks, or use an existing one (probably not yet created)<ol>
-<li>Update API endpoint code to use a new query that handles embedding with the Azure AI extension.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Data validation<ol>
-<li>Call data validation worker process when items are inserted into database (event grid and storage queues? How to trigger?)</li>
-<li>Use Prompty to create data validation prompt<ol>
-<li>Invoices (more involved, validating dates, invoice totals, line item amounts, etc.)<ol>
-<li>Iterate through a few prompts, showing the process of getting it closer to what is desired for validation.</li>
-</ol>
-</li>
-<li>SOWs (keep this simple, focused on looking for required sections and language)</li>
-<li>Deploy prompty generated prompt into API endpoints</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h1 id="data-pipeline">Data pipeline<a class="headerlink" href="#data-pipeline" title="Permanent link">&para;</a></h1>
-<h2 id="create-custom-document-intelligence-model">Create custom Document Intelligence model<a class="headerlink" href="#create-custom-document-intelligence-model" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>TODO: Add steps for creating custom Document Intelligence models for SOWs and invoices, which extract key document parts.</p>
-</li>
-<li>
-<p>Send documents into Document Intelligence using workflow triggered by documents being added to blob storage.</p>
-</li>
-</ol>
-<h2 id="validate-documents">Validate documents<a class="headerlink" href="#validate-documents" title="Permanent link">&para;</a></h2>
-<p>Create Python worker process that performs validation on document parts, comparing milestone pricing with invoiced amounts and work performed, looking for key SOW components such as compliance sections and wording, etc.</p>
-<ol>
-<li>
-<p>Perform embedding of document chunks/sections.</p>
-</li>
-<li>
-<p>Use Azure OpenAI and GPT-4o models to do semantic similarity comparisons between key sections and expected language. Set a threshold similarity score to validate documents contain appropriate language.</p>
-<ul>
-<li>Provide example document(s) with missing sections or incorrect and missing wording to show how these can be identified and flagged.</li>
-<li>Provide good documents.</li>
-</ul>
-</li>
-<li>
-<p>Insert text and associated embeddings into PostgreSQL.</p>
-</li>
-<li>
-<p>Perhaps use a custom ML model to do numerical comparisons/analysis of project milestones + assigned dollar amount against invoices for the project?</p>
-<ul>
-<li>Try with Azure OpenAI first, but it's not so good with numbers...</li>
-</ul>
-</li>
-</ol>
+<h1 id="42-configure-semantic-chunking">4.2 Configure Semantic Chunking<a class="headerlink" href="#42-configure-semantic-chunking" title="Permanent link">&para;</a></h1>
+<p>TODO</p>
+<p>https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept/retrieval-augmented-generation?view=doc-intel-4.0.0</p>
+<h2 id="write-chunks-to-postgresql">Write Chunks to PostgreSQL<a class="headerlink" href="#write-chunks-to-postgresql" title="Permanent link">&para;</a></h2>
+<p>TODO</p>
+<h3 id="update-api-endpoints-to-insert-chunks">Update API Endpoints To Insert Chunks<a class="headerlink" href="#update-api-endpoints-to-insert-chunks" title="Permanent link">&para;</a></h3>
+<p>TODO</p>
+<div class="admonition success">
+<p class="admonition-title">CONGRATULATIONS. You just learned the key quality metrics we'll assess with AI</p>
+</div>
 
 
 
@@ -1768,7 +1883,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3.4 Enable Semantic Ranking">
+          <a href="../01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.1 Extract Data with Document Intelligence">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1778,20 +1893,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                3.4 Enable Semantic Ranking
+                4.1 Extract Data with Document Intelligence
               </div>
             </div>
           </a>
         
         
           
-          <a href="01/" class="md-footer__link md-footer__link--next" aria-label="Next: 4.1 Extract Data with Document Intelligence">
+          <a href="../03/" class="md-footer__link md-footer__link--next" aria-label="Next: 4.3 Validate Data with Azure OpenAI">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                4.1 Extract Data with Document Intelligence
+                4.3 Validate Data with Azure OpenAI
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1827,12 +1942,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
   <!-- Add scripts that need to run before here -->
   
-      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   <!-- Add scripts that need to run afterwards here -->

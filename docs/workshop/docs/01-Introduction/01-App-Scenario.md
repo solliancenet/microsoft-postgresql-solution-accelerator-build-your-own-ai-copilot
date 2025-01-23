@@ -1,57 +1,19 @@
-# 1. The App Scenario
+# 1.1 The App Scenario
 
-In the financial services industry, validating contracts, statements of work (SOWs), and invoices poses distinct challenges. This is particularly true when it comes to ensuring that invoices align with SOWs, especially for milestone-based payments and other specific deliverables. Traditionally, this validation process is manual, requiring meticulous comparison and cross-checking, often leading to delays, errors, and elevated operational costs. This accelerator explores a high-level architectural solution utilizing Microsoft Azure's comprehensive suite of services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
+## Streamlining Contract Validation in Financial Services
 
-Here are some use cases and advantages:
+In the financial services industry, validating contract-related documents such as Statements of Work (SOWs) and invoices presents unique challenges. Ensuring that invoices align with SOWs, especially for milestone-based payments and specific deliverables, can be a meticulous and error-prone process. Traditionally, this validation involves manual comparison and cross-checking, often leading to delays, errors, and increased operational costs. This accelerator offers a solution that leverages Azure Database for PostgreSQL - Flexible and Azure's comprehensive suite of AI services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
 
-**Use Cases**:
+The accelerator is designed to demonstrate how an existing financial services application can be enhanced by integrating advanced AI capabilities into Azure Database for PostgreSQL through the Azure AI extension and incorporating Azure OpenAI's GPT-4 model to validate and review contract-related documents.
 
-1. **Accuracy and Compliance**
-   - Ensure that invoices match the services or products agreed upon in the SoW.
-   - Detect discrepancies between invoices and the SoW to prevent overbilling or underbilling.
+## Getting Started with the Woodgrove Bank Application
 
-2. **Automated Validation**
-   - Automatically validate invoices against contract terms, including pricing, quantities, and service descriptions.
-   - Reduce the manual effort required for invoice verification and approval.
+You have been provided with code and deployment scripts for the _Woodgrove Bank_ web application. This application comprises an enterprise user portal integrated with a custom backend API. You will enhance this starter application by integrating Azure AI services throughout this accelerator. Key steps include:
 
-3. **Fraud Detection**
-   - Identify potential fraudulent activities by detecting inconsistencies between the invoices and the SoW.
-   - Implement anomaly detection algorithms to flag unusual patterns or deviations.
+1. **Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL**: Utilize the Azure AI `azure_ai`, PGVector (`vector`), and Apache AGE (`age`) extensions to enrich your PostgreSQL database with advanced GenAI capabilities.
+2. **Automating Data Validation with AI:** Enhance the data ingestion process with automated, AI-driven validation using Azure Document Intelligence and Azure AI services.
+3. **Building a Copilot:** Create an intelligent assistant using Azure OpenAI and Azure Database for PostgreSQL - Flexible Server, incorporating the Retrieval Augmented Generation (RAG) design pattern to ensure its responses are based on the private data maintained by the enterprise.
+4. **Updating the Backend API:** Modify the backend API to provide the necessary endpoints for interacting with Azure services (Azure OpenAI and Azure Database for PostgreSQL).
+5. **Enhancing the Frontend UI:** Improve the frontend user interface to facilitate interaction with the copilot.
 
-4. **Budget Management**
-   - Monitor spending by comparing invoices to the budgeted amounts in the SoW.
-   - Provide insights into budget adherence and financial planning.
-
-5. **Streamlined Approval Workflow**
-   - Automate the approval process by routing invoices to the appropriate stakeholders for review.
-   - Track the status of invoices and ensure timely payments.
-
-6. **Dispute Resolution:**
-   - Facilitate quicker resolution of disputes by providing a clear comparison of invoices and the SoW.
-   - Maintain a record of discrepancies for future reference and audit trails.
-
-**Advantages**:
-
-- **Increased Efficiency:** Automate repetitive tasks and reduce manual effort, allowing employees to focus on more strategic activities.
-- **Enhanced Accuracy:** Minimize errors and ensure that invoices align with contract terms, reducing the risk of financial discrepancies.
-- **Cost Savings:** Detect and prevent overbilling, leading to significant cost savings over time.
-- **Improved Transparency:** Provide clear visibility into invoice processing and SoW adherence, enhancing accountability.
-- **Better Compliance:** Ensure compliance with contractual terms and internal policies, reducing legal and financial risks.
-
-Such an application can be integrated with existing financial and accounting systems to streamline the entire process. By leveraging AI and machine learning, it can continuously learn and improve its accuracy in detecting discrepancies and anomalies.
-
-The workshop teaches you to **build, evaluate, and deploy a financial services copilot** on Azure Database for PostgreSQL and Azure AI. The application scenario involves an enterprise **frontend** (User Portal) integrated with a custom copilot **backend** (API app), to provide data management and a chat-based customer support experience to users. *Click each tab below, to learn more!*
-
----
-
-=== "Woodgrove Web (User Portal)"
-
-    **Woodgrove Web** is the ... TODO: Add content
-
-    ![Woodgrove User Portal](./../img/chat-ui.png)
-
-=== "Woodgrove API"
-
-    **Woodgrove API** is the ... TODO: Add content
-
-    ![Woodgrove Chat AI](./../img/chat-ai.png)
+This solution accelerator aims to teach you how to integrate AI capabilities into an existing application by leveraging Microsoft Azure's AI services to automate and streamline the validation of contract-related documents in the financial services industry. This integration results in faster, more accurate, and cost-effective processes. Additionally, the copilot will provide intelligent assistance, enabling users to gain actionable insights from data stored in the Azure Database for PostgreSQL, enhancing their overall experience.

@@ -17,8 +17,10 @@ from app.routers import (
     webhooks
 )
 
+# Load environment variables from the .env file
 load_dotenv()
 
+# Instantiate the FastAPI app
 app = FastAPI(
     lifespan=lifespan,
     title="Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator API",
@@ -36,6 +38,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add routers to various API endpoints
 app.include_router(completions.router)
 app.include_router(deliverables.router)
 app.include_router(documents.router)

@@ -9,29 +9,26 @@ CREATE TABLE IF NOT EXISTS vendors (
     contact_email text NOT NULL,
     contact_phone text NOT NULL,
     type text NOT NULL,
-    metadata jsonb, -- additional information about the vendor
-    embeddings vector(3072) -- embeddings for the vendor
+    metadata jsonb -- additional information about the vendor
 );
 
 -- Status table: information about the status of a invoice, milestone, etc
+DROP TABLE IF EXISTS status;
+
 CREATE TABLE status (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT
 );
--- Insert default status values - if table hasn't been populated yet
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM status) THEN
-        INSERT INTO status (id, name, description) VALUES (1, 'Pending', 'Awaiting action');
-        INSERT INTO status (id, name, description) VALUES (2, 'In Progress', 'In progress');
-        INSERT INTO status (id, name, description) VALUES (3, 'In Review', 'Review is required');
-        INSERT INTO status (id, name, description) VALUES (4, 'Cancelled', 'The process was stopped');
-        INSERT INTO status (id, name, description) VALUES (5, 'Overdue', 'The invoice has passed the due date without payment');
-        INSERT INTO status (id, name, description) VALUES (6, 'Paid', 'The invoice has been fully paid');
-        INSERT INTO status (id, name, description) VALUES (7, 'Completed', 'Work has been finished');
-    END IF;
-END $$;
+
+-- Insert status values
+INSERT INTO status (id, name, description) VALUES (1, 'Pending', 'Awaiting action');
+INSERT INTO status (id, name, description) VALUES (2, 'In Progress', 'In progress');
+INSERT INTO status (id, name, description) VALUES (3, 'In Review', 'Review is required');
+INSERT INTO status (id, name, description) VALUES (4, 'Cancelled', 'The process was stopped');
+INSERT INTO status (id, name, description) VALUES (5, 'Overdue', 'The invoice has passed the due date without payment');
+INSERT INTO status (id, name, description) VALUES (6, 'Paid', 'The invoice has been fully paid');
+INSERT INTO status (id, name, description) VALUES (7, 'Completed', 'Work has been finished');
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
 CREATE TABLE IF NOT EXISTS sows (
@@ -42,8 +39,7 @@ CREATE TABLE IF NOT EXISTS sows (
     end_date DATE NOT NULL,
     budget DECIMAL(18,2) NOT NULL,
     document text NOT NULL,
-    metadata JSONB, 
-    embeddings vector(3072), -- embeddings for sows
+    metadata JSONB,
     FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
 
@@ -57,7 +53,6 @@ CREATE TABLE IF NOT EXISTS invoices (
     payment_status VARCHAR(50) NOT NULL,
     document text NOT NULL,
     metadata JSONB, -- Tax info, discounts, or itemized breakdown
-    embeddings vector(3072), -- embeddings for invoices
     FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
 

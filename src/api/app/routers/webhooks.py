@@ -82,7 +82,8 @@ async def storage_blob_webhook(
             }
             await conn.execute('''
                 UPDATE sows
-                SET embeddings = $1, metadata = $2
+                SET embeddings = $1, 
+                    metadata = $2
                 WHERE id = $3;
             ''', embeddings, json.dumps(metadata), objectId)
 
@@ -90,7 +91,9 @@ async def storage_blob_webhook(
             metadata = extract_invoice_metadata(full_text)
             await conn.execute('''
                 UPDATE invoices
-                SET extracted_text = $2, embeddings = $3, metadata = $4, invoice_date = $5, payment_status = $6, chunk_text = $7
+                SET extracted_text = $2, 
+                    embeddings = $3, 
+                    metadata = $4, invoice_date = $5, payment_status = $6, chunk_text = $7
                 WHERE id = $8;
             ''', metadata['number'], embeddings, json.dumps(metadata), metadata['invoice_date'], metadata['payment_status'], chunk_text, objectId)
 

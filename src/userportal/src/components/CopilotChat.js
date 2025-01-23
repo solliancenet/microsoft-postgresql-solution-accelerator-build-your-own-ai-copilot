@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import api from '../api/Api'; // Adjust the path as necessary
 
-const AIChat = () => {
+const CopilotChat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
@@ -17,7 +17,7 @@ const AIChat = () => {
 
     setIsThinking(true);
 
-    const userMessage = { sender: 'user', text: prompt };
+    const userMessage = { role: 'user', content: prompt };
     setMessages([...messages, userMessage]);
 
     setError('');
@@ -25,8 +25,8 @@ const AIChat = () => {
     try {
       const response = await api.completions.chat(prompt, messages);
 
-      const agentMessage = { sender: 'agent', text: response };
-      setMessages([...messages, userMessage, agentMessage]);
+      const assistantMessage = { role: 'assistant', content: response };
+      setMessages([...messages, userMessage, assistantMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
       setError('Error sending message. Please try again.');
@@ -46,10 +46,10 @@ const AIChat = () => {
     <div className="ai-chat container mt-4">
       <div className="messages mb-3 border p-3" style={{ minHeight: '20em', maxHeight: '20em', overflowY: 'scroll' }}>
         {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender} mb-2 d-flex ${msg.sender === 'user' ? 'justify-content-end' : 'justify-content-start'}`}>
+          <div key={index} className={`message ${msg.role} mb-2 d-flex ${msg.role === 'user' ? 'justify-content-end' : 'justify-content-start'}`}>
             {!error && index === messages.length - 1 && <div ref={messagesEndRef} />}
-            <div className={`alert ${msg.sender === 'user' ? 'alert-primary' : 'alert-secondary'}`} style={{ maxWidth: '90%' }} role="alert">
-              <ReactMarkdown>{msg.text}</ReactMarkdown>
+            <div className={`alert ${msg.role === 'user' ? 'alert-primary' : 'alert-secondary'}`} style={{ maxWidth: '90%' }} role="alert">
+              <ReactMarkdown>{msg.content}</ReactMarkdown>
             </div>
           </div>
         ))}
@@ -74,4 +74,4 @@ const AIChat = () => {
   );
 };
 
-export default AIChat;
+export default CopilotChat;

@@ -40,7 +40,7 @@ async def lifespan(app):
     embedding_client = await aoai_service.get_embedding_client()
 
     # Create an async Azure Document Intelligence Service client
-    adi_service = AzureDocIntelligenceService(credential, await appConfig.get_doc_intelligence_endpoint())
+    adi_service = AzureDocIntelligenceService(credential, await config_service.get_doc_intelligence_endpoint())
 
     # Create an async Azure Blob Service client
     storage_service = StorageService(credential, await config_service.get_storage_account(), config_service.get_document_container_name())

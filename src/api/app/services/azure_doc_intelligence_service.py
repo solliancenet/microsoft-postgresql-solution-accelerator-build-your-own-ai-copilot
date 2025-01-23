@@ -1,5 +1,5 @@
 from azure.identity.aio import DefaultAzureCredential
-from azure.ai.formrecognizer import DocumentAnalysisClient
+from azure.ai.formrecognizer.aio import DocumentAnalysisClient
 
 
 class AzureDocIntelligenceService:
@@ -11,13 +11,13 @@ class AzureDocIntelligenceService:
             credential=DefaultAzureCredential()
         )
 
-    def extract_text_from_document(self, document_data):
+    async def extract_text_from_document(self, document_data):
         """Extract text and structure using Azure AI Document Intelligence."""
-        poller = self.document_analysis_client.begin_analyze_document(
+        poller = await self.document_analysis_client.begin_analyze_document(
             model_id="prebuilt-document",
             document=document_data
         )
-        result = poller.result()
+        result = await poller.result()
         extracted_text = []
         for page in result.pages:
             page_text = " ".join([line.content for line in page.lines])

@@ -52,7 +52,7 @@ async def storage_blob_webhook(
         document_data = await storage_service.download_blob(blobName)
 
         # Step 2: Extract text from the document
-        extracted_text = doc_intelligence_service.extract_text_from_document(document_data)
+        extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
         full_text = "\n".join(extracted_text)
 
         # Step 3: Chunk the text semantically

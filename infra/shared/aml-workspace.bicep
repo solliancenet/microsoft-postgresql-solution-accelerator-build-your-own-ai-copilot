@@ -80,7 +80,7 @@ resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments
 
 resource storageBlobDataReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
-  name: guid(subscription().id, resourceGroup().id, principalId, 'mlStorageBlobDataContributorRole')
+  name: guid(subscription().id, resourceGroup().id, principalId, 'mlStorageBlobDataReaderRole')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1') // Storage Blob Data Reader role
     principalId: principalId

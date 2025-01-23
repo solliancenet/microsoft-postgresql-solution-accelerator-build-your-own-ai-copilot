@@ -1,4 +1,4 @@
-from app.lifespan_manager import get_db_connection_pool, get_azure_doc_intelligence_service, get_storage_service, get_config_service, get_embedding_client
+from app.lifespan_manager import get_db_connection_pool, get_azure_doc_intelligence_service, get_storage_service, get_config_service
 from fastapi import APIRouter, Depends, HTTPException, Request, Form
 from typing import List
 from pydantic import parse_obj_as
@@ -23,8 +23,7 @@ async def storage_blob_webhook(
     pool = Depends(get_db_connection_pool),
     storage_service = Depends(get_storage_service),
     app_config = Depends(get_config_service),
-    doc_intelligence_service = Depends(get_azure_doc_intelligence_service),
-    embeddings_client = Depends(get_embedding_client)
+    doc_intelligence_service = Depends(get_azure_doc_intelligence_service)
 ):
     """Handles incoming webhooks from Azure Blob Storage."""
     # Validate Event Grid Subscription confirmation
@@ -58,10 +57,7 @@ async def storage_blob_webhook(
         # Step 3: Chunk the text semantically
         text_chunks = semantic_chunking(full_text)
 
-        # Step 4: Generate embeddings for the chunks
-        embeddings = embeddings_client.embed_documents(text_chunks)
-
-        # Step 5: Insert into database
+        # Step 4: Insert into database
         # Get doc type and id
         async with pool.acquire() as conn:
             doc = await conn.fetchrow('''
@@ -82,20 +78,20 @@ async def storage_blob_webhook(
             }
             await conn.execute('''
                 UPDATE sows
-                SET embeddings = $1, 
+                SET embeddings = azure_openai.create_embeddings('embeddings', $1, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)::vector, 
                     metadata = $2
                 WHERE id = $3;
-            ''', embeddings, json.dumps(metadata), objectId)
+            ''', full_text, json.dumps(metadata), objectId)
 
         elif (documentType == 'invoice'): # Insert into Invoices table
             metadata = extract_invoice_metadata(full_text)
             await conn.execute('''
                 UPDATE invoices
                 SET extracted_text = $2, 
-                    embeddings = $3, 
+                    embeddings = azure_openai.create_embeddings('embeddings', $3, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)::vector, 
                     metadata = $4, invoice_date = $5, payment_status = $6, chunk_text = $7
                 WHERE id = $8;
-            ''', metadata['number'], embeddings, json.dumps(metadata), metadata['invoice_date'], metadata['payment_status'], chunk_text, objectId)
+            ''', metadata['number'], full_text, json.dumps(metadata), metadata['invoice_date'], metadata['payment_status'], chunk_text, objectId)
 
         else:
             raise HTTPException(status_code=500, detail=f'Unknown document type: {documentType}')

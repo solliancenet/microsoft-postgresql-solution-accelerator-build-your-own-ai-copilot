@@ -1,5 +1,5 @@
 import React from 'react';
-import AIChat from '../../components/AIChat';
+import CopilotChat from '../../components/CopilotChat';
 
 const Dashboard = () => {
   return (
@@ -8,7 +8,7 @@ const Dashboard = () => {
         <h1 className="h2">Dashboard</h1>
       </div>
       
-      <AIChat />
+      <CopilotChat />
 
     </div>
   );

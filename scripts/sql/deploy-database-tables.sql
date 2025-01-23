@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS vendors (
 );
 
 -- Status table: information about the status of a invoice, milestone, etc
-CREATE TABLE status (
+CREATE TABLE IF NOT EXISTS status (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT

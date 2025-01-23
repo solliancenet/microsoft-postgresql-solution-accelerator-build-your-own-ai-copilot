@@ -261,7 +261,7 @@ You will need to install the required software locally and provision the Azure i
     
     3. Create a virtual environment named `.venv` by running the following command at the terminal prompt:
     
-        ```bash
+        ```bash title=""
         python -m venv .venv 
         ```
     

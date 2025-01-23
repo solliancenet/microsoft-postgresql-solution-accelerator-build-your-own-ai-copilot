@@ -1,6 +1,9 @@
 /*  File to idempotently load table DDL for Claims Data  */
 
 -- Vendors table: information about companies (e.g., tags, industry codes, preferences)
+
+-- Drop vendors table if it exists
+DROP TABLE IF EXISTS vendors;
 CREATE TABLE IF NOT EXISTS vendors (
     id BIGSERIAL PRIMARY KEY,
     name text NOT NULL,
@@ -24,7 +27,7 @@ VALUES
 
 
 -- Status table: information about the status of a invoice, milestone, etc
-DROP TABLE status;
+DROP TABLE IF EXISTS status;
 CREATE TABLE IF NOT EXISTS status (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -41,6 +44,7 @@ INSERT INTO status (id, name, description) VALUES (6, 'Paid', 'The invoice has b
 INSERT INTO status (id, name, description) VALUES (7, 'Completed', 'Work has been finished');
 
 -- Statement of work table; information about deliverables, milestones, or resource allocations.
+DROP TABLE IF EXISTS sows;
 CREATE TABLE IF NOT EXISTS sows (
     id BIGSERIAL PRIMARY KEY,
     number text NOT NULL,
@@ -103,6 +107,7 @@ VALUES
     );
 
 -- Invoices table; tax details, discounts, or additional metadata
+DROP TABLE IF EXISTS invoices;
 CREATE TABLE IF NOT EXISTS invoices (
     id BIGSERIAL PRIMARY KEY,
     number text NOT NULL,
@@ -116,6 +121,7 @@ CREATE TABLE IF NOT EXISTS invoices (
 );
 
 -- Milestones table
+DROP TABLE IF EXISTS milestones;
 CREATE TABLE IF NOT EXISTS milestones (
     id BIGSERIAL PRIMARY KEY,
     sow_id BIGINT NOT NULL,

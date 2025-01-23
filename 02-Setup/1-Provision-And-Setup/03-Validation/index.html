@@ -345,32 +345,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../06-Deploy/" class="md-tabs__link">
+        <a href="../../../06-Add-GraphRAG/" class="md-tabs__link">
           
   
     
   
-  06 Deploy
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../07-Evaluate-DELETE-THIS/" class="md-tabs__link">
-          
-  
-    
-  
-  07 Evaluate DELETE THIS
+  06 Add GraphRAG
 
         </a>
       </li>
@@ -925,6 +905,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#1-validate-the-database-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Validate the database deployment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-run-api-server-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Run API Server Locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-connect-the-dots" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Connect the Dots! 💡
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#32-azure-ai-foundry" class="md-nav__link">
     <span class="md-ellipsis">
       3.2 Azure AI Foundry
@@ -1399,7 +1406,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Prompt engineering
+    5.3 Testing the Chat API
   </span>
   
 
@@ -1420,7 +1427,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Add GraphRAG support in Azure Database for PostgreSQL
+    5.4 Add Copilot Chat To UI
   </span>
   
 
@@ -1441,7 +1448,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Create Copilot Chat UI
+    5.5 Prompt engineering
   </span>
   
 
@@ -1502,11 +1509,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../06-Deploy/" class="md-nav__link ">
+            <a href="../../../06-Add-GraphRAG/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    06 Deploy
+    06 Add GraphRAG
   </span>
   
 
@@ -1522,7 +1529,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            06 Deploy
+            06 Add GraphRAG
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1535,11 +1542,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/01/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    1. Explore the Codebase
+    6.1 Create and Query Graph Data
   </span>
   
 
@@ -1556,11 +1563,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/02/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2. Run API Server Locally
+    6.2 Create nodes
   </span>
   
 
@@ -1577,11 +1584,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/03/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3. Testing the Chat AI
+    6.3 Execute cypher queries
   </span>
   
 
@@ -1598,7 +1605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/04/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1619,7 +1626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/05/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1640,7 +1647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/06/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1661,7 +1668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../06-Deploy/07/" class="md-nav__link">
+      <a href="../../../06-Add-GraphRAG/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1695,16 +1702,6 @@
           
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
       
@@ -1722,174 +1719,6 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../07-Evaluate-DELETE-THIS/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    07 Evaluate DELETE THIS
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            07 Evaluate DELETE THIS
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../07-Evaluate-DELETE-THIS/01/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.1 Understand Metrics
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../07-Evaluate-DELETE-THIS/02/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.2 Understand Evaluators
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../07-Evaluate-DELETE-THIS/03/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.3 Run Batch Evaluation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../07-Evaluate-DELETE-THIS/04/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.4 Understand Eval Workflow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../07-Evaluate-DELETE-THIS/05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.5. (Optional) Homework
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
             <a href="../../../Tear-Down/" class="md-nav__link ">
               
   
@@ -1902,8 +1731,8 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Tear Down
           </label>
@@ -1943,6 +1772,33 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-validate-the-database-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Validate the database deployment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-run-api-server-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Run API Server Locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-connect-the-dots" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Connect the Dots! 💡
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#32-azure-ai-foundry" class="md-nav__link">
@@ -2027,8 +1883,67 @@
 <p>TODO: 
     - Validate database by querying the <code>vendors</code> table from pgAdmin (this also serves as validation for data deployment into the database in Azure)
     - Validate Python and API configuration by running the API project from VS Code and ensuring the Swagger UI is accessible -- Try out the <code>/vendors</code> endpoint
-    - Validate Node.js and UI config by running the UI project -- Navigate to the Vendors page?
-    - </p>
+    - Validate Node.js and UI config by running the UI project -- Navigate to the Vendors page?</p>
+<h2 id="1-validate-the-database-deployment">1. Validate the database deployment<a class="headerlink" href="#1-validate-the-database-deployment" title="Permanent link">&para;</a></h2>
+<p>Using pgAdmin, you will quickly execute a few queries to validate the database was deployed and populated correctly.</p>
+<ol>
+<li>
+<p>TODO: Return to your open pgAdmin instance (or open a new one) and ensure you are connected to your Azure Database for PostgreSQL flexible server.</p>
+</li>
+<li>
+<p>Expand the server and its databases, and right-click on the <code>contracts</code> database.</p>
+</li>
+<li>
+<p>Select <strong>Query Tool</strong> from the context menu, and in the query window, paste the following SQL statement:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">vendors</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>TODO: Add a bit more here...</p>
+</li>
+</ol>
+<h2 id="2-run-api-server-locally">2. Run API Server Locally<a class="headerlink" href="#2-run-api-server-locally" title="Permanent link">&para;</a></h2>
+<p>To verify the API is wired up correctly, you will runs a preview version of the API server locally, with hot reload, for rapid iteration.</p>
+<p>TODO: To run the FastAPI Dev server... </p>
+<ol>
+<li>
+<p>TODO: They can press F5 or have them go to the Debug area in VS Code, select the <strong>Python Debugger: FastAPI</strong> from the drop down list, and then select the <strong>Start Debugging</strong> button.</p>
+</li>
+<li>
+<p>TODO: Verify that this starts a <em>development server</em> and open the API in a browser...</p>
+</li>
+<li>
+<p>TODO: </p>
+<ul>
+<li>You should see: a pop-up dialog with two options to view the application</li>
+<li>Select the "Browser" option - should open the preview in a new browser tab</li>
+<li>Check the browser URL - should be a path ending in <code>github.dev</code></li>
+<li>Check the page content - should show the "Hello World" message</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-connect-the-dots">2. Connect the Dots! 💡<a class="headerlink" href="#2-connect-the-dots" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>The <code>github.dev</code> ending validates the server is hosted by GitHub Codespaces </p>
+<ul>
+<li>This verifies we are running in the (local) dev environment. </li>
+<li>When deployed to production, you'll see <code>containerapps.io</code> (for ACA).</li>
+</ul>
+</li>
+<li>
+<p>What just happened?</p>
+<ul>
+<li>The dev server ran the <code>main.py</code> defined application with 2 routes</li>
+<li>The default route <code>/</code> returns the "Hello world" message (see line 46)</li>
+<li>This confirms that our application server is running successfully.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">CONGRATULATIONS. You just ran the FastAPI app and tested its default endpoint </p>
+</div>
 </div>
 <div class="tabbed-block">
 <p>TODO: List the resources to be provisioned by the Bicep template executed by the <code>azd up</code> command.</p>

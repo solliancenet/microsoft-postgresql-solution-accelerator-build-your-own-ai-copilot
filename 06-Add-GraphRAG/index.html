@@ -12,28 +12,28 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/06-Deploy/01/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/06-Add-GraphRAG/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../05-Build-Copilot/05/">
       
       
-        <link rel="next" href="../02/">
+        <link rel="next" href="01/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
-        <title>1. Explore the Codebase - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>Add GraphRAG support in Azure Database for PostgreSQL - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +52,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-explore-the-codebase" class="md-skip">
+        <a href="#add-graphrag-support-in-azure-database-for-postgresql" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href=".." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../../img/postgresql.svg" alt="logo">
+  <img src="../img/postgresql.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Explore the Codebase
+              Add GraphRAG support in Azure Database for PostgreSQL
             
           </span>
         </div>
@@ -224,7 +224,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
     
@@ -243,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../01-Introduction/" class="md-tabs__link">
+        <a href="../01-Introduction/" class="md-tabs__link">
           
   
     
@@ -263,7 +263,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../02-Setup/" class="md-tabs__link">
+        <a href="../02-Setup/" class="md-tabs__link">
           
   
     
@@ -283,7 +283,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
+        <a href="../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../04-Validate-Data/" class="md-tabs__link">
+        <a href="../04-Validate-Data/" class="md-tabs__link">
           
   
     
@@ -323,7 +323,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../05-Build-Copilot/" class="md-tabs__link">
+        <a href="../05-Build-Copilot/" class="md-tabs__link">
           
   
     
@@ -345,12 +345,12 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
     
   
-  06 Deploy
+  06 Add GraphRAG
 
         </a>
       </li>
@@ -365,27 +365,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../07-Evaluate-DELETE-THIS/" class="md-tabs__link">
-          
-  
-    
-  
-  07 Evaluate DELETE THIS
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../Tear-Down/" class="md-tabs__link">
+        <a href="../Tear-Down/" class="md-tabs__link">
           
   
     
@@ -426,9 +406,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href=".." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../../img/postgresql.svg" alt="logo">
+  <img src="../img/postgresql.svg" alt="logo">
 
     </a>
     Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide
@@ -455,7 +435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -508,7 +488,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../01-Introduction/" class="md-nav__link ">
+            <a href="../01-Introduction/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -541,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/01-App-Scenario/" class="md-nav__link">
+      <a href="../01-Introduction/01-App-Scenario/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -562,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/02-App-Architecture/" class="md-nav__link">
+      <a href="../01-Introduction/02-App-Architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -583,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
+      <a href="../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -604,7 +584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
+      <a href="../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -625,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
+      <a href="../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -680,7 +660,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/" class="md-nav__link ">
+            <a href="../02-Setup/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -736,7 +716,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
+            <a href="../02-Setup/0-Prerequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -801,7 +781,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/1-Provision-And-Setup/" class="md-nav__link ">
+            <a href="../02-Setup/1-Provision-And-Setup/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -834,7 +814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/01-Self-Guided/" class="md-nav__link">
+      <a href="../02-Setup/1-Provision-And-Setup/01-Self-Guided/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -855,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/02-Instructor-Led/" class="md-nav__link">
+      <a href="../02-Setup/1-Provision-And-Setup/02-Instructor-Led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -876,7 +856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/03-Validation/" class="md-nav__link">
+      <a href="../02-Setup/1-Provision-And-Setup/03-Validation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -943,7 +923,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
+            <a href="../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -976,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
+      <a href="../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -997,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
+      <a href="../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1018,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
+      <a href="../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1039,7 +1019,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
+      <a href="../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1096,7 +1076,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../04-Validate-Data/" class="md-nav__link ">
+            <a href="../04-Validate-Data/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1129,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Validate-Data/01/" class="md-nav__link">
+      <a href="../04-Validate-Data/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1150,7 +1130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Validate-Data/02/" class="md-nav__link">
+      <a href="../04-Validate-Data/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1171,7 +1151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Validate-Data/03/" class="md-nav__link">
+      <a href="../04-Validate-Data/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1232,7 +1212,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../05-Build-Copilot/" class="md-nav__link ">
+            <a href="../05-Build-Copilot/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1265,7 +1245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/01/" class="md-nav__link">
+      <a href="../05-Build-Copilot/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1286,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/02/" class="md-nav__link">
+      <a href="../05-Build-Copilot/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1307,11 +1287,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/03/" class="md-nav__link">
+      <a href="../05-Build-Copilot/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    5.3 Prompt engineering
+    5.3 Testing the Chat API
   </span>
   
 
@@ -1328,11 +1308,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/04/" class="md-nav__link">
+      <a href="../05-Build-Copilot/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    5.4 Add GraphRAG support in Azure Database for PostgreSQL
+    5.4 Add Copilot Chat To UI
   </span>
   
 
@@ -1349,11 +1329,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/05/" class="md-nav__link">
+      <a href="../05-Build-Copilot/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    5.5 Create Copilot Chat UI
+    5.5 Prompt engineering
   </span>
   
 
@@ -1417,18 +1397,18 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   <span class="md-ellipsis">
-    06 Deploy
+    06 Add GraphRAG
   </span>
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+              <label class="md-nav__link md-nav__link--active" for="__nav_7" id="__nav_7_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -1437,7 +1417,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            06 Deploy
+            06 Add GraphRAG
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1447,45 +1427,14 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    1. Explore the Codebase
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
-      <a href="../02/" class="md-nav__link">
+      <a href="01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2. Run API Server Locally
+    6.1 Create and Query Graph Data
   </span>
   
 
@@ -1502,11 +1451,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../03/" class="md-nav__link">
+      <a href="02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3. Testing the Chat AI
+    6.2 Create nodes
   </span>
   
 
@@ -1523,7 +1472,28 @@
   
   
     <li class="md-nav__item">
-      <a href="../04/" class="md-nav__link">
+      <a href="03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.3 Execute cypher queries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1544,7 +1514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05/" class="md-nav__link">
+      <a href="05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1565,7 +1535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06/" class="md-nav__link">
+      <a href="06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1586,7 +1556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07/" class="md-nav__link">
+      <a href="07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1620,16 +1590,6 @@
           
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
       
@@ -1647,175 +1607,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../07-Evaluate-DELETE-THIS/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    07 Evaluate DELETE THIS
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            07 Evaluate DELETE THIS
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-Evaluate-DELETE-THIS/01/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.1 Understand Metrics
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-Evaluate-DELETE-THIS/02/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.2 Understand Evaluators
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-Evaluate-DELETE-THIS/03/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.3 Run Batch Evaluation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-Evaluate-DELETE-THIS/04/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.4 Understand Eval Workflow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../07-Evaluate-DELETE-THIS/05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.5. (Optional) Homework
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../Tear-Down/" class="md-nav__link ">
+            <a href="../Tear-Down/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1827,8 +1619,8 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Tear Down
           </label>
@@ -1863,6 +1655,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-apache-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Apache AGE?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1879,155 +1688,34 @@
   
 
 
-<h1 id="1-explore-the-codebase">1. Explore the Codebase<a class="headerlink" href="#1-explore-the-codebase" title="Permanent link">&para;</a></h1>
-<p>Let's look at how the FastAPI application is implemented in the <code>src/api/main.py</code> file. Open it now in Visual Studio Code and let's explore the code in sections. You can also expand the section below to see the code inline.</p>
-<div class="admonition info">
-<p class="admonition-title">FASTAPI application server code</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
-<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
-<span class="kn">from</span> <span class="nn">prompty.tracer</span> <span class="kn">import</span> <span class="n">trace</span>
-<span class="kn">from</span> <span class="nn">prompty.core</span> <span class="kn">import</span> <span class="n">PromptyStream</span><span class="p">,</span> <span class="n">AsyncPromptyStream</span>
-<span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">StreamingResponse</span>
-<span class="kn">from</span> <span class="nn">fastapi.middleware.cors</span> <span class="kn">import</span> <span class="n">CORSMiddleware</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.instrumentation.fastapi</span> <span class="kn">import</span> <span class="n">FastAPIInstrumentor</span>
-<span class="kn">from</span> <span class="nn">tracing</span> <span class="kn">import</span> <span class="n">init_tracing</span>
-
-<span class="kn">from</span> <span class="nn">contoso_chat.chat_request</span> <span class="kn">import</span> <span class="n">get_response</span>
-
-<span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
-
-<span class="n">load_dotenv</span><span class="p">()</span>
-<span class="n">tracer</span> <span class="o">=</span> <span class="n">init_tracing</span><span class="p">()</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
-
-<span class="n">code_space</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CODESPACE_NAME&quot;</span><span class="p">)</span>
-<span class="n">app_insights</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;APPINSIGHTS_CONNECTIONSTRING&quot;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">code_space</span><span class="p">:</span> 
-    <span class="n">origin_8000</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">code_space</span><span class="si">}</span><span class="s2">-8000.app.github.dev&quot;</span>
-    <span class="n">origin_5173</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">code_space</span><span class="si">}</span><span class="s2">-5173.app.github.dev&quot;</span>
-    <span class="n">ingestion_endpoint</span> <span class="o">=</span> <span class="n">app_insights</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="n">origins</span> <span class="o">=</span> <span class="p">[</span><span class="n">origin_8000</span><span class="p">,</span> <span class="n">origin_5173</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SERVICE_ACA_URI&quot;</span><span class="p">)]</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">origins</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">o</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;origins.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
-    <span class="p">]</span>
-    <span class="n">origins</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span>
-    <span class="n">CORSMiddleware</span><span class="p">,</span>
-    <span class="n">allow_origins</span><span class="o">=</span><span class="n">origins</span><span class="p">,</span>
-    <span class="n">allow_credentials</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">allow_methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
-    <span class="n">allow_headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">root</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
-
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/api/create_response&quot;</span><span class="p">)</span>
-<span class="nd">@trace</span>
-<span class="k">def</span> <span class="nf">create_response</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chat_history</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">get_response</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">question</span><span class="p">,</span> <span class="n">chat_history</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="c1"># TODO: fix open telemetry so it doesn&#39;t slow app so much</span>
-<span class="n">FastAPIInstrumentor</span><span class="o">.</span><span class="n">instrument_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<ol>
-<li>
-<p><strong>Import the chat function</strong> (line 11). The <em>get_response</em> function is the entry point into our Contoso Chat implementation. It expects a customer ID, a question, and the chat history, and returns a text response.</p>
-</li>
-<li>
-<p><strong>Instantiate the app server</strong> (line 19-43). We use the <strong>FastAPI</strong> application server, creating it with default configurations and configuring it to allow requests from specified origins (including GitHub Codespaces hosted clients).</p>
-</li>
-<li>
-<p><strong>Define a default route</strong> (line 46). The "/" route maps to the base URL for the application server. </p>
-<ul>
-<li>It accepts GET requests with no parameters (equivalent to a browser site visit).</li>
-<li>It returns a JSON response with a "Hello World" message.</li>
-<li>This serves as a "health check" for the app server, verifying it's alive (e.g., during setup).</li>
-</ul>
-</li>
-<li>
-<p><strong>Define the copilot route</strong> (line 51). The "/api/create_response" route maps to the endpoint where we can invoke the Contoso Chat implementation. </p>
-<ul>
-<li>It accepts POST requests from clients and extracts required parameters.</li>
-<li>It invokes our copilot <em>get_request</em> function with those parameters.</li>
-<li>It returns the copilot response to the client.</li>
-</ul>
-</li>
-</ol>
-<p>Now all we need to do is run the FastAPI server, and have it listen for incoming requests from clients on these two API routes ("/" for health checks and "/api/create_response" for Contoso Chat). In the next section, we'll see how to do this locally for rapid prototyping and testing.</p>
+<h1 id="add-graphrag-support-in-azure-database-for-postgresql">Add GraphRAG support in Azure Database for PostgreSQL<a class="headerlink" href="#add-graphrag-support-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h1>
+<p>The Apache AGE extension in Azure Database for PostgreSQL offers a significant advancement that provides graph processing capabilities within the PostgreSQL ecosystem. This new extension brings a powerful toolset for developers looking to leverage a graph database with the robust enterprise features of Azure Database for PostgreSQL.</p>
+<h2 id="what-is-apache-age">What is Apache AGE?<a class="headerlink" href="#what-is-apache-age" title="Permanent link">&para;</a></h2>
+<p><a href="https://age.apache.org/age-manual/master/index.html">Apache Graph Extension</a> (AGE) is a PostgreSQL extension developed under the Apache Incubator project. It is designed to provide graph database functionality, enabling users to store and query graph data efficiently within PostgreSQL. It supports the openCypher query language, which allows for intuitive and expressive graph queries. With AGE, you can manage and analyze complex relationships within your data, uncovering insights that traditional relational databases and even semantic search might miss.</p>
 <hr />
-<div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You just reviewed the FastAPI application structure!</p>
+<div class="admonition info">
+<p class="admonition-title">Click on the tabs below to understand the key features and benefits of using AGE in Azure Database for PostgreSQL.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="key-features" name="__tabbed_1" type="radio" /><input id="benefits" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="key-features">Key Features</label><label for="benefits">Benefits</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Graph and Relational Data Integration: AGE allows seamless integration of graph data with existing relational data in PostgreSQL. This hybrid approach enables you to benefit from both graph and relational models simultaneously.</li>
+<li>openCypher Query Language: AGE incorporates openCypher, a powerful and user-friendly query language specifically designed for graph databases. This feature simplifies the process of writing and executing graph queries.</li>
+<li>High Performance: AGE is optimized for performance, ensuring efficient storage and retrieval of graph data thanks to support for indexing of graph properties using GIN indices.</li>
+<li>Scalability: Built on PostgreSQL's proven architecture, AGE inherits its scalability and reliability, allowing it to handle growing datasets and increasing workloads.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>The integration of AGE in Azure Database for PostgreSQL brings numerous benefits to developers and businesses looking to leverage graph processing capabilities:</p>
+<ul>
+<li>Simplified Data Management: AGE's ability to integrate graph and relational data simplifies data management tasks, reducing the need for separate graph database solutions.</li>
+<li>Enhanced Data Analysis: With AGE, you can perform complex graph analyses directly within your PostgreSQL database, gaining deeper insights into relationships and patterns in your data.</li>
+<li>Cost Efficiency: By utilizing AGE within Azure Database for PostgreSQL, you can consolidate your database infrastructure, lowering overall costs and reducing the complexity of your data architecture.</li>
+<li>Security and Compliance: Leverage Azure's industry-leading security and compliance features, ensuring your graph data is protected and meets regulatory requirements.</li>
+</ul>
+</div>
+</div>
 </div>
 
 
@@ -2066,7 +1754,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5. Deploy with Azure Container Apps">
+          <a href="../05-Build-Copilot/05/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.5 Prompt engineering">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2076,20 +1764,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                5. Deploy with Azure Container Apps
+                5.5 Prompt engineering
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02/" class="md-footer__link md-footer__link--next" aria-label="Next: 2. Run API Server Locally">
+          <a href="01/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.1 Create and Query Graph Data">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                2. Run API Server Locally
+                6.1 Create and Query Graph Data
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2125,12 +1813,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
   <!-- Add scripts that need to run before here -->
   
-      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   <!-- Add scripts that need to run afterwards here -->

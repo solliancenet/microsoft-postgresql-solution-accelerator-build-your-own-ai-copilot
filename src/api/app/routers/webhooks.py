@@ -78,7 +78,7 @@ async def storage_blob_webhook(
             }
             await conn.execute('''
                 UPDATE sows
-                SET embeddings = azure_openai.create_embeddings('embeddings', $1, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)::vector, 
+                SET embeddings = azure_openai.create_embeddings('embeddings', $1, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000), 
                     metadata = $2
                 WHERE id = $3;
             ''', full_text, json.dumps(metadata), objectId)
@@ -88,7 +88,7 @@ async def storage_blob_webhook(
             await conn.execute('''
                 UPDATE invoices
                 SET extracted_text = $2, 
-                    embeddings = azure_openai.create_embeddings('embeddings', $3, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)::vector, 
+                    embeddings = azure_openai.create_embeddings('embeddings', $3, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000), 
                     metadata = $4, invoice_date = $5, payment_status = $6, chunk_text = $7
                 WHERE id = $8;
             ''', metadata['number'], full_text, json.dumps(metadata), metadata['invoice_date'], metadata['payment_status'], chunk_text, objectId)

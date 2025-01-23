@@ -30,6 +30,17 @@ class StorageService:
         blob_service_client = await self.__get_blob_service_client()
         return blob_service_client.get_blob_client(container=container, blob=blob)
 
+    async def download_blob(self, blobName: str):
+        """
+        Downloads a blob from Azure Blob Storage.
+        """
+        blob_service_client = await self.__get_blob_service_client()
+        blob_client = blob_service_client.get_blob_client(container=self.container_name, blob=blobName)
+        if await blob_client.exists():
+            stream = await blob_client.download_blob()
+            return await stream.readall()
+        return None
+
     # ###########################################################################################
 
     async def __save_file(self, blobName: str, file: UploadFile):

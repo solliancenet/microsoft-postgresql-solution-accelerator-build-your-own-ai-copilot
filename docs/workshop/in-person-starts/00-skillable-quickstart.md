@@ -18,7 +18,7 @@ To preprovision resources:
   - or, `git clone -b aitour-fy25 --single-branch https://github.com/revodavid/contoso-chat`
 - Follow the instructions in [0-Preprovision.md](0-Preprovision.md)
 
-## Pre-Requisites
+## Prerequisites
 
 To participate in this workshop, you will need:
 

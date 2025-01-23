@@ -1,4 +1,4 @@
-from app.services import AzureOpenAIService, DatabaseService, StorageService, ConfigService
+from app.services import AzureOpenAIService, DatabaseService, AzureDocIntelligenceService, StorageService, ConfigService
 from azure.identity.aio import DefaultAzureCredential
 from contextlib import asynccontextmanager
 
@@ -14,11 +14,14 @@ db = None
 appConfig = None
 # Create a global async StorageService
 storage_service = None
+# Create a global async Azure Document Intelligence Service client
+adi_service = None
 
 @asynccontextmanager
 async def lifespan(app):
     """Async context manager for the FastAPI application lifespan."""
     global appConfig
+    global adi_service
     global chat_client
     global credential
     global db
@@ -35,6 +38,9 @@ async def lifespan(app):
     aoai_service = AzureOpenAIService(credential, await appConfig.get_openai_endpoint())
     chat_client = await aoai_service.get_chat_client()
     embedding_client = await aoai_service.get_embedding_client()
+
+    # Create an async Azure Document Intelligence Service client
+    adi_service = AzureDocIntelligenceService(credential, await appConfig.get_doc_intelligence_endpoint())
 
     # Create an async Azure Blob Service client
     storage_service = StorageService(credential, await appConfig.get_storage_account(), appConfig.get_document_container_name())
@@ -56,6 +62,9 @@ async def get_credential():
 
 async def get_chat_client():
     return chat_client
+
+async def get_azure_doc_intelligence_service():
+    return adi_service
 
 async def get_embedding_client():
     return embedding_client

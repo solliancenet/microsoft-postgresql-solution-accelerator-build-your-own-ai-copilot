@@ -92,6 +92,34 @@ az postgres flexible-server execute `
 Write-Host "Database Permissions Granted to API App Managed Identity"
 
 
+# # ##############################################################################
+# # Create Event Grid Subscription with BlobCreated & BlobUpdated Webhook
+# # - this must be created after the app is deployed, otherwise the webhook validation will fail
+# # ##############################################################################
+# Write-Host "Creating Event Grid 'StorageBlob' Subscription with BlobCreated & BlobUpdated Webhook..."
+
+# # az deployment group create `
+# #     --name "eventGridSub-StorageBlob" `
+# #     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+# #     --template-file "./infra/shared/eventgrid-system-topic-subscription-webhook.bicep" `
+# #     --parameters `
+# #         systemTopicName="${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+# #         subscriptionName="StorageBlob" `
+# #         endpointUrl="${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
+# #         includedEventTypes="['Microsoft.Storage.BlobCreated','Microsoft.Storage.BlobUpdated']"
+
+# # $subscriptionExists = az resource show --id "/subscriptions/8c924580-ce70-48d0-a031-1b21726acc1a/resourceGroups/ms-postgresql-byoc/providers/Microsoft.EventGrid/systemTopics/evgt-stuemjxng3p6up6/eventSubscriptions/test"
+
+# az eventgrid event-subscription create `
+#   --source-resource-id "/subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${env:AZURE_RESOURCE_GROUP}/providers/Microsoft.EventGrid/systemTopics/${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+#   --name "StorageBlob" `
+#   --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
+#   --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
+#   --event-delivery-schema EventGridSchema
+
+# Write-Host "Event Grid Subscription 'StorageBlob' Created"
+
+
 # ##############################################################################
 # Deploy Machine Learning Model to Azure ML Workspace
 # ##############################################################################
@@ -100,22 +128,3 @@ Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."
 pwsh -File "./scripts/aml/deploy_model.ps1"
 
 Write-Host "Machine Learning Model Deployed"
-
-
-# # ##############################################################################
-# # Create Event Grid Subscription with BlobCreated & BlobUpdated Webhook
-# # - this must be created after the app is deployed, otherwise the webhook validation will fail
-# # ##############################################################################
-# Write-Host "Creating Event Grid Subscription with BlobCreated & BlobUpdated Webhook..."
-
-# az deployment group create `
-#     --name "eventGridSub-StorageBlob" `
-#     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
-#     --template-file "./infra/shared/eventgrid-system-topic-subscription-webhook.bicep" `
-#     --parameters `
-#         systemTopicName="${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
-#         subscriptionName="StorageBlob" `
-#         endpointUrl="${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
-#         includedEventTypes="['Microsoft.Storage.BlobCreated','Microsoft.Storage.BlobUpdated']"
-
-# Write-Host "Event Grid Subscription 'StorageBlob' Created"

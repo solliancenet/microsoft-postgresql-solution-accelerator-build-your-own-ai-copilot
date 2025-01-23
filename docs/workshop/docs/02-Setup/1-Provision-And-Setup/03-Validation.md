@@ -1,60 +1,106 @@
 # Validate Your Setup
 
-TODO: Figure out if we want to Developer Workflow stuff in here. If not, take out the reference in the sentence below...
-
 !!! success "SETUP IS COMPLETE: Let's review where you are right now"
 
-    You just completed the **PROVISION** and **SETUP** steps of the end-to-end workflow. 
+    You just completed the **PROVISION** and **SETUP** steps of workshop. 
 
-    - [X] You installed Visual Studio Code and the required extensions
     - [X] You forked the sample repo and created a local clone
     - [X] You provisioned infrastructure resources on Azure
     - [X] You configured your local development environment
     - [X] You authenticated with Azure and refreshed our local environment varibles
     - [X] You completed post-provisioning tasks to populate data
 
-In this section, you will validate your setup quickly, and organize your development environment into browser tabs before moving on to the **IDEATE** phase of development.
+In this section, you will validate your setup, and organize your development environment into browser tabs before moving on to the next phase of solution development.
 
 ---
 
-=== "Local computer"
+=== "Local computer validation"
 
-    !!! success "On your local computer, you should have"
+    TODO: 
+        - Validate database by querying the `vendors` table from pgAdmin (this also serves as validation for data deployment into the database in Azure)
+        - Validate Python and API configuration by running the API project from VS Code and ensuring the Swagger UI is accessible -- Try out the `/vendors` endpoint
+        - Validate Node.js and UI config by running the UI project -- Navigate to the Vendors page?
 
-        - [X] Installed the Azure CLI
-        - [X] Installed the Azure Developer CLI
-        - [X] Installed Git
-        - [X] Installed Python 3.11+
-        - [X] Forked the sample repo to your personal GitHub profile
-        - [X] Created a local clone of the repo
-        - [X] Downloaded and installed Visual Studio (VS) Code
-        - [X] Installed the Python and Prompty extensions for VS Code
-        - [X] Opened the cloned repo in Visual Studio Code
-        - [X] Created a Python virtual environment
-        - [X] Installed the Python libraries in the `requirements.txt` file
+    ## 1. Validate the database deployment
 
-=== "Azure"
+    Using pgAdmin, you will quickly execute a few queries to validate the database was deployed and populated correctly.
+
+    1. TODO: Return to your open pgAdmin instance (or open a new one) and ensure you are connected to your Azure Database for PostgreSQL flexible server.
+
+    2. Expand the server and its databases, and right-click on the `contracts` database.
+
+    3. Select **Query Tool** from the context menu, and in the query window, paste the following SQL statement:
+
+        ```sql
+        SELECT * FROM vendors;
+        ```
+
+    4. TODO: Add a bit more here...
+
+    ## 2. Run API Server Locally
+
+    To verify the API is wired up correctly, you will runs a preview version of the API server locally, with hot reload, for rapid iteration.
+    
+    TODO: To run the FastAPI Dev server... 
+    
+    1. TODO: They can press F5 or have them go to the Debug area in VS Code, select the **Python Debugger: FastAPI** from the drop down list, and then select the **Start Debugging** button.
+    
+    2. TODO: Verify that this starts a _development server_ and open the API in a browser...
+
+        
+
+    3. TODO: 
+        
+        - You should see: a pop-up dialog with two options to view the application
+        - Select the "Browser" option - should open the preview in a new browser tab
+        - Check the browser URL - should be a path ending in `github.dev`
+        - Check the page content - should show the "Hello World" message
+    
+    ## 2. Connect the Dots! 💡
+    
+    3. The `github.dev` ending validates the server is hosted by GitHub Codespaces 
+        - This verifies we are running in the (local) dev environment. 
+        - When deployed to production, you'll see `containerapps.io` (for ACA).
+    
+    4. What just happened?
+    
+        - The dev server ran the `main.py` defined application with 2 routes
+        - The default route `/` returns the "Hello world" message (see line 46)
+        - This confirms that our application server is running successfully.
+    
+    ---
+    
+    !!! success "CONGRATULATIONS. You just ran the FastAPI app and tested its default endpoint "
+
+=== "Azure validation"
 
     TODO: List the resources to be provisioned by the Bicep template executed by the `azd up` command.
 
-    !!! tip "The Azure Portal helps us view the resources provisioned on Azure and check that they are setup correctly"
+    !!! tip "The Azure Portal allows you to view the resources provisioned on Azure and check that they are setup correctly"
 
-    Here's a reminder of the Azure Application Architecture - let's check our provisioned Resource Group to make sure these resources were created.
+    Here's a reminder of the Azure Application Architecture you can reference as you check your provisioned Resource Group to enure these resources were created.
     
-    ![ACA Architecture](./../../img/aca-architecture.png)
-    
+    ![Solution Architecture](./../../img/data-ingestion-validation-architecture-diagram.png)
+
     1. Open a new browser tab and navigate to the link below. You may be prompted to login.
         ``` title=""
         https://portal.azure.com/#browse/resourcegroups
         ```
     
-    2. **Sign in** → If prompted, use the `Username` and `Password` from the "Azure Credentials" section in your Skillable Lab instructions panel.
-    3. You may be presented with a "Welcome to Microsoft Azure" screen. Click **Cancel** (to dismiss it) or click **Get Started** (to take an introductory tour of the Azure Portal).
-    4. You should be taken directly to the Resource Groups page for your subscription.
-        - You should see an `rg-AITOUR` resource. This was created for you and contains all the resources needed to build and deploy your RAG-based copilot.
-    5. **Click** `rg-AITOUR` to visit the Resource Group overview page.
+        !!! task "If you are doing the Instructor-Led track and are prompted to sign in, use the `Username` and `Password` from the 'Azure Credentials' section in your Skillable Lab instructions panel."
+
+    2. You may be presented with a "Welcome to Microsoft Azure" screen. Click **Cancel** (to dismiss it) or click **Get Started** (to take an introductory tour of the Azure Portal).
+
+    3. You should be taken directly to the Resource Groups page for your subscription.
+
+        - In the list of resource groups, you should see one named `rg-postgresql-accelerator` (or, if you assigned a different name, one by specified name). This resource group was created for you as part of the `azd up` resource deployment. It contains all of the Azure resources required to build and deploy your AI-enable solution.
+
+        !!! tip "You can use the search filter to reduce the number resource groups displayed."
+
+    4. Select the `rg-postgres-accelerator` resource group.
+
         - **Check:** Deployments (look under "Essentials") - You should see: *35 succeeded*. 
-        - **Check:** Resources (in Overview) - You should see: *15 resources*.
+        - **Check:** Resources (in Overview) - You should see: *20 resources*.
     
     !!! task "Leave the Azure Portal open on this tab. We'll revisit it later."
     
@@ -64,12 +110,12 @@ In this section, you will validate your setup quickly, and organize your develop
     
     !!! tip "The Azure AI Foundry portal lets us view and manage the Azure AI project for our app."
     
-    1. Open a new browser tab and [navigate to this page](https://ai.azure.com?feature.customportal=false#home):
+    5. Open a new browser tab and [navigate to this page](https://ai.azure.com?feature.customportal=false#home):
         ``` title=""
         https://ai.azure.com
         ```
     
-    1. **Click `Sign in`** → you will auto-login with the Azure credentials used to sign into the portal.
+    6. **Click `Sign in`** → you will auto-login with the Azure credentials used to sign into the portal.
     
         - **Check:** You should see a Hub resource (with a name like _ai-hub-XXXXXXXX_)
         - **Check:** You should see a Project resource (with a name like _ai-project-XXXXXXXX_)
@@ -93,11 +139,11 @@ In this section, you will validate your setup quickly, and organize your develop
     
     [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/overview) will host the endpoint used to serve the Contoso Chat application on the Contoso Outdoors website. The Azure provisioning should have deployed a default Azure Container App to this endpoint.
     
-    1. Return to the Azure Portal tab
-    1. Visit the `rg-AITOUR` Resource group page
-    1. Click the `Container App` resource to display the Overview page
-    1. Look for `Application Url` (at top right), and click it to launch in new tab
-    1. You should see: A `Hello World` message on the screen (confirming app was deployed)
+    7. Return to the Azure Portal tab
+    8.  Visit the `rg-AITOUR` Resource group page
+    9.  Click the `Container App` resource to display the Overview page
+    10. Look for `Application Url` (at top right), and click it to launch in new tab
+    11. You should see: A `Hello World` message on the screen (confirming app was deployed)
     
     !!! info "Azure Container Apps (ACA) is used to host our chat AI application. The application server is implemented using FastAPI and exposes a `/create_request` API endpoint to make requests to our copilot."
     
@@ -105,9 +151,9 @@ In this section, you will validate your setup quickly, and organize your develop
     
     The Azure Database for PostgreSQL resource holds the data for the application. It contains data for each vendor, and the SOWs and invoices associated with them.
     
-    1. Switch to the **Azure Portal** tab and display the `rg-AITOUR` resource group Overview
-    1. **Click** the `Azure Cosmos DB account` resource name to visit its details page
-    1. **Click** `Data Explorer` in the top-nav menu 
+    12. Switch to the **Azure Portal** tab and display the `rg-AITOUR` resource group Overview
+    13. **Click** the `Azure Cosmos DB account` resource name to visit its details page
+    14. **Click** `Data Explorer` in the top-nav menu 
         - dismiss the popup dialog to skip the movie
         - see: `contoso-outdoor` container with `customers` database
         - click `customers`, then select `Items`
@@ -129,9 +175,9 @@ In this section, you will validate your setup quickly, and organize your develop
       
     The FastAPI server exposes a `Swagger API` endpoint that we can use for manual testing in both local (Codespaces) and cloud (Container Apps). Let's try it out now!
     
-    1. Return to your deployed Azure Container App tab
-    1. Add a `/docs` suffix to the URL and browse to that path - you will see: **FastAPI** page
-    1. Expand the `POST` section by clicking the arrow
+    15. Return to your deployed Azure Container App tab
+    16. Add a `/docs` suffix to the URL and browse to that path - you will see: **FastAPI** page
+    17. Expand the `POST` section by clicking the arrow
         - click `Try it out` to make inputs editable
         - enter `Tell me about your tents` for **question**
         - enter `2` for **customer_id**
@@ -170,5 +216,4 @@ This checks off the first two idents from our RAG checklist above. Now, let's se
 
 ---
 
-!!! success "CONGRATULATIONS. You validated your setup! It's time to IDEATE!"
-
+!!! success "Congratulations! You have completed your setup and are ready to begin integrating AI into the solution."

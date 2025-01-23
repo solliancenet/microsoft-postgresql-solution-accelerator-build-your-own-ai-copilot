@@ -4,18 +4,27 @@ import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
 
+const getCurrentDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}${month}${day}`;
+};
+
 const SOWCreate = () => {
   const { vendorId } = useParams();
-  const [sowNumber, setSowNumber] = useState('');
+  const [sowNumber, setSowNumber] = useState('SOW-' + getCurrentDate());
   const [sowVendorId, setSowVendorId] = useState(vendorId);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [budget, setBudget] = useState('');
+  const [startDate, setStartDate] = useState('2024-01-01');
+  const [endDate, setEndDate] = useState('2024-12-31');
+  const [budget, setBudget] = useState('0');
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   const [vendors, setVendors] = useState([]);
+
 
   useEffect(() => {
     const fetchVendors = async () => {

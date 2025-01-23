@@ -553,6 +553,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1.1 The App Scenario
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -562,6 +573,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#streamlining-contract-validation-in-financial-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Streamlining Contract Validation in Financial Services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-with-the-woodgrove-bank-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started with the Woodgrove Bank Application
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1282,7 +1330,7 @@
         
   
   <span class="md-ellipsis">
-    5.1 Implement A Chat Endpoint
+    5.1 Explore the API Codebase
   </span>
   
 
@@ -1303,7 +1351,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Create LangChain agents
+    5.2 Implement the Chat Endpoint
   </span>
   
 
@@ -1863,6 +1911,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#streamlining-contract-validation-in-financial-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Streamlining Contract Validation in Financial Services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-with-the-woodgrove-bank-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started with the Woodgrove Bank Application
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1880,105 +1954,19 @@
 
 
 <h1 id="11-the-app-scenario">1.1 The App Scenario<a class="headerlink" href="#11-the-app-scenario" title="Permanent link">&para;</a></h1>
-<p>In the financial services industry, validating contract-related documents, like statements of work (SOWs) and invoices, poses distinct challenges. This is particularly true when it comes to ensuring that invoices align with SOWs, especially for milestone-based payments and other specific deliverables. Traditionally, this validation process is manual, requiring meticulous comparison and cross-checking, often leading to delays, errors, and elevated operational costs. This accelerator explores a solution utilizing Microsoft Azure's comprehensive suite of AI services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.</p>
-<p>By integrating AI capabilities into existing solutions, leveraging advanced AI validation, Document Intelligence, and a copilot enhanced by RAG...</p>
-<p>Such an application can be integrated with existing financial and accounting systems to streamline the entire process. By leveraging AI and machine learning, it can continuously learn and improve its accuracy in detecting discrepancies and anomalies.</p>
-<p>The workshop teaches you to enhance existing financial services applications by adding rich AI capabilities using Azure Database for PostgreSQL and Azure AI. The application scenario involves an enterprise frontend (User Portal) integrated with a custom backend (API app), to provide data management and a chat-based customer support experience to users. <em>Click each tab below, to learn more!</em></p>
-<p>TODO: Write a brief intro about the starter application and how it serves as an example of an existing application that is not yet AI-enabled...</p>
-<p>The workshop teaches you to <strong>build, evaluate, and deploy a retail copilot</strong> code-first on Azure AI - using the <em>Retrieval Augmented Generation</em> (RAG) design pattern to make sure that our copilot responses are grounded in the (private) data maintained by the enterprise, for this application.</p>
-<p>Let's learn how this design pattern works in the context of our Contoso Chat application. Click on the tabs in order, to understand the sequence of events shown in the figure above.</p>
-<hr />
-<p>You have been provided with a starter application that encompasses the basic functionality...</p>
-<p>TODO: Rework the below to cover the starter application, which does not contain any AI functionality.</p>
-<p>Click on each tab to understand the starter application archtiecture components and processing workflow.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="1-architecture-components" name="__tabbed_1" type="radio" /><input id="2-processing-services" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="1-architecture-components">1. Architecture Components</label><label for="2-processing-services">2. Processing Services</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>The architecture has these core components:</p>
-<ul>
-<li><em>UI</em> → the <strong>user interface</strong> for interacting with the system</li>
-<li>TODO: Add details about REACT and structure of SPA web app used for the frontend UI</li>
-<li><em>API</em> → a Python API for integrating backend services</li>
-<li>TODO: Add details about FastAPI, Python, and the structures of the backend API</li>
-<li><em>Azure Database for PostgreSQL</em> → the project <strong>database</strong> (vendors, invoices, statements of work (SOWs))</li>
-<li><em>Azure Container Apps</em> → the <strong>app hosting</strong> service (API endpoint)</li>
-<li><em>Azure Managed Identity</em> → for <strong>keyless authentication</strong> (trustworthy AI)</li>
-</ul>
-</div>
-<div class="tabbed-block">
-<p>The Architecture "processes" incoming user requests received on the hosted API endpoint by taking the following steps:</p>
+<h2 id="streamlining-contract-validation-in-financial-services">Streamlining Contract Validation in Financial Services<a class="headerlink" href="#streamlining-contract-validation-in-financial-services" title="Permanent link">&para;</a></h2>
+<p>In the financial services industry, validating contract-related documents such as Statements of Work (SOWs) and invoices presents unique challenges. Ensuring that invoices align with SOWs, especially for milestone-based payments and specific deliverables, can be a meticulous and error-prone process. Traditionally, this validation involves manual comparison and cross-checking, often leading to delays, errors, and increased operational costs. This accelerator offers a solution that leverages Azure Database for PostgreSQL - Flexible and Azure's comprehensive suite of AI services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.</p>
+<p>The accelerator is designed to demonstrate how an existing financial services application can be enhanced by integrating advanced AI capabilities into Azure Database for PostgreSQL through the Azure AI extension and incorporating Azure OpenAI's GPT-4 model to validate and review contract-related documents.</p>
+<h2 id="getting-started-with-the-woodgrove-bank-application">Getting Started with the Woodgrove Bank Application<a class="headerlink" href="#getting-started-with-the-woodgrove-bank-application" title="Permanent link">&para;</a></h2>
+<p>You have been provided with code and deployment scripts for the <em>Woodgrove Bank</em> web application. This application comprises an enterprise user portal integrated with a custom backend API. You will enhance this starter application by integrating Azure AI services throughout this accelerator. Key steps include:</p>
 <ol>
-<li>
-<p><strong>Data Ingestion</strong>: SOWs, invoices and other related documents are ingested via a REACT single-page application (SPA). Internal users and external vendors can submit documents by uploading them through the web app, which then uploads them to Azure Blob Storage.</p>
-</li>
-<li>
-<p><strong>Workflow Trigger Mechanism</strong>: Upon receipt of new documents, an Event Grid trigger activates Python-based background worker processes:</p>
-<p>a. <strong>Data Extraction and Processing</strong>: Azure's OCR (Optical Character Recognition) technology digitizes content from uploaded documents, such as SOWs and invoices.</p>
-<p>b. <strong>Document Intelligence (Custom Model)</strong>: A custom AI model within Azure's Document Intelligence service is tailored to extract specific data fields, like payment milestones, dates, amounts, and vendor details. This model is trained to recognize the structure of financial documents, improving data extraction accuracy.</p>
-<p>c. <strong>Confidence Scoring and Validation</strong>: Each document is assigned a confidence score based on whether the documents contain the correct sections and fields.</p>
-<p>d. <strong>Validation Using Azure OpenAI</strong>: Azure OpenAI language models, such as GPT-4o, are used to review all document data, employing natural language understanding to validate and cross-check information, ensuring high data integrity. The language model is used to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing, and preventing issues like payment delays. It also validates that appropriate compliance language exists in contracts and SOWs, helping to avoid compliance violations.</p>
-</li>
-<li>
-<p><strong>Secure Storage and Database Management</strong>: Validated data is chunked, vectorized using an Azure OpenAI embedding model, and stored in an encrypted Azure Database for PostgreSQL flexible server database, which uses vector embeddings for advanced search and retrieval. This supports efficient handling of structured and semi-structured data, facilitating downstream analytics. Azure Database for PostgreSQL flexible server supports JSON-based semi-structured data and vector embedding storage, enabling AI-enhanced queries. Embeddings can be generated directly from database queries using the Azure AI extension for PostgreSQL.</p>
-</li>
-<li>
-<p><strong>Document enrichment</strong>: The Azure AI extension for PostreSQL also enables data to be enhanced using Azure AI Services directly from the database. This capability provides rich AI functionality, such as text translation and entity and keyword extraction.</p>
-</li>
-<li>
-<p><strong>Copilot chat</strong>: An Azure OpenAI + LangChain copilot enables project managers and leadership to quickly get metrics, trends and processing timelines for contracts, SOWs, invoices, and vendors using a user friendly chat interface. Function calling via LangChain tools enables the copilot to implement a RAG (retrieval-augmented generation) pattern over data in the PostgreSQL database, using vector search to efficiently retrieve relevant documents and data.</p>
-</li>
+<li><strong>Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL</strong>: Utilize the Azure AI <code>azure_ai</code>, PGVector (<code>vector</code>), and Apache AGE (<code>age</code>) extensions to enrich your PostgreSQL database with advanced GenAI capabilities.</li>
+<li><strong>Automating Data Validation with AI:</strong> Enhance the data ingestion process with automated, AI-driven validation using Azure Document Intelligence and Azure AI services.</li>
+<li><strong>Building a Copilot:</strong> Create an intelligent assistant using Azure OpenAI and Azure Database for PostgreSQL - Flexible Server, incorporating the Retrieval Augmented Generation (RAG) design pattern to ensure its responses are based on the private data maintained by the enterprise.</li>
+<li><strong>Updating the Backend API:</strong> Modify the backend API to provide the necessary endpoints for interacting with Azure services (Azure OpenAI and Azure Database for PostgreSQL).</li>
+<li><strong>Enhancing the Frontend UI:</strong> Improve the frontend user interface to facilitate interaction with the copilot.</li>
 </ol>
-</div>
-</div>
-</div>
-<!--
-!!! info "Click on the tabs below to understand the use cases and advantages of the application architecture."
-
-=== "Use Cases"
-
-    1. Accuracy and Compliance
-
-       - Ensure that invoices match the services or products agreed upon in the SoW.
-       - Detect discrepancies between invoices and the SoW to prevent overbilling or underbilling.
-
-    1. Automated Validation
-
-       - Automatically validate invoices against contract terms, including pricing, quantities, and service descriptions, during data ingestion.
-       - Utilize Azure OpenAI (gpt-4o) for robust AI data validation to ensure accuracy.
-
-    2. Financial Document Analysis
-
-       - Use Azure Document Intelligence to extract and analyze information from financial documents, ensuring alignment with the SoW.
-       - Provide insights into the accuracy, timeliness, and quality of vendor invoicing.
-
-    3. Fraud Detection
-
-       - Identify potential fraudulent activities by detecting inconsistencies between the invoices and the SoW.
-       - Implement anomaly detection algorithms to flag unusual patterns or deviations.
-
-    4. Budget Management
-
-       - Monitor spending by comparing invoices to the budgeted amounts in the SoW.
-       - Provide insights into budget adherence and financial planning.
-
-    5. Streamlined Approval Workflow
-
-       - Automate the approval process by routing invoices to the appropriate stakeholders for review.
-       - Track the status of invoices and ensure timely payments.
-
-    6. Dispute Resolution
-
-       - Facilitate quicker resolution of disputes by providing a clear comparison of invoices and the SoW.
-       - Maintain a record of discrepancies for future reference and audit trails.
-
-=== "Advantages"
-
-    - Increased Efficiency: Automate repetitive tasks and reduce manual effort, allowing employees to focus on more strategic activities.
-    - Enhanced Accuracy: Minimize errors and ensure that invoices align with contract terms, reducing the risk of financial discrepancies.
-    - Cost Savings: Detect and prevent overbilling, leading to significant cost savings over time.
-    - Improved Transparency: Provide clear visibility into invoice processing and SoW adherence, enhancing accountability.
-    - Better Compliance: Ensure compliance with contractual terms and internal policies, reducing legal and financial risks.
--->
+<p>This solution accelerator aims to teach you how to integrate AI capabilities into an existing application by leveraging Microsoft Azure's AI services to automate and streamline the validation of contract-related documents in the financial services industry. This integration results in faster, more accurate, and cost-effective processes. Additionally, the copilot will provide intelligent assistance, enabling users to gain actionable insights from data stored in the Azure Database for PostgreSQL, enhancing their overall experience.</p>
 
 
 

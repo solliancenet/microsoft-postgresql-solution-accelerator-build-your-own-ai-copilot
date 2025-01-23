@@ -26,7 +26,7 @@
     
     
       
-        <title>5.2 Create LangChain agents - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>5.2 Implement the Chat Endpoint - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#52-create-langchain-agents" class="md-skip">
+        <a href="#52-implement-the-chat-endpoint" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.2 Create LangChain agents
+              5.2 Implement the Chat Endpoint
             
           </span>
         </div>
@@ -1272,7 +1272,7 @@
         
   
   <span class="md-ellipsis">
-    5.1 Implement A Chat Endpoint
+    5.1 Explore the API Codebase
   </span>
   
 
@@ -1298,15 +1298,63 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    5.2 Implement the Chat Endpoint
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    5.2 Create LangChain agents
+    5.2 Implement the Chat Endpoint
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#review-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review router...
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-langchain-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create LangChain agents
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1863,6 +1911,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#review-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review router...
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-langchain-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create LangChain agents
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1879,8 +1953,20 @@
   
 
 
-<h1 id="52-create-langchain-agents">5.2 Create LangChain agents<a class="headerlink" href="#52-create-langchain-agents" title="Permanent link">&para;</a></h1>
+<h1 id="52-implement-the-chat-endpoint">5.2 Implement the Chat Endpoint<a class="headerlink" href="#52-implement-the-chat-endpoint" title="Permanent link">&para;</a></h1>
+<p>TODO: Add steps for implementing the <code>/chat</code> endpoint in the API. This will be updated as they go, so start simple...</p>
+<p>Have the users actually add the code (but libraries, such as LangChain should already be in place, added by the requirements.txt file)...</p>
+<p>This endpoint should:</p>
+<ul>
+<li>Have RAG capablities (multi-agent or function calling...)</li>
+<li>Use LangChain (already included, so just cover the basics in descriptions)</li>
+<li>Show how to use LangChain's <code>StructuredTool</code> (or whatever it is) to call existing functions to get info from the database for RAG\</li>
+</ul>
+<p>Next step is to refine the prompt to get better answers... (in next file)</p>
+<h2 id="review-router">Review router...<a class="headerlink" href="#review-router" title="Permanent link">&para;</a></h2>
+<h2 id="create-langchain-agents">Create LangChain agents<a class="headerlink" href="#create-langchain-agents" title="Permanent link">&para;</a></h2>
 <p>TODO: Add code for creating LangChain agents for performing data lookups</p>
+<p>TODO: LangChain implementation should already be done, so this will just be reviewing the code a</p>
 <p>How does this compare to using function calls for a single agent? Is it just splitting that across agents, so they perform data lookups in parallel?</p>
 <p>Need to consider token limits...</p>
 
@@ -1920,7 +2006,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.1 Implement A Chat Endpoint">
+          <a href="../01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.1 Explore the API Codebase">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1930,7 +2016,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                5.1 Implement A Chat Endpoint
+                5.1 Explore the API Codebase
               </div>
             </div>
           </a>

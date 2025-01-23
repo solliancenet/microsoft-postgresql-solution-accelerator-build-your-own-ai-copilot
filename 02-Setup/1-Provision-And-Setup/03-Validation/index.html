@@ -1357,7 +1357,7 @@
         
   
   <span class="md-ellipsis">
-    5.1 Implement A Chat Endpoint
+    5.1 Explore the API Codebase
   </span>
   
 
@@ -1378,7 +1378,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Create LangChain agents
+    5.2 Implement the Chat Endpoint
   </span>
   
 
@@ -2008,12 +2008,10 @@
 
 
 <h1 id="validate-your-setup">Validate Your Setup<a class="headerlink" href="#validate-your-setup" title="Permanent link">&para;</a></h1>
-<p>TODO: Figure out if we want to Developer Workflow stuff in here. If not, take out the reference in the sentence below...</p>
 <div class="admonition success">
 <p class="admonition-title">SETUP IS COMPLETE: Let's review where you are right now</p>
-<p>You just completed the <strong>PROVISION</strong> and <strong>SETUP</strong> steps of the end-to-end workflow. </p>
+<p>You just completed the <strong>PROVISION</strong> and <strong>SETUP</strong> steps of workshop. </p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You installed Visual Studio Code and the required extensions</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You forked the sample repo and created a local clone</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You provisioned infrastructure resources on Azure</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You configured your local development environment</li>
@@ -2021,52 +2019,50 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You completed post-provisioning tasks to populate data</li>
 </ul>
 </div>
-<p>In this section, you will validate your setup quickly, and organize your development environment into browser tabs before moving on to the <strong>IDEATE</strong> phase of development.</p>
+<p>In this section, you will validate your setup, and organize your development environment into browser tabs before moving on to the next phase of solution development.</p>
 <hr />
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="local-computer" name="__tabbed_1" type="radio" /><input id="azure" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="local-computer">Local computer</label><label for="azure">Azure</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="local-computer-validation" name="__tabbed_1" type="radio" /><input id="azure-validation" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="local-computer-validation">Local computer validation</label><label for="azure-validation">Azure validation</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="admonition success">
-<p class="admonition-title">On your local computer, you should have</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed the Azure CLI</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed the Azure Developer CLI</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed Git</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed Python 3.11+</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Forked the sample repo to your personal GitHub profile</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Created a local clone of the repo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Downloaded and installed Visual Studio (VS) Code</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed the Python and Prompty extensions for VS Code</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Opened the cloned repo in Visual Studio Code</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Created a Python virtual environment</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed the Python libraries in the <code>requirements.txt</code> file</li>
-</ul>
-</div>
+<p>TODO: 
+    - Validate database by querying the <code>vendors</code> table from pgAdmin (this also serves as validation for data deployment into the database in Azure)
+    - Validate Python and API configuration by running the API project from VS Code and ensuring the Swagger UI is accessible -- Try out the <code>/vendors</code> endpoint
+    - Validate Node.js and UI config by running the UI project -- Navigate to the Vendors page?
+    - </p>
 </div>
 <div class="tabbed-block">
 <p>TODO: List the resources to be provisioned by the Bicep template executed by the <code>azd up</code> command.</p>
 <div class="admonition tip">
-<p class="admonition-title">The Azure Portal helps us view the resources provisioned on Azure and check that they are setup correctly</p>
+<p class="admonition-title">The Azure Portal allows you to view the resources provisioned on Azure and check that they are setup correctly</p>
 </div>
-<p>Here's a reminder of the Azure Application Architecture - let's check our provisioned Resource Group to make sure these resources were created.</p>
-<p><img alt="ACA Architecture" src="./../../img/aca-architecture.png" /></p>
+<p>Here's a reminder of the Azure Application Architecture you can reference as you check your provisioned Resource Group to enure these resources were created.</p>
+<p><img alt="Solution Architecture" src="../../../img/data-ingestion-validation-architecture-diagram.png" /></p>
 <ol>
 <li>
 <p>Open a new browser tab and navigate to the link below. You may be prompted to login.
     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>https://portal.azure.com/#browse/resourcegroups
 </code></pre></div></td></tr></table></div></p>
+<div class="admonition task">
+<p class="admonition-title">If you are doing the Instructor-Led track and are prompted to sign in, use the <code>Username</code> and <code>Password</code> from the 'Azure Credentials' section in your Skillable Lab instructions panel.</p>
+</div>
 </li>
 <li>
-<p><strong>Sign in</strong> → If prompted, use the <code>Username</code> and <code>Password</code> from the "Azure Credentials" section in your Skillable Lab instructions panel.</p>
+<p>You may be presented with a "Welcome to Microsoft Azure" screen. Click <strong>Cancel</strong> (to dismiss it) or click <strong>Get Started</strong> (to take an introductory tour of the Azure Portal).</p>
 </li>
-<li>You may be presented with a "Welcome to Microsoft Azure" screen. Click <strong>Cancel</strong> (to dismiss it) or click <strong>Get Started</strong> (to take an introductory tour of the Azure Portal).</li>
-<li>You should be taken directly to the Resource Groups page for your subscription.<ul>
-<li>You should see an <code>rg-AITOUR</code> resource. This was created for you and contains all the resources needed to build and deploy your RAG-based copilot.</li>
+<li>
+<p>You should be taken directly to the Resource Groups page for your subscription.</p>
+<ul>
+<li>In the list of resource groups, you should see one named <code>rg-postgresql-accelerator</code> (or, if you assigned a different name, one by specified name). This resource group was created for you as part of the <code>azd up</code> resource deployment. It contains all of the Azure resources required to build and deploy your AI-enable solution.</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">You can use the search filter to reduce the number resource groups displayed.</p>
+</div>
 </li>
-<li><strong>Click</strong> <code>rg-AITOUR</code> to visit the Resource Group overview page.<ul>
+<li>
+<p>Select the <code>rg-postgres-accelerator</code> resource group.</p>
+<ul>
 <li><strong>Check:</strong> Deployments (look under "Essentials") - You should see: <em>35 succeeded</em>. </li>
-<li><strong>Check:</strong> Resources (in Overview) - You should see: <em>15 resources</em>.</li>
+<li><strong>Check:</strong> Resources (in Overview) - You should see: <em>20 resources</em>.</li>
 </ul>
 </li>
 </ol>

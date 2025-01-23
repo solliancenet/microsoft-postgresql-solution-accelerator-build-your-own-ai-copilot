@@ -964,9 +964,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-provision-deploy-app" class="md-nav__link">
+  <a href="#32-provision-azure-resource-and-deploy-app-ui-and-api" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Provision &amp; Deploy App
+      3.2 Provision Azure Resource and Deploy App (UI and API)
     </span>
   </a>
   
@@ -991,9 +991,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#43-connect-to-your-database-from-pgadmin" class="md-nav__link">
+  <a href="#43-create-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      4.3 Connect to your database from pgAdmin
+      4.3 Create .env file
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-connect-to-your-database-from-pgadmin" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Connect to your database from pgAdmin
     </span>
   </a>
   
@@ -1438,7 +1447,7 @@
         
   
   <span class="md-ellipsis">
-    5.1 Implement A Chat Endpoint
+    5.1 Explore the API Codebase
   </span>
   
 
@@ -1459,7 +1468,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Create LangChain agents
+    5.2 Implement the Chat Endpoint
   </span>
   
 
@@ -2107,9 +2116,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-provision-deploy-app" class="md-nav__link">
+  <a href="#32-provision-azure-resource-and-deploy-app-ui-and-api" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Provision &amp; Deploy App
+      3.2 Provision Azure Resource and Deploy App (UI and API)
     </span>
   </a>
   
@@ -2134,9 +2143,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#43-connect-to-your-database-from-pgadmin" class="md-nav__link">
+  <a href="#43-create-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      4.3 Connect to your database from pgAdmin
+      4.3 Create .env file
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-connect-to-your-database-from-pgadmin" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Connect to your database from pgAdmin
     </span>
   </a>
   
@@ -2316,8 +2334,7 @@ az extension remove -n ml
 </ol>
 </div>
 <div class="tabbed-block">
-<p>You must create a copy (known as a fork) of the GitHub repo and then clone that onto your local computer so you can work with the contents of the repo.</p>
-<p>At the end of this step, you should have:</p>
+<p>You must create a copy (known as a fork) of the GitHub repo and then clone that onto your local computer so you can work with the contents of the repo. After completing this step, you should have:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Forked the <strong>PostgreSQL Solution Accelerator: Build your own AI Copilot</strong> repo to your personal GitHub profile</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Created a local clone of the repo</li>
@@ -2363,15 +2380,14 @@ az extension remove -n ml
 </div>
 </div>
 <div class="tabbed-block">
-<p><em>This project uses an <code>azd-template</code>, which defines infrastructure-as-code assets that are used by the Azure Developer CLI to provision and manage your solution infrastructure resources</em>. On completing this step, you should have:</p>
+<p>This solution contains an Azure Developer CLI <code>azd-template</code> that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single <code>azd up</code> command. On completing this step, you should have:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Authenticated with Azure</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Provisioned Azure resources</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Deployed the starter solution</li>
 </ul>
-<p>This solution contains an Azure Developer CLI template that provisions various required resources in Azure and deploys the starter app to Azure Container Apps (ACA).</p>
-<p>You are now ready to connect your VS Code environment to Azure.</p>
 <h2 id="31-authenticate-with-azure">3.1 Authenticate With Azure<a class="headerlink" href="#31-authenticate-with-azure" title="Permanent link">&para;</a></h2>
+<p>Before running the <code>azd up</code> command, you must connect your VS Code environment to Azure by authenticating.</p>
 <ol>
 <li>To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:</li>
 </ol>
@@ -2401,22 +2417,41 @@ az extension remove -n ml
 </code></pre></div></td></tr></table></div>
 </li>
 </ol>
-<h2 id="32-provision-deploy-app">3.2 Provision &amp; Deploy App<a class="headerlink" href="#32-provision-deploy-app" title="Permanent link">&para;</a></h2>
+<h2 id="32-provision-azure-resource-and-deploy-app-ui-and-api">3.2 Provision Azure Resource and Deploy App (UI and API)<a class="headerlink" href="#32-provision-azure-resource-and-deploy-app-ui-and-api" title="Permanent link">&para;</a></h2>
 <p>Provision &amp; deploy the solution with one command: <code>azd up</code></p>
+<div class="admonition warning">
+<p class="admonition-title">You will be prompted to select the Azure region into which your resources should be deployed when running <code>azd up</code>."</p>
+<p>Before selecting a region, you should refer to the regional availability guidance for both the <a href="[#region-availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint)">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-3-large</a> models in Azure OpenAI and select a region that supports both models and has quota available.</p>
+<p><strong>Selecting a region that does not support both models will result in deployment failure.</strong></p>
+</div>
 <ol>
 <li>
 <p>Use <code>azd up</code> to provision your Azure infrastructure and deploy the web application to Azure.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>up
 </code></pre></div></td></tr></table></div>
 <div class="admonition task">
-<p class="admonition-title">You will be prompted for various inputs for the <code>azd up</code> command</p>
+<p class="admonition-title">You will be prompted for several inputs for the <code>azd up</code> command:</p>
 <ul>
-<li>Subscription - specify your own active Azure subscription ID</li>
-<li>Environment name for resource group</li>
-<li>Location for deployment<ul>
-<li>Refer to <a href="#region-availability">Region Availability</a> guidance and pick the option with desired models and quota available.</li>
+<li><strong>Enter a new environment name</strong>: Enter a value, such as <code>dev</code>.<ul>
+<li>The environment for the <code>azd up</code> command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.</li>
 </ul>
 </li>
+<li><strong>Select an Azure Subscription to use</strong>: Select the Azure subscription you are using for this workshop using the up and down arrow keys.</li>
+<li><strong>Select an Azure location to use</strong>: Select the Azure region into which resources should be deployed using the up and down arrow keys.</li>
+<li><strong>Enter a value for the <code>postgresqlAdminPassword</code></strong>: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.<ul>
+<li>Ensure you copy the password in a secure location so you can use it later to access the database.</li>
+</ul>
+</li>
+<li><strong>Enter a value for the <code>resourceGroupName</code></strong>: Enter <code>rg-postgresql-accelerator</code>, or a similar name.</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Should you need to delete the <code>azd</code> environment</p>
+<ul>
+<li>Locate the <code>.azure</code> folder created at the root of the project in VS Code.</li>
+<li>Expand the <code>.azure</code> folder and locate the folder matching the name of the environemnt you assigned.</li>
+<li>Delete the folder for the environment.</li>
+<li>The next time you run the <code>azd up</code> command, it will ask you to provide an environment name, along with the other values you were prompted for during setup.</li>
 </ul>
 </div>
 </li>
@@ -2436,6 +2471,7 @@ az extension remove -n ml
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Created a Python virtual environment</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Installed the required Python libraries from <code>requirements.txt</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Create and populated a <code>.env</code> file in the <strong>Woodgrove API</strong> project.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Connected to your database using pgAdmin</li>
 </ul>
 <h2 id="41-create-a-python-virtual-environment"><strong>4.1 Create a Python virtual environment</strong><a class="headerlink" href="#41-create-a-python-virtual-environment" title="Permanent link">&para;</a></h2>
@@ -2513,7 +2549,39 @@ az extension remove -n ml
 </code></pre></div></td></tr></table></div>
 </li>
 </ol>
-<h2 id="43-connect-to-your-database-from-pgadmin"><strong>4.3 Connect to your database from pgAdmin</strong><a class="headerlink" href="#43-connect-to-your-database-from-pgadmin" title="Permanent link">&para;</a></h2>
+<h2 id="43-create-env-file"><strong>4.3 Create <code>.env</code> file</strong><a class="headerlink" href="#43-create-env-file" title="Permanent link">&para;</a></h2>
+<p>Configuration values, such as connection string and endpoints, that allow your application to interact with Azure services are hosted in an Azure App Configuration service. To enable your application to retrieve these values, you must provide it with the endpoint of that service. You will use a <code>.env</code> file to host the endpoint as an environment variable, which will allow you to run the Woodgrove API locally. The <code>.env</code> file will be created within the <code>src\api\app</code> folder of the project.</p>
+<ol>
+<li>
+<p>In VS Code, navigate to the <code>src\api\app</code> folder in the <strong>Explorer</strong> panel.</p>
+</li>
+<li>
+<p>Right-click the <code>app</code> folder and select <strong>New file...</strong> from the context menu.</p>
+</li>
+<li>
+<p>Enter <code>.env</code> as the name of the new file within the VS Code <strong>Explorer</strong> panel.</p>
+</li>
+<li>
+<p>In the <code>.env</code> file, add the following as the first line, replacing the <code>{YOUR_APP_CONFIG_ENDPOINT}</code> with the endpoint for the App Configuration resource in your <code>rg-postgresql-accelerator</code> resource group.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="na">AZURE_APP_CONFIG_ENDPOINT</span><span class="o">=</span><span class="s">{YOUR_APP_CONFIG_ENDPOINT}</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition task">
+<p class="admonition-title">To get the endpoint for your App Configuration resource:</p>
+<ol>
+<li>Navigate to your App Configuration resource in the <a href="https://portal.azure.com/">Azure portal</a>.</li>
+<li>Select <strong>Access settings</strong> from the resource navigation menu, under <strong>Settings</strong>.</li>
+<li>
+<p>Copy the <strong>Endpoint</strong> value and paste it into the <code>.env</code> file.</p>
+<p><img alt="Screenshot of the App Configuration Access Settings page, with the Endpoint copy button highlighted." src="../../../img/app-config-access-settings-endpoint.png" /></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Save the <code>.env</code> file.</p>
+</li>
+</ol>
+<h2 id="44-connect-to-your-database-from-pgadmin"><strong>4.4 Connect to your database from pgAdmin</strong><a class="headerlink" href="#44-connect-to-your-database-from-pgadmin" title="Permanent link">&para;</a></h2>
 <p>You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:</p>
 <ol>
 <li>Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the <a href="https://portal.azure.com/">Azure portal</a>.</li>

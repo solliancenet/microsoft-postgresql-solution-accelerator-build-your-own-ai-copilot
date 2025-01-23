@@ -1330,7 +1330,7 @@
         
   
   <span class="md-ellipsis">
-    5.1 Implement A Chat Endpoint
+    5.1 Explore the API Codebase
   </span>
   
 
@@ -1351,7 +1351,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Create LangChain agents
+    5.2 Implement the Chat Endpoint
   </span>
   
 
@@ -1954,7 +1954,10 @@
 
 
 <h1 id="2-ai-enabled-app-architecture">2. AI-enabled App Architecture<a class="headerlink" href="#2-ai-enabled-app-architecture" title="Permanent link">&para;</a></h1>
-<p>The objective of this solution is to automate the extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.</p>
+<p>The objective of this solution is to accelerate the integration of AI capabilities into applications.</p>
+<p>The extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.</p>
+<p>By integrating AI capabilities into existing solutions, leveraging advanced AI validation, Document Intelligence, and a copilot enhanced by RAG...</p>
+<p>Such an application can be integrated with existing financial and accounting systems to streamline the entire process. By leveraging AI and machine learning, it can continuously learn and improve its accuracy in detecting discrepancies and anomalies.</p>
 <p>The high-level solution architecture is represented by the following diagrams:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="data-ingestion-and-validation" name="__tabbed_1" type="radio" /><input id="copilot-with-rag" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="data-ingestion-and-validation">Data ingestion and validation</label><label for="copilot-with-rag">Copilot with RAG</label></div>
 <div class="tabbed-content">
@@ -1966,9 +1969,6 @@
 <p>The second part of the application is an AI copilot, which allows users to ask questions and gain actionable insights over the data in the PostgreSQL database by leveraging a RAG architecture pattern. When users submit  questions through the Copilot's chat interface, the query is processed by the SPA Web App and sent to the API. The API then communicates with Azure OpenAI to generate a prompt embedding, which is used to perform a vector search in the Azure Database for PostgreSQL Flexible Server. The search results are retrieved and used to generate a completion response containing AI-generated insights. This response is sent back to the API and displayed to the user, providing them with relevant and actionable information based on the data stored in the Postgres database. This process enables users to efficiently query and analyze large datasets, making it easier to derive meaningful insights and make informed decisions.</p>
 <p><img alt="" src="../../img/copilot-architecture-diagram.png" /></p>
 <p>The attached image is a flowchart illustrating the architecture of an AI Copilot with Retrieval-Augmented Generation (RAG). The flowchart shows how users interact with the system through a browser-based Copilot Chat interface. The users' queries are sent to a Single Page Application (SPA) Web App, which communicates with an API. The API interacts with Azure OpenAI to generate prompt embeddings and perform vector searches. The vector search results are retrieved from an Azure Database for PostgreSQL Flexible Server (Vector Store). The completion response, which contains AI-generated insights, is then sent back to the API and displayed to the users through the SPA Web App. The system also includes components like Key Vault and Azure App Configuration for secure and efficient management of application settings and secrets.</p>
-</div>
-</div>
-</div>
 <h2 id="the-rag-pattern">The RAG Pattern<a class="headerlink" href="#the-rag-pattern" title="Permanent link">&para;</a></h2>
 <p>The workshop teaches you to <strong>build, evaluate, and deploy a retail copilot</strong> code-first on Azure AI - using the <em>Retrieval Augmented Generation</em> (RAG) design pattern to make sure that our copilot responses are grounded in the (private) data maintained by the enterprise, for this application.</p>
 <p><img alt="RAG" src="../../img/rag-design-pattern.png" /></p>
@@ -2006,6 +2006,9 @@
 <p class="admonition-title">The chat model uses prompt to generate a grounded response to user question.</p>
 </div>
 <p>This enhanced prompt is now sent to the Large Language "chat" model (e.g., Azure OpenAI <code>gpt-35-turbo</code> or <code>gpt-4o</code>) which sees the enhanced prompt (retrieved documents, customer profile data, chat history) as <em>grounding</em> context for generating the final response, improving the quality (e.g., relevance, groundedness) of results returned from Contoso Chat.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

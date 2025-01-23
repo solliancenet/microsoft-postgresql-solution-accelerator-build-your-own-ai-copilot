@@ -1,6 +1,6 @@
 # Introduction
 
-The solution accelarator is designed as an end-to-end example of a Financial Services Industry Copilot application. It demonstrates the implementation of generative AI capabilities to enhance an existing application with AI-driven data validation, vector search, semantic ranking, and GraphRAG on Azure Database for PostgreSQL, and illustrates how they can be combined to deliver high quality responses to financial questions. The app uses a small sample dataset made up of master services agreements (MSAs), statements of work (SOWs), and invoices. The source code for the accelerator is provided in the following repo: <https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot>.
+This solution accelarator is designed as an end-to-end example of a Financial Services Industry AI-enabled application. It demonstrates the implementation of generative AI capabilities to enhance an existing application with AI-driven data validation, vector search, semantic ranking, and GraphRAG on Azure Database for PostgreSQL, and illustrates how they can be combined to deliver high quality responses to financial questions via an intelligent copilot. The app uses a small sample dataset made up of statements of work (SOWs) and invoices. The source code for the accelerator is provided in the following repo: <https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot>.
 
 The application has the following architecture:
 
@@ -8,14 +8,14 @@ The application has the following architecture:
 
 ## Learning Objectives
 
-The goal of the solution accelerator is to teach you to how to **adding rich AI capabilities** using Azure Database for PostgreSQL and Azure AI Services to your existing applications. You will gain hands-on experience integrating advanced AI validation during data ingestion to ensure financial documents, like invoices, align with their associated statement of work. By leveraging Azure OpenAI for robust data validation and Azure Document Intelligence for comprehensive extraction and analysis, you will improve data quality. By adding a copilot chat feature, you will provide the ability for users to gain deep insights into vendors' invoicing accuracy, timeliness, and quality. This comprehensive approach equips you with the skills to seamlessly enrich your existing applications with AI-enhanced features, boosting their performance and reliability in the financial services industry.
+The goal of the solution accelerator is to teach you to how to **add rich AI capabilities** using Azure Database for PostgreSQL and Azure AI Services to your existing applications. You will gain hands-on experience integrating advanced AI validation during data ingestion to ensure financial documents, like invoices, align with their associated statement of work. By leveraging Azure OpenAI for robust data validation and Azure Document Intelligence for comprehensive extraction and analysis, you will improve data quality. By adding a copilot chat feature, you will provide the ability for users to gain deep insights into vendors' invoicing accuracy, timeliness, and quality. This comprehensive approach equips you with the skills to seamlessly enrich your existing applications with AI-enhanced features, boosting their performance and reliability in the financial services industry.
 
 By the end of the workshop, you will learn to:
 
 - Use Azure AI Services to automate data ingestion and validation tasks to streamline workflows.
 - Integrate Generative AI capabilities into your Azure Database for PostgreSQL-based applications using the [Azure AI extension](https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-integrate-azure-ai).
 - Use the [Retrieval Augmented Generation (RAG) pattern](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) <br/> (to ground responses in your own data).
-- Use [Azure Container Apps](https://aka.ms/azcontainerapps) <br/> for deployment (to get a hosted API endpoint for real-world use).
+- Use [Azure Container Apps](https://aka.ms/azcontainerapps) for deployment <br/> (to get a hosted API endpoint for real-world use).
 - Use [Azure Developer CLI](https://aka.ms/azd) with AI Application Templates <br/> (to provision & deploy apps consistently across teams)
 
 ## Learning Resources

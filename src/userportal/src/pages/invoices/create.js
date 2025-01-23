@@ -3,12 +3,28 @@ import { Form, Button } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
 
+const getCurrentDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}${month}${day}`;
+};
+
+const getTodaysDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 const InvoiceCreate = () => {
   const [vendorId, setVendorId] = useState('');
-  const [invoiceNumber, setInvoiceNumber] = useState('');
-  const [amount, setAmount] = useState('');
-  const [invoiceDate, setInvoiceDate] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState('');
+  const [invoiceNumber, setInvoiceNumber] = useState('INV-' + getCurrentDate());
+  const [amount, setAmount] = useState('0');
+  const [invoiceDate, setInvoiceDate] = useState(getTodaysDate());
+  const [paymentStatus, setPaymentStatus] = useState('Pending');
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);

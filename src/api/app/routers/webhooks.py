@@ -41,10 +41,12 @@ async def storage_blob_webhook(
     # Process each event
     for event in events:
         eventType = event['eventType']
-        containerName = event['data']['container']['name']
-        blobName = event['data']['blob']['name']
 
-        print(f"Event: {eventType} - Container: {containerName} - Filename: {blobName}")
+        subject = event['subject']
+        blobContainerName = app_config.get_document_container_name()
+        blobName = subject.replace(f"/blobServices/default/containers/{blobContainerName}/blobs/", '', 1)
+
+        print(f"Event: {eventType} - Filename: {blobName}")
         
         # Step 1: Download the document
         document_data = await storage_service.download_blob(blobName)
@@ -110,6 +112,19 @@ async def storage_blob_webhook(
 #  'eventTime': '2025-01-13T22:47:49.856086Z', 
 # 'metadataVersion': '1', 
 # 'dataVersion': '2'}]
+
+# [{'topic': '/subscriptions/8c924580-ce70-48d0-a031-1b21726acc1a/resourceGroups/ms-postgresql-byoc/providers/Microsoft.Storage/storageAccounts/stuemjxng3p6up6', 
+# 'subject': '/blobServices/default/containers/documents/blobs/1/sows/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf', 
+# 'eventType': 'Microsoft.Storage.BlobCreated', 
+# 'id': '9dd54c42-601e-003a-593c-6d3d2806c3a1',
+#  'data': {
+#     'api': 'PutBlob', 
+#     'clientRequestId': 'fc68f988-d92f-11ef-a509-e2ca5b809811', 'requestId': '9dd54c42-601e-003a-593c-6d3d28000000', 'eTag': '0x8DD3B53E0AE4303', 
+#     'contentType': 'application/pdf', 'contentLength': 3529, 'blobType': 'BlockBlob', 'accessTier': 'Default', 
+#     'url': 'https://stuemjxng3p6up6.blob.core.windows.net/documents/1/sows/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf',
+#      'sequencer': '0000000000000000000000000000F124000000000007e0c7', 'storageDiagnostics': {'batchId': '7679938c-f006-0070-003c-6d0d4f000000'}
+#      }, 'dataVersion': '', 'metadataVersion': '1', 'eventTime': '2025-01-23T02:15:59.4329615Z'}]
+
 
 def extract_invoice_metadata(full_text):
     """Extract invoice metadata such as number, amount, and invoice_date from text."""

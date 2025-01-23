@@ -19,6 +19,9 @@ param storageAccountName string
 @description('Unique name for the Container Registry instance.')
 param containerRegistryName string
 
+@description('The Principal ID of user to grant Data Contributor/Reader permissions to the storage account.')
+param principalId string
+
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
 }
@@ -62,6 +65,26 @@ resource amlEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoin
   properties: {
     authMode: 'Key'
     description: 'bge-v2-m3 reranker model endpoint'
+  }
+}
+
+resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storageAccount
+  name: guid(subscription().id, resourceGroup().id, principalId, 'storageBlobDataContributorRole')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
+    principalId: principalId
+    principalType: 'User'
+  }
+}
+
+resource storageBlobDataReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storageAccount
+  name: guid(subscription().id, resourceGroup().id, principalId, 'storageBlobDataContributorRole')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1') // Storage Blob Data Reader role
+    principalId: principalId
+    principalType: 'User'
   }
 }
 

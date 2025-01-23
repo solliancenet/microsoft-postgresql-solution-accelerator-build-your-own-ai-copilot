@@ -116,16 +116,6 @@ resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/fi
   }
 }
 
-// Enable these extensions for the PostgreSQL server
-resource postgresqlExtensions 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2024-11-01-preview' = {
-  parent: postgresqlServer
-  name: 'azure.extensions'
-  properties: {
-    source: 'user-override'
-    value: 'AZURE_AI,VECTOR'
-  }
-}
-
 resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2024-08-01' = {
   name: databaseName
   parent: postgresqlServer

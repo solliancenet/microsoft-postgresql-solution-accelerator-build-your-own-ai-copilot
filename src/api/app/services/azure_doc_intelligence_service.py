@@ -11,9 +11,9 @@ class AzureDocIntelligenceService:
             credential=DefaultAzureCredential()
         )
 
-    def extract_text_from_document(document_data):
+    def extract_text_from_document(self, document_data):
         """Extract text and structure using Azure AI Document Intelligence."""
-        poller = document_analysis_client.begin_analyze_document(
+        poller = self.document_analysis_client.begin_analyze_document(
             model_id="prebuilt-document",
             document=document_data
         )

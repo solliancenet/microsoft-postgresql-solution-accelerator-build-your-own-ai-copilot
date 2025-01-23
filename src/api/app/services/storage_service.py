@@ -38,7 +38,7 @@ class StorageService:
         blob_client = blob_service_client.get_blob_client(container=self.container_name, blob=blobName)
         if await blob_client.exists():
             stream = await blob_client.download_blob()
-            return stream.readall()
+            return await stream.readall()
         return None
 
     # ###########################################################################################

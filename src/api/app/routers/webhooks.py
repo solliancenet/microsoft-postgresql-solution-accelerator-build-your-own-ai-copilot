@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_azure_doc_intelligence_service, get_storage_service, get_app_config, get_embedding_client
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Form
 from typing import List
 from pydantic import parse_obj_as
 import json
@@ -64,17 +64,17 @@ async def storage_blob_webhook(
         # Step 5: Insert into database
         # Get doc type and id
         async with pool.acquire() as conn:
-            docs = await conn.fetchrow('''
+            doc = await conn.fetchrow('''
                 (
                     select id as id, 'sow' as doctype from sows where document LIKE CONCAT($1, '%')
                 ) UNION (
                     select id as id, 'invoice' as doctype from invoices where document LIKE CONCAT($1, '%')
                 ) LIMIT 1;
             ''', blobName)
-            if docs is None:
+            if doc is None:
                 raise HTTPException(status_code=404, detail=f'Document with the name {blobName} was not found in the database.')
-            objectId = docs[0]['id']
-            documentType = docs[0]['doctype']
+            objectId = docs['id']
+            documentType = docs['doctype']
 
         if (documentType == 'sow'): # Insert into SOWs table
             metadata = {

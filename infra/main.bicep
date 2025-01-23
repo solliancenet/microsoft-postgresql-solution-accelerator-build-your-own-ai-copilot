@@ -308,6 +308,7 @@ module amlWorkspace './shared/aml-workspace.bicep' = {
     appInsightsName: monitoring.outputs.applicationInsightsName
     storageAccountName: storage.outputs.name
     containerRegistryName: registry.outputs.name
+    principalId: principalId
   }
   scope: rg
 }

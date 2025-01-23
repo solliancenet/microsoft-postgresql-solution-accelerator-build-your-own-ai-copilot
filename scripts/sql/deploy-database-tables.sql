@@ -12,6 +12,17 @@ CREATE TABLE IF NOT EXISTS vendors (
     metadata jsonb -- additional information about the vendor
 );
 
+-- Insert vendor values
+INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
+VALUES
+    ('TailWind Cloud Solutions', '789 Goldsmith Road, MainTown City', 'Morgan Skinner', 'morgan.skinner@tailwindcloud.com', '123-789-7890', 'Cloud Services', '{}'),
+    ('Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps', '{}'),
+    ('Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing', '{}'),
+    ('Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering', '{}'),
+    ('Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services', '{}');
+
+
+
 -- Status table: information about the status of a invoice, milestone, etc
 DROP TABLE status;
 CREATE TABLE IF NOT EXISTS status (
@@ -41,6 +52,58 @@ CREATE TABLE IF NOT EXISTS sows (
     metadata JSONB,
     FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
+
+-- Insert sow values
+
+-- Insert sample data into sows table
+-- Insert sample data into sows table
+INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
+VALUES
+    (
+        'SOW-WoodgroveBank-2024-001',
+        (SELECT id FROM vendors WHERE name = 'TailWind Cloud Solutions'),
+        '2024-01-01',
+        '2024-12-31',
+        100000.00,
+        'Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20240101.pdf',
+        '{}'
+    ),
+    (
+        'WoodgroveBank-SOW-001',
+        (SELECT id FROM vendors WHERE name = 'Contoso DevOps Services'),
+        '2024-02-01',
+        '2024-11-30',
+        75000.00,
+        'Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240201.pdf',
+        '{}'
+    ),
+    (
+        'SOW-LP-WGB-001',
+        (SELECT id FROM vendors WHERE name = 'Lucerne Publishing'),
+        '2024-03-01',
+        '2024-10-31',
+        50000.00,
+        'Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20240301.pdf',
+        '{}'
+    ),
+    (
+        'WWE-WoodgroveBank-SOW-001',
+        (SELECT id FROM vendors WHERE name = 'Wide World Engineering'),
+        '2024-04-01',
+        '2024-09-30',
+        60000.00,
+        'Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20240401.pdf',
+        '{}'
+    ),
+    (
+        'SOW-2024-WoodgroveBank-001',
+        (SELECT id FROM vendors WHERE name = 'Trey Research Inc'),
+        '2024-05-01',
+        '2024-08-31',
+        45000.00,
+        'Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf',
+        '{}'
+    );
 
 -- Invoices table; tax details, discounts, or additional metadata
 CREATE TABLE IF NOT EXISTS invoices (

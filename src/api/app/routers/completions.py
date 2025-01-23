@@ -57,11 +57,26 @@ async def generate_chat_completion(request: CompletionRequest, llm = Depends(get
     completion = await agent_executor.ainvoke({"input": request.message, "chat_history": request.chat_history[-request.max_history:]})
     return completion['output']
 
-async def get_invoices():
+async def get_invoices(query: str = None):
     """Retrieves a list of invoices from the database."""
     pool = await get_db_connection_pool()
     async with pool.acquire() as conn:
-        rows = await conn.fetch('SELECT * FROM invoices;')
+        if query is not None:
+            rows = await conn.fetch('''
+                WITH
+                retrieval_result AS(
+                    SELECT id
+                    FROM invoices
+                    ORDER BY
+                        invoices.embedding <=> azure_openai.create_embeddings('embeddings', $1, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)::vector
+                    LIMIT 10
+                )
+                SELECT i.* FROM semantic_reranking($1, array (SELECT id FROM retrieval_result)) ranking
+                JOIN invoices i ON ranking.id = i.id
+                ORDER BY relevance DESC limit 3;
+            ''')
+        else:
+            rows = await conn.fetch('SELECT * FROM invoices;')
         invoices = [dict(row) for row in rows]
     return invoices
 

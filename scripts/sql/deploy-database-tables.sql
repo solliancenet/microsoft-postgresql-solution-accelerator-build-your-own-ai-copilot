@@ -54,52 +54,49 @@ CREATE TABLE IF NOT EXISTS sows (
 );
 
 -- Insert sow values
-
--- Insert sample data into sows table
--- Insert sample data into sows table
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 VALUES
     (
         'SOW-WoodgroveBank-2024-001',
         (SELECT id FROM vendors WHERE name = 'TailWind Cloud Solutions'),
-        '2024-01-01',
-        '2024-12-31',
-        100000.00,
-        'Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20240101.pdf',
+        '2024-11-01',
+        '2025-12-31',
+        43600.00,
+        'Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf',
         '{}'
     ),
     (
         'WoodgroveBank-SOW-001',
         (SELECT id FROM vendors WHERE name = 'Contoso DevOps Services'),
-        '2024-02-01',
-        '2024-11-30',
+        '2024-06-01',
+        '2025-11-30',
         75000.00,
-        'Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240201.pdf',
+        'Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf',
         '{}'
     ),
     (
         'SOW-LP-WGB-001',
         (SELECT id FROM vendors WHERE name = 'Lucerne Publishing'),
-        '2024-03-01',
-        '2024-10-31',
+        '2024-12-01',
+        '2024-12-31',
         50000.00,
-        'Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20240301.pdf',
+        'Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf',
         '{}'
     ),
     (
         'WWE-WoodgroveBank-SOW-001',
         (SELECT id FROM vendors WHERE name = 'Wide World Engineering'),
-        '2024-04-01',
-        '2024-09-30',
+        '2024-10-01',
+        '2025-09-30',
         60000.00,
-        'Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20240401.pdf',
+        'Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20241001.pdf',
         '{}'
     ),
     (
         'SOW-2024-WoodgroveBank-001',
         (SELECT id FROM vendors WHERE name = 'Trey Research Inc'),
         '2024-05-01',
-        '2024-08-31',
+        '2025-08-31',
         45000.00,
         'Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf',
         '{}'

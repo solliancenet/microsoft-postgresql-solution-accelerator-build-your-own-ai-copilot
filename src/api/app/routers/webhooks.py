@@ -11,8 +11,7 @@ router = APIRouter(
     dependencies = [
         Depends(get_db_connection_pool),
         Depends(get_storage_service),
-        Depends(get_azure_doc_intelligence_service),
-        Depends(get_embedding_client)
+        Depends(get_azure_doc_intelligence_service)
     ],
     responses = {404: {"description": "Not found"}}
 )

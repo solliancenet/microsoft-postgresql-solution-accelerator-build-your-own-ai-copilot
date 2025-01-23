@@ -100,7 +100,7 @@ resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
-  name: guid(subscription().id, resourceGroup().id, identity.id, 'storageBlobDataContributorRole')
+  name: guid(subscription().id, resourceGroup().id, identityName, 'storageBlobDataContributorRole')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
     principalId: identity.properties.principalId
@@ -113,7 +113,7 @@ resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' e
 }
 
 resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(subscription().id, resourceGroup().id, identity.id, 'AppConfigDataReader')
+  name: guid(subscription().id, resourceGroup().id, identityName, 'AppConfigDataReader')
   scope: appConfig
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '516239f1-63e1-4d78-a4de-a74fb236a071') // App Configuration Data Reader role

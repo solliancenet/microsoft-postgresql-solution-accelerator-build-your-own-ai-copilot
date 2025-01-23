@@ -70,7 +70,7 @@ resource amlEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoin
 
 resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
-  name: guid(subscription().id, resourceGroup().id, principalId, 'storageBlobDataContributorRole')
+  name: guid(subscription().id, resourceGroup().id, principalId, 'mlStorageBlobDataContributorRole')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
     principalId: principalId
@@ -80,7 +80,7 @@ resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments
 
 resource storageBlobDataReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
-  name: guid(subscription().id, resourceGroup().id, principalId, 'storageBlobDataContributorRole')
+  name: guid(subscription().id, resourceGroup().id, principalId, 'mlStorageBlobDataContributorRole')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1') // Storage Blob Data Reader role
     principalId: principalId

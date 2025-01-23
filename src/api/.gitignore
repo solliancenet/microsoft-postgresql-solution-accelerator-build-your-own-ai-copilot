@@ -1,5 +1,19 @@
-.venv
-__pycache__
-.env
 
 .DS_Store
+
+# Virtual environments
+.venv/
+.env/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+# Visual Studio Code
+.localhistory/
+.vscode/settings.json

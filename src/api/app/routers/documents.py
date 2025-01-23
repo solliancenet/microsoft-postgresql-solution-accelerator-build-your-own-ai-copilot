@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Response
-from app.lifespan_manager import get_storage_service, get_app_config
+from app.lifespan_manager import get_storage_service, get_config_service
 from azure.core.exceptions import ResourceNotFoundError
 import os
 
@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 @router.get("/", response_model = list[dict])
-async def get(storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
+async def get(storage_service = Depends(get_storage_service), app_config = Depends(get_config_service)):
     """
     Retrieves a list of all documents in the specified blob container.
     Blobs are returned in an alphabetically sorted list by filename.
@@ -36,7 +36,7 @@ async def get(storage_service = Depends(get_storage_service), app_config = Depen
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/{blob_name:path}")
-async def get_document(blob_name: str, storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
+async def get_document(blob_name: str, storage_service = Depends(get_storage_service), app_config = Depends(get_config_service)):
     """
     Reads the specified document from the container.
     """
@@ -56,7 +56,7 @@ async def get_document(blob_name: str, storage_service = Depends(get_storage_ser
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/")
-async def upload_document(file: UploadFile = File(...), storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
+async def upload_document(file: UploadFile = File(...), storage_service = Depends(get_storage_service), app_config = Depends(get_config_service)):
     """
     Upload a document to the specified container.
     """
@@ -75,7 +75,7 @@ async def upload_document(file: UploadFile = File(...), storage_service = Depend
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/{blob_name:path}")
-async def delete_document(blob_name: str, storage_service = Depends(get_storage_service), app_config = Depends(get_app_config)):
+async def delete_document(blob_name: str, storage_service = Depends(get_storage_service), app_config = Depends(get_config_service)):
     """
     Delete a document from the container.
     """

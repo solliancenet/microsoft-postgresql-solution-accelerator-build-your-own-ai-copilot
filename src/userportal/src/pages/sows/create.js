@@ -3,19 +3,29 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
+import config from '../../config';
+
+const getDefaultNumber = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `SOW-${year}-${month}${day}`;
+};
 
 const SOWCreate = () => {
   const { vendorId } = useParams();
-  const [sowNumber, setSowNumber] = useState('');
+  const [sowNumber, setSowNumber] = useState(getDefaultNumber());
   const [sowVendorId, setSowVendorId] = useState(vendorId);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [budget, setBudget] = useState('');
+  const [startDate, setStartDate] = useState('2024-01-01');
+  const [endDate, setEndDate] = useState('2024-12-31');
+  const [budget, setBudget] = useState('0');
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   const [vendors, setVendors] = useState([]);
+
 
   useEffect(() => {
     const fetchVendors = async () => {
@@ -85,53 +95,59 @@ const SOWCreate = () => {
             ))}
           </Form.Control>
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>SOW Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={sowNumber}
-            onChange={(e) => setSowNumber(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Form.Group className="mb-3">
-          <Form.Label>Budget</Form.Label>
-          <NumericFormat
-            className="form-control"
-            value={budget}
-            thousandSeparator={true}
-            prefix={'$'}
-            onValueChange={(values) => {
-              const { value } = values;
-              setBudget(value);
-            }}
-            required
-          />
-        </Form.Group>
+
+        {config.displayFieldOnCreate && (
+          <>
+          <Form.Group className="mb-3">
+            <Form.Label>SOW Number</Form.Label>
+            <Form.Control
+              type="text"
+              value={sowNumber}
+              onChange={(e) => setSowNumber(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Start Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>End Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group className="mb-3">
+            <Form.Label>Budget</Form.Label>
+            <NumericFormat
+              className="form-control"
+              value={budget}
+              thousandSeparator={true}
+              prefix={'$'}
+              onValueChange={(values) => {
+                const { value } = values;
+                setBudget(value);
+              }}
+              required
+            />
+          </Form.Group>
+        </>
+        )}
+        <br/>
         <Button type="submit" variant="primary">
           <i className="fas fa-plus"></i> Create
         </Button>

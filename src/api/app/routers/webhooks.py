@@ -1,4 +1,4 @@
-from app.lifespan_manager import get_db_connection_pool, get_azure_doc_intelligence_service, get_storage_service, get_app_config, get_embedding_client
+from app.lifespan_manager import get_db_connection_pool, get_azure_doc_intelligence_service, get_storage_service, get_config_service, get_embedding_client
 from fastapi import APIRouter, Depends, HTTPException, Request, Form
 from typing import List
 from pydantic import parse_obj_as
@@ -22,7 +22,7 @@ async def storage_blob_webhook(
     request: Request,
     pool = Depends(get_db_connection_pool),
     storage_service = Depends(get_storage_service),
-    app_config = Depends(get_app_config),
+    app_config = Depends(get_config_service),
     doc_intelligence_service = Depends(get_azure_doc_intelligence_service),
     embeddings_client = Depends(get_embedding_client)
 ):

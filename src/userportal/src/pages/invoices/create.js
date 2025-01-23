@@ -2,13 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import api from '../../api/Api';
+import config from '../../config';
+
+const getDefaultNumber = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `INV-${year}-${month}${day}`;
+};
+
+const getTodaysDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 const InvoiceCreate = () => {
   const [vendorId, setVendorId] = useState('');
-  const [invoiceNumber, setInvoiceNumber] = useState('');
-  const [amount, setAmount] = useState('');
-  const [invoiceDate, setInvoiceDate] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState('');
+  const [invoiceNumber, setInvoiceNumber] = useState(getDefaultNumber());
+  const [amount, setAmount] = useState('0');
+  const [invoiceDate, setInvoiceDate] = useState(getTodaysDate());
+  const [paymentStatus, setPaymentStatus] = useState('Pending');
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -96,51 +113,58 @@ const InvoiceCreate = () => {
             ))}
           </Form.Control>
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Invoice Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={invoiceNumber}
-            onChange={(e) => setInvoiceNumber(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Amount</Form.Label>
-          <NumericFormat
-              className="form-control"
-              value={amount}
-              onValueChange={(values) => setAmount(values.floatValue)}
-              thousandSeparator={true}
-              prefix={'$'}
+
+        {config.displayFieldOnCreate && (
+          <>
+          <Form.Group className="mb-3">
+            <Form.Label>Invoice Number</Form.Label>
+            <Form.Control
+              type="text"
+              value={invoiceNumber}
+              onChange={(e) => setInvoiceNumber(e.target.value)}
               required
             />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Invoice Date</Form.Label>
-          <Form.Control
-            type="date"
-            value={invoiceDate}
-            onChange={(e) => setInvoiceDate(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Payment Status</Form.Label>
-          <Form.Control
-            as="select"
-            value={paymentStatus}
-            onChange={(e) => setPaymentStatus(e.target.value)}
-            required
-            >
-              <option value="">Select Status</option>
-              {statuses.map((status) => (
-                <option key={status.name} value={status.name}>
-                  {status.name}
-                </option>
-              ))}
-            </Form.Control>
-        </Form.Group>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Amount</Form.Label>
+            <NumericFormat
+                className="form-control"
+                value={amount}
+                onValueChange={(values) => setAmount(values.floatValue)}
+                thousandSeparator={true}
+                prefix={'$'}
+                required
+              />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Invoice Date</Form.Label>
+            <Form.Control
+              type="date"
+              value={invoiceDate}
+              onChange={(e) => setInvoiceDate(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Payment Status</Form.Label>
+            <Form.Control
+              as="select"
+              value={paymentStatus}
+              onChange={(e) => setPaymentStatus(e.target.value)}
+              required
+              >
+                <option value="">Select Status</option>
+                {statuses.map((status) => (
+                  <option key={status.name} value={status.name}>
+                    {status.name}
+                  </option>
+                ))}
+              </Form.Control>
+          </Form.Group>
+
+        </>
+        )}
+        <br/>
         <Button type="submit" variant="primary">
           <i className="fas fa-plus"></i> Create
         </Button>

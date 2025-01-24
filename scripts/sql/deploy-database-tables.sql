@@ -8,44 +8,22 @@ CREATE TABLE IF NOT EXISTS vendors (
     contact_name text NOT NULL,
     contact_email text NOT NULL,
     contact_phone text NOT NULL,
-    type text NOT NULL,
-    metadata jsonb -- additional information about the vendor
+    type text NOT NULL
 );
 
--- Insert vendor values only if the specific vendor does not exist
--- INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
--- SELECT 'TailWind Cloud Solutions', '789 Goldsmith Road, MainTown City', 'Morgan Skinner', 'morgan.skinner@tailwindcloud.com', '123-789-7890', 'Cloud Services', '{}'
--- WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'TailWind Cloud Solutions');
-
--- INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
--- SELECT 'Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps', '{}'
--- WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Contoso DevOps Services');
-
--- INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
--- SELECT 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing', '{}'
--- WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Lucerne Publishing');
-
--- INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
--- SELECT 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering', '{}'
--- WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Wide World Engineering');
-
--- INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
--- SELECT 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services', '{}'
--- WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Trey Research Inc');
-
 -- Insert vendors only if vendors table is empty
-INSERT INTO vendors (id, name, address, contact_name, contact_email, contact_phone, type, metadata)
-SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone, v.type, v.metadata
+INSERT INTO vendors (id, name, address, contact_name, contact_email, contact_phone, type)
+SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone, v.type
 FROM (
-    SELECT 1 as id, 'TailWind Cloud Solutions' as name, '789 Goldsmith Road, MainTown City' as address, 'Morgan Skinner' as contact_name, 'morgan.skinner@tailwindcloud.com' as contact_email, '123-789-7890' as contact_phone, 'Cloud Services' as type, '{}' as metadata
+    SELECT 1 as id, 'TailWind Cloud Solutions' as name, '789 Goldsmith Road, MainTown City' as address, 'Morgan Skinner' as contact_name, 'morgan.skinner@tailwindcloud.com' as contact_email, '123-789-7890' as contact_phone, 'Cloud Services' as type
     UNION ALL
-    SELECT 2, 'Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps', '{}'
+    SELECT 2, 'Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps'
     UNION ALL
-    SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing', '{}'
+    SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing'
     UNION ALL
-    SELECT 4, 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering', '{}'
+    SELECT 4, 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering'
     UNION ALL
-    SELECT 5, 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services', '{}'
+    SELECT 5, 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services'
 ) as v
 WHERE NOT EXISTS (SELECT 1 FROM vendors)
 

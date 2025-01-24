@@ -25,6 +25,7 @@ async def lifespan(app):
     global chat_client
     global credential
     global db
+    global db_connection_pool
     global embedding_client
     global storage_service
     
@@ -47,8 +48,12 @@ async def lifespan(app):
 
     # Create a connection to the Azure Database for PostgreSQL server
     db = DatabaseService(credential, await config_service.get_postgresql_server_name(), await config_service.get_postgresql_database_name())
-    
+    db_connection_pool = await db.get_connection_pool()
+
     yield
+
+    # Close the connection pool
+    await db_connection_pool.close()
 
     # Close the async Microsoft Entra ID RBAC credential
     await credential.close()
@@ -74,4 +79,7 @@ async def get_storage_service():
 
 async def get_db_connection_pool():
     global db
-    return await db.get_connection_pool()
+    global db_connection_pool
+    if (db_connection_pool is None or db_connection_pool._closed):
+        db_connection_pool = await db.get_connection_pool()
+    return db_connection_pool

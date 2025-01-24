@@ -8,30 +8,25 @@ CREATE TABLE IF NOT EXISTS vendors (
     contact_name text NOT NULL,
     contact_email text NOT NULL,
     contact_phone text NOT NULL,
-    type text NOT NULL,
-    metadata jsonb -- additional information about the vendor
+    type text NOT NULL
 );
 
--- Insert vendor values only if the specific vendor does not exist
-INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
-SELECT 'TailWind Cloud Solutions', '789 Goldsmith Road, MainTown City', 'Morgan Skinner', 'morgan.skinner@tailwindcloud.com', '123-789-7890', 'Cloud Services', '{}'
-WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'TailWind Cloud Solutions');
+-- Insert vendors only if vendors table is empty
+INSERT INTO vendors (id, name, address, contact_name, contact_email, contact_phone, type)
+SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone, v.type
+FROM (
+    SELECT 1 as id, 'TailWind Cloud Solutions' as name, '789 Goldsmith Road, MainTown City' as address, 'Morgan Skinner' as contact_name, 'morgan.skinner@tailwindcloud.com' as contact_email, '123-789-7890' as contact_phone, 'Cloud Services' as type
+    UNION ALL
+    SELECT 2, 'Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps'
+    UNION ALL
+    SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing'
+    UNION ALL
+    SELECT 4, 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering'
+    UNION ALL
+    SELECT 5, 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services'
+) as v
+WHERE NOT EXISTS (SELECT 1 FROM vendors)
 
-INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
-SELECT 'Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps', '{}'
-WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Contoso DevOps Services');
-
-INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
-SELECT 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing', '{}'
-WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Lucerne Publishing');
-
-INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
-SELECT 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering', '{}'
-WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Wide World Engineering');
-
-INSERT INTO vendors (name, address, contact_name, contact_email, contact_phone, type, metadata)
-SELECT 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services', '{}'
-WHERE NOT EXISTS (SELECT 1 FROM vendors WHERE name = 'Trey Research Inc');
 
 -- Status table: information about the status of a invoice, milestone, etc
 DROP TABLE IF EXISTS status;
@@ -66,51 +61,51 @@ CREATE TABLE IF NOT EXISTS sows (
 -- Insert sow values only if the specific sow number does not exist
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'SOW-WoodgroveBank-2024-001',
-       (SELECT id FROM vendors WHERE name = 'TailWind Cloud Solutions'),
+       1, --TailWind Cloud Solutions
        '2024-11-01',
        '2025-12-31',
        43600.00,
-       'Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf',
+       '1/sow/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-WoodgroveBank-2024-001');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'WoodgroveBank-SOW-001',
-       (SELECT id FROM vendors WHERE name = 'Contoso DevOps Services'),
+       2, --Contoso DevOps Services
        '2024-06-01',
        '2025-11-30',
        75000.00,
-       'Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf',
+       '2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'WoodgroveBank-SOW-001');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'SOW-LP-WGB-001',
-       (SELECT id FROM vendors WHERE name = 'Lucerne Publishing'),
+       3, -- Lucerne Publishing
        '2024-12-01',
        '2024-12-31',
        50000.00,
-       'Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf',
+       '3/sow/Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-LP-WGB-001');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'WWE-WoodgroveBank-SOW-001',
-       (SELECT id FROM vendors WHERE name = 'Wide World Engineering'),
+       4, --Wide World Engineering
        '2024-10-01',
        '2025-09-30',
        60000.00,
-       'Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20241001.pdf',
+       '4/sow/Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20241001.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'WWE-WoodgroveBank-SOW-001');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'SOW-2024-WoodgroveBank-001',
-       (SELECT id FROM vendors WHERE name = 'Trey Research Inc'),
+       5, --Trey Research Inc
        '2024-05-01',
        '2025-08-31',
        45000.00,
-       'Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf',
+       '5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-WoodgroveBank-001');
 

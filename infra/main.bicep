@@ -23,6 +23,9 @@ param postgresqlAdminLogin string
 @secure()
 param postgresqlAdminPassword string
 
+@description('Determines whether to deploy the Azure Machine Learning model used for Semantic Reranking')
+param deployAMLModel bool
+
 param userPortalExists bool
 @secure()
 param portalDefinition object
@@ -32,6 +35,8 @@ param existingOpenAiInstance object = {
   subscriptionId: ''
   resourceGroup: ''
 }
+
+var blobStorageContainerName = 'documents'
 
 var deployOpenAi = empty(existingOpenAiInstance.name)
 // var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
@@ -199,6 +204,24 @@ module apiAppPostgresqlAdmin './shared/postgresql_administrator.bicep' = {
   scope: rg
 }
 
+module postgresql './shared/postgresql.bicep' = {
+  name: 'postgresql'
+  params: {
+    location: location
+    serverName: '${abbrs.dBforPostgreSQLServers}data${resourceToken}'
+    skuName: 'Standard_B2ms'
+    skuTier: 'Burstable'
+    highAvailabilityMode: 'Disabled'
+    administratorLogin: postgresqlAdminLogin
+    administratorLoginPassword: postgresqlAdminPassword
+    databaseName: postgresqlDatabaseName
+    tags: tags
+    keyvaultName: keyVault.outputs.name
+    appConfigName: appConfig.outputs.name
+  }
+  scope: rg
+}
+
 module openAi './shared/openai.bicep' = if (deployOpenAi) {
   name: 'openai'
   params: {
@@ -234,38 +257,33 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
     tags: tags
   }
   scope: rg
-}
-
-module postgresql './shared/postgresql.bicep' = {
-  name: 'postgresql'
-  params: {
-    location: location
-    serverName: '${abbrs.dBforPostgreSQLServers}data${resourceToken}'
-    skuName: 'Standard_B2ms'
-    skuTier: 'Burstable'
-    highAvailabilityMode: 'Disabled'
-    administratorLogin: postgresqlAdminLogin
-    administratorLoginPassword: postgresqlAdminPassword
-    databaseName: postgresqlDatabaseName
-    tags: tags
-    keyvaultName: keyVault.outputs.name
-    appConfigName: appConfig.outputs.name
-  }
-  scope: rg
+  dependsOn: [
+    postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
+  ]
 }
 
 module storage './shared/storage.bicep' = {
   name: 'storage'
   params: {
-    containers: []
+    containers: [
+      {
+        name: blobStorageContainerName
+        publicAccess: 'None'
+      }
+    ]
     files: []
     appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.storageStorageAccounts}${resourceToken}'
+    principalId: principalId
     tags: tags
   }
   scope: rg
+  dependsOn: [
+    postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
+  ]
 }
+
 
 module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   name: 'eventGridSystemTopic-Storage'
@@ -298,7 +316,7 @@ module languageService './shared/language-service.bicep' = {
   scope: rg
 }
 
-module amlWorkspace './shared/aml-workspace.bicep' = {
+module amlWorkspace './shared/aml-workspace.bicep' = if (deployAMLModel) {
   name: 'amlWorkspace'
   params: {
     location: location
@@ -318,7 +336,9 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_APP_CONFIG_ENDPOINT string = appConfig.outputs.endpoint
+
 output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
+output AZURE_STORAGE_CONTAINER_NAME string = blobStorageContainerName
 
 output STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME string = eventGridSystemTopicStorage.outputs.name
 
@@ -329,8 +349,9 @@ output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin
 output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_OPENAI_KEY string = openAi.outputs.key
 
-output AZURE_AML_WORKSPACE_NAME string = amlWorkspace.outputs.AML_WORKSPACE_NAME
-output AZURE_AML_ENDPOINT_NAME string = amlWorkspace.outputs.AML_ENDPOINT_NAME
+output DEPLOY_AML_MODEL bool = deployAMLModel
+output AZURE_AML_WORKSPACE_NAME string = deployAMLModel ? amlWorkspace.outputs.AML_WORKSPACE_NAME : ''
+output AZURE_AML_ENDPOINT_NAME string = deployAMLModel ? amlWorkspace.outputs.AML_ENDPOINT_NAME : ''
 
 output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrincipalName
 

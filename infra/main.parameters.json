@@ -23,6 +23,9 @@
       "postgresqlDatabaseName": {
         "value": "contracts"
       },
+      "deployAMLModel": {
+        "value": "${DEPLOY_AML_MODEL=true}"
+      },
       "portalDefinition": {
         "value": {
           "settings": []

@@ -339,8 +339,8 @@ output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_OPENAI_KEY string = openAi.outputs.key
 
 output DEPLOY_AML_MODEL bool = deployAMLModel
-output AZURE_AML_WORKSPACE_NAME string = deployAMLModel ? '' : amlWorkspace.outputs.AML_WORKSPACE_NAME
-output AZURE_AML_ENDPOINT_NAME string = deployAMLModel ? '' : amlWorkspace.outputs.AML_ENDPOINT_NAME
+output AZURE_AML_WORKSPACE_NAME string = deployAMLModel ? amlWorkspace.outputs.AML_WORKSPACE_NAME : ''
+output AZURE_AML_ENDPOINT_NAME string = deployAMLModel ? amlWorkspace.outputs.AML_ENDPOINT_NAME : ''
 
 output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrincipalName
 

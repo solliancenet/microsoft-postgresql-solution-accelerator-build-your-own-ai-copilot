@@ -108,8 +108,8 @@ if (-not ${env:DEPLOY_AML_MODEL}) {
 } else {
     Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."
 
-    pwsh -File "./scripts/aml/deploy_model.ps1"
-    
+    ./scripts/aml/deploy_model.ps1 
+   
     Write-Host "Machine Learning Model Deployed"
 }
 

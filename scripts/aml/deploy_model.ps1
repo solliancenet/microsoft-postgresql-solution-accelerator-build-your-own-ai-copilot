@@ -35,6 +35,11 @@ foreach ($FILE in $FILES) {
 az account set --subscription "$env:AZURE_SUBSCRIPTION_ID"
 
 # create variable for AML Deployment Name
+Write-Output "Creating Azure ML Deployment..."
+Write-Output "Workspace:"
+Write-Output $env:AZURE_AML_WORKSPACE_NAME
+Write-Output "Endpoint:"
+Write-Output $env:AZURE_AML_ENDPOINT_NAME
 $DEPLOYMENT_NAME = "bgev2m3-v1"
 $DEPLOYMENT_YML = "./scripts/aml/model_asset/deployment.yml"
 az ml online-deployment create --name "$DEPLOYMENT_NAME" --endpoint "$env:AZURE_AML_ENDPOINT_NAME" -f "$DEPLOYMENT_YML" --all-traffic --resource-group "$env:AZURE_RESOURCE_GROUP" --workspace-name "$env:AZURE_AML_WORKSPACE_NAME"

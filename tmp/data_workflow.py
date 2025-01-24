@@ -132,7 +132,7 @@ def process_document(container_name, blob_name, document_id):
     """Complete workflow for processing a document."""
     print(f"Processing document {document_id} from container {container_name}...")
 
-## Replcae Step 1 with eventgrid trigger
+## Replace Step 1 with eventgrid trigger
 
     # Step 1: Download the PDF
     document_data = download_blob(container_name, blob_name)

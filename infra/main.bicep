@@ -202,6 +202,24 @@ module apiAppPostgresqlAdmin './shared/postgresql_administrator.bicep' = {
   scope: rg
 }
 
+module postgresql './shared/postgresql.bicep' = {
+  name: 'postgresql'
+  params: {
+    location: location
+    serverName: '${abbrs.dBforPostgreSQLServers}data${resourceToken}'
+    skuName: 'Standard_B2ms'
+    skuTier: 'Burstable'
+    highAvailabilityMode: 'Disabled'
+    administratorLogin: postgresqlAdminLogin
+    administratorLoginPassword: postgresqlAdminPassword
+    databaseName: postgresqlDatabaseName
+    tags: tags
+    keyvaultName: keyVault.outputs.name
+    appConfigName: appConfig.outputs.name
+  }
+  scope: rg
+}
+
 module openAi './shared/openai.bicep' = if (deployOpenAi) {
   name: 'openai'
   params: {
@@ -237,24 +255,9 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
     tags: tags
   }
   scope: rg
-}
-
-module postgresql './shared/postgresql.bicep' = {
-  name: 'postgresql'
-  params: {
-    location: location
-    serverName: '${abbrs.dBforPostgreSQLServers}data${resourceToken}'
-    skuName: 'Standard_B2ms'
-    skuTier: 'Burstable'
-    highAvailabilityMode: 'Disabled'
-    administratorLogin: postgresqlAdminLogin
-    administratorLoginPassword: postgresqlAdminPassword
-    databaseName: postgresqlDatabaseName
-    tags: tags
-    keyvaultName: keyVault.outputs.name
-    appConfigName: appConfig.outputs.name
-  }
-  scope: rg
+  dependsOn: [
+    postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
+  ]
 }
 
 module storage './shared/storage.bicep' = {
@@ -268,6 +271,9 @@ module storage './shared/storage.bicep' = {
     tags: tags
   }
   scope: rg
+  dependsOn: [
+    postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
+  ]
 }
 
 module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {

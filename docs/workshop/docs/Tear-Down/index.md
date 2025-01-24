@@ -11,7 +11,7 @@ The **[PostgreSQL Solution Accelerator: Build Your Own AI Copilot](https://githu
 
 ---
 
-## 2. Feedback
+## 2. Provide Feedback
 
 Check that the right tab is selected for your session, and complete the steps!
 
@@ -47,14 +47,19 @@ Check that the right tab is selected for your session, and complete the steps!
 
 ## 3. Clean-up
 
-From a command prompt, run the following command to delete the resources created by the deployment script:
+Once you have completed this workshop, delete the Azure resources you created. You are charged for the configured capacity, not how much the resources are used. Follow these instructions to delete your resource group and all resources you created for this solution accelerator.
 
-    ```bash
+1. In VS Code, open a new integrated terminal prompt.
+
+2. At the terminal prompt, execute the following command to delete the resources created by the deployment script:
+
+    ```bash title=""
     azd down --purge
     ```
 
-> [!NOTE]
-> The `--purge` flag purges the resources that provide soft-delete functionality in Azure, including Azure KeyVault and Azure OpenAI. This flag is required to remove all resources completely.
+    !!! tip "The `--purge` flag purges the resources that provide soft-delete functionality in Azure, including Azure KeyVault and Azure OpenAI. This flag is required to remove all resources completely."
+
+3. In the terminal window, you will be shown a list of the resources that will be deleted and prompted about continuing. Enter "y" at the prompt to being the resource deletion.
 
 ## 4. Persist changes to GitHub
 

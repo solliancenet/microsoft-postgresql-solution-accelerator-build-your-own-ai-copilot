@@ -140,6 +140,7 @@ if (-not $eventGridStorageBlobSubscriptionExists) {
         --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
         --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
         --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
+        --subject-begins-with "/blobServices/default/containers/${env:AZURE_STORAGE_CONTAINER_NAME}/blobs/" `
         --resource-group "${env:AZURE_RESOURCE_GROUP}"
 }
 

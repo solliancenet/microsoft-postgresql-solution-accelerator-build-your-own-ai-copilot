@@ -25,7 +25,7 @@ FROM (
     UNION ALL
     SELECT 5, 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services'
 ) as v
-WHERE NOT EXISTS (SELECT 1 FROM vendors)
+WHERE NOT EXISTS (SELECT 1 FROM vendors);
 
 
 -- Status table: information about the status of a invoice, milestone, etc

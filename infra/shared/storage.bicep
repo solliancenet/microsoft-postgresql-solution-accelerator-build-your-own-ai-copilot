@@ -70,7 +70,7 @@ resource appConfigStorageAccountName 'Microsoft.AppConfiguration/configurationSt
 
 resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storage
-  name: guid(subscription().id, resourceGroup().id, principalId, 'storageBlobDataContributorRole')
+  name: guid(subscription().id, resourceGroup().id, principalId, 'sharedStorageBlobDataContributorRole')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
     principalId: principalId

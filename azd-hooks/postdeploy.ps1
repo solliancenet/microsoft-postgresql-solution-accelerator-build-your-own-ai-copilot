@@ -82,6 +82,7 @@ Write-Host "Uploading Sample Files to Blob Storage..."
 
 az storage blob upload `
     --auth-mode login `
+    --overwrite true `
     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
     --name "1/sow/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf" `
@@ -89,6 +90,7 @@ az storage blob upload `
 
 # az storage blob upload `
 #     --auth-mode login `
+#     --overwrite true `
 #     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
 #     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
 #     --name "2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf" `
@@ -96,6 +98,7 @@ az storage blob upload `
 
 # az storage blob upload `
 #     --auth-mode login `
+#     --overwrite true `
 #     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
 #     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
 #     --name "3/sow/Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf" `
@@ -103,6 +106,7 @@ az storage blob upload `
 
 # az storage blob upload `
 #     --auth-mode login `
+#     --overwrite true `
 #     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
 #     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
 #     --name "4/sow/Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20241001.pdf" `
@@ -110,6 +114,7 @@ az storage blob upload `
 
 # az storage blob upload `
 #     --auth-mode login `
+#     --overwrite true `
 #     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
 #     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
 #     --name "5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf" `
@@ -135,6 +140,7 @@ if (-not $eventGridStorageBlobSubscriptionExists) {
         --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
         --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
         --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
+        --subject-begins-with "/blobServices/default/containers/${env:AZURE_STORAGE_CONTAINER_NAME}/blobs/" `
         --resource-group "${env:AZURE_RESOURCE_GROUP}"
 }
 

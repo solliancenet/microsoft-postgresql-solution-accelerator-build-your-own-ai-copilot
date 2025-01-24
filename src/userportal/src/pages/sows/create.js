@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
@@ -15,14 +15,20 @@ const getDefaultNumber = () => {
 
 const SOWCreate = () => {
   const { vendorId } = useParams();
-  const [sowNumber, setSowNumber] = useState(getDefaultNumber());
+  const [sowId, setSowId]  = useState(0);
   const [sowVendorId, setSowVendorId] = useState(vendorId);
+
+  const [sowNumber, setSowNumber] = useState(getDefaultNumber());
   const [startDate, setStartDate] = useState('2024-01-01');
   const [endDate, setEndDate] = useState('2024-12-31');
   const [budget, setBudget] = useState('0');
+  const [document, setDocument] = useState(null);
+  
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showUpload, setShowUpload] = useState(true);
 
   const [vendors, setVendors] = useState([]);
 
@@ -42,26 +48,38 @@ const SOWCreate = () => {
     fetchVendors();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleAnalyzeDocument = async (e) => {
     e.preventDefault();
+    
+    setShowUpload(false);
+
     try {
-      var data = {
-        number: sowNumber,
-        vendor_id: sowVendorId,
-        start_date: startDate,
-        end_date: endDate,
-        budget: parseFloat(budget)
-      };
-      var newItem = await api.sows.create(file, data);
-      
-      setSuccess('SOW created successfully!');
-      window.location.href = `/sows/${newItem.id}`;
-      setError(null);
+      setLoading('Analyzing document with AI...');
+
+      const result = await api.sows.analyze(file, { vendor_id: sowVendorId });
+      setSowId(result.id);
+
     } catch (err) {
       console.error(err);
-      setError('Failed to create SOW');
+      setShowUpload(true);
+      setError('Error analyzing document');
       setSuccess(null);
+      setLoading(null);
+      return false;
     }
+
+    try {
+      setLoading('Validating document with AI...');
+
+      await api.sows.validate(sowId);
+    } catch (err) {
+      console.error(err);
+      // still continue on, since the SOW is already created in the database
+    }
+
+    setError(null);
+    const successMessage = "SOW created successfully with fields populated by AI!"
+    window.location.href = `/sows/${sowId}?success=${successMessage}&showValidation=true`;
   };
 
   return (
@@ -70,91 +88,52 @@ const SOWCreate = () => {
       <hr/>
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Document</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Vendor</Form.Label>
-          <Form.Control
-            as="select"
-            value={sowVendorId}
-            onChange={(e) => setSowVendorId(e.target.value)}
-            required
-          >
-            <option value="">Select Vendor</option>
-            {vendors.map((vendor) => (
-              <option key={vendor.id} value={vendor.id}>
-                {vendor.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
 
-        {config.displayFieldOnCreate && (
+      {showUpload && (
           <>
-          <Form.Group className="mb-3">
-            <Form.Label>SOW Number</Form.Label>
+        <Form onSubmit={handleAnalyzeDocument}>
+          <Form.Group>
+            <Form.Label>Vendor</Form.Label>
             <Form.Control
-              type="text"
-              value={sowNumber}
-              onChange={(e) => setSowNumber(e.target.value)}
+              as="select"
+              value={sowVendorId}
+              onChange={(e) => setSowVendorId(e.target.value)}
               required
-            />
+            >
+              <option value="">Select Vendor</option>
+              {vendors.map((vendor) => (
+                <option key={vendor.id} value={vendor.id}>
+                  {vendor.name}
+                </option>
+              ))}
+            </Form.Control>
           </Form.Group>
-          <Row className="mb-3">
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Start Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>End Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Col>
-          </Row>
           <Form.Group className="mb-3">
-            <Form.Label>Budget</Form.Label>
-            <NumericFormat
-              className="form-control"
-              value={budget}
-              thousandSeparator={true}
-              prefix={'$'}
-              onValueChange={(values) => {
-                const { value } = values;
-                setBudget(value);
-              }}
+            <Form.Label>Document</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
               required
             />
           </Form.Group>
-        </>
-        )}
-        <br/>
-        <Button type="submit" variant="primary">
-          <i className="fas fa-plus"></i> Create
-        </Button>
-        <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/sows' }>
-          <i className="fas fa-times"></i> Cancel
-        </Button>
-      </Form>
+          <Button type="submit" variant="primary">
+            <i className="fas fa-search"></i> Analyze Document
+          </Button>
+          <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/sows' }>
+            <i className="fas fa-times"></i> Cancel
+          </Button>
+        </Form>
+      </>
+      )}
+
+      {loading && (
+      <Alert variant="info" className="mt-3 p-5 text-center">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">{loading}</span>
+        </Spinner>
+        <div>{loading}</div>
+      </Alert>
+      )}
     </div>
   );
 };

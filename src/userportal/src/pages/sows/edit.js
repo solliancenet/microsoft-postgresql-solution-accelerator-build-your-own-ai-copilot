@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import api from '../../api/Api';
 import ConfirmModal from '../../components/ConfirmModal';
 import PagedTable from '../../components/PagedTable';
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
 const SOWEdit = () => {
+  const query = useQuery();
   const { id } = useParams(); // Extract SOW ID from URL
   const [sowNumber, setSowNumber] = useState('');
   const [sowVendorId, setSowVendorId] = useState('');
@@ -23,7 +29,14 @@ const SOWEdit = () => {
   const [showDeleteMilestoneModal, setShowDeleteMilestoneModal] = useState(false);
   const [milestoneToDelete, setMilestoneToDelete] = useState(null);
   const [reloadMilestones, setReloadMilestones] = useState(false);
-  
+
+  useEffect(() => {
+    const message = query.get('success');
+    if (message) {
+      setSuccess(message);
+    }
+  }, [query]);
+
   useEffect(() => {
     const fetchVendors = async () => {
           try {

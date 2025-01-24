@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import StructuredTool
@@ -16,12 +17,12 @@ router = APIRouter(
     responses = {404: {"description": "Not found"}}
 )
 
-@router.post('/validate_invoice', response_model = str)
-async def validate_invoice(request: ValidationRequest, llm = Depends(get_chat_client)):
+@router.post('/validate_invoice/{id}', response_model = str)
+async def validate_invoice_by_id(request: ValidationRequest, id: int, llm = Depends(get_chat_client)):
     """Generate a chat completion using the Azure OpenAI API."""
     # TODO: Move this system prompt into blob storage or somewhere it can be updated without redeploying the app.
     # Define the system prompt that contains the assistant's persona.
-    system_prompt = """
+    system_prompt = f"""
     You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).
    
     When validating an invoice, you should:
@@ -34,7 +35,7 @@ async def validate_invoice(request: ValidationRequest, llm = Depends(get_chat_cl
     7. If the invoice contains notes to explain discrepancies, review them for additional context.
     8. Confirm that the invoice is legitimate and ready for payment.
 
-    For context, today is Monday, December 30, 2024.
+    For context, today is {datetime.now(timezone.utc).strftime('%A, %B %d, %Y')}.
 
     If there are milestones missing from the invoice that are not yet beyond their due date according to the SOW, do not flag them as discrepancies.
     If the payment terms on the invoice are different from the SOW, assume the SOW is correct.

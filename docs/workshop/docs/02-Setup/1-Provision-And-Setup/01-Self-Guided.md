@@ -64,17 +64,19 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.2 Install Git**
 
-    9. Download Git from <https://git-scm.com/downloads>.
+    1. Download Git from <https://git-scm.com/downloads>.
 
-    10. Run the installer using the default options.
+    2. Run the installer using the default options.
 
     ## **1.3 Install Python**
 
-    6. Download Python 3.11+ from <https://python.org/downloads>.
+    Python is the programming used to build the backend API for the solution. By utilizing Python's versatile programming capabilities and Azure Database for PostgreSQL's generative AI and vector search capabilities, you can create powerful and efficient AI copilots and streamlining complex workflows.
 
-    7. Run the installer using the default options.
+    1. Download Python 3.11+ from <https://python.org/downloads>.
 
-    8. Use the following command from a terminal prompt to verify Python was installed:
+    2. Run the installer using the default options.
+
+    3. Use the following command from a terminal prompt to verify Python was installed:
 
         ```bash title=""
         python --version
@@ -125,14 +127,11 @@ You will need to install the required software locally and provision the Azure i
 
 === "2. Fork repo"
 
-    You must create a copy (known as a fork) of the GitHub repo and then clone that onto your local computer so you can work with the contents of the repo.
-
-    At the end of this step, you should have:
+    You must create a copy (known as a fork) of the GitHub repo and then clone that onto your local computer so you can work with the contents of the repo. After completing this step, you should have:
     
     - [X] Forked the **PostgreSQL Solution Accelerator: Build your own AI Copilot** repo to your personal GitHub profile
     - [X] Created a local clone of the repo
     - [X] Opened the cloned repo in Visual Studio Code
-
 
     ## 2.1 Fork Repo To Your Profile
 
@@ -249,6 +248,7 @@ You will need to install the required software locally and provision the Azure i
 
     - [X] Created a Python virtual environment
     - [X] Installed the required Python libraries from `requirements.txt`
+    - [X] Create and populated a `.env` file in the **Woodgrove API** project.
     - [X] Connected to your database using pgAdmin
 
     ## **4.1 Create a Python virtual environment**
@@ -261,7 +261,7 @@ You will need to install the required software locally and provision the Azure i
     
     3. Create a virtual environment named `.venv` by running the following command at the terminal prompt:
     
-        ```bash
+        ```bash title=""
         python -m venv .venv 
         ```
     
@@ -292,12 +292,38 @@ You will need to install the required software locally and provision the Azure i
         pip install -r requirements.txt
         ```
 
-    ## **4.3 Connect to your database from pgAdmin**
+    ## **4.3 Create `.env` file**
+
+    Configuration values, such as connection string and endpoints, that allow your application to interact with Azure services are hosted in an Azure App Configuration service. To enable your application to retrieve these values, you must provide it with the endpoint of that service. You will use a `.env` file to host the endpoint as an environment variable, which will allow you to run the Woodgrove API locally. The `.env` file will be created within the `src\api\app` folder of the project.
+
+    1. In VS Code, navigate to the `src\api\app` folder in the **Explorer** panel.
+
+    2. Right-click the `app` folder and select **New file...** from the context menu.
+
+    3. Enter `.env` as the name of the new file within the VS Code **Explorer** panel.
+
+    4. In the `.env` file, add the following as the first line, replacing the `{YOUR_APP_CONFIG_ENDPOINT}` with the endpoint for the App Configuration resource in your `rg-postgresql-accelerator` resource group.
+
+        ```ini title=""
+        AZURE_APP_CONFIG_ENDPOINT={YOUR_APP_CONFIG_ENDPOINT}
+        ```
+
+        !!! task "To get the endpoint for your App Configuration resource:"
+
+            1. Navigate to your App Configuration resource in the [Azure portal](https://portal.azure.com/).
+            2. Select **Access settings** from the resource navigation menu, under **Settings**.
+            3. Copy the **Endpoint** value and paste it into the `.env` file.
+
+                ![Screenshot of the App Configuration Access Settings page, with the Endpoint copy button highlighted.](../../img/app-config-access-settings-endpoint.png)
+
+    5. Save the `.env` file.
+
+    ## **4.4 Connect to your database from pgAdmin**
 
     You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
 
-    8. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
-    9. On the Azure Database for PostgreSQL - Flexible Server page:
+    6. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
+    7. On the Azure Database for PostgreSQL - Flexible Server page:
        1. Select **Connect** under **Settings** in the left-hand resource menu.
        2. Select the **contracts** database from the **Database name** dropdown.
        3. Expand the **pgAdmin 4** block.

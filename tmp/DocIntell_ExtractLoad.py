@@ -56,7 +56,7 @@ def parse_extracted_text(extracted_text, document_url):
         'invoice_date': None,
         'payment_status': 'Pending',  # Default value
         'document': document_url,  # Insert the full blob details
-        'metadata': {'extracted_text': extracted_text},
+        'metadata': extracted_text,
         'embeddings': None
     }
 

@@ -103,7 +103,7 @@ Write-Host "Event Grid Subscription 'StorageBlob' Created"
 # Deploy Machine Learning Model to Azure ML Workspace
 # ##############################################################################
 # only deploy if ${env:DEPLOY_AML_MODEL} is set to true
-if (-not ${env:DEPLOY_AML_MODEL}) {
+if (${env:DEPLOY_AML_MODEL} -eq $False) {
     Write-Host "Skipping Machine Learning Model Deployment"
 } else {
     Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."

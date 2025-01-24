@@ -275,6 +275,7 @@ module storage './shared/storage.bicep' = {
     appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.storageStorageAccounts}${resourceToken}'
+    principalId: principalId
     tags: tags
   }
   scope: rg
@@ -282,6 +283,7 @@ module storage './shared/storage.bicep' = {
     postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
   ]
 }
+
 
 module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   name: 'eventGridSystemTopic-Storage'

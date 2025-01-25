@@ -4,6 +4,7 @@ param appConfigName string
 param location string = resourceGroup().location
 param name string
 param tags object = {}
+param principalId string
 
 resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: name
@@ -64,6 +65,16 @@ resource appConfigStorageAccountName 'Microsoft.AppConfiguration/configurationSt
   name: 'storage-account'
   properties: {
     value: storage.name
+  }
+}
+
+resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storage
+  name: guid(subscription().id, resourceGroup().id, principalId, 'sharedStorageBlobDataContributorRole')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
+    principalId: principalId
+    principalType: 'User'
   }
 }
 

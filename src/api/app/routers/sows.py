@@ -1,8 +1,9 @@
-from app.lifespan_manager import get_db_connection_pool, get_storage_service
+from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
 from app.models import Sow, SowEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
+import json
 
 # Initialize the router
 router = APIRouter(
@@ -51,23 +52,15 @@ async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
         sow = parse_obj_as(Sow, dict(row))
     return sow
 
-@router.post("/", response_model=Sow)
-async def create_sow(
-    number: str = Form(...),
-    vendor_id: int = Form(...),
-    start_date: str = Form(...),
-    end_date: str = Form(...),
-    budget: float = Form(...),
-    file: UploadFile = File(...),
-    pool = Depends(get_db_connection_pool),
-    storage_service = Depends(get_storage_service)
-):
-    # Parse dates
-    start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
-    end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
 
-    # Parse budget
-    budget_parsed = float(budget)
+@router.post("/", response_model=Sow)
+async def analyze_sow(
+    file: UploadFile = File(...),
+    vendor_id: int = Form(...),
+    pool = Depends(get_db_connection_pool),
+    storage_service = Depends(get_storage_service),
+    doc_intelligence_service = Depends(get_azure_doc_intelligence_service)
+):
 
     # Get vendor_id from vendor_id
     async with pool.acquire() as conn:
@@ -78,16 +71,84 @@ async def create_sow(
     # Upload file to Azure Blob Storage
     documentName = await storage_service.save_sow_document(vendor_id, file)
 
+    # Set field defaults
+    sow_number = f"SOW-{datetime.now().strftime('%Y-%m%d')}"
+    start_date = datetime.strptime("2024-01-01", '%Y-%m-%d').date()
+    end_date = datetime.strptime("2024-12-31", '%Y-%m-%d').date()
+    budget = 0
+    metadata = {}
+
+    # Analyze the document
+    # document_data = await storage_service.download_blob(documentName)
+    # extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
+    # full_text = "\n".join(extracted_text)
+    # text_chunks = doc_intelligence_service.semantic_chunking(full_text)
+    # metadata = {
+    #     "content": full_text
+    # }
+
     # Create SOW in the database
     async with pool.acquire() as conn:
-        sow = await conn.fetchrow('''
+        # NO AI
+        row = await conn.fetchrow('''
             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;
-        ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', vendor_id)
-        
-        sow = parse_obj_as(Sow, dict(sow))
+        ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), vendor_id)
+
+        # WITH AI
+        # row = await conn.fetchrow('''
+        #     INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, vendor_id)
+        #     VALUES (
+        #     $1, $2, $3, $4, $5, $6, 
+        #     azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
+        #     $8)
+        #     RETURNING *;
+        # ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)
+
+        if row is None:
+            raise HTTPException(status_code=500, detail=f'An error occurred while creating the SOW.')
+
+        sow = parse_obj_as(Sow, dict(row))
     return sow
+
+# @router.post("/", response_model=Sow)
+# async def create_sow(
+#     number: str = Form(...),
+#     vendor_id: int = Form(...),
+#     start_date: str = Form(...),
+#     end_date: str = Form(...),
+#     budget: float = Form(...),
+#     file: UploadFile = File(...),
+#     pool = Depends(get_db_connection_pool),
+#     storage_service = Depends(get_storage_service)
+# ):
+#     # Parse dates
+#     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
+#     end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
+
+#     # Parse budget
+#     budget_parsed = float(budget)
+
+#     # Get vendor_id from vendor_id
+#     async with pool.acquire() as conn:
+#         vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
+#         if vendor_id is None:
+#             raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
+
+#     # Upload file to Azure Blob Storage
+#     documentName = await storage_service.save_sow_document(vendor_id, file)
+
+#     # Create SOW in the database
+#     async with pool.acquire() as conn:
+#         sow = await conn.fetchrow('''
+#             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
+#             VALUES ($1, $2, $3, $4, $5, $6, $7)
+#             RETURNING *;
+#         ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', vendor_id)
+        
+#         sow = parse_obj_as(Sow, dict(sow))
+#     return sow
 
 @router.put("/{sow_id}", response_model=Sow)
 async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_connection_pool)):

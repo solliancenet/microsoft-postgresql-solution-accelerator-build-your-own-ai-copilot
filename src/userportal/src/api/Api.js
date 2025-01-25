@@ -1,3 +1,4 @@
+const { data } = require('react-router-dom');
 const RESTHelper = require('./RESTHelper');
 
 const APIUrl = process.env.REACT_APP_SERVICE_API_ENDPOINT_URL || 'http://localhost:8000';
@@ -190,10 +191,10 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/sows/${id}`));
         },
-        create: async (file, data) => {
+        analyze: async(file, data) => {
             if (!file) return;
         
-            console.info('Creating SOW:', file);
+            console.info('Analyzing SOW:', file);
         
             const formData = new FormData();
             formData.append('file', file);
@@ -202,7 +203,7 @@ module.exports = {
             }
 
             try {
-                const response = await fetch(getUrl(`/sows`), {
+                const response = await fetch(getUrl(`/sows/`), {
                     method: 'POST',
                     body: formData,
                 });
@@ -212,10 +213,52 @@ module.exports = {
                 const result = await response.json();
                 return result;
             } catch (error) {
-                console.error('Error creating SOW:', error);
+                console.error('Error analyzing SOW:', error);
                 throw error;
             }
         },
+        validate: async (id) => {
+            console.info('Validating SOW:', id);
+        
+            try {
+                const response = await fetch(getUrl(`/sows/validate/${id}`), {
+                    method: 'POST',
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return;
+            } catch (error) {
+                console.error('Error validating SOW:', error);
+                throw error;
+            }
+        },
+        // create: async (file, data) => {
+        //     if (!file) return;
+        
+        //     console.info('Creating SOW:', file);
+        
+        //     const formData = new FormData();
+        //     formData.append('file', file);
+        //     for (var key in data) {
+        //         formData.append(key, data[key]);
+        //     }
+
+        //     try {
+        //         const response = await fetch(getUrl(`/sows`), {
+        //             method: 'POST',
+        //             body: formData,
+        //         });
+        //         if (!response.ok) {
+        //             throw new Error('Network response was not ok');
+        //         }
+        //         const result = await response.json();
+        //         return result;
+        //     } catch (error) {
+        //         console.error('Error creating SOW:', error);
+        //         throw error;
+        //     }
+        // },
         update: async (id, data) => {
             return await RESTHelper.update(getUrl(`/sows/${id}`), data);
         },

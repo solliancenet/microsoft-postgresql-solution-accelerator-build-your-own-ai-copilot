@@ -39,10 +39,17 @@ async def storage_blob_webhook(
     # Process each event
     for event in events:
         eventType = event['eventType']
-
         subject = event['subject']
+
         blobContainerName = app_config.get_document_container_name()
-        blobName = subject.replace(f"/blobServices/default/containers/{blobContainerName}/blobs/", '', 1)
+        blobNamePrefix = f"/blobServices/default/containers/{blobContainerName}/blobs/"
+        
+        # Check that event is from "documents" container
+        if (subject.substring(0, blobNamePrefix.length) != blobNamePrefix):
+            raise HTTPException(status_code=400, detail=f"Event subject is not from the '{blobContainerName}' container. (Subject: {subject})")
+
+        # Parse out the blob file name
+        blobName = subject.replace(blobNamePrefix, '', 1)
 
         print(f"Event: {eventType} - Filename: {blobName}")
         
@@ -54,7 +61,7 @@ async def storage_blob_webhook(
         full_text = "\n".join(extracted_text)
 
         # Step 3: Chunk the text semantically
-        text_chunks = semantic_chunking(full_text)
+        text_chunks = doc_intelligence_service.semantic_chunking(full_text)
 
         # Step 4: Insert into database
         # Get doc type and id

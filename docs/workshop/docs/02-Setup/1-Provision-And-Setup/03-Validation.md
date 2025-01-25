@@ -80,7 +80,9 @@ In this section, you will validate your setup, and organize your development env
 
     Here's a reminder of the Azure Application Architecture you can reference as you check your provisioned Resource Group to enure these resources were created.
     
-    ![Solution Architecture](./../../img/data-ingestion-validation-architecture-diagram.png)
+    ![Solution Architecture](../../img/data-ingestion-validation-architecture-diagram.png)
+
+    ## 1. Inspect deployed Azure resources
 
     1. Open a new browser tab and navigate to the link below. You may be prompted to login.
         ``` title=""

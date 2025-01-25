@@ -36,6 +36,8 @@ param existingOpenAiInstance object = {
   resourceGroup: ''
 }
 
+var blobStorageContainerName = 'documents'
+
 var deployOpenAi = empty(existingOpenAiInstance.name)
 // var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
 // var azureOpenAi = deployOpenAi ? openAiInstance : existingOpenAiInstance
@@ -263,11 +265,17 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
 module storage './shared/storage.bicep' = {
   name: 'storage'
   params: {
-    containers: []
+    containers: [
+      {
+        name: blobStorageContainerName
+        publicAccess: 'None'
+      }
+    ]
     files: []
     appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.storageStorageAccounts}${resourceToken}'
+    principalId: principalId
     tags: tags
   }
   scope: rg
@@ -275,6 +283,7 @@ module storage './shared/storage.bicep' = {
     postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
   ]
 }
+
 
 module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   name: 'eventGridSystemTopic-Storage'
@@ -327,7 +336,9 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
 output AZURE_APP_CONFIG_ENDPOINT string = appConfig.outputs.endpoint
+
 output AZURE_STORAGE_ACCOUNT_NAME string = storage.outputs.name
+output AZURE_STORAGE_CONTAINER_NAME string = blobStorageContainerName
 
 output STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME string = eventGridSystemTopicStorage.outputs.name
 

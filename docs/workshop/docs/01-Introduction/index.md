@@ -4,7 +4,7 @@ This solution accelarator is designed as an end-to-end example of a Financial Se
 
 The application has the following architecture:
 
-![High-level architecture diagram for the solution](./../img/solution-architecture-diagram.png)
+![High-level architecture diagram for the solution](../img/solution-architecture-diagram.png)
 
 ## Learning Objectives
 

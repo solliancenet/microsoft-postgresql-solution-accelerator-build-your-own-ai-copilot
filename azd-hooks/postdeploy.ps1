@@ -74,6 +74,53 @@ az postgres flexible-server execute `
 
 Write-Host "Database Permissions Granted to API App Managed Identity"
 
+# ##############################################################################
+# Upload Sample Files to Blob Storage
+# ##############################################################################
+
+Write-Host "Uploading Sample Files to Blob Storage..."
+
+az storage blob upload `
+    --auth-mode login `
+    --overwrite true `
+    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+    --name "1/sow/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf" `
+    --file "./data/sample_docs/model_training/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf"
+
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf" `
+#     --file "./data/sample_docs/model_training/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf"
+
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "3/sow/Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf" `
+#     --file "./data/sample_docs/model_training/Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf"
+
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "4/sow/Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20241001.pdf" `
+#     --file "./data/sample_docs/model_training/Statement_of_Work_Wide_World_Engineering_Woodgrove_Bank_20241001.pdf"
+
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf" `
+#     --file "./data/sample_docs/model_training/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf"
+
+Write-Host "Sample Files Uploaded to Blob Storage"
 
 # # ##############################################################################
 # # Create Event Grid Subscription with BlobCreated & BlobUpdated Webhook
@@ -93,6 +140,7 @@ if (-not $eventGridStorageBlobSubscriptionExists) {
         --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
         --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
         --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
+        --subject-begins-with "/blobServices/default/containers/${env:AZURE_STORAGE_CONTAINER_NAME}/blobs/" `
         --resource-group "${env:AZURE_RESOURCE_GROUP}"
 }
 
@@ -103,7 +151,7 @@ Write-Host "Event Grid Subscription 'StorageBlob' Created"
 # Deploy Machine Learning Model to Azure ML Workspace
 # ##############################################################################
 # only deploy if ${env:DEPLOY_AML_MODEL} is set to true
-if (-not ${env:DEPLOY_AML_MODEL}) {
+if (${env:DEPLOY_AML_MODEL} -eq $False) {
     Write-Host "Skipping Machine Learning Model Deployment"
 } else {
     Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."

@@ -10,10 +10,11 @@ The accelerator is designed to demonstrate how an existing financial services ap
 
 You have been provided with code and deployment scripts for the _Woodgrove Bank_ web application. This application comprises an enterprise user portal integrated with a custom backend API. You will enhance this starter application by integrating Azure AI services throughout this accelerator. Key steps include:
 
-1. **Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL**: Utilize the Azure AI `azure_ai`, PGVector (`vector`), and Apache AGE (`age`) extensions to enrich your PostgreSQL database with advanced GenAI capabilities.
+1. **Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL**: Use the Azure AI `azure_ai` and pgvector (`vector`) extensions to extend your PostgreSQL database with advanced GenAI and vector search capabilities.
 2. **Automating Data Validation with AI:** Enhance the data ingestion process with automated, AI-driven validation using Azure Document Intelligence and Azure AI services.
 3. **Building a Copilot:** Create an intelligent assistant using Azure OpenAI and Azure Database for PostgreSQL - Flexible Server, incorporating the Retrieval Augmented Generation (RAG) design pattern to ensure its responses are based on the private data maintained by the enterprise.
 4. **Updating the Backend API:** Modify the backend API to provide the necessary endpoints for interacting with Azure services (Azure OpenAI and Azure Database for PostgreSQL).
 5. **Enhancing the Frontend UI:** Improve the frontend user interface to facilitate interaction with the copilot.
+6. **Adding GraphRAG functionality**: Install the Apache AGE (`age`) extension to allow your PostgreSQL database to be used as a graph database, providing a comprehensive solution for analyzing interconnected data.
 
 This solution accelerator aims to teach you how to integrate AI capabilities into an existing application by leveraging Microsoft Azure's AI services to automate and streamline the validation of contract-related documents in the financial services industry. This integration results in faster, more accurate, and cost-effective processes. Additionally, the copilot will provide intelligent assistance, enabling users to gain actionable insights from data stored in the Azure Database for PostgreSQL, enhancing their overall experience.

@@ -117,8 +117,9 @@ CREATE TABLE IF NOT EXISTS invoices (
     amount DECIMAL(18,2) NOT NULL,
     invoice_date DATE NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
-    document text NOT NULL,
-    metadata JSONB, -- Tax info, discounts, or itemized breakdown
+    document text NOT NULL,         -- document details
+    content text,                   --  for invoice embeddings
+    metadata JSONB,                 --  for additional metadata
     FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
 

@@ -34,7 +34,7 @@ def download_blob(container_name, blob_name):
 def analyze_document(document_data):
     """Extract text and structure using Azure AI Document Intelligence."""
     poller = document_analysis_client.begin_analyze_document(
-        model_id="prebuilt-layout",
+        model_id="prebuilt-document",
         document=document_data
     )
     result = poller.result()
@@ -44,28 +44,45 @@ def analyze_document(document_data):
     sow_number = None
 
     # Regex pattern for the SOW number
-    sow_number_pattern = re.compile(r'SOW-\d{4}-\w+')
+    sow_number_pattern = re.compile(r'SOW Number:\s*(SOW-\S+)')
 
     for page in result.pages:
         for line in page.lines:
             text = line.content
-            if is_heading(text):  # Detect headings 
+            print(f"Processing text: {text}") # Debugging
+            if is_heading(text, known_headings):  # Detect headings 
                 current_heading = text
-                chunks.append({"heading": text, "body": "", "page_number": page.page_number})
+                chunks.append({"heading": text, "content": "", "page_number": page.page_number})
             elif current_heading:
-                chunks[-1]["body"] += " " + text  # Add text to the last chunk
+                chunks[-1]["content"] += " " + text  # Add text to the last chunk
 
             # Search for the SOW number in the text
             if not sow_number:
                 match = sow_number_pattern.search(text)
                 if match:
-                    sow_number = match.group(0)
-
+                    sow_number = match.group(1)
+                    print(f"Found SOW number: {sow_number}") # Debugging
     return chunks, sow_number
 
-def is_heading(text):
-    # Logic to detect headings (customize as needed)
-    return text.strip().endswith(":") or text.strip().isdigit() or text.lower().startswith("section")
+# List of known headings
+known_headings = [
+    "Project Scope", "Project Objectives", "Location", "Tasks", "Schedules",
+    "Standards and Testing", "Payments", "Compliance", "Project Deliverables"
+]
+
+# List of known headings
+known_headings = [
+    "Project Scope", "Project Objectives", "Location", "Tasks", "Schedules",
+    "Standards and Testing", "Payments", "Compliance", "Project Deliverables"
+]
+
+def is_heading(text, known_headings):
+    # Check if the text matches any known headings
+    if text.strip() in known_headings:
+        return True
+    
+    return False
+    #return text.strip().endswith(":") or text.strip().isdigit() or text.lower().startswith("section")
 
 def insert_chunks_to_db(chunks, sow_number, conn):
     cursor = conn.cursor()
@@ -80,9 +97,9 @@ def insert_chunks_to_db(chunks, sow_number, conn):
     
     for chunk in chunks:
         cursor.execute("""
-            INSERT INTO sow_chunks (sow_id, heading, body, level, page_number)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (sow_id, chunk['heading'], chunk['body'], 1, chunk['page_number']))
+            INSERT INTO sow_chunks (sow_id, heading, content, page_number)
+            VALUES (%s, %s, %s, %s)
+        """, (sow_id, chunk['heading'], chunk['content'], chunk['page_number']))
     
     conn.commit()
     cursor.close()
@@ -106,7 +123,7 @@ def process_document(container_name, blob_name, conn):
 # Example usage
 if __name__ == "__main__":
     container_name = "documents"
-    blob_names = ["Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf"]  # List of blob names to process
+    blob_names = ["Statement_of_Work_WWE_Woodgrove_Bank_20241005.pdf"]  # List of blob names to process
 
     conn = psycopg2.connect(POSTGRESQL_CONNECTION)
 

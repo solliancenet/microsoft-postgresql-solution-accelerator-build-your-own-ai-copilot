@@ -15,13 +15,13 @@ CREATE TABLE IF NOT EXISTS vendors (
 INSERT INTO vendors (id, name, address, contact_name, contact_email, contact_phone, type)
 SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone, v.type
 FROM (
-    SELECT 1 as id, 'TailWind Cloud Solutions' as name, '789 Goldsmith Road, MainTown City' as address, 'Morgan Skinner' as contact_name, 'morgan.skinner@tailwindcloud.com' as contact_email, '123-789-7890' as contact_phone, 'Cloud Services' as type
+    SELECT 1 as id, 'TailWind Cloud Solutions' as name, '789 Goldsmith Road, MainTown City' as address, 'Morgan Skinner' as contact_name, 'morgan.skinner@tailwindcloud.com' as contact_email, '123-789-7890' as contact_phone, 'IT' as type
     UNION ALL
     SELECT 2, 'Contoso DevOps Services', '456 Industrial Road, Scooton City', 'Drew Rivera', 'drew.rivera@contoso.com', '987-654-3210', 'DevOps'
     UNION ALL
     SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Alex Kim', 'akim@lucernepublishing.com', '321-654-9870', 'Digital Publishing'
     UNION ALL
-    SELECT 4, 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'Cloud Engineering'
+    SELECT 4, 'Wide World Engineering', '123 Innovation Drive, TechVille', 'Jamie Patel', 'jamie.patel@wideworldeng.com', '654-321-0987', 'IT'
     UNION ALL
     SELECT 5, 'Trey Research Inc', '456 Research Avenue, Redmond', 'Charlie Davis', 'charlie.davis@treyresearch.com', '789-012-3456', 'AI Services'
 ) as v
@@ -142,4 +142,11 @@ CREATE TABLE IF NOT EXISTS deliverables (
     amount NUMERIC(10, 2),
     status VARCHAR(50) NOT NULL,
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS sow_chunks (
+    id BIGSERIAL PRIMARY KEY,
+    sow_id BIGINT NOT NULL,
+    content text NOT NULL,
+    FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );

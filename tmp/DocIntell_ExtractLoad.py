@@ -56,7 +56,8 @@ def parse_extracted_text(extracted_text, document_url):
         'invoice_date': None,
         'payment_status': 'Pending',  # Default value
         'document': document_url,  # Insert the full blob details
-        'metadata': extracted_text,
+        'metadata': {},
+        'content': extracted_text,
         'embeddings': None
     }
 
@@ -108,8 +109,8 @@ def insert_invoice_to_db(invoice_data, conn):
         raise ValueError(f"Vendor '{invoice_data['vendor']}' not found in the vendors table.")
 
     insert_query = """
-    INSERT INTO invoices (number, vendor_id, amount, invoice_date, payment_status, document, metadata, embeddings)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO invoices (number, vendor_id, amount, invoice_date, payment_status, document, metadata, content, embeddings)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     
     cursor.execute(insert_query, (
@@ -119,7 +120,8 @@ def insert_invoice_to_db(invoice_data, conn):
         invoice_data['invoice_date'],
         invoice_data['payment_status'],
         invoice_data['document'],
-        json.dumps(invoice_data['metadata']),  # Convert metadata to JSON string
+        json.dumps(invoice_data['metadata']),
+        invoice_data['content'],  
         invoice_data['embeddings']
     ))
 
@@ -142,7 +144,7 @@ def process_document(container_name, blob_name, document_id,conn):
 
 if __name__ == "__main__":
     container_name = "documents"
-    blob_names = ["INV-TWC2024-001.pdf","INV-TWC2024-002.pdf","INV-TWC2024-003.pdf","INV-TWC2024-004.pdf", "INV-TWC2024-005.pdf"] # List of blob names to process
+    blob_names = ["INV-WWE2024-001.pdf","INV-WWE2024-002.pdf"] # List of blob names to process
 
     conn = psycopg2.connect(POSTGRESQL_CONNECTION)
 

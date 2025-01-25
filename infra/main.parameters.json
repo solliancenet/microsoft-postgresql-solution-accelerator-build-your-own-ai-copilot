@@ -24,7 +24,7 @@
         "value": "contracts"
       },
       "deployAMLModel": {
-        "value": "${DEPLOY_AML_MODEL=true}"
+        "value": "${DEPLOY_AML_MODEL}"
       },
       "portalDefinition": {
         "value": {

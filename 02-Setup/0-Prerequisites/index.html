@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -909,6 +909,8 @@
       
         
       
+        
+      
     
     
       
@@ -1026,7 +1028,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1054,6 +1077,8 @@
       
         
           
+        
+      
         
       
         
@@ -1162,7 +1187,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1183,7 +1208,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1201,6 +1226,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1503,7 +1549,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1741,8 +1787,7 @@
 
 
 <h1 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h1>
-<p>You <strong>must</strong> have a GitHub account to get started. Take a minute to <a href="https://github.com/signup">sign up for a free account</a> if you don't currently have one. Then, check your workshop tab below for additional details.</p>
-<hr />
+<p>Select the tab of your chosen track for details about what you need to do before starting the workshop, what you are expected to know beforehand, and what you can expect to take away after completing it.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="self-guided" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="self-guided">Self-Guided</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1750,20 +1795,24 @@
 <p class="admonition-title">1. What You Will Need</p>
 <ol>
 <li><strong>Your own computer.</strong><ul>
-<li>Any computer capable of running Visual Studio Code and a modern web browser will do.</li>
+<li>Any computer capable of running Visual Studio Code, Docker Desktop, and a modern web browser will do.</li>
 <li>You must have the ability to install software on the computer.</li>
-<li>We recommend having recent version of the Edge, Chrome or Safari browser installed.</li>
+<li>We recommend installing a recent version of Edge, Chrome, or Safari.</li>
 </ul>
 </li>
 <li><strong>A GitHub Account.</strong><ul>
-<li>This is required for creating a copy (known as a fork) of the sample repository.</li>
+<li>This is required to create a copy (known as a fork) of the sample repository.</li>
 <li>We recommend using a personal (vs. enterprise) GitHub account for convenience.</li>
-<li>If you don't have a GitHub account, <a href="https://github.com/signup">sign up for a free one</a> now. (takes just a few mins)</li>
+<li>If you don't have a GitHub account, <a href="https://github.com/signup">sign up for a free one</a> now. (It takes just a few minutes.)</li>
 </ul>
 </li>
 <li><strong>An Azure Subscription.</strong><ul>
-<li>This is needed for provisioning the Azure infrastructure for your AI project.</li>
-<li>If you don't have an Azure account, <a href="https://aka.ms/free">signup for a free one</a> now. (takes just a few mins)</li>
+<li>This is needed to provision the Azure infrastructure for your AI project.</li>
+<li>If you don't have an Azure account, <a href="https://aka.ms/free">sign up for a free one</a> now. (It takes just a few minutes.)</li>
+</ul>
+</li>
+<li><strong>Sufficient Azure ML Online Endpoint CPU quota</strong><ul>
+<li>To run the solution accelerator's <strong>Semantic Ranker</strong> element, you must have at least 32 <strong>Standard DASv4 Family Cluster Dedicated vCPUs</strong> cores available within your subscription. Detailed instructions are provided in the setup section to verify this in your subscription.</li>
 </ul>
 </li>
 </ol>
@@ -1773,8 +1822,8 @@
 <p><strong>Recommended knowledge and experience</strong></p>
 <ol>
 <li><strong>Familiarity with Visual Studio Code</strong> <ul>
-<li>The default editor used in this workshop is Visual Studio Code. You will be configuring your VS Code development environment with the required extensions and code libraries.</li>
-<li>The workshop requires Visual Studio Code and other tools to be installed on your computer. You will be running the solution code from your local computer.</li>
+<li>The default editor used in this workshop is Visual Studio Code. You will configure your VS Code development environment with the required extensions and code libraries.</li>
+<li>The workshop requires Visual Studio Code and other tools to be installed on your computer. You will be running the solution code from your local computer.    </li>
 </ul>
 </li>
 <li><strong>Familiarity with the Azure portal</strong><ul>
@@ -1785,19 +1834,19 @@
 </ol>
 <p><strong>Preferred knowledge and experience</strong></p>
 <ol>
-<li><strong>Familarity with <code>git</code> operations</strong><ul>
+<li><strong>Familiarity with <code>git</code> operations</strong><ul>
 <li>You will be forking the sample repository into your GitHub account.</li>
 <li>You will be committing code changes to your forked repo.</li>
 </ul>
 </li>
 <li><strong>Familiarity with the <code>bash</code> shell</strong>.<ul>
-<li>You will use <code>bash</code> in the VS Code terminal to run post-provisioning scripts if needed.</li>
+<li>If needed, you will use <code>bash</code> in the VS Code terminal to run post-provisioning scripts.</li>
 <li>You will also use it to run Azure CLI and Azure Developer CLI commands during setup. </li>
 </ul>
 </li>
 <li>(preferred) <strong>Familiarity with Python and JavaScript UI frameworks</strong>.<ul>
-<li>You will be modifying both REACT JavaScript and Python code to implement changes to the starter solution.</li>
-<li>You will create and run Python code from the command-line and VS Code in some steps.</li>
+<li>You will modify REACT JavaScript and Python code to implement changes to the starter solution.</li>
+<li>In some steps, you will create and run Python code from the command line and VS Code.</li>
 <li>You will select a Python kernel and run pre-existing scripts in some steps.</li>
 </ul>
 </li>
@@ -1807,8 +1856,9 @@
 <summary>3. What You Will Take Away (expand to view)</summary>
 <p>After completing this workshop, you will have:</p>
 <ol>
-<li>A personal fork (copy) of the <a href="https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot">Build Your Own AI Copilot for FSI with PostgreSQL</a> repository in your GitHub profile. This contains all the materials you need to reproduce the workshop on your own later (e.g., as a <em>Self-Guided</em> session).</li>
+<li>A personal fork (copy) of the <a href="https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot">Build Your Own AI Copilot for FSI with PostgreSQL</a> repository in your GitHub profile. This repo contains all the materials you need to reproduce the workshop later (e.g., as a <em>Self-Guided</em> session).</li>
 <li>Hands-on understanding of the <a href="https://ai.azure.com">Azure AI Foundry</a> portal and relevant developer tools (e.g., Azure Developer CLI, Prompty, FastAPI) to streamline end-to-end development workflows for your own AI apps.</li>
+<li>An understanding of how Azure AI services can be integrated into applications to create powerful AI-enabled applications.</li>
 </ol>
 </details>
 </div>
@@ -1819,7 +1869,7 @@
 
     !!! info "ARE YOU CURRENTLY IN THE LAB SESSION? Jump to [Provision & Setup!](./../1-Provision-And-Setup/02-Instructor-Led.md) to get started!"  
 
-    The instructor-guided labs are setup with everything you need to get started. To get the most from this session, you should have some familiarity with Python, Jupyter Notebooks and Visual Studio Code. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/01-Self-Guided.md) instead_.
+    The instructor-guided labs are set up with everything you need to get started. To get the most from this session, you should be familiar with Python, Jupyter Notebooks, and Visual Studio Code. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/01-Self-Guided.md) instead_.
 -->
 
 

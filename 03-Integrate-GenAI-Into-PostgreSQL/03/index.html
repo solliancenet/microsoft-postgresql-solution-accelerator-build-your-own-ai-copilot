@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -908,6 +908,8 @@
       
         
       
+        
+      
     
     
       
@@ -1047,27 +1049,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#what-are-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are vectors?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#add-vector-columns-to-tables" class="md-nav__link">
     <span class="md-ellipsis">
       Add vector columns to tables
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
-    <span class="md-ellipsis">
-      TODO
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generate-vector-embeddings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Generate vector embeddings
     </span>
   </a>
   
@@ -1093,7 +1086,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1121,6 +1135,8 @@
       
         
           
+        
+      
         
       
         
@@ -1229,7 +1245,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1250,7 +1266,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1268,6 +1284,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1570,7 +1607,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1798,27 +1835,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#what-are-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are vectors?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#add-vector-columns-to-tables" class="md-nav__link">
     <span class="md-ellipsis">
       Add vector columns to tables
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
-    <span class="md-ellipsis">
-      TODO
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generate-vector-embeddings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Generate vector embeddings
     </span>
   </a>
   
@@ -1843,123 +1871,36 @@
 
 
 <h1 id="33-enable-vector-storage">3.3 Enable vector storage<a class="headerlink" href="#33-enable-vector-storage" title="Permanent link">&para;</a></h1>
-<p>The <code>azure_ai</code> extension allows you to generate embeddings for input text. To enable the generated vectors to be stored alongside the rest of your data in the database, you must leverage the capabilities of the <strong>pgvector</strong> extension.</p>
+<p>The <strong>pgvector</strong> extension is a cutting-edge addition to PostgreSQL that empowers the database with the ability to handle vector data natively. This feature allows you to store and query vector information, making it ideal for applications involving copilots, recommendation systems, and similarity searches. To enable vector embeddings to be stored alongside the rest of your data in a PostgreSQL database, you must alter the tables in which you want to store embeddings to add columns with the <code>vector</code> data type provided by the extension.</p>
+<h2 id="what-are-vectors">What are vectors?<a class="headerlink" href="#what-are-vectors" title="Permanent link">&para;</a></h2>
+<p>Vectors, also referred to as embeddings or vector embeddings, are mathematical structures that represent data in a high-dimensional space. Each dimension in this space corresponds to a particular feature of the data, and complex data might be represented using tens of thousands of these dimensions. The location of a vector in this space captures its unique attributes. Various types of data, including words, phrases, entire documents, images, audio, and more, can be transformed into vectors. By using vector search, it's possible to find similar data across different types thanks to this uniform representation.</p>
+<p>An embedding is a dense and informative data format that machine learning models and algorithms can effectively leverage. Embeddings encapsulate the semantic meaning of a piece of text in the form of a vector of floating-point numbers. Consequently, the proximity of two embeddings in the vector space reflects the semantic similarity between the original inputs.</p>
 <h2 id="add-vector-columns-to-tables">Add vector columns to tables<a class="headerlink" href="#add-vector-columns-to-tables" title="Permanent link">&para;</a></h2>
-<p>TODO: Determine the tables to which vector columns should be added.</p>
-<ol>
-<li>
-<p>Add the embedding vector column.</p>
-<p>The size of the vector column should correspond to the number of dimensions generated by the embedding model being used. For this solution, you will be using the <code>text-embedding-3-large</code> model, which is configured to return 3,072 dimensions, so use that is the size you should specify for each of your vector columns.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">listings</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">listing_vector</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">1536</span><span class="p">);</span>
+<p>The <code>vector</code> data type install by the <strong>pgvector</strong> extension allows for the efficient storage and manipulation of high-dimensional numerical vectors in PostgreSQL databases. These vectors are essentially arrays of numbers that can represent a wide range of data, such as text embeddings, image features, or user preferences.</p>
+<p>Below, you will <code>vector</code> columns to the <code>deliverables</code>, <code>invoices</code>, and <code>sow_chunks</code> tables. Each of these tables contains a column storing a block of text. The vector embeddings will be stored alongside the text which they represent.</p>
+<div class="admonition info">
+<p class="admonition-title">The size of the vector column should correspond to the number of dimensions generated by the embedding model being used. For this solution, you are using OpenAI's <code>text-embedding-3-large</code> model, which is configured to return 3,072 dimensions. You will see this number represented in the size of the vector columns added to the tables below.</p>
+</div>
+<p>Using <strong>pgAdmin</strong>, execute the SQL statement for each table.</p>
+<p><em>Select the tab for each table below and execute the <code>ALTER TABLE</code> statement to create an <code>embedding</code> column for storing vector data.</em></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="deliverables" name="__tabbed_1" type="radio" /><input id="invoices" name="__tabbed_1" type="radio" /><input id="sow_chunks" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="deliverables">deliverables</label><label for="invoices">invoices</label><label for="sow_chunks">sow_chunks</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the embedding vector column.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">deliverables</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-</li>
-</ol>
-<h2 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h2>
-<p>Now that we have some sample data, it's time to generate and store the embedding vectors. The <code>azure_ai</code> extension makes calling the Azure OpenAI embedding API easy.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code>3. TODO: Run a quick query to show how it works against the SOW table for a single record
-
-
-
-    ```sql
-    azure_openai.create_embeddings(deployment)
-    ```
-
-4. To provide a simplified example of using the function, run the following query, which creates a vector embedding for the `description` field in the `listings` table. The `deployment_name` parameter in the function is set to `embedding`, which is the name of the deployment of the `text-embedding-ada-002` model in your Azure OpenAI service (it was created with that name by the Bicep deployment script):
-
-    ```sql
-    SELECT
-      id,
-      name,
-      azure_openai.create_embeddings(&#39;embedding&#39;, description) AS vector
-    FROM listings
-    LIMIT 1;
-    ```
-
-    The output looks similar to this:
-
-    ```sql
-     id |      name       |              vector
-    ----+-------------------------------+------------------------------------------------------------
-      1 | Stylish One-Bedroom Apartment | {0.020068742,0.00022734122,0.0018286322,-0.0064167166,...}
-    ```
-
-    For brevity, the vector embeddings are abbreviated in the above output.
-
-    !!! info &quot;[Embeddings](https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-overview#embeddings) are a concept in machine learning and natural language processing (NLP) that involves representing objects such as words, documents, or entities, as [vectors](https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-overview#vectors) in a multi-dimensional space. Embeddings allow machine learning models to evaluate how closely two pieces of information are related. This technique efficiently identifies relationships and similarities between data, allowing algorithms to identify patterns and make accurate predictions.&quot;
+</div>
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the embedding vector column.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="generate-vector-embeddings">Generate vector embeddings<a class="headerlink" href="#generate-vector-embeddings" title="Permanent link">&para;</a></h2>
-<p>TODO: Explain the capability... This might be better if moved to somewhere else, where it is actually going to be used...</p>
-<p>The schema contains a single function, <code>create_embeddings()</code>, with two overloads. One overload accepts a single input string, and the other expects an array of input strings. You can view the details of the function, its overloads, and expected arguments in the (function documentation)[https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-azure-openai#azure_openaicreate_embeddings].</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>```sql
--- Single text input
-azure_openai.create_embeddings(deployment_name text, input text, timeout_ms integer DEFAULT 3600000, throw_on_error boolean DEFAULT true, max_attempts integer DEFAULT 1, retry_delay_ms integer DEFAULT 1000)
-
--- Array of input text
-azure_openai.create_embeddings(deployment_name text, input text[], batch_size integer DEFAULT 100, timeout_ms integer DEFAULT 3600000, throw_on_error boolean DEFAULT true, max_attempts integer DEFAULT 1, retry_delay_ms integer DEFAULT 1000)
-```
+</div>
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the embedding vector column.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sow_chunks</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<p>TODO: Run a predefined script against the altered tables to generate embeddings for each row of text...</p>
-<ol>
-<li>
-<p>Generate an embedding vector for the description of each listing by calling Azure OpenAI through the create_embeddings user-defined function, which is implemented by the azure_ai extension:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">listings</span>
-<span class="k">SET</span><span class="w"> </span><span class="n">listing_vector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">listing_vector</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
-</code></pre></div></td></tr></table></div>
-<p>Note that this may take several minutes, depending on the available quota.</p>
-</li>
-<li>
-<p>See an example vector by running this query:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">listing_vector</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">listings</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div></td></tr></table></div>
-<p>You will get a result similar to this, but with 1536 vector columns:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">postgres</span><span class="o">=&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">listing_vector</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">listings</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">]</span><span class="c1">--+------ ...</span>
-<span class="n">listing_vector</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">0018742813</span><span class="p">,</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">04530062</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">055145424</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-</li>
-</ol>
-<div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You just learned how to add vector storage and search capabilities to Azure Database for PostgreSQL!</p>
+</div>
+</div>
 </div>
 
 
@@ -2015,13 +1956,13 @@ azure_openai.create_embeddings(deployment_name text, input text[], batch_size in
         
         
           
-          <a href="../04/" class="md-footer__link md-footer__link--next" aria-label="Next: 4.4 Vectorize existing data">
+          <a href="../04/" class="md-footer__link md-footer__link--next" aria-label="Next: 3.4 Optimize vector performance with DiskANN">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                4.4 Vectorize existing data
+                3.4 Optimize vector performance with DiskANN
               </div>
             </div>
             <div class="md-footer__button md-icon">

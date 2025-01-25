@@ -18,7 +18,7 @@
         <link rel="prev" href="../03/">
       
       
-        <link rel="next" href="../../04-Create-AI-Pipeline/">
+        <link rel="next" href="../05/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>4.4 Vectorize existing data - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>3.4 Optimize vector performance with DiskANN - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#44-vectorize-existing-data" class="md-skip">
+        <a href="#34-optimize-vector-performance-with-diskann" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.4 Vectorize existing data
+              3.4 Optimize vector performance with DiskANN
             
           </span>
         </div>
@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -908,6 +908,8 @@
       
         
       
+        
+      
     
     
       
@@ -1031,16 +1033,85 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
   </span>
   
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-the-index-access-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selecting the index access function
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1064,6 +1135,8 @@
       
         
           
+        
+      
         
       
         
@@ -1172,7 +1245,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1193,7 +1266,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1211,6 +1284,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1513,7 +1607,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1734,6 +1828,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-the-index-access-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selecting the index access function
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1750,8 +1870,45 @@
   
 
 
-<h1 id="44-vectorize-existing-data">4.4 Vectorize existing data<a class="headerlink" href="#44-vectorize-existing-data" title="Permanent link">&para;</a></h1>
-<p>TODO: Have users run a script to vectorize existing data in tables that had a <code>vector</code> column added.</p>
+<h1 id="34-optimize-vector-performance-with-diskann">3.4 Optimize vector performance with DiskANN<a class="headerlink" href="#34-optimize-vector-performance-with-diskann" title="Permanent link">&para;</a></h1>
+<p>TODO: Rewrite all of this, as it is simply a copy of the docs at <a href="https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#disk-approximate-nearest-neighbor-diskann">https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#disk-approximate-nearest-neighbor-diskann</a></p>
+<p>TODO: Keep the above link and point to it somewhere in this doc as a reference...</p>
+<p>DiskANN is a scalable approximate nearest neighbor search algorithm for efficient vector search at any scale. It offers high recall, high queries per second (QPS), and low query latency, even for billion-point datasets. This makes it a powerful tool for handling large volumes of data. <a href="https://aka.ms/pg-diskann-docs">Learn more about DiskANN from Microsoft</a>.</p>
+<h2 id="index-options">Index options<a class="headerlink" href="#index-options" title="Permanent link">&para;</a></h2>
+<p>When creating an index with diskann, you can specify various parameters to control its behavior. Here are the options that we currently have:</p>
+<ol>
+<li><code>max_neighbors</code>: Maximum number of edges per node in the graph. (Defaults to 32)</li>
+<li><code>l_value_ib</code>: The size of the search list during index build (Defaults to 50)</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">my_table_embedding_diskann_custom_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">my_table</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">diskann</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">)</span>
+<span class="k">WITH</span><span class="w"> </span><span class="p">(</span>
+<span class="w"> </span><span class="n">max_neighbors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span>
+<span class="w"> </span><span class="n">l_value_ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w"> </span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>The L value for index scanning (<code>l_value_is</code>) can be set for the whole connection or per transaction (using <code>SET LOCAL</code> within a transaction block):</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="n">diskann</span><span class="p">.</span><span class="n">l_value_is</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">my_table</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">-- uses 100 candidates</span>
+</code></pre></div></td></tr></table></div>
+<p>Postgres will automatically decide when to use the DiskANN index. If there are scenarios you always want to use the index, use the following command:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="k">LOCAL</span><span class="w"> </span><span class="n">enable_seqscan</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">OFF</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">my_table</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">-- forces the use of index</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="selecting-the-index-access-function">Selecting the index access function<a class="headerlink" href="#selecting-the-index-access-function" title="Permanent link">&para;</a></h2>
+<p>TODO: Rework the below so we only worry about <code>diskann</code> and the <code>vector_cosine_ops</code> access function.</p>
+<p>The <code>vector</code> type allows you to perform three types of searches on the stored vectors. You need to select the correct access function for your index in order to have the database consider your index when executing your queries. The examples demonstrate on <code>ivfflat</code> index types, however the same can be done for <code>hnsw</code> and <code>diskann</code> indexes. The <code>lists</code> option only applies to <code>ivfflat</code> indexes.</p>
+<p>For cosine similarity search, use the <code>vector_cosine_ops</code> access method.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">t_test_embedding_cosine_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t_test</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">ivfflat</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">lists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<p>To use the above index, the query needs to perform a cosine similarity search, which is done with the <code>&lt;=&gt;</code> operator.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_test</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="s1">&#39;[1,2,3]&#39;</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -1806,13 +1963,13 @@
         
         
           
-          <a href="../../04-Create-AI-Pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: AI-driven Data Validation">
+          <a href="../05/" class="md-footer__link md-footer__link--next" aria-label="Next: 3.5 Vectorize data">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                AI-driven Data Validation
+                3.5 Vectorize data
               </div>
             </div>
             <div class="md-footer__button md-icon">

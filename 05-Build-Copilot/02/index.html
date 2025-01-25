@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -906,6 +906,8 @@
       
         
       
+        
+      
     
     
       
@@ -1023,7 +1025,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1051,6 +1074,8 @@
       
         
           
+        
+      
         
       
         
@@ -1159,7 +1184,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1180,7 +1205,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1198,6 +1223,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1375,6 +1421,15 @@
   <a href="#create-langchain-agents" class="md-nav__link">
     <span class="md-ellipsis">
       Create LangChain agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-lets-connect-the-dots" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7. Let's Connect The Dots 💡
     </span>
   </a>
   
@@ -1561,7 +1616,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1806,6 +1861,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#37-lets-connect-the-dots" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7. Let's Connect The Dots 💡
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1840,6 +1904,26 @@
 <p>TODO: LangChain implementation should already be done, so this will just be reviewing the code a</p>
 <p>How does this compare to using function calls for a single agent? Is it just splitting that across agents, so they perform data lookups in parallel?</p>
 <p>Need to consider token limits...</p>
+<h2 id="37-lets-connect-the-dots">3.7. Let's Connect The Dots 💡<a class="headerlink" href="#37-lets-connect-the-dots" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Recall that the <a href="https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation#how-does-rag-work">Retrieval Augmented Generation</a> works by <em>retrieving</em> relevant knowledge from your data stores, and <em>augmenting</em> the user query with it to create an enhanced prompt - which <em>generates</em> the final response.</p>
+</div>
+<p>To implement this RAG pattern, we need to execute three steps:</p>
+<ol>
+<li><strong>Setup data sources</strong> and populate them with our data (product catalog, customer orders)</li>
+<li><strong>Create <a href="https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation#how-does-rag-work">indexes</a></strong> for efficient information retrieval by LLMs (e.g., find matching products)</li>
+<li><strong>Connect our Azure AI project</strong> to access data/indexes code-first, for use in processing steps.</li>
+</ol>
+<p>In the previous section we setup the data sources (provisioning infra) and populated them with data (post-provisioning scripts) as follows:</p>
+<ol>
+<li><strong>Azure CosmosDB</strong> - loaded <strong>12 records</strong> from <code>data/customer_info</code>, got <em>customers</em> database.</li>
+<li><strong>Azure AI Search</strong> - loaded <strong>20 records</strong> from <code>data/product_info</code>, got <em>contoso-products</em> index.</li>
+</ol>
+<p>This checks off the first two idents from our RAG checklist above. Now, let's see how we can achieve the thirst ep with a code-first approach that makes use of the Azure AI Search, Azure CosmosDB and Azure OpenAI services through their Azure SDKs.</p>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">Congratulations! You have completed your setup and are ready to begin integrating AI into the solution.</p>
+</div>
 
 
 

@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -908,6 +908,8 @@
       
         
       
+        
+      
     
     
       
@@ -1026,7 +1028,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1054,6 +1077,8 @@
       
         
           
+        
+      
         
       
         
@@ -1162,7 +1187,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1183,7 +1208,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1201,6 +1226,27 @@
   
     <li class="md-nav__item">
       <a href="../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1503,7 +1549,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1741,17 +1787,17 @@
 
 
 <h1 id="integrate-generative-ai-into-azure-database-for-postgresql-flexible-server">Integrate Generative AI into Azure Database for PostgreSQL - Flexible Server<a class="headerlink" href="#integrate-generative-ai-into-azure-database-for-postgresql-flexible-server" title="Permanent link">&para;</a></h1>
-<p>Generative AI (GenAI) represents a cutting-edge class of AI algorithms designed to create new, original content based on patterns and data learned from existing information. Natural language processing (NLP) is a key part of this. NLP allows generative AI to understand and produce human language, making it capable of tasks like summarizing large blocks of text, translating languages, or having conversations with people. By using NLP, generative AI can create content that sounds natural and makes sense in context. By employing techniques like prompting and retrieval augmented generation (RAG), GenAI can produce innovative outputs, such as text, images, and more.</p>
-<p>Incorporating Generative AI (GenAI) within Azure Database for PostgreSQL - Flexible Server is accomplished through the <code>azure_ai</code> extension. This extension enables the integration of large language models (LLMs) directly within your database. Using the extension allows you to interact seamlessly with Azure's advanced AI services, such as Azure OpenAI and Azure Cognitive Services, directly from the database. With this integration, you can elevate your applications by embedding robust AI functionalities directly into your database infrastructure.</p>
-<p>In the steps in this section, you will enhance your PostgreSQL database by integrating Generative AI capabilities using the <code>azure_ai</code> extension. This process includes configuring your database to connect with Azure AI and ML services and enabling it to handle AI-driven tasks effectively. Here's what you will accomplish:</p>
+<p>Generative AI (GenAI) represents a cutting-edge class of AI algorithms designed to create new, original content based on patterns and data learned from existing information. Natural language processing (NLP) is a key part of this. NLP allows generative AI to understand and produce human language, making it capable of tasks like summarizing large blocks of text, translating languages, or conversing with people. Using NLP, generative AI can create content that sounds natural and makes sense in context. By employing techniques like prompting and retrieval augmented generation (RAG), GenAI can produce innovative outputs, such as text, images, and more.</p>
+<p>Incorporating Generative AI (GenAI) within Azure Database for PostgreSQL - Flexible Server is accomplished through the Azure AI (<code>azure_ai</code>) and pgvector (<code>vector</code>) extensions. The <code>azure_ai</code> extension enables the integration of large language models (LLMs) directly within your database. The <code>azure_ai</code> extension provides seamless interaction with Azure's advanced AI services, such as Azure OpenAI and Azure Cognitive Services. With these integrations, you can elevate your applications by embedding robust AI functionalities directly into your database infrastructure. The <code>vector</code> extension works with the <code>azure_ai</code> extension, allowing vector embeddings to be generated in database queries, then stored and queried in the database. It also enables powerful vector similarity search capabilities.</p>
+<p>In this section, you will use extensions to enhance your PostgreSQL database with Generative AI and Vector Search capabilities. Here's what you will accomplish:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Enable the <code>age</code>, <code>vector</code>, and <code>azure_ai</code> extensions on your PostgreSQL server by adding them to the <em>allowlist</em>. These extensions are crucial for AI integration and vector operations.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Integrate Generative AI (GenAI) capabilities into Azure Database for PostgreSQL using the Azure AI (<code>azure_ai</code>) extension</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Configure the <code>azure_ai</code> extension to provide the endpoints to connect to the Azure AI services and the API keys required for authentication</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Install the <code>azure_ai</code> and <code>vector</code> extensions on your PostgreSQL database</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Configure the <code>azure_ai</code> extension with the connection details for your Azure AI services</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add vector columns to database tables to allow embeddings to be stored alongside text data</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Vectorize existing data</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Improve vector query performance with DiskANN</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Generate and store embeddings for existing data</li>
 </ul>
-<p>By following these steps, you will transform your PostgreSQL database into a powerful AI-enhanced platform capable of executing advanced generative AI tasks and providing deeper insights from your data.</p>
+<p>Following these steps will transform your PostgreSQL database into a powerful AI-enhanced platform capable of executing advanced generative AI tasks and providing deeper insights from your data.</p>
 
 
 

@@ -26,7 +26,7 @@
     
     
       
-        <title>2. AI-enabled App Architecture - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>2. App Architecture - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2-ai-enabled-app-architecture" class="md-skip">
+        <a href="#2-app-architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. AI-enabled App Architecture
+              2. App Architecture
             
           </span>
         </div>
@@ -558,7 +558,7 @@
           
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -569,7 +569,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -589,6 +589,15 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#35-check-azure-container-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5. Check Azure Container App
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#the-rag-pattern" class="md-nav__link">
@@ -967,6 +976,8 @@
       
         
       
+        
+      
     
     
       
@@ -1084,7 +1095,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1112,6 +1144,8 @@
       
         
           
+        
+      
         
       
         
@@ -1220,7 +1254,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1241,7 +1275,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1259,6 +1293,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1561,7 +1616,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1789,6 +1844,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#35-check-azure-container-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5. Check Azure Container App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-rag-pattern" class="md-nav__link">
     <span class="md-ellipsis">
       The RAG Pattern
@@ -1824,11 +1888,103 @@
   
 
 
-<h1 id="2-ai-enabled-app-architecture">2. AI-enabled App Architecture<a class="headerlink" href="#2-ai-enabled-app-architecture" title="Permanent link">&para;</a></h1>
+<h1 id="2-app-architecture">2. App Architecture<a class="headerlink" href="#2-app-architecture" title="Permanent link">&para;</a></h1>
 <p>The objective of this solution is to accelerate the integration of AI capabilities into applications.</p>
 <p>The extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.</p>
 <p>By integrating AI capabilities into existing solutions, leveraging advanced AI validation, Document Intelligence, and a copilot enhanced by RAG...</p>
 <p>Such an application can be integrated with existing financial and accounting systems to streamline the entire process. By leveraging AI and machine learning, it can continuously learn and improve its accuracy in detecting discrepancies and anomalies.</p>
+<p>Separating app functionality into a dedicated UI and backend API when creating a copilot in Python offers several benefits. Firstly, it enhances modularity and maintainability, allowing you to update the UI or backend independently without disrupting the other. Streamlit provides an intuitive and interactive interface that simplifies user interactions, while FastAPI ensures high-performance, asynchronous request handling and data processing. This separation also promotes scalability, as different components can be deployed across multiple servers, optimizing resource usage. Additionally, it enables better security practices, as the backend API can handle sensitive data and authentication separately, reducing the risk of exposing vulnerabilities in the UI layer. This approach leads to a more robust, efficient, and user-friendly application.</p>
+<h2 id="35-check-azure-container-app">3.5. Check Azure Container App<a class="headerlink" href="#35-check-azure-container-app" title="Permanent link">&para;</a></h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code>!!! tip &quot;The Azure Container App provides the hosting environment for our copilot (API endpoint)&quot;
+
+[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/overview) will host the endpoint used to serve the Contoso Chat application on the Contoso Outdoors website. The Azure provisioning should have deployed a default Azure Container App to this endpoint.
+
+4. Return to the Azure Portal tab
+5.  Visit the `rg-AITOUR` Resource group page
+6.  Click the `Container App` resource to display the Overview page
+7.  Look for `Application Url` (at top right), and click it to launch in new tab
+8.  You should see: A `Hello World` message on the screen (confirming app was deployed)
+
+!!! info &quot;Azure Container Apps (ACA) is used to host our chat AI application. The application server is implemented using FastAPI and exposes a `/create_request` API endpoint to make requests to our copilot.&quot;
+
+!!! info &quot;How The Custom Copilot Experience Works&quot;
+
+    Our chat application works by sending chat messages to a custom endpoint hosted as an Azure Container App.
+
+    - The inputs to the endpoint are 
+        - **question** → the customer&#39;s chat message), 
+        - **customer_id** → the logged-in customer&#39;s ID number)
+        - **chat_history** → the prior conversation, for context. 
+    - The **response** from the endpoint is the response returned by the chatbot.
+
+    When iterating on a prototype application, we start with manual testing, using a single &quot;test prompt&quot; to validate our scenario. We then move to automated evaluations with larger test datasets.
+
+The FastAPI server exposes a `Swagger API` endpoint that we can use for manual testing in both local (Codespaces) and cloud (Container Apps). Let&#39;s try it out now!
+
+9.  Return to your deployed Azure Container App tab
+10. Add a `/docs` suffix to the URL and browse to that path - you will see: **FastAPI** page
+11. Expand the `POST` section by clicking the arrow
+    - click `Try it out` to make inputs editable
+    - enter `Tell me about your tents` for **question**
+    - enter `2` for **customer_id**
+    - enter `[]` for **chat_history**
+    - enter **Execute** to run the endpoint with the provided parameters.
+
+You will get a response body with `question`, `answer` and `context` components.
+
+- **Check** `question` -  is the customer&#39;s question the same as that typed in the chat window on the Contoso Outdoor website
+- **Check** `answer` -  is the chatbot&#39;s response to the customer&#39;s `question`, as generated by this RAG application
+- **Check** `context` - is the additional information provided to the Generative AI model being used by it used to ground its answer.
+    - In this app, that includes information about products relevant to the customer question.
+    - The products selected may depend on `customer_id` and the associated order history. 
+    - The web app provides `chat_history` from the chat window - which can serve as additional context that the model can use to ground the response.
+
+!!! note &quot;Exercise → Repeat exercise with a different customer ID (between 1 and 12). How did the response change?&quot;
+</code></pre></div></td></tr></table></div>
 <hr />
 <p><em>Click each tab below to learn more about how this pattern works in the context of the Woodgrove Bank application!</em></p>
 <p>TODO: Rework the below to cover the starter application, which does not contain any AI functionality.</p>

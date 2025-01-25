@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -908,6 +908,8 @@
       
         
       
+        
+      
     
     
       
@@ -1084,7 +1086,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1112,6 +1135,8 @@
       
         
           
+        
+      
         
       
         
@@ -1220,7 +1245,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1241,7 +1266,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1259,6 +1284,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1561,7 +1607,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1829,13 +1875,14 @@
 <h2 id="allowlist-the-extensions">Allowlist the extensions<a class="headerlink" href="#allowlist-the-extensions" title="Permanent link">&para;</a></h2>
 <p>Before installing and using extensions in Azure Database for PostgreSQL flexible server, you must add them to the server's <em>allowlist</em>, as described in <a href="https://learn.microsoft.com/azure/postgresql/extensions/how-to-allow-extensions">how to use PostgreSQL extensions</a>.</p>
 <div class="admonition task">
-<p class="admonition-title">Select the tab for the method you would like to use to allowlist the extensions and follow the instructions provided.</p>
+<p class="admonition-title">Select the tab of the method you want to use for allowlisting the extensions and follow the instructions provided.</p>
+<p><strong>NOTE</strong>: The Apache AGE extension is included here, so you don't have to repeat these steps to install it later in the workshop when GraphRAG functionality is added to the solution.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="azure-cli" name="__tabbed_1" type="radio" /><input id="azure-portal" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="azure-cli">Azure CLI</label><label for="azure-portal">Azure portal</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>In VS Code, open a new integrated terminal window and execute the following Azure CLI command at the prompt.</li>
+<li>Open a new integrated terminal window in VS Code and execute the following Azure CLI command at the prompt.</li>
 </ol>
 <div class="admonition task">
 <p class="admonition-title">Ensure you replace the tokens in the command below with the appropriate values from your Azure environment.</p>
@@ -1868,10 +1915,22 @@
 </div>
 </div>
 <h2 id="install-extensions">Install extensions<a class="headerlink" href="#install-extensions" title="Permanent link">&para;</a></h2>
-<p>With the required extensions added to the <em>allowlist</em>, you are ready to install them in your database. To enable them, you will run a <a href="https://www.postgresql.org/docs/current/sql-createextension.html">CREATE EXTENSION</a> command for each in PostgreSQL.</p>
+<p>With the required extensions added to the <em>allowlist</em>, you can now install them in your database. To enable them, you will run a <a href="https://www.postgresql.org/docs/current/sql-createextension.html">CREATE EXTENSION</a> command for each in PostgreSQL.</p>
 <p><code>CREATE EXTENSION</code> loads a new extension into the database by running its script file. This script typically creates new SQL objects such as functions, data types, and schemas. An error is thrown if an extension of the same name already exists, so adding <code>IF NOT EXISTS</code> allows the command to execute without throwing an error if it is already installed.</p>
+<p>You will use <strong>pgAdmin</strong> to install the extensions by executing SQL commands against your database.</p>
+<ol>
+<li>
+<p>On your local machine, return to the open instance of <strong>pgAdmin</strong> (or open it if you closed it after the setup tasks) and ensure it is connected to your PostgreSQL database.</p>
+</li>
+<li>
+<p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your PostgreSQL server.</p>
+</li>
+<li>
+<p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
+</li>
+</ol>
 <div class="admonition task">
-<p class="admonition-title">Select each of the tabs below and execute the <code>CREATE EXTENSION</code> command to install the extensions.</p>
+<p class="admonition-title">Select each of the tabs below and execute the <code>CREATE EXTENSION</code> command in the pgAdmin query window to install the extensions.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="azure-ai-extension" name="__tabbed_2" type="radio" /><input id="pgvector-extension" name="__tabbed_2" type="radio" /><input id="apache-age-extension" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="azure-ai-extension">Azure AI extension</label><label for="pgvector-extension">pgvector extension</label><label for="apache-age-extension">Apache AGE extension</label></div>
 <div class="tabbed-content">

@@ -546,7 +546,7 @@
         
   
   <span class="md-ellipsis">
-    2. AI-enabled App Architecture
+    2. App Architecture
   </span>
   
 
@@ -908,6 +908,8 @@
       
         
       
+        
+      
     
     
       
@@ -1075,7 +1077,28 @@
         
   
   <span class="md-ellipsis">
-    4.4 Vectorize existing data
+    3.4 Optimize vector performance with DiskANN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1103,6 +1126,8 @@
       
         
           
+        
+      
         
       
         
@@ -1211,7 +1236,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.3 Summarize documents
   </span>
   
 
@@ -1232,7 +1257,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.3 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1250,6 +1275,27 @@
   
     <li class="md-nav__item">
       <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Create Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1552,7 +1598,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Install Apache AGE extension
   </span>
   
 
@@ -1807,14 +1853,15 @@
 
 
 <h1 id="32-configure-the-azure-ai-extension">3.2 Configure the Azure AI extension<a class="headerlink" href="#32-configure-the-azure-ai-extension" title="Permanent link">&para;</a></h1>
-<p>The <code>azure_ai</code> extension allows you to integrate the Azure OpenAI, Azure AI Language, and Azure ML services  directly into your database. Before using the <code>azure_ai</code> extension, you must configure the connections to each of your Azure AI and ML service resources by providing the service's endpoint and subscription key.</p>
+<p>The <code>azure_ai</code> extension lets you directly integrate the Azure OpenAI, Azure AI Language, and Azure ML services into your database. To start using the capabilities provided by the extension, you must first configure its connection to your Azure AI and ML services, providing each service's endpoint and subscription key.</p>
 <h2 id="execute-sql-in-pgadmin-to-configure-the-extension">Execute SQL in pgAdmin to configure the extension<a class="headerlink" href="#execute-sql-in-pgadmin-to-configure-the-extension" title="Permanent link">&para;</a></h2>
+<p>You will use <strong>pgAdmin</strong> to configure the <code>azure_ai</code> extension by executing SQL commands against your database.</p>
 <ol>
 <li>
-<p>Return to the open instance of pgAdmin on your local machine and ensure it is connected to your PostgreSQL database.</p>
+<p>On your local machine, return to the open instance of <strong>pgAdmin</strong> (or open it if you closed it after the setup tasks) and ensure it is connected to your PostgreSQL database.</p>
 </li>
 <li>
-<p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your server.</p>
+<p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your PostgreSQL server.</p>
 </li>
 <li>
 <p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
@@ -1823,16 +1870,16 @@
 <div class="admonition task">
 <p class="admonition-title">Select each tab below and execute SQL statements provided to connect to each Azure AI service.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="azure-openai" name="__tabbed_1" type="radio" /><input id="azure-ai-language" name="__tabbed_1" type="radio" /><input id="azure-ml" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="azure-openai">Azure OpenAI</label><label for="azure-ai-language">Azure AI Language</label><label for="azure-ml">Azure ML</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="azure-openai" name="__tabbed_1" type="radio" /><input id="language-service" name="__tabbed_1" type="radio" /><input id="azure-ml" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="azure-openai">Azure OpenAI</label><label for="language-service">Language service</label><label for="azure-ml">Azure ML</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>The Azure AI extension includes the <code>azure_openai</code> schema, which provides the ability to integrate the creation of vector representations of text values directly into your database by invoking <a href="https://learn.microsoft.com/azure/ai-services/openai/reference#embeddings">Azure OpenAI embeddings</a>. The vector ebmeddings can then be used in vector similarity searches.</p>
+<p>The Azure AI extension includes the <code>azure_openai</code> schema, which allows you to integrate the creation of vector representations of text values directly into your database by invoking <a href="https://learn.microsoft.com/azure/ai-services/openai/reference#embeddings">Azure OpenAI embeddings</a>. The vector embeddings can then be used in vector similarity searches.</p>
 <ol>
 <li>
-<p>In the new pgAdmin query window, paste the following SQL commands to configure the extension's connection to Azure OpenAI. Do not run the commands yet, as you first need to retrieve the endpoint and API key for your Azure OpenAI resource.</p>
+<p>In the new pgAdmin query window, paste the following SQL commands to configure the extension's connection to Azure OpenAI using the <code>set_setting()</code> function. Do not run the commands yet, as you first need to retrieve the endpoint and API key for your Azure OpenAI resource.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_openai.endpoint&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://&lt;endpoint&gt;.openai.azure.com&#39;</span><span class="p">);</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_openai.subscription_key&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&lt;API Key&gt;&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_openai.subscription_key&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&lt;api-ey&gt;&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
@@ -1848,18 +1895,18 @@
 <p>Copy the <strong>Endpoint</strong> value, paste it as the <code>&lt;endpoint&gt;</code> value in the query to set the <code>azure_openai.endpoint</code> value in your pgAdmin query window.</p>
 </li>
 <li>
-<p>Copy the <strong>KEY 1</strong> value, paste it as the <code>&lt;API Key&gt;</code> value in the query to set the <code>azure_openai.subscription_key</code> value in your pgAdmin query window.</p>
+<p>Copy the <strong>KEY 1</strong> value, paste it as the <code>&lt;api-key&gt;</code> value in the query to set the <code>azure_openai.subscription_key</code> value in your pgAdmin query window.</p>
 </li>
 </ol>
-<p><img alt="Screenshot of the Azure OpenAI service's Keys and Endpoints page is displayed, with the KEY 1 and Endpoint copy buttons highlighted by red boxes." src="../../img/azure-openai-keys-endpoints.png" /></p>
+<p><img alt="Screenshot of the Azure OpenAI service's Keys and Endpoints page, with the KEY 1 and Endpoint copy buttons highlighted by red boxes." src="../../img/azure-openai-keys-endpoints.png" /></p>
 </li>
 <li>
-<p>In pgAdmin, execute the SQL commands by select the <strong>Execute script</strong> button.</p>
+<p>In pgAdmin, execute the updated SQL commands by selecting the <strong>Execute script</strong> button.</p>
 <p><img alt="The Execute script button is highlighted on the query window toolbar in pgAdmin." src="../../img/pgadmin-execute-script.png" /></p>
 </li>
 <li>
-<p>The <code>azure_ai</code> extension also provides the <code>get_setting</code> function to allow users with appropriate permissions to view the values stored in the <code>endpoint</code> and <code>subscription_key</code> settings within each schema. Run the following queries to view the Azure OpenAI endpoint and key values stored in the database.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;azure_openai.endpoint&#39;</span><span class="p">);</span>
+<p>The <code>azure_ai</code> extension also provides the <code>get_setting()</code> function, allowing users with appropriate permissions to view the values stored in each schema's <code>endpoint</code> and <code>key</code> settings. Run the following queries to view the Azure OpenAI endpoint and key values stored in the database.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;azure_openai.endpoint&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">get_setting</span><span class="p">(</span><span class="s1">&#39;azure_openai.subscription_key&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
@@ -1870,14 +1917,10 @@
 <p>The Azure AI services integrations included in the <code>azure_cognitive</code> schema of the <code>azure_ai</code> extension provide a rich set of AI Language features accessible directly from the database.</p>
 <ol>
 <li>
-<p>In the pgAdmin query window, overwrite the previous commands by pasting the following SQL commands to configure the extension's connection to the Azure AI Language service. Do not run the commands yet, as you first need to retrieve the endpoint and API key for your Language service.</p>
+<p>In the pgAdmin query window, overwrite the previous commands by pasting the following SQL commands to configure the extension's connection to your Language service. Do not run the commands yet, as you first need to retrieve your service's endpoint and API key.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_cognitive.endpoint&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{endpoint}&#39;</span><span class="p">);</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_cognitive.endpoint&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{endpoint}&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_cognitive.subscription_key&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{api-key}&#39;</span><span class="p">);</span>
-<span class="c1">-- The region setting is required for the translate function</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_cognitive.region&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&lt;region&gt;&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
@@ -1893,27 +1936,24 @@
 <p>Copy the <strong>Endpoint</strong> value, paste it as the <code>&lt;endpoint&gt;</code> value in the query to set the <code>azure_cognitive.endpoint</code> value in your pgAdmin query window.</p>
 </li>
 <li>
-<p>Copy the <strong>KEY 1</strong> value, paste it as the <code>&lt;API Key&gt;</code> value in the query to set the <code>azure_cognitive.subscription_key</code> value in your pgAdmin query window.</p>
-</li>
-<li>
-<p>Copy the <strong>Location/Region</strong> value, paste it as the <code>&lt;region&gt;</code> value in the query to set the <code>azure_cognitive.region</code> value in your pgAdmin query window.</p>
+<p>Copy the <strong>KEY 1</strong> value, paste it as the <code>&lt;api-key&gt;</code> value in the query to set the <code>azure_cognitive.subscription_key</code> value in your pgAdmin query window.</p>
 </li>
 </ol>
-<p><img alt="Screenshot of the Azure Language service's Keys and Endpoints page is displayed, with the KEY 1 and Endpoint copy buttons highlighted by red boxes." src="../../img/language-service-keys-endpoints.png" /></p>
+<p><img alt="Screenshot of the Azure Language service's Keys and Endpoints page, with the KEY 1 and Endpoint copy buttons highlighted by red boxes." src="../../img/language-service-keys-endpoints.png" /></p>
 </li>
 <li>
-<p>In pgAdmin, execute the SQL commands by select the <strong>Execute script</strong> button.        </p>
+<p>In pgAdmin, execute the updated SQL commands by selecting the <strong>Execute script</strong> button.        </p>
 </li>
 </ol>
 </div>
 <div class="tabbed-block">
-<p>The Azure AI extension gives the ability to invoke any machine learning models deployed on Azure Machine Learning (ML) online endpoints from within SQL. These models can be from the Azure ML catalog or custom models that are trained and deployed.</p>
+<p>The Azure AI extension allows you to invoke any machine learning models deployed on Azure Machine Learning (ML) online endpoints from within SQL. These models can be from the Azure ML catalog or custom models that have been trained and deployed.</p>
 <ol>
 <li>
 <p>In the pgAdmin query window, overwrite the previous commands by pasting the following SQL commands to configure the extension's connection to Azure ML. Do not run the commands yet, as you first need to retrieve the endpoint and key for the model deployed on Azure ML.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_ml.scoring_endpoint&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;endpoint&gt;&#39;</span><span class="p">);</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_ml.endpoint_key&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&lt;Key&gt;&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_ml.endpoint_key&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&lt;api-key&gt;&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
@@ -1924,25 +1964,25 @@
 <p><img alt="Screenshot of the Launch studio section of the Azure Machine Learning workspace page with the Launch studio button highlighted with a red box." src="../../img/azure-ml-workspace-launch-studio.png" /></p>
 </li>
 <li>
-<p>Sign into Machine Learning Studio, if prompted.</p>
+<p>Sign into Machine Learning Studio if prompted.</p>
 </li>
 <li>
 <p>In Machine Learning Studio, select <strong>Endpoints</strong> under <strong>Assets</strong> in the left-hand resource menu, then select the endpoint for your <code>bge-v2-m3-reranker model</code>:</p>
 <p><img alt="Screenshot of the Endpoints page in Azure Machine Learning Studio, with the Endpoints menu item highlighted and the reranker model endpoint highlighted." src="../../img/aml-studio-endpoints.png" /></p>
 </li>
 <li>
-<p>On your endpoint page: TODO: Get the steps below right and a screenshot.</p>
+<p>On your endpoint page:</p>
 </li>
 <li>
 <p>Select the <strong>Consume</strong> tab.</p>
 </li>
-<li>Copy the <strong>TODO: Endpoint</strong> value, paste it as the <code>&lt;endpoint&gt;</code> value in the query to set the <code>azure_cognitive.endpoint</code> value in your pgAdmin query window.</li>
+<li>Copy the <strong>REST endpoint</strong> value, paste it as the <code>&lt;endpoint&gt;</code> value in the query to set the <code>azure_ml.scoring_endpoint</code> value in your pgAdmin query window.</li>
 <li>
-<p>Copy the <strong>TODO: KEY</strong> value, paste it as the <code>&lt;API Key&gt;</code> value in the query to set the <code>azure_cognitive.subscription_key</code> value in your pgAdmin query window.</p>
-<p><img alt="Screenshot of the Azure Machine Learning workshpace Keys and Endpoints page is displayed, with the KEY 1 and Endpoint copy buttons highlighted by red boxes." src="../../img/language-service-keys-endpoints.png" /></p>
+<p>Copy the <strong>Primary key</strong> value, paste it as the <code>&lt;api-key&gt;</code> value in the query to set the <code>azure_ml.endpoint_key</code> value in your pgAdmin query window.</p>
+<p><img alt="Screenshot of the Azure Machine Learning Studio Endpoints Consume tab, with the REST Endpoint and Primary key copy buttons highlighted by red boxes." src="../../img/aml-studio-endpoints-consume.png" /></p>
 </li>
 <li>
-<p>In pgAdmin, execute the SQL commands by select the <strong>Execute script</strong> button.</p>
+<p>In pgAdmin, execute the updated SQL commands by selecting the <strong>Execute script</strong> button.</p>
 </li>
 </ol>
 </div>

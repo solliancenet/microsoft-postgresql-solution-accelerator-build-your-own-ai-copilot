@@ -61,7 +61,7 @@ async def storage_blob_webhook(
         full_text = "\n".join(extracted_text)
 
         # Step 3: Chunk the text semantically
-        text_chunks = semantic_chunking(full_text)
+        text_chunks = doc_intelligence_service.semantic_chunking(full_text)
 
         # Step 4: Insert into database
         # Get doc type and id

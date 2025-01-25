@@ -31,46 +31,88 @@ def download_blob(container_name, blob_name):
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
     return blob_client.download_blob().readall()
 
-def analyze_document(file_path):
-    with open(file_path, "rb") as file:
-        poller = document_analysis_client.begin_analyze_document("prebuilt-layout", document=file)
-        result = poller.result()
+def analyze_document(document_data):
+    """Extract text and structure using Azure AI Document Intelligence."""
+    poller = document_analysis_client.begin_analyze_document(
+        model_id="prebuilt-layout",
+        document=document_data
+    )
+    result = poller.result()
     
     chunks = []
     current_heading = None
+    sow_number = None
+
+    # Regex pattern for the SOW number
+    sow_number_pattern = re.compile(r'SOW-\d{4}-\w+')
 
     for page in result.pages:
         for line in page.lines:
             text = line.content
-            if is_heading(text):  # Detect headings (custom logic)
+            if is_heading(text):  # Detect headings 
                 current_heading = text
                 chunks.append({"heading": text, "body": "", "page_number": page.page_number})
             elif current_heading:
                 chunks[-1]["body"] += " " + text  # Add text to the last chunk
 
-    return chunks
+            # Search for the SOW number in the text
+            if not sow_number:
+                match = sow_number_pattern.search(text)
+                if match:
+                    sow_number = match.group(0)
+
+    return chunks, sow_number
 
 def is_heading(text):
-    # Simple logic to detect headings (customize as needed)
+    # Logic to detect headings (customize as needed)
     return text.strip().endswith(":") or text.strip().isdigit() or text.lower().startswith("section")
 
-def insert_chunks_to_db(chunks, db_config):
-    conn = psycopg2.connect(**db_config)
+def insert_chunks_to_db(chunks, sow_number, conn):
     cursor = conn.cursor()
+    # Fetch the sow_id based on the SOW number
+    cursor.execute("SELECT id FROM sows WHERE number = %s", (sow_number,))
+    sow_id = cursor.fetchone()
+    
+    if sow_id:
+        sow_id = sow_id[0]
+    else:
+        raise ValueError(f"SOW number '{sow_number}' not found in the sows table.")
     
     for chunk in chunks:
         cursor.execute("""
-            INSERT INTO sow_chunks (document_id, heading, body, level, page_number)
+            INSERT INTO sow_chunks (sow_id, heading, body, level, page_number)
             VALUES (%s, %s, %s, %s, %s)
-        """, ("doc_001", chunk['heading'], chunk['body'], 1, chunk['page_number']))
+        """, (sow_id, chunk['heading'], chunk['body'], 1, chunk['page_number']))
     
     conn.commit()
     cursor.close()
     conn.close()
 
-# Analyze document and store chunks
-file_path = "path_to_your_sow_document.pdf"
-chunks = analyze_document(file_path)
-insert_chunks_to_db(chunks, db_config)
 
-print("Document chunks have been stored in the database.")
+# Analyze document and store chunks
+def process_document(container_name, blob_name, conn):
+    """Complete workflow for processing a document."""
+    print(f"Processing document {blob_name} from container {container_name}...")
+    
+    # Download the document data
+    document_data = download_blob(container_name, blob_name)
+    
+    # Analyze the document to extract chunks and SOW number
+    chunks, sow_number = analyze_document(document_data)
+    
+    # Insert the chunks into the database
+    insert_chunks_to_db(chunks, sow_number, conn)
+
+# Example usage
+if __name__ == "__main__":
+    container_name = "documents"
+    blob_names = ["Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf"]  # List of blob names to process
+
+    conn = psycopg2.connect(POSTGRESQL_CONNECTION)
+
+    try:
+        for blob_name in blob_names:
+            process_document(container_name, blob_name, conn)
+    finally:
+        # Close the database connection
+        conn.close()

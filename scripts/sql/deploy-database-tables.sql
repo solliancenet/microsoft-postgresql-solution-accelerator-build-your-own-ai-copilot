@@ -147,6 +147,8 @@ CREATE TABLE IF NOT EXISTS deliverables (
 CREATE TABLE IF NOT EXISTS sow_chunks (
     id BIGSERIAL PRIMARY KEY,
     sow_id BIGINT NOT NULL,
+    heading text NOT NULL,
     content text NOT NULL,
+    page_number INT NOT NULL,
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );

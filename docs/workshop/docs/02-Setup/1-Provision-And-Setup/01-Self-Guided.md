@@ -154,19 +154,23 @@ You will need to install the required software locally and provision the Azure i
 
         ![Screenshot of the Create a new fork page in GitHub.](../../img/github-create-fork.png)
 
-    4. The forked repo will open within your GitHub profile. On the GitHub page for your fork, select the **Code** button and then select the **Copy URL to clipboard** button next to the repo's HTTPS clone link:
+    4. The forked repo will open within your GitHub profile.
+
+    ## 2.2 Clone the Forked Repo
+
+    1. On the GitHub page for your fork, select the **Code** button and then select the **Copy URL to clipboard** button next to the repo's HTTPS clone link:
 
         ![The GitHub Code menu is expanded and the copy button for the HTTPS clone link is highlighted.](../../img/github-code-clone-https.png)
 
-    5. Open a new command prompt and change directories to the folder in which you want to clone the repo (e.g., D:\repos).
+    2. Open a new command prompt and change directories to the folder in which you want to clone the repo (e.g., D:\repos).
 
-    6. Once in the desired directory, run the following `git clone` command to download a copy of your fork onto your local machine. Ensure you replace the `<url_of_your_forked_repo>` token with the clone link you copied in the previous step.
+    3. Once in the desired directory, run the following `git clone` command to download a copy of your fork onto your local machine. Ensure you replace the `<url_of_your_forked_repo>` token with the clone link you copied in the previous step.
 
         ```bash title=""
         git clone <url_of_your_forked_repo>
         ```
 
-    7. Once the repository has been cloned, change directories at the command prompt to the folder of the cloned repo, then run the following command to open the project in Visual Studio Code:
+    4. Once the repository has been cloned, change directories at the command prompt to the folder of the cloned repo, then run the following command to open the project in Visual Studio Code:
 
         ```bash title=""
         code .
@@ -289,8 +293,7 @@ You will need to install the required software locally and provision the Azure i
               - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
                 - Ensure you copy the password in a secure location so you can use it later to access the database.
               - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
-              
-    
+
     2. Wait for the process to complete. It may take 30-45 minutes or more.
 
         !!! failure "Not enough subscription CPU quota"

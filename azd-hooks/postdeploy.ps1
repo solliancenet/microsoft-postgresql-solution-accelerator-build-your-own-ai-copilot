@@ -150,8 +150,6 @@ Write-Host "Event Grid Subscription 'StorageBlob' Created"
 # ##############################################################################
 # Deploy Machine Learning Model to Azure ML Workspace
 # ##############################################################################
-# only deploy if ${env:DEPLOY_AML_MODEL} is set to true
-
 $modelDeploymentsJson = az ml online-deployment list `
             --endpoint-name "$env:AZURE_AML_ENDPOINT_NAME" `
             --workspace-name "$env:AZURE_AML_WORKSPACE_NAME" `

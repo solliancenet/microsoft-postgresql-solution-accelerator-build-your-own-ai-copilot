@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/Api';
-import { Button } from 'react-bootstrap';
-import ConfirmModal from '../../components/ConfirmModal'; 
+// import { Button } from 'react-bootstrap';
+// import ConfirmModal from '../../components/ConfirmModal'; 
 import PagedTable from '../../components/PagedTable';
 
 const VendorList = () => {
@@ -12,20 +12,20 @@ const VendorList = () => {
   const [sowToDelete, setSowToDelete] = useState(null);
   const [reload, setReload] = useState(false);
   
-  const handleDelete = async () => {
-    if (!sowToDelete) return;
+  // const handleDelete = async () => {
+  //   if (!sowToDelete) return;
 
-    try {
-      await api.vendors.delete(sowToDelete);
-      setSuccess('Vendor deleted successfully!');
-      setError(null);
-      setShowDeleteModal(false);
-      setReload(true); // Refresh the data
-    } catch (err) {
-      setSuccess(null);
-      setError(err.message);
-    }
-  }
+  //   try {
+  //     await api.vendors.delete(sowToDelete);
+  //     setSuccess('Vendor deleted successfully!');
+  //     setError(null);
+  //     setShowDeleteModal(false);
+  //     setReload(true); // Refresh the data
+  //   } catch (err) {
+  //     setSuccess(null);
+  //     setError(err.message);
+  //   }
+  // }
 
   const columns = React.useMemo(
     () => [
@@ -62,12 +62,12 @@ const VendorList = () => {
         accessor: 'actions',
         Cell: ({ row }) => (
           <div>
-            <a href={`/vendors/${row.original.id}`} className="btn btn-link" aria-label="Edit">
-              <i className="fas fa-edit"></i>
+            <a href={`/vendors/${row.original.id}`} className="btn btn-primary" aria-label="View">
+              View
             </a>
-            <Button variant="danger" onClick={() => { setSowToDelete(row.original.id); setShowDeleteModal(true); }} aria-label="Delete">
+            {/* <Button variant="danger" onClick={() => { setSowToDelete(row.original.id); setShowDeleteModal(true); }} aria-label="Delete">
               <i className="fas fa-trash-alt"></i>
-            </Button>
+            </Button> */}
           </div>
         ),
       },
@@ -89,12 +89,12 @@ const VendorList = () => {
       
       <PagedTable columns={columns} fetchData={fetchVendors} reload={reload} />
 
-      <ConfirmModal
+      {/* <ConfirmModal
         show={showDeleteModal}
         handleClose={() => setShowDeleteModal(false)}
         handleConfirm={handleDelete}
         message="Are you sure you want to delete this Vendor?"
-      />
+      /> */}
     </div>
   );
 };

@@ -23,6 +23,7 @@ const SOWEdit = () => {
   const [metadata, setMetadata] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [showValidation, setShowValidation] = useState(false);
 
   const [vendors, setVendors] = useState([]);
 
@@ -34,6 +35,10 @@ const SOWEdit = () => {
     const message = query.get('success');
     if (message) {
       setSuccess(message);
+    }
+    const validation = query.get('showValidation');
+    if (validation) {
+      setShowValidation(true);
     }
   }, [query]);
 

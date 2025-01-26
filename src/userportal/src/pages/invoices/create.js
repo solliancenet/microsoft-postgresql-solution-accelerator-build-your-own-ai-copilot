@@ -34,12 +34,14 @@ const InvoiceCreate = () => {
     e.preventDefault();
 
     setShowUpload(false);
-
+  
+    var newInvoiceId = 0;
     try {
       setLoading('Analyzing document with AI...');
 
       const result = await api.invoices.analyze(file, { vendor_id: invoiceVendorId });
       setInvoiceId(result.id);
+      newInvoiceId = result.id
 
     } catch (err) {
       console.error(err);
@@ -52,7 +54,7 @@ const InvoiceCreate = () => {
 
     try {
       setLoading('Validating document with AI...');     
-      await api.invoices.validate(invoiceId);
+      await api.invoices.validate(newInvoiceId);
 
     } catch (err) {
       console.error(err);
@@ -60,8 +62,8 @@ const InvoiceCreate = () => {
     }
 
     setError(null);
-    const successMessage = "Document analyzed successfully!";
-    window.location.href = `/invoices/${invoiceId}?success=${successMessage}&showValidation=true`;
+    const successMessage = "Invoice created successfully with fields populated by AI!";
+    window.location.href = `/invoices/${newInvoiceId}?success=${successMessage}&showValidation=true`;
   };
 
   return (

@@ -5,7 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: FastAPI",
+            "name": "Portal Debugger",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm start",
+            "preLaunchTask": "npm: install",
+            "cwd": "${workspaceFolder}/src/userportal"
+        },
+        {
+            "name": "API Debugger (Windows)",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/api/app/main.py",
@@ -20,6 +28,23 @@
                 "PYTHONPATH": "${workspaceFolder}/src/api"
             },
             "python": "${workspaceFolder}/src/api/.venv/Scripts/python.exe",
+        },
+        {
+            "name": "API Debugger (macOS)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/api/app/main.py",
+            "args": [
+                "run",
+                "uvicorn",
+                "main:app",
+                "--reload"
+            ],
+            "jinja": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src/api"
+            },
+            "python": "${workspaceFolder}/src/api/.venv/bin/python",
         }
     ]
 }

@@ -1,6 +1,6 @@
 # A. Self-Guided Setup
 
-Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/0-Prerequisites#self-guided) section if you need more details.
+Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](../../0-Prerequisites/#self-guided) section if you need more details.
 
 !!! question "WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? [You can find that here.](./02-Instructor-Led.md)"
 
@@ -191,7 +191,7 @@ You will need to install the required software locally and provision the Azure i
 
     To ensure you can successfully deploy the Azure resources using the `azd up` command, you must choose a region that supports the required Azure OpenAI `gpt-4o` and `text-embedding-3-large` models.
 
-    1. Before deciding on the Azure region you want to use for your workshop resources, review the regional availability guidance for the [gpt-4o]([region-availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint)) and [text-embedding-3-large](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI.
+    1. Before deciding on the Azure region you want to use for your workshop resources, review the regional availability guidance for the [gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint) and [text-embedding-3-large](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI.
     
     2. Choose a region that **supports both models** and has quota available.
 
@@ -229,7 +229,7 @@ You will need to install the required software locally and provision the Azure i
         
         ![On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted.](../../img/azure-ml-quota-standard-dasv4.png)
 
-    10. If you have 32 cores or more available, you can skip to the [Authenticate With Azure task](#31-authenticate-with-azure). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
+    10. If you have 32 cores or more available, you can skip to the [Authenticate With Azure task](#33-authenticate-with-azure). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
 
         ![Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box.](../../img/azure-ml-request-quota.png)
 

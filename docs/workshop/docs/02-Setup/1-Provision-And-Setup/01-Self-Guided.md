@@ -8,7 +8,7 @@ Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, 
 
 You will need to install the required software locally and provision the Azure infrastructure yourself, as described on the tabs below.
 
-!!! task "Select each of the tabs below, in order"
+!!! note "Select each of the tabs below, in order"
 
     To complete the required setup, select the number tabs below and follow the instructions provided.
 
@@ -26,7 +26,7 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.1 Install Azure command-line tools**
 
-    !!! task "In this task, you will install both the Azure CLI and the Azure Developer CLI (`azd`)."
+    !!! note "In this task, you will install both the Azure CLI and the Azure Developer CLI (`azd`)."
 
         - The Azure CLI enables you to execute Azure CLI commands from a command prompt or VS Code terminal on your local machine.
         - The Azure Developer CLI (`azd`) is an open-source tool that accelerates provisioning and deploying app resources on Azure.
@@ -251,7 +251,7 @@ You will need to install the required software locally and provision the Azure i
     
     1. To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:
     
-    !!! task "Step 1: Authenticate with `az` for post-provisioning tasks"
+    !!! note "Step 1: Authenticate with `az` for post-provisioning tasks"
     
     2. Log into the Azure CLI `az` using the command below.
     
@@ -263,7 +263,7 @@ You will need to install the required software locally and provision the Azure i
 
         !!! info "If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id> to specify the correct subscription to use."
 
-    !!! task "Step 2: Authenticate with `azd` for provisioning & managing resources"
+    !!! note "Step 2: Authenticate with `azd` for provisioning & managing resources"
     
     4. Log in to Azure Developer CLI. This is only required once per-install.
     
@@ -281,7 +281,7 @@ You will need to install the required software locally and provision the Azure i
         azd up
         ```
 
-        !!! task "You will be prompted for several inputs for the `azd up` command:"
+        !!! info "You will be prompted for several inputs for the `azd up` command:"
     
               - **Enter a new environment name**: Enter a value, such as `dev`.
                 - The environment for the `azd up` command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.
@@ -333,7 +333,7 @@ You will need to install the required software locally and provision the Azure i
     
     4. Activate the virtual environment.
 
-        !!! task "Select the appropriate command for your OS and shell from the table."
+        !!! note "Select the appropriate command for your OS and shell from the table."
     
             | Platform | Shell | Command to activate virtual environment |
             | -------- | ----- | --------------------------------------- |
@@ -376,7 +376,7 @@ You will need to install the required software locally and provision the Azure i
         AZURE_APP_CONFIG_ENDPOINT={YOUR_APP_CONFIG_ENDPOINT}
         ```
 
-        !!! task "Retrieve the endpoint for your App Configuration resource"
+        !!! note "Retrieve the endpoint for your App Configuration resource"
 
             To get the endpoint for your App Configuration resource:
 

@@ -2,7 +2,7 @@
 
 ## 1. Give us a ⭐️ on GitHub
 
-!!! task "FOUND THIS WORKSHOP AND SAMPLE USEFUL? MAKE SURE YOU GET UPDATES."
+!!! question "FOUND THIS WORKSHOP AND SAMPLE USEFUL? MAKE SURE YOU GET UPDATES."
 
 The **[PostgreSQL Solution Accelerator: Build Your Own AI Copilot](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot)** sample is an actively updated project that will reflect the latest features and best practices for code-first development of RAG-based copilots on the Azure AI platform. **[Visit the repo](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot)** or click the button below, to give us a ⭐️.
 
@@ -17,14 +17,14 @@ Check that the right tab is selected for your session, and complete the steps!
 
 === "Self-Guided"
 
-    !!! task "Reminder 1: Give us Feedback"
+    !!! note "Reminder 1: Give us Feedback"
 
         Have feedback that can help us make this lab better for others? [Open an issue](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/issues/new) and let us know.
 
 <!--
 === "Microsoft AI Tour"
 
-    !!! task "Reminder 1: Give us Feedback"
+    !!! note "Reminder 1: Give us Feedback"
 
         Visit [aka.ms/MicrosoftAITour/Survey](https://aka.ms/MicrosoftAITour/Survey) to give us feedback on this session (#WRK550)
       

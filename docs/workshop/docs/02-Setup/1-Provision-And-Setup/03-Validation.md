@@ -28,7 +28,7 @@ In this section, you will validate your setup before moving on to the next phase
     https://portal.azure.com/#browse/resourcegroups
     ```
 
-    !!! task "Instructor-Led Track"
+    ??? question "Doing the Instructor-Led Track?"
 
         If you are doing the Instructor-Led track and are prompted to sign in, use the `Username` and `Password` from the 'Azure Credentials' section in your Skillable Lab instructions panel.
 
@@ -40,7 +40,7 @@ In this section, you will validate your setup before moving on to the next phase
 
 4. Select your resource group.
 
-    !!! task "Review the list of deployed resources."
+    !!! note "Review the list of deployed resources."
 
         In addition to creating a resource group, the `azd up` command deployed multiple resources into that resource group, as shown in the table below.
 
@@ -141,4 +141,4 @@ If you chose to deploy the Azure ML semantic ranker model during setup, you will
 
     ![Screenshot of the semantic ranker model deployment in Azure ML Studio, with the model's provisioning state of Succeded highlighted.](../../img/aml-studio-endpoints-model-deployment-succeeded.png)
 
-!!! task "Leave the Azure Portal open. You will revisit it later."
+!!! tip "Leave the Azure Portal open. You will revisit it later."

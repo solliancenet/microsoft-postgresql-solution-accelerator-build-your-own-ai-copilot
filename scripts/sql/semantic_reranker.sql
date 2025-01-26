@@ -1,4 +1,3 @@
-
 CREATE OR REPLACE FUNCTION semantic_reranking(query TEXT, vector_search_results TEXT[])
 RETURNS TABLE (article TEXT, relevance jsonb) AS $$
 BEGIN

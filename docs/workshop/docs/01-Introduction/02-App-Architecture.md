@@ -30,31 +30,31 @@ _Click each tab below to learn more about how the movement of data in the contex
 
     3. The API, hosted as an [Azure Container App](https://learn.microsoft.com/azure/container-apps/overview) (ACA), saves the uploaded documents into a container in Azure Blob storage.
 
-       1. Storing the original documents in blob storage allows raw data to be persisted.
+          1. Storing the original documents in blob storage allows raw data to be persisted.
 
-       2. Should processing errors be detected or system requirements change, documents can be easily reprocessed.
+          2. Should processing errors be detected or system requirements change, documents can be easily reprocessed.
 
     4. When new documents are added into blob storage, an Event Grid trigger is fired, starting the Data Ingestion Worker Process.
 
-       1. The data ingestion worker process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
+          1. The data ingestion worker process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
 
-       2. Custom AI models within the Document Intelligence service are tailored to extract specific data fields, such as payment milestones, due dates, billable amounts, and vendor details. These models are trained to recognize the structure of financial documents, improving data extraction accuracy.
+          2. Custom AI models within the Document Intelligence service are tailored to extract specific data fields, such as payment milestones, due dates, billable amounts, and vendor details. These models are trained to recognize the structure of financial documents, improving data extraction accuracy.
 
-       3. Document Intelligence's Semantic Chunking capability recognizes document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences. This ensures that the chunks are of higher quality for use in RAG pattern queries.
+          3. Document Intelligence's Semantic Chunking capability recognizes document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences. This ensures that the chunks are of higher quality for use in RAG pattern queries.
 
     5. The extracted document data is securely stored in Azure Database for PostgreSQL flexible server.
 
     6. As part of the database insert statement, the GenAI capabilities of the `azure_ai` extension are used to:
 
-       1. Generate and save vector embeddings of document text using Azure OpenAI.
+          1. Generate and save vector embeddings of document text using Azure OpenAI.
 
-       2. Create abstractive summaries of SOWs using the Azure AI Language service.
+          2. Create abstractive summaries of SOWs using the Azure AI Language service.
 
     7. Document data is sent through an AI-driven data validation process that uses Azure OpenAI to analyze the incoming data, ensuring it conforms to expected standards and is accurate based on related data already in the system.
         
-        1. Azure OpenAI's GPT-4o language model reviews all document data, employing natural language understanding to validate and cross-check information and ensure high data integrity.
-        
-        2. The RAG pattern allows the language model to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing and preventing issues like payment delays. It also validates that appropriate document sections and required compliance language exist in contracts and SOWs, helping to avoid incomplete contracts and compliance violations.
+           1. Azure OpenAI's GPT-4o language model reviews all document data, employing natural language understanding to validate and cross-check information and ensure high data integrity.
+           
+           2. The RAG pattern allows the language model to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing and preventing issues like payment delays. It also validates that appropriate document sections and required compliance language exist in contracts and SOWs, helping to avoid incomplete contracts and compliance violations.
 
     8. The data validation results are securely stored in Azure Database for PostgreSQL alongside the analyzed data.
 
@@ -74,9 +74,9 @@ _Click each tab below to learn more about how the movement of data in the contex
 
     4. A **hybrid search** is performed on the Azure Database for PostgreSQL flexible server, where the system searches for relevant data.
 
-       1. Hybrid search combines full-text search with vector-based search to provide more accurate and relevant results. It allows you to perform searches using both traditional keyword matching and semantic similarity, leveraging embeddings to understand the context and meaning behind the text.
+          1. Hybrid search combines full-text search with vector-based search to provide more accurate and relevant results. It allows you to perform searches using both traditional keyword matching and semantic similarity, leveraging embeddings to understand the context and meaning behind the text.
 
-       2. By integrating these two methods, hybrid search enhances the precision and comprehensiveness of search results, making it ideal for applications like semantic search, recommendation systems, and content discovery.
+          2. By integrating these two methods, hybrid search enhances the precision and comprehensiveness of search results, making it ideal for applications like semantic search, recommendation systems, and content discovery.
 
     5. (Optional) Semantic Ranking via custom model inference from the `azure_ai` extension ranks search result relevance and is returned into the RAG context as part of the composite prompt.
 

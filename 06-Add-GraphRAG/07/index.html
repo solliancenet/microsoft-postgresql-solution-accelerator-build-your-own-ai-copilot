@@ -465,12 +465,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
     
     
       
@@ -546,70 +540,7 @@
         
   
   <span class="md-ellipsis">
-    2. App Architecture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3. Application Data Flow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4. The App Lifecycle
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5. The Dev Workflow
+    1.2 Application Architecture
   </span>
   
 
@@ -1797,11 +1728,15 @@
 
 
 <h1 id="7-redeploy-copilot-to-azure">7. Redeploy Copilot to Azure<a class="headerlink" href="#7-redeploy-copilot-to-azure" title="Permanent link">&para;</a></h1>
-<p>The workshop began with a <em>pre-provisioned</em> version of the Contoso Chat application on Azure Container Apps. Now that you have modified elements of the app and tested them out locally, you might want to <em>redeploy</em> the application. </p>
+<p>The workshop began with a <em>pre-provisioned</em> version of the Contoso Chat application on Azure Container Apps. Now that you have modified elements of the app and tested them out locally, you might want to <em>redeploy</em> the application.</p>
 <p>Because we use <code>azd</code> for provisioning and deployment, this is as simple as calling <code>azd up</code> (to push all changes in both infrastructure and application) or running <code>azd deploy</code> if you want to only rebuild and deploy the application changes you made in this project.</p>
 <ol>
-<li>Open the Visual Studio Code terminal</li>
-<li>Make sure you are at the root of your repository</li>
+<li>
+<p>Open the Visual Studio Code terminal</p>
+</li>
+<li>
+<p>Make sure you are at the root of your repository</p>
+</li>
 <li>
 <p>Run this command to deploy your application with changes.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd deploy
@@ -1810,14 +1745,16 @@
 <li>
 <p>Refresh the Azure Container App browser tab when done</p>
 </li>
-<li>Try a test question and verify that your app changes are live!</li>
+<li>
+<p>Try a test question and verify that your app changes are live!</p>
+</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Learn more about <a href="https://aka.ms/azd">Azure Developer CLI</a> and explore more <a href="https://aka.ms/ai-apps">AI App templates</a> to build with AI</p>
 </div>
-<p><em>You made it!. That was a lot to cover - but don't worry! Now that you have a fork of the repo, you can check out the <a href="../../02-Setup/1-Provision-And-Setup/01-Self-Guided/">Self-Guided Workshop</a> option to revisit ideas at your own pace! Before you go, some important cleanup tasks you need to do!!</em></p>
+<p><em>You made it!. That was a lot to cover - but don't worry! Now that you have a fork of the repo, you can check out the <a href="../../02-Setup/1-Provision-And-Setup/01-Self-Guided/">Self-Guided Workshop</a> option to revisit ideas at your own pace! Before you go, there are some important cleanup tasks you need to do!!</em></p>
 <hr />
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">THANK YOU: Let's wrap up the session by cleaning up resources!</p>
 </div>
 

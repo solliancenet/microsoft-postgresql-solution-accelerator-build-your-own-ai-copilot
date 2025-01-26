@@ -465,12 +465,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
     
     
       
@@ -546,70 +540,7 @@
         
   
   <span class="md-ellipsis">
-    2. App Architecture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3. Application Data Flow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4. The App Lifecycle
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5. The Dev Workflow
+    1.2 Application Architecture
   </span>
   
 
@@ -2165,7 +2096,7 @@
 </div>
 <hr />
 <p>You will need to install the required software locally and provision the Azure infrastructure yourself, as described on the tabs below.</p>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Select each of the tabs below, in order</p>
 <p>To complete the required setup, select the number tabs below and follow the instructions provided.</p>
 </div>
@@ -2183,7 +2114,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> pgAdmin</li>
 </ul>
 <h2 id="11-install-azure-command-line-tools"><strong>1.1 Install Azure command-line tools</strong><a class="headerlink" href="#11-install-azure-command-line-tools" title="Permanent link">&para;</a></h2>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">In this task, you will install both the Azure CLI and the Azure Developer CLI (<code>azd</code>).</p>
 <ul>
 <li>The Azure CLI enables you to execute Azure CLI commands from a command prompt or VS Code terminal on your local machine.</li>
@@ -2431,7 +2362,7 @@ az extension remove -n ml
 <ol>
 <li>To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:</li>
 </ol>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Step 1: Authenticate with <code>az</code> for post-provisioning tasks</p>
 </div>
 <ol>
@@ -2447,7 +2378,7 @@ az extension remove -n ml
 </div>
 </li>
 </ol>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Step 2: Authenticate with <code>azd</code> for provisioning &amp; managing resources</p>
 </div>
 <ol>
@@ -2464,7 +2395,7 @@ az extension remove -n ml
 <p>Use <code>azd up</code> to provision your Azure infrastructure and deploy the web application to Azure.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>up
 </code></pre></div></td></tr></table></div>
-<div class="admonition task">
+<div class="admonition info">
 <p class="admonition-title">You will be prompted for several inputs for the <code>azd up</code> command:</p>
 <ul>
 <li><strong>Enter a new environment name</strong>: Enter a value, such as <code>dev</code>.<ul>
@@ -2525,7 +2456,7 @@ az extension remove -n ml
 </li>
 <li>
 <p>Activate the virtual environment.</p>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Select the appropriate command for your OS and shell from the table.</p>
 <table>
 <thead>
@@ -2603,7 +2534,7 @@ az extension remove -n ml
 <p>In the <code>.env</code> file, add the following as the first line, replacing the <code>{YOUR_APP_CONFIG_ENDPOINT}</code> with the endpoint for the App Configuration resource in your <code>rg-postgresql-accelerator</code> resource group.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="na">AZURE_APP_CONFIG_ENDPOINT</span><span class="o">=</span><span class="s">{YOUR_APP_CONFIG_ENDPOINT}</span>
 </code></pre></div></td></tr></table></div>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Retrieve the endpoint for your App Configuration resource</p>
 <p>To get the endpoint for your App Configuration resource:</p>
 <ol>

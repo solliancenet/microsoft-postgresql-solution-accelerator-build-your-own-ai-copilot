@@ -465,12 +465,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
     
     
       
@@ -546,70 +540,7 @@
         
   
   <span class="md-ellipsis">
-    2. App Architecture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-Introduction/03-App-Data-Flow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3. Application Data Flow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-Introduction/04-App-Lifecycle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4. The App Lifecycle
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-Introduction/05-Dev-Workflow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5. The Dev Workflow
+    1.2 Application Architecture
   </span>
   
 
@@ -1874,7 +1805,7 @@
 <p>Azure Database for PostgreSQL flexible server allows you to extend the functionality of your database using extensions. Extensions bundle multiple related SQL objects into a single package that can be loaded or removed from your database with a single command. After being loaded into the database, extensions function like built-in features.</p>
 <h2 id="allowlist-the-extensions">Allowlist the extensions<a class="headerlink" href="#allowlist-the-extensions" title="Permanent link">&para;</a></h2>
 <p>Before installing and using extensions in Azure Database for PostgreSQL flexible server, you must add them to the server's <em>allowlist</em>, as described in <a href="https://learn.microsoft.com/azure/postgresql/extensions/how-to-allow-extensions">how to use PostgreSQL extensions</a>.</p>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Select the tab of the method you want to use for allowlisting the extensions and follow the instructions provided.</p>
 <p><strong>NOTE</strong>: The Apache AGE extension is included here, so you don't have to repeat these steps to install it later in the workshop when GraphRAG functionality is added to the solution.</p>
 </div>
@@ -1884,7 +1815,7 @@
 <ol>
 <li>Open a new integrated terminal window in VS Code and execute the following Azure CLI command at the prompt.</li>
 </ol>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Ensure you replace the tokens in the command below with the appropriate values from your Azure environment.</p>
 <ul>
 <li><strong>[YOUR_RESOURCE_GROUP]</strong>: The name of the resource group hosting your Azure Database for PostgreSQL flexible server.</li>
@@ -1929,7 +1860,7 @@
 <p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
 </li>
 </ol>
-<div class="admonition task">
+<div class="admonition note">
 <p class="admonition-title">Select each of the tabs below and execute the <code>CREATE EXTENSION</code> command in the pgAdmin query window to install the extensions.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="azure-ai-extension" name="__tabbed_2" type="radio" /><input id="pgvector-extension" name="__tabbed_2" type="radio" /><input id="apache-age-extension" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="azure-ai-extension">Azure AI extension</label><label for="pgvector-extension">pgvector extension</label><label for="apache-age-extension">Apache AGE extension</label></div>

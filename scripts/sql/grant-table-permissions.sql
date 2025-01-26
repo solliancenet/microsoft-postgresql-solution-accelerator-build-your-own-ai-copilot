@@ -33,4 +33,4 @@ BEGIN
   ELSE
     RAISE NOTICE 'User % does not exist', username;
   END IF;
-END $$;
+END $$ LANGUAGE plpgsql;

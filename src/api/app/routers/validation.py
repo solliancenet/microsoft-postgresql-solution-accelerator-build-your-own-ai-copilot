@@ -17,7 +17,7 @@ router = APIRouter(
     responses = {404: {"description": "Not found"}}
 )
 
-@router.post('/validate_invoice/{id}', response_model = str)
+@router.post('/invoice/{id}', response_model = str)
 async def validate_invoice_by_id(request: ValidationRequest, id: int, llm = Depends(get_chat_client)):
     """Generate a chat completion using the Azure OpenAI API."""
     # TODO: Move this system prompt into blob storage or somewhere it can be updated without redeploying the app.

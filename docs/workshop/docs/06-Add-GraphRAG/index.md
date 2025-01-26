@@ -2,6 +2,11 @@
 
 The Apache AGE extension in Azure Database for PostgreSQL offers a significant advancement that provides graph processing capabilities within the PostgreSQL ecosystem. This new extension brings a powerful toolset for developers looking to leverage a graph database with the robust enterprise features of Azure Database for PostgreSQL.
 
+TODO: Use this blob post as a guide: https://techcommunity.microsoft.com/blog/adforpostgresql/introducing-the-graphrag-solution-for-azure-database-for-postgresql/4299871
+
+3. Add GraphRAG functionality
+   1. Provide graph nodes for relationships between SOWs, vendors, and invoices. Also, linking invoice line items with milestones and deliverables in SOWs?
+
 ## What is Apache AGE?
 
 [Apache Graph Extension](https://age.apache.org/age-manual/master/index.html) (AGE) is a PostgreSQL extension developed under the Apache Incubator project. It is designed to provide graph database functionality, enabling users to store and query graph data efficiently within PostgreSQL. It supports the openCypher query language, which allows for intuitive and expressive graph queries. With AGE, you can manage and analyze complex relationships within your data, uncovering insights that traditional relational databases and even semantic search might miss.

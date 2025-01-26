@@ -396,10 +396,11 @@ You will need to install the required software locally and provision the Azure i
 
     1. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
     2. On the Azure Database for PostgreSQL - Flexible Server page:
-       1. Select **Connect** under **Settings** in the left-hand resource menu.
-       2. Select the **contracts** database from the **Database name** dropdown.
-       3. Expand the **pgAdmin 4** block.
-       4. Follow the steps provided to connect to your database from pgAdmin.
+          1. Select **Connect** under **Settings** in the left-hand resource menu.
+          2. Select the **contracts** database from the **Database name** dropdown.
+          3. Select **PostgreSQL** for the **Authentication method**.
+          4. Expand the **pgAdmin 4** block.
+          5. Follow the steps provided to connect to your database from pgAdmin.
 
         ![Screenshot of the steps to connect to Azure Database for PostgreSQL - Flexible Server from pgAdmin](../../img/connect-to-pgadmin.png)
 

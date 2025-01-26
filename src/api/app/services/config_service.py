@@ -20,6 +20,9 @@ class ConfigService:
         
         self.client = AzureAppConfigurationClient(self.app_config_endpoint, credential=self.credential)
 
+    async def close(self):
+        await self.client.close()
+
     async def __get_setting(self, key: str) -> str:
         try:
             setting = await self.client.get_configuration_setting(key=key)

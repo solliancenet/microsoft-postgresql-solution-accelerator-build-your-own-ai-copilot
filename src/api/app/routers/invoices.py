@@ -93,7 +93,6 @@ async def analyze_invoice(
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')
 
         invoice = parse_obj_as(Invoice, dict(row))
-        print("Created Invoice Id: ", invoice.id)
     return invoice
 
 

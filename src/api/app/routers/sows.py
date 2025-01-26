@@ -109,7 +109,6 @@ async def analyze_sow(
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the SOW.')
 
         sow = parse_obj_as(Sow, dict(row))
-        print("Created SOW Id: ", sow.id)
     return sow
 
 # @router.post("/", response_model=Sow)

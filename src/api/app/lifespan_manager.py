@@ -55,6 +55,9 @@ async def lifespan(app):
     # Close the database connection
     await db.close()
 
+    # Close the ConfigService
+    await config_service.close()
+
     # Close the async Microsoft Entra ID RBAC credential
     await credential.close()
 

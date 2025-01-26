@@ -114,19 +114,19 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));
         },
-        create: async (file, data) => {
+        analyze: async (file, data) => {
             if (!file) return;
-        
-            console.info('Creating invoice:', file);
-        
+
+            console.info('Analyzing invoice:', file);
+
             const formData = new FormData();
             formData.append('file', file);
             for(var key in data){
                 formData.append(key, data[key]);
             }
-        
+
             try {
-                const response = await fetch(getUrl(`/invoices`), {
+                const response = await fetch(getUrl(`/invoices/`), {
                     method: 'POST',
                     body: formData,
                 });
@@ -136,10 +136,52 @@ module.exports = {
                 const result = await response.json();
                 return result;
             } catch (error) {
-                console.error('Error creating invoice:', error);
+                console.error('Error analyzing invoice:', error);
                 throw error;
             }
         },
+        validate: async (id) => {
+            console.info('Validating invoice:', id);
+            
+            try {
+                const response = await fetch(getUrl(`/invoices/validate/${id}`), {
+                    method: 'POST',
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return;
+            } catch (error) {
+                console.error('Error validating invoice:', error);
+                throw error;
+            }
+        },                
+        // create: async (file, data) => {
+        //     if (!file) return;
+        
+        //     console.info('Creating invoice:', file);
+        
+        //     const formData = new FormData();
+        //     formData.append('file', file);
+        //     for(var key in data){
+        //         formData.append(key, data[key]);
+        //     }
+        
+        //     try {
+        //         const response = await fetch(getUrl(`/invoices`), {
+        //             method: 'POST',
+        //             body: formData,
+        //         });
+        //         if (!response.ok) {
+        //             throw new Error('Network response was not ok');
+        //         }
+        //         const result = await response.json();
+        //         return result;
+        //     } catch (error) {
+        //         console.error('Error creating invoice:', error);
+        //         throw error;
+        //     }
+        // },
         update: async (id, data) => {
             return await RESTHelper.update(getUrl(`/invoices/${id}`), data);
         },
@@ -277,35 +319,35 @@ module.exports = {
         },
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/vendors/${id}`));
-        },
-        create: async (data) => {
-            console.info('Creating vendor');
-
-            const formData = new FormData();
-            for(var key in data){
-                formData.append(key, data[key]);
-            }
-
-            try {
-                const response = await fetch(getUrl(`/vendors`), {
-                    method: 'POST',
-                    body: formData,
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                return result;
-            } catch (error) {
-                console.error('Error creating vendor:', error);
-                throw error;
-            }
-        },
-        update: async (id, data) => {
-            return await RESTHelper.update(getUrl(`/vendors/${id}`), data);
-        }, 
-        delete: async (id) => {
-            return await RESTHelper.delete(getUrl(`/vendors/${id}`));
         }
+        // create: async (data) => {
+        //     console.info('Creating vendor');
+
+        //     const formData = new FormData();
+        //     for(var key in data){
+        //         formData.append(key, data[key]);
+        //     }
+
+        //     try {
+        //         const response = await fetch(getUrl(`/vendors`), {
+        //             method: 'POST',
+        //             body: formData,
+        //         });
+        //         if (!response.ok) {
+        //             throw new Error('Network response was not ok');
+        //         }
+        //         const result = await response.json();
+        //         return result;
+        //     } catch (error) {
+        //         console.error('Error creating vendor:', error);
+        //         throw error;
+        //     }
+        // },
+        // update: async (id, data) => {
+        //     return await RESTHelper.update(getUrl(`/vendors/${id}`), data);
+        // }, 
+        // delete: async (id) => {
+        //     return await RESTHelper.delete(getUrl(`/vendors/${id}`));
+        // }
     }
 };

@@ -135,6 +135,7 @@ const Shell = ({ isDarkTheme }) => {
               
               <Route path="/invoices" element={<InvoiceList />} />
               <Route path="/invoices/create" element={<InvoiceCreate />} />
+              <Route path="/invoices/create/:vendorId" element={<InvoiceCreate />} />
               <Route path="/invoices/:id" element={<InvoiceEdit />} />
 
               <Route path="/milestones/create/:sowId" element={<MilestoneCreate />} />

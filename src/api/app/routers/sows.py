@@ -61,7 +61,8 @@ async def analyze_sow(
     storage_service = Depends(get_storage_service),
     doc_intelligence_service = Depends(get_azure_doc_intelligence_service)
 ):
-
+    """Analyze a SOW document and create a new SOW in the database."""
+    
     # Get vendor_id from vendor_id
     async with pool.acquire() as conn:
         vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)

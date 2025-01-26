@@ -27,7 +27,6 @@ class DatabaseService:
             connection_uri = await self.__get_connection_uri()
             self.connection_pool = await asyncpg.create_pool(dsn=connection_uri)
             self.connection_pool_created = datetime.now()
-            print("Created new DB Connection Pool")
 
         return self.connection_pool
     

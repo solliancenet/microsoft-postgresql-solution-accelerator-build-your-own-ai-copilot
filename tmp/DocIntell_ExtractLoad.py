@@ -153,7 +153,7 @@ def process_document(container_name, blob_name, document_id,conn):
 
 if __name__ == "__main__":
     container_name = "documents"
-    blob_names = ["INV-WWE2024-001.pdf","INV-WWE2024-002.pdf"] # List of blob names to process
+    blob_names = ["INV-TWC2024-001.pdf","INV-TWC2024-002.pdf","INV-TWC2024-003.pdf","INV-TWC2024-004.pdf","INV-WWE2024-001.pdf"] # List of blob names to process
 
     conn = psycopg2.connect(POSTGRESQL_CONNECTION)
 

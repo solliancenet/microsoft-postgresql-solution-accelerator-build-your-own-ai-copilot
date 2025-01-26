@@ -30,16 +30,19 @@ Select the tab of your chosen track for details about what you need to do before
         2. **Familiarity with the Azure portal**
             - The workshop assumes you are familiar with navigating to resources within the Azure portal.
             - You will use the Azure portal to retrieve endpoints, keys, and other values associated with the resources you deploy for this workshop.
+        3. **Familiarity with PostgreSQL**
+            - The workshop assumes you are familiar with basic SQL syntax.
+            - You will be executin SQL statements to alter tables, create extensions, and run queries against tables.
 
         **Preferred knowledge and experience**
 
-        1. **Familiarity with `git` operations**
+        4. **Familiarity with `git` operations**
             - You will be forking the sample repository into your GitHub account.
             - You will be committing code changes to your forked repo.
-        2. **Familiarity with the `bash` shell**.
+        5. **Familiarity with the `bash` shell**.
             - If needed, you will use `bash` in the VS Code terminal to run post-provisioning scripts.
             - You will also use it to run Azure CLI and Azure Developer CLI commands during setup. 
-        3.  (preferred) **Familiarity with Python and JavaScript UI frameworks**.
+        6.  **Familiarity with Python and JavaScript UI frameworks**.
             - You will modify REACT JavaScript and Python code to implement changes to the starter solution.
             - In some steps, you will create and run Python code from the command line and VS Code.
             - You will select a Python kernel and run pre-existing scripts in some steps.
@@ -48,9 +51,9 @@ Select the tab of your chosen track for details about what you need to do before
 
         After completing this workshop, you will have:
         
-        1.  A personal fork (copy) of the [Build Your Own AI Copilot for FSI with PostgreSQL](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot) repository in your GitHub profile. This repo contains all the materials you need to reproduce the workshop later (e.g., as a _Self-Guided_ session).
-        2.  Hands-on understanding of the [Azure AI Foundry](https://ai.azure.com) portal and relevant developer tools (e.g., Azure Developer CLI, Prompty, FastAPI) to streamline end-to-end development workflows for your own AI apps.
-        3.  An understanding of how Azure AI services can be integrated into applications to create powerful AI-enabled applications.
+        7.  A personal fork (copy) of the [Build Your Own AI Copilot for FSI with PostgreSQL](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot) repository in your GitHub profile. This repo contains all the materials you need to reproduce the workshop later (e.g., as a _Self-Guided_ session).
+        8.  Hands-on understanding of the [Azure AI Foundry](https://ai.azure.com) portal and relevant developer tools (e.g., Azure Developer CLI, Prompty, FastAPI) to streamline end-to-end development workflows for your own AI apps.
+        9.  An understanding of how Azure AI services can be integrated into applications to create powerful AI-enabled applications.
 
 <!--
 === "Instructor-Led Workshop"

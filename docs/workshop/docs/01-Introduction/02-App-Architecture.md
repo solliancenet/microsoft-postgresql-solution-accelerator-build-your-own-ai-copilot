@@ -1,164 +1,85 @@
-# 2. AI-enabled App Architecture
+# 1.2 Application Architecture
 
-The objective of this solution is to accelerate the integration of AI capabilities into applications.
+The _Woodgrove Bank Contract Management_ application automates extracting, validating, and storing data from invoices and SOWs to minimize manual effort and boost operational efficiency while allowing internal application users to gain actionable insights from the data. By focusing on this streamlined flow, the solution effectively automates tedious tasks, reduces errors, and provides valuable insights to internal users, enhancing overall operational efficiency and decision-making.
 
-The extraction, validation, and storage of invoices and SOWs to minimize manual effort and boost operational efficiency. This solution architecture facilitates seamless integration across multiple Azure services, ensuring scalability, security, and optimized costs, while accurately aligning invoices with milestone-based deliverables and other contractual obligations.
+Throughout this solution accelerator, you will enhance the application with AI capabilities. The application consists of a REACT single page application (SPA) providing the UX (user experience), a backend API written in Python using FastAPI, and various Azure services. The solution implements the following high-level architecture:
 
-By integrating AI capabilities into existing solutions, leveraging advanced AI validation, Document Intelligence, and a copilot enhanced by RAG...
+![High-level architecture diagram for the solution](../img/solution-architecture-diagram.png)
 
-Such an application can be integrated with existing financial and accounting systems to streamline the entire process. By leveraging AI and machine learning, it can continuously learn and improve its accuracy in detecting discrepancies and anomalies.
+!!! tip "Decoupled application architecture"
 
-
+    Separating app functionality into a dedicated UI and backend API offers several benefits. Firstly, it enhances modularity and maintainability, allowing you to update the UI or backend independently without disrupting the other. REACT and Node.js provide an intuitive and interactive user interface that simplifies user interactions, while the Python API leveraging FastAPI ensures high-performance, asynchronous request handling and data processing. This separation also promotes scalability, as different components can be deployed across multiple servers, optimizing resource usage. Additionally, it enables better security practices, as the backend API can handle sensitive data and authentication separately, reducing the risk of exposing vulnerabilities in the UI layer. This approach leads to a more robust, efficient, and user-friendly application.
 
 ---
 
-_Click each tab below to learn more about how this pattern works in the context of the Woodgrove Bank application!_
+## Application Data Flow
 
-TODO: Rework the below to cover the starter application, which does not contain any AI functionality.
+_Click each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_
 
-Click on each tab to understand the starter application archtiecture components and processing workflow.
+=== "Data Ingestion & AI Processing"
 
-=== "1. Architecture Components"
+    !!! info "How The Automated Data Ingestion and AI Validation Process Works"
 
-    The architecture has these core components:
-    
-    - _UI_ → the **user interface** for interacting with the system
-      - TODO: Add details about REACT and structure of SPA web app used for the frontend UI
-    - _API_ → a Python API for integrating backend services
-      - TODO: Add details about FastAPI, Python, and the structures of the backend API
-    - _Azure Database for PostgreSQL_ → the project **database** (vendors, invoices, statements of work (SOWs))
-    - _Azure Container Apps_ → the **app hosting** service (API endpoint)
-    - _Azure Managed Identity_ → for **keyless authentication** (trustworthy AI)
+        Internal users and external vendors can introduce new documents, SOWs, and invoices into the system via an intuitive browser-based user interface. This action kicks off automated processes to extract and validate the data within those documents. Extracted data and validation results are returned to the users in the UI, allowing them to review and make updates as necessary.
 
-=== "2. Processing Services"
+    ![Data Ingestion & Validation data flow diagram](../img/validation-data-flow-diagram.png)
 
-    The Architecture "processes" incoming user requests received on the hosted API endpoint by taking the following steps:
+    1. SOWs, invoices, and related documents are ingested via the Woodgrove Bank Contract Management Portal, a REACT Single Page Application (SPA) accessed through a web browser. Internal users and external vendors can submit documents via the portal.
 
-    1. **Data Ingestion**: SOWs, invoices and other related documents are ingested via a REACT single-page application (SPA). Internal users and external vendors can submit documents by uploading them through the web app, which then uploads them to Azure Blob Storage.
+    2. The SPA web app sends uploaded documents directly with the backend API's `/documents` endpoint.
 
-    2. **Workflow Trigger Mechanism**: Upon receipt of new documents, an Event Grid trigger activates Python-based background worker processes:
+    3. The API, hosted as an [Azure Container App](https://learn.microsoft.com/azure/container-apps/overview) (ACA), saves the uploaded documents into a container in Azure Blob storage.
 
-        a. **Data Extraction and Processing**: Azure's OCR (Optical Character Recognition) technology digitizes content from uploaded documents, such as SOWs and invoices.
-    
-        b. **Document Intelligence (Custom Model)**: A custom AI model within Azure's Document Intelligence service is tailored to extract specific data fields, like payment milestones, dates, amounts, and vendor details. This model is trained to recognize the structure of financial documents, improving data extraction accuracy.
+       1. Storing the original documents in blob storage allows raw data to be persisted.
 
-        c. **Confidence Scoring and Validation**: Each document is assigned a confidence score based on whether the documents contain the correct sections and fields.
+       2. Should processing errors be detected or system requirements change, documents can be easily reprocessed.
 
-        d. **Validation Using Azure OpenAI**: Azure OpenAI language models, such as GPT-4o, are used to review all document data, employing natural language understanding to validate and cross-check information, ensuring high data integrity. The language model is used to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing, and preventing issues like payment delays. It also validates that appropriate compliance language exists in contracts and SOWs, helping to avoid compliance violations.
+    4. When new documents are added into blob storage, an Event Grid trigger is fired, starting the Data Ingestion Worker Process.
 
-    3. **Secure Storage and Database Management**: Validated data is chunked, vectorized using an Azure OpenAI embedding model, and stored in an encrypted Azure Database for PostgreSQL flexible server database, which uses vector embeddings for advanced search and retrieval. This supports efficient handling of structured and semi-structured data, facilitating downstream analytics. Azure Database for PostgreSQL flexible server supports JSON-based semi-structured data and vector embedding storage, enabling AI-enhanced queries. Embeddings can be generated directly from database queries using the Azure AI extension for PostgreSQL.
+       1. The data ingestion worker process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
 
-    4. **Document enrichment**: The Azure AI extension for PostreSQL also enables data to be enhanced using Azure AI Services directly from the database. This capability provides rich AI functionality, such as text translation and entity and keyword extraction.
+       2. Custom AI models within the Document Intelligence service are tailored to extract specific data fields, such as payment milestones, due dates, billable amounts, and vendor details. These models are trained to recognize the structure of financial documents, improving data extraction accuracy.
 
-    5. **Copilot chat**: An Azure OpenAI + LangChain copilot enables project managers and leadership to quickly get metrics, trends and processing timelines for contracts, SOWs, invoices, and vendors using a user friendly chat interface. Function calling via LangChain tools enables the copilot to implement a RAG (retrieval-augmented generation) pattern over data in the PostgreSQL database, using vector search to efficiently retrieve relevant documents and data.
+       3. Document Intelligence's Semantic Chunking capability recognizes document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences. This ensures that the chunks are of higher quality for use in RAG pattern queries.
 
+    5. The extracted document data is securely stored in Azure Database for PostgreSQL flexible server.
 
+    6. As part of the database insert statement, the GenAI capabilities of the `azure_ai` extension are used to:
 
+       1. Generate and save vector embeddings of document text using Azure OpenAI.
 
+       2. Create abstractive summaries of SOWs using the Azure AI Language service.
 
-The high-level solution architecture is represented by the following diagrams:
-
-=== "Data ingestion and validation"
-
-    The attached image is a detailed flowchart illustrating the architecture of a data ingestion and AI processing system integrated with an AI copilot using Retrieval-Augmented Generation (RAG). The system is divided into two main sections: "Data Ingestion & AI Processing" and "AI Copilot with RAG." The flowchart shows how users interact with the system, how data is processed, and how AI-generated insights are delivered back to the users.
-    
-    ![](./../img/data-ingestion-validation-architecture-diagram.png)
-
-=== "Copilot with RAG"
-
-    The second part of the application is an AI copilot, which allows users to ask questions and gain actionable insights over the data in the PostgreSQL database by leveraging a RAG architecture pattern. When users submit  questions through the Copilot's chat interface, the query is processed by the SPA Web App and sent to the API. The API then communicates with Azure OpenAI to generate a prompt embedding, which is used to perform a vector search in the Azure Database for PostgreSQL Flexible Server. The search results are retrieved and used to generate a completion response containing AI-generated insights. This response is sent back to the API and displayed to the user, providing them with relevant and actionable information based on the data stored in the Postgres database. This process enables users to efficiently query and analyze large datasets, making it easier to derive meaningful insights and make informed decisions.
-    
-    ![](./../img/copilot-architecture-diagram.png)
-    
-    The attached image is a flowchart illustrating the architecture of an AI Copilot with Retrieval-Augmented Generation (RAG). The flowchart shows how users interact with the system through a browser-based Copilot Chat interface. The users' queries are sent to a Single Page Application (SPA) Web App, which communicates with an API. The API interacts with Azure OpenAI to generate prompt embeddings and perform vector searches. The vector search results are retrieved from an Azure Database for PostgreSQL Flexible Server (Vector Store). The completion response, which contains AI-generated insights, is then sent back to the API and displayed to the users through the SPA Web App. The system also includes components like Key Vault and Azure App Configuration for secure and efficient management of application settings and secrets.
-
-    ## The RAG Pattern
-    
-    The workshop teaches you to **build, evaluate, and deploy a retail copilot** code-first on Azure AI - using the _Retrieval Augmented Generation_ (RAG) design pattern to make sure that our copilot responses are grounded in the (private) data maintained by the enterprise, for this application.
-    
-    ![RAG](./../img/rag-design-pattern.png)
-    
-    Let's learn how this design pattern works in the context of our Contoso Chat application. Click on the tabs in order, to understand the sequence of events shown in the figure above.
-    
-    ---
-    
-    === "1. Get Query"
-    
-        !!! info "The user query arrives at our copilot implementation via the endpoint (API)"
-    
-        Our deployed Contoso Chat application is exposed as a hosted API endpoint using Azure Container Apps. The inoming "user query" has 3 components: the user _question_ (text input), the user's _customer ID_ (text input), and an optional _chat history_ (object array).
-    
-        The API server extracts these parameters from the incoming request, and invokes the Contoso Chat application - starting the workflow reflecting this RAG design pattern.
-    
-    === "2. Vectorize Query"
-    
-        !!! info "The copilot sends the text query to a **retrieval** service after first vectorizing it."
-    
-        The Contoso Chat application converts the text question into a vectorized query using a Large Language "Embedding" Model (e.g., Azure Open AI `text-embedding-ada-002`). This is then sent to the information retrieval service (e.g., Azure AI Search) in the next step.
-    
-    === "3. **Retrieve** Matches"
-    
-        !!! info "The retrieval service uses vectorized query to return matching results by similarity"
-    
-        The information retrieval service maintains a search index for relevant information (here, for our product catalog). In this step, we use the vectorized query from the previous step to find and return _matching product results_ based on vector similarity. The information retrieval service can also use features like _semantic ranking_ to order the returned results.
-    
-    === "4. **Augment** Query"
-    
-        !!! info "The copilot augments user prompt with retrieved knowledge in request to model"
-    
-        The Contoso Chat application combines the user's original _question_ with returned "documents" from the information retrieval service, to create an enhanced _model prompt_. This is made easier using prompt template technologies (e.g., Prompty) with placeholders - for chat history, retrieved documents, and customer profile information - that are filled in at this step.
+    7. Document data is sent through an AI-driven data validation process that uses Azure OpenAI to analyze the incoming data, ensuring it conforms to expected standards and is accurate based on related data already in the system.
         
-    
-    === "5. **Generate** Response"
-    
-        !!! info "The chat model uses prompt to generate a grounded response to user question."
-    
-        This enhanced prompt is now sent to the Large Language "chat" model (e.g., Azure OpenAI `gpt-35-turbo` or `gpt-4o`) which sees the enhanced prompt (retrieved documents, customer profile data, chat history) as _grounding_ context for generating the final response, improving the quality (e.g., relevance, groundedness) of results returned from Contoso Chat.
+        1. Azure OpenAI's GPT-4o language model reviews all document data, employing natural language understanding to validate and cross-check information and ensure high data integrity.
+        
+        2. The RAG pattern allows the language model to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing and preventing issues like payment delays. It also validates that appropriate document sections and required compliance language exist in contracts and SOWs, helping to avoid incomplete contracts and compliance violations.
 
-## GraphRAG
+    8. The data validation results are securely stored in Azure Database for PostgreSQL alongside the analyzed data.
 
-TODO: Write up a short bit about GraphRAG
+=== "AI Copilot with RAG"
 
+    !!! info "How The Custom Copilot Experience Works"
 
+        Internal users interact with data through an intelligent copilot that employs the Retrieval Augmented Generation (RAG) pattern. This copilot allows users to ask questions about contract data, offering valuable insights into vendor contract fulfillment and invoicing accuracy.
 
-TODO: Include details about SEMANTIC RANKER MODEL () and include in the text above
-    - Update data and flow diagrams to talk about semantic ranker for custom model inference.
-    - Blog post to use are reference: <https://techcommunity.microsoft.com/blog/adforpostgresql/introducing-the-semantic-ranking-solution-for-azure-database-for-postgresql/4298781>
-    - Model to use: <https://huggingface.co/BAAI/bge-reranker-v2-m3>
+    ![Copilot data flow diagram](../img/copilot-data-flow-diagram.png)
 
-Click on each tab to understand the archtiecture components and processing workflow.
+    1. Users interact with the _Woodgrove Bank Contract Management Copilot_ through a browser interface to pose queries or seek information.
 
----
+    2. The REACT SPA sends these chat messages to the `/chat` API endpoint hosted in ACA.
 
-=== "1. Architecture Components"
+    3. The request query is embedded using the `text-embedding-3-large` model in Azure OpenAI.
 
-    The architecture has these core components:
-    
-    - _UI_ → the **user interface** for interacting with the system
-    - _API_ → a Python API for integrating backend services
-    - _Azure Database for PostgreSQL_ → the project **database** (vendors, invoices, statements of work (SOWs))
-    - _Azure OpenAI_ → the **model deployments** (embedding, chat, eval)
-    - _Azure Container Apps_ → the **app hosting** service (API endpoint)
-    - _Azure Managed Identity_ → for **keyless authentication** (trustworthy AI)
+    4. A **hybrid search** is performed on the Azure Database for PostgreSQL flexible server, where the system searches for relevant data.
 
-=== "2. Processing Services"
+       1. Hybrid search combines full-text search with vector-based search to provide more accurate and relevant results. It allows you to perform searches using both traditional keyword matching and semantic similarity, leveraging embeddings to understand the context and meaning behind the text.
 
-    The Architecture "processes" incoming user requests received on the hosted API endpoint by taking the following steps:
+       2. By integrating these two methods, hybrid search enhances the precision and comprehensiveness of search results, making it ideal for applications like semantic search, recommendation systems, and content discovery.
 
-    1. **Data Ingestion**: SOWs, invoices and other related documents are ingested via a custom REACT web application. Internal users and external vendors can submit documents by uploading them through the web app, which then uploads them to Azure Blob Storage.
+    5. (Optional) Semantic Ranking via custom model inference from the `azure_ai` extension ranks search result relevance and is returned into the RAG context as part of the composite prompt.
 
-    2. **Workflow Trigger Mechanism**: Upon receipt of new documents, an event trigger activates Python-based background worker processes:
+    6. Azure OpenAI uses the composite prompt to augment the data over which it formulates a response.
 
-        a. **Data Extraction and Processing**: Azure's OCR (Optical Character Recognition) technology digitizes content from uploaded documents, such as SOWs and invoices.
-    
-        b. **Document Intelligence (Custom Model)**: A custom AI model within Azure's Document Intelligence service is tailored to extract specific data fields, like payment milestones, dates, amounts, and vendor details. This model is trained to recognize the structure of financial documents, improving data extraction accuracy.
-
-        c. **Confidence Scoring and Validation**: Each document is assigned a confidence score based on whether the documents contain the correct sections and fields.
-
-        d. **Validation Using Azure OpenAI**: Azure OpenAI language models, such as GPT-4o, are used to review all document data, employing natural language understanding to validate and cross-check information, ensuring high data integrity. The language model is used to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing, and preventing issues like payment delays. It also validates that appropriate compliance language exists in contracts and SOWs, helping to avoid compliance violations.
-
-    3. **Secure Storage and Database Management**: Validated data is chunked, vectorized using an Azure OpenAI embedding model, and stored in an encrypted Azure Database for PostgreSQL flexible server database, which uses vector embeddings for advanced search and retrieval. This supports efficient handling of structured and semi-structured data, facilitating downstream analytics. Azure Database for PostgreSQL flexible server supports JSON-based semi-structured data and vector embedding storage, enabling AI-enhanced queries. Embeddings can be generated directly from database queries using the Azure AI extension for PostgreSQL.
-
-    4. **Document enrichment**: The Azure AI extension for PostreSQL also enables data to be enhanced using Azure AI Services directly from the database. This capability provides rich AI functionality, such as text translation and entity and keyword extraction.
-
-    5. **Copilot chat**: An Azure OpenAI + LangChain copilot enables project managers and leadership to quickly get metrics, trends and processing timelines for contracts, SOWs, invoices, and vendors using a user friendly chat interface. Function calling via LangChain tools enables the copilot to implement a RAG (retrieval-augmented generation) pattern over data in the PostgreSQL database, using vector search to efficiently retrieve relevant documents and data.
+    7. The AI-generated completion response is sent back to the user through the browser interface, providing them with actionable insights based on the data stored in the system. The efficient flow of information ensures users can quickly and accurately obtain the information they need.

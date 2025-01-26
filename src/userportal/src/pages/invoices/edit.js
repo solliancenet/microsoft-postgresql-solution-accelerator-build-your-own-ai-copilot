@@ -180,6 +180,9 @@ const InvoiceEdit = () => {
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/invoices' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
+        <a href={`/vendors/${vendorId}`} className="btn btn-link ms-2">
+          Go to Vendor
+        </a>
       </Form>
     </div>
   );

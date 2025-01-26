@@ -151,13 +151,27 @@ Write-Host "Event Grid Subscription 'StorageBlob' Created"
 # Deploy Machine Learning Model to Azure ML Workspace
 # ##############################################################################
 # only deploy if ${env:DEPLOY_AML_MODEL} is set to true
-if (${env:DEPLOY_AML_MODEL} -eq $False) {
+
+$modelDeploymentsJson = az ml online-deployment list `
+            --endpoint-name "$env:AZURE_AML_ENDPOINT_NAME" `
+            --workspace-name "$env:AZURE_AML_WORKSPACE_NAME" `
+            --resource-group "$env:AZURE_RESOURCE_GROUP" `
+            --query "[].name" `
+            --output tsv
+$modelDeployments = $modelDeploymentsJson | ConvertFrom-Json
+if ($env:DEPLOY_AML_MODEL -eq $False) {
     Write-Host "Skipping Machine Learning Model Deployment"
+} elseif ($modelDeployments -contains "bgev2m3-v1") {
+    Write-Host "Machine Learning Model Already Deployed"
 } else {
     Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."
 
-    ./scripts/aml/deploy_model.ps1 
+    ./scripts/aml/deploy_model.ps1 -ErrorAction Stop
    
-    Write-Host "Machine Learning Model Deployed"
+    if ($? -eq $False) {
+        Write-Error "An error occurred while executing deploy_model.ps1"
+    } else {
+        Write-Host "Machine Learning Model Deployed"
+    }
 }
 

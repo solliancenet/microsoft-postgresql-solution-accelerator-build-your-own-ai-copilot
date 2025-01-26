@@ -134,6 +134,7 @@ VALUES
     ('INV-TWC2024-003', 1, 1, 12500, '2024-11-27', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-003.pdf',  '{"Invoice Number": "INV-TWC2024-003", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-27", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 10500.00, "Due Date": "2024-12-27", "Description": "Maintenance Practices"}, {"Amount": 2000.00, "Due Date": "2024-12-27", "Description": "Issue Resolution"}], "Total Amount": 12500.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
     ('INV-TWC2024-004', 1, 1, 3500, '2024-11-30', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-004.pdf',  '{"Invoice Number": "INV-TWC2024-004", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-30", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 3500.00, "Due Date": "2024-12-30", "Description": "Issue Resolution"}], "Total Amount": 3500.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
     ('INV-WWE2024-001', 5, 2, 36600, '2024-10-10', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-WWE2024-001.pdf',  '{"Invoice Number": "INV-WWE2024-001", "Vendor": "Wide World Engineering", "Address": "123 Innovation Drive, TechVille", "Contact Name": "Morgan Brown", "Contact Email": "morgan.brown@wideworldeng.com", "Contact Number": "555-967-8543", "SOW Number": "WWE-WoodgroveBank-SOW-001", "Invoice Date": "2024-10-10", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 20100.00, "Due Date": "2024-11-10", "Description": "CI/CD Pipelines"}, {"Amount": 16500.00, "Due Date": "2024-11-10", "Description": "Cloud Monitoring"}], "Total Amount": 36600.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing Wide World Engineering"}', '{}');
+
 -- Milestones table
 CREATE TABLE IF NOT EXISTS milestones (
     id BIGSERIAL PRIMARY KEY,
@@ -187,4 +188,13 @@ CREATE TABLE IF NOT EXISTS sow_chunks (
     content text NOT NULL,
     page_number INT NOT NULL,
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS validation (
+    id BIGSERIAL PRIMARY KEY,
+    invoice_id BIGINT NOT NULL,
+    datestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    validation_result TEXT,
+    validation_pass BOOLEAN,
+    FOREIGN KEY (invoice_id) REFERENCES invoices (id) ON DELETE CASCADE
 );

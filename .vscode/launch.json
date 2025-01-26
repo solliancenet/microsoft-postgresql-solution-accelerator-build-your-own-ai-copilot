@@ -5,7 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: FastAPI",
+            "name": "Portal Debugger",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm start",
+            "preLaunchTask": "npm: install",
+            "cwd": "${workspaceFolder}/src/userportal"
+        },
+        {
+            "name": "API Debugger",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/api/app/main.py",

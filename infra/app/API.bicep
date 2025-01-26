@@ -3,6 +3,7 @@ param location string = resourceGroup().location
 param tags object = {}
 
 param appConfigName string
+param keyVaultName string
 param identityName string
 param storageAccountName string
 param containerRegistryName string
@@ -127,6 +128,44 @@ resource appConfigDocIntelligenceEndpoint 'Microsoft.AppConfiguration/configurat
   name: 'doc-intelligence-endpoint'
   properties: {
     value: docIntelligence.properties.endpoints.FormRecognizer
+  }
+}
+
+resource keyvault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
+  name: keyVaultName
+}
+
+resource secretsAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
+  parent: keyvault
+  name: 'add'
+  properties: {
+    accessPolicies: [
+      {
+        objectId: identity.properties.principalId
+        permissions: { secrets: [ 'get', 'list' ] }
+        tenantId: subscription().tenantId
+      }
+    ]
+  }
+}
+
+resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2021-06-01-preview' = {
+  parent: keyvault
+  name: 'doc-intelligence-key'
+  properties: {
+    value: listKeys(docIntelligence.id, '2024-10-01').key1 // docIntelligence.properties.keys[0].key
+  }
+}
+
+resource appConfigDocIntelligenceKey 'Microsoft.AppConfiguration/configurationStores/keyValues@2022-05-01' = {
+  parent: appConfig
+  name: 'doc-intelligence-key'
+  properties: {
+    value: '{"uri":"https://${keyvault.name}.vault.azure.net/secrets/doc-intelligence-key"}'
+    contentType: 'application/vnd.microsoft.appconfig.keyvaultref+json;charset=utf-8'
+    tags: {
+      environment: 'production'
+    }
   }
 }
 

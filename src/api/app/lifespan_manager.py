@@ -1,5 +1,6 @@
 from app.services import AzureOpenAIService, DatabaseService, AzureDocIntelligenceService, StorageService, ConfigService
 from azure.identity.aio import DefaultAzureCredential
+from azure.core.credentials import AzureKeyCredential
 from contextlib import asynccontextmanager
 
 # Create an Azure OpenAI embeddings client
@@ -41,7 +42,8 @@ async def lifespan(app):
     embedding_client = await aoai_service.get_embedding_client()
 
     # Create an async Azure Document Intelligence Service client
-    doc_intelligence_service = AzureDocIntelligenceService(credential, await config_service.get_doc_intelligence_endpoint())
+    doc_intelligence_credential = AzureKeyCredential(await config_service.get_doc_intelligence_key())
+    doc_intelligence_service = AzureDocIntelligenceService(doc_intelligence_credential, await config_service.get_doc_intelligence_endpoint())
 
     # Create an async Azure Blob Service client
     storage_service = StorageService(credential, await config_service.get_storage_account(), config_service.get_document_container_name())

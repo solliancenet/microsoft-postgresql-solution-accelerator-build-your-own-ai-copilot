@@ -1,4 +1,4 @@
-from azure.identity.aio import DefaultAzureCredential
+from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer.aio import DocumentAnalysisClient
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List
@@ -9,7 +9,7 @@ class DocumentAnalysisResult:
     text_chunks: List[str]
 
 class AzureDocIntelligenceService:
-    def __init__(self, credential: DefaultAzureCredential, docIntelligenceEndpoint: str):
+    def __init__(self, credential: AzureKeyCredential, docIntelligenceEndpoint: str):
         self.credential = credential
         self.docIntelligenceEndpoint = docIntelligenceEndpoint
 
@@ -35,11 +35,11 @@ class AzureDocIntelligenceService:
             page_text = " ".join([line.content for line in page.lines])
             extracted_text.append(page_text)
 
-        docClient.close();
+        docClient.close()
 
         return extracted_text
 
-    def semantic_chunking(text):
+    def semantic_chunking(self, text):
         """Chunk text into semantically meaningful pieces."""
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=500,         # Maximum characters per chunk

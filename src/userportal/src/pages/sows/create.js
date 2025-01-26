@@ -36,11 +36,13 @@ const SOWCreate = () => {
     
     setShowUpload(false);
 
+    var newSowId = 0;
     try {
       setLoading('Analyzing document with AI...');
 
       const result = await api.sows.analyze(file, { vendor_id: sowVendorId });
       setSowId(result.id);
+      newSowId = result.id;
 
     } catch (err) {
       console.error(err);
@@ -53,7 +55,7 @@ const SOWCreate = () => {
 
     try {
       setLoading('Validating document with AI...');
-      await api.sows.validate(sowId);
+      await api.sows.validate(newSowId);
       
     } catch (err) {
       console.error(err);
@@ -62,7 +64,7 @@ const SOWCreate = () => {
 
     setError(null);
     const successMessage = "SOW created successfully with fields populated by AI!"
-    window.location.href = `/sows/${sowId}?success=${successMessage}&showValidation=true`;
+    window.location.href = `/sows/${newSowId}?success=${successMessage}&showValidation=true`;
   };
 
   return (

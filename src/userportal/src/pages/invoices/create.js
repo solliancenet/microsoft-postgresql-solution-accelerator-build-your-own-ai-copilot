@@ -62,7 +62,7 @@ const InvoiceCreate = () => {
     }
 
     setError(null);
-    const successMessage = "Document analyzed successfully!";
+    const successMessage = "Invoice created successfully with fields populated by AI!";
     window.location.href = `/invoices/${newInvoiceId}?success=${successMessage}&showValidation=true`;
   };
 

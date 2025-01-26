@@ -95,9 +95,9 @@ The `azd up` command included steps to deploy the Woodgrove Bank application int
 
     ![Screenshot of the API container app page in the Azure portal, with the Application Url highlighted.](../../img/azure-portal-portal-container-app.png)
 
-3. TODO: Screenshot of landing page of portal
+3. In the Woodgrove Bank Contract Management Portal, select the **Vendors** page and verify the list of vendors loads correctly.
 
-4. TODO: Have them hit a page or two and ensure data loads correctly
+    ![Screenshot of the Vendors page in the Woodgrove Bank Contract Management Portal](../../img/woodgrove-bank-portal-vendors.png)
 
 ## 3. View Azure OpenAI model deployments in Azure AI Foundry
 

@@ -15,9 +15,6 @@ class AzureDocIntelligenceService:
         self.credential = credential
         self.docIntelligenceEndpoint = docIntelligenceEndpoint
 
-    async def close(self):
-        await self.document_analysis_client.close()
-
     async def extract_text_from_document(self, document_data):
         """Extract text and structure using Azure AI Document Intelligence."""
         docClient = DocumentAnalysisClient(
@@ -37,7 +34,7 @@ class AzureDocIntelligenceService:
             page_text = " ".join([line.content for line in page.lines])
             extracted_text.append(page_text)
 
-        docClient.close()
+        await docClient.close()
 
         return extracted_text
 

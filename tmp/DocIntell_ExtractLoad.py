@@ -36,7 +36,7 @@ def download_blob(container_name, blob_name):
 def extract_text_from_document(document_data):
     """Extract text and structure using Azure AI Document Intelligence."""
     poller = document_analysis_client.begin_analyze_document(
-        model_id="prebuilt-document",
+        model_id="prebuilt-invoice",
         document=document_data
     )
     result = poller.result()
@@ -125,6 +125,15 @@ def insert_invoice_to_db(invoice_data, conn):
         invoice_data['embeddings']
     ))
 
+    # Update the embeddings column
+    cursor = conn.cursor()
+    update_query = """
+    UPDATE invoices
+    SET embeddings = azure_openai.create_embeddings('embeddings', content)
+    WHERE number = %s
+    """
+    cursor.execute(update_query, (document_id,))
+   
     conn.commit()
     cursor.close()
     #conn.close()

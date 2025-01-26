@@ -13,7 +13,7 @@
             "cwd": "${workspaceFolder}/src/userportal"
         },
         {
-            "name": "API Debugger",
+            "name": "API Debugger (Windows)",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/api/app/main.py",
@@ -28,6 +28,23 @@
                 "PYTHONPATH": "${workspaceFolder}/src/api"
             },
             "python": "${workspaceFolder}/src/api/.venv/Scripts/python.exe",
+        },
+        {
+            "name": "API Debugger (macOS)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/api/app/main.py",
+            "args": [
+                "run",
+                "uvicorn",
+                "main:app",
+                "--reload"
+            ],
+            "jinja": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src/api"
+            },
+            "python": "${workspaceFolder}/src/api/.venv/bin/python",
         }
     ]
 }

@@ -10,7 +10,7 @@ import { DeliverableCreate, DeliverableEdit } from './deliverables';
 import { InvoiceList, InvoiceCreate, InvoiceEdit } from './invoices';
 import { MilestoneCreate, MilestoneEdit } from './milestones';
 import { SOWList, SOWCreate, SOWEdit } from './sows';
-import { VendorList, VendorCreate, VendorEdit } from './vendors';
+import { VendorList, VendorEdit } from './vendors';
 
 const Shell = ({ isDarkTheme }) => {
   //const userName = "John Doe"; // Replace with actual user name
@@ -135,6 +135,7 @@ const Shell = ({ isDarkTheme }) => {
               
               <Route path="/invoices" element={<InvoiceList />} />
               <Route path="/invoices/create" element={<InvoiceCreate />} />
+              <Route path="/invoices/create/:vendorId" element={<InvoiceCreate />} />
               <Route path="/invoices/:id" element={<InvoiceEdit />} />
 
               <Route path="/milestones/create/:sowId" element={<MilestoneCreate />} />
@@ -146,7 +147,6 @@ const Shell = ({ isDarkTheme }) => {
               <Route path="/sows/:id" element={<SOWEdit />} />
 
               <Route path="/vendors" element={<VendorList />} />
-              <Route path="/vendors/create" element={<VendorCreate />} />
               <Route path="/vendors/:id" element={<VendorEdit />} />
             </Routes>
           </main>

@@ -21,25 +21,35 @@ class StorageService:
         Retrieves a container client.
         """
         blob_service_client = await self.__get_blob_service_client()
-        return blob_service_client.get_container_client(container_name)
+        result = blob_service_client.get_container_client(container_name)
+        await blob_service_client.close()
+        return result
 
     async def get_blob_client(self, container: str, blob: str):
         """
         Retrieves a blob client.
         """
         blob_service_client = await self.__get_blob_service_client()
-        return blob_service_client.get_blob_client(container=container, blob=blob)
+        result = blob_service_client.get_blob_client(container=container, blob=blob)
+        await blob_service_client.close()
+        return result
 
     async def download_blob(self, blobName: str):
         """
         Downloads a blob from Azure Blob Storage.
         """
         blob_service_client = await self.__get_blob_service_client()
+
+        result = None
+        
         blob_client = blob_service_client.get_blob_client(container=self.container_name, blob=blobName)
         if await blob_client.exists():
             stream = await blob_client.download_blob()
-            return await stream.readall()
-        return None
+            result = await stream.readall()
+        
+        await blob_service_client.close()
+
+        return result
 
     # ###########################################################################################
 
@@ -58,6 +68,8 @@ class StorageService:
 
         await blob_client.upload_blob(file.file.read(), overwrite=True, content_settings=content_settings)
 
+        await blob_service_client.close()
+
         return blobName
 
     async def __save_vendor_document(self, vendor_id: int, docType: str, file: UploadFile):
@@ -73,24 +85,12 @@ class StorageService:
         """
         return await self.__save_vendor_document(vendor_id, "sows", file)
 
-    async def save_invoice_document(self, file: UploadFile):
+    async def save_invoice_document(self, vendor_id: int, file: UploadFile):
         """
-        Saves a file to Azure Blob Storage.
+        Saves an Invoice document to Azure Blob Storage.
         """
-        blobName = f"invoices/{file.filename}"
+        return await self.__save_vendor_document(vendor_id, "invoices", file)
 
-        blob_service_client = await self.__get_blob_service_client()
-        
-        blob_client = await blob_service_client.get_blob_client(container=self.container_name, blob=blobName)
-
-        content_settings = ContentSettings(
-                content_type=file.content_type,
-                content_disposition=f'attachment; filename="{file.filename}"'
-            )
-
-        await blob_client.upload_blob(file.file.read(), overwrite=True, content_settings=content_settings)
-
-        return blobName
 
     async def delete_document(self, blobName: str):
         """
@@ -100,3 +100,4 @@ class StorageService:
         blob_client = blob_service_client.get_blob_client(container=self.container_name, blob=blobName)
         if await blob_client.exists():
             await blob_client.delete_blob()
+        await blob_service_client.close()

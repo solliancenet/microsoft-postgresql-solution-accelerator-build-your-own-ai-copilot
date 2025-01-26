@@ -1,8 +1,9 @@
-from app.lifespan_manager import get_db_connection_pool, get_storage_service
+from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
 from app.models import Invoice, InvoiceEdit, ListResponse
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
-from pydantic import parse_obj_as
 from datetime import datetime
+from pydantic import parse_obj_as
+import json
 
 # Initialize the router
 router = APIRouter(
@@ -39,34 +40,91 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
     return invoice
 
 @router.post("/", response_model=Invoice)
-async def create_invoice(
-    vendor_id: int = Form(...),
-    number: str = Form(...),
-    amount: float = Form(...),
-    invoice_date: str = Form(...),
-    payment_status: str = Form(...),
+async def analyze_invoice(
     file: UploadFile = File(...),
+    vendor_id: int = Form(...),
     pool = Depends(get_db_connection_pool),
-    storage_service = Depends(get_storage_service)
+    storage_service = Depends(get_storage_service),
+    doc_intelligence_service = Depends(get_azure_doc_intelligence_service)
     ):
-    """Creates a new invoice in the database."""
-
-    # Parse date
-    invoice_date_parsed = datetime.strptime(invoice_date, '%Y-%m-%d').date()
-
+    """Analyze an Invoice document and create a new invoice in the database."""
+    # Get vendor_id from vendor_id
+    async with pool.acquire() as conn:
+        vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
+        if vendor_id is None:
+            raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
 
     # Upload file to Azure Blob Storage
-    documentName = await storage_service.save_invoice_document(file)
+    documentName = await storage_service.save_invoice_document(vendor_id, file)
     
+    # Analyze the document
+    document_data = await storage_service.download_blob(documentName)
+    extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
+    full_text = "\n".join(extracted_text)
+    text_chunks = doc_intelligence_service.semantic_chunking(full_text)
+    metadata = doc_intelligence_service.extract_invoice_metadata(full_text)
+
+    # Incorporate extracted field values, or use default if not found
+    invoice_number = metadata['number'] or f"INV-{datetime.now().strftime('%Y-%m%d')}"
+    amount = metadata['amount'] or 0
+    invoice_date = metadata['invoice_date'] or datetime.now().date()
+    payment_status = metadata['payment_status'] or "Pending"
+
+    metadata['invoice_date'] = None # clear this since object of type date is not json serializable
+
     # Create invoice in the database
     async with pool as conn:
-        row = await conn.fetchrow('''
-        INSERT INTO invoices (number, amount, invoice_date, payment_status, document, vendor_id)
-        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
-        ''', number, amount, invoice_date_parsed, payment_status, documentName, vendor_id)
+        # NO AI
+        # row = await conn.fetchrow('''
+        # INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata)
+        # VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
+        # ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata))
         
-        new_invoice = parse_obj_as(Invoice, dict(row))
-    return new_invoice
+        # WITH AI
+        row = await conn.fetchrow('''
+        INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
+        VALUES (
+            $1, $2, $3, $4, $5, $6, $7,
+            azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+        ) RETURNING *;
+        ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
+
+        if row is None:
+            raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')
+
+        invoice = parse_obj_as(Invoice, dict(row))
+    return invoice
+
+
+# @router.post("/", response_model=Invoice)
+# async def create_invoice(
+#     vendor_id: int = Form(...),
+#     number: str = Form(...),
+#     amount: float = Form(...),
+#     invoice_date: str = Form(...),
+#     payment_status: str = Form(...),
+#     file: UploadFile = File(...),
+#     pool = Depends(get_db_connection_pool),
+#     storage_service = Depends(get_storage_service)
+#     ):
+#     """Creates a new invoice in the database."""
+
+#     # Parse date
+#     invoice_date_parsed = datetime.strptime(invoice_date, '%Y-%m-%d').date()
+
+
+#     # Upload file to Azure Blob Storage
+#     documentName = await storage_service.save_invoice_document(file)
+    
+#     # Create invoice in the database
+#     async with pool as conn:
+#         row = await conn.fetchrow('''
+#         INSERT INTO invoices (number, amount, invoice_date, payment_status, document, vendor_id)
+#         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
+#         ''', number, amount, invoice_date_parsed, payment_status, documentName, vendor_id)
+        
+#         new_invoice = parse_obj_as(Invoice, dict(row))
+#     return new_invoice
 
 @router.put("/{invoice_id}", response_model=Invoice)
 async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = Depends(get_db_connection_pool)):

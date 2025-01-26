@@ -1,7 +1,9 @@
-from azure.identity.aio import DefaultAzureCredential
+from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer.aio import DocumentAnalysisClient
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List
+from datetime import datetime
+import re
 
 class DocumentAnalysisResult:
     extracted_text: str
@@ -9,31 +11,74 @@ class DocumentAnalysisResult:
     text_chunks: List[str]
 
 class AzureDocIntelligenceService:
-    def __init__(self, credential: DefaultAzureCredential, docIntelligenceEndpoint: str):
+    def __init__(self, credential: AzureKeyCredential, docIntelligenceEndpoint: str):
         self.credential = credential
+        self.docIntelligenceEndpoint = docIntelligenceEndpoint
 
-        self.document_analysis_client = DocumentAnalysisClient(
-            endpoint=docIntelligenceEndpoint,
-            credential=DefaultAzureCredential()
-        )
+    async def close(self):
+        await self.document_analysis_client.close()
 
     async def extract_text_from_document(self, document_data):
         """Extract text and structure using Azure AI Document Intelligence."""
-        poller = await self.document_analysis_client.begin_analyze_document(
+        docClient = DocumentAnalysisClient(
+            endpoint=self.docIntelligenceEndpoint,
+            credential=self.credential
+        )
+
+        poller = await docClient.begin_analyze_document(
             model_id="prebuilt-document",
             document=document_data
         )
+
         result = await poller.result()
         extracted_text = []
+        
         for page in result.pages:
             page_text = " ".join([line.content for line in page.lines])
             extracted_text.append(page_text)
+
+        docClient.close()
+
         return extracted_text
 
-    def semantic_chunking(text):
+    def semantic_chunking(self, text):
         """Chunk text into semantically meaningful pieces."""
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=500,         # Maximum characters per chunk
             chunk_overlap=50        # Overlap between chunks
         )
         return text_splitter.split_text(text)
+
+
+    def extract_sow_metadata(self, full_text):
+        """Extract SOW metadata"""
+        return {
+            "content": full_text
+        }
+
+    def extract_invoice_metadata(self, full_text):
+        """Extract invoice metadata such as number, amount, and invoice_date from text."""
+        metadata = {}
+
+        # Extract invoice number
+        match = re.search(r"Invoice Number[:\s]+([A-Za-z0-9-]+)", full_text, re.IGNORECASE)
+        metadata['number'] = match.group(1) if match else "UNKNOWN"
+
+        # Extract invoice amount
+        match = re.search(r"Total Amount[:\s]+[$]?([\d,]+(?:\.\d{1,2})?)", full_text, re.IGNORECASE)
+        metadata['amount'] = float(match.group(1).replace(",", "")) if match else 0.0
+
+        # Extract invoice date
+        match = re.search(r"Invoice Date[:\s]+([\d/-]{8,10})", full_text, re.IGNORECASE)
+        if match:
+            try:
+                metadata['invoice_date'] = datetime.strptime(match.group(1), "%Y-%m-%d").date()
+            except ValueError:
+                metadata['invoice_date'] = None
+        else:
+            metadata['invoice_date'] = None
+
+        # Default payment status
+        metadata['payment_status'] = "Pending"
+
+        return metadata

@@ -4,7 +4,7 @@ This guide serves as both a solution accelerator and a learning tool for develop
 
 You can complete it as a **self-guided** workshop at home. Instructor-led workshop options will be provided in the near future.
 
-!!! task "CHOOSE THE TAB FOR YOUR SESSION - This becomes the default context site-wide."
+!!! note "CHOOSE THE TAB FOR YOUR SESSION - This becomes the default context site-wide."
 
 === "Self-Guided"
 

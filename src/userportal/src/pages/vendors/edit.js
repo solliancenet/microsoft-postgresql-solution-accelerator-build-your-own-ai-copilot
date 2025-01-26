@@ -45,25 +45,25 @@ const VendorEdit = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-          var data = {
-            name: name,
-            address: address,
-            contact_name: contactName,
-            contact_email: contactEmail,
-            contact_phone: contactPhone,
-            type: contactType
-          };
-          var updatedItem = await api.vendors.update(id, data);
+        // try {
+        //   var data = {
+        //     name: name,
+        //     address: address,
+        //     contact_name: contactName,
+        //     contact_email: contactEmail,
+        //     contact_phone: contactPhone,
+        //     type: contactType
+        //   };
+        //   var updatedItem = await api.vendors.update(id, data);
 
-          updateDisplay(updatedItem);
-          setSuccess('Vendor updated successfully!');
-          setError(null);
-        } catch (err) {
-          console.error(err);
-          setError('Failed to update Vendor');
-          setSuccess(null);
-        }
+        //   updateDisplay(updatedItem);
+        //   setSuccess('Vendor updated successfully!');
+        //   setError(null);
+        // } catch (err) {
+        //   console.error(err);
+        //   setError('Failed to update Vendor');
+        //   setSuccess(null);
+        // }
       };
 
 
@@ -150,6 +150,7 @@ const VendorEdit = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            disabled
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -159,6 +160,7 @@ const VendorEdit = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
+            disabled
             />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -168,6 +170,7 @@ const VendorEdit = () => {
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
             required
+            disabled
             />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -177,6 +180,7 @@ const VendorEdit = () => {
             value={contactEmail}
             onChange={(e) => setContactEmail(e.target.value)}
             required
+            disabled
             />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -186,6 +190,7 @@ const VendorEdit = () => {
             value={contactPhone}
             onChange={(e) => setContactPhone(e.target.value)}
             required
+            disabled
             />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -195,14 +200,15 @@ const VendorEdit = () => {
             value={contactType}
             onChange={(e) => setContactType(e.target.value)}
             required
+            disabled
             />
         </Form.Group>
-        <Button type="submit" variant="primary">
+        {/* <Button type="submit" variant="primary">
           <i className="fas fa-save"></i> Save
         </Button>
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/vendors' }>
           <i className="fas fa-times"></i> Cancel
-        </Button>
+        </Button> */}
       </Form>
 
       <hr />

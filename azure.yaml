@@ -36,6 +36,26 @@ services:
       context: ./
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
       path: DOCKERFILE
+    hooks:
+      prebuild:
+        shell: pwsh
+        continueOnError: false
+        interactive: true
+        run: |
+          "REACT_APP_SERVICE_API_ENDPOINT_URL=$env:SERVICE_API_ENDPOINT_URL
+          " | Out-File -FilePath ".env" -Encoding utf8
+      postbuild:
+        shell: pwsh
+        continueOnError: false
+        interactive: true
+        run: |
+          # Check if .env file exists
+          if (Test-Path -Path ".env") {
+              Remove-Item -Path ".env" -Force
+              Write-Host ".env file deleted successfully"
+          } else {
+              Write-Host "Skipping: .env file does not exist"
+          }
     dependsOn:
       - infra
 

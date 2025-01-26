@@ -22,7 +22,7 @@ To continue with Skillable-based Setup, you will need the **Lab Launch URL** (li
 
 **If you already completed these steps in-venue with instructor help, then skip ahead to [Step 2](#2-launch-github-codespaces)**. Otherwise, expand the section below to complete the task now.
 
-??? task "GET STARTED: Launch Skillable VM, Click Deploy Button, Open Workshop Guide"
+??? note "GET STARTED: Launch Skillable VM, Click Deploy Button, Open Workshop Guide"
 
     The lab instructor should have shared a Skillable Lab link (URL or QR Code).
 
@@ -106,7 +106,7 @@ Your GitHub Codespaces is running on the _original_ Azure Samples repo for this 
 
 1. Follow the prompts to complete auth flow. (Expand the sections below for an example)
 
-    ??? task "1. Complete Device Activation flow"
+    ??? note "1. Complete Device Activation flow"
 
         - Say "Yes" when prompted to authenticate with GitHub credentials
         - Copy the one-time code provided in the console
@@ -117,7 +117,7 @@ Your GitHub Codespaces is running on the _original_ Azure Samples repo for this 
 
             ![Activation](./../../img/gh-cli-activation.png)
 
-    ??? task "2. Confirm GitHub authorization scope"
+    ??? note "2. Confirm GitHub authorization scope"
 
         - You should see this authorization dialog on activation
         - Click the green "Authorize github" button to continue
@@ -125,7 +125,7 @@ Your GitHub Codespaces is running on the _original_ Azure Samples repo for this 
 
             ![Activation](./../../img/gh-cli-confirmation'.png)
 
-    ??? task "3. Verify you are Logged in."
+    ??? note "3. Verify you are Logged in."
 
         - The console log should show you are logged in successfully
 
@@ -145,7 +145,7 @@ Your GitHub Codespaces is running on the _original_ Azure Samples repo for this 
 
 The workshop uses the following tools and commands: `python`, `fastapi`, `prompty`, `az`, `azd`. These are pre-installed for you, but you can optionally verify these to get a sense for their current versions.
 
-??? task "(Optional: Expand to view details) Verify intalled tools." 
+??? note "(Optional: Expand to view details) Verify intalled tools." 
 
     ```bash title=""
     python --version
@@ -168,7 +168,7 @@ The workshop uses the following tools and commands: `python`, `fastapi`, `prompt
 
 To access our Azure resources, we need to be authenticated from VS Code. Make sure the Terminal pane is active in the GitHub Codespaces tab. Then, complete both the steps below (click each to expland for instructions).
 
-??? task "1. Authenticate with `az` for post-provisioning tasks"
+??? note "1. Authenticate with `az` for post-provisioning tasks"
 
     1. Log into the Azure CLI `az` using the command below. 
 
@@ -183,7 +183,7 @@ To access our Azure resources, we need to be authenticated from VS Code. Make su
     1. Back in the Terminal, press Enter to select the default presented subscription and tenant.
 
 
-??? task "2. Authenticate with `azd` for provisioning & managing resources"
+??? note "2. Authenticate with `azd` for provisioning & managing resources"
 
     1. Log into the Azure Developer CLI using the command below. 
 

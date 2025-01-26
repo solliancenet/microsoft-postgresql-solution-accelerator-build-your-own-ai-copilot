@@ -12,9 +12,9 @@ The goal of the solution accelerator is to teach you to how to **add rich AI cap
 
 By the end of the workshop, you will learn to:
 
-- Use Azure AI Services to automate data ingestion and validation tasks to streamline workflows.
+- Use Azure AI Services to automate data validation tasks during ingestion to streamline workflows.
 - Integrate Generative AI capabilities into your Azure Database for PostgreSQL-based applications using the [Azure AI extension](https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-integrate-azure-ai).
-- Use the [Retrieval Augmented Generation (RAG) pattern](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) <br/> (to ground responses in your own data).
+- Use the [Retrieval Augmented Generation (RAG) pattern](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) in a copilot <br/> (to ground responses in your own data).
 - Use [Azure Container Apps](https://aka.ms/azcontainerapps) for deployment <br/> (to get a hosted API endpoint for real-world use).
 - Use [Azure Developer CLI](https://aka.ms/azd) with AI Application Templates <br/> (to provision & deploy apps consistently across teams)
 

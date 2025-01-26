@@ -8,7 +8,9 @@ Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, 
 
 You will need to install the required software locally and provision the Azure infrastructure yourself, as described on the tabs below.
 
-!!! task "Select each of the tabs below, in order, to complete the required setup."
+!!! note "Select each of the tabs below, in order"
+
+    To complete the required setup, select the number tabs below and follow the instructions provided.
 
 === "1. Install software"
 
@@ -24,7 +26,7 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.1 Install Azure command-line tools**
 
-    !!! task "In this task, you will install both the Azure CLI and the Azure Developer CLI (`azd`)."
+    !!! note "In this task, you will install both the Azure CLI and the Azure Developer CLI (`azd`)."
 
         - The Azure CLI enables you to execute Azure CLI commands from a command prompt or VS Code terminal on your local machine.
         - The Azure Developer CLI (`azd`) is an open-source tool that accelerates provisioning and deploying app resources on Azure.
@@ -39,7 +41,9 @@ You will need to install the required software locally and provision the Azure i
 
     3. Next, install the `ml` extension to the Azure CLI.
  
-        !!! info "The ml extension to the Azure CLI is the enhanced interface for Azure Machine Learning. It enables you to train and deploy models from the command line, with features that accelerate scaling data science up and out while tracking the model lifecycle.""
+        !!! info "About the ml extension"
+
+            The `ml` extension to the Azure CLI is the enhanced interface for Azure Machine Learning. It enables you to train and deploy models from the command line, with features that accelerate scaling data science up and out while tracking the model lifecycle.
 
         To install the `ml` extensinon you should first remove any existing installation of the extension and also the CLI v1 `azure-cli-ml` extension:
     
@@ -64,6 +68,8 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.2 Install Git**
 
+    Git enables you to manage your code by tracking changes, maintaining a version history, and facilitating collaboration with others. This helps in organizing and maintaining the integrity of your project's development.
+
     1. Download Git from <https://git-scm.com/downloads>.
 
     2. Run the installer using the default options.
@@ -84,11 +90,15 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.4 Install Node.js**
 
-    11. Download Node.js from <https://nodejs.org/en/download/>, ensuring you select the most recent LTS version and your correct OS.
+    Node.js is an open-source runtime environment that lets you run JavaScript code outside of a browser. It's ideal for building scalable network applications and works seamlessly with REACT single-page applications by providing a backend environment to handle server-side logic and API requests. This allows for efficient development and smooth interactions between the frontend and backend.
 
-    12. Run the installer using the default options.
+    1. Download Node.js from <https://nodejs.org/en/download/>, ensuring you select the most recent LTS version and your correct OS.
+
+    2. Run the installer using the default options.
 
     ## **1.5 Install Docker Desktop**
+
+    Docker Desktop is an application that allows you to build, share, and run containerized applications on your local machine. It provides a user-friendly interface to manage Docker containers, images, and networks. By streamlining the containerization process, Docker Desktop helps you develop, test, and deploy applications consistently across different environments.
 
     1. Download and install Docker Desktop for your OS using instructions provided on the <https://docs.docker.com/desktop/>:
 
@@ -98,36 +108,31 @@ You will need to install the required software locally and provision the Azure i
 
     ## **1.6 Install Visual Studio Code (and extensions)**
 
-    Visual Studio Code is a versatile, open-source code editor that combines powerful features with an intuitive interface to help developers efficiently write, debug, and customize their projects.
+    Visual Studio Code is a versatile, open-source code editor that combines powerful features with an intuitive interface to help you efficiently write, debug, and customize projects.
     
-    The Prompty extension enhances productivity by providing intelligent code completions and suggestions, while the Python extension offers a comprehensive environment for Python development, including robust debugging, linting, and testing capabilities.
-
-    3.  Download and install from <https://code.visualstudio.com/download>.
+    1.  Download and install from <https://code.visualstudio.com/download>.
 
         - Use the default options in the installer.
 
-    4.  After installation completed, launch Visual Studio Code.
+    2.  After installation completed, launch Visual Studio Code.
 
-    5.  In the **Extensions** menu, search for and install the following extensions from Microsoft:
+    3.  In the **Extensions** menu, search for and install the following extensions from Microsoft:
 
         - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-        - [Prompty](marketplace.visualstudio.com/items?itemName=ms-toolsai.prompty)
 
-            !!! info "[Prompty](https://prompty.ai) is an open-source generative AI templating framework that makes it easy to experiment with prompts, context, parameters, and other ways to change the behavior of language models. The easiest way to get started with **Prompty**, is to use the Visual Studio Code Extension. The offers an intuitive prompt playground within VS Code to streamline the prompt engineering process."
-
-    6.  Close VS Code.
+    4.  Close VS Code.
 
     ## **1.7 Install pgAdmin**
 
     Throughout this workshop, you will use pgAdmin to run queries against your PostgreSQL database. pgAdmin is the leading Open Source management tool for Postgres.
 
-    7.  Download pgAdmin from <https://www.pgadmin.org/download/>.
+    1.  Download pgAdmin from <https://www.pgadmin.org/download/>.
 
-    8.  Run the installer using the default options.
+    2.  Run the installer using the default options.
 
 === "2. Fork repo"
 
-    You must create a copy (known as a fork) of the GitHub repo and then clone that onto your local computer so you can work with the contents of the repo. After completing this step, you should have:
+    You must create a copy (known as a fork) of the **PostgreSQL Solution Accelerator: Build your own AI Copilot** GitHub repo and then clone that onto your local computer so you can work with its contents. After completing this step, you should have:
     
     - [X] Forked the **PostgreSQL Solution Accelerator: Build your own AI Copilot** repo to your personal GitHub profile
     - [X] Created a local clone of the repo
@@ -137,7 +142,7 @@ You will need to install the required software locally and provision the Azure i
 
     Forking in GitHub refers to creating a personal copy of a public repository, which allows you to freely experiment with changes without affecting the original project.
 
-    1. To fork the **PostgreSQL Solution Accelerator: Build your own AI Copilot** repo, open a new browser window or tab and navigate to the repo at <https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot>.
+    1. To fork the repo, open a new browser window or tab and navigate to <https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot>.
 
     2. Select the **Fork** button to create a copy of the repo in your GitHub profile.
 
@@ -149,19 +154,23 @@ You will need to install the required software locally and provision the Azure i
 
         ![Screenshot of the Create a new fork page in GitHub.](../../img/github-create-fork.png)
 
-    4. The forked repo will open within your profile. On the GitHub page for your fork that opens, select the **Code** button and select the **Copy URL to clipboard** button next to the repo's HTTPS clone link:
+    4. The forked repo will open within your GitHub profile.
+
+    ## 2.2 Clone the Forked Repo
+
+    1. On the GitHub page for your fork, select the **Code** button and then select the **Copy URL to clipboard** button next to the repo's HTTPS clone link:
 
         ![The GitHub Code menu is expanded and the copy button for the HTTPS clone link is highlighted.](../../img/github-code-clone-https.png)
 
-    5. Open a new command prompt and change directories to the folder within which you want to clone the repo (e.g., D:\repos).
+    2. Open a new command prompt and change directories to the folder in which you want to clone the repo (e.g., D:\repos).
 
-    6. Once in the desired directory, run the following `git clone` command to download a copy of your fork onto your local machine. Ensure you replace the `[url_of_your_forked_repo]` token with the clone link you copied in the previous step.
+    3. Once in the desired directory, run the following `git clone` command to download a copy of your fork onto your local machine. Ensure you replace the `<url_of_your_forked_repo>` token with the clone link you copied in the previous step.
 
         ```bash title=""
-        git clone [url_of_your_forked_repo]
+        git clone <url_of_your_forked_repo>
         ```
 
-    7. Once the repository has been cloned, change directories at the command prompt to the folder of the cloned repo, then run the following command to open the project in Visual Studio Code:
+    4. Once the repository has been cloned, change directories at the command prompt to the folder of the cloned repo, then run the following command to open the project in Visual Studio Code:
 
         ```bash title=""
         code .
@@ -173,45 +182,98 @@ You will need to install the required software locally and provision the Azure i
 
     This solution contains an Azure Developer CLI `azd-template` that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single `azd up` command. On completing this step, you should have:
 
+    - [X] Selected an Azure region for workshop resources
+    - [X] Verified your Azure ML CPU quota
     - [X] Authenticated with Azure
-    - [X] Provisioned Azure resources
-    - [X] Deployed the starter solution
+    - [X] Provisioned Azure resources and deployed the starter solution
 
-    ## 3.1 Authenticate With Azure
+    ## 3.1 Select an Azure region for your workshop resources
 
-    Before running the `azd up` command, you must connect your VS Code environment to Azure by authenticating.
+    To ensure you can successfully deploy the Azure resources using the `azd up` command, you must choose a region that supports the required Azure OpenAI `gpt-4o` and `text-embedding-3-large` models.
+
+    1. Before deciding on the Azure region you want to use for your workshop resources, review the regional availability guidance for the [gpt-4o]([region-availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint)) and [text-embedding-3-large](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI.
+    
+    2. Choose a region that **supports both models** and has quota available.
+
+    !!! danger "Select a region that supports both models!"
+    
+        Choosing a region that doesn't support both models will result in deployment failure when running `azd up`.
+
+    ## 3.2 Verify Azure ML CPU Quota
+
+    This solution accelerator contains a section dedicted to setting up and using a Semantic Ranking model directly from your PostgreSQL database. The deployment of this component of the architecture requires sufficient CPU quota (32 cores) in Azure Machine Learning to accomodate the [Hugging Face BGE reranker model deployment](https://huggingface.co/BAAI/bge-reranker-v2-m3). In this task, you must verify you have available quota for the target virtual machine (VM) instance type (`STANDARD_D16AS_V4`), and if not, request additional quota.
+
+    3. To view your available quota, you first need to retrieve your Microsoft Entra ID **Tenant ID** from the [Azure portal](https://portal.azure.com/).
+
+    4. In the Azure portal, enter "Microsoft Entra ID" into the search bar, then select **Microsoft Entra ID** from the **Services** list in the results.
+
+        ![Microsoft Entra ID is entered into the Azure search bar and it is highlighted in the Services results.](../../img/azure-portal-search-entra-id.png)
+
+    5. On the **Overview** page of your Microsoft Entra ID tenant, select the **Copy to clipboard** button for your **Tenant ID**.
+
+        ![On the Entra ID tenant overview tab, the copy to clipboard button for the Tenant ID is highlighted with a red box.](../../img/azure-portal-entra-id-tenant-overview.png)
+
+    6. Open a new browser window or tab and navigate to the following URL, replacing the `<your-tenant-id>` token with the Tenant ID you copied from the Entra ID overview page in the Azure portal.
+
+        ```bash title="Azure ML Quota page"
+        https://ml.azure.com/quota?tid=<your-tenant-id>
+        ```
+
+    7. On the Azure ML **Quota** page, select the subscription you are using for this workshop.
+
+        ![Screenshot of the Azure ML quota subscription selection page.](../../img/azure-ml-quota-subscription.png)
+
+    8. On the quota page for your selected subscription, select the Azure region you plan to use for this workshop. This should be the region you chose in previous task that supports the required Azure OpenAI models.
+
+    9. You should now see a list of CPUs and their quotas within your subscription. Locate **Standard DASv4 Family Cluster Dedicated vCPUs** in the list and inspect the **Quota** available.
+        
+        ![On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted.](../../img/azure-ml-quota-standard-dasv4.png)
+
+    10. If you have 32 cores or more available, you can skip to the [Authenticate With Azure task](#31-authenticate-with-azure). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
+
+        ![Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box.](../../img/azure-ml-request-quota.png)
+
+    11. In the **Request quota** dialog, increase your **New cores limit** value by 32 and then select **Submit**.
+
+        ![Screenshot of the Request quota dialog with a value of 32 highlighted in the new cores limit box and the submit button highlighted.](../../img/azure-ml-request-quota-dialog.png)
+
+        !!! example
+
+            Your **new cores limit** should be increased to ensure 32 cores are available for a new deployment. For example, if you have zero cores available, your new cores limit should be set to 32. If your core limit is 100 and you are currently using 90, your new cores limit should be set to 122.
+
+    12. Quota increase requests typically take a few minutes to complete. You will recieve notifications in the Azure portal as the request is processed and when it completes.
+
+    13. If your request is denied, you don't have permissions to issue the request, or you prefer not to request additional quota, you have the option to exclude the **Semantic Ranking** model deployment when running the `azd up` command by setting the `deployAMLModel` flag to `false` when prompted.
+
+    ## 3.3 Authenticate With Azure
+
+    Before running the `azd up` command, you must authenticate your VS Code environment to Azure.
     
     1. To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:
     
-    !!! task "Step 1: Authenticate with `az` for post-provisioning tasks"
+    !!! note "Step 1: Authenticate with `az` for post-provisioning tasks"
     
-    1. Log into the Azure CLI `az` using the command below.
+    2. Log into the Azure CLI `az` using the command below.
     
         ```bash  title=""
         az login
         ```
 
-    2. Complete the login process in the browser window that opens.
+    3. Complete the login process in the browser window that opens.
 
         !!! info "If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id> to specify the correct subscription to use."
 
-    !!! task "Step 2: Authenticate with `azd` for provisioning & managing resources"
+    !!! note "Step 2: Authenticate with `azd` for provisioning & managing resources"
     
-    3. Log in to Azure Developer CLI. This is only required once per-install.
+    4. Log in to Azure Developer CLI. This is only required once per-install.
     
         ```bash title=""
         azd auth login
         ```
     
-    ## 3.2 Provision Azure Resource and Deploy App (UI and API)
+    ## 3.4 Provision Azure Resource and Deploy App (UI and API)
 
-    Provision & deploy the solution with one command: ```azd up```
-
-    !!! warning "You will be prompted to select the Azure region into which your resources should be deployed when running `azd up`.""
-        
-        Before selecting a region, you should refer to the regional availability guidance for both the [gpt-4o]([#region-availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint)) and [text-embedding-3-large](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI and select a region that supports both models and has quota available.
-        
-        **Selecting a region that does not support both models will result in deployment failure.**
+    You are now ready to provision your Azure resources and deploy the Woodgrove back solution.
 
     1. Use `azd up` to provision your Azure infrastructure and deploy the web application to Azure.
 
@@ -219,28 +281,30 @@ You will need to install the required software locally and provision the Azure i
         azd up
         ```
 
-        !!! task "You will be prompted for several inputs for the `azd up` command:"
+        !!! info "You will be prompted for several inputs for the `azd up` command:"
     
               - **Enter a new environment name**: Enter a value, such as `dev`.
                 - The environment for the `azd up` command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.
+                - Should you need to delete the `azd` environment, locate and delete the `.azure` folder at the root of the project in the VS Code Explorer.
               - **Select an Azure Subscription to use**: Select the Azure subscription you are using for this workshop using the up and down arrow keys.
               - **Select an Azure location to use**: Select the Azure region into which resources should be deployed using the up and down arrow keys.
+              - **Enter a value for the `deployAMLModel`**: Select `True` if you were able to ensure you have sufficient Azure ML CPU quota avaiable to deploy the model. Otherwise, choose `False`.
+                - If you select `False`, you will need to skip the optional **Semantic Ranker** section of this accelerator.
               - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
                 - Ensure you copy the password in a secure location so you can use it later to access the database.
               - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
 
-        !!! info "Should you need to delete the `azd` environment"
+    2. Wait for the process to complete. It may take 30-45 minutes or more.
 
-            - Locate the `.azure` folder created at the root of the project in VS Code.
-            - Expand the `.azure` folder and locate the folder matching the name of the environemnt you assigned.
-            - Delete the folder for the environment.
-            - The next time you run the `azd up` command, it will ask you to provide an environment name, along with the other values you were prompted for during setup.
+        !!! failure "Not enough subscription CPU quota"
     
-    2. Wait for the process to complete. It may take 5-10 minutes or more.
+            If you did not check your Azure ML CPU quota prior to starting running the `azd up` command, you may receive a CPU quota error message similar to the following:
+
+            _(OutOfQuota) Not enough subscription CPU quota. The amount of CPU quota requested is 32 and your maximum amount of quota is [N/A]. Please see troubleshooting guide, available here: https://aka.ms/oe-tsg#error-outofquota_
+
+            You can still continue with the workshop, but will need to skip the optional **Semantic Ranking** section, as you will not have the deployed model available.
  
     3. On successful completion you will see a `SUCCESS: ...` message on the console.
-
-    !!! tip "After running `azd up` on the **ACA** deployment and the deployment finishes, you can locate the URL of the web application by navigating to the deployed resource group in the Azure portal. Click on the link to the new resource group in the output of the script to open the Azure portal."
 
 === "4. Setup dev environment"
 
@@ -269,7 +333,7 @@ You will need to install the required software locally and provision the Azure i
     
     4. Activate the virtual environment.
 
-        !!! task "Select the appropriate command for your OS and shell from the table below and execute it at the terminal prompt."
+        !!! note "Select the appropriate command for your OS and shell from the table."
     
             | Platform | Shell | Command to activate virtual environment |
             | -------- | ----- | --------------------------------------- |
@@ -279,12 +343,16 @@ You will need to install the required software locally and provision the Azure i
             | | pwsh | `.venv/bin/Activate.ps1` |
             | Windows | cmd.exe | `.venv\Scripts\activate.bat` |
             | | PowerShell | `.venv\Scripts\Activate.ps1` |
+
+    5. Execute the command at the terminal prompt to activate your virtual environment.
     
     ## **4.2 Install required Python libraries**
     
     The `requirements.txt` file in the `src\api` folder contains the set of Python libraries needed to run the Python components of the solution accelerator.
 
-    !!! tip "Open the `src\api\requirements.txt` file in the repo to review the required libraries and the versions that are being used."
+    !!! tip "Review required libraries"
+
+        Open the `src\api\requirements.txt` file in the repo to review the required libraries and the versions that are being used.
 
     1. From the integrated terminal window in VS Code, run the following command to install the required libraries in your virtual environment:
 
@@ -308,10 +376,14 @@ You will need to install the required software locally and provision the Azure i
         AZURE_APP_CONFIG_ENDPOINT={YOUR_APP_CONFIG_ENDPOINT}
         ```
 
-        !!! task "To get the endpoint for your App Configuration resource:"
+        !!! note "Retrieve the endpoint for your App Configuration resource"
+
+            To get the endpoint for your App Configuration resource:
 
             1. Navigate to your App Configuration resource in the [Azure portal](https://portal.azure.com/).
+            
             2. Select **Access settings** from the resource navigation menu, under **Settings**.
+            
             3. Copy the **Endpoint** value and paste it into the `.env` file.
 
                 ![Screenshot of the App Configuration Access Settings page, with the Endpoint copy button highlighted.](../../img/app-config-access-settings-endpoint.png)
@@ -322,8 +394,8 @@ You will need to install the required software locally and provision the Azure i
 
     You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
 
-    6. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
-    7. On the Azure Database for PostgreSQL - Flexible Server page:
+    1. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
+    2. On the Azure Database for PostgreSQL - Flexible Server page:
        1. Select **Connect** under **Settings** in the left-hand resource menu.
        2. Select the **contracts** database from the **Database name** dropdown.
        3. Expand the **pgAdmin 4** block.

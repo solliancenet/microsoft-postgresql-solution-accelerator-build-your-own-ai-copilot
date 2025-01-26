@@ -1,50 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { NumericFormat } from 'react-number-format';
+import { Form, Button, Spinner, Alert } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
-import config from '../../config';
-
-const getDefaultNumber = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `INV-${year}-${month}${day}`;
-};
-
-const getTodaysDate = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
 
 const InvoiceCreate = () => {
-  const [vendorId, setVendorId] = useState('');
-  const [invoiceNumber, setInvoiceNumber] = useState(getDefaultNumber());
-  const [amount, setAmount] = useState('0');
-  const [invoiceDate, setInvoiceDate] = useState(getTodaysDate());
-  const [paymentStatus, setPaymentStatus] = useState('Pending');
+  const { vendorId } = useParams();
+  const [invoiceId, setInvoiceId]  = useState(0);
+  const [invoiceVendorId, setInvoiceVendorId] = useState(vendorId);
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showUpload, setShowUpload] = useState(true);
 
-  const [statuses, setStatuses] = useState([]);
   const [vendors, setVendors] = useState([]);
 
   useEffect(() => {
-    // Fetch data when component mounts
-    const fetchStatuses = async () => {
-      try {
-        const data = await api.statuses.list();
-        setStatuses(data);
-      } catch (err) {
-        setError('Failed to load statuses');
-      }
-    }
-    fetchStatuses();
-
     const fetchVendors = async () => {
       try {
         const data = await api.vendors.list(0, -1); // No pagination limit
@@ -59,27 +30,38 @@ const InvoiceCreate = () => {
     fetchVendors();
   }, []);
 
-
-  const handleSubmit = async (e) => {
+  const handleAnalyzeDocument = async (e) => {
     e.preventDefault();
-    try {
-      var data = {
-        vendor_id: vendorId,
-        number: invoiceNumber,
-        amount: amount,
-        invoice_date: invoiceDate,
-        payment_status: paymentStatus
-      };
-      var newItem = await api.invoices.create(file, data);
 
-      setSuccess('Invoice created successfully!');
-      window.location.href = `/invoices/${newItem.id}`;
-      setError(null);
+    setShowUpload(false);
+
+    try {
+      setLoading('Analyzing document with AI...');
+
+      const result = await api.invoices.analyze(file, { vendor_id: invoiceVendorId });
+      setInvoiceId(result.id);
+
     } catch (err) {
       console.error(err);
-      setError('Failed to create Invoice');
+      setShowUpload(true);
+      setError('Error analyzing document');
       setSuccess(null);
+      setLoading(null);
+      return false;
     }
+
+    try {
+      setLoading('Validating document with AI...');     
+      await api.invoices.validate(invoiceId);
+
+    } catch (err) {
+      console.error(err);
+      // still continue on, since the Invoice is already created in the database
+    }
+
+    setError(null);
+    const successMessage = "Document analyzed successfully!";
+    window.location.href = `/invoices/${invoiceId}?success=${successMessage}&showValidation=true`;
   };
 
   return (
@@ -88,21 +70,16 @@ const InvoiceCreate = () => {
       <hr/>
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Document</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            required
-          />
-        </Form.Group>
+
+      {showUpload && (
+        <>
+      <Form onSubmit={handleAnalyzeDocument}>
         <Form.Group>
           <Form.Label>Vendor</Form.Label>
           <Form.Control
             as="select"
             value={vendorId}
-            onChange={(e) => setVendorId(e.target.value)}
+            onChange={(e) => setInvoiceVendorId(e.target.value)}
             required
           >
             <option value="">Select Vendor</option>
@@ -113,65 +90,32 @@ const InvoiceCreate = () => {
             ))}
           </Form.Control>
         </Form.Group>
-
-        {config.displayFieldOnCreate && (
-          <>
-          <Form.Group className="mb-3">
-            <Form.Label>Invoice Number</Form.Label>
-            <Form.Control
-              type="text"
-              value={invoiceNumber}
-              onChange={(e) => setInvoiceNumber(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Amount</Form.Label>
-            <NumericFormat
-                className="form-control"
-                value={amount}
-                onValueChange={(values) => setAmount(values.floatValue)}
-                thousandSeparator={true}
-                prefix={'$'}
-                required
-              />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Invoice Date</Form.Label>
-            <Form.Control
-              type="date"
-              value={invoiceDate}
-              onChange={(e) => setInvoiceDate(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Payment Status</Form.Label>
-            <Form.Control
-              as="select"
-              value={paymentStatus}
-              onChange={(e) => setPaymentStatus(e.target.value)}
-              required
-              >
-                <option value="">Select Status</option>
-                {statuses.map((status) => (
-                  <option key={status.name} value={status.name}>
-                    {status.name}
-                  </option>
-                ))}
-              </Form.Control>
-          </Form.Group>
-
-        </>
-        )}
-        <br/>
+        <Form.Group className="mb-3">
+          <Form.Label>Document</Form.Label>
+          <Form.Control
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            required
+          />
+        </Form.Group>
         <Button type="submit" variant="primary">
-          <i className="fas fa-plus"></i> Create
+          <i className="fas fa-search"></i> Analyze Document
         </Button>
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/invoices' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
       </Form>
+        </>
+      )}
+
+      {loading && (
+      <Alert variant="info" className="mt-3 p-5 text-center">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">{loading}</span>
+        </Spinner>
+        <div>{loading}</div>
+      </Alert>
+      )}
     </div>
   );
 };

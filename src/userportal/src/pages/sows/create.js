@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Spinner, Alert } from 'react-bootstrap';
-import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
-import config from '../../config';
-
-const getDefaultNumber = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `SOW-${year}-${month}${day}`;
-};
 
 const SOWCreate = () => {
   const { vendorId } = useParams();
   const [sowId, setSowId]  = useState(0);
   const [sowVendorId, setSowVendorId] = useState(vendorId);
-
-  const [sowNumber, setSowNumber] = useState(getDefaultNumber());
-  const [startDate, setStartDate] = useState('2024-01-01');
-  const [endDate, setEndDate] = useState('2024-12-31');
-  const [budget, setBudget] = useState('0');
-  const [document, setDocument] = useState(null);
-  
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -70,8 +53,8 @@ const SOWCreate = () => {
 
     try {
       setLoading('Validating document with AI...');
-
       await api.sows.validate(sowId);
+      
     } catch (err) {
       console.error(err);
       // still continue on, since the SOW is already created in the database

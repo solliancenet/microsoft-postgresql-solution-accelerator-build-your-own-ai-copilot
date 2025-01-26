@@ -39,7 +39,7 @@ app.add_middleware(
 )
 
 # Add routers to various API endpoints
-app.include_router(completions.router)
+#app.include_router(completions.router)
 app.include_router(deliverables.router)
 app.include_router(documents.router)
 app.include_router(embeddings.router)
@@ -55,7 +55,7 @@ app.include_router(webhooks.router)
 @app.get("/")
 async def get():
     """API welcome message."""
-    return {"message": "Welcome to the Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator API!"}
+    return {"message": "Welcome to the Woodgrove Bank API!"}
 
 if __name__ == "__main__":
     import uvicorn

@@ -56,12 +56,12 @@ resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' e
   name: appConfigName
 }
 
-resource appConfigOpenApiKey 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' =  if (!empty(appConfigName)) {
+resource appConfigOpenApiKey 'Microsoft.AppConfiguration/configurationStores/keyValues@2022-05-01' =  if (!empty(appConfigName)) {
   parent: appConfig
   name: 'openai-apikey'
   properties: {
-    value: '@Microsoft.KeyVault(VaultName=${keyvault.name};SecretName=openai-apikey)'
-    contentType: 'text/plain'
+    value: '{"uri":"https://${keyvault.name}.vault.azure.net/secrets/openai-apikey"}'
+    contentType: 'application/vnd.microsoft.appconfig.keyvaultref+json;charset=utf-8'
     tags: {
       environment: 'production'
     }

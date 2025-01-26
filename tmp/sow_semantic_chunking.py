@@ -70,12 +70,6 @@ known_headings = [
     "Standards and Testing", "Payments", "Compliance", "Project Deliverables"
 ]
 
-# List of known headings
-known_headings = [
-    "Project Scope", "Project Objectives", "Location", "Tasks", "Schedules",
-    "Standards and Testing", "Payments", "Compliance", "Project Deliverables"
-]
-
 def is_heading(text, known_headings):
     # Check if the text matches any known headings
     if text.strip() in known_headings:

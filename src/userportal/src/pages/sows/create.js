@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Spinner, Alert } from 'react-bootstrap';
-import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import api from '../../api/Api';
-import config from '../../config';
-
-const getDefaultNumber = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `SOW-${year}-${month}${day}`;
-};
 
 const SOWCreate = () => {
   const { vendorId } = useParams();
   const [sowId, setSowId]  = useState(0);
   const [sowVendorId, setSowVendorId] = useState(vendorId);
-
-  const [sowNumber, setSowNumber] = useState(getDefaultNumber());
-  const [startDate, setStartDate] = useState('2024-01-01');
-  const [endDate, setEndDate] = useState('2024-12-31');
-  const [budget, setBudget] = useState('0');
-  const [document, setDocument] = useState(null);
-  
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -53,11 +36,13 @@ const SOWCreate = () => {
     
     setShowUpload(false);
 
+    var newSowId = 0;
     try {
       setLoading('Analyzing document with AI...');
 
       const result = await api.sows.analyze(file, { vendor_id: sowVendorId });
       setSowId(result.id);
+      newSowId = result.id;
 
     } catch (err) {
       console.error(err);
@@ -70,8 +55,8 @@ const SOWCreate = () => {
 
     try {
       setLoading('Validating document with AI...');
-
-      await api.sows.validate(sowId);
+      await api.sows.validate(newSowId);
+      
     } catch (err) {
       console.error(err);
       // still continue on, since the SOW is already created in the database
@@ -79,7 +64,7 @@ const SOWCreate = () => {
 
     setError(null);
     const successMessage = "SOW created successfully with fields populated by AI!"
-    window.location.href = `/sows/${sowId}?success=${successMessage}&showValidation=true`;
+    window.location.href = `/sows/${newSowId}?success=${successMessage}&showValidation=true`;
   };
 
   return (

@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import api from '../../api/Api';
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
 const InvoiceEdit = () => {
+  const query = useQuery();
   const { id } = useParams(); // Extract Vendor ID from URL
   const [vendorId, setVendorId] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState('');
@@ -15,9 +21,21 @@ const InvoiceEdit = () => {
   const [metadata, setMetadata] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [showValidation, setShowValidation] = useState(false);
 
   const [statuses, setStatuses] = useState([]);
   const [vendors, setVendors] = useState([]);
+
+  useEffect(() => {
+    const message = query.get('success');
+    if (message) {
+      setSuccess(message);
+    }
+    const validation = query.get('showValidation');
+    if (validation) {
+      setShowValidation(true);
+    }
+  }, [query]);
 
   useEffect(() => {
     // Fetch data when component mounts
@@ -180,6 +198,9 @@ const InvoiceEdit = () => {
         <Button type="button" variant="secondary" className="ms-2" onClick={() => window.location.href = '/invoices' }>
           <i className="fas fa-times"></i> Cancel
         </Button>
+        <a href={`/vendors/${vendorId}`} className="btn btn-link ms-2">
+          Go to Vendor
+        </a>
       </Form>
     </div>
   );

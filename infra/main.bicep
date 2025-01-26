@@ -174,6 +174,7 @@ module apiApp './app/API.bicep' = {
     location: location
     tags: tags
     appConfigName: appConfig.outputs.name
+    keyVaultName: keyVault.outputs.name
     identityName: '${abbrs.managedIdentityUserAssignedIdentities}api-${resourceToken}'
     storageAccountName: storage.outputs.name
     applicationInsightsName: monitoring.outputs.applicationInsightsName

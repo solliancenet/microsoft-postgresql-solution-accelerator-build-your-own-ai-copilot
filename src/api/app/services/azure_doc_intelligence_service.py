@@ -2,6 +2,8 @@ from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer.aio import DocumentAnalysisClient
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List
+from datetime import datetime
+import re
 
 class DocumentAnalysisResult:
     extracted_text: str
@@ -46,3 +48,37 @@ class AzureDocIntelligenceService:
             chunk_overlap=50        # Overlap between chunks
         )
         return text_splitter.split_text(text)
+
+
+    def extract_sow_metadata(self, full_text):
+        """Extract SOW metadata"""
+        return {
+            "content": full_text
+        }
+
+    def extract_invoice_metadata(self, full_text):
+        """Extract invoice metadata such as number, amount, and invoice_date from text."""
+        metadata = {}
+
+        # Extract invoice number
+        match = re.search(r"Invoice Number[:\s]+([A-Za-z0-9-]+)", full_text, re.IGNORECASE)
+        metadata['number'] = match.group(1) if match else "UNKNOWN"
+
+        # Extract invoice amount
+        match = re.search(r"Total Amount[:\s]+[$]?([\d,]+(?:\.\d{1,2})?)", full_text, re.IGNORECASE)
+        metadata['amount'] = float(match.group(1).replace(",", "")) if match else 0.0
+
+        # Extract invoice date
+        match = re.search(r"Invoice Date[:\s]+([\d/-]{8,10})", full_text, re.IGNORECASE)
+        if match:
+            try:
+                metadata['invoice_date'] = datetime.strptime(match.group(1), "%Y-%m-%d").date()
+            except ValueError:
+                metadata['invoice_date'] = None
+        else:
+            metadata['invoice_date'] = None
+
+        # Default payment status
+        metadata['payment_status'] = "Pending"
+
+        return metadata

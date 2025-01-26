@@ -84,9 +84,7 @@ async def analyze_sow(
     extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
     full_text = "\n".join(extracted_text)
     text_chunks = doc_intelligence_service.semantic_chunking(full_text)
-    metadata = {
-        "content": full_text
-    }
+    metadata = doc_intelligence_service.extract_sow_metadata(full_text)
 
     # Create SOW in the database
     async with pool.acquire() as conn:

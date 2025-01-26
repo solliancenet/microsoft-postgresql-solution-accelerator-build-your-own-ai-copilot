@@ -57,38 +57,37 @@ async def analyze_invoice(
     # Upload file to Azure Blob Storage
     documentName = await storage_service.save_invoice_document(vendor_id, file)
     
-    # Set field defaults
-    invoice_number = f"INV-{datetime.now().strftime('%Y-%m%d')}"
-    amount = 0
-    invoice_date = datetime.now().date()
-    payment_status = "Pending"
-    metadata = {}
-
     # Analyze the document
-    # document_data = await storage_service.download_blob(documentName)
-    # extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
-    # full_text = "\n".join(extracted_text)
-    # text_chunks = doc_intelligence_service.semantic_chunking(full_text)
-    # metadata = {
-    #     "content": full_text
-    # }
+    document_data = await storage_service.download_blob(documentName)
+    extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
+    full_text = "\n".join(extracted_text)
+    text_chunks = doc_intelligence_service.semantic_chunking(full_text)
+    metadata = doc_intelligence_service.extract_invoice_metadata(full_text)
+
+    # Incorporate extracted field values, or use default if not found
+    invoice_number = metadata['number'] or f"INV-{datetime.now().strftime('%Y-%m%d')}"
+    amount = metadata['amount'] or 0
+    invoice_date = metadata['invoice_date'] or datetime.now().date()
+    payment_status = metadata['payment_status'] or "Pending"
+
+    metadata['invoice_date'] = None # clear this since object of type date is not json serializable
 
     # Create invoice in the database
     async with pool as conn:
         # NO AI
-        row = await conn.fetchrow('''
-        INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata)
-        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
-        ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata))
+        # row = await conn.fetchrow('''
+        # INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata)
+        # VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
+        # ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata))
         
         # WITH AI
-        # row = await conn.fetchrow('''
-        # INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
-        # VALUES (
-        #     $1, $2, $3, $4, $5, $6, $7,
-        #     azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
-        # ) RETURNING *;
-        # ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
+        row = await conn.fetchrow('''
+        INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
+        VALUES (
+            $1, $2, $3, $4, $5, $6, $7,
+            azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+        ) RETURNING *;
+        ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
 
         if row is None:
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')

@@ -252,6 +252,7 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
     ]
     keyvaultName: keyVault.outputs.name
     appConfigName: appConfig.outputs.name
+    principalId: principalId
     location: location
     name: '${abbrs.openAiAccounts}${resourceToken}'
     sku: 'S0'

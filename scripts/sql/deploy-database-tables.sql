@@ -147,11 +147,11 @@ CREATE TABLE IF NOT EXISTS milestones (
 -- Insert starter data for milestones 
 INSERT INTO milestones (sow_id, name, status)
 VALUES
-    (1,'Monitoring of resources','Completed'),
+    (1,'Monitoring','Completed'),
+    (1,'Resource Scaling','Completed'),
     (1,'Cost Management','Completed'),
-    (1,'Automated Scaling','Completed'),
     (1,'Maintenance Practices','Completed'),
-    (1,'Issue Resolution','In Progress'),
+    (1,'App Troubleshooting','In Progress'),
     (2,'CI/CD Pipelines','Completed'),
     (2,'Containerized Applications','In Progress'),
     (2,'Cloud Monitoring','In Progress')
@@ -167,12 +167,37 @@ CREATE TABLE IF NOT EXISTS deliverables (
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
 );
 
--- Insert starter data for deliverables
-INSERT INTO deliverables (milestone_id, description, amount, status, due_date)
+-- Insert starter data for deliverable
+INSERT INTO deliverables (milestone_id, description, due_date)
 VALUES
 
-(1,'Monitoring of Azure infrastructure',8600,'Completed','2024-12-08'),
-(2,'Implementation of cost management',7000,'Completed','2024-12-08'),
+(1,'Monitoring of resources','Completed'),
+(2,'Implementation of automated scaling','Completed'),
+(3,'Cost Management Implementation','Completed'),
+(4,'Maintenance and troubleshooting practices','Completed'),
+(5,'Identify Azure application issues','In Progress'),
+(5,'Resolution of Azure application issues','Completed'),
+(6,'Design CI/CD pipelines','Completed'),
+(8,'Initial setup of Cloud infrastructure monitoring','In Progress')
+
+
+-- Invoice Line Items table
+CREATE TABLE IF NOT EXISTS invoice_line_items (
+    id BIGSERIAL PRIMARY KEY,
+    invoice_id BIGINT NOT NULL,
+    description TEXT,
+    amount NUMERIC(10, 2),
+    status TEXT NOT NULL,
+    due_date DATE NOT NULL,
+    FOREIGN KEY (invoice_id) REFERENCES invoices (id) ON DELETE CASCADE
+);
+
+-- Insert starter data for invoice_line_items
+INSERT INTO invoice_line_items (invoice_id, description, amount, status, due_date)
+VALUES
+
+(1,'Monitoring of resources',8600,'Completed','2024-12-08'),
+(2,'Cost Management Implementation',7000,'Completed','2024-12-08'),
 (3,'Implementation of automated scaling',7000,'Completed','2024-12-22'),
 (4,'Maintenance and troubleshooting practices',10500,'Completed','2024-12-27'),
 (5,'Identify Azure application issues',2000,'In Progress','2024-12-27'),
@@ -190,11 +215,20 @@ CREATE TABLE IF NOT EXISTS sow_chunks (
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS validation (
+CREATE TABLE IF NOT EXISTS invoice_validation_results (
     id BIGSERIAL PRIMARY KEY,
     invoice_id BIGINT NOT NULL,
     datestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    validation_result TEXT,
-    validation_pass BOOLEAN,
+    result TEXT,
+    validation_passed BOOLEAN,
     FOREIGN KEY (invoice_id) REFERENCES invoices (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS sow_validation_results (
+    id BIGSERIAL PRIMARY KEY,
+    sow_id BIGINT NOT NULL,
+    datestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    result TEXT,
+    validation_passed BOOLEAN,
+    FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );

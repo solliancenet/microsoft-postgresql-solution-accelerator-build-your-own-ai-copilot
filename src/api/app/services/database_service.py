@@ -2,6 +2,7 @@ import asyncpg
 import urllib.parse
 from azure.identity.aio import DefaultAzureCredential
 from datetime import datetime, timedelta
+import asyncio
 import jwt
 import os
 
@@ -13,6 +14,7 @@ class DatabaseService:
         self.database_name = database_name
         self.connection_pool = None
         self.connection_pool_created = None
+        self._lock = asyncio.Lock()
 
     async def close(self):
         """Close the connection pool."""
@@ -22,11 +24,18 @@ class DatabaseService:
 
     async def get_connection_pool(self):
         """Get the connection pool to the Azure Database for PostgreSQL server."""
-        if self.connection_pool is None or self.connection_pool._closed or (self.connection_pool_created is None or (datetime.now() - self.connection_pool_created) >= timedelta(minutes=55)):
-            # Create a new connection pool, if it does not exist, is closed, or has been open for more than 55 minutes (Azure token expires after 1 hour)
-            connection_uri = await self.__get_connection_uri()
-            self.connection_pool = await asyncpg.create_pool(dsn=connection_uri)
-            self.connection_pool_created = datetime.now()
+        # Create a new connection pool, if it does not exist, is closed, or has been open for more than 55 minutes (Azure token expires after 1 hour)
+        sessionExpired = (self.connection_pool_created is not None and (datetime.now() - self.connection_pool_created) >= timedelta(minutes=55))
+        
+        if self.connection_pool is None or self.connection_pool._closed or (self.connection_pool_created is None or sessionExpired):
+            async with self._lock:
+                if (sessionExpired):
+                    if (self.connection_pool is not None and not self.connection_pool._closed):
+                        await self.connection_pool.close()
+
+                connection_uri = await self.__get_connection_uri()
+                self.connection_pool = await asyncpg.create_pool(dsn=connection_uri, min_size=1, max_size=150)
+                self.connection_pool_created = datetime.now()
 
         return self.connection_pool
     

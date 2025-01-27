@@ -38,6 +38,7 @@ async def list_invoices(vendor_id: int = -1, skip: int = 0, limit: int = 10, sor
         
     return ListResponse(data=invoices, total = len(invoices), skip = skip, limit = limit)
 
+   
 @router.get("/{invoice_id}", response_model=Invoice)
 async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
     """Retrieves an invoice by ID from the database."""
@@ -48,13 +49,6 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
         invoice = parse_obj_as(Invoice, dict(row))
     return invoice
 
-@router.get("/{id}/validations", response_model=ListResponse[InvoiceValidationResult])
-async def list_invoice_validations(id: int, pool = Depends(get_db_connection_pool)):
-    """Retrieves a list of validation results for an Invoice from the database."""
-    async with pool.acquire() as conn:
-        rows = await conn.fetch('SELECT * FROM invoice_validation_results WHERE invoice_id = $1 ORDER BY datestamp DESC;', id)
-        validations = parse_obj_as(list[InvoiceValidationResult], [dict(row) for row in rows])
-    return ListResponse(data=validations, total = len(validations), skip = 0, limit = len(validations))
 
 @router.post("/", response_model=Invoice)
 async def analyze_invoice(

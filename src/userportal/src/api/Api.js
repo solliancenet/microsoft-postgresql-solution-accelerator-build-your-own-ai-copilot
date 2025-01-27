@@ -114,9 +114,6 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));
         },
-        validations: async (id) => {
-            return await RESTHelper.get(getUrl(`/invoices/${id}/validations`));
-        },
         analyze: async (file, data) => {
             if (!file) return;
 
@@ -300,6 +297,14 @@ module.exports = {
         list: async () => {
             return await RESTHelper.get(getUrl(`/statuses`));
         }
+    },
+    validationResults: {
+        invoice: async (id) => {
+            return await RESTHelper.get(getUrl(`/validation-results/invoice/${id}`));
+        },
+        sow: async (id) => {
+            return await RESTHelper.get(getUrl(`/validation-results/sow/${id}`));
+        },
     },
     vendors: {
         list: async (skip = 0, limit = 10, sortBy = '') => {

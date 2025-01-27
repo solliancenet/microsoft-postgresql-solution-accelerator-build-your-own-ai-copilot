@@ -57,15 +57,6 @@ async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
     return sow
 
 
-@router.get("/{id}/validations", response_model=ListResponse[SowValidationResult])
-async def list_sow_validations(id: int, pool = Depends(get_db_connection_pool)):
-    """Retrieves a list of validation results for a SOW from the database."""
-    async with pool.acquire() as conn:
-        rows = await conn.fetch('SELECT * FROM sow_validation_results WHERE sow_id = $1 ORDER BY datestamp DESC;', id)
-        validations = parse_obj_as(list[SowValidationResult], [dict(row) for row in rows])
-    return ListResponse(data=validations, total = len(validations), skip = 0, limit = len(validations))
-
-
 @router.post("/", response_model=Sow)
 async def analyze_sow(
     file: UploadFile = File(...),

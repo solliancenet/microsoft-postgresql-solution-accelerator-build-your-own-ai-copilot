@@ -43,7 +43,7 @@ const InvoiceEdit = () => {
     if (validation) {
       setShowValidation(true);
     }
-  }, [query]);
+  }, [useLocation().search]);
 
   useEffect(() => {
     // Fetch data when component mounts
@@ -341,6 +341,24 @@ const InvoiceEdit = () => {
         title="Delete Invoice Line Item"
         message="Are you sure you want to delete this Invoice Line Item?"
         />
+
+      {showValidation && (
+        <div className="modal show d-block" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Validation Results</h5>
+              </div>
+              <div className="modal-body">
+                <p>Your validation message here.</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowValidation(false)}>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

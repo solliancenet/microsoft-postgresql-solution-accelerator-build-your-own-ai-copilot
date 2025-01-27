@@ -2,7 +2,12 @@
 module.exports = {
     get: async (url) => {
         const tryGet = async () => {
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

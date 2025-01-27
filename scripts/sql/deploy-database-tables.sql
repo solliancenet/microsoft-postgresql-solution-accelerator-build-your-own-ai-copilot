@@ -89,7 +89,7 @@ SELECT 'SOW-LP-WGB-001',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-LP-WGB-001');
 
-INSERT INTO sows (number, vendor_id, sow_id, start_date, end_date, budget, document, metadata)
+INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'SOW-WoodgroveBank-WWE-001',
        4, --Wide World Engineering
        '2024-10-01',
@@ -168,17 +168,17 @@ CREATE TABLE IF NOT EXISTS deliverables (
 );
 
 -- Insert starter data for deliverable
-INSERT INTO deliverables (milestone_id, description, due_date)
+INSERT INTO deliverables (milestone_id, description, status, due_date)
 VALUES
 
-(1,'Monitoring of resources','Completed'),
-(2,'Implementation of automated scaling','Completed'),
-(3,'Cost Management Implementation','Completed'),
-(4,'Maintenance and troubleshooting practices','Completed'),
-(5,'Identify Azure application issues','In Progress'),
-(5,'Resolution of Azure application issues','Completed'),
-(6,'Design CI/CD pipelines','Completed'),
-(8,'Initial setup of Cloud infrastructure monitoring','In Progress');
+(1,'Monitoring of resources','Completed', '2024-11-08'),
+(2,'Implementation of automated scaling','Completed', '2024-11-15'),
+(3,'Cost Management Implementation','Completed', '2024-11-22'),
+(4,'Maintenance and troubleshooting practices','Completed', '2024-11-27'),
+(5,'Identify Azure application issues','Completed', '2024-11-27'),
+(5,'Resolution of Azure application issues','Completed', '2024-12-13'),
+(6,'Design CI/CD pipelines','Completed', '2024-10-10'),
+(8,'Initial setup of Cloud infrastructure monitoring','Completed', '2024-10-10');
 
 
 -- Invoice Line Items table

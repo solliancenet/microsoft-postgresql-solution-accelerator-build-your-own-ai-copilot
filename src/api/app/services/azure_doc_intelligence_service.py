@@ -36,10 +36,9 @@ class AzureDocIntelligenceService:
 
         result = await poller.result()
 
-        analysis = DocumentAnalysisResult(
-            extracted_text=[],
-            text_chunks=[]
-        )
+        analysis = DocumentAnalysisResult()
+        analysis.extracted_text = []
+        analysis.text_chunks = []
         
         known_headings = [
             "Project Scope", "Project Objectives", "Location", "Tasks", "Schedules",
@@ -50,11 +49,16 @@ class AzureDocIntelligenceService:
             page_text = " ".join([line.content for line in page.lines])
             analysis.extracted_text.append(page_text)
 
-            for line in pages.lines:
+            current_heading = None
+            for line in page.lines:
                 text = line.content
                 if self.__is_heading(text, known_headings): # Detect headings
                     current_heading = text
-                    analysis.text_chunks.append(TextChunk(heading=text, content="", page_number=page.page_number))
+                    newTextChunk = TextChunk()
+                    newTextChunk.heading = text
+                    newTextChunk.content = ""
+                    newTextChunk.page_number = page.page_number
+                    analysis.text_chunks.append(newTextChunk)
                 elif current_heading:
                     analysis.text_chunks[-1].content += " " + text
 
@@ -64,7 +68,7 @@ class AzureDocIntelligenceService:
 
         return analysis
 
-    def __is_heading(text, known_headings):
+    def __is_heading(self, text, known_headings):
         # Check if the text matches any known headings
         if text.strip() in known_headings:
             return True

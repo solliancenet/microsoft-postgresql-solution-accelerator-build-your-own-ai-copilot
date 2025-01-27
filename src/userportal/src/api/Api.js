@@ -107,8 +107,8 @@ module.exports = {
         },
     },
     invoices: {
-        list: async (skip = 0, limit = 10, sortBy = '') => {
-            return await RESTHelper.get(getUrl(`/invoices?skip=${skip}&limit=${limit}&sortby=${sortBy}`));
+        list: async (vendor_id = -1, skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/invoices?vendor_id=${vendor_id}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
         },
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));

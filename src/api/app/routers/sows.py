@@ -105,10 +105,11 @@ async def analyze_sow(
         if sow_id is None:
             # Create new SOW
             row = await conn.fetchrow('''
-                INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, vendor_id)
+                INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, summary, vendor_id)
                 VALUES (
                 $1, $2, $3, $4, $5, $6, 
                 azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
+                azure_cognitive.summarize_abstractive($7, 'en', 2)
                 $8)
                 RETURNING *;
             ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)
@@ -121,8 +122,9 @@ async def analyze_sow(
                     budget = $3,
                     document = $4,
                     metadata = $5,
-                    embeddings = azure_openai.create_embeddings('embeddings', $6, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
-                WHERE sow_id = $7
+                    embeddings = azure_openai.create_embeddings('embeddings', $6, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+                    --, summary = azure_cognitive.summarize_abstractive($6, 'en', 2) --azure_cognitive.summarize_extractive($6, 'en', 2)
+                WHERE id = $7
                 RETURNING *;
             ''', start_date, end_date, budget, documentName, json.dumps(metadata), full_text, sow_id)
 

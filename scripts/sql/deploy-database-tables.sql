@@ -197,13 +197,13 @@ INSERT INTO invoice_line_items (invoice_id, description, amount, status, due_dat
 VALUES
 
 (1,'Monitoring of resources',8600,'Completed','2024-12-08'),
-(2,'Cost Management Implementation',7000,'Completed','2024-12-08'),
-(3,'Implementation of automated scaling',7000,'Completed','2024-12-22'),
-(4,'Maintenance and troubleshooting practices',10500,'Completed','2024-12-27'),
-(5,'Identify Azure application issues',2000,'In Progress','2024-12-27'),
-(5,'Resolution of Azure application issues',3500,'Completed','2024-12-30'),
-(6,'Design CI/CD pipelines',20100,'Completed','2024-12-10'),
-(8,'Initial setup of Cloud infrastructure monitoring',16500,'In Progress','2024-12-10');
+(1,'Cost Management Implementation',7000,'Completed','2024-12-08'),
+(2,'Implementation of automated scaling',7000,'Completed','2024-12-22'),
+(3,'Maintenance and troubleshooting practices',10500,'Completed','2024-12-27'),
+(3,'Identify Azure application issues',2000,'In Progress','2024-12-27'),
+(4,'Resolution of Azure application issues',3500,'Completed','2024-12-30'),
+(5,'Design CI/CD pipelines',20100,'Completed','2024-12-10'),
+(5,'Initial setup of Cloud infrastructure monitoring',16500,'In Progress','2024-12-10');
 
 
 CREATE TABLE IF NOT EXISTS sow_chunks (

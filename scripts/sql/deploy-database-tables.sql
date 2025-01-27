@@ -89,7 +89,7 @@ SELECT 'SOW-LP-WGB-001',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-LP-WGB-001');
 
-INSERT INTO sows (number, vendor_id, sow_id, start_date, end_date, budget, document, metadata)
+INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'SOW-WoodgroveBank-WWE-001',
        4, --Wide World Engineering
        '2024-10-01',
@@ -125,15 +125,15 @@ CREATE TABLE IF NOT EXISTS invoices (
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
 
--- Insert starter data for invoices
+
 -- Insert starter data for invoices
 INSERT INTO invoices (number, vendor_id, sow_id, amount, invoice_date, payment_status, document, content, metadata)
 VALUES
-    ('INV-TWC2024-001', 1, 1, 15600, '2024-11-08', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-001.pdf',  '{"Invoice Number": "INV-TWC2024-001", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-08", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 8600.00, "Due Date": "2024-12-08", "Description": "Monitoring of resources"}, {"Amount": 7000.00, "Due Date": "2024-12-08", "Description": "Cost Management"}], "Total Amount": 15600.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
-    ('INV-TWC2024-002', 1, 1, 7000, '2024-11-22', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-002.pdf', '{"Invoice Number": "INV-TWC2024-002", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-22", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 7000.00, "Due Date": "2024-12-22", "Description": "Automated Scaling"}], "Total Amount": 7000.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
-    ('INV-TWC2024-003', 1, 1, 12500, '2024-11-27', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-003.pdf',  '{"Invoice Number": "INV-TWC2024-003", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-27", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 10500.00, "Due Date": "2024-12-27", "Description": "Maintenance Practices"}, {"Amount": 2000.00, "Due Date": "2024-12-27", "Description": "Issue Resolution"}], "Total Amount": 12500.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
-    ('INV-TWC2024-004', 1, 1, 3500, '2024-11-30', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-004.pdf',  '{"Invoice Number": "INV-TWC2024-004", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-30", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 3500.00, "Due Date": "2024-12-30", "Description": "Issue Resolution"}], "Total Amount": 3500.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
-    ('INV-WWE2024-001', 5, 2, 36600, '2024-10-10', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-WWE2024-001.pdf',  '{"Invoice Number": "INV-WWE2024-001", "Vendor": "Wide World Engineering", "Address": "123 Innovation Drive, TechVille", "Contact Name": "Morgan Brown", "Contact Email": "morgan.brown@wideworldeng.com", "Contact Number": "555-967-8543", "SOW Number": "WWE-WoodgroveBank-SOW-001", "Invoice Date": "2024-10-10", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 20100.00, "Due Date": "2024-11-10", "Description": "CI/CD Pipelines"}, {"Amount": 16500.00, "Due Date": "2024-11-10", "Description": "Cloud Monitoring"}], "Total Amount": 36600.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing Wide World Engineering"}', '{}');
+    ('INV-TWC2024-001', 1, 1, 15600, '2024-11-08', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-001.pdf',  '{"Invoice Number": "INV-TWC2024-001", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-08", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 8600.00, "Due Date": "2024-12-08", "Description": "Monitoring of resources"}, {"Amount": 7000.00, "Due Date": "2024-12-08", "Description": "Cost Management Implementation"}], "Total Amount": 15600.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
+    ('INV-TWC2024-002', 1, 1, 7000, '2024-11-22', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-002.pdf', '{"Invoice Number": "INV-TWC2024-002", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-22", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 7000.00, "Due Date": "2024-12-22", "Description": "Implementaion of automated scaling"}], "Total Amount": 7000.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
+    ('INV-TWC2024-003', 1, 1, 12500, '2024-11-27', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-003.pdf',  '{"Invoice Number": "INV-TWC2024-003", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-27", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 10500.00, "Due Date": "2024-12-27", "Description": "Maintenance and troubleshooting practices"}, {"Amount": 2000.00, "Due Date": "2024-12-27", "Description": "Identify Azure application issues"}], "Total Amount": 12500.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
+    ('INV-TWC2024-004', 1, 1, 3500, '2024-11-30', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-TWC2024-004.pdf',  '{"Invoice Number": "INV-TWC2024-004", "Vendor": "TailWind Cloud Solutions", "Address": "789 Goldsmith Road, MainTown City", "Contact Name": "Morgan Skinner", "Contact Email": "morgan.skinner@tailwindcloud.com", "Contact Number": "123-789-7890", "SOW Number": "SOW-WoodgroveBank-2024-001", "Invoice Date": "2024-11-30", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 3500.00, "Due Date": "2024-12-30", "Description": "Resolution of Azure application issues"}], "Total Amount": 3500.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing TailWind Cloud Solutions"}', '{}'),
+    ('INV-WWE2024-001', 5, 2, 36600, '2024-10-10', 'Pending', 'https://stuemjxng3p6up6.blob.core.windows.net/documents/INV-WWE2024-001.pdf',  '{"Invoice Number": "INV-WWE2024-001", "Vendor": "Wide World Engineering", "Address": "123 Innovation Drive, TechVille", "Contact Name": "Morgan Brown", "Contact Email": "morgan.brown@wideworldeng.com", "Contact Number": "555-967-8543", "SOW Number": "WWE-WoodgroveBank-SOW-001", "Invoice Date": "2024-10-10", "Client": "Woodgrove Bank", "Address": "123 Financial Avenue, Woodgrove City", "Milestone Deliverables": [{"Amount": 20100.00, "Due Date": "2024-11-10", "Description": "Design CI/CD Pipelines"}, {"Amount": 16500.00, "Due Date": "2024-11-10", "Description": "Initial setup of Cloud infrastructure monitoringg"}], "Total Amount": 36600.00, "Payment Terms": "Payment is due within 30 days of the invoice date. A penalty of 10% will be applied for late payments.", "Thank you": "Thank you for choosing Wide World Engineering"}', '{}');
 
 -- Milestones table
 CREATE TABLE IF NOT EXISTS milestones (
@@ -147,14 +147,14 @@ CREATE TABLE IF NOT EXISTS milestones (
 -- Insert starter data for milestones 
 INSERT INTO milestones (sow_id, name, status)
 VALUES
-    (1,'Monitoring of resources','Completed'),
+    (1,'Monitoring','Completed'),
+    (1,'Resource Scaling','Completed'),
     (1,'Cost Management','Completed'),
-    (1,'Automated Scaling','Completed'),
     (1,'Maintenance Practices','Completed'),
-    (1,'Issue Resolution','In Progress'),
+    (1,'App Troubleshooting','In Progress'),
     (2,'CI/CD Pipelines','Completed'),
     (2,'Containerized Applications','In Progress'),
-    (2,'Cloud Monitoring','In Progress')
+    (2,'Cloud Monitoring','In Progress');
 
 -- Deliverables table
 CREATE TABLE IF NOT EXISTS deliverables (
@@ -167,18 +167,43 @@ CREATE TABLE IF NOT EXISTS deliverables (
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
 );
 
--- Insert starter data for deliverables
-INSERT INTO deliverables (milestone_id, description, amount, status, due_date)
+-- Insert starter data for deliverable
+INSERT INTO deliverables (milestone_id, description, status, due_date)
 VALUES
 
-(1,'Monitoring of Azure infrastructure',8600,'Completed','2024-12-08'),
-(2,'Implementation of cost management',7000,'Completed','2024-12-08'),
-(3,'Implementation of automated scaling',7000,'Completed','2024-12-22'),
-(4,'Maintenance and troubleshooting practices',10500,'Completed','2024-12-27'),
-(5,'Identify Azure application issues',2000,'In Progress','2024-12-27'),
-(5,'Resolution of Azure application issues',3500,'Completed','2024-12-30'),
-(6,'Design CI/CD pipelines',20100,'Completed','2024-12-10'),
-(8,'Initial setup of Cloud infrastructure monitoring',16500,'In Progress','2024-12-10')
+(1,'Monitoring of resources','Completed', '2024-11-08'),
+(2,'Implementation of automated scaling','Completed', '2024-11-15'),
+(3,'Cost Management Implementation','Completed', '2024-11-22'),
+(4,'Maintenance and troubleshooting practices','Completed', '2024-11-27'),
+(5,'Identify Azure application issues','Completed', '2024-11-27'),
+(5,'Resolution of Azure application issues','Completed', '2024-12-13'),
+(6,'Design CI/CD pipelines','Completed', '2024-10-10'),
+(8,'Initial setup of Cloud infrastructure monitoring','Completed', '2024-10-10');
+
+
+-- Invoice Line Items table
+CREATE TABLE IF NOT EXISTS invoice_line_items (
+    id BIGSERIAL PRIMARY KEY,
+    invoice_id BIGINT NOT NULL,
+    description TEXT,
+    amount NUMERIC(10, 2),
+    status TEXT NOT NULL,
+    due_date DATE NOT NULL,
+    FOREIGN KEY (invoice_id) REFERENCES invoices (id) ON DELETE CASCADE
+);
+
+-- Insert starter data for invoice_line_items
+INSERT INTO invoice_line_items (invoice_id, description, amount, status, due_date)
+VALUES
+
+(1,'Monitoring of resources',8600,'Completed','2024-12-08'),
+(1,'Cost Management Implementation',7000,'Completed','2024-12-08'),
+(2,'Implementation of automated scaling',7000,'Completed','2024-12-22'),
+(3,'Maintenance and troubleshooting practices',10500,'Completed','2024-12-27'),
+(3,'Identify Azure application issues',2000,'In Progress','2024-12-27'),
+(4,'Resolution of Azure application issues',3500,'Completed','2024-12-30'),
+(5,'Design CI/CD pipelines',20100,'Completed','2024-12-10'),
+(5,'Initial setup of Cloud infrastructure monitoring',16500,'In Progress','2024-12-10');
 
 
 CREATE TABLE IF NOT EXISTS sow_chunks (
@@ -190,11 +215,20 @@ CREATE TABLE IF NOT EXISTS sow_chunks (
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS validation (
+CREATE TABLE IF NOT EXISTS invoice_validation_results (
     id BIGSERIAL PRIMARY KEY,
     invoice_id BIGINT NOT NULL,
     datestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    validation_result TEXT,
-    validation_pass BOOLEAN,
+    result TEXT,
+    validation_passed BOOLEAN,
     FOREIGN KEY (invoice_id) REFERENCES invoices (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS sow_validation_results (
+    id BIGSERIAL PRIMARY KEY,
+    sow_id BIGINT NOT NULL,
+    datestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    result TEXT,
+    validation_passed BOOLEAN,
+    FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );

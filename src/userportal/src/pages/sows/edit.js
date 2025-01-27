@@ -374,6 +374,8 @@ const SOWEdit = () => {
     </table>
 
       {showValidation && validations && validations.length > 0 && (
+        <>
+        <div className="blur-overlay"></div>
         <div className="modal show d-block" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -391,6 +393,7 @@ const SOWEdit = () => {
             </div>
           </div>
         </div>
+        </>
       )}
 
     </div>

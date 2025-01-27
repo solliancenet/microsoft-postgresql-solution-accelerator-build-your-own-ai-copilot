@@ -53,55 +53,7 @@ async def storage_blob_webhook(
 
         print(f"Event: {eventType} - Filename: {blobName}")
         
-        # Step 1: Download the document
-        document_data = await storage_service.download_blob(blobName)
 
-        # Step 2: Extract text from the document
-        extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
-        full_text = "\n".join(extracted_text)
-
-        # Step 3: Chunk the text semantically
-        text_chunks = doc_intelligence_service.semantic_chunking(full_text)
-
-        # Step 4: Insert into database
-        # Get doc type and id
-        async with pool.acquire() as conn:
-            doc = await conn.fetchrow('''
-                (
-                    select id as id, 'sow' as doctype from sows where document LIKE CONCAT($1, '%')
-                ) UNION (
-                    select id as id, 'invoice' as doctype from invoices where document LIKE CONCAT($1, '%')
-                ) LIMIT 1;
-            ''', blobName)
-            if doc is None:
-                raise HTTPException(status_code=404, detail=f'Document with the name {blobName} was not found in the database.')
-            objectId = docs['id']
-            documentType = docs['doctype']
-
-        if (documentType == 'sow'): # Insert into SOWs table
-            metadata = {
-                "content": full_text
-            }
-            await conn.execute('''
-                UPDATE sows
-                SET embeddings = azure_openai.create_embeddings('embeddings', $1, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000), 
-                    metadata = $2
-                WHERE id = $3;
-            ''', full_text, json.dumps(metadata), objectId)
-
-        elif (documentType == 'invoice'): # Insert into Invoices table
-            metadata = extract_invoice_metadata(full_text)
-            await conn.execute('''
-                UPDATE invoices
-                SET extracted_text = $2, 
-                    embeddings = azure_openai.create_embeddings('embeddings', $3, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000), 
-                    metadata = $4, invoice_date = $5, payment_status = $6, chunk_text = $7
-                WHERE id = $8;
-            ''', metadata['number'], full_text, json.dumps(metadata), metadata['invoice_date'], metadata['payment_status'], chunk_text, objectId)
-
-        else:
-            raise HTTPException(status_code=500, detail=f'Unknown document type: {documentType}')
-    
 
     return {"message": "Webhook received."}
 
@@ -129,31 +81,3 @@ async def storage_blob_webhook(
 #     'url': 'https://stuemjxng3p6up6.blob.core.windows.net/documents/1/sows/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf',
 #      'sequencer': '0000000000000000000000000000F124000000000007e0c7', 'storageDiagnostics': {'batchId': '7679938c-f006-0070-003c-6d0d4f000000'}
 #      }, 'dataVersion': '', 'metadataVersion': '1', 'eventTime': '2025-01-23T02:15:59.4329615Z'}]
-
-
-def extract_invoice_metadata(full_text):
-    """Extract invoice metadata such as number, amount, and invoice_date from text."""
-    metadata = {}
-
-    # Extract invoice number
-    match = re.search(r"Invoice Number[:\s]+([A-Za-z0-9-]+)", full_text, re.IGNORECASE)
-    metadata['number'] = match.group(1) if match else "UNKNOWN"
-
-    # Extract invoice amount
-    match = re.search(r"Total Amount[:\s]+[$]?([\d,]+(?:\.\d{1,2})?)", full_text, re.IGNORECASE)
-    metadata['amount'] = float(match.group(1).replace(",", "")) if match else 0.0
-
-    # Extract invoice date
-    match = re.search(r"Invoice Date[:\s]+([\d/-]{8,10})", full_text, re.IGNORECASE)
-    if match:
-        try:
-            metadata['invoice_date'] = datetime.strptime(match.group(1), "%Y-%m-%d").date()
-        except ValueError:
-            metadata['invoice_date'] = None
-    else:
-        metadata['invoice_date'] = None
-
-    # Default payment status
-    metadata['payment_status'] = "Pending"
-
-    return metadata

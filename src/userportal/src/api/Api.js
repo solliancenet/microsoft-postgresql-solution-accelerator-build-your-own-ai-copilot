@@ -1,4 +1,3 @@
-const { data } = require('react-router-dom');
 const RESTHelper = require('./RESTHelper');
 
 const APIUrl = process.env.REACT_APP_SERVICE_API_ENDPOINT_URL || 'http://localhost:8000';
@@ -163,6 +162,43 @@ module.exports = {
             return await RESTHelper.delete(getUrl(`/invoices/${id}`));
         }
     },
+    invoiceLineItems: {
+        list: async (invoiceId = -1, skip = 0, limit = 10, sortBy = '') => {
+            return await RESTHelper.get(getUrl(`/invoice_line_items?invoice_id=${invoiceId}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
+        },
+        get: async (id) => {
+            return await RESTHelper.get(getUrl(`/invoice_line_items/${id}`));
+        },
+        create: async (data) => {
+            console.info('Creating invoice line item');
+        
+            const formData = new FormData();
+            for(var key in data){
+                formData.append(key, data[key]);
+            }
+        
+            try {
+                const response = await fetch(getUrl(`/invoice_line_items`), {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error creating invoice line item:', error);
+                throw error;
+            }
+        },
+        update: async (id, data) => {
+            return await RESTHelper.update(getUrl(`/invoice_line_items/${id}`), data);
+        },
+        delete: async (id) => {
+            return await RESTHelper.delete(getUrl(`/invoice_line_items/${id}`));
+        }
+    },
     milestones: {
         list: async (sowId = -1, skip = 0, limit = 10, sortBy = '') => {
             return await RESTHelper.get(getUrl(`/milestones?sow_id=${sowId}&skip=${skip}&limit=${limit}&sortby=${sortBy}`));
@@ -237,7 +273,7 @@ module.exports = {
             console.info('Validating SOW:', id);
         
             try {
-                const response = await fetch(getUrl(`/valiation/sow/${id}`), {
+                const response = await fetch(getUrl(`/validation/sow/${id}`), {
                     method: 'POST',
                 });
                 if (!response.ok) {
@@ -260,6 +296,14 @@ module.exports = {
         list: async () => {
             return await RESTHelper.get(getUrl(`/statuses`));
         }
+    },
+    validationResults: {
+        invoice: async (id) => {
+            return await RESTHelper.get(getUrl(`/validation-results/invoice/${id}`));
+        },
+        sow: async (id) => {
+            return await RESTHelper.get(getUrl(`/validation-results/sow/${id}`));
+        },
     },
     vendors: {
         list: async (skip = 0, limit = 10, sortBy = '') => {

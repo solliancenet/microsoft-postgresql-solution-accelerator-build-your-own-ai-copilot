@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Sow, SowEdit, ListResponse
+from app.models import Sow, SowEdit, ListResponse, SowValidationResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
@@ -17,11 +17,11 @@ router = APIRouter(
 @router.get("/", response_model=ListResponse[Sow])
 async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of SOWs from the database."""
+    orderby = 'id'
+    if (sortby):
+        orderby = sortby
     async with pool.acquire() as conn:
-        orderby = 'id'
-        if (sortby):
-            orderby = sortby
-        
+       
         if (limit < 0):
             if(vendor_id > 0):
                 rows = await conn.fetch('SELECT * FROM sows WHERE vendor_id = $1 ORDER BY $2;', vendor_id, orderby)
@@ -40,7 +40,11 @@ async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby:
         else:
             total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
 
+    if (limit < 0):
+        limit = total
+
     return ListResponse[Sow](data=sows, total = total, skip = skip, limit = limit)
+
 
 @router.get("/{sow_id}", response_model=Sow)
 async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
@@ -88,14 +92,6 @@ async def analyze_sow(
 
     # Create SOW in the database
     async with pool.acquire() as conn:
-        # NO AI
-        # row = await conn.fetchrow('''
-        #     INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
-        #     VALUES ($1, $2, $3, $4, $5, $6, $7)
-        #     RETURNING *;
-        # ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), vendor_id)
-
-        # WITH AI
         row = await conn.fetchrow('''
             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, vendor_id)
             VALUES (
@@ -111,43 +107,6 @@ async def analyze_sow(
         sow = parse_obj_as(Sow, dict(row))
     return sow
 
-# @router.post("/", response_model=Sow)
-# async def create_sow(
-#     number: str = Form(...),
-#     vendor_id: int = Form(...),
-#     start_date: str = Form(...),
-#     end_date: str = Form(...),
-#     budget: float = Form(...),
-#     file: UploadFile = File(...),
-#     pool = Depends(get_db_connection_pool),
-#     storage_service = Depends(get_storage_service)
-# ):
-#     # Parse dates
-#     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
-#     end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
-
-#     # Parse budget
-#     budget_parsed = float(budget)
-
-#     # Get vendor_id from vendor_id
-#     async with pool.acquire() as conn:
-#         vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
-#         if vendor_id is None:
-#             raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
-
-#     # Upload file to Azure Blob Storage
-#     documentName = await storage_service.save_sow_document(vendor_id, file)
-
-#     # Create SOW in the database
-#     async with pool.acquire() as conn:
-#         sow = await conn.fetchrow('''
-#             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
-#             VALUES ($1, $2, $3, $4, $5, $6, $7)
-#             RETURNING *;
-#         ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', vendor_id)
-        
-#         sow = parse_obj_as(Sow, dict(sow))
-#     return sow
 
 @router.put("/{sow_id}", response_model=Sow)
 async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_connection_pool)):

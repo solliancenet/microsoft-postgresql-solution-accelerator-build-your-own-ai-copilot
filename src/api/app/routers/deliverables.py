@@ -34,7 +34,13 @@ async def list_deliverables(milestone_id: int = -1, skip: int = 0, limit: int = 
         
         deliverables = parse_obj_as(list[Deliverable], [dict(row) for row in rows])
 
-        total = await conn.fetchval('SELECT COUNT(*) FROM deliverables;')
+        if (milestone_id == -1):
+            total = await conn.fetchval('SELECT COUNT(*) FROM deliverables;')
+        else:
+            total = await conn.fetchval('SELECT COUNT(*) FROM deliverables WHERE milestone_id = $1;', milestone_id)
+
+    if (limit == -1):
+        limit = total
 
     return ListResponse[Deliverable](data=deliverables, total = total, skip = skip, limit = limit)
 
@@ -77,9 +83,9 @@ async def update_deliverable(
         # Save the updated deliverable
         await conn.execute('''
         UPDATE deliverables 
-        SET name = $1, description = $2, amount = $3, status = $4 
-        WHERE id = $5;
-        ''', deliverable.name, deliverable.description, deliverable.amount, deliverable.status, deliverable_id)
+        SET description = $1, amount = $2, status = $3 
+        WHERE id = $4;
+        ''', deliverable.description, deliverable.amount, deliverable.status, deliverable_id)
 
         row = await conn.fetchrow('SELECT * FROM deliverables WHERE id = $1;', deliverable_id)
         deliverable = parse_obj_as(Deliverable, dict(row))

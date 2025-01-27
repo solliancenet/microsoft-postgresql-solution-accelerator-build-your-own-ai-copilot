@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Invoice, InvoiceEdit, ListResponse
+from app.models import Invoice, InvoiceEdit, ListResponse, InvoiceValidationResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
@@ -16,7 +16,7 @@ router = APIRouter(
 @router.get("/", response_model=ListResponse[Invoice])
 async def list_invoices(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of invoices from the database."""
-    async with pool as conn:
+    async with pool.acquire() as conn:
         orderby = 'id'
         if (sortby):
             orderby = sortby
@@ -27,17 +27,28 @@ async def list_invoices(vendor_id: int = -1, skip: int = 0, limit: int = 10, sor
             rows = await conn.fetch('SELECT * FROM invoices ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
 
         invoices = parse_obj_as(list[Invoice], [dict(row) for row in rows])
+
+        if (vendor_id == -1):
+            total = await conn.fetchval('SELECT COUNT(*) FROM invoices;')
+        else:
+            total = await conn.fetchval('SELECT COUNT(*) FROM invoices WHERE vendor_id = $1;', vendor_id)
+
+    if (limit == -1):
+        limit = total
+        
     return ListResponse(data=invoices, total = len(invoices), skip = skip, limit = limit)
 
+   
 @router.get("/{invoice_id}", response_model=Invoice)
 async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
     """Retrieves an invoice by ID from the database."""
-    async with pool as conn:
+    async with pool.acquire() as conn:
         row = await conn.fetchrow('SELECT * FROM invoices WHERE id = $1;', invoice_id)
         if row is None:
             raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
         invoice = parse_obj_as(Invoice, dict(row))
     return invoice
+
 
 @router.post("/", response_model=Invoice)
 async def analyze_invoice(
@@ -72,22 +83,26 @@ async def analyze_invoice(
 
     metadata['invoice_date'] = None # clear this since object of type date is not json serializable
 
+
+    # Get SOW ID from metadata
+    # TODO: Need to determine SOW from AI analysis of Document
+    sow_id = 0 # metadata['sow_id']
+    if sow_id is not None:
+        async with pool.acquire() as conn:
+            sow_id = await conn.fetchval('SELECT id FROM sows WHERE id = $1;', sow_id)
+            if sow_id is None:
+                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1', vendor_id)
+
+
     # Create invoice in the database
-    async with pool as conn:
-        # NO AI
-        # row = await conn.fetchrow('''
-        # INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata)
-        # VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
-        # ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata))
-        
-        # WITH AI
+    async with pool.acquire() as conn:
         row = await conn.fetchrow('''
-        INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
+        INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
         VALUES (
-            $1, $2, $3, $4, $5, $6, $7,
-            azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+            $1, $2, $3, $4, $5, $6, $7, $8::jsonb,
+            azure_openai.create_embeddings('embeddings', $9, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
         ) RETURNING *;
-        ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
+        ''', vendor_id, sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
 
         if row is None:
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')
@@ -95,36 +110,6 @@ async def analyze_invoice(
         invoice = parse_obj_as(Invoice, dict(row))
     return invoice
 
-
-# @router.post("/", response_model=Invoice)
-# async def create_invoice(
-#     vendor_id: int = Form(...),
-#     number: str = Form(...),
-#     amount: float = Form(...),
-#     invoice_date: str = Form(...),
-#     payment_status: str = Form(...),
-#     file: UploadFile = File(...),
-#     pool = Depends(get_db_connection_pool),
-#     storage_service = Depends(get_storage_service)
-#     ):
-#     """Creates a new invoice in the database."""
-
-#     # Parse date
-#     invoice_date_parsed = datetime.strptime(invoice_date, '%Y-%m-%d').date()
-
-
-#     # Upload file to Azure Blob Storage
-#     documentName = await storage_service.save_invoice_document(file)
-    
-#     # Create invoice in the database
-#     async with pool as conn:
-#         row = await conn.fetchrow('''
-#         INSERT INTO invoices (number, amount, invoice_date, payment_status, document, vendor_id)
-#         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
-#         ''', number, amount, invoice_date_parsed, payment_status, documentName, vendor_id)
-        
-#         new_invoice = parse_obj_as(Invoice, dict(row))
-#     return new_invoice
 
 @router.put("/{invoice_id}", response_model=Invoice)
 async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = Depends(get_db_connection_pool)):
@@ -135,18 +120,19 @@ async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = De
         raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
 
     invoice.vendor_id = invoice_update.vendor_id
+    invoice.sow_id = invoice_update.sow_id
     invoice.number = invoice_update.number
     invoice.amount = invoice_update.amount
     invoice.invoice_date = invoice_update.invoice_date
     invoice.payment_status = invoice_update.payment_status
 
-    async with pool as conn:
+    async with pool.acquire() as conn:
         row = await conn.fetchrow('''
         UPDATE invoices
-        SET number = $1, amount = $2, invoice_date = $3, payment_status = $4, vendor_id = $5
-        WHERE id = $6
+        SET number = $1, amount = $2, invoice_date = $3, payment_status = $4, vendor_id = $5, sow_id = $6
+        WHERE id = $7
         RETURNING *;
-        ''', invoice.number, invoice.amount, invoice.invoice_date, invoice.payment_status, invoice.vendor_id, invoice_id)
+        ''', invoice.number, invoice.amount, invoice.invoice_date, invoice.payment_status, invoice.vendor_id, invoice.sow_id, invoice_id)
         
         updated_invoice = parse_obj_as(Invoice, dict(row))
     return updated_invoice

@@ -25,6 +25,12 @@ async def list_vendors(skip: int = 0, limit: int = 10, sortby: str = None, pool 
             rows = await conn.fetch('SELECT * FROM vendors ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
 
         vendors = parse_obj_as(list[Vendor], [dict(row) for row in rows])
+
+        total = await conn.fetchval('SELECT COUNT(*) FROM vendors;')
+
+    if (limit == -1):
+        limit = total
+
     return ListResponse[Vendor](data = vendors, total = len(vendors), skip = 0, limit = len(vendors))
 
 @router.get('/{id:int}', response_model = Vendor)

@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import api from '../../api/Api';
 import ConfirmModal from '../../components/ConfirmModal';
 import PagedTable from '../../components/PagedTable';
+import ReactMarkdown from 'react-markdown';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -26,6 +27,7 @@ const SOWEdit = () => {
   const [showValidation, setShowValidation] = useState(false);
 
   const [vendors, setVendors] = useState([]);
+  const [validations, setValidations] = useState([]);
 
   const [showDeleteMilestoneModal, setShowDeleteMilestoneModal] = useState(false);
   const [milestoneToDelete, setMilestoneToDelete] = useState(null);
@@ -40,21 +42,33 @@ const SOWEdit = () => {
     if (validation) {
       setShowValidation(true);
     }
-  }, [query]);
+  }, [useLocation().search]);
 
   useEffect(() => {
     const fetchVendors = async () => {
-          try {
-            const data = await api.vendors.list(0, -1); // No pagination limit
-            setVendors(data.data);
-          } catch (err) {
-            console.error(err);
-            setError('Error fetching Vendors');
-            setSuccess(null);
-          }
-        };
-    
-        fetchVendors();
+        try {
+          const data = await api.vendors.list(0, -1); // No pagination limit
+          setVendors(data.data);
+        } catch (err) {
+          console.error(err);
+          setError('Error fetching Vendors');
+          setSuccess(null);
+        }
+      };
+  
+      fetchVendors();
+
+      const fetchValidations = async () => {
+        try {
+          const data = await api.validationResults.sow(id);
+          setValidations(data.data);
+        } catch (err) {
+          console.error(err);
+          setError('Error fetching Validations');
+          setSuccess(null);
+        }
+      };
+      fetchValidations();
   }, [id]);
 
   useEffect(() => {
@@ -115,7 +129,7 @@ const SOWEdit = () => {
       setError(err.message);
     }
   };
-  
+
   const milestoneColumns = React.useMemo(
     () => [
       {
@@ -160,13 +174,25 @@ const SOWEdit = () => {
   const fetchMilestones = async () => {
     try {
       const data = await api.milestones.list(id, 0, -1); // No pagination limit
+      setReloadMilestones(false);
       return data;
     } catch (err) {
       console.error(err);
       setError('Error fetching milestones');
       setSuccess(null);
     }
-  }
+  };
+  
+  const runManualValidation = async () => {
+      try {
+        await api.sows.validate(id);
+        window.location.href = `/sows/${id}?showValidation=true`;
+      }
+      catch (err) {
+        console.error(err);
+        setError('Manual validation failed!');
+      }
+    };
 
   return (
     <div>
@@ -296,6 +322,64 @@ const SOWEdit = () => {
         title="Delete Milestone"
         message="Are you sure you want to delete this milestone?"
       />
+
+    <hr />
+
+    <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h2 className="h2">Validations</h2>
+      <Button variant="primary" onClick={() => runManualValidation()}>
+        Run Manual Validation<i className="fas fa-gear" />
+      </Button>
+    </div>
+
+    <table className="table">
+      <thead>
+        <tr role="row">
+          <th colspan="1" role="columnheader">Passed?</th>
+          <th colspan="1" role="columnheader">Timestamp</th>
+          <th colspan="1" role="columnheader">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        {validations.length === 0 && (
+          <tr>
+            <td colspan="3">No validations found</td>
+            </tr>
+              )}
+        {validations.map((validation) => (
+          <tr key={validation.id}>
+            <td>{validation.validation_passed ? <span><i className="fas fa-check-circle text-success"></i> Passed</span> : <span><i className="fas fa-times-circle text-danger"></i> Failed</span>}</td>
+            <td>{validation.datestamp}</td>
+            <td>
+              <div style={{ height: '12em', overflowY: 'scroll', border: '0.1em #ccc solid' }}>
+                <ReactMarkdown>{validation.result}</ReactMarkdown>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+      {showValidation && validations && validations.length > 0 && (
+        <div className="modal show d-block" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Validation Result: {validations[0].validation_passed ? <span><i className="fas fa-check-circle text-success"></i> Passed</span> : <span><i className="fas fa-times-circle text-danger"></i> Failed</span>}</h5>
+              </div>
+              <div className="modal-body">
+                <div style={{ height: '20em', overflowY: 'scroll', border: '0.1em #ccc solid' }}>
+                  <ReactMarkdown>{validations[0].result}</ReactMarkdown>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowValidation(false)}>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

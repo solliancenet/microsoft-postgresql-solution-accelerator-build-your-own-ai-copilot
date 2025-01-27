@@ -34,7 +34,13 @@ async def list_milestones(sow_id: int = -1, skip: int = 0, limit: int = 10, sort
 
         milestones = parse_obj_as(list[Milestone], [dict(row) for row in rows])
 
-        total = await conn.fetchval('SELECT COUNT(*) FROM milestones;')
+        if (sow_id == -1):
+            total = await conn.fetchval('SELECT COUNT(*) FROM milestones;')
+        else:
+            total = await conn.fetchval('SELECT COUNT(*) FROM milestones WHERE sow_id = $1;', sow_id)
+
+    if (limit == -1):
+        limit = total
 
     return ListResponse[Milestone](data=milestones, total = total, skip = skip, limit = limit)
 

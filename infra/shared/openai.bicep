@@ -5,6 +5,7 @@ param sku string = 'S0'
 param tags object = {}
 param keyvaultName string = ''
 param appConfigName string = ''
+param principalId string
 
 resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: name
@@ -77,6 +78,16 @@ resource appConfigOpenApiName 'Microsoft.AppConfiguration/configurationStores/ke
     tags: {
       environment: 'production'
     }
+  }
+}
+
+resource apiAppOpenAIContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  scope: openAi
+  name: guid(subscription().id, resourceGroup().id, principalId, 'Cognitive Services OpenAI Contributor')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a001fd3d-188f-4b5d-821b-7da978bf7442') // Cognitive Services OpenAI Contributor role ID
+    principalId: principalId
+    principalType: 'User'
   }
 }
 

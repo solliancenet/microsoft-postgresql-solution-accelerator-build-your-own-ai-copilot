@@ -8,7 +8,6 @@ class VendorEdit(BaseModel):
     contact_email: str
     contact_phone: str
     type: str
-    metadata: Optional[Json[dict]] = None
 
 class Vendor(VendorEdit):
     id: int

@@ -3,7 +3,6 @@ from typing import Optional
 from datetime import date
 
 class DeliverableEdit(BaseModel):
-    name: str
     description: str
     amount: Optional[float]
     status: str

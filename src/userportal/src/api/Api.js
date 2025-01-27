@@ -273,7 +273,7 @@ module.exports = {
             console.info('Validating SOW:', id);
         
             try {
-                const response = await fetch(getUrl(`/valiation/sow/${id}`), {
+                const response = await fetch(getUrl(`/validation/sow/${id}`), {
                     method: 'POST',
                 });
                 if (!response.ok) {

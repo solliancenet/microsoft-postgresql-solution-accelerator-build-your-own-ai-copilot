@@ -83,6 +83,17 @@ async def analyze_invoice(
 
     metadata['invoice_date'] = None # clear this since object of type date is not json serializable
 
+
+    # Get SOW ID from metadata
+    # TODO: Need to determine SOW from AI analysis of Document
+    sow_id = 0 # metadata['sow_id']
+    if sow_id is not None:
+        async with pool.acquire() as conn:
+            sow_id = await conn.fetchval('SELECT id FROM sows WHERE id = $1;', sow_id)
+            if sow_id is None:
+                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1', vendor_id)
+
+
     # Create invoice in the database
     async with pool.acquire() as conn:
         # NO AI
@@ -93,12 +104,12 @@ async def analyze_invoice(
         
         # WITH AI
         row = await conn.fetchrow('''
-        INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
+        INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
         VALUES (
-            $1, $2, $3, $4, $5, $6, $7,
-            azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+            $1, $2, $3, $4, $5, $6, $7, $8::jsonb,
+            azure_openai.create_embeddings('embeddings', $9, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
         ) RETURNING *;
-        ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
+        ''', vendor_id, sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
 
         if row is None:
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')

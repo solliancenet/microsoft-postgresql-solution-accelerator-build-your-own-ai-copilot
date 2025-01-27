@@ -185,8 +185,8 @@ const SOWEdit = () => {
   
   const runManualValidation = async () => {
       try {
-        await api.invoices.validate(id);
-        window.location.href = `/invoices/edit/${id}?showValidation=true`;
+        await api.sows.validate(id);
+        window.location.href = `/sows/${id}?showValidation=true`;
       }
       catch (err) {
         console.error(err);

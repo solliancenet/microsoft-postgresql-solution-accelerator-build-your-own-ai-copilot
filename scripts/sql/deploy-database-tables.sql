@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS sows (
     budget DECIMAL(18,2) NOT NULL,
     document text NOT NULL,
     metadata JSONB,
+    summary text,
     FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );
 

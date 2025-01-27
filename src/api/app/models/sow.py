@@ -8,6 +8,7 @@ class SowEdit(BaseModel):
     start_date: date
     end_date: date
     budget: float
+    summary: Optional[str] = None
 
 class Sow(SowEdit):
     id: int

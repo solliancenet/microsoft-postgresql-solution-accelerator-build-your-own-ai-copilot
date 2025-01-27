@@ -85,21 +85,46 @@ async def analyze_sow(
 
     # Analyze the document
     document_data = await storage_service.download_blob(documentName)
-    extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
-    full_text = "\n".join(extracted_text)
+
+    analysis_result = await doc_intelligence_service.extract_text_from_document(document_data)
+    full_text = analysis_result.full_text
+
     text_chunks = doc_intelligence_service.semantic_chunking(full_text)
     metadata = doc_intelligence_service.extract_sow_metadata(full_text)
 
+    # Get SOW ID from metadata
+    sow_number = metadata['sow_number'] or None
+    sow_id = None # metadata['sow_id']
+    if sow_number is not None:
+        async with pool.acquire() as conn:
+            sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 AND number = $2;', vendor_id, sow_number)
+               
+
     # Create SOW in the database
     async with pool.acquire() as conn:
-        row = await conn.fetchrow('''
-            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, vendor_id)
-            VALUES (
-            $1, $2, $3, $4, $5, $6, 
-            azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
-            $8)
-            RETURNING *;
-        ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)
+        if sow_id is None:
+            # Create new SOW
+            row = await conn.fetchrow('''
+                INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, vendor_id)
+                VALUES (
+                $1, $2, $3, $4, $5, $6, 
+                azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
+                $8)
+                RETURNING *;
+            ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)
+        else:
+            # Update existing SOW with new document
+            row = await conn.fetchrow('''
+                UPDATE sows
+                SET start_date = $1,
+                    end_date = $2,
+                    budget = $3,
+                    document = $4,
+                    metadata = $5,
+                    embeddings = azure_openai.create_embeddings('embeddings', $6, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
+                WHERE sow_id = $7
+                RETURNING *;
+            ''', start_date, end_date, budget, documentName, json.dumps(metadata), full_text, sow_id)
 
         if row is None:
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the SOW.')

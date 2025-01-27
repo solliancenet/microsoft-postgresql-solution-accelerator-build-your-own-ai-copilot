@@ -70,8 +70,10 @@ async def analyze_invoice(
     
     # Analyze the document
     document_data = await storage_service.download_blob(documentName)
-    extracted_text = await doc_intelligence_service.extract_text_from_document(document_data)
-    full_text = "\n".join(extracted_text)
+    analysis_result = await doc_intelligence_service.extract_text_from_document(document_data)
+    
+    full_text = analysis_result.full_text
+
     text_chunks = doc_intelligence_service.semantic_chunking(full_text)
     metadata = doc_intelligence_service.extract_invoice_metadata(full_text)
 
@@ -80,18 +82,18 @@ async def analyze_invoice(
     amount = metadata['amount'] or 0
     invoice_date = metadata['invoice_date'] or datetime.now().date()
     payment_status = metadata['payment_status'] or "Pending"
+    sow_number = metadata['sow_number'] or None
 
     metadata['invoice_date'] = None # clear this since object of type date is not json serializable
 
 
     # Get SOW ID from metadata
-    # TODO: Need to determine SOW from AI analysis of Document
     sow_id = 0 # metadata['sow_id']
-    if sow_id is not None:
+    if sow_number is not None:
         async with pool.acquire() as conn:
-            sow_id = await conn.fetchval('SELECT id FROM sows WHERE id = $1;', sow_id)
+            sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 AND number = $2;', vendor_id, sow_number)
             if sow_id is None:
-                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1', vendor_id)
+                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 ORDER BY id DESC', vendor_id)
 
 
     # Create invoice in the database

@@ -392,17 +392,75 @@ You will need to install the required software locally and provision the Azure i
 
     ## **4.4 Connect to your database from pgAdmin**
 
-    You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
+    You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. The `azd up` deployment script added your Microsoft Entra ID user as the owner of the database, so you will authenticate with Entra ID to. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
 
     1. Navigate to your Azure Database for PostgreSQL - Flexible Server resource in the [Azure portal](https://portal.azure.com/).
-    2. On the Azure Database for PostgreSQL - Flexible Server page:
-          1. Select **Connect** under **Settings** in the left-hand resource menu.
-          2. Select the **contracts** database from the **Database name** dropdown.
-          3. Select **PostgreSQL** for the **Authentication method**.
-          4. Expand the **pgAdmin 4** block.
-          5. Follow the steps provided to connect to your database from pgAdmin.
 
-        ![Screenshot of the steps to connect to Azure Database for PostgreSQL - Flexible Server from pgAdmin](../../img/connect-to-pgadmin.png)
+    2. On the Azure Database for PostgreSQL - Flexible Server page, copy the **Server name** value from the **Essentials** panel on the **Overview** page by selecting the _Copy to clipboard_ button to the right of the value.
+
+        ![Screenshot of the Azure Database for PostgreSQL - Flexible Server Overview blade in the Azure portal, with the Server name highlighted.](../../img/azure-database-for-postgresql-server-name.png)
+
+    3. On your development computer, open pgAdmin.
+
+    4. In the pgAdmin **Object Explorer**, right-click on **Servers** and in the context menu select **Register >**, then **Server...**.
+
+        ![Screenshot of the pgAdmin Servers context menu, with Register > Server highlighted.](../../img/pgadmin-register-server.png)
+
+    5. In tab of **Register - Server** dialog, follow these steps:
+
+        1. On the **General** tab, enter "PostgreSQLSolutionAccelerator" into the **Name** field and clear the **Connect now** option.
+
+            ![Screenshot of the Register Server general tabl with the name and connect now fields highlighted.](../../img/pgadmin-register-server-general-tab.png)
+
+        2. Select the **Connection** tab and provide your Azure Database for PostgreSQL flexible server instance details for **Hostname/address** and **Username**.
+
+           1. Paste the **Server name** value of your Azure Database for PostgreSQL flexible server into the **Host name/address** field.
+
+           2. The **Username** value is your Microsoft Entra ID or email.
+
+        3. Select **Save**.
+
+        4. Right-click the newly added **PostgreSQLSolutionAccelerator** server in the pgAdmin Object Explorer, and select **Connect Server** in the context menu.
+
+            ![Screenshot of the server context menu, with Connect Server highlighted.](../../img/pgadmin-connect-server.png)
+
+        5. In the **Connect to Server** dialog, you will need to provide an access token.
+
+            !!! note "To Retrieve Your Microsoft Entra ID Access Token"
+
+                1. In VS Code, open a new integrated terminal.
+
+                2. At the integrated terminal prompt, execute the following command:
+
+                    ```bash
+                    az account get-access-token --resource-type oss-rdbms
+                    ```
+
+                    After authentication is successful, Microsoft Entra ID returns an access token:
+
+                    ```json
+                    {
+                      "accessToken": "TOKEN",
+                      "expiresOn": "...",
+                      "subscription": "...",
+                      "tenant": "...",
+                      "tokenType": "Bearer"
+                    }
+                    ```
+
+                3. Copy the `TOKEN` value in the `accessToken` property (without the surrounding quotes).
+
+                    !!! info "The token is a Base64 string. It encodes all the information about the authenticated user and is targeted to the Azure Database for PostgreSQL service."
+
+        6. Return to pgAdmin and the **Connect to Server** dialog and paste the access token into the password field.
+
+            ![Screenshot of the Connect to Server dialog, with the access token entered into the password box.](../../img/pgadmin-connect-to-server.png)
+
+        7. Select **OK**.
+
+            !!! warning "Access token expiration"
+
+                Your access token will be good for an hour, so you may need to come back and repeat the above steps multiple times throughout the course of the workshop.
 
     !!! tip "Leave pgAdmin open as you will be using it throughout the remainder of the workshop."
 

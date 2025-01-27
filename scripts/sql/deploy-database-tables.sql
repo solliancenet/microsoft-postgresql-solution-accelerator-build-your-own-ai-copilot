@@ -214,6 +214,19 @@ CREATE TABLE IF NOT EXISTS sow_chunks (
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
 
+-- Insert starter data for sow_chunks
+
+INSERT INTO sow_chunks (sow_id, heading, content, page_number)
+VALUES
+    ( 1, 'Project Scope', 'TailWind Cloud Solutions will provide comprehensive Azure resource management services, including infrastructure monitoring, automated scaling, cost optimization, and application troubleshooting, to ensure high availability and efficiency for Woodgrove Bank.', 1),
+    (1, 'Project Objectives', 'Ensure the continuous performance and scalability of Azure resources. Implement cost-efficient resource management strategies. Minimize downtime through proactive monitoring and rapid troubleshooting.', 1),
+    (1, 'Tasks', '1. Set up Azure resource monitoring tools. 2. Design and implement automated scaling strategies. 3. Conduct cost analysis and apply optimization measures. 4. Perform regular maintenance on Azure-hosted applications. 5. Troubleshoot and resolve any application or resource issues.', 1),
+    (1, 'Schedules', 'Project kick-off: November 01, 2024 - Initial monitoring setup: November 08, 2024 - Scaling implementation: November 15, 2024 - Cost optimization review: November 22, 2024 - Maintenance practices established: December 13, 2024 - Final troubleshooting and wrap-up: December 31, 2025', 1),
+    (1, 'Payments', 'Payment terms are Net 30. Invoices will be issued upon the completion of each milestone and are payable within 30 days. A penalty of 10% will be applied for late deliveries or payments.', 1),
+    (1, 'Compliance', '- Data Security: All data transfers between the Service Provider and Client will use secure, encrypted communication protocols. Data at rest will be encrypted using industry-standard encryption algorithms (e.g., AES-256). - Access Control: Access to the Azure resources and sensitive client information will be granted only to authorized personnel. Multi-factor authentication (MFA) will be enforced for all administrative access. - Audit and Monitoring: TailWind Cloud Solutions will maintain comprehensive logs of all access and changes to Azure resources. Regular audits will be conducted to ensure compliance with security protocols. - Incident Response: In the event of a security incident, the Service Provider will notify the Client within 24 hours. A detailed incident report will be provided within 48 hours, outlining the root cause, impact, and mitigation steps. - Regulatory Compliance: The project will comply with applicable regulations, including GDPR, PCI DSS, and ISO 27001, as they pertain to the management of Azure resources.', 2),
+    (1, 'Project Deliverables', 'Milestone Name Deliverables Amount Due Date 1 Monitoring Monitoring of resources $8,600.00 2024-11-08 2 Resource Scaling Implementation of automated scaling $7,000.00 2024-11-15 3 Cost Management Cost Management Implementation $7,000.00 2024-11-22 4 Maintenance Practices Maintenance & troubleshooting practice $10,500.00 2024-11-27 5 App Troubleshooting Identify Azure application issues $2,000.00 2024-11-27 5 App Troubleshooting Resolution of Azure application issues $3,500.00 2024-12-13 5 App Troubleshooting Implementation of app monitoring $5,000.00 2024-12-31 Total $43,600.00 Signatures (TailWind Cloud Solutions - Morgan Skinner) (Woodgrove Bank - Sora Kim)', 2);
+
+
 CREATE TABLE IF NOT EXISTS invoice_validation_results (
     id BIGSERIAL PRIMARY KEY,
     invoice_id BIGINT NOT NULL,
@@ -223,6 +236,19 @@ CREATE TABLE IF NOT EXISTS invoice_validation_results (
     FOREIGN KEY (invoice_id) REFERENCES invoices (id) ON DELETE CASCADE
 );
 
+-- Insert starter data for invoice_validation_results
+INSERT INTO invoice_validation_results (
+    invoice_id, 
+	datestamp,
+    result, 
+    validation_passed
+)
+VALUES
+    
+    (1, CURRENT_TIMESTAMP, 'Invoice failed validation: Total amount was wrong.', FALSE),
+    (2, CURRENT_TIMESTAMP, 'Invoice validation passed with warnings: Payment terms was missing penalty text.', TRUE), 
+	(1,CURRENT_TIMESTAMP, 'Invoice had total amount added changed and passed with no errors.', TRUE);  
+
 CREATE TABLE IF NOT EXISTS sow_validation_results (
     id BIGSERIAL PRIMARY KEY,
     sow_id BIGINT NOT NULL,
@@ -231,3 +257,17 @@ CREATE TABLE IF NOT EXISTS sow_validation_results (
     validation_passed BOOLEAN,
     FOREIGN KEY (sow_id) REFERENCES sows (id) ON DELETE CASCADE
 );
+
+-- Insert starter data for sow_validation_results
+INSERT INTO sow_validation_results (
+    sow_id,
+    datestamp,
+    result,
+    validation_passed
+)
+VALUES
+    (1, CURRENT_TIMESTAMP - INTERVAL '2 hours', 'SOW failed validation: Missing deliverables section.', FALSE),   
+    (1, CURRENT_TIMESTAMP - INTERVAL '1 hour', 'SOW failed validation:  Deliverables section contains wrong information.', FALSE),  
+    (1, CURRENT_TIMESTAMP, 'SOW validation passed: All fields are valid.', TRUE),  -- Passed with warnings
+    (2, CURRENT_TIMESTAMP - INTERVAL '1 hour', 'SOW failed validation: Incorrect milestone dates.', FALSE), 
+    (2, CURRENT_TIMESTAMP, 'SOW validation passed: All fields are valid.', TRUE); 

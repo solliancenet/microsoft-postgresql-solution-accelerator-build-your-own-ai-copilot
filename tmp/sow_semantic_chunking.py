@@ -117,7 +117,7 @@ def process_document(container_name, blob_name, conn):
 # Example usage
 if __name__ == "__main__":
     container_name = "documents"
-    blob_names = ["Statement_of_Work_WWE_Woodgrove_Bank_20241005.pdf"]  # List of blob names to process
+    blob_names = ["Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf"]  # List of blob names to process
 
     conn = psycopg2.connect(POSTGRESQL_CONNECTION)
 

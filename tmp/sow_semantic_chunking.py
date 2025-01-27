@@ -67,7 +67,7 @@ def analyze_document(document_data):
 # List of known headings
 known_headings = [
     "Project Scope", "Project Objectives", "Location", "Tasks", "Schedules",
-    "Standards and Testing", "Payments", "Compliance", "Project Deliverables"
+    "Standards and Testing", "Payments", "Compliance", "Requirements", "Project Deliverables"
 ]
 
 def is_heading(text, known_headings):

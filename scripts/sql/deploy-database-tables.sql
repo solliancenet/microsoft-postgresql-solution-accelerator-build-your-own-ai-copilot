@@ -154,7 +154,7 @@ VALUES
     (1,'App Troubleshooting','In Progress'),
     (2,'CI/CD Pipelines','Completed'),
     (2,'Containerized Applications','In Progress'),
-    (2,'Cloud Monitoring','In Progress')
+    (2,'Cloud Monitoring','In Progress');
 
 -- Deliverables table
 CREATE TABLE IF NOT EXISTS deliverables (

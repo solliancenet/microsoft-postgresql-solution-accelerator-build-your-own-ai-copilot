@@ -209,7 +209,18 @@ const InvoiceEdit = () => {
       console.error(err);
       setError('Failed to delete Invoice Line Item');
     }
-  }
+  };
+
+  const runManualValidation = async () => {
+    try {
+      await api.invoices.validate(id);
+      window.location.href = `/invoices/edit/${id}?showValidation=true`;
+    }
+    catch (err) {
+      console.error(err);
+      setError('Manual validation failed!');
+    }
+  };
 
   return (
     <div>
@@ -361,6 +372,9 @@ const InvoiceEdit = () => {
       
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h2 className="h2">Validations</h2>
+          <Button variant="primary" onClick={() => runManualValidation()}>
+            Run Manual Validation<i className="fas fa-gear" />
+          </Button>
         </div>
     
         <table className="table">

@@ -89,7 +89,6 @@ async def analyze_sow(
     analysis_result = await doc_intelligence_service.extract_text_from_document(document_data)
     full_text = analysis_result.full_text
 
-    text_chunks = doc_intelligence_service.semantic_chunking(full_text)
     metadata = doc_intelligence_service.extract_sow_metadata(full_text)
 
     # Get SOW ID from metadata
@@ -132,6 +131,16 @@ async def analyze_sow(
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the SOW.')
 
         sow = parse_obj_as(Sow, dict(row))
+
+
+        # Save the text chunks for the SOW
+        await conn.execute('''DELETE FROM sow_chunks WHERE sow_id = $1''', sow.id)
+        for chunk in analysis_result.text_chunks:
+            await conn.execute('''
+                INSERT INTO sow_chunks (sow_id, heading, content, page_number) VALUES ($1, $2, $3, $4);
+            ''', sow.id, chunk.heading, chunk.content, chunk.page_number)
+
+
     return sow
 
 

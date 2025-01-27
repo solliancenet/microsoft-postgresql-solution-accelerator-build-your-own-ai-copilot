@@ -103,6 +103,10 @@ class AzureDocIntelligenceService:
         """Extract invoice metadata such as number, amount, and invoice_date from text."""
         metadata = {}
 
+        # Extract Vendor Name
+        # match = re.search(r'Vendor:\s*([^\n]+)', full_text, re.IGNORECASE)
+        # metadata['vendor'] = match.group(1).strip() if match else "UNKNOWN"
+
         # Extract invoice number
         match = re.search(r"Invoice Number[:\s]+([A-Za-z0-9-]+)", full_text, re.IGNORECASE)
         metadata['number'] = match.group(1) if match else "UNKNOWN"

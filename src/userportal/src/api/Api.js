@@ -114,6 +114,9 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoices/${id}`));
         },
+        validations: async (id) => {
+            return await RESTHelper.get(getUrl(`/invoices/${id}/validations`));
+        },
         analyze: async (file, data) => {
             if (!file) return;
 

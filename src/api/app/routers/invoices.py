@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Invoice, InvoiceEdit, ListResponse
+from app.models import Invoice, InvoiceEdit, ListResponse, InvoiceValidationResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
@@ -47,6 +47,14 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
             raise HTTPException(status_code=404, detail=f'An invoice with an id of {invoice_id} was not found.')
         invoice = parse_obj_as(Invoice, dict(row))
     return invoice
+
+@router.get("/{id}/validations", response_model=ListResponse[InvoiceValidationResult])
+async def list_invoice_validations(id: int, pool = Depends(get_db_connection_pool)):
+    """Retrieves a list of validation results for an Invoice from the database."""
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM invoice_validation_results WHERE invoice_id = $1 ORDER BY datestamp DESC;', id)
+        validations = parse_obj_as(list[InvoiceValidationResult], [dict(row) for row in rows])
+    return ListResponse(data=validations, total = len(validations), skip = 0, limit = len(validations))
 
 @router.post("/", response_model=Invoice)
 async def analyze_invoice(

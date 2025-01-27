@@ -160,6 +160,7 @@ const SOWEdit = () => {
   const fetchMilestones = async () => {
     try {
       const data = await api.milestones.list(id, 0, -1); // No pagination limit
+      setReloadMilestones(false);
       return data;
     } catch (err) {
       console.error(err);

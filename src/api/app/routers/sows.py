@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Sow, SowEdit, ListResponse
+from app.models import Sow, SowEdit, ListResponse, SowValidationResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
@@ -17,11 +17,11 @@ router = APIRouter(
 @router.get("/", response_model=ListResponse[Sow])
 async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of SOWs from the database."""
+    orderby = 'id'
+    if (sortby):
+        orderby = sortby
     async with pool.acquire() as conn:
-        orderby = 'id'
-        if (sortby):
-            orderby = sortby
-        
+       
         if (limit < 0):
             if(vendor_id > 0):
                 rows = await conn.fetch('SELECT * FROM sows WHERE vendor_id = $1 ORDER BY $2;', vendor_id, orderby)
@@ -40,7 +40,11 @@ async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby:
         else:
             total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
 
+    if (limit < 0):
+        limit = total
+
     return ListResponse[Sow](data=sows, total = total, skip = skip, limit = limit)
+
 
 @router.get("/{sow_id}", response_model=Sow)
 async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
@@ -51,6 +55,15 @@ async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
             raise HTTPException(status_code=404, detail=f'A SOW with an id of {sow_id} was not found.')
         sow = parse_obj_as(Sow, dict(row))
     return sow
+
+
+@router.get("/{id}/validations", response_model=ListResponse[SowValidationResult])
+async def list_sow_validations(id: int, pool = Depends(get_db_connection_pool)):
+    """Retrieves a list of validation results for a SOW from the database."""
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM sow_validation_results WHERE sow_id = $1 ORDER BY datestamp DESC;', id)
+        validations = parse_obj_as(list[SowValidationResult], [dict(row) for row in rows])
+    return ListResponse(data=validations, total = len(validations), skip = 0, limit = len(validations))
 
 
 @router.post("/", response_model=Sow)

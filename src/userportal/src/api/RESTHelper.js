@@ -1,16 +1,28 @@
 
 module.exports = {
     get: async (url) => {
-        try {
+        const tryGet = async () => {
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const returnData = await response.json();
             return returnData;
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            throw error;
+        };
+
+        const retries = 3;
+        const delay = 400;
+        for(let attempts = 1; attempts <= retries; attempts++) {
+            try {
+                return await tryGet();
+            } catch (error) {
+                if (attempts === retries) {
+                    console.error(`Error fetching data after multiple attempts(${attempts}):`, error);
+                    throw error;
+                }
+                console.warn(`Error fetching data, Retrying in ${delay}ms...`, error);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
         }
     },
     post: async (url, data) => {

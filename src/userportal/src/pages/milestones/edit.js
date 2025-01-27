@@ -132,6 +132,7 @@ const MilestoneEdit = () => {
     const fetchDeliverables = async () => {
         try {
             const data = await api.deliverables.list(id, 0, -1); // No pagination limit
+            setReloadDeliverables(false);
             return data;
         } catch (err) {
             console.error(err);

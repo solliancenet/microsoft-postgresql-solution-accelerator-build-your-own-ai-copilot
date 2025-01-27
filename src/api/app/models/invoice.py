@@ -4,6 +4,7 @@ from datetime import date
 
 class InvoiceEdit(BaseModel):
     vendor_id: int
+    sow_id: int
     number: str
     amount: float
     invoice_date: date

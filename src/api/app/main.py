@@ -8,6 +8,7 @@ from app.routers import (
     documents,
     embeddings,
     invoices,
+    invoice_line_items,
     milestones,
     sows,
     status,
@@ -44,6 +45,7 @@ app.include_router(deliverables.router)
 app.include_router(documents.router)
 app.include_router(embeddings.router)
 app.include_router(invoices.router)
+app.include_router(invoice_line_items.router)
 app.include_router(milestones.router)
 app.include_router(sows.router)
 app.include_router(status.router)

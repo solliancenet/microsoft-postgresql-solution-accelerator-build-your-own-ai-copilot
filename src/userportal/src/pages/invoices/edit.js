@@ -4,6 +4,8 @@ import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import api from '../../api/Api';
+import PagedTable from '../../components/PagedTable';
+import ConfirmModel from '../../components/ConfirmModal';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -12,7 +14,8 @@ const useQuery = () => {
 const InvoiceEdit = () => {
   const query = useQuery();
   const { id } = useParams(); // Extract Vendor ID from URL
-  const [vendorId, setVendorId] = useState('');
+  const [vendorId, setVendorId] = useState(0);
+  const [sowId, setSowId] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [amount, setAmount] = useState('');
   const [invoiceDate, setInvoiceDate] = useState('');
@@ -23,8 +26,13 @@ const InvoiceEdit = () => {
   const [success, setSuccess] = useState(null);
   const [showValidation, setShowValidation] = useState(false);
 
+  const [showDeleteInvoiceLineItemModal, setShowDeleteInvoiceLineItemModal] = useState(false);
+  const [reloadInvoiceLineItems, setReloadInvoiceLineItems] = useState(false);
+  const [invoiceLineItemToDelete, setInvoiceLineItemToDelete] = useState(null);
+
   const [statuses, setStatuses] = useState([]);
   const [vendors, setVendors] = useState([]);
+  const [sows, setSows] = useState([]);
 
   useEffect(() => {
     const message = query.get('success');
@@ -73,21 +81,92 @@ const InvoiceEdit = () => {
     fetchVendors();
   }, [id]);
 
+  useEffect(() => {
+    // Fetch SOWs when vendor changes
+    const fetchSows = async () => {
+      try {
+        const data = await api.sows.list(vendorId, 0, -1); // No pagination limit
+        setSows(data.data);
+      } catch (err) {
+        setError('Failed to load SOWs');
+      }
+    };
+    fetchSows();
+  }, [vendorId]);
+
   const updateDisplay = (data) => {
     setVendorId(data.vendor_id);
+    setSowId(data.sow_id);
     setInvoiceNumber(data.number);
     setAmount(data.amount);
     setInvoiceDate(data.invoice_date);
     setPaymentStatus(data.payment_status);
     setDocument(data.document);
     setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
-  }
+  };
+
+  const fetchInvoiceLineItems = async () => {
+    try {
+      const result = await api.invoiceLineItems.list(id, 0, -1); // No pagination limit
+      return result;
+    } catch (err) {
+      console.error(err);
+      setError('Failed to load Invoice Line Items');
+      setSuccess(null);
+    }
+  };
+
+  const invoiceLineItemsColumns = React.useMemo(
+    () => [
+      {
+        Header: "Description",
+        accessor: "description",
+      },
+      {
+        Header: "Amount",
+        accessor: "amount",
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+      },
+      { 
+        Header: "Due Date",
+        accessor: "due_date",
+      },
+      {
+        Header: "Actions",
+        accessor: "actions",
+        Cell: ({ row }) => {
+          return (
+            <div>
+              <a href={`/invoice-line-items/${row.original.id}`} className="btn btn-link" aria-label="Edit">
+                <i className="fas fa-edit"></i>
+              </a>
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => {
+                  setInvoiceLineItemToDelete(row.original.id);
+                  setShowDeleteInvoiceLineItemModal(true);
+                }}
+              >
+                Delete
+              </Button>
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       var data = {
         vendor_id: vendorId,
+        sow_id: sowId,
         number: invoiceNumber,
         amount: amount,
         invoice_date: invoiceDate,
@@ -105,6 +184,17 @@ const InvoiceEdit = () => {
     }
   };
 
+  const handleDeleteInvoiceLineItem = async () => {
+    try {
+      await api.invoiceLineItems.delete(invoiceLineItemToDelete);
+      setReloadInvoiceLineItems(true);
+      setShowDeleteInvoiceLineItemModal(false);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to delete Invoice Line Item');
+    }
+  }
+
   return (
     <div>
       <h1>Edit Invoice</h1>
@@ -119,11 +209,37 @@ const InvoiceEdit = () => {
             value={vendorId}
             onChange={(e) => setVendorId(e.target.value)}
             required
+            disabled={vendors.length === 0}
           >
-            <option value="">Select Vendor</option>
+            {vendors.length === 0 ? (
+              <option value="">Loading Vendors...</option>
+            ) : (
+              <option value="">Select Vendor</option>
+            )}
             {vendors.map((vendor) => (
               <option key={vendor.id} value={vendor.id}>
                 {vendor.name}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>SOW</Form.Label>
+          <Form.Control
+            as="select"
+            value={sowId}
+            onChange={(e) => setSowId(e.target.value)}
+            required
+            disabled={sows.length === 0}
+          >
+            {sows.length === 0 ? (
+              <option value="">Loading SOWs...</option>
+            ) : (
+              <option value="">Select SOW</option>
+            )}
+            {sows.map((sow) => (
+              <option key={sow.id} value={sow.id}>
+                {sow.number}
               </option>
             ))}
           </Form.Control>
@@ -202,6 +318,29 @@ const InvoiceEdit = () => {
           Go to Vendor
         </a>
       </Form>
+
+      <hr />
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 className="h2">Line Items</h2>
+        <Button variant="primary" onClick={() => window.location.href = `/invoiceLineItems/create/${id}`}>
+          New Line Item<i className="fas fa-plus" />
+        </Button>
+      </div>
+
+      <PagedTable columns={invoiceLineItemsColumns}
+        fetchData={fetchInvoiceLineItems}
+        reload={reloadInvoiceLineItems}
+        showPagination={false}
+        />
+
+      <ConfirmModel
+        show={showDeleteInvoiceLineItemModal}
+        handleClose={() => setShowDeleteInvoiceLineItemModal(false)}
+        handleConfirm={handleDeleteInvoiceLineItem}
+        title="Delete Invoice Line Item"
+        message="Are you sure you want to delete this Invoice Line Item?"
+        />
+
     </div>
   );
 };

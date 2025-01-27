@@ -17,11 +17,11 @@ router = APIRouter(
 @router.get("/", response_model=ListResponse[Sow])
 async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby: str = None, pool = Depends(get_db_connection_pool)):
     """Retrieves a list of SOWs from the database."""
+    orderby = 'id'
+    if (sortby):
+        orderby = sortby
     async with pool.acquire() as conn:
-        orderby = 'id'
-        if (sortby):
-            orderby = sortby
-        
+       
         if (limit < 0):
             if(vendor_id > 0):
                 rows = await conn.fetch('SELECT * FROM sows WHERE vendor_id = $1 ORDER BY $2;', vendor_id, orderby)
@@ -39,6 +39,9 @@ async def list_sows(vendor_id: int = -1, skip: int = 0, limit: int = 10, sortby:
             total = await conn.fetchval('SELECT COUNT(*) FROM sows WHERE vendor_id = $1;', vendor_id)
         else:
             total = await conn.fetchval('SELECT COUNT(*) FROM sows;')
+
+    if (limit < 0):
+        limit = total
 
     return ListResponse[Sow](data=sows, total = total, skip = skip, limit = limit)
 

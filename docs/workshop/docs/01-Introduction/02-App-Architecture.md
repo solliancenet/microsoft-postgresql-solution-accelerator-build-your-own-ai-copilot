@@ -80,6 +80,8 @@ _Click each tab below to learn more about how the movement of data in the contex
 
     5. (Optional) Semantic Ranking via custom model inference from the `azure_ai` extension ranks search result relevance and is returned into the RAG context as part of the composite prompt.
 
-    6. Azure OpenAI uses the composite prompt to augment the data over which it formulates a response.
+    6. Azure OpenAI uses the composite prompt to formulates a response.
+
+          1. The composite prompt contains the system prompt augmented with context provided by the results of the hybrid search against the PostgreSQL database.
 
     7. The AI-generated completion response is sent back to the user through the browser interface, providing them with actionable insights based on the data stored in the system. The efficient flow of information ensures users can quickly and accurately obtain the information they need.

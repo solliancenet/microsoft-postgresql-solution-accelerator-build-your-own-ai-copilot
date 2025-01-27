@@ -24,6 +24,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2024-06-01-p
       ipRules: []
     }
     publicNetworkAccess: 'Enabled'
+    customSubDomainName: name
   }
 }
 

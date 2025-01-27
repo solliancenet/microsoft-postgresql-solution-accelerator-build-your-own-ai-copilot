@@ -368,7 +368,9 @@ const SOWEdit = () => {
                 <h5 className="modal-title">Validation Result: {validations[0].validation_passed ? <span><i className="fas fa-check-circle text-success"></i> Passed</span> : <span><i className="fas fa-times-circle text-danger"></i> Failed</span>}</h5>
               </div>
               <div className="modal-body">
-                <ReactMarkdown>{validations[0].result}</ReactMarkdown>
+                <div style={{ height: '20em', overflowY: 'scroll', border: '0.1em #ccc solid' }}>
+                  <ReactMarkdown>{validations[0].result}</ReactMarkdown>
+                </div>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={() => setShowValidation(false)}>Close</button>

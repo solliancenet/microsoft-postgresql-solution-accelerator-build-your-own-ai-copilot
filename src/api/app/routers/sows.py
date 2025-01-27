@@ -92,14 +92,6 @@ async def analyze_sow(
 
     # Create SOW in the database
     async with pool.acquire() as conn:
-        # NO AI
-        # row = await conn.fetchrow('''
-        #     INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
-        #     VALUES ($1, $2, $3, $4, $5, $6, $7)
-        #     RETURNING *;
-        # ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), vendor_id)
-
-        # WITH AI
         row = await conn.fetchrow('''
             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, vendor_id)
             VALUES (
@@ -115,43 +107,6 @@ async def analyze_sow(
         sow = parse_obj_as(Sow, dict(row))
     return sow
 
-# @router.post("/", response_model=Sow)
-# async def create_sow(
-#     number: str = Form(...),
-#     vendor_id: int = Form(...),
-#     start_date: str = Form(...),
-#     end_date: str = Form(...),
-#     budget: float = Form(...),
-#     file: UploadFile = File(...),
-#     pool = Depends(get_db_connection_pool),
-#     storage_service = Depends(get_storage_service)
-# ):
-#     # Parse dates
-#     start_date_parsed = datetime.strptime(start_date, '%Y-%m-%d').date()
-#     end_date_parsed = datetime.strptime(end_date, '%Y-%m-%d').date()
-
-#     # Parse budget
-#     budget_parsed = float(budget)
-
-#     # Get vendor_id from vendor_id
-#     async with pool.acquire() as conn:
-#         vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
-#         if vendor_id is None:
-#             raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
-
-#     # Upload file to Azure Blob Storage
-#     documentName = await storage_service.save_sow_document(vendor_id, file)
-
-#     # Create SOW in the database
-#     async with pool.acquire() as conn:
-#         sow = await conn.fetchrow('''
-#             INSERT INTO sows (number, start_date, end_date, budget, document, metadata, vendor_id)
-#             VALUES ($1, $2, $3, $4, $5, $6, $7)
-#             RETURNING *;
-#         ''', number, start_date_parsed, end_date_parsed, budget_parsed, documentName, '{}', vendor_id)
-        
-#         sow = parse_obj_as(Sow, dict(sow))
-#     return sow
 
 @router.put("/{sow_id}", response_model=Sow)
 async def update_sow(sow_id: int, sow_update: SowEdit, pool = Depends(get_db_connection_pool)):

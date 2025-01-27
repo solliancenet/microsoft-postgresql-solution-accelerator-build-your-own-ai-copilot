@@ -96,13 +96,6 @@ async def analyze_invoice(
 
     # Create invoice in the database
     async with pool.acquire() as conn:
-        # NO AI
-        # row = await conn.fetchrow('''
-        # INSERT INTO invoices (vendor_id, "number", amount, invoice_date, payment_status, document, metadata)
-        # VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;
-        # ''', vendor_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata))
-        
-        # WITH AI
         row = await conn.fetchrow('''
         INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
         VALUES (
@@ -117,36 +110,6 @@ async def analyze_invoice(
         invoice = parse_obj_as(Invoice, dict(row))
     return invoice
 
-
-# @router.post("/", response_model=Invoice)
-# async def create_invoice(
-#     vendor_id: int = Form(...),
-#     number: str = Form(...),
-#     amount: float = Form(...),
-#     invoice_date: str = Form(...),
-#     payment_status: str = Form(...),
-#     file: UploadFile = File(...),
-#     pool = Depends(get_db_connection_pool),
-#     storage_service = Depends(get_storage_service)
-#     ):
-#     """Creates a new invoice in the database."""
-
-#     # Parse date
-#     invoice_date_parsed = datetime.strptime(invoice_date, '%Y-%m-%d').date()
-
-
-#     # Upload file to Azure Blob Storage
-#     documentName = await storage_service.save_invoice_document(file)
-    
-#     # Create invoice in the database
-#     async with pool.acquire() as conn:
-#         row = await conn.fetchrow('''
-#         INSERT INTO invoices (number, amount, invoice_date, payment_status, document, vendor_id)
-#         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
-#         ''', number, amount, invoice_date_parsed, payment_status, documentName, vendor_id)
-        
-#         new_invoice = parse_obj_as(Invoice, dict(row))
-#     return new_invoice
 
 @router.put("/{invoice_id}", response_model=Invoice)
 async def update_invoice(invoice_id: int, invoice_update: InvoiceEdit, pool = Depends(get_db_connection_pool)):

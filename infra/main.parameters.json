@@ -26,6 +26,9 @@
       "deployAMLModel": {
         "value": "${DEPLOY_AML_MODEL}"
       },
+      "runPostDeployScript":{
+        "value": "${RUN_POSTDEPLOY_SCRIPT=true}"
+      },
       "portalDefinition": {
         "value": {
           "settings": []

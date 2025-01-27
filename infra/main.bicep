@@ -26,6 +26,8 @@ param postgresqlAdminPassword string
 @description('Determines whether to deploy the Azure Machine Learning model used for Semantic Reranking')
 param deployAMLModel bool
 
+param runPostDeployScript bool
+
 param userPortalExists bool
 @secure()
 param portalDefinition object
@@ -359,3 +361,5 @@ output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = apiApp.outputs.identityPrinc
 
 output SERVICE_USERPORTAL_ENDPOINT_URL string = userPortalApp.outputs.uri
 output SERVICE_API_ENDPOINT_URL string = apiApp.outputs.uri
+
+output RUN_POSTDEPLOY_SCRIPT bool = runPostDeployScript

@@ -4,7 +4,9 @@ Select the tab of your chosen track for details about what you need to do before
 
 === "Self-Guided"
 
-    !!! info "1. What You Will Need"   
+    Expand each block below and review the requirements within each.
+
+    ???+ info "1. What You Need"   
 
         1. **Your own computer.**
             - Any computer capable of running Visual Studio Code, Docker Desktop, and a modern web browser will do.
@@ -55,10 +57,45 @@ Select the tab of your chosen track for details about what you need to do before
         8.  Hands-on understanding of the [Azure AI Foundry](https://ai.azure.com) portal and relevant developer tools (e.g., Azure Developer CLI, Prompty, FastAPI) to streamline end-to-end development workflows for your own AI apps.
         9.  An understanding of how Azure AI services can be integrated into applications to create powerful AI-enabled applications.
 
-<!--
 === "Instructor-Led Workshop"
 
-    !!! info "ARE YOU CURRENTLY IN THE LAB SESSION? Jump to [Provision & Setup!](./../1-Provision-And-Setup/02-Instructor-Led.md) to get started!"  
+    Expand each block below and review the requirements within each.
 
-    The instructor-guided labs are set up with everything you need to get started. To get the most from this session, you should be familiar with Python, Jupyter Notebooks, and Visual Studio Code. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/01-Self-Guided.md) instead_.
--->
+    ???+ info "1. What You Need"   
+    
+        The instructor-guided labs are set up with everything you need to get started. To get the most from this session, please review the recommended and preferred knowledge and experience in the blocks below. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/01-Self-Guided.md) instead_.
+            
+    ??? info "2. What You Should Know (expand to view)"   
+
+        **Recommended knowledge and experience**
+
+        1. **Familiarity with Visual Studio Code** 
+            - The default editor used in this workshop is Visual Studio Code. You will configure your VS Code development environment with the required extensions and code libraries.
+            - The workshop requires Visual Studio Code and other tools to be installed on your computer. You will be running the solution code from your local computer.    
+        2. **Familiarity with the Azure portal**
+            - The workshop assumes you are familiar with navigating to resources within the Azure portal.
+            - You will use the Azure portal to retrieve endpoints, keys, and other values associated with the resources you deploy for this workshop.
+        3. **Familiarity with PostgreSQL**
+            - The workshop assumes you are familiar with basic SQL syntax.
+            - You will be executin SQL statements to alter tables, create extensions, and run queries against tables.
+
+        **Preferred knowledge and experience**
+
+        4. **Familiarity with `git` operations**
+            - You will be forking the sample repository into your GitHub account.
+            - You will be committing code changes to your forked repo.
+        5. **Familiarity with the `bash` shell**.
+            - If needed, you will use `bash` in the VS Code terminal to run post-provisioning scripts.
+            - You will also use it to run Azure CLI and Azure Developer CLI commands during setup. 
+        6.  **Familiarity with Python and JavaScript UI frameworks**.
+            - You will modify REACT JavaScript and Python code to implement changes to the starter solution.
+            - In some steps, you will create and run Python code from the command line and VS Code.
+            - You will select a Python kernel and run pre-existing scripts in some steps.
+
+    ??? info "3. What You Will Take Away (expand to view)"   
+
+        After completing this workshop, you will have:
+        
+        7.  A personal fork (copy) of the [Build Your Own AI Copilot for FSI with PostgreSQL](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot) repository in your GitHub profile. This repo contains all the materials you need to reproduce the workshop later (e.g., as a _Self-Guided_ session).
+        8.  Hands-on understanding of the [Azure AI Foundry](https://ai.azure.com) portal and relevant developer tools (e.g., Azure Developer CLI, Prompty, FastAPI) to streamline end-to-end development workflows for your own AI apps.
+        9.  An understanding of how Azure AI services can be integrated into applications to create powerful AI-enabled applications.

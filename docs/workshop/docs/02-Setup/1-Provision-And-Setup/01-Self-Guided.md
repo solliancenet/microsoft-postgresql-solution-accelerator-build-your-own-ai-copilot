@@ -460,7 +460,7 @@ You will need to install the required software locally and provision the Azure i
 
             !!! warning "Access token expiration"
 
-                Your access token will be good for an hour, so you may need to come back and repeat the above steps multiple times throughout the course of the workshop.
+                If your access token expires during the course of the workshop, you will need to come back and repeat the above steps to reauthenticate.
 
     !!! tip "Leave pgAdmin open as you will be using it throughout the remainder of the workshop."
 

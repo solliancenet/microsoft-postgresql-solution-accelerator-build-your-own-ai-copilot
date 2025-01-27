@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import api from '../../api/Api';
 import PagedTable from '../../components/PagedTable';
 import ConfirmModel from '../../components/ConfirmModal';
+import ReactMarkdown from 'react-markdown';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -33,6 +34,8 @@ const InvoiceEdit = () => {
   const [statuses, setStatuses] = useState([]);
   const [vendors, setVendors] = useState([]);
   const [sows, setSows] = useState([]);
+  const [validations, setValidations] = useState([]);
+
 
   useEffect(() => {
     const message = query.get('success');
@@ -79,6 +82,18 @@ const InvoiceEdit = () => {
     };
 
     fetchVendors();
+
+    const fetchValidations = async () => {
+      try {
+        const data = await api.validationResults.invoice(id);
+        setValidations(data.data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching Validations');
+        setSuccess(null);
+      }
+    };
+    fetchValidations();
   }, [id]);
 
   useEffect(() => {
@@ -342,23 +357,57 @@ const InvoiceEdit = () => {
         message="Are you sure you want to delete this Invoice Line Item?"
         />
 
-      {showValidation && (
-        <div className="modal show d-block" tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Validation Results</h5>
-              </div>
-              <div className="modal-body">
-                <p>Your validation message here.</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowValidation(false)}>Close</button>
+        <hr />
+      
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h2 className="h2">Validations</h2>
+        </div>
+    
+        <table className="table">
+          <thead>
+            <tr role="row">
+              <th colspan="1" role="columnheader">Passed?</th>
+              <th colspan="1" role="columnheader">Timestamp</th>
+              <th colspan="1" role="columnheader">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {validations.length === 0 && (
+              <tr>
+                <td colspan="3">No validations found</td>
+                </tr>
+                )}
+            {validations.map((validation) => (
+              <tr key={validation.id}>
+                <td>{validation.validation_passed ? <span><i className="fas fa-check-circle text-success"></i> Passed</span> : <span><i className="fas fa-times-circle text-danger"></i> Failed</span>}</td>
+                <td>{validation.datestamp}</td>
+                <td>
+                  <div style={{ height: '12em', overflowY: 'scroll', border: '0.1em #ccc solid' }}>
+                    <ReactMarkdown>{validation.result}</ReactMarkdown>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+    
+          {showValidation && validations && validations.length > 0 && (
+            <div className="modal show d-block" tabIndex="-1" role="dialog">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Validation Result: {validations[0].validation_passed ? <span><i className="fas fa-check-circle text-success"></i> Passed</span> : <span><i className="fas fa-times-circle text-danger"></i> Failed</span>}</h5>
+                  </div>
+                  <div className="modal-body">
+                    <ReactMarkdown>{validations[0].result}</ReactMarkdown>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" onClick={() => setShowValidation(false)}>Close</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
 
     </div>
   );

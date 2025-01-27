@@ -328,6 +328,11 @@ const SOWEdit = () => {
         </tr>
       </thead>
       <tbody>
+        {validations.length === 0 && (
+          <tr>
+            <td colspan="3">No validations found</td>
+            </tr>
+              )}
         {validations.map((validation) => (
           <tr key={validation.id}>
             <td>{validation.validation_passed ? <span><i className="fas fa-check-circle text-success"></i> Passed</span> : <span><i className="fas fa-times-circle text-danger"></i> Failed</span>}</td>

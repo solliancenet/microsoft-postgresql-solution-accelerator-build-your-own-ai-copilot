@@ -1,58 +1,46 @@
-# Implement Copilot
+# Implement a Copilot
 
-With AI-validated data now in the system, the second part of the solution is to implement an AI copilot, which will allow users to ask questions and gain actionable insights over the data in the PostgreSQL database. The solution leverages the RAG architecture pattern. When users submit questions through the copilot's chat interface, the query is processed by the SPA Web App and sent to the API's `/chat` endpoint.
+In this task, you will add an AI-copilot to the _Woodgrove Bank Contract Management_ application using Python and the GenAI capabilities of Azure Database for PostgreSQL - Flexible Server and the Azure AI extension. Using the AI-validated data, the copilot will use RAG to provide insights, and answer questions, about vendor contract performance and invoicing accuracy, serving as an intelligent assistant for Woodgrove Banks users.
 
-TODO: Add more to the below about performing a hybrid search against the database and augmenting the prompt with data from the database...
+## What are copilots?
 
-The API then communicates with Azure OpenAI to generate a prompt embedding, which is used to perform a vector search in the Azure Database for PostgreSQL Flexible Server. The search results are retrieved and used to generate a completion response containing AI-generated insights. This response is sent back to the API and displayed to the user, providing them with relevant and actionable information based on the data stored in the Postgres database. This process enables users to efficiently query and analyze large datasets, making it easier to derive meaningful insights and make informed decisions.
+Copilots are advanced AI assistants designed to augment human capabilities and improve productivity by providing intelligent, context-aware support, automating repetitive tasks, and enhancing decision-making processes. For instance, an AI copilot can assist in code review and suggest improvements in software development. In customer service, it can handle routine queries, freeing up human agents for more complex issues. In data analysis, it can identify patterns and trends in large datasets. AI copilots can be employed in diverse fields such as these, and many more.
 
-**Copilot chat**: An Azure OpenAI + LangChain copilot enables project managers and leadership to quickly get metrics, trends and processing timelines for contracts, SOWs, invoices, and vendors using a user friendly chat interface. Function calling via LangChain tools enables the copilot to implement a RAG (retrieval-augmented generation) pattern over data in the PostgreSQL database, using vector search to efficiently retrieve relevant documents and data.
+## Why use Python?
 
-1. Implement `/chat` endpoint
-   1. Code will already be there.
-   2. Update to pull prompt from JSON file (ensure this is included in deployment)
-2. Iterate on copilot prompt to allow for insights to be derived from data
-   1. Should be able to answer questions about vendors, invoices and their alignment with SOWs
-   2. Test the endpoint...
-4. Use LangChain (already in place, so will just need to review the code and go over the details.)
-   1. Multi-agent approach?
-   2. Autogen?
-5. Implement RAG (Function calling review)
-   1. Show how to use LangChain's `StructuredTool` (or whatever it is) to call existing functions to get info from the database for RAG
-   2. Embed incoming user messages for similarity search and semantic ranker capablities
-6. Enable Chat/Copilot UI in REACT app.
-   1. Steps for this? 
-      1. 
+Python's simplicity and readability make it a popular programming language for AI and machine learning projects. Its extensive libraries and frameworks, such as LangChain, FastAPI, and many others, provide robust tools for developing sophisticated copilots. Python's versatility allows developers to iterate and experiment quickly, making it a top choice for building AI applications.
 
 ## The RAG Pattern
 
-The solution leverages the _Retrieval Augmented Generation_ (RAG) design pattern to ensure the copilot's responses are grounded in the (private) data maintained by the enterprise, for this application.
+The solution leverages the _Retrieval Augmented Generation_ (RAG) design pattern to ensure the copilot's responses are grounded in the (private) data maintained by Woodgrove Bank.
 
 ![RAG design pattern](../img/rag-design-pattern.png)
 
-Let's learn how this design pattern works in the context of our Contoso Chat application. Click on the tabs in order, to understand the sequence of events shown in the figure above.
+To understand how the RAG design pattern works in the context of the _Woodgrove Bank Contract Management_ application, select the tabs in order to review the sequence of events shown in the figure above.
 
----
+TODO: Update the content of the tabs below -- Include details about function calling to access information in databases and other "private" sources.
 
 === "1. Get Query"
 
     !!! info "The user query arrives at our copilot implementation via the endpoint (API)"
     
-    Our deployed Contoso Chat application is exposed as a hosted API endpoint using Azure Container Apps. The inoming "user query" has 3 components: the user _question_ (text input), the user's _customer ID_ (text input), and an optional _chat history_ (object array).
+    User queries entered into the portal UI and passed into the Woodgrove Bank API's `/chat` endpoint. The incoming "user query" has two components: the user _question_ (text input) and an optional _chat history_ (object array).
     
-    The API server extracts these parameters from the incoming request, and invokes the Contoso Chat application - starting the workflow reflecting this RAG design pattern.
+    The API extracts these parameters from the incoming request, and invokes the `/chat` endpoint - starting the workflow reflecting this RAG design pattern.
 
 === "2. Vectorize Query"
 
-    !!! info "The copilot sends the text query to a **retrieval** service after first vectorizing it."
+    !!! info "The copilot sends the text query to Azure OpenAI to generate vector embeddings."
     
-    The Contoso Chat application converts the text question into a vectorized query using a Large Language "Embedding" Model (e.g., Azure Open AI `text-embedding-ada-002`). This is then sent to the information retrieval service (e.g., Azure AI Search) in the next step.
+    The `/chat` endpoint calls out to Azure OpenAI, where the user's text input is vectorized using a Large Language "Embedding" Model (e.g., Azure Open AI `text-embedding-3-large`). This vector is then sent into the PostgreSQL database to retrieve similar records in the next step.
 
-=== "3. **Retrieve** Matches"
+=== "3. Retrieve Similar Data"
 
-    !!! info "The retrieval service uses vectorized query to return matching results by similarity"
+    !!! info "A hybrid search query is executed against the database to return semantically similar results."
+
+    ### RAG Pattern
     
-    The information retrieval service maintains a search index for relevant information (here, for our product catalog). In this step, we use the vectorized query from the previous step to find and return _matching product results_ based on vector similarity. The information retrieval service can also use features like _semantic ranking_ to order the returned results.
+    In this step, the vectorized query from the previous step is compared to data in relevant database tables to find and return _matching results_ based on vector similarity. The database can also use features like _semantic ranking_ to order the returned results and _GraphRAG_ to identify relationship between data to improve the accuracy of the RAG design pattern.
 
     ### Semantic Ranking
     TODO: Add details about semantic ranking and graph rag...

@@ -41,7 +41,7 @@ const InvoiceLineItemCreate = () => {
       var newItem = await api.invoiceLineItems.create(data);
 
       setSuccess('Invoice Line Item created successfully!');
-      window.location.href = `/invoice_line_items/${newItem.id}`;
+      window.location.href = `/invoice-line-items/${newItem.id}`;
       setError(null);
     } catch (err) {
       console.error(err);

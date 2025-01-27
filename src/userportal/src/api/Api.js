@@ -170,11 +170,10 @@ module.exports = {
         get: async (id) => {
             return await RESTHelper.get(getUrl(`/invoice_line_items/${id}`));
         },
-        create: async (id, data) => {
+        create: async (data) => {
             console.info('Creating invoice line item');
         
             const formData = new FormData();
-            formData.append('invoice_id', id);
             for(var key in data){
                 formData.append(key, data[key]);
             }

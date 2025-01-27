@@ -108,6 +108,7 @@ const InvoiceEdit = () => {
   const fetchInvoiceLineItems = async () => {
     try {
       const result = await api.invoiceLineItems.list(id, 0, -1); // No pagination limit
+      setReloadInvoiceLineItems(false);
       return result;
     } catch (err) {
       console.error(err);
@@ -322,7 +323,7 @@ const InvoiceEdit = () => {
       <hr />
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 className="h2">Line Items</h2>
-        <Button variant="primary" onClick={() => window.location.href = `/invoiceLineItems/create/${id}`}>
+        <Button variant="primary" onClick={() => window.location.href = `/invoice-line-items/create/${id}`}>
           New Line Item<i className="fas fa-plus" />
         </Button>
       </div>

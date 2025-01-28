@@ -9,5 +9,5 @@ ADD embeddings vector(3072);
 ALTER TABLE sows
 ADD embeddings vector(3072);
 
-ALTER TABLE invoices
-ADD validation text;
+ALTER TABLE sows
+ADD summary text;

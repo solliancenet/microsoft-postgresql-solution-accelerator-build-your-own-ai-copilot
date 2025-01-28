@@ -79,7 +79,6 @@ def extract_invoice_line_items(document_data):
 
             # Determine the status based on the due date
             status = 'Completed' if due_date and datetime.strptime(due_date, '%Y-%m-%d') < datetime(2024, 12, 31) else 'Pending'  # Changed line
-            print(f"Inserting chunk: {description}, {amount}, {due_date}, {status}") # Debugging
 
             line_items.append({
                 "description": description,
@@ -117,7 +116,7 @@ def insert_line_items_to_db(invoice_number, line_items):
 
 # Download the document data from blob storage
 container_name = "documents"
-blob_name = "INV-TWC2024-001.pdf"
+blob_name = "INV-TWC2024-003.pdf"
 document_data = download_blob(container_name, blob_name)
 
 # Extract line items from the document data

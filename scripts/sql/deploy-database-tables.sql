@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS vendors (
 
 -- Insert vendors only if vendors table is empty
 INSERT INTO vendors (id, name, address, contact_name, contact_email, contact_phone, website, type)
-SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone, v.type
+SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone, v.website, v.type
 FROM (
     SELECT 1 as id, 'Adatum Corporation' as name, '789 Goldsmith Road, MainTown City' as address, 'Elizabeth Moore' as contact_name, 'elizabeth.moore@adatum.com' as contact_email, '555-789-7890' as contact_phone, 'http://www.adatum.com' as website, 'Data Engineering' as type
     UNION ALL

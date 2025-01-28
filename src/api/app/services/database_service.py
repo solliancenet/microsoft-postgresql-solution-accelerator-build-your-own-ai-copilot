@@ -13,7 +13,7 @@ class DatabaseService:
         self.host_name = host_name
         self.database_name = database_name
         self.connection_pool = None
-        self.connection_pool_created = None
+        self.connection_pool_created = datetime.now()
         self._lock = asyncio.Lock()
 
     async def close(self):
@@ -24,10 +24,10 @@ class DatabaseService:
 
     async def get_connection_pool(self):
         """Get the connection pool to the Azure Database for PostgreSQL server."""
-        # Create a new connection pool, if it does not exist, is closed, or has been open for more than 55 minutes (Azure token expires after 1 hour)
-        sessionExpired = (self.connection_pool_created is not None and (datetime.now() - self.connection_pool_created) >= timedelta(minutes=55))
+        # Create a new connection pool, if it does not exist, is closed, or has been open for more than 45 minutes (Azure token expires after 1 hour)
+        sessionExpired = (datetime.now() - self.connection_pool_created) >= timedelta(minutes=45)
         
-        if self.connection_pool is None or self.connection_pool._closed or (self.connection_pool_created is None or sessionExpired):
+        if sessionExpired or self.connection_pool is None or self.connection_pool._closed:
             async with self._lock:
                 if (sessionExpired):
                     if (self.connection_pool is not None and not self.connection_pool._closed):

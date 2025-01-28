@@ -2,6 +2,11 @@ name: react-app
 metadata:
   subscription: ${AZURE_SUBSCRIPTION_ID}
   location: ${AZURE_LOCATION}
+workflows:
+  up:
+    steps:
+      - azd: provision
+      - azd: deploy
 
 infra:
   bicep: ./infra/main.bicep
@@ -37,7 +42,7 @@ services:
       context: ./
       registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
       path: DOCKERFILE
-      buildArgs: 
+      buildArgs:
         - REACT_APP_SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
     dependsOn:
       - infra

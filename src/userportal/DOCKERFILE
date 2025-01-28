@@ -5,11 +5,12 @@ WORKDIR /app
 
 ARG REACT_APP_SERVICE_API_ENDPOINT_URL
 
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install
 COPY . ./
 
+# Create .env file with REACT_APP_SERVICE_API_ENDPOINT_URL
+RUN echo "REACT_APP_SERVICE_API_ENDPOINT_URL: \"${REACT_APP_SERVICE_API_ENDPOINT_URL}\"" > ./.env
+
+RUN npm install
 RUN npm run build
 
 # Stage 2: Serve the React app with Nginx

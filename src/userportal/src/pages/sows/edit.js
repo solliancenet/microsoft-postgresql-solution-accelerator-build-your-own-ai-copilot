@@ -203,57 +203,39 @@ const SOWEdit = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label>Vendor</Form.Label>
-          <Form.Control
-            as="select"
-            value={sowVendorId}
-            onChange={(e) => setSowVendorId(e.target.value)}
-            required
-          >
-            <option value="">Select Vendor</option>
-            {vendors.map((vendor) => (
-              <option key={vendor.id} value={vendor.id}>
-                {vendor.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>SOW Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={sowNumber}
-            onChange={(e) => setSowNumber(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Start Date</Form.Label>
+        <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Vendor</Form.Label>
               <Form.Control
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
+                as="select"
+                value={sowVendorId}
+                onChange={(e) => setSowVendorId(e.target.value)}
+                required
+              >
+                <option value="">Select Vendor</option>
+                {vendors.map((vendor) => (
+                  <option key={vendor.id} value={vendor.id}>
+                    {vendor.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>SOW</Form.Label>
+              <Form.Control
+                type="text"
+                value={sowNumber}
+                onChange={(e) => setSowNumber(e.target.value)}
                 required
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Col>
+          </Col>  
         </Row>
-        <Row className="mb-3">
-          <Col md={6}>
+        <Row>
+          <Col>
             <Form.Group className="mb-3">
               <Form.Label>Budget</Form.Label>
               <NumericFormat
@@ -269,18 +251,38 @@ const SOWEdit = () => {
               />
             </Form.Group>
           </Col>
-          <Col md={6}>
+          <Col>
             <Form.Group className="mb-3">
-              <Form.Label>Document</Form.Label>
-              <div className="d-flex">
-                <code>{sowDocument}</code>
-                <a href={api.documents.getUrl(sowDocument)} target="_blank" rel="noreferrer">
-                  <i className="fas fa-download ms-3"></i>
-                </a>
-              </div>
+              <Form.Label>Start Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>End Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                required
+              />
             </Form.Group>
           </Col>
         </Row>
+        <Form.Group className="mb-3">
+          <Form.Label>Document</Form.Label>
+          <div className="d-flex">
+            <code>{sowDocument}</code>
+            <a href={api.documents.getUrl(sowDocument)} target="_blank" rel="noreferrer">
+              <i className="fas fa-download ms-3"></i>
+            </a>
+          </div>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Summary</Form.Label>
           <Form.Control
@@ -292,7 +294,7 @@ const SOWEdit = () => {
             disabled
           />
         </Form.Group>
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label>Metadata</Form.Label>
           <Form.Control
             as="textarea"
@@ -301,7 +303,7 @@ const SOWEdit = () => {
             style={{ height: '8em' }}
             readOnly
           />
-        </Form.Group>
+        </Form.Group> */}
         <Button type="submit" variant="primary">
           <i className="fas fa-save"></i> Save
         </Button>

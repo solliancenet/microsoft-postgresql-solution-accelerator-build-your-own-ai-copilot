@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -229,48 +229,54 @@ const InvoiceEdit = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
       <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label>Vendor</Form.Label>
-          <Form.Control
-            as="select"
-            value={vendorId}
-            onChange={(e) => setVendorId(e.target.value)}
-            required
-            disabled={vendors.length === 0}
-          >
-            {vendors.length === 0 ? (
-              <option value="">Loading Vendors...</option>
-            ) : (
-              <option value="">Select Vendor</option>
-            )}
-            {vendors.map((vendor) => (
-              <option key={vendor.id} value={vendor.id}>
-                {vendor.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>SOW</Form.Label>
-          <Form.Control
-            as="select"
-            value={sowId}
-            onChange={(e) => setSowId(e.target.value)}
-            required
-            disabled={sows.length === 0}
-          >
-            {sows.length === 0 ? (
-              <option value="">Loading SOWs...</option>
-            ) : (
-              <option value="">Select SOW</option>
-            )}
-            {sows.map((sow) => (
-              <option key={sow.id} value={sow.id}>
-                {sow.number}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
+        <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Vendor</Form.Label>
+              <Form.Control
+                as="select"
+                value={vendorId}
+                onChange={(e) => setVendorId(e.target.value)}
+                required
+                disabled={vendors.length === 0}
+              >
+                {vendors.length === 0 ? (
+                  <option value="">Loading Vendors...</option>
+                ) : (
+                  <option value="">Select Vendor</option>
+                )}
+                {vendors.map((vendor) => (
+                  <option key={vendor.id} value={vendor.id}>
+                    {vendor.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+        </Col>
+          <Col>
+            <Form.Group>
+              <Form.Label>SOW</Form.Label>
+              <Form.Control
+                as="select"
+                value={sowId}
+                onChange={(e) => setSowId(e.target.value)}
+                required
+                disabled={sows.length === 0}
+              >
+                {sows.length === 0 ? (
+                  <option value="">Loading SOWs...</option>
+                ) : (
+                  <option value="">Select SOW</option>
+                )}
+                {sows.map((sow) => (
+                  <option key={sow.id} value={sow.id}>
+                    {sow.number}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
         <Form.Group className="mb-3">
           <Form.Label>Invoice Number</Form.Label>
           <Form.Control
@@ -280,42 +286,50 @@ const InvoiceEdit = () => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Amount</Form.Label>
-          <NumericFormat
-            className="form-control"
-            value={amount}
-            onValueChange={(values) => setAmount(values.floatValue)}
-            thousandSeparator={true}
-            prefix={'$'}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Invoice Date</Form.Label>
-          <Form.Control
-            type="date"
-            value={invoiceDate}
-            onChange={(e) => setInvoiceDate(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Payment Status</Form.Label>
-          <Form.Control
-            as="select"
-            value={paymentStatus}
-            onChange={(e) => setPaymentStatus(e.target.value)}
-            required
-            >
-              <option value="">Select Status</option>
-              {statuses.map((status) => (
-                <option key={status.name} value={status.name}>
-                  {status.name}
-                </option>
-              ))}
-            </Form.Control>
-        </Form.Group>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>Amount</Form.Label>
+              <NumericFormat
+                className="form-control"
+                value={amount}
+                onValueChange={(values) => setAmount(values.floatValue)}
+                thousandSeparator={true}
+                prefix={'$'}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>Invoice Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={invoiceDate}
+                onChange={(e) => setInvoiceDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>Payment Status</Form.Label>
+              <Form.Control
+                as="select"
+                value={paymentStatus}
+                onChange={(e) => setPaymentStatus(e.target.value)}
+                required
+                >
+                  <option value="">Select Status</option>
+                  {statuses.map((status) => (
+                    <option key={status.name} value={status.name}>
+                      {status.name}
+                    </option>
+                  ))}
+                </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
         <Form.Group className="mb-3">
           <Form.Label>Document</Form.Label>
           <div className="d-flex">
@@ -325,7 +339,7 @@ const InvoiceEdit = () => {
             </a>
           </div>
         </Form.Group>
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label>Metadata</Form.Label>
           <Form.Control
             as="textarea"
@@ -334,7 +348,7 @@ const InvoiceEdit = () => {
             style={{ height: '8em' }}
             readOnly
           />
-        </Form.Group>
+        </Form.Group> */}
         <Button type="submit" variant="primary">
           <i className="fas fa-save"></i> Save
         </Button>

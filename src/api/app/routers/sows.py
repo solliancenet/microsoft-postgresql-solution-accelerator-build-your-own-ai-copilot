@@ -86,7 +86,7 @@ async def analyze_sow(
     # Analyze the document
     document_data = await storage_service.download_blob(documentName)
 
-    analysis_result = await doc_intelligence_service.extract_text_from_document(document_data)
+    analysis_result = await doc_intelligence_service.extract_text_from_sow_document(document_data)
     full_text = analysis_result.full_text
 
     metadata = doc_intelligence_service.extract_sow_metadata(full_text)

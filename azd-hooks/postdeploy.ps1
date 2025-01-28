@@ -128,6 +128,46 @@ az storage blob upload `
 #     --name "5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf" `
 #     --file "./data/sample_docs/model_training/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf"
 
+az storage blob upload `
+    --auth-mode login `
+    --overwrite true `
+    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+    --name "1/invoice/INV-TWC2024-001.pdf" `
+    --file "./data/sample_docs/model_training/INV-TWC2024-001.pdf"
+
+az storage blob upload `
+    --auth-mode login `
+    --overwrite true `
+    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+    --name "2/invoice/INV-TWC2024-002.pdf" `
+    --file "./data/sample_docs/model_training/INV-TWC2024-002.pdf"
+
+az storage blob upload `
+    --auth-mode login `
+    --overwrite true `
+    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+    --name "3/invoice/INV-TWC2024-003.pdf" `
+    --file "./data/sample_docs/model_training/INV-TWC2024-003.pdf"
+
+az storage blob upload `
+    --auth-mode login `
+    --overwrite true `
+    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+    --name "4/invoice/INV-TWC2024-004.pdf" `
+    --file "./data/sample_docs/model_training/INV-TWC2024-004.pdf"
+
+az storage blob upload `
+    --auth-mode login `
+    --overwrite true `
+    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+    --name "5/invoice/INV-WWE2024-001.pdf" `
+    --file "./data/sample_docs/model_training/INV-WWE2024-001.pdf"
+
 Write-Host "Sample Files Uploaded to Blob Storage"
 
 # # ##############################################################################
@@ -169,6 +209,11 @@ if ($env:DEPLOY_AML_MODEL -eq $False) {
     Write-Host "Machine Learning Model Deployed"
 }
 
+
+
+# ##############################################################################
+# Update .env file to prevent postdeploy script from running again (this ensures that the script runs only once)
+# ##############################################################################
 
 # write DEPLOY_AML_MODEL = false to .env file for azd environment, by updating the .azure/{env}/.env file
 $envFile = "./.azure/${env:AZURE_ENV_NAME}/.env"

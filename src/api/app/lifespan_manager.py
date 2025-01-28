@@ -66,12 +66,12 @@ async def get_credential():
 async def get_chat_client():
      return await aoai_service.get_chat_client()
 
-async def get_azure_doc_intelligence_service():
-    return doc_intelligence_service
-
 async def get_embedding_client():
     return await aoai_service.get_embedding_client()
 
+async def get_azure_doc_intelligence_service():
+    return doc_intelligence_service
+    
 async def get_storage_service():
     return storage_service
 

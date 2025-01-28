@@ -44,7 +44,7 @@ const CopilotChat = () => {
 
   return (
     <div className="ai-chat container mt-4">
-      <div className="messages mb-3 border p-3" style={{ minHeight: '20em', maxHeight: '20em', overflowY: 'scroll' }}>
+      <div className="messages mb-3 border p-3" style={{ minHeight: '20em', maxHeight: '50em', overflowY: 'scroll' }}>
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.role} mb-2 d-flex ${msg.role === 'user' ? 'justify-content-end' : 'justify-content-start'}`}>
             {!error && index === messages.length - 1 && <div ref={messagesEndRef} />}

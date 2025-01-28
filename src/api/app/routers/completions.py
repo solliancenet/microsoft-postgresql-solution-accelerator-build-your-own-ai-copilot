@@ -150,46 +150,53 @@ async def get_sows(vendor_id: int = None): #, intent: Literal['', 'performance',
     """
     pool = await get_db_connection_pool()
     async with pool.acquire() as conn:
-       tables = {
+        tables = {
             "sows": {
                 "name": "sows",
                 "alias": "s",
                 "columns": ["id", "number", "vendor_id", "start_date", "end_date", "budget", "document"],
             },
-            "sow_chunks": {
-                "name": "sow_chunks",
-                "alias": "c",
-                "columns": ["heading", "content", "page_number"],
-            },
+            # "sow_chunks": {
+            #     "name": "sow_chunks",
+            #     "alias": "c",
+            #     "columns": ["heading", "content", "page_number"],
+            # },
             "milestones": {
                 "name": "milestones",
                 "alias": "m",
                 "columns": ["name", "status"]
             },
-            "deliverables": {
-                "name": "deliverables",
-                "alias": "d",
-                "columns": ["milestone_id", "description", "amount", "status", "due_date"]
-            }
+            # "deliverables": {
+            #     "name": "deliverables",
+            #     "alias": "d",
+            #     "columns": ["milestone_id", "description", "amount", "status", "due_date"]
+            # }
         }
 
-    # Create columns list from both tables
-    columns = [f"{tables[table]['alias']}.{column}" for table in tables for column in tables[table]['columns']]
-    # Build a SELECT query and JOIN from the tables and columns
-    query = f'SELECT {",".join(columns)} FROM {tables["sows"]["name"]} AS {tables["sows"]["alias"]}'
-    # Join the related tables
-    query += f' LEFT JOIN {tables["milestones"]["name"]} AS {tables["milestones"]["alias"]} ON {tables["sows"]["alias"]}.id = {tables["milestones"]["alias"]}.sow_id'
-    query += f' LEFT JOIN {tables["deliverables"]["name"]} AS {tables["deliverables"]["alias"]} ON {tables["milestones"]["alias"]}.id = {tables["deliverables"]["alias"]}.milestone_id'
-    query += f' LEFT JOIN {tables["sow_chunks"]["name"]} AS {tables["sow_chunks"]["alias"]} ON {tables["sows"]["alias"]}.id = {tables["sow_chunks"]["alias"]}.sow_id'
+        # Create columns list from both tables
+        columns = [f"{tables[table]['alias']}.{column}" for table in tables for column in tables[table]['columns']]
+        # Build a SELECT query and JOIN from the tables and columns
+        query = f'SELECT {", ".join(columns)} FROM {tables["sows"]["name"]} AS {tables["sows"]["alias"]}'
+        # Join the related tables
+        for table in tables:
+            # Perform LEFT JOIN on the related tables
+            if table != "sows":
+                query += f' LEFT JOIN {tables[table]["name"]} AS {tables[table]["alias"]} ON {tables["sows"]["alias"]}.id = {tables[table]["alias"]}.sow_id'
 
-    #if intent == 'performance' or intent == 'accuracy':
-    query += ' LEFT JOIN sow_validation_results AS v ON s.id = v.sow_id'
-    
-    if vendor_id is not None:
-        query += f' WHERE vendor_id = {vendor_id}'
+        #query += f' LEFT JOIN {tables["milestones"]["name"]} AS {tables["milestones"]["alias"]} ON {tables["sows"]["alias"]}.id = {tables["milestones"]["alias"]}.sow_id'
+        #query += f' LEFT JOIN {tables["deliverables"]["name"]} AS {tables["deliverables"]["alias"]} ON {tables["milestones"]["alias"]}.id = {tables["deliverables"]["alias"]}.milestone_id'
+        #query += f' LEFT JOIN {tables["sow_chunks"]["name"]} AS {tables["sow_chunks"]["alias"]} ON {tables["sows"]["alias"]}.id = {tables["sow_chunks"]["alias"]}.sow_id'
 
-    rows = await conn.fetch(f'{query};')
-    sows = [dict(row) for row in rows]
+        #if intent == 'performance' or intent == 'accuracy':
+        #query += ' LEFT JOIN sow_validation_results AS v ON s.id = v.sow_id'
+
+        #query = 'SELECT id, number, vendor_id, start_date, end_date, budget, document FROM sows'
+        
+        if vendor_id is not None:
+            query += f' WHERE vendor_id = {vendor_id}'
+
+        rows = await conn.fetch(f'{query};')
+        sows = [dict(row) for row in rows]
     return sows
 
 async def get_vendors():

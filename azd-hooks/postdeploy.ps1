@@ -210,6 +210,11 @@ if ($env:DEPLOY_AML_MODEL -eq $False) {
 }
 
 
+
+# ##############################################################################
+# Update .env file to prevent postdeploy script from running again (this ensures that the script runs only once)
+# ##############################################################################
+
 # write DEPLOY_AML_MODEL = false to .env file for azd environment, by updating the .azure/{env}/.env file
 $envFile = "./.azure/${env:AZURE_ENV_NAME}/.env"
 $envFileContent = Get-Content -Path $envFile

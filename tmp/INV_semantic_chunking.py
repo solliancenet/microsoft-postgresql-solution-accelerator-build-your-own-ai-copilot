@@ -121,37 +121,3 @@ def insert_line_items_to_db(invoice_number, line_items):
 
 # Insert the extracted line items with the fetched invoice_id
 insert_line_items_to_db(invoice_number, line_items)
-
-
-
-
-
-
-# # Analyze document and store chunks
-# def process_document(container_name, blob_name, conn):
-#     """Complete workflow for processing a document."""
-#     print(f"Processing document {blob_name} from container {container_name}...")
-    
-#     # Download the document data
-#     document_data = download_blob(container_name, blob_name)
-
-#     # Analyze the document to extract chunks and INV number
-#     chunks, invoice_number = analyze_document(document_data)
-#     print(f"Document analyzed. Chunks: {chunks}, Invoice Number: {invoice_number}") # Debugging
-    
-#     # Insert the chunks into the database
-#     insert_chunks_to_db(chunks, invoice_number, conn)
-
-# # Example usage
-# if __name__ == "__main__":
-#     container_name = "documents"
-#     blob_names = ["INV-TWC2024-001.pdf"]  # List of blob names to process
-
-#     conn = psycopg2.connect(POSTGRESQL_CONNECTION)
-
-#     try:
-#         for blob_name in blob_names:
-#             process_document(container_name, blob_name, conn)
-#     finally:
-#         # Close the database connection
-#         conn.close()

@@ -3,10 +3,8 @@ from azure.identity.aio import DefaultAzureCredential
 from azure.core.credentials import AzureKeyCredential
 from contextlib import asynccontextmanager
 
-# Create an Azure OpenAI embeddings client
-embedding_client = None
-# Create an Azure OpenAI chat client
-chat_client = None
+# Create a global async Azure OpenAI
+aoai_service = None
 # Create a global async Microsoft Entra ID RBAC credential
 credential = None
 # Create a global async PostgreSQL db connection
@@ -21,12 +19,11 @@ doc_intelligence_service = None
 @asynccontextmanager
 async def lifespan(app):
     """Async context manager for the FastAPI application lifespan."""
+    global aoai_service
     global config_service
-    global chat_client
     global credential
     global db
     global doc_intelligence_service
-    global embedding_client
     global storage_service
     
     # Create an async Microsoft Entra ID RBAC credential
@@ -37,8 +34,6 @@ async def lifespan(app):
 
     # Create an async Azure OpenAI chat and embeddings clients
     aoai_service = AzureOpenAIService(credential, await config_service.get_openai_endpoint())
-    chat_client = await aoai_service.get_chat_client()
-    embedding_client = await aoai_service.get_embedding_client()
 
     # Create an async Azure Document Intelligence Service client
     doc_intelligence_credential = AzureKeyCredential(await config_service.get_doc_intelligence_key())
@@ -69,14 +64,14 @@ async def get_credential():
     return credential
 
 async def get_chat_client():
-    return chat_client
+     return await aoai_service.get_chat_client()
+
+async def get_embedding_client():
+    return await aoai_service.get_embedding_client()
 
 async def get_azure_doc_intelligence_service():
     return doc_intelligence_service
-
-async def get_embedding_client():
-    return embedding_client
-
+    
 async def get_storage_service():
     return storage_service
 

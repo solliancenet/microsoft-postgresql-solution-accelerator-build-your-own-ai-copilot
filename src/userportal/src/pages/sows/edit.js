@@ -22,6 +22,7 @@ const SOWEdit = () => {
   const [endDate, setEndDate] = useState('');
   const [budget, setBudget] = useState('');
   const [metadata, setMetadata] = useState('');
+  const [summary, setSummary] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showValidation, setShowValidation] = useState(false);
@@ -93,6 +94,7 @@ const SOWEdit = () => {
     setEndDate(data.end_date);
     setBudget(data.budget);
     setMetadata(data.metadata ? JSON.stringify(data.metadata, null, 2) : '');
+    setSummary(data.summary);
   }
 
   const handleSubmit = async (e) => {
@@ -280,6 +282,17 @@ const SOWEdit = () => {
           </Col>
         </Row>
         <Form.Group className="mb-3">
+          <Form.Label>Summary</Form.Label>
+          <Form.Control
+            as="textarea"
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
+            style={{ height: '8em' }}
+            required
+            disabled
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label>Metadata</Form.Label>
           <Form.Control
             as="textarea"
@@ -361,6 +374,8 @@ const SOWEdit = () => {
     </table>
 
       {showValidation && validations && validations.length > 0 && (
+        <>
+        <div className="blur-overlay"></div>
         <div className="modal show d-block" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -378,6 +393,7 @@ const SOWEdit = () => {
             </div>
           </div>
         </div>
+        </>
       )}
 
     </div>

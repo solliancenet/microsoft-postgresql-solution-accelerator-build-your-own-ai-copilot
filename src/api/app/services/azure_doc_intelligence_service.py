@@ -5,10 +5,17 @@ from typing import List
 from datetime import datetime
 import re
 
+
+
+class TextChunk:
+    heading: str
+    content: str
+    page_number:int
+
 class DocumentAnalysisResult:
     extracted_text: str
-    full_text: str
-    text_chunks: List[str]
+    text_chunks: List[TextChunk]
+
 
 class AzureDocIntelligenceService:
     def __init__(self, credential: AzureKeyCredential, docIntelligenceEndpoint: str):
@@ -28,15 +35,45 @@ class AzureDocIntelligenceService:
         )
 
         result = await poller.result()
-        extracted_text = []
+
+        analysis = DocumentAnalysisResult()
+        analysis.extracted_text = []
+        analysis.text_chunks = []
         
+        known_headings = [
+            "Project Scope", "Project Objectives", "Location", "Tasks", "Schedules",
+            "Standards and Testing", "Payments", "Compliance", "Requirements", "Project Deliverables"
+        ]
+
         for page in result.pages:
             page_text = " ".join([line.content for line in page.lines])
-            extracted_text.append(page_text)
+            analysis.extracted_text.append(page_text)
+
+            current_heading = None
+            for line in page.lines:
+                text = line.content
+                if self.__is_heading(text, known_headings): # Detect headings
+                    current_heading = text
+                    newTextChunk = TextChunk()
+                    newTextChunk.heading = text
+                    newTextChunk.content = ""
+                    newTextChunk.page_number = page.page_number
+                    analysis.text_chunks.append(newTextChunk)
+                elif current_heading:
+                    analysis.text_chunks[-1].content += " " + text
 
         await docClient.close()
 
-        return extracted_text
+        analysis.full_text = "\n".join(analysis.extracted_text)
+
+        return analysis
+
+    def __is_heading(self, text, known_headings):
+        # Check if the text matches any known headings
+        if text.strip() in known_headings:
+            return True
+        
+        return False
 
     def semantic_chunking(self, text):
         """Chunk text into semantically meaningful pieces."""
@@ -49,13 +86,26 @@ class AzureDocIntelligenceService:
 
     def extract_sow_metadata(self, full_text):
         """Extract SOW metadata"""
-        return {
+        metadata = {
             "content": full_text
         }
+
+        # Extract SOW Number
+        match = re.search(r'SOW Number:\s*(SOW-\S+)', full_text, re.IGNORECASE)
+        if match:
+            metadata['sow_number'] = match.group(1)
+        else:
+            metadata['sow_number'] = None
+
+        return metadata
 
     def extract_invoice_metadata(self, full_text):
         """Extract invoice metadata such as number, amount, and invoice_date from text."""
         metadata = {}
+
+        # Extract Vendor Name
+        # match = re.search(r'Vendor:\s*([^\n]+)', full_text, re.IGNORECASE)
+        # metadata['vendor'] = match.group(1).strip() if match else "UNKNOWN"
 
         # Extract invoice number
         match = re.search(r"Invoice Number[:\s]+([A-Za-z0-9-]+)", full_text, re.IGNORECASE)
@@ -74,6 +124,13 @@ class AzureDocIntelligenceService:
                 metadata['invoice_date'] = None
         else:
             metadata['invoice_date'] = None
+
+        # Extract SOW Number
+        match = re.search(r'SOW Number:\s*(SOW-\S+)', full_text, re.IGNORECASE)
+        if match:
+            metadata['sow_number'] = match.group(1)
+        else:
+            metadata['sow_number'] = None
 
         # Default payment status
         metadata['payment_status'] = "Pending"

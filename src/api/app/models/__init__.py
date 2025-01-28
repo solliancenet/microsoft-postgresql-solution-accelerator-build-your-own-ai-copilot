@@ -8,6 +8,7 @@ from .milestone import Milestone, MilestoneEdit
 from .prompt import Prompt
 from .status import Status
 from .sow import Sow, SowEdit
+from .sow_chunks import SowChunk
 from .validation_result import InvoiceValidationResult, SowValidationResult, ValidationResultBase
 from .validation_request import ValidationRequest
 from .vendor import Vendor, VendorEdit

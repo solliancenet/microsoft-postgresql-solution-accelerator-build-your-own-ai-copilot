@@ -1,11 +1,11 @@
 import os
+import re
+from datetime import datetime
 import psycopg2
 import json
 from azure.storage.blob import BlobServiceClient
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
-import re
-from datetime import datetime
 
 # Parameters to be replaced in api
 AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
@@ -56,7 +56,6 @@ def extract_invoice_line_items(document_data):
     match = invoice_number_pattern.search(text)
     if match:
         invoice_number = match.group(1)
-        print(f"Found invoice number: {invoice_number}") # Debugging
     else:
         raise ValueError("Invoice number not found in the document.")
 
@@ -68,31 +67,28 @@ def extract_invoice_line_items(document_data):
         for item in items_field.value:
             description_field = item.value.get("Description")
             amount_field = item.value.get("Amount")
-            due_date_field = item.value.get("DueDate")
+            due_date_field = item.value.get("Date")
 
             # Extract and clean up fields
             description = description_field.content if description_field else "N/A"
             amount = amount_field.content if amount_field else "0"
+            
             # Remove currency symbols or extra characters from amount
             amount = float(re.sub(r"[^\d.]", "", amount))
             due_date = due_date_field.content if due_date_field else "1970-01-01"
 
+            # Determine the status based on the due date
+            status = 'Completed' if due_date and datetime.strptime(due_date, '%Y-%m-%d') < datetime(2024, 12, 31) else 'Pending'  # Changed line
+            print(f"Inserting chunk: {description}, {amount}, {due_date}, {status}") # Debugging
+
             line_items.append({
                 "description": description,
                 "amount": amount,
-                "due_date": due_date
+                "due_date": due_date,
+                "status": status
             })
 
     return invoice_number, line_items
-
-# Download the document data from blob storage
-container_name = "documents"
-blob_name = "INV-TWC2024-001.pdf"
-document_data = download_blob(container_name, blob_name)
-
-# Extract line items from the document data
-invoice_number, line_items = extract_invoice_line_items(document_data)
-print(line_items)
 
 
 def insert_line_items_to_db(invoice_number, line_items):
@@ -113,11 +109,19 @@ def insert_line_items_to_db(invoice_number, line_items):
         cursor.execute("""
             INSERT INTO invoice_line_items (invoice_id,description, amount, status, due_date)
             VALUES (%s, %s, %s, %s, %s)
-        """, (1,item['description'], item['amount'], 'Pending', item['due_date']))
+        """, (1,item['description'], item['amount'], item['status'], item['due_date']))
 
     conn.commit()
     cursor.close()
     conn.close()
+
+# Download the document data from blob storage
+container_name = "documents"
+blob_name = "INV-TWC2024-001.pdf"
+document_data = download_blob(container_name, blob_name)
+
+# Extract line items from the document data
+invoice_number, line_items = extract_invoice_line_items(document_data)
 
 # Insert the extracted line items with the fetched invoice_id
 insert_line_items_to_db(invoice_number, line_items)

@@ -247,8 +247,8 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
           capacity: 10
         }
         model: {
-          name: 'text-embedding-3-large'
-          version: '1'
+          name: 'text-embedding-ada-002'
+          version: '2'
         }
       }
     ]

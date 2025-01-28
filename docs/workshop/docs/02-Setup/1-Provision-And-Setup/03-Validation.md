@@ -103,7 +103,7 @@ The `azd up` command included steps to deploy the Woodgrove Bank application int
 
 !!! tip "The Azure AI Foundry portal lets you view and manage the Azure AI resources for your app."
 
-You will use the Azure AI Foundry portal to verify the `gpt-4o` and `text-embedding-3-large` models were deployed into your Azure OpenAI service.
+You will use the Azure AI Foundry portal to verify the `gpt-4o` and `text-embedding-ada-002` models were deployed into your Azure OpenAI service.
 
 1. In the Azure portal, return to the resource group containing your resources and select the **Azure OpenAI** resource.
 
@@ -117,7 +117,7 @@ You will use the Azure AI Foundry portal to verify the `gpt-4o` and `text-embedd
 
     ![Screenshot of Azure AI Foundry, with the Deployments menu item highlighted and selected. The completions and embeddings model deployments are displayed.](../../img/azure-ai-foundry-deployments.png)
 
-4. Verify you see a `completions` deployment for the `gpt-4o` model and an `embeddings` deployment for the `text-embedding-3-large` model.
+4. Verify you see a `completions` deployment for the `gpt-4o` model and an `embeddings` deployment for the `text-embedding-ada-002` model.
 
 ## 4. Verify Semantic Ranker Model Deployment (optional)
 

@@ -70,7 +70,7 @@ _Click each tab below to learn more about how the movement of data in the contex
 
     2. The REACT SPA sends these chat messages to the `/chat` API endpoint hosted in ACA.
 
-    3. The request query is embedded using the `text-embedding-3-large` model in Azure OpenAI.
+    3. The request query is embedded using the `text-embedding-ada-002` model in Azure OpenAI.
 
     4. A **hybrid search** is performed on the Azure Database for PostgreSQL flexible server, where the system searches for relevant data.
 

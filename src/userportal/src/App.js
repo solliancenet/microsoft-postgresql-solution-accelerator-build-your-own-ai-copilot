@@ -39,7 +39,7 @@ function App() {
     <span>
       <header className={`navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow`}>
         <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3 d-flex align-items-center" href="#">
-          <img src="logo192.png" alt="Woodgrove Bank" className="logo" />
+          <img src="/logo.png" alt="Woodgrove Bank" className="logo" />
           <span className="ms-2 text-light">Woodgrove Bank</span>
         </a>
         <div className="navbar-nav flex-row ms-auto">

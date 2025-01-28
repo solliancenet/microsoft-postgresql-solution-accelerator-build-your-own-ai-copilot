@@ -108,7 +108,7 @@ async def analyze_sow(
                 VALUES (
                 $1, $2, $3, $4, $5, $6, 
                 azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
-                azure_cognitive.summarize_abstractive($7, 'en', 2) --azure_cognitive.summarize_extractive($7, 'en', 2)
+                azure_cognitive.summarize_abstractive($7, 'en', 2) --azure_cognitive.summarize_extractive($7, 'en', 2),
                 $8)
                 RETURNING *;
             ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)

@@ -30,7 +30,7 @@ To understand how the RAG design pattern works in the context of the _Woodgrove 
 
     !!! info "Embeddings representing the user query are generated."
     
-    The `/chat` endpoint sends the user request to Azure Database for PostgreSQL, where the `azure_ai` extension calls Azure OpenAI to vectorize the user's text input using a Large Language "Embedding" Model (e.g., Azure Open AI `text-embedding-3-large`). This vector is then used in the query to retrieve similar records in the next step.
+    The `/chat` endpoint sends the user request to Azure Database for PostgreSQL, where the `azure_ai` extension calls Azure OpenAI to vectorize the user's text input using a Large Language "Embedding" Model (e.g., Azure Open AI `text-embedding-ada-002`). This vector is then used in the query to retrieve similar records in the next step.
 
 === "3. **Retrieve** Similar Data"
 

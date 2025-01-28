@@ -17,10 +17,10 @@ ALTER TABLE invoices
 ADD content text;
 
 ALTER TABLE invoices
-ADD embeddings vector(3072);
+ADD embeddings vector(1536);
 
 ALTER TABLE sows
-ADD embeddings vector(3072);
+ADD embeddings vector(1536);
 
 ALTER TABLE sows
 ADD summary text;

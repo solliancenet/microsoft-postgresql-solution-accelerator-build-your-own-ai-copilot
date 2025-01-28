@@ -88,7 +88,7 @@ def generate_embeddings(text_chunks):
     for chunk in text_chunks:
         response = openai.Embedding.create(
             input=chunk,
-            model="text-embedding-ada-002"  # Replace with "text-embedding-3-large" if available
+            model="text-embedding-ada-002"  # Replace with "text-embedding-ada-002" if available
         )
         embeddings.append(response['data'][0]['embedding'])
     return embeddings

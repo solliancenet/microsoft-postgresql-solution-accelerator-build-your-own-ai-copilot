@@ -71,7 +71,7 @@ const InvoiceList = () => {
   );
 
   const fetchVendors = async (skip, limit, sortBy, search) => {
-    const response = await api.invoices.list(skip, limit, sortBy, search);
+    const response = await api.invoices.list(-1, skip, limit, sortBy, search);
     setReload(false);
     return response;
   };

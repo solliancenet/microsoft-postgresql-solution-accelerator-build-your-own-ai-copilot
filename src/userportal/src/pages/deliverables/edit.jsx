@@ -7,10 +7,10 @@ import api from '../../api/Api';
 const DeliverableEdit = () => {
     const { id } = useParams(); // Extract ID from URL
     const [milestoneId, setMilestoneId] = useState('');
-    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [status, setStatus] = useState('');
+    const [dueDate, setDueDate] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
@@ -42,20 +42,20 @@ const DeliverableEdit = () => {
 
     const updateDisplay = (data) => {
         setMilestoneId(data.milestone_id);
-        setName(data.name);
         setDescription(data.description);
         setAmount(data.amount);
         setStatus(data.status);
+        setDueDate(data.due_date);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             var data = {
-                name: name,
                 description: description,
                 amount: amount,
-                status: status
+                status: status,
+                due_date: dueDate
             };
             var updatedItem = await api.deliverables.update(id, data);
             updateDisplay(updatedItem);
@@ -76,12 +76,12 @@ const DeliverableEdit = () => {
         {success && <div className="alert alert-success">{success}</div>}
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Description</Form.Label>
                 <Form.Control
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
+                    as="textarea"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
                 />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -115,11 +115,11 @@ const DeliverableEdit = () => {
                 />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Due Date</Form.Label>
                 <Form.Control
-                    as="textarea"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    type="date"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
                     required
                 />
             </Form.Group>

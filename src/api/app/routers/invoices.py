@@ -70,7 +70,7 @@ async def analyze_invoice(
     
     # Analyze the document
     document_data = await storage_service.download_blob(documentName)
-    analysis_result = await doc_intelligence_service.extract_text_from_document(document_data)
+    analysis_result = await doc_intelligence_service.extract_text_from_invoice_document(document_data)
     
     full_text = analysis_result.full_text
 
@@ -135,6 +135,14 @@ async def analyze_invoice(
             raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')
 
         invoice = parse_obj_as(Invoice, dict(row))
+
+        # Save Invoice Line Items
+        await conn.execute('''DELETE FROM invoice_line_items WHERE invoice_id = $1''', invoice.id)
+        for line_item in analysis_result.line_items:
+            await conn.execute('''
+                INSERT INTO invoice_line_items (invoice_id, description, amount, status, due_date) VALUES ($1, $2, $3, $4, $5);
+            ''', invoice.id, line_item.description, line_item.amount, line_item.status, line_item.due_date)
+
     return invoice
 
 

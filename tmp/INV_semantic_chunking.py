@@ -108,7 +108,7 @@ def insert_line_items_to_db(invoice_number, line_items):
         cursor.execute("""
             INSERT INTO invoice_line_items (invoice_id,description, amount, status, due_date)
             VALUES (%s, %s, %s, %s, %s)
-        """, (1,item['description'], item['amount'], item['status'], item['due_date']))
+        """, (invoice_id,item['description'], item['amount'], item['status'], item['due_date']))
 
     conn.commit()
     cursor.close()
@@ -116,7 +116,7 @@ def insert_line_items_to_db(invoice_number, line_items):
 
 # Download the document data from blob storage
 container_name = "documents"
-blob_name = "INV-TWC2024-003.pdf"
+blob_name = "INV-TWC2024-005.pdf"
 document_data = download_blob(container_name, blob_name)
 
 # Extract line items from the document data

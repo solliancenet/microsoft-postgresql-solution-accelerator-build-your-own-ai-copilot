@@ -13,7 +13,7 @@ RETURNS TABLE(
     rank REAL
 ) AS $$
 DECLARE 
-	query_embedding vector(3072);
+	query_embedding vector(1536);
 BEGIN
 	query_embedding := (
 		azure_openai.create_embeddings('embeddings', query_text, max_attempts => 5, retry_delay_ms => 500)::vector

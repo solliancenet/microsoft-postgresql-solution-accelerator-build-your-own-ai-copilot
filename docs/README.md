@@ -99,7 +99,7 @@ To deploy and explore the sample, you will need:
 1. An active GitHub account - [Signup for a free account here](https://github.com/signup)
 1. Access to Azure OpenAI Services - [Learn about Limited Access here](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access)
 1. Access to Azure AI Search - [With Semantic Ranker](https://learn.microsoft.com/azure/search/semantic-search-overview) (premiun feature)
-1. Available Quota for: `text-embedding-ada-002`, `gpt-35-turbo`. and `gpt-4`
+1. Available Quota for: `text-embedding-ada-002` and `gpt-4o`
 
 We recommend deployments to `swedencentral` or `francecentral` as regions that can support all these models. In addition to the above, you will also need the ability to:
 
@@ -296,7 +296,7 @@ The solution is deployed using the Azure Developer CLI. The `azd up` command eff
 
 ### Region Availability
 
-This template currently uses the following models: `gpt35-turbo`, `gpt-4` and `text-embedding-ada-002`, which may not be available in all Azure regions, or may lack sufficient quota for your subscription in supported regions. Check for [up-to-date region availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) and select a region during deployment accordingly
+This template currently uses the following models: `gpt-4o` and `text-embedding-ada-002`, which may not be available in all Azure regions, or may lack sufficient quota for your subscription in supported regions. Check for [up-to-date region availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) and select a region during deployment accordingly
 
 **We recommend using `francecentral`**
 

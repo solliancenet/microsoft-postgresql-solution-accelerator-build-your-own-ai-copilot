@@ -1,0 +1,22 @@
+/* src/UserProfile.css */
+.user-profile {
+  padding-left: 1.2em;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-sticky-bottom .user-profile {
+  margin-top: 2em;
+}
+
+.user-avatar {
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 50%;
+  margin-right: 1em;
+}
+
+.user-name {
+  font-size: 1.2em;
+  font-weight: 400;
+}

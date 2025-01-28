@@ -3,3 +3,5 @@
 .venv
 docs/workshop/site
 scripts/aml/model_asset/model
+src/*/dist
+node_modules

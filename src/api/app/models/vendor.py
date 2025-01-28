@@ -7,6 +7,7 @@ class VendorEdit(BaseModel):
     contact_name: str
     contact_email: str
     contact_phone: str
+    website: Optional[str] = None
     type: str
 
 class Vendor(VendorEdit):

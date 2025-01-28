@@ -13,6 +13,7 @@ const VendorEdit = () => {
     const [contactEmail, setContactEmail] = useState('');
     const [contactPhone, setContactPhone] = useState('');
     const [contactType, setContactType] = useState('');
+    const [website, setWebsite] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
@@ -40,6 +41,7 @@ const VendorEdit = () => {
         setContactName(data.contact_name);
         setContactEmail(data.contact_email);
         setContactPhone(data.contact_phone);
+        setWebsite(data.website);
         setContactType(data.type);
       }
     
@@ -203,6 +205,17 @@ const VendorEdit = () => {
             disabled
             />
         </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Website</Form.Label>
+          <Form.Control
+            type="text"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            required
+            disabled
+            />
+        </Form.Group>
+        
         {/* <Button type="submit" variant="primary">
           <i className="fas fa-save"></i> Save
         </Button>

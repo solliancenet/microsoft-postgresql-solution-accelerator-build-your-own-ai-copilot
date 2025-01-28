@@ -2097,7 +2097,9 @@
 <li><strong>Embedding Storage</strong>:</li>
 <li>
 <p>A new column is added to the database to store high-dimensional vector embeddings of the document text:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sows</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>

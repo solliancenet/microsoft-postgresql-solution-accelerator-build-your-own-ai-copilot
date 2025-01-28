@@ -26,7 +26,7 @@
     
     
       
-        <title>5.3 Testing the Chat API - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>5.3 Review RAG Implementation - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#53-testing-the-chat-api" class="md-skip">
+        <a href="#53-review-rag-implementation" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.3 Testing the Chat API
+              5.3 Review RAG Implementation
             
           </span>
         </div>
@@ -283,12 +283,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
+        <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
   
-  03 Integrate GenAI Into PostgreSQL
+  03 Integrate AI Into PostgreSQL
 
         </a>
       </li>
@@ -345,12 +345,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../06-Add-GraphRAG/" class="md-tabs__link">
+        <a href="../../06-Improve-RAG-Accuracy/" class="md-tabs__link">
           
   
     
   
-  06 Add GraphRAG
+  06 Improve RAG Accuracy
 
         </a>
       </li>
@@ -837,8 +837,6 @@
       
         
       
-        
-      
     
     
       
@@ -856,11 +854,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
+            <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    03 Integrate GenAI Into PostgreSQL
+    03 Integrate AI Into PostgreSQL
   </span>
   
 
@@ -876,7 +874,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            03 Integrate GenAI Into PostgreSQL
+            03 Integrate AI Into PostgreSQL
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -889,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -910,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -931,7 +929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -952,32 +950,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.4 Optimize vector performance with DiskANN
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.5 Vectorize data
+    3.4 Vectorize data
   </span>
   
 
@@ -1157,7 +1134,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.5 Create Validation Prompts
   </span>
   
 
@@ -1178,7 +1155,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.6 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1208,6 +1185,8 @@
       
         
           
+        
+      
         
       
         
@@ -1328,7 +1307,7 @@
           
   
   <span class="md-ellipsis">
-    5.3 Testing the Chat API
+    5.3 Review RAG Implementation
   </span>
   
 
@@ -1339,7 +1318,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Testing the Chat API
+    5.3 Review RAG Implementation
   </span>
   
 
@@ -1361,18 +1340,51 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-testing-options" class="md-nav__link">
+  <a href="#37-lets-connect-the-dots" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Testing Options
+      3.7. Let's Connect The Dots 💡
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-test-with-swagger" class="md-nav__link">
+  <a href="#hybrid-search" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Test with Swagger
+      Hybrid Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hybrid Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-its-better" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why It's Better
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-hybrid-search-in-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable Hybrid Search in PostgreSQL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allow-hybrid-search-from-chat-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allow Hybrid Search From Chat Endpoint
     </span>
   </a>
   
@@ -1398,7 +1410,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Add Copilot Chat To UI
+    5.4 Testing the Chat API
   </span>
   
 
@@ -1440,7 +1452,28 @@
         
   
   <span class="md-ellipsis">
-    5.6 Use Semantic Ranking
+    5.6 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.7 Redeploy App
   </span>
   
 
@@ -1484,6 +1517,8 @@
       
         
       
+        
+      
     
     
       
@@ -1501,11 +1536,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../06-Add-GraphRAG/" class="md-nav__link ">
+            <a href="../../06-Improve-RAG-Accuracy/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    06 Add GraphRAG
+    06 Improve RAG Accuracy
   </span>
   
 
@@ -1521,7 +1556,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            06 Add GraphRAG
+            06 Improve RAG Accuracy
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1534,11 +1569,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/01/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/00/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    6.1 Install Apache AGE extension
+    5.6 Use Semantic Ranking
   </span>
   
 
@@ -1555,7 +1590,28 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/02/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.1 Create and Query Graph Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-Improve-RAG-Accuracy/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1576,7 +1632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/03/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1597,7 +1653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/04/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1618,7 +1674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/05/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1639,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/06/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1660,7 +1716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/07/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1766,18 +1822,51 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-testing-options" class="md-nav__link">
+  <a href="#37-lets-connect-the-dots" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Testing Options
+      3.7. Let's Connect The Dots 💡
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-test-with-swagger" class="md-nav__link">
+  <a href="#hybrid-search" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Test with Swagger
+      Hybrid Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hybrid Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-its-better" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why It's Better
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-hybrid-search-in-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable Hybrid Search in PostgreSQL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allow-hybrid-search-from-chat-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allow Hybrid Search From Chat Endpoint
     </span>
   </a>
   
@@ -1801,40 +1890,207 @@
   
 
 
-<h1 id="53-testing-the-chat-api">5.3 Testing the Chat API<a class="headerlink" href="#53-testing-the-chat-api" title="Permanent link">&para;</a></h1>
-<h2 id="31-testing-options">3.1 Testing Options<a class="headerlink" href="#31-testing-options" title="Permanent link">&para;</a></h2>
-<p>The Chat API is deployed against the <code>/completions/chat</code> endpoint. So, how can you test this?</p>
+<h1 id="53-review-rag-implementation">5.3 Review RAG Implementation<a class="headerlink" href="#53-review-rag-implementation" title="Permanent link">&para;</a></h1>
+<ol>
+<li>Implement RAG (Function calling review)</li>
+<li>Show how to use LangChain's <code>StructuredTool</code> (or whatever it is) to call existing functions to get info from the database for RAG</li>
+<li>Embed incoming user messages for similarity search and semantic ranker capablities</li>
+</ol>
+<h2 id="37-lets-connect-the-dots">3.7. Let's Connect The Dots 💡<a class="headerlink" href="#37-lets-connect-the-dots" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Recall that the <a href="https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation#how-does-rag-work">Retrieval Augmented Generation</a> works by <em>retrieving</em> relevant knowledge from your data stores, and <em>augmenting</em> the user query with it to create an enhanced prompt - which <em>generates</em> the final response.</p>
+</div>
+<p>To implement this RAG pattern, we need to execute three steps:</p>
+<ol>
+<li><strong>Setup data sources</strong> and populate them with our data (product catalog, customer orders)</li>
+<li><strong>Create <a href="https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation#how-does-rag-work">indexes</a></strong> for efficient information retrieval by LLMs (e.g., find matching products)</li>
+<li><strong>Connect our Azure AI project</strong> to access data/indexes code-first, for use in processing steps.</li>
+</ol>
+<p>In the previous section we setup the data sources (provisioning infra) and populated them with data (post-provisioning scripts) as follows:</p>
+<ol>
+<li><strong>Azure CosmosDB</strong> - loaded <strong>12 records</strong> from <code>data/customer_info</code>, got <em>customers</em> database.</li>
+<li><strong>Azure AI Search</strong> - loaded <strong>20 records</strong> from <code>data/product_info</code>, got <em>contoso-products</em> index.</li>
+</ol>
+<p>This checks off the first two idents from our RAG checklist above. Now, let's see how we can achieve the thirst ep with a code-first approach that makes use of the Azure AI Search, Azure CosmosDB and Azure OpenAI services through their Azure SDKs.</p>
+<h2 id="hybrid-search">Hybrid Search<a class="headerlink" href="#hybrid-search" title="Permanent link">&para;</a></h2>
+<p>Hybrid search in Azure Database for PostgreSQL combines traditional full-text search functionality with the vector similarity search capabilites enabled by the <code>azure_ai</code> and <code>vector</code> extensions to deliver highly relevant results. This dual approach leverages the precision of keyword matching with full-text search and the contextual understanding of vector search, ensuring that users obtain both exact matches and semantically related content. This synergy enhances search efficiency, provides a richer user experience, and supports diverse use cases—from technical document retrieval to broad content discovery—making it an invaluable tool for modern copilots.</p>
+<h3 id="why-its-better">Why It's Better<a class="headerlink" href="#why-its-better" title="Permanent link">&para;</a></h3>
+<p>By integrating full-text search and vector similarity search, hybrid search maximizes the relevance and comprehensiveness of search results, providing users with more accurate and meaningful information.</p>
+<ol>
+<li>
+<p><strong>Comprehensive Results</strong></p>
 <ul>
-<li>You can use a third party client to <code>POST</code> a request to the endpoint</li>
-<li>You can use a <code>CURL</code> command to make the request from commandline</li>
-<li>You can use the built-in <code>/swagger</code> Swagger UI to <a href="https://fastapi.tiangolo.com/#interactive-api-docs">try it out interactively</a></li>
-</ul>
-<h2 id="32-test-with-swagger">3.2 Test with Swagger<a class="headerlink" href="#32-test-with-swagger" title="Permanent link">&para;</a></h2>
-<p><strong>Let's use option 3</strong> - a side benefit of this is it shows us the <em><code>curl</code></em> command you can use to make the same request from the terminal if you want to try that out later.</p>
-<p>TODO: Update the step below to have them start a debug session from VS Code and then open a browser tab for the API</p>
-<ul>
-<li>Return to the dev server preview tab in the browser (ends in <code>github.dev</code>)</li>
-<li>Append <code>/swagger</code> to the URL to get the Swagger UI interactive testing page</li>
-<li>Expand the POST section and select <code>Try it out</code><ul>
-<li>Specify a question: <code>What camping gear do I own already?</code></li>
-<li>Specify a customer_id: try <strong>3</strong> ("Michael Johnson")</li>
-<li>Specify chat_history: enter <code>[ ]</code> (empty list)</li>
+<li><strong>Full-Text Search</strong>: Uses keyword matching for precise term searches.</li>
+<li><strong>Vector Search</strong>: Uses vector similarity to find contextually relevant results.</li>
+<li><strong>Hybrid</strong>: Combines both to ensure exact and semantically similar results.</li>
 </ul>
 </li>
-<li>Click <code>Execute</code> to run the query</li>
-</ul>
-<p>This is similar to our previous testing with the FastAPI endpoint on Azure Container Apps - but now you can <strong>also</strong> see the server execution traces in the Visual Studio Code console.</p>
+<li>
+<p><strong>Enhanced Relevance</strong></p>
 <ul>
-<li><strong>Check:</strong> You should get a valid response in the Swagger UI</li>
-<li><strong>Check:</strong> You should also see the response traces in the VS Code terminal</li>
+<li>Prioritizes exact matches from full-text search while including contextually significant results from vector search.</li>
 </ul>
-<p><strong>What just happened?</strong></p>
+</li>
+<li>
+<p><strong>Improved User Experience</strong></p>
 <ul>
-<li>The dev server ran the <code>main.py</code> defined application with 2 routes</li>
-<li>The default route <code>/</code> returns the "Hello world" message (see line 46) TODO: Change line number here</li>
-<li>This confirms that our application server is running successfully</li>
-<li>The <code>/swagger</code> UI endpoint displays the endpoints available on the API... TODO: Expand on this.</li>
+<li>Balances precision (full-text) and relevance (vector) for satisfying search outcomes.</li>
 </ul>
+</li>
+<li>
+<p><strong>Versatility</strong></p>
+<ul>
+<li>Supports varied use cases from technical documents to content discovery by integrating both search techniques.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Resource Use</strong></p>
+<ul>
+<li>Optimizes search efficiency by leveraging both full-text and vector search.</li>
+</ul>
+</li>
+</ol>
+<h2 id="enable-hybrid-search-in-postgresql">Enable Hybrid Search in PostgreSQL<a class="headerlink" href="#enable-hybrid-search-in-postgresql" title="Permanent link">&para;</a></h2>
+<p>To allow search results against the database to use traditional full-text search combined with vector similarity seearch, you can combine both approaches in a single query to leverage the strengths of traditional keyword search and vector similarity search.</p>
+<ol>
+<li>
+<p>In pgAdmin, open a new query tool window for your database.</p>
+</li>
+<li>
+<p>In the new query window, paste the following SQL statement to create a function for performing a hybrid search against the <code>invoice_validation_results</code> table...</p>
+<p>TODO: Need to have them review the below function first, then copy it into a pgAdmin query window and run it...</p>
+<div class="admonition info">
+<p class="admonition-title">PostgreSQL Hybrid Search Function</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">get_similar_invoices</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">get_similar_invoices</span><span class="p">(</span><span class="n">query_text</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="n">max_results</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">vendor</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">sow</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span>
+<span class="k">RETURNS</span><span class="w"> </span><span class="k">TABLE</span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="nb">number</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vendor_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sow_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">amount</span><span class="w"> </span><span class="nb">NUMERIC</span><span class="p">,</span>
+<span class="w">    </span><span class="n">invoice_date</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">payment_status</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">datestamp</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">result</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">validation_passed</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rank</span><span class="w"> </span><span class="nb">REAL</span>
+<span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="n">query_embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="n">query_embedding</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">query_text</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)::</span><span class="n">vector</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">RETURN</span><span class="w"> </span><span class="n">QUERY</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="nb">number</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">vendor_id</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">sow_id</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">invoice_date</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">payment_status</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">datestamp</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="k">result</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">validation_passed</span><span class="p">,</span>
+<span class="w">            </span><span class="k">CASE</span>
+<span class="w">                </span><span class="k">WHEN</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="k">result</span><span class="w"> </span><span class="k">ILIKE</span><span class="w"> </span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">query_text</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">-- Exact match ranks highest</span>
+<span class="w">                </span><span class="k">ELSE</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="n">query_embedding</span><span class="p">)::</span><span class="nb">real</span>
+<span class="w">            </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rank</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">i</span>
+<span class="w">        </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">invoice_validation_results</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">invoice_id</span><span class="w"> </span><span class="c1">-- Only get invoices that have validation results</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">vendor_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vendor</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">vendor</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">AND</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">sow_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sow</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">sow</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="k">ASC</span>
+<span class="w">    </span><span class="k">LIMIT</span><span class="w"> </span><span class="n">max_results</span><span class="p">;</span>
+<span class="k">END</span><span class="w"> </span><span class="err">$$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<p>In this function:</p>
+<ul>
+<li>
+<p>The CASE statement assigns a rank of 0 to rows where text_field contains the exact search term (ILIKE '%search_term%').</p>
+</li>
+<li>
+<p>For all other rows, the rank is based on the vector distance, which ensures that semantically similar results are included.</p>
+</li>
+<li>
+<p>The results are then ordered by the rank, with exact matches ranking highest, followed by the most semantically similar results.</p>
+</li>
+<li>
+<p>Finally, we limit the results to the top 100.</p>
+</li>
+</ul>
+<p>This approach allows you to prioritize exact keyword matches while still incorporating the benefits of vector similarity search.</p>
+<p>TODO: Test the above, and implement something like also restricting to a particular vendor?</p>
+</div>
+<p>TODO: Provide details and review the various lines/parts of the above function</p>
+</li>
+<li>
+<p>Run the query using the <strong>Execute script</strong> button on the pgAdmin toolbar.</p>
+</li>
+<li>
+<p>Test out the function by running the following query:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">get_ranked_invoices</span><span class="p">(</span><span class="s1">&#39;amount was wrong&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<h2 id="allow-hybrid-search-from-chat-endpoint">Allow Hybrid Search From Chat Endpoint<a class="headerlink" href="#allow-hybrid-search-from-chat-endpoint" title="Permanent link">&para;</a></h2>
+<p>TODO: Review existing code in the <code>get_similar_invoice_validation_results</code> function...</p>
+<div class="admonition info">
+<p class="admonition-title">Hybrid Search Implementation</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/completions.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">get_similar_invoice_validation_results</span><span class="p">(</span><span class="n">user_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vendor_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves a list of invoice validation results similar to the user query for the specified vendor.</span>
+<span class="sd">    If no vendor_id is provided, invoice validation results for all vendors are returned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_db_connection_pool</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">vendor_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM get_ranked_sows(&#39;</span><span class="si">{</span><span class="n">user_query</span><span class="si">}</span><span class="s2">&#39;, </span><span class="si">{</span><span class="n">vendor_id</span><span class="si">}</span><span class="s2">);&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM get_ranked_sows(&#39;</span><span class="si">{</span><span class="n">user_query</span><span class="si">}</span><span class="s2">&#39;);&quot;</span>
+
+        <span class="n">rows</span> <span class="o">=</span> <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">invoices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">invoices</span>
+</code></pre></div></td></tr></table></div>
+</div>
 
 
 
@@ -1889,13 +2145,13 @@
         
         
           
-          <a href="../04/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.4 Add Copilot Chat To UI">
+          <a href="../04/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.4 Testing the Chat API">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                5.4 Add Copilot Chat To UI
+                5.4 Testing the Chat API
               </div>
             </div>
             <div class="md-footer__button md-icon">

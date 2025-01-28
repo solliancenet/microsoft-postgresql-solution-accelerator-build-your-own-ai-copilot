@@ -283,12 +283,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-tabs__link">
+        <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
   
-  03 Integrate GenAI Into PostgreSQL
+  03 Integrate AI Into PostgreSQL
 
         </a>
       </li>
@@ -345,12 +345,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../06-Add-GraphRAG/" class="md-tabs__link">
+        <a href="../../06-Improve-RAG-Accuracy/" class="md-tabs__link">
           
   
     
   
-  06 Add GraphRAG
+  06 Improve RAG Accuracy
 
         </a>
       </li>
@@ -837,8 +837,6 @@
       
         
       
-        
-      
     
     
       
@@ -856,11 +854,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../03-Integrate-GenAI-Into-PostgreSQL/" class="md-nav__link ">
+            <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    03 Integrate GenAI Into PostgreSQL
+    03 Integrate AI Into PostgreSQL
   </span>
   
 
@@ -876,7 +874,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            03 Integrate GenAI Into PostgreSQL
+            03 Integrate AI Into PostgreSQL
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -889,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/01/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -910,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/02/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -931,7 +929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/03/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -952,32 +950,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/04/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3.4 Optimize vector performance with DiskANN
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Integrate-GenAI-Into-PostgreSQL/05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.5 Vectorize data
+    3.4 Vectorize data
   </span>
   
 
@@ -1139,6 +1116,57 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#configure-semantic-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Semantic Chunking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Semantic Chunking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-define-the-chunking-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Define the Chunking Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-leverage-azure-document-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Leverage Azure Document Intelligence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-store-chunks-in-azure-database-for-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Store Chunks in Azure Database for PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-benefits-of-semantic-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Benefits of Semantic Chunking
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#write-chunks-to-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       Write Chunks to PostgreSQL
@@ -1224,7 +1252,7 @@
         
   
   <span class="md-ellipsis">
-    4.4 Create Validation Prompts
+    4.5 Create Validation Prompts
   </span>
   
 
@@ -1245,7 +1273,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.6 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1273,6 +1301,8 @@
       
         
           
+        
+      
         
       
         
@@ -1383,7 +1413,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Testing the Chat API
+    5.3 Review RAG Implementation
   </span>
   
 
@@ -1404,7 +1434,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Add Copilot Chat To UI
+    5.4 Testing the Chat API
   </span>
   
 
@@ -1446,7 +1476,28 @@
         
   
   <span class="md-ellipsis">
-    5.6 Use Semantic Ranking
+    5.6 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.7 Redeploy App
   </span>
   
 
@@ -1490,6 +1541,8 @@
       
         
       
+        
+      
     
     
       
@@ -1507,11 +1560,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../06-Add-GraphRAG/" class="md-nav__link ">
+            <a href="../../06-Improve-RAG-Accuracy/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    06 Add GraphRAG
+    06 Improve RAG Accuracy
   </span>
   
 
@@ -1527,7 +1580,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            06 Add GraphRAG
+            06 Improve RAG Accuracy
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1540,11 +1593,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/01/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/00/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    6.1 Install Apache AGE extension
+    5.6 Use Semantic Ranking
   </span>
   
 
@@ -1561,7 +1614,28 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/02/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.1 Create and Query Graph Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-Improve-RAG-Accuracy/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1582,7 +1656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/03/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1603,7 +1677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/04/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1624,7 +1698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/05/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1645,7 +1719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/06/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1666,7 +1740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Add-GraphRAG/07/" class="md-nav__link">
+      <a href="../../06-Improve-RAG-Accuracy/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1772,6 +1846,57 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#configure-semantic-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Semantic Chunking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Semantic Chunking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-define-the-chunking-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Define the Chunking Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-leverage-azure-document-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Leverage Azure Document Intelligence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-store-chunks-in-azure-database-for-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Store Chunks in Azure Database for PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-benefits-of-semantic-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Benefits of Semantic Chunking
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#write-chunks-to-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       Write Chunks to PostgreSQL
@@ -1816,6 +1941,91 @@
 <h1 id="42-configure-semantic-chunking">4.2 Configure Semantic Chunking<a class="headerlink" href="#42-configure-semantic-chunking" title="Permanent link">&para;</a></h1>
 <p>TODO</p>
 <p>https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept/retrieval-augmented-generation?view=doc-intel-4.0.0</p>
+<h2 id="configure-semantic-chunking">Configure Semantic Chunking<a class="headerlink" href="#configure-semantic-chunking" title="Permanent link">&para;</a></h2>
+<p>Semantic chunking is a critical step in preparing documents for retrieval-augmented generation (RAG) and other AI-driven workflows. It involves breaking down large documents into smaller, semantically meaningful chunks that enable better indexing, searching, and retrieval. Using Azure Document Intelligence, semantic chunking can be configured to optimize data flow for downstream processes. Below is a guide to configuring semantic chunking effectively.</p>
+<hr />
+<h3 id="1-define-the-chunking-strategy"><strong>1. Define the Chunking Strategy</strong><a class="headerlink" href="#1-define-the-chunking-strategy" title="Permanent link">&para;</a></h3>
+<p>Before implementing semantic chunking, it is essential to define a strategy tailored to the document’s content and the use case:</p>
+<ul>
+<li><strong>Determine Chunk Size</strong>:</li>
+<li>Decide the size of each chunk based on the complexity of the document and the AI model’s token limits.</li>
+<li>
+<p>For example, divide a lengthy Statement of Work document into sections such as "Project Scope", "Schedules", and "Project Deliverables".</p>
+</li>
+<li>
+<p><strong>Identify Semantically Relevant Boundaries</strong>:</p>
+</li>
+<li>Use natural breakpoints like paragraphs, headings, or bullet points.</li>
+<li>For structured documents, align chunks with logical sections, such as "Invoice Details" or "Payment Terms."</li>
+</ul>
+<hr />
+<h3 id="2-leverage-azure-document-intelligence"><strong>2. Leverage Azure Document Intelligence</strong><a class="headerlink" href="#2-leverage-azure-document-intelligence" title="Permanent link">&para;</a></h3>
+<p>Azure Document Intelligence provides tools and capabilities to automate the chunking process:</p>
+<ol>
+<li><strong>Use Pre-Trained Models</strong>:</li>
+<li>
+<p>Apply pre-trained models to extract structured data and identify logical sections within documents.</p>
+</li>
+<li>
+<p><strong>Apply Custom Models</strong>:</p>
+</li>
+<li>
+<p>Use custom models trained on domain-specific documents to identify sections unique to your organization.</p>
+</li>
+<li>
+<p><strong>Configure Semantic Rules</strong>:</p>
+</li>
+<li>Define rules or conditions to segment documents based on semantic content.</li>
+<li>Example: Break a contract into "Parties Involved," "Obligations," and "Terms and Conditions" sections.</li>
+</ol>
+<hr />
+<h3 id="3-store-chunks-in-azure-database-for-postgresql"><strong>3. Store Chunks in Azure Database for PostgreSQL</strong><a class="headerlink" href="#3-store-chunks-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
+<p>Once documents are semantically chunked, the resulting chunks are stored in <strong>Azure Database for PostgreSQL</strong> for efficient querying and retrieval:</p>
+<ul>
+<li><strong>Data Structure</strong>:</li>
+<li>Each chunk is stored as an individual record with metadata for easy identification.</li>
+<li>
+<p>Example Schema:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sow_chunks</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sow_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">heading</span><span class="p">,</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">chunk_content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">chunk_metadata</span><span class="w"> </span><span class="n">JSONB</span>
+<span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p><strong>Metadata</strong>:</p>
+</li>
+<li>This can include metadata such as document ID, chunk sequence, and semantic labels for efficient retrieval.</li>
+</ul>
+<hr />
+<h3 id="4-benefits-of-semantic-chunking"><strong>4. Benefits of Semantic Chunking</strong><a class="headerlink" href="#4-benefits-of-semantic-chunking" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Enhanced Retrieval</strong>:</li>
+<li>
+<p>Enables precise querying of specific document sections, improving the accuracy of AI-driven responses.</p>
+</li>
+<li>
+<p><strong>Optimized Indexing</strong>:</p>
+</li>
+<li>
+<p>Reduces the complexity of indexing large documents by focusing on smaller, meaningful sections.</p>
+</li>
+<li>
+<p><strong>Improved AI Performance</strong>:</p>
+</li>
+<li>Ensures AI models operate within token limits, avoiding truncation and enhancing output quality.</li>
+</ul>
+<hr />
+<p>By configuring semantic chunking using Azure Document Intelligence, organizations can streamline document workflows, improve data accessibility, and enable more effective AI-powered retrieval and analysis.</p>
 <h2 id="write-chunks-to-postgresql">Write Chunks to PostgreSQL<a class="headerlink" href="#write-chunks-to-postgresql" title="Permanent link">&para;</a></h2>
 <p>TODO</p>
 <h3 id="update-api-endpoints-to-insert-chunks">Update API Endpoints To Insert Chunks<a class="headerlink" href="#update-api-endpoints-to-insert-chunks" title="Permanent link">&para;</a></h3>

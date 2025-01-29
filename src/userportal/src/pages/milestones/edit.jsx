@@ -10,7 +10,6 @@ const MilestoneEdit = () => {
     const [sowId, setSowId] = useState('');
     const [name, setName] = useState('');
     const [status, setStatus] = useState('');
-    const [dueDate, setDueDate] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
@@ -49,7 +48,6 @@ const MilestoneEdit = () => {
         setSowId(data.sow_id);
         setName(data.name);
         setStatus(data.status);
-        setDueDate(data.due_date);
     }
 
     const handleSubmit = async (e) => {
@@ -57,8 +55,7 @@ const MilestoneEdit = () => {
         try {
             var data = {
                 name: name,
-                status: status,
-                due_date: dueDate
+                status: status
             };
             var updatedItem = await api.milestones.update(id, data);
             updateDisplay(updatedItem);
@@ -87,20 +84,27 @@ const MilestoneEdit = () => {
     const deliverableColumns = React.useMemo(
         () => [
             {
-            Header: 'Name',
-            accessor: 'name',
-            },
-            {
             Header: 'Description',
             accessor: 'description',
             },
             {
-            Header: 'Amount',
-            accessor: 'amount',
+                Header: 'Amount',
+                accessor: 'amount',
+                Cell: ({ value }) => {
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                });
+                return formatter.format(value);
+                },
             },
             {
-            Header: 'Status',
-            accessor: 'status',
+                Header: 'Status',
+                accessor: 'status',
+            },
+            {
+                Header: 'Due Date',
+                accessor: 'due_date',
             },
             {
             Header: 'Actions',
@@ -172,15 +176,6 @@ const MilestoneEdit = () => {
                         </option>
                         ))}
                     </Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Due Date</Form.Label>
-                <Form.Control
-                    type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                    required
-                />
             </Form.Group>
             <Button type="submit" variant="primary">
                 <i className="fas fa-save"></i> Save

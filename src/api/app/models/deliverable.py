@@ -6,6 +6,7 @@ class DeliverableEdit(BaseModel):
     description: str
     amount: Optional[float]
     status: str
+    due_date: date
 
 class Deliverable(DeliverableEdit):
     id: int

@@ -139,10 +139,6 @@ const SOWEdit = () => {
         accessor: 'name',
       },
       {
-        Header: 'Due Date',
-        accessor: 'due_date',
-      },
-      {
         Header: 'Status',
         accessor: 'status',
       },

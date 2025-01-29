@@ -1,4 +1,11 @@
-from app.services import AzureOpenAIService, DatabaseService, AzureDocIntelligenceService, StorageService, ConfigService
+from app.services import (
+    AzureDocIntelligenceService,
+    AzureOpenAIService,
+    ConfigService,
+    DatabaseService,
+    PromptService,
+    StorageService
+)
 from azure.identity.aio import DefaultAzureCredential
 from azure.core.credentials import AzureKeyCredential
 from contextlib import asynccontextmanager
@@ -25,6 +32,7 @@ async def lifespan(app):
     global db
     global doc_intelligence_service
     global storage_service
+    global prompt_service
     
     # Create an async Microsoft Entra ID RBAC credential
     credential = DefaultAzureCredential()
@@ -44,6 +52,9 @@ async def lifespan(app):
 
     # Create a connection to the Azure Database for PostgreSQL server
     db = DatabaseService(credential, await config_service.get_postgresql_server_name(), await config_service.get_postgresql_database_name())
+
+    # Create a prompt service
+    prompt_service = PromptService()
 
     yield
 
@@ -77,3 +88,6 @@ async def get_storage_service():
 
 async def get_db_connection_pool():
     return await db.get_connection_pool()
+
+async def get_prompt_service():
+    return prompt_service

@@ -24,7 +24,7 @@ FROM (
     UNION ALL
     SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Ana Bowman', 'abowman@lucernepublishing.com', '555-654-9870', 'http://www.lucernepublishing.com', 'Graphic Design'
     UNION ALL
-    SELECT 4, 'VarArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
+    SELECT 4, 'VanArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
     UNION ALL
     SELECT 5, 'Trey Research', '456 Research Avenue, Redmond', 'Serena Davis', 'serena.davis@treyresearch.net', '555-867-5309', 'http://www.treyresearch.net', 'DevOps'
     UNION ALL
@@ -78,7 +78,7 @@ INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, met
 SELECT 'SOW-2024-073',
        1,
        '2024-11-01',
-       '2025-12-31',
+       '2024-12-31',
        43600.00,
        '1/sow/Statement_of_Work_Adatum_Corporation_Woodgrove_Bank_20241101.pdf',
        '{}'
@@ -90,7 +90,7 @@ SELECT 'SOW-2024-052',
        '2024-06-01',
        '2025-11-30',
        75000.00,
-       '2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf',
+       '2/sow/Statement_of_Work_Contoso_Ltd_Woodgrove_Bank_20240601.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-052');
 
@@ -110,12 +110,12 @@ SELECT 'SOW-2024-070',
        '2024-10-01',
        '2025-09-30',
        60000.00,
-       '4/sow/Statement_of_Trey_Research_Woodgrove_Bank_20241001.pdf',
+       '4/sow/Statement_of_VanArsdel_Ltd_Woodgrove_Bank_20241001.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-070');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
-SELECT 'SOW-2024-W-038',
+SELECT 'SOW-2024-038',
        5,
        '2024-05-01',
        '2025-08-31',

@@ -20,15 +20,15 @@ SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone
 FROM (
     SELECT 1 as id, 'Adatum Corporation' as name, '789 Goldsmith Road, MainTown City' as address, 'Elizabeth Moore' as contact_name, 'elizabeth.moore@adatum.com' as contact_email, '555-789-7890' as contact_phone, 'http://www.adatum.com' as website, 'Data Engineering' as type
     UNION ALL
-    SELECT 2, 'Contoso, Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
+    SELECT 2, 'Contoso Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
     UNION ALL
     SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Ana Bowman', 'abowman@lucernepublishing.com', '555-654-9870', 'http://www.lucernepublishing.com', 'Graphic Design'
     UNION ALL
-    SELECT 4, 'VarArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
+    SELECT 4, 'VanArsdel Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
     UNION ALL
     SELECT 5, 'Trey Research', '456 Research Avenue, Redmond', 'Serena Davis', 'serena.davis@treyresearch.net', '555-867-5309', 'http://www.treyresearch.net', 'DevOps'
     UNION ALL
-    SELECT 6, 'Fabrikam, Inc.', '24601 South St., Philadelphia', 'Remy Morris', 'remy.morris@fabrikam.com', '610-321-0987', 'http://www.fabrikam.com', 'AI Services'
+    SELECT 6, 'Fabrikam Inc.', '24601 South St., Philadelphia', 'Remy Morris', 'remy.morris@fabrikam.com', '610-321-0987', 'http://www.fabrikam.com', 'AI Services'
     UNION ALL
     SELECT 7, 'The Phone Company', '10642 Meridian St., Indianapolis', 'Ashley Schroeder', 'ashley.schroeder@thephone-company.com', '719-444-2345', 'http://www.thephone-company.com', 'Communications'
 ) as v
@@ -78,7 +78,7 @@ INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, met
 SELECT 'SOW-2024-073',
        1,
        '2024-11-01',
-       '2025-12-31',
+       '2024-12-31',
        43600.00,
        '1/sow/Statement_of_Work_Adatum_Corporation_Woodgrove_Bank_20241101.pdf',
        '{}'
@@ -90,7 +90,7 @@ SELECT 'SOW-2024-052',
        '2024-06-01',
        '2025-11-30',
        75000.00,
-       '2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf',
+       '2/sow/Statement_of_Work_Contoso_Ltd_Woodgrove_Bank_20240601.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-052');
 
@@ -110,12 +110,12 @@ SELECT 'SOW-2024-070',
        '2024-10-01',
        '2025-09-30',
        60000.00,
-       '4/sow/Statement_of_Trey_Research_Woodgrove_Bank_20241001.pdf',
+       '4/sow/Statement_of_VanArsdel_Ltd_Woodgrove_Bank_20241001.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-070');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
-SELECT 'SOW-2024-W-038',
+SELECT 'SOW-2024-038',
        5,
        '2024-05-01',
        '2025-08-31',

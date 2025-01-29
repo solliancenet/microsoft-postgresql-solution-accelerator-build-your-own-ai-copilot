@@ -32,14 +32,15 @@ def create_invoice(invoice_number, deliverables, vendor_info, client_info, outpu
     pdf.cell(0, 10, txt=f"Invoice Date: {deliverables[0]['due_date']}", ln=True, align="L")
       
     # Client Information
+    pdf.ln(10)
     pdf.set_font("Arial", style="B", size=10)
     pdf.cell(0, 10, txt=f"Client: {client_info['name']}", ln=True, align="L")
     pdf.set_font("Arial", size=10)
     pdf.cell(0, 10, txt=f"Contact Name: {client_info['contact_name']}", ln=True, align="L")
     pdf.cell(0, 10, txt=f"Contact Email: {client_info['contact_email']}", ln=True, align="L")
-    
+    pdf.ln(10)  # Added line
+
     # Invoice Details
-    pdf.ln(10)
     pdf.set_font("Arial", style="B", size=10)
     pdf.cell(40, 10, txt="Milestone", border=1)
     pdf.cell(80, 10, txt="Deliverable", border=1)
@@ -110,7 +111,10 @@ if __name__ == "__main__":
 
     # Generate invoices for each group of deliverables
     for invoice_num, deliverables in grouped_deliverables.items():
-        invoice_number = f"INV-{vendor_config['SOW']}-{invoice_num:03d}"
+        # Generate the invoice number in the required format
+        words = vendor_config['name'].split()
+        invoice_prefix = f"{words[0][0]}{words[1][0]}" if len(words) > 1 else words[0][:2]
+        invoice_number = f"INV-{invoice_prefix.upper()}-2024-{invoice_num:03d}"
         output_path = f"../output/Invoice_{invoice_number}.pdf"
         
         create_invoice(invoice_number, deliverables, vendor_config, client_info, output_path)

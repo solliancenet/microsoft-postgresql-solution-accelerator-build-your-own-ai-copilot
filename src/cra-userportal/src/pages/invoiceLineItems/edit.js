@@ -41,8 +41,8 @@ const InvoiceLineItemEdit = () => {
 
         const fetchInvoices = async () => {
             try {
-                const data = await api.invoices.list(0, -1); // Fetch all invoices
-                setInvoices(data);
+                const data = await api.invoices.list(-1, 0, -1); // Fetch all invoices
+                setInvoices(data.data);
             } catch (err) {
                 setError('Failed to load invoices');
             }

@@ -8,7 +8,7 @@
             "name": "Portal Debugger",
             "type": "node-terminal",
             "request": "launch",
-            "command": "npm start",
+            "command": "npm run dev",
             "preLaunchTask": "npm: install",
             "cwd": "${workspaceFolder}/src/userportal"
         },

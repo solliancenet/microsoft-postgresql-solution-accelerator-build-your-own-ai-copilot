@@ -21,10 +21,16 @@ async def list_invoices(vendor_id: int = -1, skip: int = 0, limit: int = 10, sor
         if (sortby):
             orderby = sortby
 
-        if vendor_id > 0:
-            rows = await conn.fetch('SELECT * FROM invoices WHERE vendor_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', vendor_id, orderby, limit, skip)
+        if limit < 0:
+            if vendor_id > 0:
+                rows = await conn.fetch('SELECT * FROM invoices WHERE vendor_id = $1 ORDER BY $2;', vendor_id, orderby)
+            else:
+                rows = await conn.fetch('SELECT * FROM invoices ORDER BY $1;', orderby)
         else:
-            rows = await conn.fetch('SELECT * FROM invoices ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
+            if vendor_id > 0:
+                rows = await conn.fetch('SELECT * FROM invoices WHERE vendor_id = $1 ORDER BY $2 LIMIT $3 OFFSET $4;', vendor_id, orderby, limit, skip)
+            else:
+                rows = await conn.fetch('SELECT * FROM invoices ORDER BY $1 LIMIT $2 OFFSET $3;', orderby, limit, skip)
 
         invoices = parse_obj_as(list[Invoice], [dict(row) for row in rows])
 

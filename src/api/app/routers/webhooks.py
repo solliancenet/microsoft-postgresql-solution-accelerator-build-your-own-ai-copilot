@@ -45,8 +45,8 @@ async def storage_blob_webhook(
         blobNamePrefix = f"/blobServices/default/containers/{blobContainerName}/blobs/"
         
         # Check that event is from "documents" container
-        if (subject.substring(0, blobNamePrefix.length) != blobNamePrefix):
-            raise HTTPException(status_code=400, detail=f"Event subject is not from the '{blobContainerName}' container. (Subject: {subject})")
+        # if (subject.substring(0, blobNamePrefix.length) != blobNamePrefix):
+        #     raise HTTPException(status_code=400, detail=f"Event subject is not from the '{blobContainerName}' container. (Subject: {subject})")
 
         # Parse out the blob file name
         blobName = subject.replace(blobNamePrefix, '', 1)

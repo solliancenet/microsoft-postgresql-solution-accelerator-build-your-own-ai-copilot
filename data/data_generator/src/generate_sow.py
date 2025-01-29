@@ -1,11 +1,12 @@
 from fpdf import FPDF
 import json
+import argparse
 from datetime import datetime
 import os
 import textwrap
 
 # Function to generate the SOW PDF
-def generate_sow_pdf(output_path, vendor_name):
+def generate_sow_pdf(output_path, vendor_name,config):
     # Load configuration from the JSON file
     with open('src/config/sow_inv.config', 'r') as config_file:
         configs = json.load(config_file)
@@ -117,16 +118,24 @@ def generate_sow_pdf(output_path, vendor_name):
     pdf.output(output_path)
 
 if __name__ == "__main__":
-    vendor_name = "Contoso Ltd."  # Change this to the desired vendor name
+    parser = argparse.ArgumentParser(description="Generate Statement of Work PDF")
+    parser.add_argument("vendor_name", type=str, help="The name of the vendor")
+    args = parser.parse_args()
+
+    vendor_name = args.vendor_name
+
     with open('src/config/sow_inv.config', 'r') as config_file:
         configs = json.load(config_file)
+    
     config = next((config for config in configs if config['name'] == vendor_name), None)
     if not config:
         raise ValueError(f"Vendor '{vendor_name}' not found in configuration.")
+    
     name = config['name']
     start_date_str = config.get('start_date', "")
     if not start_date_str:
         raise ValueError(f"Start date not found for vendor '{vendor_name}'")
+    
     start_date = datetime.strptime(start_date_str, "%B %d, %Y").strftime("%Y-%m-%d")
     output_path = f"../output/Statement_of_Work_{name}_Woodgrove_Bank_{start_date}.pdf"
-    generate_sow_pdf(output_path, vendor_name)
+    generate_sow_pdf(output_path, vendor_name, config)

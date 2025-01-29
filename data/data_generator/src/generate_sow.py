@@ -131,7 +131,7 @@ if __name__ == "__main__":
     if not config:
         raise ValueError(f"Vendor '{vendor_name}' not found in configuration.")
     
-    name = config['name']
+    name = config['name'].replace(" ", "_").replace(".", "")
     start_date_str = config.get('start_date', "")
     if not start_date_str:
         raise ValueError(f"Start date not found for vendor '{vendor_name}'")

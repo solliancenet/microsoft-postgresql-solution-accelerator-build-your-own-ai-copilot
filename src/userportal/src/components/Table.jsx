@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTable, useSortBy } from 'react-table';
 
-const Table = ({ columns, data, loading, onSortChange }) => {
+const Table = ({ columns, data, loading, onSortChange, enableSorting = false }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -9,11 +9,13 @@ const Table = ({ columns, data, loading, onSortChange }) => {
     rows,
     prepareRow,
     state: { sortBy }
-  } = useTable({ columns, data }, useSortBy);
+  } = useTable({ columns, data }, enableSorting ? useSortBy : undefined);
 
   useEffect(() => {
-    onSortChange(sortBy);
-  }, [sortBy]);
+    if (enableSorting) {
+      onSortChange(sortBy);
+    }
+  }, [sortBy, enableSorting]);
 
   return (
     <div>
@@ -22,8 +24,9 @@ const Table = ({ columns, data, loading, onSortChange }) => {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
+                <th {...column.getHeaderProps(enableSorting ? column.getSortByToggleProps() : undefined)} key={column.id}>
                   {column.render('Header')}
+                  {enableSorting && (
                   <span>
                     {column.isSorted
                       ? column.isSortedDesc
@@ -31,13 +34,19 @@ const Table = ({ columns, data, loading, onSortChange }) => {
                         : <i className="ms-2 fas fa-sort-up text-muted"></i>
                       : <i className="ms-2 fas fa-sort text-muted"></i>}
                   </span>
+                  )}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {rows.length === 0 ? (
+            <tr>
+              <td colSpan={columns.length} className="text-center">No records to display</td>
+            </tr>
+          ) : (
+          rows.map(row => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()} key={row.index}>
@@ -48,7 +57,8 @@ const Table = ({ columns, data, loading, onSortChange }) => {
                 ))}
               </tr>
             );
-          })}
+          })
+        )}
         </tbody>
       </table>
       {loading && <div>Loading...</div>}

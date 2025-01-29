@@ -7,7 +7,6 @@ const MilestoneCreate = () => {
   const { sowId } = useParams(); // Extract from URL
   const [name, setName] = useState('');
   const [status, setStatus] = useState('');
-  const [dueDate, setDueDate] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -32,8 +31,7 @@ const MilestoneCreate = () => {
       var data = {
         sow_id: sowId,
         name: name,
-        status: status,
-        due_date: dueDate
+        status: status
       };
       var newItem = await api.milestones.create(data);
 
@@ -78,17 +76,7 @@ const MilestoneCreate = () => {
                   </option>
                 ))}
               </Form.Control>
-        </Form.Group>
-        <Form.Group className="mb-3">
-            <Form.Label>Due Date</Form.Label>
-            <Form.Control
-                type="date"
-                value={dueDate}
-                onChange={(e) => setDueDate(e.target.value)}
-                required
-            />
-        </Form.Group>
-      
+        </Form.Group>    
         <Button type="submit" variant="primary">
           <i className="fas fa-plus"></i> Create
         </Button>

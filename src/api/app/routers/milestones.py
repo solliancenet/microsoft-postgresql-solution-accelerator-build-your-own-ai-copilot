@@ -59,16 +59,11 @@ async def create_milestone(
     sow_id: int = Form(...),
     name: str = Form(...),
     status: str = Form(...),
-    due_date: str = Form(None),
     pool = Depends(get_db_connection_pool)
 ):
-    # Parse dates
-    due_date_parsed = None
-    if due_date:
-        due_date_parsed = datetime.strptime(due_date, '%Y-%m-%d').date()
-
+    """Creates a milestone in the database."""
     async with pool.acquire() as conn:
-        milestone_id = await conn.fetchval('INSERT INTO milestones (sow_id, name, status, due_date) VALUES ($1, $2, $3, $4) RETURNING id;', sow_id, name, status, due_date_parsed)
+        milestone_id = await conn.fetchval('INSERT INTO milestones (sow_id, name, status) VALUES ($1, $2, $3) RETURNING id;', sow_id, name, status)
         row = await conn.fetchrow('SELECT * FROM milestones WHERE id = $1;', milestone_id)
         milestone = parse_obj_as(Milestone, dict(row))
     return milestone
@@ -79,11 +74,12 @@ async def update_milestone(
     milestone: MilestoneEdit,
     pool = Depends(get_db_connection_pool)
 ):
+    """Updates a milestone in the database."""
     async with pool.acquire() as conn:
         await conn.execute('''
-        UPDATE milestones SET name = $1, status = $2, due_date = $3 
-        WHERE id = $4;
-        ''', milestone.name, milestone.status, milestone.due_date, milestone_id)
+        UPDATE milestones SET name = $1, status = $2
+        WHERE id = $3;
+        ''', milestone.name, milestone.status, milestone_id)
         row = await conn.fetchrow('SELECT * FROM milestones WHERE id = $1;', milestone_id)
         milestone = parse_obj_as(Milestone, dict(row))
     return milestone

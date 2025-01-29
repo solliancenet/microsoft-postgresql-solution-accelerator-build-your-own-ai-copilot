@@ -57,18 +57,20 @@ async def get_by_id(deliverable_id: int, pool = Depends(get_db_connection_pool))
 @router.post("/", response_model=Deliverable)
 async def create_deliverable(
     milestone_id: int = Form(...),
-    name: str = Form(...),
     description: str = Form(...),
     amount: float = Form(None),
     status: str = Form(...),
+    due_date: str = Form(None),
     pool = Depends(get_db_connection_pool)
 ):
+    parsed_due_date =  datetime.strptime(due_date, '%Y-%m-%d').date()
+
     async with pool.acquire() as conn:
         deliverable_id = await conn.fetchval('''
         INSERT INTO deliverables 
-        (milestone_id, name, description, amount, status) 
+        (milestone_id, description, amount, status, due_date) 
         VALUES ($1, $2, $3, $4, $5) RETURNING id;
-        ''', milestone_id, name, description, amount, status)
+        ''', milestone_id, description, amount, status, parsed_due_date)
         row = await conn.fetchrow('SELECT * FROM deliverables WHERE id = $1;', deliverable_id)
         deliverable = parse_obj_as(Deliverable, dict(row))
     return deliverable
@@ -83,9 +85,9 @@ async def update_deliverable(
         # Save the updated deliverable
         await conn.execute('''
         UPDATE deliverables 
-        SET description = $1, amount = $2, status = $3 
-        WHERE id = $4;
-        ''', deliverable.description, deliverable.amount, deliverable.status, deliverable_id)
+        SET description = $1, amount = $2, status = $3, due_date = $4
+        WHERE id = $5;
+        ''', deliverable.description, deliverable.amount, deliverable.status, deliverable.due_date, deliverable_id)
 
         row = await conn.fetchrow('SELECT * FROM deliverables WHERE id = $1;', deliverable_id)
         deliverable = parse_obj_as(Deliverable, dict(row))

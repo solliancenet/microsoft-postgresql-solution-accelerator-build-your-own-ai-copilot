@@ -87,20 +87,27 @@ const MilestoneEdit = () => {
     const deliverableColumns = React.useMemo(
         () => [
             {
-            Header: 'Name',
-            accessor: 'name',
-            },
-            {
             Header: 'Description',
             accessor: 'description',
             },
             {
-            Header: 'Amount',
-            accessor: 'amount',
+                Header: 'Amount',
+                accessor: 'amount',
+                Cell: ({ value }) => {
+                const formatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                });
+                return formatter.format(value);
+                },
             },
             {
-            Header: 'Status',
-            accessor: 'status',
+                Header: 'Status',
+                accessor: 'status',
+            },
+            {
+                Header: 'Due Date',
+                accessor: 'due_date',
             },
             {
             Header: 'Actions',

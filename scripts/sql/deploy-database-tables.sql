@@ -20,15 +20,15 @@ SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone
 FROM (
     SELECT 1 as id, 'Adatum Corporation' as name, '789 Goldsmith Road, MainTown City' as address, 'Elizabeth Moore' as contact_name, 'elizabeth.moore@adatum.com' as contact_email, '555-789-7890' as contact_phone, 'http://www.adatum.com' as website, 'Data Engineering' as type
     UNION ALL
-    SELECT 2, 'Contoso, Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
+    SELECT 2, 'Contoso Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
     UNION ALL
     SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Ana Bowman', 'abowman@lucernepublishing.com', '555-654-9870', 'http://www.lucernepublishing.com', 'Graphic Design'
     UNION ALL
-    SELECT 4, 'VanArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
+    SELECT 4, 'VanArsdel Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
     UNION ALL
     SELECT 5, 'Trey Research', '456 Research Avenue, Redmond', 'Serena Davis', 'serena.davis@treyresearch.net', '555-867-5309', 'http://www.treyresearch.net', 'DevOps'
     UNION ALL
-    SELECT 6, 'Fabrikam, Inc.', '24601 South St., Philadelphia', 'Remy Morris', 'remy.morris@fabrikam.com', '610-321-0987', 'http://www.fabrikam.com', 'AI Services'
+    SELECT 6, 'Fabrikam Inc.', '24601 South St., Philadelphia', 'Remy Morris', 'remy.morris@fabrikam.com', '610-321-0987', 'http://www.fabrikam.com', 'AI Services'
     UNION ALL
     SELECT 7, 'The Phone Company', '10642 Meridian St., Indianapolis', 'Ashley Schroeder', 'ashley.schroeder@thephone-company.com', '719-444-2345', 'http://www.thephone-company.com', 'Communications'
 ) as v

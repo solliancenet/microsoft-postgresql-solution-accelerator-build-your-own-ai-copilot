@@ -1,6 +1,10 @@
 from fpdf import FPDF
 import os
 import json
+import argparse
+from collections import defaultdict
+import random
+from datetime import datetime, timedelta
 
 # Load configuration from the sow_inv.config file
 def load_config(config_path):
@@ -8,17 +12,16 @@ def load_config(config_path):
         return json.load(file)
 
 # Create a function to generate an invoice PDF
-def create_invoice(invoice_number, milestone_name, deliverables, amount_due, due_date, vendor_info, client_info, output_path):
+def create_invoice(invoice_number, deliverables, vendor_info, client_info, output_path):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=10)
     
     # Title
     pdf.set_font("Arial", style="B", size=12)
-    pdf.cell(200, 10, txt="Invoice", ln=True, align="C")
+    pdf.cell(200, 10, txt=f"Invoice Number: {invoice_number}", ln=True, align="C")
     
     # Vendor Information
-    pdf.ln(10)
     pdf.set_font("Arial", style="B", size=10)
     pdf.cell(0, 10, txt=f"Vendor: {vendor_info['name']}", ln=True, align="L")
     pdf.set_font("Arial", size=10)
@@ -26,89 +29,96 @@ def create_invoice(invoice_number, milestone_name, deliverables, amount_due, due
     pdf.cell(0, 10, txt=f"Contact Name: {vendor_info['contact_name']}", ln=True, align="L")
     pdf.cell(0, 10, txt=f"Contact Email: {vendor_info['contact_email']}", ln=True, align="L")
     pdf.cell(0, 10, txt=f"Contact Number: {vendor_info['contact_phone']}", ln=True, align="L")
+    pdf.cell(0, 10, txt=f"SOW Number: {vendor_info['SOW']}", ln=True, align="L")
+    
+    # Calculate the invoice date as the due date minus 30 days
+    due_date = datetime.strptime(deliverables[0]['due_date'], '%Y-%m-%d')
+    invoice_date = due_date - timedelta(days=30)
+    pdf.cell(0, 10, txt=f"Invoice Date: {invoice_date.strftime('%Y-%m-%d')}", ln=True, align="L")
       
     # Client Information
     pdf.set_font("Arial", style="B", size=10)
     pdf.cell(0, 10, txt=f"Client: {client_info['name']}", ln=True, align="L")
     pdf.set_font("Arial", size=10)
-    pdf.cell(0, 10, txt=f"Address: {client_info['address']}", ln=True, align="L")
-    
+    pdf.cell(0, 10, txt=f"Contact Name: {client_info['contact_name']}", ln=True, align="L")
+    pdf.cell(0, 10, txt=f"Contact Email: {client_info['contact_email']}", ln=True, align="L")
+    pdf.ln(10)  # Added line
+
     # Invoice Details
-    pdf.ln(10)
     pdf.set_font("Arial", style="B", size=10)
-    pdf.cell(0, 10, txt=f"Invoice Number: {invoice_number}", ln=True, align="L")
-    pdf.cell(0, 10, txt=f"Milestone: {milestone_name}", ln=True, align="L")
-    pdf.cell(0, 10, txt=f"Deliverables: {deliverables}", ln=True, align="L")
-    pdf.cell(0, 10, txt=f"Amount Due: ${amount_due:.2f}", ln=True, align="L")
-    pdf.cell(0, 10, txt=f"Due Date: {due_date}", ln=True, align="L")
+    pdf.cell(40, 10, txt="Milestone", border=1)
+    pdf.cell(80, 10, txt="Deliverable", border=1)
+    pdf.cell(30, 10, txt="Amount", border=1)
+    pdf.cell(40, 10, txt="Due Date", border=1)
+    pdf.ln()
+
+    total_amount = 0
     pdf.set_font("Arial", size=10)
-    pdf.cell(0, 10, txt="If paying by Direct Credit please pay into the following bank account:", ln=True, align="L")
-    pdf.cell(0, 10, txt=f"Account Name: {vendor_info['name']}", ln=True, align="L")
-    pdf.set_font("Arial", style="B", size=10)
-    pdf.cell(0, 10, txt=f"Account Number: {vendor_info['account_number']}", ln=True, align="L")
-    pdf.set_font("Arial", size=10)
-    pdf.cell(0, 10, txt=f"To help us allocate money correctly, please reference your invoice number: {invoice_number}", ln=True, align="L")
+    for deliverable in deliverables:
+        pdf.cell(40, 10, txt=deliverable['name'], border=1)
+        pdf.cell(80, 10, txt=deliverable['deliverables'], border=1)
+        pdf.cell(30, 10, txt=deliverable['amount'], border=1)
+        pdf.cell(40, 10, txt=deliverable['due_date'], border=1)
+        pdf.ln()
+        amount = float(deliverable['amount'].replace('$', '').replace(',', ''))
+        total_amount += amount
     
-    # Payment Terms
-    pdf.ln(10)
+    # Total Amount
     pdf.set_font("Arial", style="B", size=10)
-    pdf.cell(0, 10, txt="Payment Terms", ln=True, align="L")
+    pdf.cell(120, 10, txt="Total Amount", border=1, align='R')
+    pdf.cell(70, 10, txt=f"${total_amount:,.2f}", border=1)  # Updated line
+    pdf.ln(20)
+
+    # Payment Instructions
     pdf.set_font("Arial", size=10)
     pdf.multi_cell(0, 10, txt=(
-        "- Payment is due within 30 days of the invoice date.\n"
-        "- A penalty of 10% will be applied for late payments.\n"
+        f"If paying by Direct Credit please pay into the following bank account:\n"
+        f"Account Name: {vendor_info['name']}\n"
+        f"Account Number: {random.randint(10000000, 99999999)}\n"
+        f"To help us allocate money correctly, please reference your invoice number: {invoice_number}\n\n"
+        f"Payment Terms\n"
+        f"- Payment is due within 30 days of the invoice date.\n"
+        f"- A penalty of 10% will be applied for late payments."
     ))
-    
-    # Footer
-    pdf.ln(10)
-    pdf.set_font("Arial", style="I", size=8)
-    pdf.cell(0, 10, txt="Thank you for choosing TailWind Cloud Solutions!", ln=True, align="C")
-    
-    # Save the PDF
-    pdf.output(output_path)
-    return output_path
 
-# Main function to generate invoices based on the configuration
-def generate_invoices(config_path):
-    config = load_config(config_path)
+    # Ensure the output directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
-    vendor_info = {
-        "name": config['name'],
-        "address": config['address'],
-        "contact_name": config['contact_name'],
-        "contact_email": config['contact_email'],
-        "contact_phone": config['contact_phone'],
-        "account_number": "123-456-789"  # Example account number
-    }
+    # Output the PDF
+    pdf.output(output_path)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate Invoices for a Vendor")
+    parser.add_argument("vendor_name", type=str, help="The name of the vendor")
+    args = parser.parse_args()
+
+    vendor_name = args.vendor_name
+
+    config_path = 'src/config/sow_inv.config'
+    configs = load_config(config_path)
+    
+    # Find the vendor configuration by name
+    vendor_config = next((config for config in configs if config['name'] == vendor_name), None)
+    if not vendor_config:
+        raise ValueError(f"Vendor '{vendor_name}' not found in configuration.")
     
     client_info = {
         "name": "Woodgrove Bank",
-        "address": "123 Financial Avenue, Woodgrove City"
+        "contact_name": "Chris Green",
+        "contact_email": "chris.green@woodgrovebank.com"
     }
-    
-    output_paths = []
-    for index, deliverable in enumerate(config['deliverables']):
-        invoice_number = f"INV-TWC2024-{str(index + 1).zfill(3)}"
-        milestone_name = deliverable[1]
-        deliverables = deliverable[2]
-        amount_due = float(deliverable[3].replace("$", "").replace(",", ""))
-        due_date = deliverable[4]
+
+    # Group deliverables by invoice number
+    grouped_deliverables = defaultdict(list)
+    for deliverable in vendor_config['deliverables']:
+        grouped_deliverables[deliverable['invoice#']].append(deliverable)
+
+    # Generate invoices for each group of deliverables
+    for invoice_num, deliverables in grouped_deliverables.items():
+        # Generate the invoice number in the required format
+        words = vendor_config['name'].split()
+        invoice_prefix = f"{words[0][0]}{words[1][0]}" if len(words) > 1 else words[0][:2]
+        invoice_number = f"INV-{invoice_prefix.upper()}-2024-{invoice_num:03d}"
+        output_path = f"../output/Invoice_{invoice_number}.pdf"
         
-        file_name = f"{invoice_number}.pdf"
-        create_invoice(
-            invoice_number=invoice_number,
-            milestone_name=milestone_name,
-            deliverables=deliverables,
-            amount_due=amount_due,
-            due_date=due_date,
-            vendor_info=vendor_info,
-            client_info=client_info,
-            output_path=file_name
-        )
-        output_paths.append(file_name)
-
-    return output_paths
-
-# Generate invoices
-config_path = os.path.join(os.path.dirname(__file__), 'config', 'sow_inv.config')
-generate_invoices(config_path)
+        create_invoice(invoice_number, deliverables, vendor_config, client_info, output_path)

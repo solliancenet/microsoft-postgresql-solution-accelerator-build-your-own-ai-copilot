@@ -22,6 +22,8 @@ config_service = None
 storage_service = None
 # Create a global async Azure Document Intelligence Service client
 doc_intelligence_service = None
+# Create a global PromptService
+prompt_service = None
 
 @asynccontextmanager
 async def lifespan(app):

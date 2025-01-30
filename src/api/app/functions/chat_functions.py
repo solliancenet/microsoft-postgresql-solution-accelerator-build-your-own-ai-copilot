@@ -276,6 +276,8 @@ class ChatFunctions:
             elif sow_id is not None:
                 query += f' WHERE sow_id = {sow_id}'
 
+        query += f' ORDER BY rank ASC'
+
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
 
@@ -301,6 +303,8 @@ class ChatFunctions:
             query += f' WHERE sow_id = {sow_id}'
         elif vendor_id is not None:
             query += f' WHERE vendor_id = {vendor_id}'
+
+        query += f' ORDER BY rank ASC'
 
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
@@ -331,6 +335,8 @@ class ChatFunctions:
             query += f' WHERE sow_id = {sow_id}'
         elif vendor_id is not None:
             query += f' WHERE vendor_id = {vendor_id}'
+
+        query += f' ORDER BY rank ASC'
 
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]

@@ -9,4 +9,3 @@ class CompletionRequest(BaseModel):
     message: str
     chat_history: list[ChatItem]
     max_history: int = 6
-

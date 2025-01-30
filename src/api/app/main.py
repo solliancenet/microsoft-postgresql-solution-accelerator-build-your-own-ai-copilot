@@ -25,8 +25,8 @@ load_dotenv()
 # Instantiate the FastAPI app
 app = FastAPI(
     lifespan=lifespan,
-    title="Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator API",
-    summary="API for the Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator",
+    title="Woodgrove Bank API",
+    summary="Woodgrove Bank API for the Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator",
     version="1.0.0",
     docs_url="/swagger",
     openapi_url="/swagger/v1/swagger.json"
@@ -40,8 +40,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Add routers to various API endpoints
-#app.include_router(completions.router)
+# Add routers to API endpoints
 app.include_router(deliverables.router)
 app.include_router(documents.router)
 app.include_router(embeddings.router)

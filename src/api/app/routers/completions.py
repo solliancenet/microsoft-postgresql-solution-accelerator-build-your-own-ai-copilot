@@ -68,7 +68,7 @@ async def generate_chat_completion(
         StructuredTool.from_function(coroutine=cf.get_sow_validation_results),
         StructuredTool.from_function(coroutine=cf.get_sows),
         # Get vendor data functions
-        StructuredTool.from_function(coroutine=cf.get_vendors),
+        StructuredTool.from_function(coroutine=cf.get_vendors)
     ]
     
     # Create an agent

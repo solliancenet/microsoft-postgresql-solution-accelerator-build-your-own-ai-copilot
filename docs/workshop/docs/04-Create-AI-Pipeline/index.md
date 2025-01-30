@@ -9,6 +9,7 @@ AI-driven Data Validation offers a transformative solution by automating documen
 In this section, you will enable a feature flag that will activate the AI components of the solution.
 
 
+## NOTES: (to be removed)
 
 2. Data ingestion
    1. Document Intelligence

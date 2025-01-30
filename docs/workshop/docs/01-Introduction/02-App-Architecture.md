@@ -14,7 +14,7 @@ Throughout this solution accelerator, you will enhance the application with AI c
 
 ## Application Data Flow
 
-_Click each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_
+Select each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_
 
 === "Data Ingestion & AI Processing"
 

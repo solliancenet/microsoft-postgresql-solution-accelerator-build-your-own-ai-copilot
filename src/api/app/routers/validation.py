@@ -81,20 +81,22 @@ async def validate_invoice_by_id(id: int, llm = Depends(get_chat_client)):
         ]
     )
     
-    # TODO: Define tools for the agent
+    # Define tools for the agent
     tools = [
          StructuredTool.from_function(coroutine=validate_invoice)
     ]
     
-    # Create an agent
+    # Create an AI agent
     agent = create_openai_functions_agent(llm=llm, tools=tools, prompt=prompt)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, return_intermediate_steps=True)
-    #completion = await agent_executor.ainvoke({"input": request.message})
-    completion = await agent_executor.ainvoke({"input": userMessage})
 
+    # Invoke the agent to perform a chat completion that provides the validation results.
+    completion = await agent_executor.ainvoke({"input": userMessage})
     validationResult = completion['output']
 
     # Check if validationResult contains [PASSED] or [FAILED]
+    # This is based on the prompt telling the AI to return either [PASSED] or [FAILED]
+    # at the end of the response to indicate if the invoice passed or failed validation.
     validation_passed = validationResult.find('[PASSED]') != -1
 
     # Write validation result to database

@@ -9,8 +9,6 @@ The **[PostgreSQL Solution Accelerator: Build Your Own AI Copilot](https://githu
 <!-- Place this tag where you want the button to render. -->
 <a class="github-button" href="https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot on GitHub"> Give the PostgreSQL Solution Accelerator a Star!</a>
 
----
-
 ## 2. Provide Feedback
 
 Check that the right tab is selected for your session, and complete the steps!
@@ -43,7 +41,6 @@ Check that the right tab is selected for your session, and complete the steps!
 
         Visit the Skillable Lab page and click `End Session` to end the session and release all resources. This allows the lab to be run again without quota issues for others.
 -->
----
 
 ## 3. Clean-up
 

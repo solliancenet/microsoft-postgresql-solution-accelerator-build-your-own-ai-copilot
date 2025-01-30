@@ -2,27 +2,12 @@ from datetime import datetime, timezone
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import StructuredTool
-
-from datetime import date
-
 from app.lifespan_manager import get_chat_client, get_db_connection_pool, get_prompt_service
-from app.models import ValidationRequest, Invoice, Vendor, Sow, Milestone, Deliverable, InvoiceLineItem
+from app.models import ValidationRequest, Vendor, Milestone, Deliverable, InvoiceLineItem
 from fastapi import APIRouter, Depends, HTTPException
-
-from pydantic import parse_obj_as, BaseModel
-from typing import Optional
-
-class InvoiceModel(Invoice):
-    vendor: Optional[Vendor] = None
-    line_items: Optional[list[InvoiceLineItem]] = None
-    
-class SowModel(Sow):
-    milestones: Optional[list[Milestone]] = None
-
-class MilestoneModel(Milestone):
-    deliverables: Optional[list[Deliverable]] = None
-
-
+from app.models.validation import InvoiceModel, SowModel, MilestoneModel
+from datetime import date
+from pydantic import parse_obj_as
 
 # Initialize the router
 router = APIRouter(

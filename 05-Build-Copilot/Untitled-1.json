@@ -1,0 +1,61 @@
+[
+    {
+        "message": "Tell me about Contoso, Ltd.",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "How is the billing accuracy?",
+        "chat_history": [
+            {
+                "role": "user",
+                "content": "Tell me about Contoso, Ltd."
+            },
+            {
+                "role": "assistant",
+                "content": "Contoso, Ltd. is a vendor specializing in DevOps services. Here is some detailed information about them and their current engagement with Woodgrove Bank:\n\n### Vendor Information:\n- **Name:** Contoso, Ltd.\n- **Address:** 456 Industrial Road, Scooton City\n- **Contact Name:** Nicole Wagner\n- **Contact Email:** nicole@contoso.com\n- **Contact Phone:** 555-654-3210\n- **Type:** DevOps\n\n### Statement of Work (SOW):\n- **SOW Number:** SOW-2024-052\n- **Start Date:** June 1, 2024\n- **End Date:** November 30, 2025\n- **Budget:** $75,000.00\n- **Document:** [Statement of Work Document](2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf)\n\n### Invoices:\nThere are currently no invoices associated with Contoso, Ltd. for this SOW.\n\nIf you need more specific details or further insights into their performance or billing accuracy, please let me know!"
+            }
+        ],
+        "max_history": 6
+    },
+    {
+        "message": "Provide an assessment of Adatum.",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "Which vendors have had the most billing errors?",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "What is Adatum's billing accuracy?",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "What vendor has most frequently had invoicing errors?",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "Has Adatum had any billing errors?",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "What vendor has most frequently invoiced for the wrong amount?",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "What software vendors are we working with?",
+        "chat_history": [],
+        "max_history": 6
+    },
+    {
+        "message": "How are our data engineering vendors performing?",
+        "chat_history": [],
+        "max_history": 6
+    }
+]

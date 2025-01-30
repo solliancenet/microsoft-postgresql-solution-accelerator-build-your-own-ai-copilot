@@ -1042,6 +1042,8 @@
       
         
       
+        
+      
     
     
       
@@ -1159,7 +1161,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1187,8 +1210,6 @@
       
         
           
-        
-      
         
       
         
@@ -1318,7 +1339,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1339,28 +1360,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1388,6 +1388,8 @@
       
         
           
+        
+      
         
       
         
@@ -1479,7 +1481,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1500,7 +1502,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1521,7 +1523,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1542,7 +1544,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1563,7 +1565,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1584,7 +1586,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../05-Build-Copilot/08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -2318,18 +2341,25 @@ az extension remove -n ml
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Provisioned Azure resources and deployed the starter solution</li>
 </ul>
 <h2 id="31-select-an-azure-region-for-your-workshop-resources">3.1 Select an Azure region for your workshop resources<a class="headerlink" href="#31-select-an-azure-region-for-your-workshop-resources" title="Permanent link">&para;</a></h2>
-<p>To ensure you can successfully deploy the Azure resources using the <code>azd up</code> command, you must choose a region that supports the required Azure OpenAI <code>gpt-4o</code> and <code>text-embedding-3-large</code> models.</p>
+<p>To ensure you can successfully deploy the Azure resources using the <code>azd up</code> command, you must choose a region that supports the required Azure OpenAI <code>gpt-4o</code> and <code>text-embedding-ada-002</code> models.</p>
 <ol>
 <li>
-<p>Before deciding on the Azure region you want to use for your workshop resources, review the regional availability guidance for the <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-3-large</a> models in Azure OpenAI.</p>
+<p>Before deciding on the Azure region you want to use for your workshop resources:</p>
 </li>
 <li>
-<p>Choose a region that <strong>supports both models</strong> and has quota available.</p>
+<p>Review the regional availability guidance for the <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-ada-002</a> models in Azure OpenAI.</p>
+</li>
+<li>
+<p>Check the <a href="https://learn.microsoft.com/azure/ai-services/language-service/summarization/region-support#regional-availability-table">text abstractive summarization regional availability</a></p>
+</li>
+<li>
+<p>Choose a region that <strong>supports both Azure OpenAI models</strong> and <strong>Text Abstractive Summarization</strong>.</p>
 </li>
 </ol>
 <div class="admonition danger">
-<p class="admonition-title">Select a region that supports both models!</p>
-<p>Choosing a region that doesn't support both models will result in deployment failure when running <code>azd up</code>.</p>
+<p class="admonition-title">Select a region that supports Azure OpenAI both models!</p>
+<p>Choosing a region that doesn't support both Azure OpenAI models will result in deployment failure when running <code>azd up</code>.</p>
+<p>Selecting a region that does not support <em>abstractive summarization</em> will not cause a deployment failure, but will need to make code changes later in the workshop to use <em>extractive summarization</em> in its place.</p>
 </div>
 <h2 id="32-verify-azure-ml-cpu-quota">3.2 Verify Azure ML CPU Quota<a class="headerlink" href="#32-verify-azure-ml-cpu-quota" title="Permanent link">&para;</a></h2>
 <p>This solution accelerator contains a section dedicted to setting up and using a Semantic Ranking model directly from your PostgreSQL database. The deployment of this component of the architecture requires sufficient CPU quota (32 cores) in Azure Machine Learning to accomodate the <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">Hugging Face BGE reranker model deployment</a>. In this task, you must verify you have available quota for the target virtual machine (VM) instance type (<code>STANDARD_D16AS_V4</code>), and if not, request additional quota.</p>

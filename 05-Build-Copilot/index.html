@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/05-Build-Copilot/">
       
       
-        <link rel="prev" href="../04-Create-AI-Pipeline/06/">
+        <link rel="prev" href="../04-Create-AI-Pipeline/05/">
       
       
         <link rel="next" href="01/">
@@ -837,6 +837,8 @@
       
         
       
+        
+      
     
     
       
@@ -954,7 +956,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -982,8 +1005,6 @@
       
         
           
-        
-      
         
       
         
@@ -1113,7 +1134,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1134,28 +1155,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1185,6 +1185,8 @@
       
         
           
+        
+      
         
       
         
@@ -1277,7 +1279,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1298,7 +1300,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1319,7 +1321,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1340,7 +1342,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1361,7 +1363,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1382,7 +1384,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1748,15 +1771,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#the-rag-pattern" class="md-nav__link">
-    <span class="md-ellipsis">
-      The RAG Pattern
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1776,54 +1790,21 @@
 
 
 <h1 id="implement-a-copilot">Implement a Copilot<a class="headerlink" href="#implement-a-copilot" title="Permanent link">&para;</a></h1>
-<p>In this task, you will add an AI copilot to the <em>Woodgrove Bank Contract Management</em> application using Python, the GenAI capabilities of Azure Database for PostgreSQL - Flexible Server, and the Azure AI extension. Using the AI-validated data, the copilot will use RAG to provide insights and answer questions about vendor contract performance and invoicing accuracy, serving as an intelligent assistant for Woodgrove Banks users.</p>
+<p>In this section, you will add an AI copilot to the <em>Woodgrove Bank Contract Management</em> application using Python, the GenAI capabilities of Azure Database for PostgreSQL - Flexible Server, and the Azure AI extension. Using the AI-validated data, the copilot will use RAG to provide insights and answer questions about vendor contract performance and invoicing accuracy, serving as an intelligent assistant for Woodgrove Banks users. Here's what you will accomplish:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explore the API codebase</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Review the RAG design</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Leverage LangChain Orchestration</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implement and test the Chat endpoint</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Refine the copilot prompt using common prompt engineering techniques</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add the Copilot Chat UI component</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Redeploy the app to Azure</li>
+</ul>
+<p>Following these steps will transform your application into a powerful AI-enhanced platform capable of executing advanced generative AI tasks and providing deeper insights from your data.</p>
 <h2 id="what-are-copilots">What are copilots?<a class="headerlink" href="#what-are-copilots" title="Permanent link">&para;</a></h2>
 <p>Copilots are advanced AI assistants designed to augment human capabilities and improve productivity by providing intelligent, context-aware support, automating repetitive tasks, and enhancing decision-making processes. For instance, the Woodgrove Bank copilot will assist in data analysis, helping users identify patterns and trends in financial datasets.</p>
 <h2 id="why-use-python">Why use Python?<a class="headerlink" href="#why-use-python" title="Permanent link">&para;</a></h2>
 <p>Python's simplicity and readability make it a popular programming language for AI and machine learning projects. Its extensive libraries and frameworks, such as LangChain, FastAPI, and many others, provide robust tools for developing sophisticated copilots. Python's versatility allows developers to iterate and experiment quickly, making it a top choice for building AI applications.</p>
-<h2 id="the-rag-pattern">The RAG Pattern<a class="headerlink" href="#the-rag-pattern" title="Permanent link">&para;</a></h2>
-<p>The solution leverages the <em>Retrieval Augmented Generation</em> (RAG) design pattern to ensure the copilot's responses are grounded in the (private) data maintained by Woodgrove Bank.</p>
-<p><img alt="RAG design pattern" src="../img/rag-design-pattern.png" /></p>
-<p>To understand how the RAG design pattern works in the context of the <em>Woodgrove Bank Contract Management</em> application, select each tab in order and review the sequence of events shown in the figure above.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="1-get-query" name="__tabbed_1" type="radio" /><input id="2-vectorize-query" name="__tabbed_1" type="radio" /><input id="3-retrieve-similar-data" name="__tabbed_1" type="radio" /><input id="4-augment-query" name="__tabbed_1" type="radio" /><input id="5-generate-response" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="1-get-query">1. Get Query</label><label for="2-vectorize-query">2. Vectorize Query</label><label for="3-retrieve-similar-data">3. <strong>Retrieve</strong> Similar Data</label><label for="4-augment-query">4. <strong>Augment</strong> Query</label><label for="5-generate-response">5. <strong>Generate</strong> Response</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="admonition info">
-<p class="admonition-title">The user query arrives at our copilot implementation via the chat API endpoint.</p>
-</div>
-<p>User queries entered via the copilot interface of the <em>Woodgrove Bank Contract Management</em> portal are sent to the backend API's <code>/chat</code> endpoint. The incoming "user query" has two components: the user <em>question</em> (text input) and an optional <em>chat history</em> (object array).</p>
-<p>The API extracts these parameters from the incoming request and invokes the <code>/chat</code> endpoint, starting the workflow that reflects this RAG design pattern.</p>
-</div>
-<div class="tabbed-block">
-<div class="admonition info">
-<p class="admonition-title">Embeddings representing the user query are generated.</p>
-</div>
-<p>The <code>/chat</code> endpoint sends the user request to Azure Database for PostgreSQL, where the <code>azure_ai</code> extension calls Azure OpenAI to vectorize the user's text input using a Large Language "Embedding" Model (e.g., Azure Open AI <code>text-embedding-3-large</code>). This vector is then used in the query to retrieve similar records in the next step.</p>
-</div>
-<div class="tabbed-block">
-<div class="admonition info">
-<p class="admonition-title">A hybrid search query is executed against the database to return semantically similar results.</p>
-</div>
-<p>In this step, the vectorized query from the previous step is compared to data in relevant database tables to find and return <em>matching results</em> based on exact full-text matches and vector similarity.</p>
-<div class="admonition info">
-<p class="admonition-title">Improve RAG accuracy</p>
-<p>The accuracy of the RAG pattern can also be improved by using database features like <em>semantic ranking</em> to order the returned results and <em>GraphRAG</em> to identify relationships between data, which you learn about in the next task.</p>
-</div>
-</div>
-<div class="tabbed-block">
-<div class="admonition info">
-<p class="admonition-title">The copilot augments user prompt with retrieved knowledge in request to model.</p>
-</div>
-<p>The <em>Woodgrove Bank Contract Management</em> application combines the user's original <em>question</em> with hybrid search results returned from the database to create an enhanced or composite <em>model prompt</em>.</p>
-</div>
-<div class="tabbed-block">
-<div class="admonition info">
-<p class="admonition-title">The chat model uses the prompt to generate a grounded response.</p>
-</div>
-<p>The composite prompt, grounded with ("private") data, is sent to a Large Language "chat" completion model, such as Azure OpenAI's <code>gpt-4o</code>. The completion model sees the enhanced prompt (hybrid search results and chat history) as <em>grounding</em> context for generating the final response, improving the quality (e.g., relevance, groundedness) of results returned from the Woodgrove Bank copilot.</p>
-</div>
-</div>
-</div>
 
 
 
@@ -1861,7 +1842,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../04-Create-AI-Pipeline/06/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.6 Validate Data with Azure OpenAI">
+          <a href="../04-Create-AI-Pipeline/05/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.5 Review Validation Prompts">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1871,7 +1852,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                4.6 Validate Data with Azure OpenAI
+                4.5 Review Validation Prompts
               </div>
             </div>
           </a>

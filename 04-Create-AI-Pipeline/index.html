@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/04-Create-AI-Pipeline/">
       
       
-        <link rel="prev" href="../03-Integrate-AI-Into-PostgreSQL/04/">
+        <link rel="prev" href="../03-Integrate-AI-Into-PostgreSQL/05/">
       
       
         <link rel="next" href="01/">
@@ -837,6 +837,8 @@
       
         
       
+        
+      
     
     
       
@@ -954,7 +956,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -984,8 +1007,6 @@
       
         
           
-        
-      
         
       
         
@@ -1116,7 +1137,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1137,28 +1158,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1186,6 +1186,8 @@
       
         
           
+        
+      
         
       
         
@@ -1277,7 +1279,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1298,7 +1300,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1319,7 +1321,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1340,7 +1342,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1361,7 +1363,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1382,7 +1384,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-Build-Copilot/08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1724,6 +1747,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#building-an-ai-enhanced-data-ingestion-and-processing-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building an AI-Enhanced Data Ingestion and Processing Pipeline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-to-be-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTES: (to be removed)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validate-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate documents
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1741,10 +1799,15 @@
 
 
 <h1 id="ai-driven-data-validation">AI-driven Data Validation<a class="headerlink" href="#ai-driven-data-validation" title="Permanent link">&para;</a></h1>
+<h2 id="building-an-ai-enhanced-data-ingestion-and-processing-pipeline">Building an AI-Enhanced Data Ingestion and Processing Pipeline<a class="headerlink" href="#building-an-ai-enhanced-data-ingestion-and-processing-pipeline" title="Permanent link">&para;</a></h2>
+<p>An end-to-end data pipeline has been created to create an AI-powered solution for advanced data analysis. This pipeline starts with documents uploaded to Azure Blob Storage and employs Azure services for intelligent ingestion, automated validation, semantic analysis, and optimized storage.</p>
+<p>AI-driven Data Validation offers a transformative solution by automating document processing, improving accuracy, and reducing the burden on human reviewers. Through a combination of intelligent document ingestion, machine learning, and natural language processing, AI will revolutionize how contract validation is performed.</p>
+<p>In this section, you will enable a feature flag that will activate the AI components of the solution.</p>
+<h2 id="notes-to-be-removed">NOTES: (to be removed)<a class="headerlink" href="#notes-to-be-removed" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Data ingestion</li>
 <li>Document Intelligence<ol>
-<li>Create custom models in Azure Document Intelligence</li>
+<li>Utilize pre-built models in Azure Document Intelligence</li>
 <li>Configure semantic chunking</li>
 <li>Write chunks to Postgres, generating embeddings for each chunk on insert</li>
 <li>Update API endpoints for inserting chunks, or use an existing one (probably not yet created)<ol>
@@ -1753,28 +1816,20 @@
 </li>
 </ol>
 </li>
-<li>Data validation<ol>
-<li>Call data validation worker process when items are inserted into database (event grid and storage queues? How to trigger?)</li>
-<li>Use Prompty to create data validation prompt<ol>
+<li>Data ingestion<ol>
+<li>Data ingestion process is triggered when documents are uploaded through the application<ol>
+<li>Document analysis step is triggered to ingest document and insert/update data in database</li>
+<li>Document validation step is triggered to validate the document and associated data within the database<ol>
 <li>Invoices (more involved, validating dates, invoice totals, line item amounts, etc.)<ol>
 <li>Iterate through a few prompts, showing the process of getting it closer to what is desired for validation.</li>
 </ol>
 </li>
 <li>SOWs (keep this simple, focused on looking for required sections and language)</li>
-<li>Deploy prompty generated prompt into API endpoints</li>
 </ol>
 </li>
 </ol>
 </li>
 </ol>
-<h1 id="data-pipeline">Data pipeline<a class="headerlink" href="#data-pipeline" title="Permanent link">&para;</a></h1>
-<h2 id="create-custom-document-intelligence-model">Create custom Document Intelligence model<a class="headerlink" href="#create-custom-document-intelligence-model" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>TODO: Add steps for creating custom Document Intelligence models for SOWs and invoices, which extract key document parts.</p>
-</li>
-<li>
-<p>Send documents into Document Intelligence using workflow triggered by documents being added to blob storage.</p>
 </li>
 </ol>
 <h2 id="validate-documents">Validate documents<a class="headerlink" href="#validate-documents" title="Permanent link">&para;</a></h2>
@@ -1837,7 +1892,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../03-Integrate-AI-Into-PostgreSQL/04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3.4 Vectorize data">
+          <a href="../03-Integrate-AI-Into-PostgreSQL/05/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3.5 Vectorize data">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1847,7 +1902,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                3.4 Vectorize data
+                3.5 Vectorize data
               </div>
             </div>
           </a>

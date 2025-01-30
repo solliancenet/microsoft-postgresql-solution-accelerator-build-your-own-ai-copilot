@@ -12,13 +12,13 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/04-Create-AI-Pipeline/06/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/03-Integrate-AI-Into-PostgreSQL/05/">
       
       
-        <link rel="prev" href="../05/">
+        <link rel="prev" href="../04/">
       
       
-        <link rel="next" href="../../05-Build-Copilot/">
+        <link rel="next" href="../../04-Create-AI-Pipeline/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>4.6 Validate Data with Azure OpenAI - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>3.5 Vectorize data - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#46-validate-data-with-azure-openai" class="md-skip">
+        <a href="#35-vectorize-data" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.6 Validate Data with Azure OpenAI
+              3.5 Vectorize data
             
           </span>
         </div>
@@ -279,11 +279,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
     
@@ -299,13 +301,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../04-Create-AI-Pipeline/" class="md-tabs__link">
           
   
     
@@ -820,161 +820,6 @@
       
   
   
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    03 Integrate AI Into PostgreSQL
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            03 Integrate AI Into PostgreSQL
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.1 Install extensions
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.2 Configure the Azure AI extension
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.3 Enable vector storage
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3.4 Vectorize data
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -984,8 +829,6 @@
       
         
           
-        
-      
         
       
         
@@ -1011,7 +854,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           
@@ -1020,23 +863,23 @@
               
   
   <span class="md-ellipsis">
-    04 Create AI Pipeline
+    03 Integrate AI Into PostgreSQL
   </span>
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            04 Create AI Pipeline
+            03 Integrate AI Into PostgreSQL
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1053,7 +896,7 @@
         
   
   <span class="md-ellipsis">
-    4.1 Extract Data with Document Intelligence
+    3.1 Install extensions
   </span>
   
 
@@ -1074,7 +917,7 @@
         
   
   <span class="md-ellipsis">
-    4.2 Configure Semantic Chunking
+    3.2 Configure the Azure AI extension
   </span>
   
 
@@ -1095,7 +938,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Summarize documents
+    3.3 Enable vector storage
   </span>
   
 
@@ -1116,28 +959,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.5 Create Validation Prompts
+    3.4 Optimize Vector Query Performance
   </span>
   
 
@@ -1167,7 +989,7 @@
           
   
   <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    3.5 Vectorize data
   </span>
   
 
@@ -1178,7 +1000,7 @@
         
   
   <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    3.5 Vectorize data
   </span>
   
 
@@ -1200,18 +1022,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#create-validation-endpoints" class="md-nav__link">
+  <a href="#generate-embeddings" class="md-nav__link">
     <span class="md-ellipsis">
-      Create Validation Endpoints
+      Generate embeddings
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#create-data-validation-prompts" class="md-nav__link">
+  <a href="#vectorize-existing-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Create Data Validation Prompts
+      Vectorize existing data
     </span>
   </a>
   
@@ -1244,6 +1066,186 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../04-Create-AI-Pipeline/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    04 Create AI Pipeline
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            04 Create AI Pipeline
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.1 Extract Data with Document Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.2 Configure Semantic Chunking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.3 Summarize documents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.4 Validate Data with Azure OpenAI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.5 Review Validation Prompts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
         
       
         
@@ -1335,7 +1337,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1356,7 +1358,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1377,7 +1379,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1398,7 +1400,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1419,7 +1421,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1440,7 +1442,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1789,18 +1812,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#create-validation-endpoints" class="md-nav__link">
+  <a href="#generate-embeddings" class="md-nav__link">
     <span class="md-ellipsis">
-      Create Validation Endpoints
+      Generate embeddings
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#create-data-validation-prompts" class="md-nav__link">
+  <a href="#vectorize-existing-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Create Data Validation Prompts
+      Vectorize existing data
     </span>
   </a>
   
@@ -1824,68 +1847,127 @@
   
 
 
-<h1 id="46-validate-data-with-azure-openai">4.6 Validate Data with Azure OpenAI<a class="headerlink" href="#46-validate-data-with-azure-openai" title="Permanent link">&para;</a></h1>
-<p>TODO: This should involve configuring the data validation work process to point at the students resources</p>
-<p>Code will already be in place</p>
-<h2 id="create-validation-endpoints">Create Validation Endpoints<a class="headerlink" href="#create-validation-endpoints" title="Permanent link">&para;</a></h2>
-<p>Have the user add or enable the <code>validation</code> router in FastAPI (maybe have the code mostly there (except the prompt), and then just have them hook in the router in the <code>main.py</code> file?)</p>
-<p>Then, update the prompt for the LangChain agent and test the endpoint, passing in a known invoice number or some bogus data that can be used to show validation.</p>
-<p>TODO: Restructure the router a bit to perhaps rename the prefix to <code>/validate</code>, and then have <code>/invoice</code> and <code>/sow</code> as endpoints to handle validation of the different document types? Can keep this simple, so don't try to get fancy...</p>
-<p>Prompts will be updated/created for each.</p>
-<p>Insert prompt code from the prompt_langchain.py files generated in the previous step...</p>
-<h2 id="create-data-validation-prompts">Create Data Validation Prompts<a class="headerlink" href="#create-data-validation-prompts" title="Permanent link">&para;</a></h2>
-<p>TODO: Move this into the prompt engineering (02) file</p>
-<p>Create prompts for each of the document types...</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="sow-validation" name="__tabbed_1" type="radio" /><input id="invoice-validation" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="sow-validation">SOW Validation</label><label for="invoice-validation">Invoice Validation</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>TODO: Create prompt to validate SOWs</p>
+<h1 id="35-vectorize-data">3.5 Vectorize data<a class="headerlink" href="#35-vectorize-data" title="Permanent link">&para;</a></h1>
+<p>By leveraging an embedding model, such as Azure OpenAI's <code>text-embedding-ada-002</code>, you can generate vector representations of textual data and store them in a vector store like Azure Database for PostgreSQL - Flexible Server. This approach facilitates efficient and accurate similarity searches, significantly enhancing the copilot's ability to retrieve relevant information and provide contextually rich interactions.</p>
+<p>The <code>azure_openai</code> schema installed by the <code>azure_ai</code> extension contains the <code>create_embeddings()</code> function, which enables you to generate embeddings for text input by invoking an embedding model deployed in Azure OpenAI directly from a query.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Function signatures for the create_embeddings() function</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Single text input</span>
+<span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="n">timeout_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">3600000</span><span class="p">,</span><span class="w"> </span><span class="n">throw_on_error</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1">-- Array of input text</span>
+<span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="nb">text</span><span class="p">[],</span><span class="w"> </span><span class="n">batch_size</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">timeout_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">3600000</span><span class="p">,</span><span class="w"> </span><span class="n">throw_on_error</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition tip">
+<p class="admonition-title">Learn more about the <code>create_embeddings()</code> function, its overloads, and expected arguments in the <a href="https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-azure-openai#azure_openaicreate_embeddings">function documentation</a>.</p>
 </div>
-<div class="tabbed-block">
-<p>TODO: Create prompt to validate invoices...</p>
-<p>TODO: Use prompty to create and update the prompt...</p>
+<h2 id="generate-embeddings">Generate embeddings<a class="headerlink" href="#generate-embeddings" title="Permanent link">&para;</a></h2>
+<p>The <code>azure_ai</code> extension makes calling the Azure OpenAI embedding API trivial. In its simplest form, the <code>create_embeddings()</code> function can be called with two arguments, <code>deployment_name</code> and <code>input</code>, as shown below:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>To demonstrate how you can generate vector embeddings through a SQL query, execute the following query in <strong>pgAdmin</strong>.</p>
 <ol>
 <li>
-<p>First...</p>
-<p>Start with a very basic prompt...</p>
-<p>You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).</p>
+<p>On your local machine, return to the open instance of <strong>pgAdmin</strong> and ensure it is connected to your PostgreSQL database.</p>
 </li>
 <li>
-<p>Add parameter to pass in today's date</p>
-<p>Have the user ask the prompt, "What is today's date?" and talk about how LLMs are not good at understanding temporal information</p>
-<p>Add param to prompty to pass in the current date in the format, "For context, today is Monday, December 30, 2024."</p>
+<p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your PostgreSQL server.</p>
 </li>
 <li>
-<p>Second...</p>
-<p>Update the prompt to provide more specific details about the types of validation it should attempt to perform...</p>
-<p>system_prompt = """
-You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).</p>
-<p>When validating an invoice, you should:
-1. Verify that the invoice number matches the vendor's records.
-2. Check that the total amount on the invoice is correct.
-3. Ensure that the milestone delivery dates are before or on the specified due date in the SOW.
-4. Assess any late fees or penalties that may apply, as defined by the SOW. For example, if a milestone is late, a penalty of 15% should be applied to payment of that milestone.
-5. Validate the line items on the invoice against the billing milestones in the SOW.
-6. Ensure that the amount billed for each line item matches the billable amount specified in the SOW.
-7. If the invoice contains notes to explain discrepancies, review them for additional context.
-8. Confirm that the invoice is legitimate and ready for payment.</p>
-<p>For context, today is Monday, December 30, 2024.</p>
-<p>If there are milestones missing from the invoice that are not yet beyond their due date according to the SOW, do not flag them as discrepancies.
-If the payment terms on the invoice are different from the SOW, assume the SOW is correct.</p>
-<p>In your response:
-- Provide a statement of valid or invalid for the invoice.
-- Create separate sections for the invoice and the milestone validation.
-- Provide a detailed summary of the validation results, including any discrepancies or anomalies found between the invoice and the SOW.
-- If any discrepancies or anomalies are found, you should provide detailed feedback on the issues discovered, like including dollar amounts, line items, and due dates.
-- If there are any discrepancies, flag the invoice for further review.
-"""</p>
+<p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
+</li>
+<li>
+<p>Run the following query, which creates a vector embedding for the <code>result</code> field in the <code>invoice_validation_results</code> table. The <code>deployment_name</code> parameter in the function is set to <code>embeddings</code>, which is the name of the deployment of the <code>text-embedding-ada-002</code> model in your Azure OpenAI service (it was created with that name by the Bicep deployment script):</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">invoice_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">result</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">embedding</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">invoice_validation_results</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition tip">
+<p class="admonition-title">You can view the deployment name of your embedding model in Azure AI Foundry.</p>
+<ol>
+<li>Open Azure AI Foundry from the landing page of your Azure OpenAI service.</li>
+<li>In Azure AI Foundry, select the <strong>Deployments</strong> option from the resource navigation menu.</li>
+<li>
+<p>Observe the <strong>Name</strong> associated with the <code>text-embedding-ada-002</code> model.</p>
+<p><img alt="Screenshot of Azure AI Foundry, with the Deployments page selcted and highlighted. The embeddings model deployment name is highlighted." src="../../img/azure-ai-foundry-deployments-embeddings.png" /></p>
 </li>
 </ol>
 </div>
+</li>
+<li>
+<p>The results of the query will look similar to this:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">   </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w">                              </span><span class="n">embedding</span>
+<span class="c1">------+-------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">031766646</span><span class="p">,</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">033289704</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">0009468119</span><span class="p">,...,</span><span class="mi">0</span><span class="p">.</span><span class="mi">016508864</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">031440277</span><span class="err">}</span>
+</code></pre></div></td></tr></table></div>
+<p>For brevity, the 1,536 dimensions in the vector are abbreviated in the above output.</p>
+</li>
+</ol>
+<h2 id="vectorize-existing-data">Vectorize existing data<a class="headerlink" href="#vectorize-existing-data" title="Permanent link">&para;</a></h2>
+<p>You added <code>vector</code> columns to the <code>deliverables</code>, <code>invoice_line_items</code>, <code>invoice_validation_results</code>,  <code>sow_chunks</code>, and <code>sow_validation_results</code> tables. You will now use the <code>azure_openai.create_embeddings()</code> function in SQL <code>UPDATE</code> statements to generate embeddings for the text data already in each of those tables.</p>
+<div class="admonition warning">
+<p class="admonition-title">Each of the table queries may take several minutes, depending on the configured TPM limits.</p>
+</div>
+<p>Using <strong>pgAdmin</strong>, execute the SQL statement for each table.</p>
+<p><em>Select the tab for each table below and execute the <code>UPDATE</code> statement to create embeddings for the specified column.</em></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="deliverables" name="__tabbed_1" type="radio" /><input id="invoice_line_items" name="__tabbed_1" type="radio" /><input id="invoice_validation_results" name="__tabbed_1" type="radio" /><input id="sow_chunks" name="__tabbed_1" type="radio" /><input id="sow_validation_results" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="deliverables">deliverables</label><label for="invoice_line_items">invoice_line_items</label><label for="invoice_validation_results">invoice_validation_results</label><label for="sow_chunks">sow_chunks</label><label for="sow_validation_results">sow_validation_results</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">deliverables</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">invoice_line_items</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">invoice_validation_results</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">result</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">sow_chunks</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">sow_validation_results</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">result</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
 </div>
 </div>
-<div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You just learned the key quality metrics we'll assess with AI</p>
 </div>
 
 
@@ -1924,7 +2006,7 @@ If the payment terms on the invoice are different from the SOW, assume the SOW i
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../05/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.5 Create Validation Prompts">
+          <a href="../04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3.4 Optimize Vector Query Performance">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1934,20 +2016,20 @@ If the payment terms on the invoice are different from the SOW, assume the SOW i
                 Previous
               </span>
               <div class="md-ellipsis">
-                4.5 Create Validation Prompts
+                3.4 Optimize Vector Query Performance
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../05-Build-Copilot/" class="md-footer__link md-footer__link--next" aria-label="Next: Implement a Copilot">
+          <a href="../../04-Create-AI-Pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: AI-driven Data Validation">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Implement a Copilot
+                AI-driven Data Validation
               </div>
             </div>
             <div class="md-footer__button md-icon">

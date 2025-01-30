@@ -18,7 +18,7 @@
         <link rel="prev" href="../03/">
       
       
-        <link rel="next" href="../../04-Create-AI-Pipeline/">
+        <link rel="next" href="../05/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>3.4 Vectorize data - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>3.4 Optimize Vector Query Performance - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#34-vectorize-data" class="md-skip">
+        <a href="#34-optimize-vector-query-performance" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3.4 Vectorize data
+              3.4 Optimize Vector Query Performance
             
           </span>
         </div>
@@ -839,6 +839,8 @@
       
         
       
+        
+      
     
     
       
@@ -966,7 +968,7 @@
           
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
   </span>
   
 
@@ -977,7 +979,7 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
   </span>
   
 
@@ -999,18 +1001,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#generate-embeddings" class="md-nav__link">
+  <a href="#index-types" class="md-nav__link">
     <span class="md-ellipsis">
-      Generate embeddings
+      Index Types
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#vectorize-existing-data" class="md-nav__link">
+  <a href="#index-access-and-vector-distance-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Vectorize existing data
+      Index Access and Vector Distance Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Operators
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-vector-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Vector Indexes
     </span>
   </a>
   
@@ -1020,6 +1040,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1043,8 +1084,6 @@
       
         
           
-        
-      
         
       
         
@@ -1174,7 +1213,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1195,28 +1234,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1244,6 +1262,8 @@
       
         
           
+        
+      
         
       
         
@@ -1335,7 +1355,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1356,7 +1376,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1377,7 +1397,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1398,7 +1418,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1419,7 +1439,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1440,7 +1460,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1789,18 +1830,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#generate-embeddings" class="md-nav__link">
+  <a href="#index-types" class="md-nav__link">
     <span class="md-ellipsis">
-      Generate embeddings
+      Index Types
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#vectorize-existing-data" class="md-nav__link">
+  <a href="#index-access-and-vector-distance-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Vectorize existing data
+      Index Access and Vector Distance Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Operators
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-vector-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Vector Indexes
     </span>
   </a>
   
@@ -1824,124 +1883,93 @@
   
 
 
-<h1 id="34-vectorize-data">3.4 Vectorize data<a class="headerlink" href="#34-vectorize-data" title="Permanent link">&para;</a></h1>
-<p>By leveraging an embedding model, such as Azure OpenAI's <code>text-embedding-3-large</code>, you can generate vector representations of textual data and store them in a vector store like Azure Database for PostgreSQL - Flexible Server. This approach facilitates efficient and accurate similarity searches, significantly enhancing the copilot's ability to retrieve relevant information and provide contextually rich interactions.</p>
-<p>The <code>azure_openai</code> schema installed by the <code>azure_ai</code> extension contains the <code>create_embeddings()</code> function, which enables you to generate embeddings for text input by invoking an embedding model deployed in Azure OpenAI directly from a query.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Function signatures for the create_embeddings() function</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Single text input</span>
-<span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="n">timeout_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">3600000</span><span class="p">,</span><span class="w"> </span><span class="n">throw_on_error</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="c1">-- Array of input text</span>
-<span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="nb">text</span><span class="p">[],</span><span class="w"> </span><span class="n">batch_size</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">timeout_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">3600000</span><span class="p">,</span><span class="w"> </span><span class="n">throw_on_error</span><span class="w"> </span><span class="nb">boolean</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+<h1 id="34-optimize-vector-query-performance">3.4 Optimize Vector Query Performance<a class="headerlink" href="#34-optimize-vector-query-performance" title="Permanent link">&para;</a></h1>
+<p>The <code>vector</code> extension adds vector storage and similarity search capabilities to Azure Database for PostgreSQL flexible server. Indexing can help improve the performance of vector queries against the database. Without indexes, the <code>vector</code> extension performs an exact search, which provides perfect recall at the expense of performance. To perform approximate nearest neighbor searches, you can create indexes on your data, which sacrifices recall for execution performance.</p>
 <div class="admonition tip">
-<p class="admonition-title">Learn more about the <code>create_embeddings()</code> function, its overloads, and expected arguments in the <a href="https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-azure-openai#azure_openaicreate_embeddings">function documentation</a>.</p>
+<p class="admonition-title">Always load your data before indexing it.</p>
+<p>Loading data before indexing creates the index faster and results in a more optimal layout.</p>
 </div>
-<h2 id="generate-embeddings">Generate embeddings<a class="headerlink" href="#generate-embeddings" title="Permanent link">&para;</a></h2>
-<p>The <code>azure_ai</code> extension makes calling the Azure OpenAI embedding API trivial. In its simplest form, the <code>create_embeddings()</code> function can be called with two arguments, <code>deployment_name</code> and <code>input</code>, as shown below:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="p">)</span>
+<h2 id="index-types">Index Types<a class="headerlink" href="#index-types" title="Permanent link">&para;</a></h2>
+<p>There are three supported vector index types, each with its own pros and cons. You can learn more about the index types using these links:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#inverted-file-with-flat-compression-ivvflat">Inverted File with Flat Compression</a> (IVVFlat)</li>
+<li><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#hierarchical-navigable-small-worlds-hnsw">Hierarchical Navigable Small Worlds</a> (HNSW)</li>
+<li><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#disk-approximate-nearest-neighbor-diskann">Disk Approximate Nearest Neighbor</a> (DiskANN)</li>
+</ul>
+<p>The <code>IVFFlat</code> index has faster build times and uses less memory than <code>HNSW</code>, but it has lower query performance (in terms of the speed-recall tradeoff). <code>DiskANN</code> offers a great balance between highly accurate query performance and fast build times.</p>
+<details>
+<summary>Index Type Limitations</summary>
+<ul>
+<li>To index a column, it must have dimensions defined. Attempting to index a column defined as <code>col vector</code> will result in the error: <code>ERROR: column does not have dimensions</code>.</li>
+<li>When using <code>ivfflat</code> and <code>hnsw</code>, you are limited to indexing columns with 2000 dimensions or less. Attempting to index a column with more dimensions results in an error: <code>ERROR: column cannot have more than 2000 dimensions for INDEX_TYPE index where INDEX_TYPE is either ivfflat or hnsw</code>.</li>
+</ul>
+</details>
+<h2 id="index-access-and-vector-distance-functions">Index Access and Vector Distance Functions<a class="headerlink" href="#index-access-and-vector-distance-functions" title="Permanent link">&para;</a></h2>
+<p>The <code>vector</code> type added to your database by the <code>vector</code> extension allows you to perform three types of searches on the stored vectors. You need to select the correct access function for your index to have the database consider your index when executing your queries.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Distance Function</th>
+<th style="text-align: left;">Index Access Function</th>
+<th style="text-align: left;">Vector Operator</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Cosine distance</td>
+<td style="text-align: left;"><code>vector_cosine_ops</code></td>
+<td style="text-align: left;"><code>&lt;=&gt;</code></td>
+<td style="text-align: left;">Measures similarity between vectors by calculating the cosine of the angle between them.</td>
+</tr>
+<tr>
+<td style="text-align: left;">L2 (or Euclidean) distance</td>
+<td style="text-align: left;"><code>vector_l2_ops</code></td>
+<td style="text-align: left;"><code>&lt;-&gt;</code></td>
+<td style="text-align: left;">Measures the straight-line distance between two vectors in multi-dimensional space.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Inner (dot) product</td>
+<td style="text-align: left;"><code>vector_ip_ops</code></td>
+<td style="text-align: left;"><code>&lt;#&gt;</code></td>
+<td style="text-align: left;">Measures the similarity between two vectors by summing the products of their corresponding components.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vector-operators">Vector Operators<a class="headerlink" href="#vector-operators" title="Permanent link">&para;</a></h2>
+<p>The <em>vector operators</em> in the table above indicate the "distance operator" used to calculate the distances between two vectors in a multi-dimensional space. They are used when writing queries to calculate similarity. For example, in the following query, records are selected based on the similarity to the provided vector, where the cosine distance similarity is less than 0.5:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sow_chunks</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="s1">&#39;[-0.031766646,-0.033289704,...,0.016508864,0.031440277]&#39;</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span>
 </code></pre></div></td></tr></table></div>
-<p>To demonstrate how you can generate vector embeddings through a SQL query, execute the following query in <strong>pgAdmin</strong>.</p>
-<ol>
-<li>
-<p>On your local machine, return to the open instance of <strong>pgAdmin</strong> and ensure it is connected to your PostgreSQL database.</p>
-</li>
-<li>
-<p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your PostgreSQL server.</p>
-</li>
-<li>
-<p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
-</li>
-<li>
-<p>Run the following query, which creates a vector embedding for the <code>result</code> field in the <code>invoice_validation_results</code> table. The <code>deployment_name</code> parameter in the function is set to <code>embeddings</code>, which is the name of the deployment of the <code>text-embedding-ada-002</code> model in your Azure OpenAI service (it was created with that name by the Bicep deployment script):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
-<span class="w">    </span><span class="n">invoice_id</span><span class="p">,</span>
-<span class="w">    </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">result</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">embedding</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">invoice_validation_results</span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div></td></tr></table></div>
-<div class="admonition tip">
-<p class="admonition-title">You can view the deployment name of your embedding model in Azure AI Foundry.</p>
-<ol>
-<li>Open Azure AI Foundry from the landing page of your Azure OpenAI service.</li>
-<li>In Azure AI Foundry, select the <strong>Deployments</strong> option from the resource navigation menu.</li>
-<li>
-<p>Observe the <strong>Name</strong> associated with the <code>text-embedding-3-large</code> model.</p>
-<p><img alt="Screenshot of Azure AI Foundry, with the Deployments page selcted and highlighted. The embeddings model deployment name is highlighted." src="../../img/azure-ai-foundry-deployments-embeddings.png" /></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>The results of the query will look similar to this:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">   </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w">                              </span><span class="n">embedding</span>
-<span class="c1">------+-------------------------------------------------------------------------</span>
-<span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">031766646</span><span class="p">,</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">033289704</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">0009468119</span><span class="p">,...,</span><span class="mi">0</span><span class="p">.</span><span class="mi">016508864</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">031440277</span><span class="err">}</span>
-</code></pre></div></td></tr></table></div>
-<p>For brevity, the 3,072 dimensions in the vector are abbreviated in the above output.</p>
-</li>
-</ol>
-<h2 id="vectorize-existing-data">Vectorize existing data<a class="headerlink" href="#vectorize-existing-data" title="Permanent link">&para;</a></h2>
-<p>You added <code>vector</code> columns to the <code>deliverables</code>, <code>invoice_line_items</code>, <code>invoice_validation_results</code>,  <code>sow_chunks</code>, and <code>sow_validation_results</code> tables. You will now use the <code>azure_openai.create_embeddings()</code> function in SQL <code>UPDATE</code> statements to generate embeddings for the text data already in each of those tables.</p>
-<div class="admonition warning">
-<p class="admonition-title">Each of the table queries may take several minutes, depending on the configured TPM limits.</p>
-</div>
-<p>Using <strong>pgAdmin</strong>, execute the SQL statement for each table.</p>
-<p><em>Select the tab for each table below and execute the <code>UPDATE</code> statement to create embeddings for the specified column.</em></p>
+<h2 id="create-vector-indexes">Create Vector Indexes<a class="headerlink" href="#create-vector-indexes" title="Permanent link">&para;</a></h2>
+<p>In the previous tasks, you added <code>vector</code> columns to several tables in your database and populated them with embeddings using the <code>azure_ai</code> extension and Azure OpenAI. To ensure queries over those embeddings are efficient, you will add <code>hnsw</code> indexes to each table to which you added a <code>vector</code> column.</p>
+<p><em>Select the tab for each table below and execute the <code>CREATE INDEX</code> statement to create an <code>hnsw</code> index.</em></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="deliverables" name="__tabbed_1" type="radio" /><input id="invoice_line_items" name="__tabbed_1" type="radio" /><input id="invoice_validation_results" name="__tabbed_1" type="radio" /><input id="sow_chunks" name="__tabbed_1" type="radio" /><input id="sow_validation_results" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="deliverables">deliverables</label><label for="invoice_line_items">invoice_line_items</label><label for="invoice_validation_results">invoice_validation_results</label><label for="sow_chunks">sow_chunks</label><label for="sow_validation_results">sow_validation_results</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">deliverables</span>
-<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the index.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">deliverables_hnsw_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">deliverables</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">hnsw</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">invoice_line_items</span>
-<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the index.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">line_items_hnsw_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">invoice_line_items</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">hnsw</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">invoice_validation_results</span>
-<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">result</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the index.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">invoice_validation_results_hnsw_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">invoice_validation_results</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">hnsw</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">sow_chunks</span>
-<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the index.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">sow_chunks_hnsw_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">sow_chunks</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">hnsw</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">sow_validation_results</span>
-<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">result</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+<p>Copy and paste the following SQL statement into a new query window in pgAdmin, then execute the query to add the index.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">sow_validation_results_hnsw_idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">sow_validation_results</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">hnsw</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2000,13 +2028,13 @@
         
         
           
-          <a href="../../04-Create-AI-Pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: AI-driven Data Validation">
+          <a href="../05/" class="md-footer__link md-footer__link--next" aria-label="Next: 3.5 Vectorize data">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                AI-driven Data Validation
+                3.5 Vectorize data
               </div>
             </div>
             <div class="md-footer__button md-icon">

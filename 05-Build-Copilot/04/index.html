@@ -26,7 +26,7 @@
     
     
       
-        <title>5.4 Testing the Chat API - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>5.4 Enable the Chat Endpoint - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#54-testing-the-chat-api" class="md-skip">
+        <a href="#54-enable-the-chat-endpoint" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.4 Testing the Chat API
+              5.4 Enable the Chat Endpoint
             
           </span>
         </div>
@@ -837,6 +837,8 @@
       
         
       
+        
+      
     
     
       
@@ -954,7 +956,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -982,8 +1005,6 @@
       
         
           
-        
-      
         
       
         
@@ -1113,7 +1134,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1134,28 +1155,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1185,6 +1185,8 @@
       
         
           
+        
+      
         
       
         
@@ -1277,7 +1279,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1298,7 +1300,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1328,7 +1330,7 @@
           
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1339,7 +1341,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1361,18 +1363,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-testing-options" class="md-nav__link">
+  <a href="#review-chat-endpoint-implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Testing Options
+      Review Chat Endpoint Implementation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-test-with-swagger" class="md-nav__link">
+  <a href="#enable-chat-endpoint-calls" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Test with Swagger
+      Enable Chat Endpoint Calls
     </span>
   </a>
   
@@ -1398,7 +1400,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1419,7 +1421,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1440,7 +1442,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1789,18 +1812,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-testing-options" class="md-nav__link">
+  <a href="#review-chat-endpoint-implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Testing Options
+      Review Chat Endpoint Implementation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-test-with-swagger" class="md-nav__link">
+  <a href="#enable-chat-endpoint-calls" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Test with Swagger
+      Enable Chat Endpoint Calls
     </span>
   </a>
   
@@ -1824,40 +1847,307 @@
   
 
 
-<h1 id="54-testing-the-chat-api">5.4 Testing the Chat API<a class="headerlink" href="#54-testing-the-chat-api" title="Permanent link">&para;</a></h1>
-<h2 id="31-testing-options">3.1 Testing Options<a class="headerlink" href="#31-testing-options" title="Permanent link">&para;</a></h2>
-<p>The Chat API is deployed against the <code>/completions/chat</code> endpoint. So, how can you test this?</p>
+<h1 id="54-enable-the-chat-endpoint">5.4 Enable the Chat Endpoint<a class="headerlink" href="#54-enable-the-chat-endpoint" title="Permanent link">&para;</a></h1>
+<p>In this step, you will review backend API code for the <code>/chat</code> endpoint in the <code>completions</code> router, along with the various functions used for implementing the RAG pattern. You will then add the <code>completions</code> router to the FastAPI application to make the <code>/chat</code> endpoint available.</p>
+<h2 id="review-chat-endpoint-implementation">Review Chat Endpoint Implementation<a class="headerlink" href="#review-chat-endpoint-implementation" title="Permanent link">&para;</a></h2>
+<p>The <em>Woodgove Bank API</em> exposes endpoints in various <em>routers</em>... The <code>chat</code> endpoint resides in the <code>completions</code> router, defined in the <code>src/api/app/routers/completions.py</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section belwot see the code inline and review explanations for each line of code.</p>
+<details class="info" open="open">
+<summary>Chat endpoint code</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">app.functions.chat_functions</span> <span class="kn">import</span> <span class="n">ChatFunctions</span>
+<span class="kn">from</span> <span class="nn">app.lifespan_manager</span> <span class="kn">import</span> <span class="n">get_chat_client</span><span class="p">,</span> <span class="n">get_db_connection_pool</span><span class="p">,</span> <span class="n">get_embedding_client</span><span class="p">,</span> <span class="n">get_prompt_service</span>
+<span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">CompletionRequest</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentExecutor</span><span class="p">,</span> <span class="n">create_openai_functions_agent</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span><span class="p">,</span> <span class="n">MessagesPlaceholder</span>
+<span class="kn">from</span> <span class="nn">langchain_core.tools</span> <span class="kn">import</span> <span class="n">StructuredTool</span>
+
+<span class="c1"># Initialize the router</span>
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;/completions&quot;</span><span class="p">,</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Completions&quot;</span><span class="p">],</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">Depends</span><span class="p">(</span><span class="n">get_chat_client</span><span class="p">)],</span>
+    <span class="n">responses</span> <span class="o">=</span> <span class="p">{</span><span class="mi">404</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Not found&quot;</span><span class="p">}}</span>
+<span class="p">)</span>
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/chat&#39;</span><span class="p">,</span> <span class="n">response_model</span> <span class="o">=</span> <span class="nb">str</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">generate_chat_completion</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">:</span> <span class="n">CompletionRequest</span><span class="p">,</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_chat_client</span><span class="p">),</span>
+    <span class="n">db_pool</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db_connection_pool</span><span class="p">),</span>
+    <span class="n">embedding_client</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_embedding_client</span><span class="p">),</span>
+    <span class="n">prompt_service</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_prompt_service</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a chat completion using the Azure OpenAI API.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Retrieve the copilot prompt</span>
+    <span class="n">system_prompt</span> <span class="o">=</span> <span class="n">prompt_service</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">(</span><span class="s2">&quot;copilot&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Provide the copilot with a persona using the system prompt.</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span> <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_prompt</span> <span class="p">}]</span>
+
+    <span class="c1"># Add the chat history to the messages list</span>
+    <span class="c1"># Chat history provides context of previous questions and responses for the copilot.</span>
+    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">chat_history</span><span class="p">[</span><span class="o">-</span><span class="n">request</span><span class="o">.</span><span class="n">max_history</span><span class="p">:]:</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">message</span><span class="o">.</span><span class="n">role</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">})</span>
+
+    <span class="c1"># Create a chat prompt template</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="n">system_prompt</span><span class="p">),</span>
+            <span class="n">MessagesPlaceholder</span><span class="p">(</span><span class="s2">&quot;chat_history&quot;</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{input}</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="n">MessagesPlaceholder</span><span class="p">(</span><span class="s2">&quot;agent_scratchpad&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get the chat functions</span>
+    <span class="n">cf</span> <span class="o">=</span> <span class="n">ChatFunctions</span><span class="p">(</span><span class="n">db_pool</span><span class="p">,</span> <span class="n">embedding_client</span><span class="p">)</span>
+
+    <span class="c1"># Define tools for the agent to retrieve data from the database</span>
+    <span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1"># Hybrid search functions</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">find_invoice_line_items</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">find_invoice_validation_results</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">find_milestone_deliverables</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">find_sow_chunks</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">find_sow_validation_results</span><span class="p">),</span>
+        <span class="c1"># Get invoice data functions</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_invoice_id</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_invoice_line_items</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_invoice_validation_results</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_invoices</span><span class="p">),</span>
+        <span class="c1"># Get SOW data functions</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_sow_chunks</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_sow_id</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_sow_milestones</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_milestone_deliverables</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_sow_validation_results</span><span class="p">),</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_sows</span><span class="p">),</span>
+        <span class="c1"># Get vendor data functions</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">get_vendors</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Create an agent</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_openai_functions_agent</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+    <span class="n">agent_executor</span> <span class="o">=</span> <span class="n">AgentExecutor</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_intermediate_steps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">completion</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent_executor</span><span class="o">.</span><span class="n">ainvoke</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;chat_history&quot;</span><span class="p">:</span> <span class="n">messages</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">completion</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<ol>
+<li>
+<p><strong>Import libraries</strong> (lines 1-7): Required classes and functions are imported from various libraries.</p>
+</li>
+<li>
+<p><strong>Intialize the router</strong> (lines 10-15): The <code>completions</code> router, assigning the route <em>prefix</em>, dependencies, and other metadata.</p>
+</li>
+<li>
+<p><strong>Define the chat endpoint</strong> (line2 17-23): The <code>/chat</code> endpoint is the entry point into the <em>Woodgove Bank</em> copilot implementation. It expects a <code>CompletionRequest</code>, which contains the user query, the chat history and the maximum number of history messages to include in the prompt, and returns a text response.</p>
 <ul>
-<li>You can use a third party client to <code>POST</code> a request to the endpoint</li>
-<li>You can use a <code>CURL</code> command to make the request from commandline</li>
-<li>You can use the built-in <code>/swagger</code> Swagger UI to <a href="https://fastapi.tiangolo.com/#interactive-api-docs">try it out interactively</a></li>
-</ul>
-<h2 id="32-test-with-swagger">3.2 Test with Swagger<a class="headerlink" href="#32-test-with-swagger" title="Permanent link">&para;</a></h2>
-<p><strong>Let's use option 3</strong> - a side benefit of this is it shows us the <em><code>curl</code></em> command you can use to make the same request from the terminal if you want to try that out later.</p>
-<p>TODO: Update the step below to have them start a debug session from VS Code and then open a browser tab for the API</p>
-<ul>
-<li>Return to the dev server preview tab in the browser (ends in <code>github.dev</code>)</li>
-<li>Append <code>/swagger</code> to the URL to get the Swagger UI interactive testing page</li>
-<li>Expand the POST section and select <code>Try it out</code><ul>
-<li>Specify a question: <code>What camping gear do I own already?</code></li>
-<li>Specify a customer_id: try <strong>3</strong> ("Michael Johnson")</li>
-<li>Specify chat_history: enter <code>[ ]</code> (empty list)</li>
+<li>It accepts POST requests from clients and extracts required parameters.</li>
+<li>It invokes the <em>get_chat_completion</em> function with those parameters.</li>
+<li>It returns the LLM's response to the client.</li>
 </ul>
 </li>
-<li>Click <code>Execute</code> to run the query</li>
-</ul>
-<p>This is similar to our previous testing with the FastAPI endpoint on Azure Container Apps - but now you can <strong>also</strong> see the server execution traces in the Visual Studio Code console.</p>
+<li>
+<p><strong>Chat endpoint implementation</strong> (lines 24-78). The "/completions/chat" route maps to the endpoint where we can invoke the Contoso Chat implementation.</p>
 <ul>
-<li><strong>Check:</strong> You should get a valid response in the Swagger UI</li>
-<li><strong>Check:</strong> You should also see the response traces in the VS Code terminal</li>
-</ul>
-<p><strong>What just happened?</strong></p>
+<li>
+<p><strong>Get the system prompt</strong> (line 27): The system prompt defines the copilot's <em>persona</em>, providing instructions about how the copilot should behave, respond to questions, and interact with customers. It also provides guidance about the RAG design pattern and how function calls (tools) should be used when answering questions. You will look at this in detail in the <a href="../05/">Prompt Engineering step of this section</a>.</p>
+</li>
+<li>
+<p><strong>Build messages collection</strong> (lines 30-35): The messages collection provides the system and user prompts to the LLM, along with chat history messages. Each message consists of a <code>role</code> and message <code>content</code>. The role will be one of <code>system</code>, <code>assistant</code>, or <code>user</code>. After the <code>system</code> message, all subsequent messages must be <code>user</code> / <code>assistant</code> pairs, with a user query followed by an assistant response.</p>
+</li>
+<li>
+<p><strong>Build the model prompt</strong> (lines 38-45): The LangChain <code>ChatPromptTemplate</code> class allows you to build a <em>model prompt</em> from a collection of messages.</p>
 <ul>
-<li>The dev server ran the <code>main.py</code> defined application with 2 routes</li>
-<li>The default route <code>/</code> returns the "Hello world" message (see line 46) TODO: Change line number here</li>
-<li>This confirms that our application server is running successfully</li>
-<li>The <code>/swagger</code> UI endpoint displays the endpoints available on the API... TODO: Expand on this.</li>
+<li>The <em>system prompt</em> is added to provide instructions to the model.</li>
+<li>The <em>chat history</em> is inserted as context of previous questions and responses.</li>
+<li>The <em>user input</em> provides the model with the current question it is attempting to answer.</li>
+<li>An <em>agent scratchpad</em> placeholder is included to allow responses from tools assigned to the agent to <em>augment</em> the model with grounding data from.</li>
+<li>The resulting prompt provides a structured input for the conversational AI agent, helping it to generate a response based on the given context.</li>
 </ul>
+</li>
+<li>
+<p><strong>Implement function calling</strong> (lines 48-72):</p>
+<ul>
+<li>Line 48 instantiates the <code>ChatFunctions</code> class, which contains the methods used for interacting with the PostgreSQL database. You can review the functions in the <code>src/api/app/functions/chat_functions.py</code> file.</li>
+<li>The <code>tools</code> array created in lines 51-72 is the collection of <em>functions</em> available to the LangChain agent for performing <em>retrieval</em> operations to <em>augment</em> the model prompt during response <em>generation</em>.</li>
+<li>
+<p>Tools are created using the <code>StructuredTool.from_function</code> method provided by LangChain.</p>
+<details class="info">
+<summary>About the LangChain <code>StructuredTool</code> class</summary>
+<p>The <code>StructuredTool</code> class is a wrapper to allow LangChain agents to interact with functions. The <code>from_function</code> method in creates a tool from the given function, describing the function using its input parameters and docstring description. To use it with async methods, you pass the function's name to the <code>coroutine</code> input parameter.</p>
+<p>In Python, a docstring (short for documentation string) is a special type of string used to document a function, method, class, or module. It provides a convenient way of associating documentation with Python code and is typically enclosed within triple quotes (""" or '''). Docstrings are placed immediately after the definition of the function (or method, class, or module) they document.</p>
+<p>Using the <code>StructuredTool.from_function</code> method automates the creation of the JSON function definitions, simplifying the process of function calling when using LangChain.</p>
+</details>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Create a LangChain agent</strong> (lines 75-76): The LangChain agent is responsible for interacting with the LLM to generate a response.</p>
+<ul>
+<li>
+<p>Using the <code>create_openai_functions_agent</code> method, a LangChain agent is instantiated. This agent handles <em>function calling</em> via the <code>tools</code> provided to the agent.</p>
+<details class="info">
+<summary>About the <code>create_openai_functions_agent</code> function</summary>
+<p>The <code>create_openai_functions_agent</code> function in LangChain creates an agent that can call external functions to perform tasks using a specified language model and tools. This enables the integration of various services and functionalities into the agent's workflow, providing flexibility and enhanced capabilities.</p>
+</details>
+</li>
+<li>
+<p>LangChain's <code>AgentExecutor</code> class is used to manage the execution flow of the agent. It handles the processing of inputs, the invocation of tools or models, and the handling of outputs.</p>
+<details class="info">
+<summary>About LangChain's <code>AgentExecutor</code></summary>
+<p>The <code>AgentExecutor</code> ensures that all the steps required to generate a response are executed in the correct order. It abstracts the complexities of execution for agents, providing an additional layer of functionality and structure, and making it easier to build, manage, and scale sophisticated agents.</p>
+</details>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Invoke the agent</strong> (line 77): Using the agent executor's async <code>invoke</code> method, the incoming user message, chat history is sent to the LLM.</p>
+<ul>
+<li>The <code>input</code> and <code>chat_history</code> tokens were defined in the prompt object created using the <code>ChatPromptTemplate</code>. With the <code>invoke</code> method, these will be injected into the model prompt, allowing the LLM to use that information when creating a response.</li>
+<li>The LangChain agent uses the LLM to determine if tool calls are necessary by evaluating the <em>user query</em>.</li>
+<li>Any <em>tools</em> required to answer the question are called and the model prompt is augmented with grounding data from their results to formulate the final response.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the response</strong> (line 78): The agent's completion response is returned to the user.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="enable-chat-endpoint-calls">Enable Chat Endpoint Calls<a class="headerlink" href="#enable-chat-endpoint-calls" title="Permanent link">&para;</a></h2>
+<p>To enable the <code>/chat</code> endpoint to be called from the <em>Woodgrove Bank Contract Management Portal</em>, you will add the completions router to the FastAPI app.</p>
+<ol>
+<li>
+<p>In the VS Code <strong>Explorer</strong>, navigate to the <code>src/api/app</code> folder and open the <code>main.py</code> file.</p>
+</li>
+<li>
+<p>Locate the block of code where the API endpoint routers are added (lines 44-56).</p>
+</li>
+<li>
+<p>Insert the following code at the start of that block (just below the <code># Add routers to API endpoints</code> comment on line 43) to add the <code>completions/chat</code> endpoint to the exposed API.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">completions</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>The updated list of router should look like:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Add routers to API endpoints</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">completions</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">deliverables</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">documents</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">embeddings</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">invoices</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">invoice_line_items</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">milestones</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">sows</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">statuses</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">validation</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">validation_results</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">vendors</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">webhooks</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Save the <code>main.py</code> file.</p>
+</li>
+</ol>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">Congratulations! Your API is now enabled for copilot interactions!</p>
+</div>
 
 
 
@@ -1895,7 +2185,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../03/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.3 Review RAG Implementation">
+          <a href="../03/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.3 Leverage LangChain Orchestration">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1905,20 +2195,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                5.3 Review RAG Implementation
+                5.3 Leverage LangChain Orchestration
               </div>
             </div>
           </a>
         
         
           
-          <a href="../05/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.5 Prompt engineering">
+          <a href="../05/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.5 Test the Chat API">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                5.5 Prompt engineering
+                5.5 Test the Chat API
               </div>
             </div>
             <div class="md-footer__button md-icon">

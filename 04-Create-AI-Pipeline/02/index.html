@@ -837,6 +837,8 @@
       
         
       
+        
+      
     
     
       
@@ -954,7 +956,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -984,8 +1007,6 @@
       
         
           
-        
-      
         
       
         
@@ -1116,46 +1137,112 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configure-semantic-chunking" class="md-nav__link">
+  <a href="#what-are-chunks-in-document-intelligence" class="md-nav__link">
     <span class="md-ellipsis">
-      Configure Semantic Chunking
+      What Are Chunks in Document Intelligence?
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Configure Semantic Chunking">
+    <nav class="md-nav" aria-label="What Are Chunks in Document Intelligence?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-define-the-chunking-strategy" class="md-nav__link">
+  <a href="#how-chunks-work" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Define the Chunking Strategy
+      How Chunks Work
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-leverage-azure-document-intelligence" class="md-nav__link">
+  <a href="#why-chunks-matter-in-ai-powered-data-validation" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Leverage Azure Document Intelligence
+      Why Chunks Matter in AI-Powered Data Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defining-the-chunking-strategy-in-document-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defining the Chunking Strategy in Document Intelligence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Defining the Chunking Strategy in Document Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chunking-strategy-for-statements-of-work-sows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chunking Strategy for Statements of Work (SOWs)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-store-chunks-in-azure-database-for-postgresql" class="md-nav__link">
+  <a href="#chunking-strategy-for-invoices" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Store Chunks in Azure Database for PostgreSQL
+      Chunking Strategy for Invoices
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-benefits-of-semantic-chunking" class="md-nav__link">
+  <a href="#differences-in-chunking-strategy" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Benefits of Semantic Chunking
+      Differences in Chunking Strategy:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-an-optimized-chunking-strategy-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why an Optimized Chunking Strategy Matters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leverage-azure-document-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leverage Azure Document Intelligence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leverage Azure Document Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#store-chunks-in-azure-database-for-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Store Chunks in Azure Database for PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-semantic-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Semantic Chunking
     </span>
   </a>
   
@@ -1177,9 +1264,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#intelligent-data-storage-in-azure-database-for-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intelligent Data Storage in Azure Database for PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-generating-vector-embeddings-with-azure-ai-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Generating Vector Embeddings with Azure AI Extension
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-api-endpoints-to-insert-chunks" class="md-nav__link">
     <span class="md-ellipsis">
       Update API Endpoints To Insert Chunks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -1231,7 +1345,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1252,28 +1366,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1301,6 +1394,8 @@
       
         
           
+        
+      
         
       
         
@@ -1392,7 +1487,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1413,7 +1508,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1434,7 +1529,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1455,7 +1550,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1476,7 +1571,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1497,7 +1592,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1846,46 +1962,112 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configure-semantic-chunking" class="md-nav__link">
+  <a href="#what-are-chunks-in-document-intelligence" class="md-nav__link">
     <span class="md-ellipsis">
-      Configure Semantic Chunking
+      What Are Chunks in Document Intelligence?
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Configure Semantic Chunking">
+    <nav class="md-nav" aria-label="What Are Chunks in Document Intelligence?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-define-the-chunking-strategy" class="md-nav__link">
+  <a href="#how-chunks-work" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Define the Chunking Strategy
+      How Chunks Work
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-leverage-azure-document-intelligence" class="md-nav__link">
+  <a href="#why-chunks-matter-in-ai-powered-data-validation" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Leverage Azure Document Intelligence
+      Why Chunks Matter in AI-Powered Data Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defining-the-chunking-strategy-in-document-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Defining the Chunking Strategy in Document Intelligence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Defining the Chunking Strategy in Document Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chunking-strategy-for-statements-of-work-sows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chunking Strategy for Statements of Work (SOWs)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-store-chunks-in-azure-database-for-postgresql" class="md-nav__link">
+  <a href="#chunking-strategy-for-invoices" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Store Chunks in Azure Database for PostgreSQL
+      Chunking Strategy for Invoices
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-benefits-of-semantic-chunking" class="md-nav__link">
+  <a href="#differences-in-chunking-strategy" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Benefits of Semantic Chunking
+      Differences in Chunking Strategy:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-an-optimized-chunking-strategy-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why an Optimized Chunking Strategy Matters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leverage-azure-document-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leverage Azure Document Intelligence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leverage Azure Document Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#store-chunks-in-azure-database-for-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Store Chunks in Azure Database for PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-semantic-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Semantic Chunking
     </span>
   </a>
   
@@ -1907,9 +2089,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#intelligent-data-storage-in-azure-database-for-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intelligent Data Storage in Azure Database for PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-generating-vector-embeddings-with-azure-ai-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Generating Vector Embeddings with Azure AI Extension
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-api-endpoints-to-insert-chunks" class="md-nav__link">
     <span class="md-ellipsis">
       Update API Endpoints To Insert Chunks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -1939,38 +2148,143 @@
 
 
 <h1 id="42-configure-semantic-chunking">4.2 Configure Semantic Chunking<a class="headerlink" href="#42-configure-semantic-chunking" title="Permanent link">&para;</a></h1>
-<p>TODO</p>
-<p>https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept/retrieval-augmented-generation?view=doc-intel-4.0.0</p>
-<h2 id="configure-semantic-chunking">Configure Semantic Chunking<a class="headerlink" href="#configure-semantic-chunking" title="Permanent link">&para;</a></h2>
 <p>Semantic chunking is a critical step in preparing documents for retrieval-augmented generation (RAG) and other AI-driven workflows. It involves breaking down large documents into smaller, semantically meaningful chunks that enable better indexing, searching, and retrieval. Using Azure Document Intelligence, semantic chunking can be configured to optimize data flow for downstream processes. Below is a guide to configuring semantic chunking effectively.</p>
-<hr />
-<h3 id="1-define-the-chunking-strategy"><strong>1. Define the Chunking Strategy</strong><a class="headerlink" href="#1-define-the-chunking-strategy" title="Permanent link">&para;</a></h3>
-<p>Before implementing semantic chunking, it is essential to define a strategy tailored to the document’s content and the use case:</p>
+<h2 id="what-are-chunks-in-document-intelligence">What Are Chunks in Document Intelligence?<a class="headerlink" href="#what-are-chunks-in-document-intelligence" title="Permanent link">&para;</a></h2>
+<p>In <strong>Azure AI Document Intelligence</strong>, "chunks" refer to structured segments of a document that are intelligently divided to improve data extraction, retrieval, and validation. This process, known as <strong>Semantic Chunking</strong>, ensures that information is logically grouped based on its meaning and context, rather than arbitrary divisions like page numbers.</p>
+<h3 id="how-chunks-work">How Chunks Work<a class="headerlink" href="#how-chunks-work" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Semantic Understanding:</strong> Instead of treating a document as a single block of text, AI models recognize key sections such as headings, paragraphs, tables, and lists.</p>
+</li>
+<li>
+<p><strong>Context Preservation:</strong> By maintaining the relationship between different parts of the document, chunking helps AI models interpret financial statements, SOWs, and invoices more accurately.</p>
+</li>
+<li>
+<p><strong>Retrieval-Augmented Generation (RAG)</strong> models can retrieve relevant chunks dynamically, improving AI-driven document validation, compliance checks, and financial data reconciliation.</p>
+</li>
+</ol>
+<h3 id="why-chunks-matter-in-ai-powered-data-validation"><strong>Why Chunks Matter in AI-Powered Data Validation</strong><a class="headerlink" href="#why-chunks-matter-in-ai-powered-data-validation" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Determine Chunk Size</strong>:</li>
-<li>Decide the size of each chunk based on the complexity of the document and the AI model’s token limits.</li>
-<li>
-<p>For example, divide a lengthy Statement of Work document into sections such as "Project Scope", "Schedules", and "Project Deliverables".</p>
-</li>
-<li>
-<p><strong>Identify Semantically Relevant Boundaries</strong>:</p>
-</li>
-<li>Use natural breakpoints like paragraphs, headings, or bullet points.</li>
-<li>For structured documents, align chunks with logical sections, such as "Invoice Details" or "Payment Terms."</li>
+<li><strong>Higher Accuracy:</strong> Structured document segmentation improves AI’s ability to <strong>extract and validate key financial data</strong>.  </li>
+<li><strong>Better Contextual Retrieval:</strong> When comparing invoices to <strong>Statements of Work (SOWs)</strong>, AI can <strong>retrieve specific clauses</strong> related to payment terms.  </li>
+<li><strong>Optimized Query Performance:</strong> AI-powered searches return <strong>more precise</strong> and <strong>context-aware</strong> results.  </li>
 </ul>
 <hr />
-<h3 id="2-leverage-azure-document-intelligence"><strong>2. Leverage Azure Document Intelligence</strong><a class="headerlink" href="#2-leverage-azure-document-intelligence" title="Permanent link">&para;</a></h3>
+<h2 id="defining-the-chunking-strategy-in-document-intelligence"><strong>Defining the Chunking Strategy in Document Intelligence</strong><a class="headerlink" href="#defining-the-chunking-strategy-in-document-intelligence" title="Permanent link">&para;</a></h2>
+<p>When working with Statements of Work (SOWs) and Invoices, defining an effective chunking strategy is essential to ensure accurate data extraction, validation, and cross-referencing. The way chunks are structured depends on the document type, as <strong>SOWs</strong> and <strong>Invoices</strong> have different formats, purposes, and data requirements.</p>
+<h3 id="chunking-strategy-for-statements-of-work-sows"><strong>Chunking Strategy for Statements of Work (SOWs)</strong><a class="headerlink" href="#chunking-strategy-for-statements-of-work-sows" title="Permanent link">&para;</a></h3>
+<p>SOWs are <strong>long, structured documents</strong> that outline contractual obligations, payment milestones, deliverables, and compliance clauses. The chunking strategy for SOWs must focus on <strong>preserving contextual integrity</strong> while making it easy to retrieve relevant sections.</p>
+<h4 id="key-chunking-considerations-for-sows"><strong>Key Chunking Considerations for SOWs:</strong><a class="headerlink" href="#key-chunking-considerations-for-sows" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Logical Sectioning:</strong>  </p>
+<ol>
+<li>Chunk based on headings, subheadings, and numbered clauses (e.g., <strong>"Scope of Work"</strong>, <strong>"Payment Terms"</strong>, <strong>"Milestones"</strong>).  </li>
+<li>Ensures that AI can retrieve relevant contract details when cross-referencing invoices.  </li>
+</ol>
+</li>
+<li>
+<p><strong>Paragraph-Based Semantic Chunking:</strong>  </p>
+<ol>
+<li>Break sections into <strong>semantically meaningful paragraphs</strong> for precise retrieval.  </li>
+<li>Helps ensure <strong>RAG-based AI models</strong> understand contract obligations.</li>
+</ol>
+</li>
+<li>
+<p><strong>Compliance Clause Recognition:</strong></p>
+<ol>
+<li>Identify and separately chunk regulatory or compliance language to facilitate <strong>automated legal checks</strong>.</li>
+</ol>
+</li>
+<li>
+<p><strong>Deliverable Based Segmentation:</strong>  </p>
+<ol>
+<li>Define chunks based on <strong>payment deliverables</strong>, linking them to expected invoice amounts.  </li>
+</ol>
+</li>
+</ol>
+<h3 id="chunking-strategy-for-invoices"><strong>Chunking Strategy for Invoices</strong><a class="headerlink" href="#chunking-strategy-for-invoices" title="Permanent link">&para;</a></h3>
+<p>Invoices are <strong>structured, tabular documents</strong> designed to list billable items, amounts, and due dates. Unlike SOWs, invoice chunking must focus on tabular data extraction, line-item accuracy, and direct matching with SOWs.</p>
+<h4 id="key-chunking-considerations-for-invoices"><strong>Key Chunking Considerations for Invoices:</strong><a class="headerlink" href="#key-chunking-considerations-for-invoices" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Line-Item Chunking:</strong>  <ol>
+<li>Each <strong>line item (e.g., service, quantity, amount, tax, etc.)</strong> is treated as a separate chunk for precise AI validation.  </li>
+</ol>
+</li>
+<li>
+<p><strong>Table-Aware Chunking:</strong>  </p>
+<ol>
+<li>Preserve <strong>tabular structures</strong> to ensure AI correctly extracts and processes invoice totals, taxes, and discounts.</li>
+</ol>
+</li>
+<li>
+<p><strong>Semantic Chunking for Descriptions:</strong>  </p>
+<ol>
+<li>Invoice descriptions may <strong>reference project deliverables</strong>—chunking ensures AI can <strong>cross-validate them against SOW deliverables</strong>.  </li>
+</ol>
+</li>
+<li>
+<p><strong>Vendor &amp; Payment Terms Segmentation:</strong>  </p>
+<ol>
+<li>Vendor details, invoice dates, and due dates must be separately chunked to ensure <strong>accurate payment milestone validation</strong>.  </li>
+</ol>
+</li>
+</ol>
+<h3 id="differences-in-chunking-strategy"><strong>Differences in Chunking Strategy:</strong><a class="headerlink" href="#differences-in-chunking-strategy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>SOW Chunking Strategy</th>
+<th>Invoice Chunking Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Document Structure</strong></td>
+<td>Long-form contract with sections</td>
+<td>Structured tables with line items</td>
+</tr>
+<tr>
+<td><strong>Chunking Method</strong></td>
+<td>Section &amp; paragraph-based chunking</td>
+<td>Table-aware &amp; line-item chunking</td>
+</tr>
+<tr>
+<td><strong>Key Chunking Focus</strong></td>
+<td>Milestones, deliverables, compliance clauses</td>
+<td>Billable items,  payment details</td>
+</tr>
+<tr>
+<td><strong>AI Retrieval Purpose</strong></td>
+<td>Validate contractual obligations &amp; compliance</td>
+<td>Match billable amounts &amp; due dates with SOWs</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-an-optimized-chunking-strategy-matters"><strong>Why an Optimized Chunking Strategy Matters</strong><a class="headerlink" href="#why-an-optimized-chunking-strategy-matters" title="Permanent link">&para;</a></h3>
+<p><strong>Improves AI Accuracy</strong> – Ensures that document validation is based on structured, meaningful chunks.<br />
+<strong>Enhances Cross-Document Validation</strong> – Allows AI models to <strong>match invoices to SOWs efficiently</strong>.<br />
+<strong>Supports Compliance &amp; Auditability</strong> – Ensures that all necessary sections are <strong>properly reviewed</strong>.<br />
+<strong>Optimizes Retrieval-Augmented Generation (RAG) Queries</strong> – AI can retrieve <strong>precise contract and invoice details</strong> for analysis.  </p>
+<hr />
+<h2 id="leverage-azure-document-intelligence"><strong>Leverage Azure Document Intelligence</strong><a class="headerlink" href="#leverage-azure-document-intelligence" title="Permanent link">&para;</a></h2>
 <p>Azure Document Intelligence provides tools and capabilities to automate the chunking process:</p>
 <ol>
 <li><strong>Use Pre-Trained Models</strong>:</li>
 <li>
-<p>Apply pre-trained models to extract structured data and identify logical sections within documents.</p>
+<p>Apply pre-trained models to extract structured data and identify logical sections within documents. In this workshop 2 models were used:</p>
+<ol>
+<li>The <strong>prebuilt-invoice</strong> model in Document Intelligence was used to process invoices as this model is designed to extract key information from invoices, such as vendor details, invoice date, and total amount due. This model leverages advanced machine learning techniques to streamline the processing of invoices, reducing manual data entry and improving accuracy.</li>
+<li>The <strong>prebuilt-document</strong> model in Document Intelligence was used to process Statement of Works as this model is designed to extract structured data from a variety of document types, such as contracts, receipts, and forms. This model uses machine learning to identify and extract relevant information, enabling efficient document processing and data management.</li>
+</ol>
 </li>
 <li>
 <p><strong>Apply Custom Models</strong>:</p>
 </li>
 <li>
-<p>Use custom models trained on domain-specific documents to identify sections unique to your organization.</p>
+<p>If the pre-built models will not work for your domain-specific documents then you can use custom models trained on your documents to identify sections unique to your use case.
+   <a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/how-to-guides/build-a-custom-model?view=doc-intel-4.0.0">Follow this guide</a></p>
 </li>
 <li>
 <p><strong>Configure Semantic Rules</strong>:</p>
@@ -1979,7 +2293,7 @@
 <li>Example: Break a contract into "Parties Involved," "Obligations," and "Terms and Conditions" sections.</li>
 </ol>
 <hr />
-<h3 id="3-store-chunks-in-azure-database-for-postgresql"><strong>3. Store Chunks in Azure Database for PostgreSQL</strong><a class="headerlink" href="#3-store-chunks-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
+<h3 id="store-chunks-in-azure-database-for-postgresql"><strong>Store Chunks in Azure Database for PostgreSQL</strong><a class="headerlink" href="#store-chunks-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
 <p>Once documents are semantically chunked, the resulting chunks are stored in <strong>Azure Database for PostgreSQL</strong> for efficient querying and retrieval:</p>
 <ul>
 <li><strong>Data Structure</strong>:</li>
@@ -2007,7 +2321,7 @@
 <li>This can include metadata such as document ID, chunk sequence, and semantic labels for efficient retrieval.</li>
 </ul>
 <hr />
-<h3 id="4-benefits-of-semantic-chunking"><strong>4. Benefits of Semantic Chunking</strong><a class="headerlink" href="#4-benefits-of-semantic-chunking" title="Permanent link">&para;</a></h3>
+<h3 id="benefits-of-semantic-chunking"><strong>Benefits of Semantic Chunking</strong><a class="headerlink" href="#benefits-of-semantic-chunking" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Enhanced Retrieval</strong>:</li>
 <li>
@@ -2025,13 +2339,160 @@
 <li>Ensures AI models operate within token limits, avoiding truncation and enhancing output quality.</li>
 </ul>
 <hr />
-<p>By configuring semantic chunking using Azure Document Intelligence, organizations can streamline document workflows, improve data accessibility, and enable more effective AI-powered retrieval and analysis.</p>
 <h2 id="write-chunks-to-postgresql">Write Chunks to PostgreSQL<a class="headerlink" href="#write-chunks-to-postgresql" title="Permanent link">&para;</a></h2>
-<p>TODO</p>
+<h3 id="intelligent-data-storage-in-azure-database-for-postgresql">Intelligent Data Storage in Azure Database for PostgreSQL<a class="headerlink" href="#intelligent-data-storage-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
+<p>Chunked text data is stored in <strong>Azure Database for PostgreSQL</strong>, ensuring efficient storage and retrieval.</p>
+<ul>
+<li><strong>Data Organization</strong>: Documents are stored in structured formats with metadata.</li>
+<li><strong>Scalability</strong>: Optimized for handling large data volumes.</li>
+</ul>
+<hr />
+<h3 id="4-generating-vector-embeddings-with-azure-ai-extension">4. Generating Vector Embeddings with Azure AI Extension<a class="headerlink" href="#4-generating-vector-embeddings-with-azure-ai-extension" title="Permanent link">&para;</a></h3>
+<p>The <strong>Azure AI extension</strong> for PostgreSQL enables advanced AI functionalities such as semantic search.</p>
+<ul>
+<li><strong>Embedding Storage</strong>: Adds vector columns for document embeddings.</li>
+<li><strong>Embedding Generation</strong>: Uses <strong>Azure OpenAI</strong> to generate high-dimensional vector embeddings.</li>
+</ul>
+<p>Example SQL command:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">);</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sows</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<hr />
 <h3 id="update-api-endpoints-to-insert-chunks">Update API Endpoints To Insert Chunks<a class="headerlink" href="#update-api-endpoints-to-insert-chunks" title="Permanent link">&para;</a></h3>
-<p>TODO</p>
+<p>When uploading a SOW in the application, the document workflow starts with the analysis API endpoint <code>/sows/</code>. This endpoint is called using an HTTP POST passing it the <code>vendor_id</code> of the Vendor and the document file being uploaded.</p>
+<p>The document is passed to Document Intelligence to extract the text from the document.</p>
+<p>```py linenum="89" title="src/api/app/routers/sows.py"
+  analysis_result = await doc_intelligence_service.extract_text_from_sow_document(document_data)
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code>The application implements a service for calling Document Intelligence located within the `src/api/app/services/azure_doc_intelligence_service.py` file where the `.extract_text_from_sow_document` method is located. This code uses the `prebuild-document` model within Document Intelligence to extract the text from the document.
+
+You can expand the section below to see the specific section of code that calls Document Intelligence to extract the text form the document and generate the text chunks.
+
+???+ info &quot;Call Document Intelligence to extract text from document&quot;
+
+    ```py linenums=&quot;35&quot; title=&quot;src/api/services/azure_doc_intelligence_service.py&quot;
+      async def extract_text_from_sow_document(self, document_data):
+        &quot;&quot;&quot;Extract text and structure using Azure AI Document Intelligence.&quot;&quot;&quot;
+        docClient = DocumentAnalysisClient(
+            endpoint=self.docIntelligenceEndpoint,
+            credential=self.credential
+        )
+
+        poller = await docClient.begin_analyze_document(
+            model_id=&quot;prebuilt-document&quot;,
+            document=document_data
+        )
+
+        result = await poller.result()
+
+        analysis = DocumentAnalysisResult()
+        analysis.extracted_text = []
+        analysis.text_chunks = []
+
+        known_headings = [
+            &quot;Project Scope&quot;, &quot;Project Objectives&quot;, &quot;Location&quot;, &quot;Tasks&quot;, &quot;Schedules&quot;,
+            &quot;Standards and Testing&quot;, &quot;Payments&quot;, &quot;Compliance&quot;, &quot;Requirements&quot;, &quot;Project Deliverables&quot;
+        ]
+
+        for page in result.pages:
+            page_text = &quot; &quot;.join([line.content for line in page.lines])
+            analysis.extracted_text.append(page_text)
+
+            current_heading = None
+            for line in page.lines:
+                text = line.content
+                if self.__is_heading(text, known_headings): # Detect headings
+                    current_heading = text
+                    newTextChunk = TextChunk()
+                    newTextChunk.heading = text
+                    newTextChunk.content = &quot;&quot;
+                    newTextChunk.page_number = page.page_number
+                    analysis.text_chunks.append(newTextChunk)
+                elif current_heading:
+                    analysis.text_chunks[-1].content += &quot; &quot; + text
+
+        await docClient.close()
+
+        analysis.full_text = &quot;\n&quot;.join(analysis.extracted_text)
+
+        return analysis
+    ```
+
+The `.extract_text_from_sow_document` method returns an object that contains a `.text_chunks` collection of objects that contain all the text chunks from the document. The code then loops through the chunks that were extracted and inserts them into the database.
+
+```py linenum=&quot;138&quot; title=&quot;src/api/app/routers/sows.py&quot;
+for chunk in analysis_result.text_chunks:
+    await conn.execute(&#39;&#39;&#39;
+        INSERT INTO sow_chunks (sow_id, heading, content, page_number) VALUES ($1, $2, $3, $4);
+    &#39;&#39;&#39;, sow.id, chunk.heading, chunk.content, chunk.page_number)
+</code></pre></div></td></tr></table></div></p>
+<p>The text chunks loaded into the database will now be available for query later by the Copilot to implement retrieval augmented generation (RAG) based on the text content of the documents.</p>
+<h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
+<p><a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/model-overview?view=doc-intel-4.0.0">Document Intelligence - Document Processing Models</a></p>
+<p><a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/how-to-guides/build-a-custom-model?view=doc-intel-4.0.0">Build a Custom Model in Document Intelligence</a></p>
+<p><a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/concept/retrieval-augmented-generation?view=doc-intel-4.0.0">Document Intelligence - Retrieval Augmented Generation</a></p>
 <div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You just learned the key quality metrics we'll assess with AI</p>
+<p class="admonition-title">CONGRATULATIONS. You just learned the key concepts of configuring <strong>Semantic Chunking</strong></p>
 </div>
 
 

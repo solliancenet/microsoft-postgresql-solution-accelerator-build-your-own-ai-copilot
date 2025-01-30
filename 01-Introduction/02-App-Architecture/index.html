@@ -889,6 +889,8 @@
       
         
       
+        
+      
     
     
       
@@ -1006,7 +1008,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -1034,8 +1057,6 @@
       
         
           
-        
-      
         
       
         
@@ -1165,7 +1186,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1186,28 +1207,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1235,6 +1235,8 @@
       
         
           
+        
+      
         
       
         
@@ -1326,7 +1328,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1347,7 +1349,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1368,7 +1370,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1389,7 +1391,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1410,7 +1412,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1431,7 +1433,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-Build-Copilot/08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1816,7 +1839,7 @@
 </div>
 <hr />
 <h2 id="application-data-flow">Application Data Flow<a class="headerlink" href="#application-data-flow" title="Permanent link">&para;</a></h2>
-<p><em>Click each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!</em></p>
+<p>Select each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="data-ingestion--ai-processing" name="__tabbed_1" type="radio" /><input id="ai-copilot-with-rag" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="data-ingestion--ai-processing">Data Ingestion &amp; AI Processing</label><label for="ai-copilot-with-rag">AI Copilot with RAG</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1901,7 +1924,7 @@
 <p>The REACT SPA sends these chat messages to the <code>/chat</code> API endpoint hosted in ACA.</p>
 </li>
 <li>
-<p>The request query is embedded using the <code>text-embedding-3-large</code> model in Azure OpenAI.</p>
+<p>The request query is embedded using the <code>text-embedding-ada-002</code> model in Azure OpenAI.</p>
 </li>
 <li>
 <p>A <strong>hybrid search</strong> is performed on the Azure Database for PostgreSQL flexible server, where the system searches for relevant data.</p>

@@ -837,6 +837,8 @@
       
         
       
+        
+      
     
     
       
@@ -954,7 +956,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -982,8 +1005,6 @@
       
         
           
-        
-      
         
       
         
@@ -1113,7 +1134,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1134,28 +1155,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1185,6 +1185,8 @@
       
         
           
+        
+      
         
       
         
@@ -1307,9 +1309,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#code-organized-using-routers" class="md-nav__link">
+  <a href="#organize-code-using-routers" class="md-nav__link">
     <span class="md-ellipsis">
-      Code Organized using Routers
+      Organize Code using Routers
     </span>
   </a>
   
@@ -1335,7 +1337,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1356,7 +1358,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1377,7 +1379,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1398,7 +1400,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1419,7 +1421,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1440,7 +1442,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1798,9 +1821,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#code-organized-using-routers" class="md-nav__link">
+  <a href="#organize-code-using-routers" class="md-nav__link">
     <span class="md-ellipsis">
-      Code Organized using Routers
+      Organize Code using Routers
     </span>
   </a>
   
@@ -1828,7 +1851,7 @@
 <p>In this step, you will review the backend API code and structure. By utilizing Python's versatile programming capabilities and Azure Database for PostgreSQL's vector search functionality, you can create powerful and efficient AI copilots that streamline complex workflows. The copilot's backend API enriches its abilities to handle intricate data, provide real-time insights, and connect seamlessly with diverse services, making interactions more dynamic and informative.</p>
 <h2 id="api-implementation">API Implementation<a class="headerlink" href="#api-implementation" title="Permanent link">&para;</a></h2>
 <p>The <em>Woodgrove Bank API</em> is built using the <a href="https://fastapi.tiangolo.com/">FastAPI Python library</a>. FastAPI is a modern, high-performance web framework designed to enable you to build APIs with Python based on standard Python type hints. By decoupling the copilot UI from the backend using this approach, you ensure greater flexibility, maintainability, and scalability, allowing the copilot's capabilities to evolve independently from the UI.</p>
-<p>The entry point of the FastAPI application is implemented in the <code>src/api/app/main.py</code> file. Open it now in Visual Studio Code and explore the code in sections. You can also expand the section below to see the code inline.</p>
+<p>The entry point of the FastAPI application is implemented in the <code>src/api/app/main.py</code> file. Open it now in Visual Studio Code and explore the code in sections. You can also expand the section belwot see the code inline and review explanations for each line of code.</p>
 <details class="info" open="open">
 <summary>FASTAPI application code</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -1922,8 +1945,8 @@
 <span class="c1"># Instantiate the FastAPI app</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
     <span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator API&quot;</span><span class="p">,</span>
-    <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;API for the Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Woodgrove Bank API&quot;</span><span class="p">,</span>
+    <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Woodgrove Bank API for the Build Your Own Copilot with Azure Database for PostgreSQL Solution Accelerator&quot;</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
     <span class="n">docs_url</span><span class="o">=</span><span class="s2">&quot;/swagger&quot;</span><span class="p">,</span>
     <span class="n">openapi_url</span><span class="o">=</span><span class="s2">&quot;/swagger/v1/swagger.json&quot;</span>
@@ -1988,7 +2011,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="code-organized-using-routers">Code Organized using Routers<a class="headerlink" href="#code-organized-using-routers" title="Permanent link">&para;</a></h2>
+<h2 id="organize-code-using-routers">Organize Code using Routers<a class="headerlink" href="#organize-code-using-routers" title="Permanent link">&para;</a></h2>
 <p>When building more extensive applications, <em>routers</em> allow API endpoint code to be split across multiple files, providing a convenient tool for structuring your application. FastAPI's <code>APIRouter</code> class allows <em>path</em> operations to be maintained in a dedicated code file, isolated from other paths and logic.</p>
 <p>For example, the <em>Woodgrove Bank API</em> contains a file dedicated to handling just <em>vendors</em>. This file, the submodule at <code>api/app/routers/vendors.py</code>, contains all the path operations related to vendors. The router allows vendor-specific logic to be separated from the rest of the application code. The <em>router</em> is connected to the FastAPI application using the <code>APIRouter</code> class.</p>
 <details class="info">
@@ -2099,7 +2122,7 @@
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>
-<p><strong>Define the router</strong> (lines 5-10): The <code>APIRouter</code> initialization</p>
+<p><strong>Define the router</strong> (lines 5-10): The <code>APIRouter</code> initialization.</p>
 <ul>
 <li>The <em>prefix</em> allows you to specify the path prefix of all endpoints within the router. In this case, it is <code>/vendors</code>.</li>
 <li>Setting <em>tags</em> allows the endpoints within the router to be grouped by a friendly name in the Swagger UI.</li>
@@ -2178,13 +2201,13 @@
         
         
           
-          <a href="../02/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.2 Implement the Chat Endpoint">
+          <a href="../02/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.2 Review RAG Design">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                5.2 Implement the Chat Endpoint
+                5.2 Review RAG Design
               </div>
             </div>
             <div class="md-footer__button md-icon">

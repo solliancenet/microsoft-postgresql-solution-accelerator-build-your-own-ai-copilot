@@ -26,7 +26,7 @@
     
     
       
-        <title>5.5 Prompt engineering - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>5.5 Test the Chat API - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#55-prompt-engineering" class="md-skip">
+        <a href="#55-test-the-chat-api" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.5 Prompt engineering
+              5.5 Test the Chat API
             
           </span>
         </div>
@@ -837,6 +837,8 @@
       
         
       
+        
+      
     
     
       
@@ -954,7 +956,28 @@
         
   
   <span class="md-ellipsis">
-    3.4 Vectorize data
+    3.4 Optimize Vector Query Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.5 Vectorize data
   </span>
   
 
@@ -982,8 +1005,6 @@
       
         
           
-        
-      
         
       
         
@@ -1113,7 +1134,7 @@
         
   
   <span class="md-ellipsis">
-    4.3 Validate Data with Azure OpenAI
+    4.4 Validate Data with Azure OpenAI
   </span>
   
 
@@ -1134,28 +1155,7 @@
         
   
   <span class="md-ellipsis">
-    4.5 Create Validation Prompts
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/06/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4.6 Validate Data with Azure OpenAI
+    4.5 Review Validation Prompts
   </span>
   
 
@@ -1185,6 +1185,8 @@
       
         
           
+        
+      
         
       
         
@@ -1277,7 +1279,7 @@
         
   
   <span class="md-ellipsis">
-    5.2 Implement the Chat Endpoint
+    5.2 Review RAG Design
   </span>
   
 
@@ -1298,7 +1300,7 @@
         
   
   <span class="md-ellipsis">
-    5.3 Review RAG Implementation
+    5.3 Leverage LangChain Orchestration
   </span>
   
 
@@ -1319,7 +1321,7 @@
         
   
   <span class="md-ellipsis">
-    5.4 Testing the Chat API
+    5.4 Enable the Chat Endpoint
   </span>
   
 
@@ -1349,7 +1351,7 @@
           
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1360,7 +1362,7 @@
         
   
   <span class="md-ellipsis">
-    5.5 Prompt engineering
+    5.5 Test the Chat API
   </span>
   
 
@@ -1382,27 +1384,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iterate" class="md-nav__link">
+  <a href="#testing-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Iterate
+      Testing Options
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-chat-endpoint" class="md-nav__link">
+  <a href="#test-with-swagger" class="md-nav__link">
     <span class="md-ellipsis">
-      Update Chat Endpoint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#test-the-updated-prompt" class="md-nav__link">
-    <span class="md-ellipsis">
-      Test the updated prompt
+      Test with Swagger
     </span>
   </a>
   
@@ -1428,7 +1421,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Add Copilot Chat To UI
+    5.6 Prompt engineering
   </span>
   
 
@@ -1449,7 +1442,28 @@
         
   
   <span class="md-ellipsis">
-    5.7 Redeploy App
+    5.7 Add Copilot Chat To UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.8 Redeploy App
   </span>
   
 
@@ -1798,27 +1812,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iterate" class="md-nav__link">
+  <a href="#testing-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Iterate
+      Testing Options
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-chat-endpoint" class="md-nav__link">
+  <a href="#test-with-swagger" class="md-nav__link">
     <span class="md-ellipsis">
-      Update Chat Endpoint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#test-the-updated-prompt" class="md-nav__link">
-    <span class="md-ellipsis">
-      Test the updated prompt
+      Test with Swagger
     </span>
   </a>
   
@@ -1842,28 +1847,212 @@
   
 
 
-<h1 id="55-prompt-engineering">5.5 Prompt engineering<a class="headerlink" href="#55-prompt-engineering" title="Permanent link">&para;</a></h1>
-<p>In the initial <code>chat</code> endpoint, you provided a basic prompt for your copilot. Now, you are going to use Prompty to iterate on the prompt to improve how it interacts with users and the types of responses it is able to provide.</p>
+<h1 id="55-test-the-chat-api">5.5 Test the Chat API<a class="headerlink" href="#55-test-the-chat-api" title="Permanent link">&para;</a></h1>
+<p>Now all you need to do is run the FastAPI server and have it listen for incoming requests from clients on the API's <code>completions/chat</code> route. In this next section, you will see how to do this locally for rapid prototyping and testing.</p>
+<h2 id="testing-options">Testing Options<a class="headerlink" href="#testing-options" title="Permanent link">&para;</a></h2>
+<p>The Chat API is deployed against the <code>/completions/chat</code> endpoint. So, how can you test this?</p>
+<ul>
+<li>You can use a third party client to <code>POST</code> a request to the endpoint</li>
+<li>You can use a <code>CURL</code> command to make the request from commandline</li>
+<li>
+<p>You can use the built-in <code>/swagger</code> Swagger UI to <a href="https://fastapi.tiangolo.com/#interactive-api-docs">try it out interactively</a></p>
+<div class="admonition info">
+<p class="admonition-title">Swagger UI</p>
+<p>Recall that the <code>src/api/app/main.py</code> file contained the definition for the FastAPI application. In that definition, the default documentation endpoint for the API was modified to use the more common <code>/swagger</code> path.</p>
+</div>
+</li>
+</ul>
+<h2 id="test-with-swagger">Test with Swagger<a class="headerlink" href="#test-with-swagger" title="Permanent link">&para;</a></h2>
+<p>Using the Swagger UI provides an easy and intuitive way to rapidly test your endpoints. A side benefit of this approach is it shows you the <em><code>curl</code></em> command you can use to make the same request from the terminal if you want to try that out later.</p>
 <ol>
-<li>Iterate on copilot prompt to allow for insights to be derived from data</li>
-<li>Should be able to answer questions about vendors, invoices and their alignment with SOWs</li>
-<li>Test the endpoint...</li>
-</ol>
-<h2 id="iterate">Iterate<a class="headerlink" href="#iterate" title="Permanent link">&para;</a></h2>
+<li>
+<p>In Visual Studio Code, select the <strong>Run and Debug</strong> icon from the <em>Activity Bar</em> on the left-hand side.</p>
+<p><img alt="Screenshot of the VS Code Activity Bar, with the Run and Debug icon highlighted." src="../../img/vs-code-activity-bar-debug.png" /></p>
+</li>
+<li>
+<p>At the top of the <strong>Run and Debug</strong> menu, select the <strong>API Debugger</strong> option for your OS from the debug configurations dropdown list.</p>
+<p><img alt="Screenshot of the Run and Debug panel, with the Run and Debug configurations dropdown list expanded and the AI Debugger options highlighted." src="../../img/vs-code-run-and-debug-selection.png" /></p>
+</li>
+<li>
+<p>Select the <strong>Start Debugging</strong> button (or press F5 on your keyboard).</p>
+<p><img alt="Screenshot of the Start Debugging button highlighted next to the Run and Debug configurations dropdown list." src="../../img/vs-code-start-debugging.png" /></p>
+</li>
+<li>
+<p>Once the API debugging session has started, indicated by an <code>Application startup complete.</code> message in the terminal output, followed by the URL on which Uvicorn is running, open the local API URL in a web browser (<a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>)</p>
+<p><img alt="Screenshot of the VS Code terminal output for starting the API via a debug session." src="../../img/vs-code-python-debugger-terminal.png" /></p>
+</li>
+<li>
+<p>Append <code>/swagger</code> to the URL to get the Swagger UI interactive testing page.</p>
+<p><img alt="Screenshot of the Woodgrove Bank Swagger UI." src="../../img/woodgrove-api-swagger-ui.png" /></p>
+</li>
+<li>
+<p>Expand the <code>POST</code> section for the <code>completions/chat</code> endpoint under the <strong>Completions</strong> tag and select <code>Try it out</code>:</p>
+<p><img alt="Screenshot of the chat endpoint expanded, with the Try it out button highlighted." src="../../img/woodgrove-api-chat-try-it-out.png" /></p>
+</li>
+<li>
+<p>In the <strong>Request body</strong> section, paste the following JSON snippet to request a list of vendors, then select <strong>Execute</strong>.</p>
+<p><code>json
+{
+    "message": "What vendors are we working with?",
+    "chat_history": [],
+    "max_history": 6
+}</code></p>
+<p><img alt="Screenshot of the request body section, with the above message highlighted in the body textbox and the Execute button highlighted." src="../../img/woodgrove-api-chat-try-it-out-execute.png" /></p>
+</li>
+<li>
+<p>Scroll down to the <strong>Responses</strong> section for the <code>/completions/chat</code> endpoint in the Swagger UI and verify you received a valid response.</p>
+<p><img alt="Screenshot of the Responses section of the Swagger UI, with the Response body populated by the response from the above query." src="../../img/woodgrove-api-chat-response.png" /></p>
+<details class="tip" open="open">
+<summary>View server execution traces in the VS Code console</summary>
+<p>By running a debug session in VS Code, you have the ability to see the server execution traces of request to the Chat endpoint in the Visual Studio Code console. These traces allows you to observe the <em>agent scratchpad</em> output from your LangChain agent, which can be useful in troubleshooting and understanding how the agent works.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">VS Code terminal with LangChain output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code>&gt;<span class="w"> </span>Entering<span class="w"> </span>new<span class="w"> </span>AgentExecutor<span class="w"> </span>chain...
+
+Invoking:<span class="w"> </span><span class="sb">`</span>get_vendors<span class="sb">`</span><span class="w"> </span>with<span class="w"> </span><span class="sb">`</span><span class="o">{}</span><span class="sb">`</span>
+
+<span class="o">[{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Adatum Corporation&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;789 Goldsmith Road, MainTown City&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Elizabeth Moore&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;elizabeth.moore@adatum.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;555-789-7890&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.adatum.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;Data Engineering&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Contoso Ltd.&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;456 Industrial Road, Scooton City&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Nicole Wagner&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;nicole@contoso.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;555-654-3210&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.contoso.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;Software Engineering&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Lucerne Publishing&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;789 Live Street, Woodgrove&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Ana Bowman&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;abowman@lucernepublishing.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;555-654-9870&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.lucernepublishing.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;Graphic Design&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">4</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;VanArsdel Ltd.&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;123 Innovation Drive, TechVille&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Gabriel Diaz&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;gdiaz@vanarsdelltd.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;555-321-0987&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.vanarsdelltd.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;Software Engineering&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">5</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Trey Research&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;456 Research Avenue, Redmond&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Serena Davis&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;serena.davis@treyresearch.net&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;555-867-5309&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.treyresearch.net&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;DevOps&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">6</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Fabrikam Inc.&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;24601 South St., Philadelphia&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Remy Morris&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;remy.morris@fabrikam.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;610-321-0987&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.fabrikam.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;AI Services&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;The Phone Company&#39;</span>,<span class="w"> </span><span class="s1">&#39;address&#39;</span>:<span class="w"> </span><span class="s1">&#39;10642 Meridian St., Indianapolis&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;Ashley Schroeder&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_email&#39;</span>:<span class="w"> </span><span class="s1">&#39;ashley.schroeder@thephone-company.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;contact_phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;719-444-2345&#39;</span>,<span class="w"> </span><span class="s1">&#39;website&#39;</span>:<span class="w"> </span><span class="s1">&#39;http://www.thephone-company.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;type&#39;</span>:<span class="w"> </span><span class="s1">&#39;Communications&#39;</span><span class="o">}]</span>Here<span class="w"> </span>are<span class="w"> </span>the<span class="w"> </span>vendors<span class="w"> </span>we<span class="w"> </span>are<span class="w"> </span>currently<span class="w"> </span>working<span class="w"> </span>with:
+
+<span class="m">1</span>.<span class="w"> </span>**Adatum<span class="w"> </span>Corporation**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>Data<span class="w"> </span>Engineering
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">789</span><span class="w"> </span>Goldsmith<span class="w"> </span>Road,<span class="w"> </span>MainTown<span class="w"> </span>City
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Elizabeth<span class="w"> </span>Moore
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>elizabeth.moore@adatum.com<span class="o">](</span>mailto:elizabeth.moore@adatum.com<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">555</span>-789-7890
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.adatum.com<span class="o">](</span>http://www.adatum.com<span class="o">)</span>
+
+<span class="m">2</span>.<span class="w"> </span>**Contoso<span class="w"> </span>Ltd.**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>Software<span class="w"> </span>Engineering
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">456</span><span class="w"> </span>Industrial<span class="w"> </span>Road,<span class="w"> </span>Scooton<span class="w"> </span>City
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Nicole<span class="w"> </span>Wagner
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>nicole@contoso.com<span class="o">](</span>mailto:nicole@contoso.com<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">555</span>-654-3210
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.contoso.com<span class="o">](</span>http://www.contoso.com<span class="o">)</span>
+
+<span class="m">3</span>.<span class="w"> </span>**Lucerne<span class="w"> </span>Publishing**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>Graphic<span class="w"> </span>Design
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">789</span><span class="w"> </span>Live<span class="w"> </span>Street,<span class="w"> </span>Woodgrove
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Ana<span class="w"> </span>Bowman
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>abowman@lucernepublishing.com<span class="o">](</span>mailto:abowman@lucernepublishing.com<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">555</span>-654-9870
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.lucernepublishing.com<span class="o">](</span>http://www.lucernepublishing.com<span class="o">)</span>
+
+<span class="m">4</span>.<span class="w"> </span>**VanArsdel<span class="w"> </span>Ltd.**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>Software<span class="w"> </span>Engineering
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">123</span><span class="w"> </span>Innovation<span class="w"> </span>Drive,<span class="w"> </span>TechVille
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Gabriel<span class="w"> </span>Diaz
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>gdiaz@vanarsdelltd.com<span class="o">](</span>mailto:gdiaz@vanarsdelltd.com<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">555</span>-321-0987
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.vanarsdelltd.com<span class="o">](</span>http://www.vanarsdelltd.com<span class="o">)</span>
+
+<span class="m">5</span>.<span class="w"> </span>**Trey<span class="w"> </span>Research**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>DevOps
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">456</span><span class="w"> </span>Research<span class="w"> </span>Avenue,<span class="w"> </span>Redmond
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Serena<span class="w"> </span>Davis
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>serena.davis@treyresearch.net<span class="o">](</span>mailto:serena.davis@treyresearch.net<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">555</span>-867-5309
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.treyresearch.net<span class="o">](</span>http://www.treyresearch.net<span class="o">)</span>
+
+<span class="m">6</span>.<span class="w"> </span>**Fabrikam<span class="w"> </span>Inc.**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>AI<span class="w"> </span>Services
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">24601</span><span class="w"> </span>South<span class="w"> </span>St.,<span class="w"> </span>Philadelphia
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Remy<span class="w"> </span>Morris
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>remy.morris@fabrikam.com<span class="o">](</span>mailto:remy.morris@fabrikam.com<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">610</span>-321-0987
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.fabrikam.com<span class="o">](</span>http://www.fabrikam.com<span class="o">)</span>
+
+<span class="m">7</span>.<span class="w"> </span>**The<span class="w"> </span>Phone<span class="w"> </span>Company**
+<span class="w">   </span>-<span class="w"> </span>**Type:**<span class="w"> </span>Communications
+<span class="w">   </span>-<span class="w"> </span>**Address:**<span class="w"> </span><span class="m">10642</span><span class="w"> </span>Meridian<span class="w"> </span>St.,<span class="w"> </span>Indianapolis
+<span class="w">   </span>-<span class="w"> </span>**Contact:**<span class="w"> </span>Ashley<span class="w"> </span>Schroeder
+<span class="w">   </span>-<span class="w"> </span>**Email:**<span class="w"> </span><span class="o">[</span>ashley.schroeder@thephone-company.com<span class="o">](</span>mailto:ashley.schroeder@thephone-company.com<span class="o">)</span>
+<span class="w">   </span>-<span class="w"> </span>**Phone:**<span class="w"> </span><span class="m">719</span>-444-2345
+<span class="w">   </span>-<span class="w"> </span>**Website:**<span class="w"> </span><span class="o">[</span>www.thephone-company.com<span class="o">](</span>http://www.thephone-company.com<span class="o">)</span>
+
+&gt;<span class="w"> </span>Finished<span class="w"> </span>chain.
+</code></pre></div></td></tr></table></div>
+<p>In the trace above:</p>
 <ol>
-<li>Have users:<ol>
-<li>Ask questions and review responses</li>
-<li>Modify prompt and restart API</li>
-<li>Ask questions and review responses</li>
-<li>...</li>
-</ol>
+<li>
+<p>Line 1 shows the <code>AgentExecutor</code> chain starting.</p>
+</li>
+<li>
+<p>Lines 3-5 show the agent invoking the <code>get_vendors</code> method and outputting the results into an array of vendor data.</p>
+</li>
+<li>
+<p>Lines 7-61 show the response from the LLM in markdown format.</p>
+</li>
+<li>
+<p>Line 63 shows the <code>AgentExecutor</code> chain has finished.</p>
 </li>
 </ol>
-<h2 id="update-chat-endpoint">Update Chat Endpoint<a class="headerlink" href="#update-chat-endpoint" title="Permanent link">&para;</a></h2>
-<p>Finally, you will update the <code>/chat</code> endpoint in the API with the new prompt...</p>
-<p>TODO: Run the updated code and evaluate the results of the new prompt.</p>
-<h2 id="test-the-updated-prompt">Test the updated prompt<a class="headerlink" href="#test-the-updated-prompt" title="Permanent link">&para;</a></h2>
-<p>TODO</p>
+</details>
+</li>
+</ol>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">You have successfully tested your <code>/chat</code> API endpoint!</p>
+</div>
 
 
 
@@ -1901,7 +2090,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.4 Testing the Chat API">
+          <a href="../04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.4 Enable the Chat Endpoint">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1911,20 +2100,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                5.4 Testing the Chat API
+                5.4 Enable the Chat Endpoint
               </div>
             </div>
           </a>
         
         
           
-          <a href="../06/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.6 Add Copilot Chat To UI">
+          <a href="../06/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.6 Prompt engineering">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                5.6 Add Copilot Chat To UI
+                5.6 Prompt engineering
               </div>
             </div>
             <div class="md-footer__button md-icon">

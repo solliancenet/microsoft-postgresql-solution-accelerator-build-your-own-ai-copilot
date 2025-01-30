@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -26,7 +26,7 @@ const InvoiceEdit = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showValidation, setShowValidation] = useState(false);
-
+  const [validating, setValidating] = useState(false);
   const [showDeleteInvoiceLineItemModal, setShowDeleteInvoiceLineItemModal] = useState(false);
   const [reloadInvoiceLineItems, setReloadInvoiceLineItems] = useState(false);
   const [invoiceLineItemToDelete, setInvoiceLineItemToDelete] = useState(null);
@@ -213,10 +213,12 @@ const InvoiceEdit = () => {
 
   const runManualValidation = async () => {
     try {
+      setValidating(true);
       await api.invoices.validate(id);
       window.location.href = `/invoices/${id}?showValidation=true`;
     }
     catch (err) {
+      setValidating(false);
       console.error(err);
       setError('Manual validation failed!');
     }
@@ -228,6 +230,9 @@ const InvoiceEdit = () => {
       <hr/>
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
+
+      {!validating && (
+        <>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
@@ -418,6 +423,8 @@ const InvoiceEdit = () => {
             ))}
           </tbody>
         </table>
+        </>
+      )}
     
           {showValidation && validations && validations.length > 0 && (
             <>
@@ -442,6 +449,14 @@ const InvoiceEdit = () => {
             </>
           )}
 
+        {validating && (
+          <Alert variant="info" className="mt-3 p-5 text-center">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Validating document with AI...</span>
+            </Spinner>
+            <div>Validating document with AI...</div>
+          </Alert>
+          )}
     </div>
   );
 };

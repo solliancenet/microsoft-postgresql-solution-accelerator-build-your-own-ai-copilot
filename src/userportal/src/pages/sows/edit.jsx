@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -26,7 +26,7 @@ const SOWEdit = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showValidation, setShowValidation] = useState(false);
-
+  const [validating, setValidating] = useState(false); 
   const [vendors, setVendors] = useState([]);
   const [validations, setValidations] = useState([]);
 
@@ -183,10 +183,12 @@ const SOWEdit = () => {
   
   const runManualValidation = async () => {
       try {
+        setValidating(true);
         await api.sows.validate(id);
         window.location.href = `/sows/${id}?showValidation=true`;
       }
       catch (err) {
+        setValidating(false);
         console.error(err);
         setError('Manual validation failed!');
       }
@@ -198,6 +200,9 @@ const SOWEdit = () => {
       <hr/>
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
+
+      {!validating && (
+        <>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
@@ -370,6 +375,8 @@ const SOWEdit = () => {
         ))}
       </tbody>
     </table>
+        </>
+      )}
 
       {showValidation && validations && validations.length > 0 && (
         <>
@@ -394,6 +401,14 @@ const SOWEdit = () => {
         </>
       )}
 
+      {validating && (
+        <Alert variant="info" className="mt-3 p-5 text-center">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Validating document with AI...</span>
+          </Spinner>
+          <div>Validating document with AI...</div>
+        </Alert>
+        )}
     </div>
   );
 };

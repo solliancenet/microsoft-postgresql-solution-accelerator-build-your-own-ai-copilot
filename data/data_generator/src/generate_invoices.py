@@ -4,6 +4,7 @@ import json
 import argparse
 from collections import defaultdict
 import random
+from datetime import datetime, timedelta
 
 # Load configuration from the sow_inv.config file
 def load_config(config_path):
@@ -29,10 +30,13 @@ def create_invoice(invoice_number, deliverables, vendor_info, client_info, outpu
     pdf.cell(0, 10, txt=f"Contact Email: {vendor_info['contact_email']}", ln=True, align="L")
     pdf.cell(0, 10, txt=f"Contact Number: {vendor_info['contact_phone']}", ln=True, align="L")
     pdf.cell(0, 10, txt=f"SOW Number: {vendor_info['SOW']}", ln=True, align="L")
-    pdf.cell(0, 10, txt=f"Invoice Date: {deliverables[0]['due_date']}", ln=True, align="L")
+    
+    # Calculate the invoice date as the due date minus 30 days
+    due_date = datetime.strptime(deliverables[0]['due_date'], '%Y-%m-%d')
+    invoice_date = due_date - timedelta(days=30)
+    pdf.cell(0, 10, txt=f"Invoice Date: {invoice_date.strftime('%Y-%m-%d')}", ln=True, align="L")
       
     # Client Information
-    pdf.ln(10)
     pdf.set_font("Arial", style="B", size=10)
     pdf.cell(0, 10, txt=f"Client: {client_info['name']}", ln=True, align="L")
     pdf.set_font("Arial", size=10)

@@ -15,21 +15,13 @@ In this section, you will enable a feature flag that will activate the AI compon
       3. Write chunks to Postgres, generating embeddings for each chunk on insert
       4. Update API endpoints for inserting chunks, or use an existing one (probably not yet created)
          1. Update API endpoint code to use a new query that handles embedding with the Azure AI extension.
-   2. Data validation
-      1. Call data validation worker process when items are inserted into database (event grid and storage queues? How to trigger?)
-      2. Use Prompty to create data validation prompt
-         1. Invoices (more involved, validating dates, invoice totals, line item amounts, etc.)
-            1. Iterate through a few prompts, showing the process of getting it closer to what is desired for validation.
-         2. SOWs (keep this simple, focused on looking for required sections and language)
-         3. Deploy prompty generated prompt into API endpoints
-
-# Data pipeline
-
-## Create custom Document Intelligence model
-
-1. TODO: Add steps for creating custom Document Intelligence models for SOWs and invoices, which extract key document parts.
-
-2. Send documents into Document Intelligence using workflow triggered by documents being added to blob storage.
+   2. Data ingestion
+      1. Data ingestion process is triggered when documents are uploaded through the application
+          1. Document analysis step is triggered to ingest document and insert/update data in database
+          1. Document validation step is triggered to validate the document and associated data within the database
+              1. Invoices (more involved, validating dates, invoice totals, line item amounts, etc.)
+                  1. Iterate through a few prompts, showing the process of getting it closer to what is desired for validation.
+              1. SOWs (keep this simple, focused on looking for required sections and language)
 
 ## Validate documents
 

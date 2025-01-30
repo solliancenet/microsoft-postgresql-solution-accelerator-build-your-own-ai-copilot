@@ -1,8 +1,7 @@
 from app.functions.chat_functions import ChatFunctions
 from app.lifespan_manager import get_chat_client, get_db_connection_pool, get_embedding_client, get_prompt_service
 from app.models import CompletionRequest
-from datetime import datetime, timezone
-from fastapi import APIRouter, Depends #, HTTPException
+from fastapi import APIRouter, Depends
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import StructuredTool

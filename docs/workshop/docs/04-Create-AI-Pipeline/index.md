@@ -6,7 +6,10 @@ An end-to-end data pipeline has been created to create an AI-powered solution fo
 
 AI-driven Data Validation offers a transformative solution by automating document processing, improving accuracy, and reducing the burden on human reviewers. Through a combination of intelligent document ingestion, machine learning, and natural language processing, AI will revolutionize how contract validation is performed.
 
-In this section, you will enable a feature flag that will activate the AI components of the solution. The components of the solution can be divided into the following detailed steps.
+In this section, you will enable a feature flag that will activate the AI components of the solution.
+
+
+## NOTES: (to be removed)
 
 2. Data ingestion
    1. Document Intelligence

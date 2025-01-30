@@ -5,7 +5,7 @@ from langchain_core.tools import StructuredTool
 
 from datetime import date
 
-from app.lifespan_manager import get_chat_client, get_db_connection_pool
+from app.lifespan_manager import get_chat_client, get_db_connection_pool, get_prompt_service
 from app.models import ValidationRequest, Invoice, Vendor, Sow, Milestone, Deliverable, InvoiceLineItem
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -34,37 +34,14 @@ router = APIRouter(
 
 @router.post('/invoice/{id}', response_model = str)
 #async def validate_invoice_by_id(request: ValidationRequest, id: int, llm = Depends(get_chat_client)):
-async def validate_invoice_by_id(id: int, llm = Depends(get_chat_client)):
+async def validate_invoice_by_id(id: int, llm = Depends(get_chat_client), prompt_service = Depends(get_prompt_service)):
     """Generate a chat completion to Validate the Invoice using the Azure OpenAI API."""
-    # TODO: Move this system prompt into blob storage or somewhere it can be updated without redeploying the app.
-    # Define the system prompt that contains the assistant's persona.
-    system_prompt = f"""
-    You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).
-   
-    When validating an invoice, you should:
-    1. Verify that the invoice number matches the vendor's records.
-    2. Check that the total amount on the invoice is correct.
-    3. Ensure that the milestone delivery dates are before or on the specified due date in the SOW.
-    4. Assess any late fees or penalties that may apply, as defined by the SOW. For example, if a milestone is late, a penalty of 15% should be applied to payment of that milestone.
-    5. Validate the line items on the invoice against the billing milestones in the SOW.
-    6. Ensure that the amount billed for each line item matches the billable amount specified in the SOW.
-    7. If the invoice contains notes to explain discrepancies, review them for additional context.
-    8. Confirm that the invoice is legitimate and ready for payment.
+    
+    # Define the system prompt for the validator.
+    system_prompt = prompt_service.get_prompt("invoice_validation")
+    # Append the current date to the system prompt to provide context when checking timeliness of deliverables.
+    system_prompt += f"\n\nFor context, today is {datetime.now(timezone.utc).strftime('%A, %B %d, %Y')}."
 
-    For context, today is {datetime.now(timezone.utc).strftime('%A, %B %d, %Y')}.
-
-    If there are milestones missing from the invoice that are not yet beyond their due date according to the SOW, do not flag them as discrepancies.
-    If the payment terms on the invoice are different from the SOW, assume the SOW is correct.
-
-    In your response:
-    - Provide a statement of valid or invalid for the invoice.
-    - Create separate sections for the invoice and the milestone validation.
-    - Provide a detailed summary of the validation results, including any discrepancies or anomalies found between the invoice and the SOW.
-    - If any discrepancies or anomalies are found, you should provide detailed feedback on the issues discovered, like including dollar amounts, line items, and due dates.
-    - If there are any discrepancies, flag the invoice for further review.
-
-    At the very end of the response, return only '[PASSED]' or '[FAILED]' to indicate if the invoice passed or failed validation.
-    """
     # Provide the validation copilot with a persona using the system prompt.
     messages = [{ "role": "system", "content": system_prompt }]
 
@@ -81,7 +58,6 @@ async def validate_invoice_by_id(id: int, llm = Depends(get_chat_client)):
         ]
     )
     
-    # TODO: Define tools for the agent
     tools = [
          StructuredTool.from_function(coroutine=validate_invoice)
     ]
@@ -145,34 +121,14 @@ async def validate_invoice(id: int):
 
 
 @router.post('/sow/{id}', response_model = str)
-async def validate_sow_by_id(id: int, llm = Depends(get_chat_client)):
+async def validate_sow_by_id(id: int, llm = Depends(get_chat_client), prompt_service = Depends(get_prompt_service)):
     """Generate a chat completion to Validate the SOW using the Azure OpenAI API."""
 
-    # Define the system prompt that contains the assistant's persona.
-    system_prompt = f"""
-    You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).
-   
-    When validating a SOW, you should:
-    1. Verify that the SOW number matches the vendor's records.
-    2. Check that the total amount on the SOW is correct.
-    3. Ensure that the milestone delivery dates are before or on the specified due date in the SOW.
-    4. Assess any late fees or penalties that may apply, as defined by the SOW. For example, if a milestone is late, a penalty of 15% should be applied to payment of that milestone.
-    5. Validate the deliverables for each milestone in the SOW.
-    6. Ensure that the amount billed for each deliverable matches the billable amount specified in the SOW.
-    7. If the SOW contains notes to explain discrepancies, review them for additional context.
-    8. Confirm that the SOW is legitimate and ready for payment.
+    # Define the system prompt for the validator.
+    system_prompt = prompt_service.get_prompt("sow_validation")
+    # Append the current date to the system prompt to provide context when checking timeliness of deliverables.
+    system_prompt += f"\n\nFor context, today is {datetime.now(timezone.utc).strftime('%A, %B %d, %Y')}."
 
-    For context, today is {datetime.now(timezone.utc).strftime('%A, %B %d, %Y')}.
-
-    In your response:
-    - Provide a statement of valid or invalid for the SOW.
-    - Create separate sections for the SOW and the milestone validation.
-    - Provide a detailed summary of the validation results, including any discrepancies or anomalies found between the SOW and the milestones.
-    - If any discrepancies or anomalies are found, you should provide detailed feedback on the issues discovered, like including dollar amounts, line items, and due dates.
-    - If there are any discrepancies, flag the SOW for further review.
-
-    At the very end of the response, return only '[PASSED]' or '[FAILED]' to indicate if the SOW passed or failed validation.
-    """
     # Provide the validation copilot with a persona using the system prompt.
     messages = [{ "role": "system", "content": system_prompt }]
 
@@ -189,7 +145,6 @@ async def validate_sow_by_id(id: int, llm = Depends(get_chat_client)):
         ]
     )
 
-    # TODO: Define tools for the agent
     tools = [
          StructuredTool.from_function(coroutine=validate_sow)
     ]

@@ -1,8 +1,16 @@
 # AI-driven Data Validation
 
+## Building an AI-Enhanced Data Ingestion and Processing Pipeline
+
+An end-to-end data pipeline has been created to create an AI-powered solution for advanced data analysis. This pipeline starts with documents uploaded to Azure Blob Storage and employs Azure services for intelligent ingestion, automated validation, semantic analysis, and optimized storage.
+
+AI-driven Data Validation offers a transformative solution by automating document processing, improving accuracy, and reducing the burden on human reviewers. Through a combination of intelligent document ingestion, machine learning, and natural language processing, AI will revolutionize how contract validation is performed.
+
+In this section, you will enable a feature flag that will activate the AI components of the solution. The components of the solution can be divided into the following detailed steps.
+
 2. Data ingestion
    1. Document Intelligence
-      1. Create custom models in Azure Document Intelligence
+      1. Utilize pre-built models in Azure Document Intelligence
       2. Configure semantic chunking
       3. Write chunks to Postgres, generating embeddings for each chunk on insert
       4. Update API endpoints for inserting chunks, or use an existing one (probably not yet created)

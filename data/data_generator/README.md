@@ -19,16 +19,11 @@ sow_invoice_generator
 
 To set up the project, follow these steps:
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd sow_invoice_generator
-   ```
+1. Install the required dependencies:
 
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+``` bash
+pip install -r requirements.txt
+```
 
 ## Usage
 
@@ -36,7 +31,7 @@ To set up the project, follow these steps:
 
 To generate the SOW PDF, run the following command:
 
-```
+``` bash
 python src/generate_sow.py
 ```
 
@@ -46,7 +41,7 @@ This will create a PDF document containing the project details, objectives, task
 
 To generate invoices for each milestone defined in the SOW, run:
 
-```
+```bash
 python src/generate_invoices.py
 ```
 
@@ -66,8 +61,5 @@ Ensure that the configuration file is correctly formatted to facilitate seamless
 
 ## Output
 
-The generated SOW and invoices will be saved in the current directory. You can open them using any PDF viewer.
+The generated SOW and invoices will be saved in the output directory. You can open them using any PDF viewer.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.

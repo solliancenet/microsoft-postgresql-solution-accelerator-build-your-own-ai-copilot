@@ -186,7 +186,7 @@ class ChatFunctions:
         return [dict(row) for row in rows]
 
     """
-    The following methods are used for hybrid searchs against the database.
+    The following methods are used for hybrid searches against the database.
     """
 
     async def find_milestone_deliverables(self, user_query: str, sow_id: int = None):

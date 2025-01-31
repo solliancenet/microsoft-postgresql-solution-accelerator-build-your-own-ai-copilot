@@ -1,6 +1,13 @@
 # Improve RAG Accuracy
 
-As Generative AI (GenAI) becomes increasingly integral to modern enterprises, users' trust in these applications is paramount and heavily reliant on the accuracy of the responses they generate. The productivity loss from incorrect answers and the consequent erosion of user trust are issues that cannot be overlooked. For many organizations, the decision to deploy GenAI apps hinges on their ability to elevate the accuracy of the app's responses to an acceptable level.
+As Generative AI (GenAI) becomes increasingly integral to modern enterprises, users' trust in these applications is paramount and heavily reliant on the accuracy of their responses. The productivity loss from incorrect answers and the consequent erosion of user trust are issues that cannot be overlooked. For many organizations, the decision to deploy GenAI apps hinges on their ability to elevate the accuracy of the app's responses to an acceptable level.
+
+In this section, you will use Semantic Ranking and GraphRAG to enhance the accuracy of responses from the _Woodgrove Bank Contract Management_ copilot. Here's what you will accomplish:
+
+- [ ] Review Semantic Ranking
+- [ ] Use Semantic Ranking to rerank hybrid search results
+- [ ] Review GraphRAG and the Apache AGE extension
+- [ ] Implement the AGE extension to enable graph queries against your PostgreSQL database
 
 ## The Accuracy Problem
 
@@ -14,7 +21,7 @@ _Select the tabs below to understand how Semantic Ranking and GraphRAG can impro
 
 === "Semantic Ranking"
 
-    Semantic ranking is an advanced technique used in information retrieval systems to enhance the relevance of search results by understanding the context and meaning of queries and documents, rather than relying solely on keyword matching. By leveraging natural language processing and machine learning algorithms, semantic ranking can analyze the relationships between words and concepts to provide more accurate and meaningful results. This approach allows search engines to better comprehend the intent behind user queries and deliver results that are contextually aligned with what users are looking for. The benefits of semantic ranking include improved accuracy in search results, enhanced user satisfaction, and more efficient retrieval of information, making it a powerful tool for modern search engines and recommendation systems.
+    Semantic ranking is an advanced technique used in information retrieval systems to enhance the relevance of search results by understanding the context and meaning of queries and documents rather than relying solely on keyword matching. By leveraging natural language processing and machine learning algorithms, semantic ranking can analyze the relationships between words and concepts to provide more accurate and meaningful results. This approach allows search engines to better comprehend the intent behind user queries and deliver results that are contextually aligned with what users are looking for. The benefits of semantic ranking include improved accuracy in search results, enhanced user satisfaction, and more efficient retrieval of information, making it a powerful tool for modern search engines and recommendation systems.
 
 === "GraphRAG"
 

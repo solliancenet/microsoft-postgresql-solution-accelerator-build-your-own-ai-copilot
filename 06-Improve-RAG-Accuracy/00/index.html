@@ -647,11 +647,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    0 Prerequisites
+    0 PreRequisites
   </span>
   
 
@@ -662,7 +662,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
-            0 Prerequisites
+            0 PreRequisites
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1533,17 +1533,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    5.6 Use Semantic Ranking
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1553,34 +1542,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#semantic-ranking" class="md-nav__link">
-    <span class="md-ellipsis">
-      Semantic Ranking
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1819,23 +1780,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#semantic-ranking" class="md-nav__link">
-    <span class="md-ellipsis">
-      Semantic Ranking
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1870,19 +1814,6 @@
 <div class="admonition success">
 <p class="admonition-title">CONGRATULATIONS. You just learned how to leverage the semantic ranking capabilities in Azure Database for PostgreSQL!</p>
 </div>
-<h3 id="semantic-ranking">Semantic Ranking<a class="headerlink" href="#semantic-ranking" title="Permanent link">&para;</a></h3>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>TODO: Add details about semantic ranking and graph rag...
-
-TODO: Include details about SEMANTIC RANKER MODEL () and include in the text above
-- Update data and flow diagrams to talk about semantic ranker for custom model inference.
-- Blog post to use are reference: &lt;https://techcommunity.microsoft.com/blog/adforpostgresql/introducing-the-semantic-ranking-solution-for-azure-database-for-postgresql/4298781&gt;
-- Model to use: &lt;https://huggingface.co/BAAI/bge-reranker-v2-m3&gt;
-</code></pre></div></td></tr></table></div>
 <p>Semantic Ranking model:</p>
 <p>https://huggingface.co/BAAI/bge-reranker-v2-m3</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -1958,37 +1889,6 @@ TODO: Include details about SEMANTIC RANKER MODEL () and include in the text abo
 <span class="w">                </span><span class="n">a</span><span class="p">.</span><span class="n">idx2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">idx</span><span class="p">;</span>
 
 <span class="k">END</span><span class="w"> </span><span class="err">$$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
-</code></pre></div></td></tr></table></div>
-<p>To call the function...</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># if query is not None:</span>
-<span class="c1">#     rows = await conn.fetch(&#39;&#39;&#39;</span>
-<span class="c1">#         WITH</span>
-<span class="c1">#         retrieval_result AS(</span>
-<span class="c1">#             SELECT id</span>
-<span class="c1">#             FROM invoices</span>
-<span class="c1">#             ORDER BY</span>
-<span class="c1">#                 invoices.embedding &lt;=&gt; azure_openai.create_embeddings(&#39;embeddings&#39;, $1, throw_on_error =&gt; FALSE, max_attempts =&gt; 1000, retry_delay_ms =&gt; 2000)::vector</span>
-<span class="c1">#             LIMIT 10</span>
-<span class="c1">#         )</span>
-<span class="c1">#         SELECT i.* FROM semantic_reranking($1, array (SELECT id FROM retrieval_result)) ranking</span>
-<span class="c1">#         JOIN invoices i ON ranking.id = i.id</span>
-<span class="c1">#         ORDER BY relevance DESC limit 3;</span>
-<span class="c1">#     &#39;&#39;&#39;)</span>
-<span class="c1"># else:</span>
 </code></pre></div></td></tr></table></div>
 
 

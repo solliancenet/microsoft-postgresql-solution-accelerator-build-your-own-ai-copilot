@@ -647,11 +647,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    0 Prerequisites
+    0 PreRequisites
   </span>
   
 
@@ -662,7 +662,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
-            0 Prerequisites
+            0 PreRequisites
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1953,13 +1953,13 @@
 <span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
-<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">app.functions.chat_functions</span> <span class="kn">import</span> <span class="n">ChatFunctions</span>
-<span class="kn">from</span> <span class="nn">app.lifespan_manager</span> <span class="kn">import</span> <span class="n">get_chat_client</span><span class="p">,</span> <span class="n">get_db_connection_pool</span><span class="p">,</span> <span class="n">get_embedding_client</span><span class="p">,</span> <span class="n">get_prompt_service</span>
-<span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">CompletionRequest</span>
-<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">Depends</span>
-<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentExecutor</span><span class="p">,</span> <span class="n">create_openai_functions_agent</span>
-<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span><span class="p">,</span> <span class="n">MessagesPlaceholder</span>
-<span class="kn">from</span> <span class="nn">langchain_core.tools</span> <span class="kn">import</span> <span class="n">StructuredTool</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">app.functions.chat_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatFunctions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.lifespan_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chat_client</span><span class="p">,</span> <span class="n">get_db_connection_pool</span><span class="p">,</span> <span class="n">get_embedding_client</span><span class="p">,</span> <span class="n">get_prompt_service</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompletionRequest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgentExecutor</span><span class="p">,</span> <span class="n">create_openai_functions_agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span><span class="p">,</span> <span class="n">MessagesPlaceholder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">StructuredTool</span>
 
 <span class="c1"># Initialize the router</span>
 <span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span>
@@ -1970,7 +1970,7 @@
 <span class="p">)</span>
 
 <span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/chat&#39;</span><span class="p">,</span> <span class="n">response_model</span> <span class="o">=</span> <span class="nb">str</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">generate_chat_completion</span><span class="p">(</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">generate_chat_completion</span><span class="p">(</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">CompletionRequest</span><span class="p">,</span>
     <span class="n">llm</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_chat_client</span><span class="p">),</span>
     <span class="n">db_pool</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db_connection_pool</span><span class="p">),</span>

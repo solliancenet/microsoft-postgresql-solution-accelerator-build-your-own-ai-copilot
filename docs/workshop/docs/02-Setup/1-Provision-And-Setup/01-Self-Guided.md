@@ -349,6 +349,7 @@ You will need to install the required software locally and provision the Azure i
             | | pwsh | `.venv/bin/Activate.ps1` |
             | Windows | cmd.exe | `.venv\Scripts\activate.bat` |
             | | PowerShell | `.venv\Scripts\Activate.ps1` |
+            | macOS | bash/zsh | `source .venv/bin/activate` |
 
     5. Execute the command at the terminal prompt to activate your virtual environment.
     

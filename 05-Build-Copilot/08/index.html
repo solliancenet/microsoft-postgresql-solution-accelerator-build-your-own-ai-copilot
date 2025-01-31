@@ -1853,12 +1853,12 @@
 
 
 <h1 id="58-refine-the-copilot-prompt">5.8 Refine the Copilot Prompt<a class="headerlink" href="#58-refine-the-copilot-prompt" title="Permanent link">&para;</a></h1>
-<p>Prompt engineering is the art of crafting precise and effective prompts to guide AI models in generating desired outputs, making them respond in a way that aligns closely with the user's intentions and context. It involves understanding the model's capabilities and tailoring the input to produce clear, relevant, and useful results.</p>
-<p>The initial prompt used by your copilot looks like:</p>
+<p>Prompt engineering is the art of crafting precise and effective prompts to guide AI models in generating desired outputs, making them respond in a way that aligns closely with the user's intentions and context. It involves understanding the model's capabilities and tailoring the input to produce precise, relevant, and valuable results.</p>
+<p>The initial prompt used by your copilot looks like this:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Starter prompt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="na">You are an intelligent copilot for Woodgrove Bank, designed to provide insights about the bank&#39;s vendors, active Statements of Work (SOWs), and the accuracy of invoices submitted in relation to those SOWs. You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove&#39;s vendors and associated documents (invoices and SOWs).</span>
 </code></pre></div></td></tr></table></div>
-<p>This is a very basic prompt, that does little to provide guidance to your copilot in how it interacts with users, leverages the <em>tools</em> available to it, or responds to questions. Now, you are going to iterate on that prompt to improve how it interacts with users and the types of responses it is able to provide.</p>
-<p>Prompt engineering typically involves an iterative process of making small changes the prompt, then testing their impact. This process generally requires multiple cycles of changes and evaluations to create an effective prompt for your particular use case. The iterative processs generally follow steps similar to the following:</p>
+<p>This is a very basic prompt that does little to provide guidance to your copilot in how it interacts with users, leverages the tools available to it, or responds to questions. Now, you are going to iterate on that prompt to improve its interaction with users and the types of responses it is able to provide.</p>
+<p>Prompt engineering typically involves an iterative process of making minor changes to the prompt and then testing their impact. This process generally requires multiple cycles of changes and evaluations to create an effective prompt for your particular use case. Typicall, the iterative follows steps similar to the following:</p>
 <ol>
 <li>Ask questions</li>
 <li>Review responses</li>
@@ -1867,17 +1867,17 @@
 <li>Repeat the above steps until you are satisfied with the quality and relevance of the responses you are receiving.</li>
 </ol>
 <h2 id="iterate-to-improve-your-prompt">Iterate to improve your prompt<a class="headerlink" href="#iterate-to-improve-your-prompt" title="Permanent link">&para;</a></h2>
-<p>You will using the active VS Code debug sessions for both the API and the Portal you started in the last task to test a few changes to the copilot's prompt and evaluate the responses you are receiving.</p>
+<p>You will use the active VS Code debug sessions for both the API and the Portal you started in the last task to test a few changes to the copilot's prompt and evaluate the responses you are receiving.</p>
 <ol>
 <li>
-<p>Open the copilot prompt by navigating to the <code>src/api/app/prompts</code> folder in the VS Code <strong>Explorer</strong> and opening the <code>copilot.txt</code> file you find there.</p>
+<p>Open the copilot prompt by navigating to the <code>src/api/app/prompts</code> folder in the VS Code <strong>Explorer</strong> and opening the <code>copilot.txt</code> file.</p>
 <div class="admonition info">
 <p class="admonition-title">Prompts are loaded by the API's lifespan manager</p>
 <p>In the <em>Woodgrove Bank API</em> project, prompts are stored in text files and loaded into memory by the <code>lifespan_manager</code> used by the FastAPI application.</p>
 </div>
 </li>
 <li>
-<p>To get started, add the following language to the bottom of the prompt to provide some guidelines it should follow when responding to questions. This guidance contains details about the information that should be included in the response, based on the type of information the user query is about:</p>
+<p>To get started, add the following language to the bottom of the prompt to provide some guidelines it should follow when responding to questions. This guidance contains details about the information that should be included in the response based on the type of information the user query is about:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Provide response guidelines</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1903,7 +1903,7 @@
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>In VS Code, use the floating debugger toolbar to restart the <strong>API Dugger</strong> session. Ensure the <strong>API Debugger</strong> is selected in the configurations dropdown list before restarting the debugger. Alternatively, you can stop and restart the <strong>API Debugger</strong> via the <strong>Run and Debug</strong> panel.</p>
+<p>In VS Code, restart the <strong>API Dugger</strong> session using the floating debugger toolbar. Ensure the <strong>API Debugger</strong> is selected in the configurations dropdown list before restarting the debugger. Alternatively, you can stop and restart the <strong>API Debugger</strong> via the <strong>Run and Debug</strong> panel.</p>
 <p><img alt="Screenshot of the VS Code floating debug toolbar with the restart button highlighted and the API Debugger selected in the configurations dropdown list." src="../../img/vs-code-debugger-toolbar.png" /></p>
 </li>
 <li>
@@ -1953,7 +1953,7 @@
 <p>Restart the <strong>API Dugger</strong> session again.</p>
 </li>
 <li>
-<p>Return to the <em>Woodgrove Bank Contract Management Portal</em>, and some questions about vendor performance, accuracy, and issues with billing. For example, you can ask, "What vendor has had the most invoicing issues?"</p>
+<p>Return to the <em>Woodgrove Bank Contract Management Portal</em>, and ask some questions about vendor performance, accuracy, and billing issues. For example, ask, "What vendor has had the most invoicing issues?"</p>
 <p><img alt="Screenshot of the Woodgrove Bank Contract Management Portal Dashboard, with a copilot question and response displayed." src="../../img/woodgrove-portal-copilot.png" /></p>
 </li>
 <li>

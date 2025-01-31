@@ -1871,7 +1871,7 @@
 
 
 <h1 id="51-explore-the-api-codebase">5.1 Explore the API Codebase<a class="headerlink" href="#51-explore-the-api-codebase" title="Permanent link">&para;</a></h1>
-<p>In this step, you will review the backend API code and structure. By utilizing Python's versatile programming capabilities and Azure Database for PostgreSQL's vector search functionality, you can create powerful and efficient AI copilots that streamline complex workflows. The copilot's backend API enriches its abilities to handle intricate data, provide real-time insights, and connect seamlessly with diverse services, making interactions more dynamic and informative.</p>
+<p>In this step, you will review the backend API code and structure. You can create powerful and efficient AI copilots that streamline complex workflows by utilizing Python's versatile programming capabilities and Azure Database for PostgreSQL's vector search functionality. The copilot's backend API enriches its abilities to handle intricate data, provide real-time insights, and connect seamlessly with diverse services, making interactions more dynamic and informative.</p>
 <h2 id="api-implementation">API Implementation<a class="headerlink" href="#api-implementation" title="Permanent link">&para;</a></h2>
 <p>The <em>Woodgrove Bank API</em> is built using the <a href="https://fastapi.tiangolo.com/">FastAPI Python library</a>. FastAPI is a modern, high-performance web framework designed to enable you to build APIs with Python based on standard Python type hints. By decoupling the copilot UI from the backend using this approach, you ensure greater flexibility, maintainability, and scalability, allowing the copilot's capabilities to evolve independently from the UI.</p>
 <p>The entry point of the FastAPI application is implemented in the <code>src/api/app/main.py</code> file. Open it now in Visual Studio Code and explore the code in sections. You can also expand the section below to see the code inline and review explanations for each line of code.</p>
@@ -2036,7 +2036,7 @@
 </ol>
 <h2 id="organize-code-using-routers">Organize Code using Routers<a class="headerlink" href="#organize-code-using-routers" title="Permanent link">&para;</a></h2>
 <p>When building more extensive applications, <em>routers</em> allow API endpoint code to be split across multiple files, providing a convenient tool for structuring your application. FastAPI's <code>APIRouter</code> class allows <em>path</em> operations to be maintained in a dedicated code file, isolated from other paths and logic.</p>
-<p>For example, the <em>Woodgrove Bank API</em> contains a file dedicated to handling just <em>vendors</em>. This file, the submodule at <code>api/app/routers/vendors.py</code>, contains all the path operations related to vendors. The router allows vendor-specific logic to be separated from the rest of the application code. The <em>router</em> is connected to the FastAPI application using the <code>APIRouter</code> class.</p>
+<p>For example, the <em>Woodgrove Bank API</em> contains a file dedicated to handling just <em>vendors</em>. This file, the submodule at <code>api/app/routers/vendors.py</code>, contains all the path operations related to vendors. The router separates vendor-specific logic from the rest of the application code. The <em>router</em> is connected to the FastAPI application using the <code>APIRouter</code> class.</p>
 <details class="info">
 <summary>Expand this block to view the Vendors router code</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/vendors.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -2154,7 +2154,7 @@
 </ul>
 </li>
 <li>
-<p><strong>Define the get vendors route</strong> (lines 12-32). The <code>/vendors/</code> route maps to an endpoint that retrieves a list of vendors from the database. </p>
+<p><strong>Define the get vendors route</strong> (lines 12-32). The API's <code>/vendors/</code> route maps to an endpoint for retrieving the list of vendors from the database.</p>
 <ul>
 <li>It accepts GET requests from clients and extracts optional parameters.</li>
 <li>It uses the injected database connection pool and invokes a <em>SELECT</em> query against the database to retrieve vendor records.</li>
@@ -2168,7 +2168,7 @@
 </details>
 <hr />
 <div class="admonition success">
-<p class="admonition-title">CONGRATULATIONS. You just reviewed the FastAPI application structure!</p>
+<p class="admonition-title">Congratulations! You just reviewed the FastAPI application structure!</p>
 </div>
 
 

@@ -1871,12 +1871,12 @@
 
 
 <h1 id="56-add-copilot-chat-to-ui">5.6 Add Copilot Chat To UI<a class="headerlink" href="#56-add-copilot-chat-to-ui" title="Permanent link">&para;</a></h1>
-<p>In this step, you will review the <code>CopilotChat</code> component of the front end application and enable it so you can chat with your copilot via the Portal UI. By leveraging React's dynamic component-based architecture and its seamless integration with real-time messaging APIs, you can create an interactive and responsive chat interface that enhances user engagement. The copilot chat feature empowers the application to provide real-time conversation capabilities, handle complex state management, and deliver intuitive interactions that make the user experience more engaging and efficient.</p>
+<p>In this step, you will review the <code>CopilotChat</code> component of the front-end application and enable it so you can chat with your copilot via the Portal UI. You can create an interactive and responsive chat interface that enhances user engagement by leveraging React's dynamic component-based architecture and its seamless integration with real-time messaging APIs. The copilot chat feature empowers the application to provide real-time conversation capabilities, handle complex state management, and deliver intuitive interactions that make the user experience more engaging and efficient.</p>
 <h2 id="review-copilot-chat-ui-component">Review Copilot Chat UI Component<a class="headerlink" href="#review-copilot-chat-ui-component" title="Permanent link">&para;</a></h2>
-<p>The <em>Woodgrove Bank Contract Management Portal</em> is a single-page application (SPA) built using React.js, a populat JavaScript framework used for building interactive user interfaces.</p>
+<p>The <em>Woodgrove Bank Contract Management Portal</em> is a single-page application (SPA) built using React.js, a popular JavaScript framework for interactive user interfaces.</p>
 <p>A React component, <code>CopilotChat</code>, has been provided to allow you to easily integrate the copilot capability into the UI of the portal application. This component is implemented in the <code>src/userportal/src/components/CopilotChat.jsx</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section below to see the code inline and review the explanations for each line of code.</p>
 <details class="info" open="open">
-<summary>Copilot Chat REACT component code</summary>
+<summary>Copilot Chat REACT component code.</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/userportal/src/components/CopilotChat.jsx</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2046,13 +2046,13 @@
 <p><strong>Declare state variables</strong> (lines 6-10): State variables are used to maintain the chat session state, including message history.</p>
 </li>
 <li>
-<p><strong>Provide function for sending messages to the API</strong> (lines 12-37): The <code>handleSendMessage</code> function is used to send messages asynchonously to the <em>Woodgrove Bank API</em>. This function handles the UI's interaction with the backend <code>/chat</code> endpoint, sending the <em>user query</em> and <em>chat history</em> to the API.</p>
+<p><strong>Provide function for sending messages to the API</strong> (lines 12-37): The <code>handleSendMessage</code> function sends messages asynchronously to the <em>Woodgrove Bank API</em>. This function handles the UI's interaction with the backend <code>/chat</code> endpoint, sending the <em>user query</em> and <em>chat history</em> to the API.</p>
 </li>
 <li>
 <p><strong>Handle changes in the messages collection</strong> (lines 39-43): The <code>useEffect</code> hook is used to run code in response to changes in the messages array.</p>
 </li>
 <li>
-<p><strong>Return the component</strong> (lines 45-75): The return statement renders the component's JSX, defining how it is presented in the web brower.</p>
+<p><strong>Return the component</strong> (lines 45-75): The return statement renders the component's JSX, defining how it is presented in the web browser.</p>
 </li>
 <li>
 <p><strong>Export the <code>CopilotChat</code> component</strong> (line 77): Exports the <code>CopilotChat</code> component as the default export.</p>
@@ -2096,12 +2096,12 @@
 <p>In the VS Code <strong>Explorer</strong>, navigate to the <code>src/userportal/src/pages/dashboard</code> folder and open the <code>dashboard.jsx</code> file.</p>
 </li>
 <li>
-<p>Import the AI chat component by inserting the following <code>import</code> statement directly below the <code>import React from 'react';</code> line at the top of the file.</p>
+<p>To import the AI chat component, insert the following <code>import</code> statement directly below the <code>import React from 'react';</code> line at the top of the file.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">JavaScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">CopilotChat</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../../components/CopilotChat&#39;</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>Insert the following code just below the closing tag of <code>&lt;div&gt;</code> containing the <em>Dashboard</em> header (line 9). This will insert the component within the <code>const Dashboard =() =&gt; {}</code> functional component block of the dashboard page.</p>
+<p>Insert the following code below the closing tag of <code>&lt;div&gt;</code> containing the <em>Dashboard</em> header (line 9). This will insert the component within the <code>const Dashboard =() =&gt; {}</code> functional component block of the dashboard page.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">JavaScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">&lt;</span><span class="nx">CopilotChat</span><span class="w"> </span><span class="o">/&gt;</span>
 </code></pre></div></td></tr></table></div>
 </li>

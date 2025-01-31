@@ -1797,7 +1797,7 @@
 
 
 <h1 id="52-review-rag-design">5.2 Review RAG Design<a class="headerlink" href="#52-review-rag-design" title="Permanent link">&para;</a></h1>
-<p>The solution leverages the <a href="https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation#how-does-rag-work">Retrieval Augmented Generation</a> (RAG) design pattern to ensure the copilot's responses are grounded in the (private) data maintained by Woodgrove Bank. The RAG works by <em>retrieving</em> relevant information from your data stores, and <em>augmenting</em> the model prompt with it to create a composite prompt. This enhanced prompt is used by the LLM to <em>generate</em> the final response or completion.</p>
+<p>The solution leverages the <a href="https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation#how-does-rag-work">Retrieval Augmented Generation</a> (RAG) design pattern to ensure the copilot's responses are grounded in the (private) data maintained by Woodgrove Bank. RAG works by <em>retrieving</em> relevant information from your data stores and <em>augmenting</em> the model prompt to create a composite prompt. This enhanced prompt is used by the LLM to <em>generate</em> the final response or completion.</p>
 <p><img alt="RAG design pattern" src="../../img/rag-design-pattern.png" /></p>
 <p>To understand how the RAG design pattern works in the context of the <em>Woodgrove Bank Contract Management</em> application, select each tab in order and review the sequence of events shown in the figure above.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="1-user-query" name="__tabbed_1" type="radio" /><input id="2-vectorize-query" name="__tabbed_1" type="radio" /><input id="3-retrieve-data" name="__tabbed_1" type="radio" /><input id="4-augment-query" name="__tabbed_1" type="radio" /><input id="5-generate-response" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="1-user-query">1. User Query</label><label for="2-vectorize-query">2. Vectorize Query</label><label for="3-retrieve-data">3. <strong>Retrieve</strong> Data</label><label for="4-augment-query">4. <strong>Augment</strong> Query</label><label for="5-generate-response">5. <strong>Generate</strong> Response</label></div>
@@ -1818,7 +1818,7 @@
 <div class="admonition info">
 <p class="admonition-title">Embeddings representing the user query are generated.</p>
 </div>
-<p>When performing similarity searches to find data, the <code>/chat</code> endpoint sends the text of the user's request to the Azure OpenAI, where it is vectorized using a Large Language "Embedding" Model (e.g., Azure Open AI <code>text-embedding-ada-002</code>). This vector is then used in the query to retrieve similar records in the next step.</p>
+<p>When performing similarity searches to find data, the <code>/chat</code> endpoint sends the text of the user's request to Azure OpenAI, where it is vectorized using a large language "Embedding" model (e.g., Azure Open AI <code>text-embedding-ada-002</code>). This vector is then used in the query to retrieve similar records in the next step.</p>
 <details class="info" open="open">
 <summary>Generate Embeddings</summary>
 <p>The below <code>__create_query_embeddings</code> function in the <em>Woodgrove Bank API</em> uses the LangChain <a href="https://python.langchain.com/docs/integrations/text_embedding/azureopenai/">AzureOpenAIEmbeddings</a> class to generate embeddings for the provided <em>user query</em>.</p>
@@ -1841,26 +1841,26 @@
     <span class="k">return</span> <span class="n">query_embeddings</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>In cases where raw data is requested, such as a list of vendors, this step may be skipped.</p>
+<p>This step may be skipped in cases where raw data is requested, such as a list of vendors.</p>
 </div>
 <div class="tabbed-block">
 <div class="admonition info">
 <p class="admonition-title">Queries are executed against the database to retrieve (private) data.</p>
 </div>
-<p>In this step, data from the PostgreSQL database is retrieved to "augment" the prompt. Depending on the <em>user query</em>, hybrid search and direct data retrieval techniques may be used to get relevant records.</p>
+<p>This step retrieves data from the PostgreSQL database to "augment" the prompt. Depending on the <em>user query</em>, hybrid search and direct data retrieval techniques may be used to obtain relevant records.</p>
 <details class="tip" open="open">
 <summary>Improve RAG accuracy</summary>
-<p>The accuracy of the RAG pattern can be improved by using techniques like <em>semantic ranking</em> to order the returned results and <em>GraphRAG</em> to identify relationships between data. You will learn about these techniques in next task.</p>
+<p>The accuracy of the RAG pattern can be improved by using techniques like <em>semantic ranking</em> to order the returned results and <em>GraphRAG</em> to identify relationships between data. You will learn about these techniques in the next task.</p>
 </details>
 <hr />
 <p><em>Select each tab below to learn more about the implementation of <strong>Hybrid Search</strong> and <strong>Direct Data Retrieval</strong> in the context of the Woodgrove Bank Contract Management application!</em></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="hybrid-search" name="__tabbed_2" type="radio" /><input id="direct-data-retrieval" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="hybrid-search">Hybrid Search</label><label for="direct-data-retrieval">Direct Data Retrieval</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Hybrid search in Azure Database for PostgreSQL combines traditional full-text search functionality with the vector similarity search capabilites enabled by the <code>azure_ai</code> and <code>vector</code> extensions to deliver highly relevant results. This dual approach leverages the precision of keyword matching with full-text search and the contextual understanding of vector search, ensuring that users obtain both exact matches and semantically related content. This synergy enhances search efficiency, provides a richer user experience, and supports diverse use cases—from technical document retrieval to broad content discovery—making it an invaluable tool for modern copilots.</p>
+<p>Hybrid search in Azure Database for PostgreSQL combines traditional full-text search functionality with the vector similarity search capabilities enabled by the <code>azure_ai</code> and <code>vector</code> extensions to deliver highly relevant results. This dual approach leverages the precision of keyword matching with full-text search and the contextual understanding of vector search, ensuring that users obtain exact matches and semantically related content. This synergy enhances search efficiency, provides a richer user experience, and supports diverse use cases—from technical document retrieval to broad content discovery—making it an invaluable tool for modern copilots</p>
 <details class="info" open="open">
 <summary>Hybrid Search Example Code</summary>
-<p>The below <code>find_invoice_validation_results</code> function provides an example of the hybrid search technique used in the <em>Woodgrove Bank API</em>.</p>
+<p>The <code>find_invoice_validation_results</code> function below provides an example of the hybrid search technique used in the <em>Woodgrove Bank API</em>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/functions/chat_functions.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1934,10 +1934,10 @@
 <p>In the code above: </p>
 <ol>
 <li>
-<p><em>Hybrid Search</em> is handled by the <code>CASE</code> statement created on lines 14-17.</p>
+<p>The <code>CASE</code> statement on lines 14-17 handles the <em>Hybrid Search</em>.</p>
 <ol>
 <li>
-<p><code>WHEN result ILIKE '%{user_query}%'</code> performs a case-insensitive search for the exact text of the <em>user query</em>. If found, a <code>rank</code> of <code>0</code> is assigned to the record, which <em>ranks</em> these records as the highest, or most similar, matches.</p>
+<p><code>WHEN result ILIKE '%{user_query}%'</code> performs a case-insensitive search for the exact text of the <em>user query</em>. If found, a <code>rank</code> of <code>0</code> is assigned to the record, which <em>ranks</em> these records as the highest or most similar matches.</p>
 </li>
 <li>
 <p>When an exact match is not found, the <code>ELSE</code> statement executes a vector similarity search using the <a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-use-pgvector#cosine_distance">cosine distance function</a>, as indicated by the <code>&lt;=&gt;</code> vector operator, to compare the embedding representation of the <em>user query</em> (<code>query_embeddings</code>) from the previous step to values in the <code>embedding</code> column of the <code>invoice_validation_results</code> table. The <em>similarity score</em> of these matches is assigned as the <code>rank</code>. Scores closer to zero indicate a more semantically similar result.</p>
@@ -1945,19 +1945,19 @@
 </ol>
 </li>
 <li>
-<p>The query is further refined to filter on a specific <code>invoice_id</code> or <code>vendor_id</code> and <code>sow_id</code>, if those values are provided, as show in lines 73-81.</p>
+<p>If values are provided, the query is further refined to filter on a specific <code>invoice_id</code> or <code>vendor_id</code> and <code>sow_id</code>, as shown in lines 73-81.</p>
 </li>
 <li>
-<p>And finally, the results are ordered by <code>rank</code> to ensure the most relevant search results appear first in the rows returned.</p>
+<p>Finally, the results are ordered by <code>rank</code> to ensure the most relevant search results appear first in the rows returned.</p>
 </li>
 </ol>
 </details>
 </div>
 <div class="tabbed-block">
-<p>In other cases, such as getting a list of all vendors, query vectorization is not needed and direct data retrieval is handled via simple <code>SELECT</code> queries against the database to avoid the overhead associated with generating embeddings and querying vector fields.</p>
+<p>In other cases, such as getting a list of all vendors, query vectorization is unnecessary. Direct data retrieval is handled via simple <code>SELECT</code> queries against the database to avoid the overhead of generating embeddings and querying vector fields.</p>
 <details class="info" open="open">
 <summary>Direct Data Retrieval Example Code</summary>
-<p>The below <code>get_vendors</code> function provides an example a direct data retrieval technique used in the <em>Woodgrove Bank API</em>.</p>
+<p>The <code>get_vendors</code> function below provides an example of a direct data retrieval technique used in the <em>Woodgrove Bank API</em>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/functions/chat_functions.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1981,7 +1981,7 @@
 <div class="admonition info">
 <p class="admonition-title">The chat model uses the prompt to generate a grounded response.</p>
 </div>
-<p>The composite prompt, grounded with ("private") data, is sent to a Large Language "chat" completion model, such as Azure OpenAI's <code>gpt-4o</code>. The completion model sees the enhanced prompt (hybrid search results and chat history) as <em>grounding</em> context for generating the final completion, improving the quality (e.g., relevance, groundedness) of response returned from the Woodgrove Bank copilot.</p>
+<p>The composite prompt, grounded with ("private") data, is sent to a Large Language "chat" completion model, such as Azure OpenAI's <code>gpt-4o</code>. The completion model sees the enhanced prompt (hybrid search results and chat history) as the <em>grounding</em> context for generating the completion, improving the quality (e.g., relevance, groundedness) of the response returned from the Woodgrove Bank copilot.</p>
 </div>
 </div>
 </div>

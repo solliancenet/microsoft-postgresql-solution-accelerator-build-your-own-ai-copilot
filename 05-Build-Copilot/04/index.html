@@ -1871,7 +1871,7 @@
 
 
 <h1 id="54-enable-the-chat-endpoint">5.4 Enable the Chat Endpoint<a class="headerlink" href="#54-enable-the-chat-endpoint" title="Permanent link">&para;</a></h1>
-<p>In this step, you will review backend API code for the <code>/chat</code> endpoint in the <code>completions</code> router, along with the various functions used for implementing the RAG pattern. You will then add the <code>completions</code> router to the FastAPI application to make the <code>/chat</code> endpoint available.</p>
+<p>In this step, you will review the backend API code for the <code>/chat</code> endpoint in the <code>completions</code> router. You will then add the <code>completions</code> router to the FastAPI application to make the <code>/chat</code> endpoint available.</p>
 <h2 id="review-chat-endpoint-implementation">Review Chat Endpoint Implementation<a class="headerlink" href="#review-chat-endpoint-implementation" title="Permanent link">&para;</a></h2>
 <p>The <em>Woodgove Bank API</em> exposes endpoints in various <em>routers</em>... The <code>chat</code> endpoint resides in the <code>completions</code> router, defined in the <code>src/api/app/routers/completions.py</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section below to see the code inline and review explanations for each line of code.</p>
 <details class="info" open="open">
@@ -2038,10 +2038,10 @@
 <p><strong>Import libraries</strong> (lines 1-7): Required classes and functions are imported from various libraries.</p>
 </li>
 <li>
-<p><strong>Intialize the router</strong> (lines 10-15): The <code>completions</code> router, assigning the route <em>prefix</em>, dependencies, and other metadata.</p>
+<p><strong>Intialize the router</strong> (lines 10-15): This is the <code>completions</code> router, assigning the route <em>prefix</em>, dependencies, and other metadata.</p>
 </li>
 <li>
-<p><strong>Define the chat endpoint</strong> (line2 17-23): The <code>/chat</code> endpoint is the entry point into the <em>Woodgove Bank</em> copilot implementation. It expects a <code>CompletionRequest</code>, which contains the user query, the chat history and the maximum number of history messages to include in the prompt, and returns a text response.</p>
+<p><strong>Define the chat endpoint</strong> (lines 17-23): The <code>/chat</code> endpoint is the entry point into the <em>Woodgove Bank</em> copilot implementation. It expects a <code>CompletionRequest</code>, which contains the user query, the chat history, and the maximum number of history messages to include in the prompt, and returns a text response.</p>
 <ul>
 <li>It accepts POST requests from clients and extracts required parameters.</li>
 <li>It invokes the <em>get_chat_completion</em> function with those parameters.</li>
@@ -2055,30 +2055,30 @@
 <p><strong>Get the system prompt</strong> (line 27): The system prompt defines the copilot's <em>persona</em>, providing instructions about how the copilot should behave, respond to questions, and interact with customers. It also provides guidance about the RAG design pattern and how function calls (tools) should be used when answering questions. You will look at this in detail in the <a href="../05/">Prompt Engineering step of this section</a>.</p>
 </li>
 <li>
-<p><strong>Build messages collection</strong> (lines 30-35): The messages collection provides the system and user prompts to the LLM, along with chat history messages. Each message consists of a <code>role</code> and message <code>content</code>. The role will be one of <code>system</code>, <code>assistant</code>, or <code>user</code>. After the <code>system</code> message, all subsequent messages must be <code>user</code> / <code>assistant</code> pairs, with a user query followed by an assistant response.</p>
+<p><strong>Build messages collection</strong> (lines 30-35): The messages collection provides the LLM with system and user prompts and chat history messages. Each message consists of a <code>role</code> and message <code>content</code>. The role will be <code>system</code>, <code>assistant</code>, or <code>user</code>. After the <code>system</code> message, all subsequent messages must be <code>user</code> / <code>assistant</code> pairs, with a user query followed by an assistant response.</p>
 </li>
 <li>
 <p><strong>Build the model prompt</strong> (lines 38-45): The LangChain <code>ChatPromptTemplate</code> class allows you to build a <em>model prompt</em> from a collection of messages.</p>
 <ul>
 <li>The <em>system prompt</em> is added to provide instructions to the model.</li>
-<li>The <em>chat history</em> is inserted as context of previous questions and responses.</li>
+<li>The <em>chat history</em> is inserted as context about previous questions and responses.</li>
 <li>The <em>user input</em> provides the model with the current question it is attempting to answer.</li>
-<li>An <em>agent scratchpad</em> placeholder is included to allow responses from tools assigned to the agent to <em>augment</em> the model with grounding data from.</li>
+<li>An <em>agent scratchpad</em> placeholder is included to allow responses from tools assigned to the agent to <em>augment</em> the model with grounding data.</li>
 <li>The resulting prompt provides a structured input for the conversational AI agent, helping it to generate a response based on the given context.</li>
 </ul>
 </li>
 <li>
 <p><strong>Implement function calling</strong> (lines 48-72):</p>
 <ul>
-<li>Line 48 instantiates the <code>ChatFunctions</code> class, which contains the methods used for interacting with the PostgreSQL database. You can review the functions in the <code>src/api/app/functions/chat_functions.py</code> file.</li>
+<li>Line 48 instantiates the <code>ChatFunctions</code> class, which contains the methods for interacting with the PostgreSQL database. You can review the functions in the <code>src/api/app/functions/chat_functions.py</code> file.</li>
 <li>The <code>tools</code> array created in lines 51-72 is the collection of <em>functions</em> available to the LangChain agent for performing <em>retrieval</em> operations to <em>augment</em> the model prompt during response <em>generation</em>.</li>
 <li>
 <p>Tools are created using the <code>StructuredTool.from_function</code> method provided by LangChain.</p>
 <details class="info">
 <summary>About the LangChain <code>StructuredTool</code> class</summary>
-<p>The <code>StructuredTool</code> class is a wrapper to allow LangChain agents to interact with functions. The <code>from_function</code> method in creates a tool from the given function, describing the function using its input parameters and docstring description. To use it with async methods, you pass the function's name to the <code>coroutine</code> input parameter.</p>
+<p>The <code>StructuredTool</code> class is a wrapper that allows LangChain agents to interact with functions. The <code>from_function</code> method creates a tool from the given function, describing the function using its input parameters and docstring description. To use it with async methods, you pass the function's name to the <code>coroutine</code> input parameter.</p>
 <p>In Python, a docstring (short for documentation string) is a special type of string used to document a function, method, class, or module. It provides a convenient way of associating documentation with Python code and is typically enclosed within triple quotes (""" or '''). Docstrings are placed immediately after the definition of the function (or method, class, or module) they document.</p>
-<p>Using the <code>StructuredTool.from_function</code> method automates the creation of the JSON function definitions, simplifying the process of function calling when using LangChain.</p>
+<p>Using the <code>StructuredTool.from_function</code> method automates the creation of the JSON function definitions required by Azure OpenAI function calling methods, simplifying function calling when using LangChain.</p>
 </details>
 </li>
 </ul>
@@ -2094,7 +2094,7 @@
 </details>
 </li>
 <li>
-<p>LangChain's <code>AgentExecutor</code> class is used to manage the execution flow of the agent. It handles the processing of inputs, the invocation of tools or models, and the handling of outputs.</p>
+<p>LangChain's <code>AgentExecutor</code> class manages the agent's execution flow. It handles the processing of inputs, the invocation of tools or models, and the handling of outputs.</p>
 <details class="info">
 <summary>About LangChain's <code>AgentExecutor</code></summary>
 <p>The <code>AgentExecutor</code> ensures that all the steps required to generate a response are executed in the correct order. It abstracts the complexities of execution for agents, providing an additional layer of functionality and structure, and making it easier to build, manage, and scale sophisticated agents.</p>
@@ -2103,11 +2103,11 @@
 </ul>
 </li>
 <li>
-<p><strong>Invoke the agent</strong> (line 77): Using the agent executor's async <code>invoke</code> method, the incoming user message, chat history is sent to the LLM.</p>
+<p><strong>Invoke the agent</strong> (line 77): The agent executor's async <code>invoke</code> method sends the incoming user message and chat history to the LLM.</p>
 <ul>
-<li>The <code>input</code> and <code>chat_history</code> tokens were defined in the prompt object created using the <code>ChatPromptTemplate</code>. With the <code>invoke</code> method, these will be injected into the model prompt, allowing the LLM to use that information when creating a response.</li>
+<li>The <code>input</code> and <code>chat_history</code> tokens were defined in the prompt object created using the <code>ChatPromptTemplate</code>. The <code>invoke</code> method injects these into the model prompt, allowing the LLM to use that information when generating a response.</li>
 <li>The LangChain agent uses the LLM to determine if tool calls are necessary by evaluating the <em>user query</em>.</li>
-<li>Any <em>tools</em> required to answer the question are called and the model prompt is augmented with grounding data from their results to formulate the final response.</li>
+<li>Any <em>tools</em> required to answer the question are called, and the model prompt is augmented with grounding data from their results to formulate the final response.</li>
 </ul>
 </li>
 <li>
@@ -2131,7 +2131,7 @@
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>The updated list of router should look like:</p>
+<p>The updated list of routers should look like this:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>

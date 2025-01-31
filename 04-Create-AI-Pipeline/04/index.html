@@ -1215,8 +1215,71 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#step-3-construct-full-prompt-with-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Construct Full Prompt with RAG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-invoke-the-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Invoke the AI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-parse-our-passed-or-failed-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Parse our passed or failed state
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-insert-validation-result-into-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Insert Validation Result into database
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sow-validation-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      SOW Validation Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perform-document-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perform Document Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
   
 </li>
       
@@ -1895,8 +1958,71 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#step-3-construct-full-prompt-with-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Construct Full Prompt with RAG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-invoke-the-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Invoke the AI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-parse-our-passed-or-failed-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Parse our passed or failed state
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-insert-validation-result-into-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Insert Validation Result into database
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sow-validation-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      SOW Validation Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perform-document-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perform Document Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
   
 </li>
       
@@ -1953,12 +2079,16 @@
 <h3 id="step-2-define-system-prompt">Step 2: Define System Prompt<a class="headerlink" href="#step-2-define-system-prompt" title="Permanent link">&para;</a></h3>
 <p>Before Azure OpenAI can be used to perform the validation, the system prompt must first be defined. This system prompt sill instruct the AI what it's expected to do, what to look for in the data, and how to respond with the validation results.</p>
 <p>This application includes code that retrieves the system prompt from a text file:</p>
-<p>```py linenum="40" title="src/api/app/routers/validation.py"</p>
-<h1 id="define-the-system-prompt-for-the-validator">Define the system prompt for the validator.<a class="headerlink" href="#define-the-system-prompt-for-the-validator" title="Permanent link">&para;</a></h1>
-<p>system_prompt = prompt_service.get_prompt("invoice_validation")</p>
-<h1 id="append-the-current-date-to-the-system-prompt-to-provide-context-when-checking-timeliness-of-deliverables">Append the current date to the system prompt to provide context when checking timeliness of deliverables.<a class="headerlink" href="#append-the-current-date-to-the-system-prompt-to-provide-context-when-checking-timeliness-of-deliverables" title="Permanent link">&para;</a></h1>
-<p>system_prompt += f"\n\nFor context, today is {datetime.now(timezone.utc).strftime('%A, %B %d, %Y')}."
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Define the system prompt for the validator.</span>
+<span class="n">system_prompt</span> <span class="o">=</span> <span class="n">prompt_service</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">(</span><span class="s2">&quot;invoice_validation&quot;</span><span class="p">)</span>
+<span class="c1"># Append the current date to the system prompt to provide context when checking timeliness of deliverables.</span>
+<span class="n">system_prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">For context, today is </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%A, %B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>For reference, here's the system prompt the application uses for validating Invoices:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/prompts/invoice_validation.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -1980,13 +2110,7 @@
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code>For reference, here&#39;s the system prompt the application uses for validating Invoices:
-
-```text linenums=&quot;1&quot; title=&quot;src/api/app/prompts/invoice_validation.txt&quot;
-You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code>You are an intelligent copilot for Woodgrove Bank designed to automate the validation of vendor invoices against billing milestones in statements of work (SOWs).
 
 When validating an invoice, you should:
 1. Verify that the invoice number matches the vendor&#39;s records.
@@ -2009,60 +2133,55 @@ In your response:
 - If there are any discrepancies, flag the invoice for further review.
 
 At the very end of the response, return only &#39;[PASSED]&#39; or &#39;[FAILED]&#39; to indicate if the invoice passed or failed validation.
-</code></pre></div></td></tr></table></div></p>
+</code></pre></div></td></tr></table></div>
 <p>The system prompt is also adding additional context of todays date. This is because the LLM doesn't know what the date is, and since Invoices and line items are date sensitive, the LLM needs to know the current date in order to more accurately perform date validations.</p>
 <p>At the end of the system prompt is instruction for it to add the values of <code>[PASSED]</code> or <code>[FAILED]</code> at the end of the output to indicate whether it passed or failed validation. This will be used by the code to more easily determine a boolean of true/false to insert into the database later that indicates the pass or fail state.</p>
 <h3 id="step-3-construct-full-prompt-with-rag">Step 3: Construct Full Prompt with RAG<a class="headerlink" href="#step-3-construct-full-prompt-with-rag" title="Permanent link">&para;</a></h3>
 <p>The next step is to construct the full prompt for LangChain to use, in addition to specify the tools that will be used to implement a retrieval augmented generation (RAG) pattern.</p>
 <p>With most of the instructions of how to perform the validation contained within the system prompt, the user prompt only needs to be simple in telling the AI what to do. In this application, the user prompt is just telling the AI to perform an invoice validation along with providing the context of the id of the invoice to validate.</p>
-<p>```py linenum="72" title="src/api/app/routers/validation.py"
-userMessage = f"""validate Invoice with ID of {id}"""
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code>This user prompt is put together with the system prompt to construct the full prompt that will be sent to the AI.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">userMessage</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;validate Invoice with ID of </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>This user prompt is put together with the system prompt to construct the full prompt that will be sent to the AI.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Provide the validation copilot with a persona using the system prompt.</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span> <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_prompt</span> <span class="p">}]</span>
 
-```py linenum=&quot;68&quot; title=&quot;src/api/app/routers/validation.py&quot;
-# Provide the validation copilot with a persona using the system prompt.
-messages = [{ &quot;role&quot;: &quot;system&quot;, &quot;content&quot;: system_prompt }]
+<span class="c1"># Add the current user message to the messages list</span>
+<span class="n">userMessage</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;validate Invoice with ID of </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">userMessage</span><span class="p">})</span>
 
-# Add the current user message to the messages list
-userMessage = f&quot;&quot;&quot;validate Invoice with ID of {id}&quot;&quot;&quot;
-messages.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: userMessage})
+<span class="c1"># Create a chat prompt template</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="n">system_prompt</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{input}</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="n">MessagesPlaceholder</span><span class="p">(</span><span class="s2">&quot;agent_scratchpad&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 
-# Create a chat prompt template
-prompt = ChatPromptTemplate.from_messages(
-    [
-        (&quot;system&quot;, system_prompt),
-        (&quot;user&quot;, &quot;{input}&quot;),
-        MessagesPlaceholder(&quot;agent_scratchpad&quot;)
-    ]
-)
-
-# Define tools for the agent
-tools = [
-        StructuredTool.from_function(coroutine=validate_invoice)
-]
-</code></pre></div></td></tr></table></div></p>
+<span class="c1"># Define tools for the agent</span>
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">validate_invoice</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></div></td></tr></table></div>
 <p>This defines a LangChain tool for implementing the retrieval augmented generation pattern using the <code>validate_invoice</code> method that will be used to retrieve the relevant data from the database to validate the invoice.</p>
 <p>You can expand the section below to see the specific section of code that performs the <code>azure_ai</code> call to generate the document summary, within the database INSERT and UPDATE statements.</p>
 <details class="info" open="open">
@@ -2140,118 +2259,98 @@ tools = [
 </details>
 <h3 id="step-4-invoke-the-ai">Step 4: Invoke the AI<a class="headerlink" href="#step-4-invoke-the-ai" title="Permanent link">&para;</a></h3>
 <p>With the prompt built and the RAG tools defined, the AI can now be invoked to perform the validation and generate the response.</p>
-<p>```py linenum="93" title="src/api/app/routers/validation.py"</p>
-<h1 id="invoke-the-agent-to-perform-a-chat-completion-that-provides-the-validation-results">Invoke the agent to perform a chat completion that provides the validation results.<a class="headerlink" href="#invoke-the-agent-to-perform-a-chat-completion-that-provides-the-validation-results" title="Permanent link">&para;</a></h1>
-<p>completion = await agent_executor.ainvoke({"input": userMessage})
-validationResult = completion['output']
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>### Step 5: Parse our passed or failed state
-
-Now that the generative AI response is returned with the validation results, the `[PASSED]` or `[FAILED]` values the system prompt told the AI to add to the end of the response can be parsed out. This will be used to set a true / false in the database to more easily indicate if the validation passed or failed.
-
-```py linenum=&quot;97&quot; title=&quot;src/api/app/routers/validation.py&quot;
-# Check if validationResult contains [PASSED] or [FAILED]
-# This is based on the prompt telling the AI to return either [PASSED] or [FAILED]
-# at the end of the response to indicate if the invoice passed or failed validation.
-validation_passed = validationResult.find(&#39;[PASSED]&#39;) != -1
-</code></pre></div></td></tr></table></div></p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Invoke the agent to perform a chat completion that provides the validation results.</span>
+<span class="n">completion</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent_executor</span><span class="o">.</span><span class="n">ainvoke</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">userMessage</span><span class="p">})</span>
+<span class="n">validationResult</span> <span class="o">=</span> <span class="n">completion</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="step-5-parse-our-passed-or-failed-state">Step 5: Parse our passed or failed state<a class="headerlink" href="#step-5-parse-our-passed-or-failed-state" title="Permanent link">&para;</a></h3>
+<p>Now that the generative AI response is returned with the validation results, the <code>[PASSED]</code> or <code>[FAILED]</code> values the system prompt told the AI to add to the end of the response can be parsed out. This will be used to set a true / false in the database to more easily indicate if the validation passed or failed.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Check if validationResult contains [PASSED] or [FAILED]</span>
+<span class="c1"># This is based on the prompt telling the AI to return either [PASSED] or [FAILED]</span>
+<span class="c1"># at the end of the response to indicate if the invoice passed or failed validation.</span>
+<span class="n">validation_passed</span> <span class="o">=</span> <span class="n">validationResult</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;[PASSED]&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="step-6-insert-validation-result-into-database">Step 6: Insert Validation Result into database<a class="headerlink" href="#step-6-insert-validation-result-into-database" title="Permanent link">&para;</a></h3>
 <p>With the validation response generated and a passed or failed result, the validation results can now be inserted into the database, and the response returned from the REST API.</p>
-<p>```py linenum="102" title="src/api/app/routers/validation.py"</p>
-<h1 id="write-validation-result-to-database">Write validation result to database<a class="headerlink" href="#write-validation-result-to-database" title="Permanent link">&para;</a></h1>
-<p>pool = await get_db_connection_pool()
-async with pool.acquire() as conn:
-    await conn.execute('''
-    INSERT INTO invoice_validation_results (invoice_id, datestamp, result, validation_passed)
-    VALUES ($1, $2, $3, $4);
-    ''', id, datetime.utcnow(), validationResult, validation_passed)</p>
-<p>return validationResult
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code>This completes the Validation step of the workflow process.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Write validation result to database</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_db_connection_pool</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    INSERT INTO invoice_validation_results (invoice_id, datestamp, result, validation_passed)</span>
+<span class="s1">    VALUES ($1, $2, $3, $4);</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="n">validationResult</span><span class="p">,</span> <span class="n">validation_passed</span><span class="p">)</span>
 
----
-
-## SOW Validation Workflow
-
-The validation workflow for SOWs is built using the same retrieval augmented generation (RAG) pattern, with a system prompt that is written specifically for the unique validation requirements of SOWs.
-
-The system prompt for validating SOWs is located within the `src/api/app/prompts/sow_validation.txt` file. In the next section, we&#39;ll review the structure and formatting of the SOW and Invoice validation system prompts.
-
-The user prompt for the SOW validation tells the AI to validate a SOW and gives it the id of the SOW to validate.
-
-```py linenum=&quot;124&quot; title=&quot;src/api/app/routers/validation.py&quot;
-userMessage = f&quot;&quot;&quot;validate SOW with ID {id}&quot;&quot;&quot;
-</code></pre></div></td></tr></table></div></p>
+<span class="k">return</span> <span class="n">validationResult</span>
+</code></pre></div></td></tr></table></div>
+<p>This completes the Validation step of the workflow process.</p>
+<hr />
+<h2 id="sow-validation-workflow">SOW Validation Workflow<a class="headerlink" href="#sow-validation-workflow" title="Permanent link">&para;</a></h2>
+<p>The validation workflow for SOWs is built using the same retrieval augmented generation (RAG) pattern, with a system prompt that is written specifically for the unique validation requirements of SOWs.</p>
+<p>The system prompt for validating SOWs is located within the <code>src/api/app/prompts/sow_validation.txt</code> file. In the next section, we'll review the structure and formatting of the SOW and Invoice validation system prompts.</p>
+<p>The user prompt for the SOW validation tells the AI to validate a SOW and gives it the id of the SOW to validate.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">userMessage</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;validate SOW with ID </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
 <p>The RAG part of the SOW validation is setup with a LangChain tool using the <code>validate_sow</code> method within the <code>src/api/app/routers/validation.py</code> file.</p>
-<p>```py linenum="136" title="src/api/app/routers/validation.py"
-tools = [
-    StructuredTool.from_function(coroutine=validate_sow)
-]
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code>This method is used to retrieve the SOW data (sow, milestones, and deliverables) from the database for the context needed to perform the validation.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">StructuredTool</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">coroutine</span><span class="o">=</span><span class="n">validate_sow</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<p>This method is used to retrieve the SOW data (sow, milestones, and deliverables) from the database for the context needed to perform the validation.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/validation.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">validate_sow</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves a SOW and it&#39;s associated Milestones and Deliverables.&quot;&quot;&quot;</span>
 
-```py linenum=&quot;161&quot; title=&quot;src/api/app/routers/validation.py&quot;
-async def validate_sow(id: int):
-    &quot;&quot;&quot;Retrieves a SOW and it&#39;s associated Milestones and Deliverables.&quot;&quot;&quot;
+    <span class="n">pool</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_db_connection_pool</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">fetchrow</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM sows WHERE id = $1;&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;A SOW with an id of </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> was not found.&#39;</span><span class="p">)</span>
+        <span class="n">sow</span> <span class="o">=</span> <span class="n">parse_obj_as</span><span class="p">(</span><span class="n">SowModel</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
 
-    pool = await get_db_connection_pool()
-    async with pool.acquire() as conn:
-        row = await conn.fetchrow(&#39;SELECT * FROM sows WHERE id = $1;&#39;, id)
-        if row is None:
-            raise HTTPException(status_code=404, detail=f&#39;A SOW with an id of {id} was not found.&#39;)
-        sow = parse_obj_as(SowModel, dict(row))
+        <span class="c1"># Get the milestones</span>
+        <span class="n">milestone_rows</span> <span class="o">=</span> <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM milestones WHERE sow_id = $1;&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+        <span class="n">sow</span><span class="o">.</span><span class="n">milestones</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_obj_as</span><span class="p">(</span><span class="n">MilestoneModel</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">milestone_rows</span><span class="p">]</span>
 
-        # Get the milestones
-        milestone_rows = await conn.fetch(&#39;SELECT * FROM milestones WHERE sow_id = $1;&#39;, id)
-        sow.milestones = [parse_obj_as(MilestoneModel, dict(row)) for row in milestone_rows]
+        <span class="c1"># Get the deliverables for each milestone</span>
+        <span class="k">for</span> <span class="n">milestone</span> <span class="ow">in</span> <span class="n">sow</span><span class="o">.</span><span class="n">milestones</span><span class="p">:</span>
+            <span class="n">deliverable_rows</span> <span class="o">=</span> <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM deliverables WHERE milestone_id = $1;&#39;</span><span class="p">,</span> <span class="n">milestone</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="n">milestone</span><span class="o">.</span><span class="n">deliverables</span> <span class="o">=</span> <span class="n">parse_obj_as</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">Deliverable</span><span class="p">],</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">deliverable_rows</span><span class="p">])</span>
 
-        # Get the deliverables for each milestone
-        for milestone in sow.milestones:
-            deliverable_rows = await conn.fetch(&#39;SELECT * FROM deliverables WHERE milestone_id = $1;&#39;, milestone.id)
-            milestone.deliverables = parse_obj_as(list[Deliverable], [dict(row) for row in deliverable_rows])
-
-    return sow
-</code></pre></div></td></tr></table></div></p>
+    <span class="k">return</span> <span class="n">sow</span>
+</code></pre></div></td></tr></table></div>
 <hr />
 <h2 id="perform-document-validation">Perform Document Validation<a class="headerlink" href="#perform-document-validation" title="Permanent link">&para;</a></h2>
 <p>Accessing the UserPortal application in your deployment of the application for this workshop will allow you to upload documents and perform validations for SOWs and Invoices.</p>

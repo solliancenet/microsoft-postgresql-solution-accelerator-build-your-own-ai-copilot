@@ -1786,15 +1786,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes-to-be-removed" class="md-nav__link">
-    <span class="md-ellipsis">
-      NOTES: (to be removed)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#validate-documents" class="md-nav__link">
     <span class="md-ellipsis">
       Validate documents
@@ -1825,44 +1816,16 @@
 <h2 id="building-an-ai-enhanced-data-ingestion-and-processing-pipeline">Building an AI-Enhanced Data Ingestion and Processing Pipeline<a class="headerlink" href="#building-an-ai-enhanced-data-ingestion-and-processing-pipeline" title="Permanent link">&para;</a></h2>
 <p>An end-to-end data pipeline has been created to create an AI-powered solution for advanced data analysis. This pipeline starts with documents uploaded to Azure Blob Storage and employs Azure services for intelligent ingestion, automated validation, semantic analysis, and optimized storage.</p>
 <p>AI-driven Data Validation offers a transformative solution by automating document processing, improving accuracy, and reducing the burden on human reviewers. Through a combination of intelligent document ingestion, machine learning, and natural language processing, AI will revolutionize how contract validation is performed.</p>
-<p>In this section, you will enable a feature flag that will activate the AI components of the solution.</p>
-<h2 id="notes-to-be-removed">NOTES: (to be removed)<a class="headerlink" href="#notes-to-be-removed" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Data ingestion</li>
-<li>Document Intelligence<ol>
-<li>Utilize pre-built models in Azure Document Intelligence</li>
-<li>Configure semantic chunking</li>
-<li>Write chunks to Postgres, generating embeddings for each chunk on insert</li>
-<li>Update API endpoints for inserting chunks, or use an existing one (probably not yet created)<ol>
-<li>Update API endpoint code to use a new query that handles embedding with the Azure AI extension.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Data ingestion<ol>
-<li>Data ingestion process is triggered when documents are uploaded through the application<ol>
-<li>Document analysis step is triggered to ingest document and insert/update data in database</li>
-<li>Document validation step is triggered to validate the document and associated data within the database<ol>
-<li>Invoices (more involved, validating dates, invoice totals, line item amounts, etc.)<ol>
-<li>Iterate through a few prompts, showing the process of getting it closer to what is desired for validation.</li>
-</ol>
-</li>
-<li>SOWs (keep this simple, focused on looking for required sections and language)</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
+<p>Prior to the integration of AI into the data ingestion workflow, the application would require a lot of manual parsing and input of Invoice and SOW data into the application. This can be a time consuming and labor intensive process.</p>
+<p>In this section, you will review the code that integrates AI components into the solution.</p>
 <h2 id="validate-documents">Validate documents<a class="headerlink" href="#validate-documents" title="Permanent link">&para;</a></h2>
-<p>Create Python worker process that performs validation on document parts, comparing milestone pricing with invoiced amounts and work performed, looking for key SOW components such as compliance sections and wording, etc.</p>
+<p>The document ingestion workflow process performs document text extraction, validation on document parts, comparing milestone pricing with invoiced amounts and work performed, looking for key SOW components such as compliance sections and wording, etc.</p>
 <ol>
 <li>
-<p>Perform embedding of document chunks/sections.</p>
+<p>Use Azure AI Document Intelligence to perform document text extraction, and Azure OpenAI to generate text embeddings of document chunks/sections that are inserted into the database.</p>
 </li>
 <li>
-<p>Use Azure OpenAI and GPT-4o models to do semantic similarity comparisons between key sections and expected language. Set a threshold similarity score to validate documents contain appropriate language.</p>
+<p>Use Azure OpenAI and GPT-4o model along with PostgreSQL vector extensions to do semantic similarity comparisons between key sections and expected language. Set a threshold similarity score to validate documents contain appropriate language.</p>
 <ul>
 <li>Provide example document(s) with missing sections or incorrect and missing wording to show how these can be identified and flagged.</li>
 <li>Provide good documents.</li>
@@ -1878,6 +1841,11 @@
 </ul>
 </li>
 </ol>
+<details class="info" open="open">
+<summary>Document validation worker process architecture</summary>
+<p>The best practice for enterprise systems is to build a background worker process that performs the document validation workflow. Then when a document is uploaded a message is sent using a queue, like Event Grid, that is then handled by the background worker process to perform the document ingestion and validation workflow.</p>
+<p>To make this guide easier to follow, the document validation workflow has been implemented as REST API methods that are called directly by the front-end application. The following sections will guide you through the review of the AI integration code into the application.</p>
+</details>
 
 
 

@@ -1872,7 +1872,7 @@
 
 <h1 id="35-vectorize-data">3.5 Vectorize data<a class="headerlink" href="#35-vectorize-data" title="Permanent link">&para;</a></h1>
 <p>By leveraging an embedding model, such as Azure OpenAI's <code>text-embedding-ada-002</code>, you can generate vector representations of textual data and store them in a vector store like Azure Database for PostgreSQL - Flexible Server. This approach facilitates efficient and accurate similarity searches, significantly enhancing the copilot's ability to retrieve relevant information and provide contextually rich interactions.</p>
-<p>The <code>azure_openai</code> schema installed by the <code>azure_ai</code> extension contains the <code>create_embeddings()</code> function, which enables you to generate embeddings for text input by invoking an embedding model deployed in Azure OpenAI directly from a query.</p>
+<p>The <code>azure_openai</code> schema installed by the <code>azure_ai</code> extension contains the <code>create_embeddings()</code> function. This function enables you to generate embeddings for text input by invoking an embedding model deployed in Azure OpenAI directly from a query.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Function signatures for the create_embeddings() function</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1890,10 +1890,10 @@
 <p>The <code>azure_ai</code> extension makes calling the Azure OpenAI embedding API trivial. In its simplest form, the <code>create_embeddings()</code> function can be called with two arguments, <code>deployment_name</code> and <code>input</code>, as shown below:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="n">deployment_name</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>To demonstrate how you can generate vector embeddings through a SQL query, execute the following query in <strong>pgAdmin</strong>.</p>
+<p>To demonstrate how to generate vector embeddings through a SQL query, execute the following query in <strong>pgAdmin</strong>.</p>
 <ol>
 <li>
-<p>On your local machine, return to the open instance of <strong>pgAdmin</strong> and ensure it is connected to your PostgreSQL database.</p>
+<p>Return to the open instance of <strong>pgAdmin</strong> on your local machine and ensure it is connected to your PostgreSQL database.</p>
 </li>
 <li>
 <p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your PostgreSQL server.</p>
@@ -1920,7 +1920,7 @@
 <li>In Azure AI Foundry, select the <strong>Deployments</strong> option from the resource navigation menu.</li>
 <li>
 <p>Observe the <strong>Name</strong> associated with the <code>text-embedding-ada-002</code> model.</p>
-<p><img alt="Screenshot of Azure AI Foundry, with the Deployments page selcted and highlighted. The embeddings model deployment name is highlighted." src="../../img/azure-ai-foundry-deployments-embeddings.png" /></p>
+<p><img alt="Screenshot of Azure AI Foundry, with the Deployments page selected and highlighted. The embeddings model deployment name is highlighted." src="../../img/azure-ai-foundry-deployments-embeddings.png" /></p>
 </li>
 </ol>
 </div>
@@ -1933,13 +1933,13 @@
 <span class="c1">------+-------------------------------------------------------------------------</span>
 <span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">031766646</span><span class="p">,</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">033289704</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">0009468119</span><span class="p">,...,</span><span class="mi">0</span><span class="p">.</span><span class="mi">016508864</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">031440277</span><span class="err">}</span>
 </code></pre></div></td></tr></table></div>
-<p>For brevity, the 1,536 dimensions in the vector are abbreviated in the above output.</p>
+<p>The 1,536 dimensions in the vector are abbreviated in the above output for brevity.</p>
 </li>
 </ol>
 <h2 id="vectorize-existing-data">Vectorize existing data<a class="headerlink" href="#vectorize-existing-data" title="Permanent link">&para;</a></h2>
-<p>You added <code>vector</code> columns to the <code>deliverables</code>, <code>invoice_line_items</code>, <code>invoice_validation_results</code>,  <code>sow_chunks</code>, and <code>sow_validation_results</code> tables. You will now use the <code>azure_openai.create_embeddings()</code> function in SQL <code>UPDATE</code> statements to generate embeddings for the text data already in each of those tables.</p>
+<p>You added <code>vector</code> columns to the <code>deliverables</code>, <code>invoice_line_items</code>, <code>invoice_validation_results</code>,  <code>sow_chunks</code>, and <code>sow_validation_results</code> tables. You will now use the <code>azure_openai.create_embeddings()</code> function in SQL <code>UPDATE</code> statements to generate embeddings for the text data already in each table.</p>
 <div class="admonition warning">
-<p class="admonition-title">Each of the table queries may take several minutes, depending on the configured TPM limits.</p>
+<p class="admonition-title">Each table query may take several minutes, depending on the configured TPM limits.</p>
 </div>
 <p>Using <strong>pgAdmin</strong>, execute the SQL statement for each table.</p>
 <p><em>Select the tab for each table below and execute the <code>UPDATE</code> statement to create embeddings for the specified column.</em></p>

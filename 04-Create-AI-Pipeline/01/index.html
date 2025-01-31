@@ -1116,13 +1116,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview-of-document-upload-and-event-driven-workflow" class="md-nav__link">
+  <a href="#overview-of-document-upload-and-ingestion-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview of Document Upload and Event-Driven Workflow
+      Overview of Document Upload and Ingestion Workflow
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Overview of Document Upload and Event-Driven Workflow">
+    <nav class="md-nav" aria-label="Overview of Document Upload and Ingestion Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1850,13 +1850,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview-of-document-upload-and-event-driven-workflow" class="md-nav__link">
+  <a href="#overview-of-document-upload-and-ingestion-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview of Document Upload and Event-Driven Workflow
+      Overview of Document Upload and Ingestion Workflow
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Overview of Document Upload and Event-Driven Workflow">
+    <nav class="md-nav" aria-label="Overview of Document Upload and Ingestion Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1903,25 +1903,19 @@
 <h1 id="41-extract-data-with-document-intelligence">4.1 Extract Data with Document Intelligence<a class="headerlink" href="#41-extract-data-with-document-intelligence" title="Permanent link">&para;</a></h1>
 <p>Azure Document Intelligence enables automated data extraction and processing from documents using AI. This section provides details on the AI-enhanced data ingestion and processing pipeline.</p>
 <hr />
-<h2 id="overview-of-document-upload-and-event-driven-workflow">Overview of Document Upload and Event-Driven Workflow<a class="headerlink" href="#overview-of-document-upload-and-event-driven-workflow" title="Permanent link">&para;</a></h2>
+<h2 id="overview-of-document-upload-and-ingestion-workflow">Overview of Document Upload and Ingestion Workflow<a class="headerlink" href="#overview-of-document-upload-and-ingestion-workflow" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>The process begins with financial documents, such as invoices and statements of work, uploaded to <strong>Azure Blob Storage</strong>. This event triggers downstream processing via <strong>Azure Event Grid</strong>.</p>
+<p>The process begins with financial documents, such as invoices and statements of work (SOWs), uploaded through the application UI.</p>
 </li>
 <li>
-<p><strong>Azure Blob Storage</strong>: Cost-effective storage for incoming documents.</p>
+<p>When new documents are uploaded they are saved to <strong>Azure Blob Storage</strong> at the start of the <strong>data ingestion workflow</strong>.</p>
 </li>
 <li>
-<p><strong>Azure Event Grid</strong>: Detects document uploads and triggers processing workflows in real time.</p>
+<p>The <strong>data ingestion workflow</strong> handles data extraction and processing by sending uploaded documents to <strong>Azure AI Document Intelligence service</strong>.</p>
 </li>
 <li>
-<p>When new documents are uploaded into blob storage, an <strong>Event Grid trigger</strong> is fired, starting the <strong>Data Ingestion Worker Process</strong>.</p>
-</li>
-<li>
-<p>The <strong>data ingestion worker process</strong> handles data extraction and processing by sending uploaded documents to the <strong>Azure AI Document Intelligence service</strong>.</p>
-</li>
-<li>
-<p>The solution uses pre-built AI models within <strong>Document Intelligence</strong> which analyze data fields, such as <strong>project deliverables, due dates, billable amounts, and vendor details</strong>. These models are designed for specific document types, such as invoices, contracts, receipts, and identity documents, and leverage AI-powered optical character recognition (OCR) and natural language processing (NLP) to extract relevant data.</p>
+<p>The solution uses pre-built AI models within <strong>Document Intelligence</strong> which analyze data fields, such as <strong>project deliverables, due dates, billable amounts, and vendor details</strong>. These models are designed for specific document types, such as invoices, SOWs, contracts, receipts, and identity documents, and leverage AI-powered optical character recognition (OCR) and natural language processing (NLP) to extract relevant data.</p>
 </li>
 <li>
 <p>Once the document is analyzed, the model:</p>

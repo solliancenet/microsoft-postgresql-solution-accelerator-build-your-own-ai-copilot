@@ -1282,9 +1282,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-api-endpoints-to-insert-chunks" class="md-nav__link">
+  <a href="#api-endpoints-to-insert-chunks-on-insert" class="md-nav__link">
     <span class="md-ellipsis">
-      Update API Endpoints To Insert Chunks
+      API Endpoints To Insert Chunks on Insert
     </span>
   </a>
   
@@ -2130,9 +2130,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-api-endpoints-to-insert-chunks" class="md-nav__link">
+  <a href="#api-endpoints-to-insert-chunks-on-insert" class="md-nav__link">
     <span class="md-ellipsis">
-      Update API Endpoints To Insert Chunks
+      API Endpoints To Insert Chunks on Insert
     </span>
   </a>
   
@@ -2173,7 +2173,7 @@
 <h1 id="42-configure-semantic-chunking">4.2 Configure Semantic Chunking<a class="headerlink" href="#42-configure-semantic-chunking" title="Permanent link">&para;</a></h1>
 <p>Semantic chunking is a critical step in preparing documents for retrieval-augmented generation (RAG) and other AI-driven workflows. It involves breaking down large documents into smaller, semantically meaningful chunks that enable better indexing, searching, and retrieval. Using Azure Document Intelligence, semantic chunking can be configured to optimize data flow for downstream processes. Below is a guide to configuring semantic chunking effectively.</p>
 <h2 id="what-are-chunks-in-document-intelligence">What Are Chunks in Document Intelligence?<a class="headerlink" href="#what-are-chunks-in-document-intelligence" title="Permanent link">&para;</a></h2>
-<p>In <strong>Azure AI Document Intelligence</strong>, "chunks" refer to structured segments of a document that are intelligently divided to improve data extraction, retrieval, and validation. This process, known as <strong>Semantic Chunking</strong>, ensures that information is logically grouped based on its meaning and context, rather than arbitrary divisions like page numbers.</p>
+<p>In <strong>Azure AI Document Intelligence</strong>, "<em>chunks</em>" refer to structured segments of a document that are intelligently divided to improve data extraction, retrieval, and validation. This process, known as <strong>Semantic Chunking</strong>, ensures that information is logically grouped based on its meaning and context, rather than arbitrary divisions like page numbers.</p>
 <h3 id="how-chunks-work">How Chunks Work<a class="headerlink" href="#how-chunks-work" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
@@ -2186,18 +2186,18 @@
 <p><strong>Retrieval-Augmented Generation (RAG)</strong> models can retrieve relevant chunks dynamically, improving AI-driven document validation, compliance checks, and financial data reconciliation.</p>
 </li>
 </ol>
-<h3 id="why-chunks-matter-in-ai-powered-data-validation"><strong>Why Chunks Matter in AI-Powered Data Validation</strong><a class="headerlink" href="#why-chunks-matter-in-ai-powered-data-validation" title="Permanent link">&para;</a></h3>
+<h3 id="why-chunks-matter-in-ai-powered-data-validation">Why Chunks Matter in AI-Powered Data Validation<a class="headerlink" href="#why-chunks-matter-in-ai-powered-data-validation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Higher Accuracy:</strong> Structured document segmentation improves AI’s ability to <strong>extract and validate key financial data</strong>.  </li>
 <li><strong>Better Contextual Retrieval:</strong> When comparing invoices to <strong>Statements of Work (SOWs)</strong>, AI can <strong>retrieve specific clauses</strong> related to payment terms.  </li>
 <li><strong>Optimized Query Performance:</strong> AI-powered searches return <strong>more precise</strong> and <strong>context-aware</strong> results.  </li>
 </ul>
 <hr />
-<h2 id="defining-the-chunking-strategy-in-document-intelligence"><strong>Defining the Chunking Strategy in Document Intelligence</strong><a class="headerlink" href="#defining-the-chunking-strategy-in-document-intelligence" title="Permanent link">&para;</a></h2>
+<h2 id="defining-the-chunking-strategy-in-document-intelligence">Defining the Chunking Strategy in Document Intelligence<a class="headerlink" href="#defining-the-chunking-strategy-in-document-intelligence" title="Permanent link">&para;</a></h2>
 <p>When working with Statements of Work (SOWs) and Invoices, defining an effective chunking strategy is essential to ensure accurate data extraction, validation, and cross-referencing. The way chunks are structured depends on the document type, as <strong>SOWs</strong> and <strong>Invoices</strong> have different formats, purposes, and data requirements.</p>
-<h3 id="chunking-strategy-for-statements-of-work-sows"><strong>Chunking Strategy for Statements of Work (SOWs)</strong><a class="headerlink" href="#chunking-strategy-for-statements-of-work-sows" title="Permanent link">&para;</a></h3>
+<h3 id="chunking-strategy-for-statements-of-work-sows">Chunking Strategy for Statements of Work (SOWs)<a class="headerlink" href="#chunking-strategy-for-statements-of-work-sows" title="Permanent link">&para;</a></h3>
 <p>SOWs are <strong>long, structured documents</strong> that outline contractual obligations, payment milestones, deliverables, and compliance clauses. The chunking strategy for SOWs must focus on <strong>preserving contextual integrity</strong> while making it easy to retrieve relevant sections.</p>
-<h4 id="key-chunking-considerations-for-sows"><strong>Key Chunking Considerations for SOWs:</strong><a class="headerlink" href="#key-chunking-considerations-for-sows" title="Permanent link">&para;</a></h4>
+<h4 id="key-chunking-considerations-for-sows">Key Chunking Considerations for SOWs:<a class="headerlink" href="#key-chunking-considerations-for-sows" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
 <p><strong>Logical Sectioning:</strong>  </p>
@@ -2226,9 +2226,9 @@
 </ol>
 </li>
 </ol>
-<h3 id="chunking-strategy-for-invoices"><strong>Chunking Strategy for Invoices</strong><a class="headerlink" href="#chunking-strategy-for-invoices" title="Permanent link">&para;</a></h3>
+<h3 id="chunking-strategy-for-invoices">Chunking Strategy for Invoices<a class="headerlink" href="#chunking-strategy-for-invoices" title="Permanent link">&para;</a></h3>
 <p>Invoices are <strong>structured, tabular documents</strong> designed to list billable items, amounts, and due dates. Unlike SOWs, invoice chunking must focus on tabular data extraction, line-item accuracy, and direct matching with SOWs.</p>
-<h4 id="key-chunking-considerations-for-invoices"><strong>Key Chunking Considerations for Invoices:</strong><a class="headerlink" href="#key-chunking-considerations-for-invoices" title="Permanent link">&para;</a></h4>
+<h4 id="key-chunking-considerations-for-invoices">Key Chunking Considerations for Invoices:<a class="headerlink" href="#key-chunking-considerations-for-invoices" title="Permanent link">&para;</a></h4>
 <ol>
 <li><strong>Line-Item Chunking:</strong>  <ol>
 <li>Each <strong>line item (e.g., service, quantity, amount, tax, etc.)</strong> is treated as a separate chunk for precise AI validation.  </li>
@@ -2253,7 +2253,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="differences-in-chunking-strategy"><strong>Differences in Chunking Strategy:</strong><a class="headerlink" href="#differences-in-chunking-strategy" title="Permanent link">&para;</a></h3>
+<h3 id="differences-in-chunking-strategy">Differences in Chunking Strategy:<a class="headerlink" href="#differences-in-chunking-strategy" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2285,13 +2285,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="why-an-optimized-chunking-strategy-matters"><strong>Why an Optimized Chunking Strategy Matters</strong><a class="headerlink" href="#why-an-optimized-chunking-strategy-matters" title="Permanent link">&para;</a></h3>
+<h3 id="why-an-optimized-chunking-strategy-matters">Why an Optimized Chunking Strategy Matters<a class="headerlink" href="#why-an-optimized-chunking-strategy-matters" title="Permanent link">&para;</a></h3>
 <p><strong>Improves AI Accuracy</strong> – Ensures that document validation is based on structured, meaningful chunks.<br />
 <strong>Enhances Cross-Document Validation</strong> – Allows AI models to <strong>match invoices to SOWs efficiently</strong>.<br />
 <strong>Supports Compliance &amp; Auditability</strong> – Ensures that all necessary sections are <strong>properly reviewed</strong>.<br />
 <strong>Optimizes Retrieval-Augmented Generation (RAG) Queries</strong> – AI can retrieve <strong>precise contract and invoice details</strong> for analysis.  </p>
 <hr />
-<h2 id="leverage-azure-document-intelligence"><strong>Leverage Azure Document Intelligence</strong><a class="headerlink" href="#leverage-azure-document-intelligence" title="Permanent link">&para;</a></h2>
+<h2 id="leverage-azure-document-intelligence">Leverage Azure Document Intelligence<a class="headerlink" href="#leverage-azure-document-intelligence" title="Permanent link">&para;</a></h2>
 <p>Azure Document Intelligence provides tools and capabilities to automate the chunking process:</p>
 <ol>
 <li><strong>Use Pre-Trained Models</strong>:</li>
@@ -2316,10 +2316,12 @@
 <li>Example: Break a contract into "Parties Involved," "Obligations," and "Terms and Conditions" sections.</li>
 </ol>
 <hr />
-<h3 id="store-chunks-in-azure-database-for-postgresql"><strong>Store Chunks in Azure Database for PostgreSQL</strong><a class="headerlink" href="#store-chunks-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
+<h3 id="store-chunks-in-azure-database-for-postgresql">Store Chunks in Azure Database for PostgreSQL<a class="headerlink" href="#store-chunks-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
 <p>Once documents are semantically chunked, the resulting chunks are stored in <strong>Azure Database for PostgreSQL</strong> for efficient querying and retrieval:</p>
 <ul>
-<li><strong>Data Structure</strong>:</li>
+<li>
+<p><strong>Data Structure</strong>:</p>
+<ul>
 <li>Each chunk is stored as an individual record with metadata for easy identification.</li>
 <li>
 <p>Example Schema:</p>
@@ -2329,37 +2331,47 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sow_chunks</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
-<span class="w">    </span><span class="n">sow_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sow_chunks</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sow_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">heading</span><span class="p">,</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">chunk_content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">chunk_metadata</span><span class="w"> </span><span class="n">JSONB</span>
+<span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">page_number</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">sow_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">sows</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
+</ul>
+</li>
 <li>
 <p><strong>Metadata</strong>:</p>
-</li>
+<ul>
 <li>This can include metadata such as document ID, chunk sequence, and semantic labels for efficient retrieval.</li>
 </ul>
+</li>
+</ul>
 <hr />
-<h3 id="benefits-of-semantic-chunking"><strong>Benefits of Semantic Chunking</strong><a class="headerlink" href="#benefits-of-semantic-chunking" title="Permanent link">&para;</a></h3>
+<h3 id="benefits-of-semantic-chunking">Benefits of Semantic Chunking<a class="headerlink" href="#benefits-of-semantic-chunking" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Enhanced Retrieval</strong>:</li>
 <li>
-<p>Enables precise querying of specific document sections, improving the accuracy of AI-driven responses.</p>
+<p><strong>Enhanced Retrieval</strong>:</p>
+<ul>
+<li>Enables precise querying of specific document sections, improving the accuracy of AI-driven responses.</li>
+</ul>
 </li>
 <li>
 <p><strong>Optimized Indexing</strong>:</p>
-</li>
-<li>
-<p>Reduces the complexity of indexing large documents by focusing on smaller, meaningful sections.</p>
+<ul>
+<li>Reduces the complexity of indexing large documents by focusing on smaller, meaningful sections.</li>
+</ul>
 </li>
 <li>
 <p><strong>Improved AI Performance</strong>:</p>
-</li>
+<ul>
 <li>Ensures AI models operate within token limits, avoiding truncation and enhancing output quality.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h2 id="write-chunks-to-postgresql">Write Chunks to PostgreSQL<a class="headerlink" href="#write-chunks-to-postgresql" title="Permanent link">&para;</a></h2>
@@ -2382,46 +2394,16 @@
 <span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sows</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <hr />
-<h3 id="update-api-endpoints-to-insert-chunks">Update API Endpoints To Insert Chunks<a class="headerlink" href="#update-api-endpoints-to-insert-chunks" title="Permanent link">&para;</a></h3>
+<h3 id="api-endpoints-to-insert-chunks-on-insert">API Endpoints To Insert Chunks on Insert<a class="headerlink" href="#api-endpoints-to-insert-chunks-on-insert" title="Permanent link">&para;</a></h3>
 <p>When uploading a SOW in the application, the document workflow starts with the analysis API endpoint <code>/sows/</code>. This endpoint is called using an HTTP POST passing it the <code>vendor_id</code> of the Vendor and the document file being uploaded.</p>
 <p>The document is passed to Document Intelligence to extract the text from the document.</p>
-<p>```py linenum="89" title="src/api/app/routers/sows.py"
-  analysis_result = await doc_intelligence_service.extract_text_from_sow_document(document_data)
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/sows.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code>  <span class="n">analysis_result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">doc_intelligence_service</span><span class="o">.</span><span class="n">extract_text_from_sow_document</span><span class="p">(</span><span class="n">document_data</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The application implements a service for calling Document Intelligence located within the <code>src/api/app/services/azure_doc_intelligence_service.py</code> file where the <code>.extract_text_from_sow_document</code> method is located. This code uses the <code>prebuild-document</code> model within Document Intelligence to extract the text from the document.</p>
+<p>You can expand the section below to see the specific section of code that calls Document Intelligence to extract the text form the document and generate the text chunks.</p>
+<details class="info" open="open">
+<summary>Call Document Intelligence to extract text from document</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/services/azure_doc_intelligence_service.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
@@ -2447,68 +2429,80 @@
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code>The application implements a service for calling Document Intelligence located within the `src/api/app/services/azure_doc_intelligence_service.py` file where the `.extract_text_from_sow_document` method is located. This code uses the `prebuild-document` model within Document Intelligence to extract the text from the document.
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>  <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">extract_text_from_sow_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract text and structure using Azure AI Document Intelligence.&quot;&quot;&quot;</span>
+    <span class="n">docClient</span> <span class="o">=</span> <span class="n">DocumentAnalysisClient</span><span class="p">(</span>
+        <span class="n">endpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">docIntelligenceEndpoint</span><span class="p">,</span>
+        <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">credential</span>
+    <span class="p">)</span>
 
-You can expand the section below to see the specific section of code that calls Document Intelligence to extract the text form the document and generate the text chunks.
+    <span class="n">poller</span> <span class="o">=</span> <span class="k">await</span> <span class="n">docClient</span><span class="o">.</span><span class="n">begin_analyze_document</span><span class="p">(</span>
+        <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;prebuilt-document&quot;</span><span class="p">,</span>
+        <span class="n">document</span><span class="o">=</span><span class="n">document_data</span>
+    <span class="p">)</span>
 
-???+ info &quot;Call Document Intelligence to extract text from document&quot;
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">poller</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
-    ```py linenums=&quot;35&quot; title=&quot;src/api/services/azure_doc_intelligence_service.py&quot;
-      async def extract_text_from_sow_document(self, document_data):
-        &quot;&quot;&quot;Extract text and structure using Azure AI Document Intelligence.&quot;&quot;&quot;
-        docClient = DocumentAnalysisClient(
-            endpoint=self.docIntelligenceEndpoint,
-            credential=self.credential
-        )
+    <span class="n">analysis</span> <span class="o">=</span> <span class="n">DocumentAnalysisResult</span><span class="p">()</span>
+    <span class="n">analysis</span><span class="o">.</span><span class="n">extracted_text</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">analysis</span><span class="o">.</span><span class="n">text_chunks</span> <span class="o">=</span> <span class="p">[]</span>
 
-        poller = await docClient.begin_analyze_document(
-            model_id=&quot;prebuilt-document&quot;,
-            document=document_data
-        )
+    <span class="n">known_headings</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;Project Scope&quot;</span><span class="p">,</span> <span class="s2">&quot;Project Objectives&quot;</span><span class="p">,</span> <span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="s2">&quot;Tasks&quot;</span><span class="p">,</span> <span class="s2">&quot;Schedules&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Standards and Testing&quot;</span><span class="p">,</span> <span class="s2">&quot;Payments&quot;</span><span class="p">,</span> <span class="s2">&quot;Compliance&quot;</span><span class="p">,</span> <span class="s2">&quot;Requirements&quot;</span><span class="p">,</span> <span class="s2">&quot;Project Deliverables&quot;</span>
+    <span class="p">]</span>
 
-        result = await poller.result()
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">pages</span><span class="p">:</span>
+        <span class="n">page_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">content</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">lines</span><span class="p">])</span>
+        <span class="n">analysis</span><span class="o">.</span><span class="n">extracted_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page_text</span><span class="p">)</span>
 
-        analysis = DocumentAnalysisResult()
-        analysis.extracted_text = []
-        analysis.text_chunks = []
+        <span class="n">current_heading</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">lines</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">content</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_heading</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">known_headings</span><span class="p">):</span> <span class="c1"># Detect headings</span>
+                <span class="n">current_heading</span> <span class="o">=</span> <span class="n">text</span>
+                <span class="n">newTextChunk</span> <span class="o">=</span> <span class="n">TextChunk</span><span class="p">()</span>
+                <span class="n">newTextChunk</span><span class="o">.</span><span class="n">heading</span> <span class="o">=</span> <span class="n">text</span>
+                <span class="n">newTextChunk</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">newTextChunk</span><span class="o">.</span><span class="n">page_number</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">page_number</span>
+                <span class="n">analysis</span><span class="o">.</span><span class="n">text_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newTextChunk</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">current_heading</span><span class="p">:</span>
+                <span class="n">analysis</span><span class="o">.</span><span class="n">text_chunks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">text</span>
 
-        known_headings = [
-            &quot;Project Scope&quot;, &quot;Project Objectives&quot;, &quot;Location&quot;, &quot;Tasks&quot;, &quot;Schedules&quot;,
-            &quot;Standards and Testing&quot;, &quot;Payments&quot;, &quot;Compliance&quot;, &quot;Requirements&quot;, &quot;Project Deliverables&quot;
-        ]
+    <span class="k">await</span> <span class="n">docClient</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-        for page in result.pages:
-            page_text = &quot; &quot;.join([line.content for line in page.lines])
-            analysis.extracted_text.append(page_text)
+    <span class="n">analysis</span><span class="o">.</span><span class="n">full_text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">analysis</span><span class="o">.</span><span class="n">extracted_text</span><span class="p">)</span>
 
-            current_heading = None
-            for line in page.lines:
-                text = line.content
-                if self.__is_heading(text, known_headings): # Detect headings
-                    current_heading = text
-                    newTextChunk = TextChunk()
-                    newTextChunk.heading = text
-                    newTextChunk.content = &quot;&quot;
-                    newTextChunk.page_number = page.page_number
-                    analysis.text_chunks.append(newTextChunk)
-                elif current_heading:
-                    analysis.text_chunks[-1].content += &quot; &quot; + text
-
-        await docClient.close()
-
-        analysis.full_text = &quot;\n&quot;.join(analysis.extracted_text)
-
-        return analysis
-    ```
-
-The `.extract_text_from_sow_document` method returns an object that contains a `.text_chunks` collection of objects that contain all the text chunks from the document. The code then loops through the chunks that were extracted and inserts them into the database.
-
-```py linenum=&quot;138&quot; title=&quot;src/api/app/routers/sows.py&quot;
-for chunk in analysis_result.text_chunks:
-    await conn.execute(&#39;&#39;&#39;
-        INSERT INTO sow_chunks (sow_id, heading, content, page_number) VALUES ($1, $2, $3, $4);
-    &#39;&#39;&#39;, sow.id, chunk.heading, chunk.content, chunk.page_number)
-</code></pre></div></td></tr></table></div></p>
+    <span class="k">return</span> <span class="n">analysis</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>The <code>.extract_text_from_sow_document</code> method returns an object that contains a <code>.text_chunks</code> collection of objects that contain all the text chunks from the document. The code then loops through the chunks that were extracted and inserts them into the database.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/sows.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">analysis_result</span><span class="o">.</span><span class="n">text_chunks</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        INSERT INTO sow_chunks (sow_id, heading, content, page_number) VALUES ($1, $2, $3, $4);</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">,</span> <span class="n">sow</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">chunk</span><span class="o">.</span><span class="n">heading</span><span class="p">,</span> <span class="n">chunk</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">chunk</span><span class="o">.</span><span class="n">page_number</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
 <p>The text chunks loaded into the database will now be available for query later by the Copilot to implement retrieval augmented generation (RAG) based on the text content of the documents.</p>
 <h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
 <p><a href="https://learn.microsoft.com/azure/ai-services/document-intelligence/model-overview?view=doc-intel-4.0.0">Document Intelligence - Document Processing Models</a></p>

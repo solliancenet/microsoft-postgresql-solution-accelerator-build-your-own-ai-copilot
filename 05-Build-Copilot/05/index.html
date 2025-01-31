@@ -1871,12 +1871,12 @@
 
 
 <h1 id="55-test-the-chat-api">5.5 Test the Chat API<a class="headerlink" href="#55-test-the-chat-api" title="Permanent link">&para;</a></h1>
-<p>Now all you need to do is run the FastAPI server and have it listen for incoming requests from clients on the API's <code>completions/chat</code> route. In this next section, you will see how to do this locally for rapid prototyping and testing.</p>
+<p>Now, all you need to do is run the FastAPI server and have it listen for incoming client requests on the API's <code>completions/chat</code> route. In this next section, you will see how to do this locally for rapid prototyping and testing.</p>
 <h2 id="testing-options">Testing Options<a class="headerlink" href="#testing-options" title="Permanent link">&para;</a></h2>
 <p>The Chat API is deployed against the <code>/completions/chat</code> endpoint. So, how can you test this?</p>
 <ul>
-<li>You can use a third party client to <code>POST</code> a request to the endpoint</li>
-<li>You can use a <code>CURL</code> command to make the request from commandline</li>
+<li>You can use a third-party client to <code>POST</code> a request to the endpoint</li>
+<li>You can use a <code>CURL</code> command to make the request from the command line</li>
 <li>
 <p>You can use the built-in <code>/swagger</code> Swagger UI to <a href="https://fastapi.tiangolo.com/#interactive-api-docs">try it out interactively</a></p>
 <div class="admonition info">
@@ -1886,7 +1886,7 @@
 </li>
 </ul>
 <h2 id="test-with-swagger">Test with Swagger<a class="headerlink" href="#test-with-swagger" title="Permanent link">&para;</a></h2>
-<p>Using the Swagger UI provides an easy and intuitive way to rapidly test your endpoints. A side benefit of this approach is it shows you the <em><code>curl</code></em> command you can use to make the same request from the terminal if you want to try that out later.</p>
+<p>The Swagger UI provides an easy and intuitive way to test your endpoints rapidly. A side benefit of this approach is it shows you the <em><code>curl</code></em> command you can use to make the same request from the terminal if you want to try that out later.</p>
 <ol>
 <li>
 <p>In Visual Studio Code, select the <strong>Run and Debug</strong> icon from the <em>Activity Bar</em> on the left-hand side.</p>
@@ -1926,8 +1926,8 @@
 <p>Scroll down to the <strong>Responses</strong> section for the <code>/completions/chat</code> endpoint in the Swagger UI and verify you received a valid response.</p>
 <p><img alt="Screenshot of the Responses section of the Swagger UI, with the Response body populated by the response from the above query." src="../../img/woodgrove-api-chat-response.png" /></p>
 <details class="tip" open="open">
-<summary>View server execution traces in the VS Code console</summary>
-<p>By running a debug session in VS Code, you have the ability to see the server execution traces of request to the Chat endpoint in the Visual Studio Code console. These traces allows you to observe the <em>agent scratchpad</em> output from your LangChain agent, which can be useful in troubleshooting and understanding how the agent works.</p>
+<summary>View server execution traces in the VS Code console.</summary>
+<p>By running a debug session in VS Code, you can see the server execution traces of a request to the Chat endpoint in the Visual Studio Code console. These traces allow you to observe the <em>agent scratchpad</em> output from your LangChain agent, which can be useful in troubleshooting and understanding how the agent works.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">VS Code terminal with LangChain output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>

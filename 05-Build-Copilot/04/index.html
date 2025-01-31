@@ -1203,6 +1203,8 @@
       
         
       
+        
+      
     
     
       
@@ -1421,7 +1423,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Prompt engineering
+    5.6 Add Copilot Chat To UI
   </span>
   
 
@@ -1442,7 +1444,7 @@
         
   
   <span class="md-ellipsis">
-    5.7 Add Copilot Chat To UI
+    5.7 Test the UI Copilot Chat
   </span>
   
 
@@ -1463,7 +1465,28 @@
         
   
   <span class="md-ellipsis">
-    5.8 Redeploy App
+    5.8 Refine the Copilot Prompt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.9 Redeploy App
   </span>
   
 
@@ -1850,10 +1873,10 @@
 <h1 id="54-enable-the-chat-endpoint">5.4 Enable the Chat Endpoint<a class="headerlink" href="#54-enable-the-chat-endpoint" title="Permanent link">&para;</a></h1>
 <p>In this step, you will review backend API code for the <code>/chat</code> endpoint in the <code>completions</code> router, along with the various functions used for implementing the RAG pattern. You will then add the <code>completions</code> router to the FastAPI application to make the <code>/chat</code> endpoint available.</p>
 <h2 id="review-chat-endpoint-implementation">Review Chat Endpoint Implementation<a class="headerlink" href="#review-chat-endpoint-implementation" title="Permanent link">&para;</a></h2>
-<p>The <em>Woodgove Bank API</em> exposes endpoints in various <em>routers</em>... The <code>chat</code> endpoint resides in the <code>completions</code> router, defined in the <code>src/api/app/routers/completions.py</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section belwot see the code inline and review explanations for each line of code.</p>
+<p>The <em>Woodgove Bank API</em> exposes endpoints in various <em>routers</em>... The <code>chat</code> endpoint resides in the <code>completions</code> router, defined in the <code>src/api/app/routers/completions.py</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section below to see the code inline and review explanations for each line of code.</p>
 <details class="info" open="open">
 <summary>Chat endpoint code</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/api/app/routers/completions.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>

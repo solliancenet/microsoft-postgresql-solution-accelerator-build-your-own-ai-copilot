@@ -26,7 +26,7 @@
     
     
       
-        <title>5.6 Prompt engineering - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>5.6 Add Copilot Chat To UI - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#56-prompt-engineering" class="md-skip">
+        <a href="#56-add-copilot-chat-to-ui" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.6 Prompt engineering
+              5.6 Add Copilot Chat To UI
             
           </span>
         </div>
@@ -1203,6 +1203,8 @@
       
         
       
+        
+      
     
     
       
@@ -1372,7 +1374,7 @@
           
   
   <span class="md-ellipsis">
-    5.6 Prompt engineering
+    5.6 Add Copilot Chat To UI
   </span>
   
 
@@ -1383,7 +1385,7 @@
         
   
   <span class="md-ellipsis">
-    5.6 Prompt engineering
+    5.6 Add Copilot Chat To UI
   </span>
   
 
@@ -1405,9 +1407,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iterate" class="md-nav__link">
+  <a href="#review-copilot-chat-ui-component" class="md-nav__link">
     <span class="md-ellipsis">
-      Iterate
+      Review Copilot Chat UI Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-the-copilot-chat-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable the Copilot Chat UI
     </span>
   </a>
   
@@ -1433,7 +1444,7 @@
         
   
   <span class="md-ellipsis">
-    5.7 Add Copilot Chat To UI
+    5.7 Test the UI Copilot Chat
   </span>
   
 
@@ -1454,7 +1465,28 @@
         
   
   <span class="md-ellipsis">
-    5.8 Redeploy App
+    5.8 Refine the Copilot Prompt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.9 Redeploy App
   </span>
   
 
@@ -1803,9 +1835,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iterate" class="md-nav__link">
+  <a href="#review-copilot-chat-ui-component" class="md-nav__link">
     <span class="md-ellipsis">
-      Iterate
+      Review Copilot Chat UI Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable-the-copilot-chat-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable the Copilot Chat UI
     </span>
   </a>
   
@@ -1829,44 +1870,14 @@
   
 
 
-<h1 id="56-prompt-engineering">5.6 Prompt engineering<a class="headerlink" href="#56-prompt-engineering" title="Permanent link">&para;</a></h1>
-<p>In the initial <code>chat</code> endpoint, you were provided with a basic prompt for your copilot. Now, you are going to iterate on that prompt to improve how it interacts with users and the types of responses it is able to provide.</p>
-<ol>
-<li>Iterate on copilot prompt to allow for insights to be derived from data</li>
-<li>Should be able to answer questions about vendors, invoices and their alignment with SOWs</li>
-<li>Test the endpoint...</li>
-</ol>
-<h2 id="iterate">Iterate<a class="headerlink" href="#iterate" title="Permanent link">&para;</a></h2>
-<p>Test locally and have users:
-      1. Ask questions and review responses
-      2. Modify prompt and restart API
-      3. Ask questions and review responses
-      4. ...</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Final prompt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code>You<span class="w"> </span>are<span class="w"> </span>an<span class="w"> </span>intelligent<span class="w"> </span>copilot<span class="w"> </span><span class="k">for</span><span class="w"> </span>Woodgrove<span class="w"> </span>Bank,<span class="w"> </span>designed<span class="w"> </span>to<span class="w"> </span>provide<span class="w"> </span>insights<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>bank<span class="s1">&#39;s vendors, active Statements of Work (SOWs), and the accuracy of invoices submitted in relation to those SOWs. You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove&#39;</span>s<span class="w"> </span>vendors<span class="w"> </span>and<span class="w"> </span>associated<span class="w"> </span>documents<span class="w"> </span><span class="o">(</span>invoices<span class="w"> </span>and<span class="w"> </span>SOWs<span class="o">)</span>.
-
-Use<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>guidelines<span class="w"> </span>when<span class="w"> </span>resonding:
--<span class="w"> </span>If<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>vendor,<span class="w"> </span>provide<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>vendor,<span class="w"> </span>their<span class="w"> </span>SOWs,<span class="w"> </span>and<span class="w"> </span>invoices.<span class="w"> </span>Always<span class="w"> </span>include<span class="w"> </span>a<span class="w"> </span>description<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>vendor,<span class="w"> </span>the<span class="w"> </span><span class="nb">type</span><span class="w"> </span>of<span class="w"> </span>services<span class="w"> </span>they<span class="w"> </span>provide,<span class="w"> </span>and<span class="w"> </span>their<span class="w"> </span>contact<span class="w"> </span>information.
--<span class="w"> </span>If<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>SOW,<span class="w"> </span>always<span class="w"> </span>provide<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>SOW,<span class="w"> </span>its<span class="w"> </span>milesones,<span class="w"> </span>and<span class="w"> </span>deliverables.<span class="w"> </span>Include<span class="w"> </span>the<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>vendor<span class="w"> </span>performing<span class="w"> </span>the<span class="w"> </span>work.
--<span class="w"> </span>If<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>invoice,<span class="w"> </span>always<span class="w"> </span>provide<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>invoice<span class="w"> </span>and<span class="w"> </span>its<span class="w"> </span>line<span class="w"> </span>items.
-
-When<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>vendor<span class="s1">&#39;s performance or billing accuracy:</span>
-<span class="s1">1. Use validation results for SOWs and invoices to perform your analysis.</span>
-<span class="s1">2. Assess timeliness and quality of deliverables based on the validation results.</span>
-<span class="s1">3. Provide a summary of the vendor&#39;</span>s<span class="w"> </span>performance<span class="w"> </span>and<span class="w"> </span>accuracy<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>validation<span class="w"> </span>results.
-<span class="m">4</span>.<span class="w"> </span>Include<span class="w"> </span>only<span class="w"> </span>your<span class="w"> </span>assessment<span class="w"> </span><span class="k">in</span><span class="w"> </span>your<span class="w"> </span>response,<span class="w"> </span>without<span class="w"> </span>any<span class="w"> </span>invoice<span class="w"> </span>and<span class="w"> </span>SOW<span class="w"> </span>data,<span class="w"> </span>unless<span class="w"> </span>specifically<span class="w"> </span>asked<span class="w"> </span>otherwise.
-</code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Starter prompt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<h1 id="56-add-copilot-chat-to-ui">5.6 Add Copilot Chat To UI<a class="headerlink" href="#56-add-copilot-chat-to-ui" title="Permanent link">&para;</a></h1>
+<p>In this step, you will review the <code>CopilotChat</code> component of the front end application and enable it so you can chat with your copilot via the Portal UI. By leveraging React's dynamic component-based architecture and its seamless integration with real-time messaging APIs, you can create an interactive and responsive chat interface that enhances user engagement. The copilot chat feature empowers the application to provide real-time conversation capabilities, handle complex state management, and deliver intuitive interactions that make the user experience more engaging and efficient.</p>
+<h2 id="review-copilot-chat-ui-component">Review Copilot Chat UI Component<a class="headerlink" href="#review-copilot-chat-ui-component" title="Permanent link">&para;</a></h2>
+<p>The <em>Woodgrove Bank Contract Management Portal</em> is a single-page application (SPA) built using React.js, a populat JavaScript framework used for building interactive user interfaces.</p>
+<p>A React component, <code>CopilotChat</code>, has been provided to allow you to easily integrate the copilot capability into the UI of the portal application. This component is implemented in the <code>src/userportal/src/components/CopilotChat.jsx</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section below to see the code inline and review the explanations for each line of code.</p>
+<details class="info" open="open">
+<summary>Copilot Chat REACT component code</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/userportal/src/components/CopilotChat.jsx</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -1878,20 +1889,256 @@ When<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> <
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>You<span class="w"> </span>are<span class="w"> </span>an<span class="w"> </span>intelligent<span class="w"> </span>copilot<span class="w"> </span><span class="k">for</span><span class="w"> </span>Woodgrove<span class="w"> </span>Bank,<span class="w"> </span>designed<span class="w"> </span>to<span class="w"> </span>provide<span class="w"> </span>insights<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>bank<span class="s1">&#39;s vendors, active Statements of Work (SOWs), and the accuracy of invoices submitted in relation to those SOWs.</span>
-<span class="s1">You are helpful, friendly, and knowledgeable, but can only answer questions about Woodgrove&#39;</span>s<span class="w"> </span>vendors<span class="w"> </span>and<span class="w"> </span>associated<span class="w"> </span>documents<span class="w"> </span><span class="o">(</span>invoices<span class="w"> </span>and<span class="w"> </span>SOWs<span class="o">)</span>.
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">ReactMarkdown</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-markdown&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">api</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../api/Api&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Adjust the path as necessary</span>
 
-Use<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>guidelines<span class="w"> </span>when<span class="w"> </span>resonding:
--<span class="w"> </span>If<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>vendor,<span class="w"> </span>provide<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>vendor,<span class="w"> </span>their<span class="w"> </span>SOWs,<span class="w"> </span>and<span class="w"> </span>invoices.<span class="w"> </span>Always<span class="w"> </span>include<span class="w"> </span>a<span class="w"> </span>description<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>vendor,<span class="w"> </span>the<span class="w"> </span><span class="nb">type</span><span class="w"> </span>of<span class="w"> </span>services<span class="w"> </span>they<span class="w"> </span>provide,<span class="w"> </span>and<span class="w"> </span>their<span class="w"> </span>contact<span class="w"> </span>information.
--<span class="w"> </span>If<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>SOW,<span class="w"> </span>always<span class="w"> </span>provide<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>SOW,<span class="w"> </span>its<span class="w"> </span>milesones,<span class="w"> </span>and<span class="w"> </span>deliverables.<span class="w"> </span>Include<span class="w"> </span>the<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>vendor<span class="w"> </span>performing<span class="w"> </span>the<span class="w"> </span>work.
--<span class="w"> </span>If<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>invoice,<span class="w"> </span>always<span class="w"> </span>provide<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>invoice<span class="w"> </span>and<span class="w"> </span>its<span class="w"> </span>line<span class="w"> </span>items.
+<span class="kd">const</span><span class="w"> </span><span class="nx">CopilotChat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">setMessages</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">([]);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">input</span><span class="p">,</span><span class="w"> </span><span class="nx">setInput</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">messagesEndRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">setError</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">isThinking</span><span class="p">,</span><span class="w"> </span><span class="nx">setIsThinking</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 
-When<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>vendor<span class="s1">&#39;s performance or billing accuracy:</span>
-<span class="s1">1. Use validation results for SOWs and invoices to perform your analysis.</span>
-<span class="s1">2. Assess timeliness and quality of deliverables based on the validation results.</span>
-<span class="s1">3. Provide a summary of the vendor&#39;</span>s<span class="w"> </span>performance<span class="w"> </span>and<span class="w"> </span>accuracy<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>validation<span class="w"> </span>results.
-<span class="m">4</span>.<span class="w"> </span>Include<span class="w"> </span>only<span class="w"> </span>your<span class="w"> </span>assessment<span class="w"> </span><span class="k">in</span><span class="w"> </span>your<span class="w"> </span>response,<span class="w"> </span>without<span class="w"> </span>any<span class="w"> </span>invoice<span class="w"> </span>and<span class="w"> </span>SOW<span class="w"> </span>data,<span class="w"> </span>unless<span class="w"> </span>specifically<span class="w"> </span>asked<span class="w"> </span>otherwise.
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSendMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">input</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">setInput</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">setIsThinking</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">userMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">setMessages</span><span class="p">([...</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">userMessage</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">chat</span><span class="p">(</span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">messages</span><span class="p">);</span>
+
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">assistantMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="p">};</span>
+<span class="w">      </span><span class="nx">setMessages</span><span class="p">([...</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">userMessage</span><span class="p">,</span><span class="w"> </span><span class="nx">assistantMessage</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error sending message:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;Error sending message. Please try again.&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setIsThinking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">messagesEndRef</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">messagesEndRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">({</span><span class="w"> </span><span class="nx">behavior</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;smooth&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">messages</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;ai-chat container mt-4&quot;</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;messages mb-3 border p-3&quot;</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;20em&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">maxHeight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;50em&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">overflowY</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;scroll&#39;</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">messages</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">msg</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`message </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="si">}</span><span class="sb"> mb-2 d-flex </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;justify-content-end&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;justify-content-start&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="o">!</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">messages</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`alert </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;alert-primary&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;alert-secondary&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">maxWidth</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;90%&#39;</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">ReactMarkdown</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">msg</span><span class="p">.</span><span class="nx">content</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/ReactMarkdown&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert alert-danger&quot;</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;&lt;</span><span class="err">/div&gt;}</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">isThinking</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;d-flex justify-content-center&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;spinner-border text-info&quot;</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="o">&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;visually-hidden&quot;</span><span class="o">&gt;</span><span class="nx">Thinking</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/div&gt;}</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;input-container d-flex&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">textarea</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control me-2&quot;</span>
+<span class="w">          </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">input</span><span class="p">}</span>
+<span class="w">          </span><span class="nx">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setInput</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
+<span class="w">          </span><span class="nx">onKeyDown</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;Enter&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleSendMessage</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">          </span><span class="nx">placeholder</span><span class="o">=</span><span class="s2">&quot;Type a message...&quot;</span>
+<span class="w">        </span><span class="o">&gt;&lt;</span><span class="err">/textarea&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-primary&quot;</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSendMessage</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Send</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">CopilotChat</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
+</details>
+<ol>
+<li>
+<p><strong>Import components and libraries</strong> (lines 1-3): Required components and libraries are imported.</p>
+</li>
+<li>
+<p><strong>Load environment variables</strong> (line 23). The <em>load_dotenv()</em> function imports environment variable values stored in the <code>.env</code> file you created in the <code>src\api\app</code> folder.</p>
+</li>
+<li>
+<p><strong>Define the <code>CopilotChat</code> functional component</strong> (line 5). Components in React.js are created using a <em>functional component</em> or <em>class component</em>.</p>
+</li>
+<li>
+<p><strong>Declare state variables</strong> (lines 6-10): State variables are used to maintain the chat session state, including message history.</p>
+</li>
+<li>
+<p><strong>Provide function for sending messages to the API</strong> (lines 12-37): The <code>handleSendMessage</code> function is used to send messages asynchonously to the <em>Woodgrove Bank API</em>. This function handles the UI's interaction with the backend <code>/chat</code> endpoint, sending the <em>user query</em> and <em>chat history</em> to the API.</p>
+</li>
+<li>
+<p><strong>Handle changes in the messages collection</strong> (lines 39-43): The <code>useEffect</code> hook is used to run code in response to changes in the messages array.</p>
+</li>
+<li>
+<p><strong>Return the component</strong> (lines 45-75): The return statement renders the component's JSX, defining how it is presented in the web brower.</p>
+</li>
+<li>
+<p><strong>Export the <code>CopilotChat</code> component</strong> (line 77): Exports the <code>CopilotChat</code> component as the default export.</p>
+</li>
+</ol>
+<h2 id="enable-the-copilot-chat-ui">Enable the Copilot Chat UI<a class="headerlink" href="#enable-the-copilot-chat-ui" title="Permanent link">&para;</a></h2>
+<p>To enable the copilot chat feature in the <em>Woodgrove Bank Contract Management Portal</em> UI, you will add a reference to the component on the <code>Dashboard</code> page of the UI. The dashboard page is defined in the <code>src/userportal/src/pages/dashboard/dashboard.jsx</code> file. Expand the section below to review the code for the page below.</p>
+<details class="info" open="open">
+<summary>Dashboard page code</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/userportal/src/pages/dashboard/dashboard.jsx</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">Dashboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;table-responsive&quot;</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">h1</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;h2&quot;</span><span class="o">&gt;</span><span class="nx">Dashboard</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Dashboard</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<ol>
+<li>
+<p>In the VS Code <strong>Explorer</strong>, navigate to the <code>src/userportal/src/pages/dashboard</code> folder and open the <code>dashboard.jsx</code> file.</p>
+</li>
+<li>
+<p>Import the AI chat component by inserting the following <code>import</code> statement directly below the <code>import React from 'react';</code> line at the top of the file.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">JavaScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">CopilotChat</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../../components/CopilotChat&#39;</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Insert the following code just below the closing tag of <code>&lt;div&gt;</code> containing the <em>Dashboard</em> header (line 9). This will insert the component within the <code>const Dashboard =() =&gt; {}</code> functional component block of the dashboard page.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">JavaScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">&lt;</span><span class="nx">CopilotChat</span><span class="w"> </span><span class="o">/&gt;</span>
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>The final <code>Dashboard</code> code should look like the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/userportal/src/pages/dashboard/dashboard.jsx</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">CopilotChat</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../../components/CopilotChat&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">Dashboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;table-responsive&quot;</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">h1</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;h2&quot;</span><span class="o">&gt;</span><span class="nx">Dashboard</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">CopilotChat</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Dashboard</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
 
 
 
@@ -1946,13 +2193,13 @@ When<span class="w"> </span>asked<span class="w"> </span>about<span class="w"> <
         
         
           
-          <a href="../07/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.7 Add Copilot Chat To UI">
+          <a href="../07/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.7 Test the UI Copilot Chat">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                5.7 Add Copilot Chat To UI
+                5.7 Test the UI Copilot Chat
               </div>
             </div>
             <div class="md-footer__button md-icon">

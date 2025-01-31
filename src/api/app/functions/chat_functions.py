@@ -309,6 +309,34 @@ class ChatFunctions:
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
     
+    async def find_sow_chunks_with_semantic_ranking(self, user_query: str, vendor_id: int = None, sow_id: int = None, max_results: int = 3):
+        """
+        Retrieves content chunks similar to the user query for the specified SOW.
+        """
+
+        # Get the embeddings for the user query
+        query_embeddings = await self.__create_query_embeddings(user_query)
+
+        # Create a vector search query
+        cte_query = f"SELECT content FROM sow_chunks"
+        cte_query += f" WHERE sow_id = {sow_id}" if sow_id is not None else f" WHERE vendor_id = {vendor_id}" if vendor_id is not None else ""
+        cte_query += f" ORDER BY embedding <=> '{query_embeddings}'"
+        cte_query += f" LIMIT 10"
+
+        # Create the semantic ranker query
+        query = f"""
+        WITH vector_results AS (
+            {cte_query}
+        )
+        SELECT content, relevance
+        FROM semantic_reranking('{user_query}',  ARRAY(SELECT content from vector_results))
+        ORDER BY relevance DESC
+        LIMIT {max_results};
+        """
+
+        rows = await self.__execute_query(f'{query};')
+        return [dict(row) for row in rows]
+    
     async def find_sow_validation_results(self, user_query: str, vendor_id: int = None, sow_id: int = None): 
         """
         Retrieves SOW accuracy and performance validation results similar to the user query for specified vendor or SOW.

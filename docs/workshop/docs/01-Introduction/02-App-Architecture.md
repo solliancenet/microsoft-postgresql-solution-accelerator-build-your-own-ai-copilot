@@ -38,7 +38,7 @@ Select each tab below to learn more about how the movement of data in the contex
 
           1. The data ingestion worker process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
 
-          2. Custom AI models within the Document Intelligence service are tailored to extract specific data fields, such as payment milestones, due dates, billable amounts, and vendor details. These models are trained to recognize the structure of financial documents, improving data extraction accuracy.
+          2. AI models within the Document Intelligence service are tailored to extract specific data fields, such as payment milestones, due dates, billable amounts, and vendor details. These models are trained to recognize the structure of financial documents, improving data extraction accuracy.
 
           3. Document Intelligence's Semantic Chunking capability recognizes document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences. This ensures that the chunks are of higher quality for use in RAG pattern queries.
 
@@ -78,7 +78,7 @@ Select each tab below to learn more about how the movement of data in the contex
 
           2. By integrating these two methods, hybrid search enhances the precision and comprehensiveness of search results, making it ideal for applications like semantic search, recommendation systems, and content discovery.
 
-    5. (Optional) Semantic Ranking via custom model inference from the `azure_ai` extension ranks search result relevance and is returned into the RAG context as part of the composite prompt.
+    5. (Optional) Semantic Ranking via model inference from the `azure_ai` extension ranks search result relevance and is returned into the RAG context as part of the composite prompt.
 
     6. Azure OpenAI uses the composite prompt to formulates a response.
 

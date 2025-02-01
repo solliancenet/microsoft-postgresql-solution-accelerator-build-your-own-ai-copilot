@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/06-Improve-RAG-Accuracy/01/">
       
       
-        <link rel="prev" href="../00/">
+        <link rel="prev" href="../">
       
       
         <link rel="next" href="../02/">
@@ -26,7 +26,7 @@
     
     
       
-        <title>6.1 Create and Query Graph Data - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>6.1 Understand Semantic Ranking - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#61-create-and-query-graph-data" class="md-skip">
+        <a href="#61-understand-semantic-ranking" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.1 Create and Query Graph Data
+              6.1 Understand Semantic Ranking
             
           </span>
         </div>
@@ -351,6 +351,26 @@
     
   
   06 Improve RAG Accuracy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07-Redeploy/" class="md-tabs__link">
+          
+  
+    
+  
+  07 Redeploy
 
         </a>
       </li>
@@ -647,11 +667,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    0 PreRequisites
+    0 Prerequisites
   </span>
   
 
@@ -662,7 +682,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
-            0 PreRequisites
+            0 Prerequisites
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1201,8 +1221,6 @@
       
         
       
-        
-      
     
     
       
@@ -1414,27 +1432,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/09/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.9 Redeploy App
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1455,10 +1452,6 @@
       
         
           
-        
-      
-        
-      
         
       
         
@@ -1521,27 +1514,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../00/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.6 Use Semantic Ranking
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1558,7 +1530,7 @@
           
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Understand Semantic Ranking
   </span>
   
 
@@ -1569,7 +1541,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Understand Semantic Ranking
   </span>
   
 
@@ -1591,9 +1563,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update-api-to-allow-graphrag" class="md-nav__link">
+  <a href="#reranking-search-results-with-semantic-ranker-models" class="md-nav__link">
     <span class="md-ellipsis">
-      Update API to allow GraphRAG
+      Reranking Search Results with Semantic Ranker Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#semantic-ranker-model-inference-from-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Semantic Ranker Model Inference from PostgreSQL
     </span>
   </a>
   
@@ -1619,7 +1600,7 @@
         
   
   <span class="md-ellipsis">
-    6.2 Create nodes
+    6.2 Use Semantic Ranking in PostgreSQL
   </span>
   
 
@@ -1640,7 +1621,7 @@
         
   
   <span class="md-ellipsis">
-    6.3 Execute cypher queries
+    6.3 Update Copilot to Use Semantic Ranking
   </span>
   
 
@@ -1661,7 +1642,7 @@
         
   
   <span class="md-ellipsis">
-    4. Debugging Execution Errors
+    Apache AGE Extension
   </span>
   
 
@@ -1682,7 +1663,7 @@
         
   
   <span class="md-ellipsis">
-    5. Testing Code Changes Live
+    6.1 Create and Query Graph Data
   </span>
   
 
@@ -1703,28 +1684,7 @@
         
   
   <span class="md-ellipsis">
-    6. Test Code Changes to Prompty
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    7. Redeploy Copilot to Azure
+    06
   </span>
   
 
@@ -1771,6 +1731,64 @@
           
           
           <div class="md-nav__link md-nav__container">
+            <a href="../../07-Redeploy/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    07 Redeploy
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            07 Redeploy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
             <a href="../../Tear-Down/" class="md-nav__link ">
               
   
@@ -1783,8 +1801,8 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Tear Down
           </label>
@@ -1826,9 +1844,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update-api-to-allow-graphrag" class="md-nav__link">
+  <a href="#reranking-search-results-with-semantic-ranker-models" class="md-nav__link">
     <span class="md-ellipsis">
-      Update API to allow GraphRAG
+      Reranking Search Results with Semantic Ranker Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#semantic-ranker-model-inference-from-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Semantic Ranker Model Inference from PostgreSQL
     </span>
   </a>
   
@@ -1852,19 +1879,14 @@
   
 
 
-<h1 id="61-create-and-query-graph-data">6.1  Create and Query Graph Data<a class="headerlink" href="#61-create-and-query-graph-data" title="Permanent link">&para;</a></h1>
-<p>With AGE installed, you are ready to start creating and querying graph data using OpenCypher.</p>
-<p>TODO: Expand on the below and provide good examples</p>
-<p>In this example you use OpenCypher and AGE to determine the connections or relationships between the SOWs and vendors and invoices they have submitted.</p>
-<p>To accomplish this, you will need to create a set of nodes (vertices) and relationships (edges):</p>
-<p>Note: You will need to set the ag_catalog schema in your path to utilize cypher or you will need to specify it directly in the query as shown in the following examples:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;$user&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="p">;</span>
-</code></pre></div></td></tr></table></div>
-<p>Or</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<h2 id="update-api-to-allow-graphrag">Update API to allow GraphRAG<a class="headerlink" href="#update-api-to-allow-graphrag" title="Permanent link">&para;</a></h2>
-<p>TODO: Add a new API endpoint associated with the copilot to allow GraphRAG queries to be executed and relationship nodes returned...</p>
+<h1 id="61-understand-semantic-ranking">6.1 Understand Semantic Ranking<a class="headerlink" href="#61-understand-semantic-ranking" title="Permanent link">&para;</a></h1>
+<p>In the context of Azure Database for PostgreSQL, <em>semantic ranking</em> can enhance the accuracy and relevance of search results within the database, significantly improving the information retrieval pipelines in Generative AI (GenAI) applications. Unlike vector search, which primarily measures the similarity between two vector embeddings, semantic ranking delves deeper by analyzing the semantic relevance between text strings at the actual text level. This approach ensures that search results are more contextually aligned with user queries, improving information retrieval and higher user satisfaction.</p>
+<h2 id="reranking-search-results-with-semantic-ranker-models">Reranking Search Results with Semantic Ranker Models<a class="headerlink" href="#reranking-search-results-with-semantic-ranker-models" title="Permanent link">&para;</a></h2>
+<p>Semantic ranker models compare two text strings: the search query and the text of one of the items being searched. The ranker produces a relevance score that indicates how well the text string matches the query, essentially determining if the text holds an answer to the query. Typically, the semantic ranker is a machine learning model, often a variant of the BERT language model fine-tuned for ranking tasks, but it can also be a large language model (LLM). These ranker models, also called cross-encoder models, take two text strings as input and output a relevance score, usually ranging from 0 to 1.</p>
+<h2 id="semantic-ranker-model-inference-from-postgresql">Semantic Ranker Model Inference from PostgreSQL<a class="headerlink" href="#semantic-ranker-model-inference-from-postgresql" title="Permanent link">&para;</a></h2>
+<p>The <code>azure_ai</code> extension enables the invocation of machine learning models deployed on <a href="https://learn.microsoft.com/azure/machine-learning/concept-endpoints-online">Azure Machine Learning online endpoints</a> directly from within PostgreSQL.</p>
+<p><img alt="Diagram showing reranking being performed from Azure Database for PostgreSQL by calling a semantic ranker model deployed to Azure ML." src="../../img/semantic-ranking-solution-architecture.png" /></p>
+<p>Using the <code>azure_ml.invoke()</code> method, inference with a semantic ranker model can be performed through SQL queries. This allows for the reranking of vector search results based on the semantic relevance of the text, rather than relying solely on keyword matching.</p>
 
 
 
@@ -1902,7 +1924,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../00/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.6 Use Semantic Ranking">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Improve RAG Accuracy">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1912,20 +1934,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                5.6 Use Semantic Ranking
+                Improve RAG Accuracy
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.2 Create nodes">
+          <a href="../02/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.2 Use Semantic Ranking in PostgreSQL">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                6.2 Create nodes
+                6.2 Use Semantic Ranking in PostgreSQL
               </div>
             </div>
             <div class="md-footer__button md-icon">

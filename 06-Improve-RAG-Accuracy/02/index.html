@@ -26,7 +26,7 @@
     
     
       
-        <title>6.2 Create nodes - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>6.2 Use Semantic Ranking in PostgreSQL - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#62-create-nodes" class="md-skip">
+        <a href="#62-use-semantic-ranking-in-postgresql" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.2 Create nodes
+              6.2 Use Semantic Ranking in PostgreSQL
             
           </span>
         </div>
@@ -351,6 +351,26 @@
     
   
   06 Improve RAG Accuracy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07-Redeploy/" class="md-tabs__link">
+          
+  
+    
+  
+  07 Redeploy
 
         </a>
       </li>
@@ -647,11 +667,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    0 PreRequisites
+    0 Prerequisites
   </span>
   
 
@@ -662,7 +682,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
-            0 PreRequisites
+            0 Prerequisites
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1201,8 +1221,6 @@
       
         
       
-        
-      
     
     
       
@@ -1414,27 +1432,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/09/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.9 Redeploy App
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1455,10 +1452,6 @@
       
         
           
-        
-      
-        
-      
         
       
         
@@ -1524,32 +1517,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../00/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    5.6 Use Semantic Ranking
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.1 Understand Semantic Ranking
   </span>
   
 
@@ -1575,15 +1547,63 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    6.2 Use Semantic Ranking in PostgreSQL
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    6.2 Create nodes
+    6.2 Use Semantic Ranking in PostgreSQL
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-reranking-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a reranking function
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-the-udf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test the UDF
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1601,7 +1621,7 @@
         
   
   <span class="md-ellipsis">
-    6.3 Execute cypher queries
+    6.3 Update Copilot to Use Semantic Ranking
   </span>
   
 
@@ -1622,7 +1642,7 @@
         
   
   <span class="md-ellipsis">
-    4. Debugging Execution Errors
+    Apache AGE Extension
   </span>
   
 
@@ -1643,7 +1663,7 @@
         
   
   <span class="md-ellipsis">
-    5. Testing Code Changes Live
+    6.1 Create and Query Graph Data
   </span>
   
 
@@ -1664,28 +1684,7 @@
         
   
   <span class="md-ellipsis">
-    6. Test Code Changes to Prompty
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    7. Redeploy Copilot to Azure
+    06
   </span>
   
 
@@ -1732,6 +1731,64 @@
           
           
           <div class="md-nav__link md-nav__container">
+            <a href="../../07-Redeploy/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    07 Redeploy
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            07 Redeploy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
             <a href="../../Tear-Down/" class="md-nav__link ">
               
   
@@ -1744,8 +1801,8 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Tear Down
           </label>
@@ -1780,6 +1837,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-reranking-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a reranking function
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-the-udf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test the UDF
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1796,34 +1879,138 @@
   
 
 
-<h1 id="62-create-nodes">6.2 Create nodes<a class="headerlink" href="#62-create-nodes" title="Permanent link">&para;</a></h1>
-<p>TODO: Fix the <code>graph_name</code> reference above to use a standard one for the solution accelerator so it doesn't need to be updated in the queries...</p>
-<p>Create vendor nodes</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">kb</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Kevin Bacon&#39;</span><span class="err">}</span><span class="p">),</span>
-<span class="w">        </span><span class="p">(</span><span class="n">a1</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Actor 1&#39;</span><span class="err">}</span><span class="p">),</span>
-<span class="w">        </span><span class="p">(</span><span class="n">a2</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Actor 2&#39;</span><span class="err">}</span><span class="p">),</span>
-<span class="w">        </span><span class="p">(</span><span class="n">d1</span><span class="p">:</span><span class="n">Director</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Director 1&#39;</span><span class="err">}</span><span class="p">),</span>
-<span class="w">        </span><span class="p">(</span><span class="n">d2</span><span class="p">:</span><span class="n">Director</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Director 2&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span>
+<h1 id="62-use-semantic-ranking-in-postgresql">6.2 Use Semantic Ranking in PostgreSQL<a class="headerlink" href="#62-use-semantic-ranking-in-postgresql" title="Permanent link">&para;</a></h1>
+<p>By leveraging the power of <em>semantic ranking</em>, you can improve the accuracy of data retrieval and help ensure the success of your Generative AI applications. In this task, you will create a user-defined function (UDF) in your database that utilizes <a href="https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-azure-machine-learning">model inferencing capabilities of the Azure AI extension</a>. Specifically, the <code>azure_ml.invoke()</code> method of the extension will be called from within the UDF to seamlessly invoke a semantic ranking model directly within SQL queries.</p>
+<details class="info" open="open">
+<summary>Your Semantic Ranker model was deployed to Azure ML.</summary>
+<p>The deployment of this solution accelerator included executing a post-deployment script to download the <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">BGE-reranker-v2-m3</a> semantic ranker model and deploy it as an Azure Machine Learning (AML) inference endpoint in your subscription. This model was selected because it is lightweight, easy to deploy, and provides fast inference.</p>
+</details>
+<h2 id="create-a-reranking-function">Create a reranking function<a class="headerlink" href="#create-a-reranking-function" title="Permanent link">&para;</a></h2>
+<p>To simplify the integration of semantic ranking and invocation of the semantic ranker model from Azure ML, you will create a user-defined function (UDF). The function uses the <code>azure_ai</code> extension to directly make remote calls to the AML inference endpoint from a SQL query. Using the <code>azure_ml.invoke()</code> function within a UDF, you can make calls to the semantic ranker model.</p>
+<details class="info">
+<summary>You already configured the extension's connection to Azure ML</summary>
+<p>Recall that you already configured the Azure AI extension's connection to Azure ML in task <a href="../../03-Integrate-AI-Into-PostgreSQL/02/">3.2 Configure the Azure AI extension</a> using the following commands:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_ml.scoring_endpoint&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;endpoint&gt;&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">azure_ai</span><span class="p">.</span><span class="n">set_setting</span><span class="p">(</span><span class="s1">&#39;azure_ml.endpoint_key&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&lt;api-key&gt;&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<p>Create SOW nodes:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">m1</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 1&#39;</span><span class="err">}</span><span class="p">),</span>
-<span class="w">       </span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 2&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span><span class="err">​</span>
+</details>
+<p>The UDF will be defined within your SQL database, allowing you to seamlessly incorporate semantic ranking into your queries. You will use <strong>pgAdmin</strong> to create it.</p>
+<ol>
+<li>
+<p>Return to the open instance of <strong>pgAdmin</strong> on your local machine and ensure it is connected to your PostgreSQL database.</p>
+</li>
+<li>
+<p>In the pgAdmin <strong>Object Explorer</strong>, expand databases under your PostgreSQL server.</p>
+</li>
+<li>
+<p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
+</li>
+<li>
+<p>Run the following query to create the <code>semantic_reranking</code> function:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Create Semantic Reranking UDF</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">semantic_reranking</span><span class="p">(</span><span class="n">query</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="n">vector_search_results</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">[])</span>
+<span class="k">RETURNS</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">(</span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="n">relevance</span><span class="w"> </span><span class="n">jsonb</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="n">QUERY</span>
+<span class="w">        </span><span class="k">WITH</span>
+<span class="w">        </span><span class="n">json_pairs</span><span class="w"> </span><span class="k">AS</span><span class="p">(</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">jsonb_build_object</span><span class="p">(</span>
+<span class="w">                    </span><span class="s1">&#39;pairs&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">jsonb_agg</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">jsonb_build_array</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="n">content_</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">json_pairs_data</span>
+<span class="w">                </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">content</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">content_</span>
+<span class="w">                    </span><span class="k">FROM</span><span class="w"> </span><span class="k">unnest</span><span class="p">(</span><span class="n">vector_search_results</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">        </span><span class="p">),</span><span class="w"> </span>
+<span class="w">        </span><span class="n">relevance_scores</span><span class="w"> </span><span class="k">AS</span><span class="p">(</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="n">jsonb_array_elements</span><span class="p">(</span><span class="n">invoke</span><span class="p">.</span><span class="n">invoke</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">relevance_results</span>
+<span class="w">            </span><span class="k">FROM</span><span class="w"> </span><span class="n">azure_ml</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span>
+<span class="w">                        </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">json_pairs_data</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">json_pairs</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">deployment_name</span><span class="o">=&gt;</span><span class="s1">&#39;bgev2m3-v1&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">timeout_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">120000</span><span class="p">)</span>
+<span class="w">        </span><span class="p">),</span>
+<span class="w">        </span><span class="n">relevance_scores_rn</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">idx</span>
+<span class="w">            </span><span class="k">FROM</span><span class="w"> </span><span class="n">relevance_scores</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">content</span><span class="p">,</span>
+<span class="w">               </span><span class="n">r</span><span class="p">.</span><span class="n">relevance_results</span>
+<span class="w">            </span><span class="k">FROM</span>
+<span class="w">                </span><span class="k">unnest</span><span class="p">(</span><span class="n">vector_search_results</span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">ORDINALITY</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">idx2</span><span class="p">)</span>
+<span class="w">            </span><span class="k">JOIN</span>
+<span class="w">                </span><span class="n">relevance_scores_rn</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="n">relevance_results</span><span class="p">,</span><span class="w"> </span><span class="n">idx</span><span class="p">)</span>
+<span class="w">            </span><span class="k">ON</span>
+<span class="w">                </span><span class="n">a</span><span class="p">.</span><span class="n">idx2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">idx</span><span class="p">;</span>
+
+<span class="k">END</span><span class="w"> </span><span class="err">$$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<p>Create relationships indicating vendors submitted invoices:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<details class="info">
+<summary>How does the `semantic_reranking function work?</summary>
+<p>The <code>semantic_reranking</code> function enhances search results by re-ranking them based on their semantic relevance to a given query. Here's a breakdown of how it works:</p>
+<p><strong>Input Parameters</strong></p>
+<ul>
+<li><code>query</code>: A text string representing the search query.</li>
+<li><code>vector_search_results</code>: An array of text strings representing the initial search results obtained from a vector search.</li>
+</ul>
+<p><strong>Return Value</strong></p>
+<ul>
+<li>The function returns a table with two columns: <code>content</code> (the original search result content) and <code>relevance</code> (a JSONB object representing the relevance score).</li>
+</ul>
+<p><strong>Steps</strong></p>
+<ul>
+<li><strong>Json Pairs Construction</strong>: The function starts by constructing a JSON object that pairs the query with each initial search result.</li>
+<li><strong>Relevance Scoring</strong>: It then calls the <code>azure_ml.invoke</code> function to send the JSON pairs to an Azure Machine Learning endpoint, which computes the relevance scores for each pair. The results are returned as a JSON array.</li>
+<li><strong>Row Number Assignment</strong>: The relevance scores are assigned row numbers to maintain their order.</li>
+<li><strong>Combining Results</strong>: Finally, the function combines the original search results with corresponding relevance scores using the row numbers, ensuring that each result is paired with the correct relevance score.</li>
+</ul>
+<p>This function's overall purpose is to improve the relevance of search results by leveraging a semantic model hosted on Azure ML. This ensures that the results returned are more contextually relevant to the user's query.</p>
+</details>
+</li>
+</ol>
+<h2 id="test-the-udf">Test the UDF<a class="headerlink" href="#test-the-udf" title="Permanent link">&para;</a></h2>
+<p>To see how <em>semantic ranking</em> works in your queries, you can execute a test query from <strong>pgAdmin</strong>. The example below shows how to perform semantic reranking of vector search results for the query "cost management and optimization" over the <code>sow_chunks</code> table using the <code>semantic_reranking</code> UDF you created.</p>
+<ol>
+<li>
+<p>In the <strong>pgAdmin</strong> query window, run the following query and observe the results.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Semantic ranking query</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -1831,54 +2018,20 @@
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">kb</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Kevin Bacon&#39;</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m1</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 1&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">kb</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span>
-
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">kb</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Kevin Bacon&#39;</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 2&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">kb</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span><span class="err">​</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">vector_results</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sow_chunks</span><span class="w"> </span><span class="k">c</span>
+<span class="w">    </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;=&gt;</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cost management and optimization&#39;</span><span class="p">)::</span><span class="n">vector</span>
+<span class="w">    </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">relevance</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">semantic_reranking</span><span class="p">(</span><span class="s1">&#39;cost management and optimization&#39;</span><span class="p">,</span><span class="w">  </span><span class="nb">ARRAY</span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">vector_results</span><span class="p">))</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">relevance</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<p>Create relationships indicating other actors acted in the same movies:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">a1</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Actor 1&#39;</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m1</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 1&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">a1</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span>
-
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">a2</span><span class="p">:</span><span class="n">Actor</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Actor 2&#39;</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 2&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">a2</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span><span class="err">​</span>
-</code></pre></div></td></tr></table></div>
-<p>Create relationships indicating directors directed the movies:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">d1</span><span class="p">:</span><span class="n">Director</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Director 1&#39;</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m1</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 1&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">d1</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">DIRECTED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span>
-
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="s1">&#39;graph_name&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">$$</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">d2</span><span class="p">:</span><span class="n">Director</span><span class="w"> </span><span class="err">{</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Director 2&#39;</span><span class="err">}</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="w"> </span><span class="err">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Movie 2&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="p">(</span><span class="n">d2</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">DIRECTED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
-<span class="err">$$</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">agtype</span><span class="p">);</span><span class="err">​</span>
-</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<hr />
+<p>Next, you will update the <code>get_sow_chunks</code> function used by your copilot to use semantic ranking to improve the accuracy and quality of the copilot's responses.</p>
 
 
 
@@ -1916,7 +2069,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.1 Create and Query Graph Data">
+          <a href="../01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.1 Understand Semantic Ranking">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1926,20 +2079,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                6.1 Create and Query Graph Data
+                6.1 Understand Semantic Ranking
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.3 Execute cypher queries">
+          <a href="../03/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.3 Update Copilot to Use Semantic Ranking">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                6.3 Execute cypher queries
+                6.3 Update Copilot to Use Semantic Ranking
               </div>
             </div>
             <div class="md-footer__button md-icon">

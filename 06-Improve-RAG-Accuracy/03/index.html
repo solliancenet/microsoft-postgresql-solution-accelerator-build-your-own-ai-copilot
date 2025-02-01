@@ -26,7 +26,7 @@
     
     
       
-        <title>6.3 Update Copilot to Use Semantic Ranking - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>6.3 Update Copilot With Semantic Ranking - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#63-update-copilot-to-use-semantic-ranking" class="md-skip">
+        <a href="#63-update-copilot-with-semantic-ranking" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.3 Update Copilot to Use Semantic Ranking
+              6.3 Update Copilot With Semantic Ranking
             
           </span>
         </div>
@@ -1572,7 +1572,7 @@
           
   
   <span class="md-ellipsis">
-    6.3 Update Copilot to Use Semantic Ranking
+    6.3 Update Copilot With Semantic Ranking
   </span>
   
 
@@ -1583,7 +1583,7 @@
         
   
   <span class="md-ellipsis">
-    6.3 Update Copilot to Use Semantic Ranking
+    6.3 Update Copilot With Semantic Ranking
   </span>
   
 
@@ -1675,7 +1675,7 @@
         
   
   <span class="md-ellipsis">
-    Apache AGE Extension
+    6.4 Review GraphRAG
   </span>
   
 
@@ -1696,7 +1696,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.5 Set Up GraphRAG
   </span>
   
 
@@ -1717,7 +1717,7 @@
         
   
   <span class="md-ellipsis">
-    06
+    6.6 Update APP With GraphRAG
   </span>
   
 
@@ -1945,7 +1945,7 @@
   
 
 
-<h1 id="63-update-copilot-to-use-semantic-ranking">6.3 Update Copilot to Use Semantic Ranking<a class="headerlink" href="#63-update-copilot-to-use-semantic-ranking" title="Permanent link">&para;</a></h1>
+<h1 id="63-update-copilot-with-semantic-ranking">6.3 Update Copilot With Semantic Ranking<a class="headerlink" href="#63-update-copilot-with-semantic-ranking" title="Permanent link">&para;</a></h1>
 <p>The next step is to update your API to use the semantic ranking capability. For this, you will update how it finds and retrieves SOW chunks, which are the blocks of content extracted from each SOW uploaded into the application.</p>
 <h2 id="review-the-function">Review the function<a class="headerlink" href="#review-the-function" title="Permanent link">&para;</a></h2>
 <p>Following the <em>function calling</em> pattern used by your LangChain agent to retrieve data from the database, you will use a Python function to execute semantic ranking queries from your copilot. Within the <code>src/api/app/functions/chat_functions.py</code> file, the <code>find_sow_chunks_with_semantic_ranking</code> function has been provided for executing queries using the <code>semantic_reranking</code> UDF you added to your database in the previous step. Open it now in Visual Studio Code and explore the code with the function. You can also expand the section below to see the code inline.</p>
@@ -2192,13 +2192,13 @@
         
         
           
-          <a href="../04/" class="md-footer__link md-footer__link--next" aria-label="Next: Apache AGE Extension">
+          <a href="../04/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.4 Review GraphRAG">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Apache AGE Extension
+                6.4 Review GraphRAG
               </div>
             </div>
             <div class="md-footer__button md-icon">

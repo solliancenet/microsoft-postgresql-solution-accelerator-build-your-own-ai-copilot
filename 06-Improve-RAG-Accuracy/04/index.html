@@ -26,7 +26,7 @@
     
     
       
-        <title>Apache AGE Extension - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>6.4 Review GraphRAG - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#apache-age-extension" class="md-skip">
+        <a href="#64-review-graphrag" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Apache AGE Extension
+              6.4 Review GraphRAG
             
           </span>
         </div>
@@ -1563,7 +1563,7 @@
         
   
   <span class="md-ellipsis">
-    6.3 Update Copilot to Use Semantic Ranking
+    6.3 Update Copilot With Semantic Ranking
   </span>
   
 
@@ -1589,15 +1589,54 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    6.4 Review GraphRAG
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Apache AGE Extension
+    6.4 Review GraphRAG
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#graphrag-with-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphRAG with AGE
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1615,7 +1654,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.5 Set Up GraphRAG
   </span>
   
 
@@ -1636,7 +1675,7 @@
         
   
   <span class="md-ellipsis">
-    06
+    6.6 Update APP With GraphRAG
   </span>
   
 
@@ -1789,6 +1828,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#graphrag-with-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphRAG with AGE
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1805,64 +1861,42 @@
   
 
 
-<h1 id="apache-age-extension">Apache AGE Extension<a class="headerlink" href="#apache-age-extension" title="Permanent link">&para;</a></h1>
-<p>The Apache AGE extension in Azure Database for PostgreSQL offers a significant advancement that provides graph processing capabilities within the PostgreSQL ecosystem. This new extension brings a powerful toolset for developers looking to leverage a graph database with the robust enterprise features of Azure Database for PostgreSQL.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code>TODO: Use this blob post as a guide: https://techcommunity.microsoft.com/blog/adforpostgresql/introducing-the-graphrag-solution-for-azure-database-for-postgresql/4299871
-
-3. Add GraphRAG functionality
-   1. Provide graph nodes for relationships between SOWs, vendors, and invoices. Also, linking invoice line items with milestones and deliverables in SOWs?
-
-### What is Apache AGE?
-
-[Apache Graph Extension](https://age.apache.org/age-manual/master/index.html) (AGE) is a PostgreSQL extension developed under the Apache Incubator project. It is designed to provide graph database functionality, enabling users to store and query graph data efficiently within PostgreSQL. It supports the openCypher query language, which allows for intuitive and expressive graph queries. With AGE, you can manage and analyze complex relationships within your data, uncovering insights that traditional relational databases and even semantic search might miss.
-
----
-
-_Select the tabs below to understand the key features and benefits of using AGE in Azure Database for PostgreSQL_
-
-=== &quot;Key Features&quot;
-
-    - Graph and Relational Data Integration: AGE allows seamless integration of graph data with existing relational data in PostgreSQL. This hybrid approach enables you to benefit from both graph and relational models simultaneously.
-    - openCypher Query Language: AGE incorporates openCypher, a powerful and user-friendly query language specifically designed for graph databases. This feature simplifies the process of writing and executing graph queries.
-    - High Performance: AGE is optimized for performance, ensuring efficient storage and retrieval of graph data thanks to support for indexing of graph properties using GIN indices.
-    - Scalability: Built on PostgreSQL&#39;s proven architecture, AGE inherits its scalability and reliability, allowing it to handle growing datasets and increasing workloads.
-
-=== &quot;Benefits&quot;
-
-    The integration of AGE in Azure Database for PostgreSQL brings numerous benefits to developers and businesses looking to leverage graph processing capabilities:
-
-    - Simplified Data Management: AGE&#39;s ability to integrate graph and relational data simplifies data management tasks, reducing the need for separate graph database solutions.
-    - Enhanced Data Analysis: With AGE, you can perform complex graph analyses directly within your PostgreSQL database, gaining deeper insights into relationships and patterns in your data.
-    - Cost Efficiency: By utilizing AGE within Azure Database for PostgreSQL, you can consolidate your database infrastructure, lowering overall costs and reducing the complexity of your data architecture.
-    - Security and Compliance: Leverage Azure&#39;s industry-leading security and compliance features, ensuring your graph data is protected and meets regulatory requirements.
-</code></pre></div></td></tr></table></div>
+<h1 id="64-review-graphrag">6.4 Review GraphRAG<a class="headerlink" href="#64-review-graphrag" title="Permanent link">&para;</a></h1>
+<p><strong>GraphRAG</strong> (Graph Retrieval-Augmented Generation) is an innovative technique developed by Microsoft Research. It significantly enhances the accuracy and relevance of responses generated by Retrieval-Augmented Generation (RAG) systems. <em>Graph</em> refers to a data structure that represents entities and their relationships. This structure is often visualized as nodes (vertices) and edges, where nodes represent entities and edges represent the relationships or connections between these entities.</p>
+<p>The GraphRAG technique involves three main steps:</p>
+<ol>
+<li><strong>Graph Extraction</strong>: Creating a knowledge graph from the source data.</li>
+<li><strong>Entity Summarization</strong>: Summarizing entities within the graph to capture essential information.</li>
+<li><strong>Graph Query Generation</strong>: Generating graph queries at query time to retrieve relevant information based on the prominence and relationships within the graph.</li>
+</ol>
+<p>In the context of Azure Database for PostgreSQL, GraphRAG leverages the structure of knowledge graphs extracted from source data to provide better context and improve the quality of responses from language models. By integrating GraphRAG with PostgreSQL, you can enhance the information retrieval pipeline, making it more accurate and context-aware. This is particularly useful for applications where the accuracy and relevance of information are critical.</p>
+<h2 id="graphrag-with-age">GraphRAG with AGE<a class="headerlink" href="#graphrag-with-age" title="Permanent link">&para;</a></h2>
+<p><a href="https://age.apache.org/age-manual/master/index.html">Apache Graph Extension</a> (AGE) is a PostgreSQL extension developed under the Apache Incubator project. It offers a significant advancement that provides graph processing capabilities within the PostgreSQL ecosystem, enabling users to store and query graph data efficiently. This new extension brings a powerful toolset for developers looking to leverage a graph database with the robust enterprise features of Azure Database for PostgreSQL.</p>
+<p><img alt="Architecture diagram for GraphRAG using the Apache AGE extension and Azure Database for PostgreSQL." src="../../img/graphrag-solution-architecture.png" /></p>
+<p>With AGE, you can manage and analyze complex relationships within your data, uncovering insights that traditional relational databases and even semantic search might miss.</p>
+<hr />
+<p><em>Select the tabs below to discover the key features and benefits of using AGE in Azure Database for PostgreSQL.</em></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="key-features" name="__tabbed_1" type="radio" /><input id="benefits" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="key-features">Key Features</label><label for="benefits">Benefits</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Graph and Relational Data Integration</strong>: AGE allows seamless integration of graph data with existing relational data in PostgreSQL. This hybrid approach lets you benefit from both graph and relational models simultaneously.</li>
+<li><strong>openCypher Query Language</strong>: AGE incorporates openCypher, a powerful and user-friendly query language specifically designed for graph databases. This feature simplifies the process of writing and executing graph queries.</li>
+<li><strong>High Performance</strong>: AGE is optimized for performance, ensuring efficient storage and retrieval of graph data thanks to support for indexing graph properties using GIN indices.</li>
+<li><strong>Scalability</strong>: Built on PostgreSQL's proven architecture, AGE inherits its scalability and reliability, allowing it to handle growing datasets and increasing workloads.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>The integration of AGE in Azure Database for PostgreSQL brings numerous practical benefits to developers and businesses looking to leverage graph processing capabilities:</p>
+<ul>
+<li><strong>Simplified Data Management</strong>: AGE's ability to integrate graph and relational data simplifies data management tasks, reducing the need for separate graph database solutions.</li>
+<li><strong>Enhanced Data Analysis</strong>: With AGE, you can perform complex graph analyses directly within your PostgreSQL database, gaining deeper insights into relationships and patterns in your data.</li>
+<li><strong>Cost Efficiency</strong>: By utilizing AGE within Azure Database for PostgreSQL, you can consolidate your database infrastructure, lowering overall costs and reducing the complexity of your data architecture.</li>
+<li><strong>Security and Compliance</strong>: AGE leverages Azure's industry-leading security and compliance features to ensure your graph data is protected and meets regulatory requirements, providing you with peace of mind.</li>
+</ul>
+</div>
+</div>
+</div>
 
 
 
@@ -1900,7 +1934,7 @@ _Select the tabs below to understand the key features and benefits of using AGE 
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../03/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.3 Update Copilot to Use Semantic Ranking">
+          <a href="../03/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.3 Update Copilot With Semantic Ranking">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1910,20 +1944,20 @@ _Select the tabs below to understand the key features and benefits of using AGE 
                 Previous
               </span>
               <div class="md-ellipsis">
-                6.3 Update Copilot to Use Semantic Ranking
+                6.3 Update Copilot With Semantic Ranking
               </div>
             </div>
           </a>
         
         
           
-          <a href="../05/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.1 Create and Query Graph Data">
+          <a href="../05/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.5 Set Up GraphRAG">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                6.1 Create and Query Graph Data
+                6.5 Set Up GraphRAG
               </div>
             </div>
             <div class="md-footer__button md-icon">

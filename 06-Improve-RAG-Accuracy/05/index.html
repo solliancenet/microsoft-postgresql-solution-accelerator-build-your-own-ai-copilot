@@ -26,7 +26,7 @@
     
     
       
-        <title>6.1 Create and Query Graph Data - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>6.5 Set Up GraphRAG - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#61-create-and-query-graph-data" class="md-skip">
+        <a href="#65-set-up-graphrag" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.1 Create and Query Graph Data
+              6.5 Set Up GraphRAG
             
           </span>
         </div>
@@ -1563,7 +1563,7 @@
         
   
   <span class="md-ellipsis">
-    6.3 Update Copilot to Use Semantic Ranking
+    6.3 Update Copilot With Semantic Ranking
   </span>
   
 
@@ -1584,7 +1584,7 @@
         
   
   <span class="md-ellipsis">
-    Apache AGE Extension
+    6.4 Review GraphRAG
   </span>
   
 
@@ -1614,7 +1614,7 @@
           
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.5 Set Up GraphRAG
   </span>
   
 
@@ -1625,7 +1625,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.5 Set Up GraphRAG
   </span>
   
 
@@ -1647,9 +1647,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update-api-to-allow-graphrag" class="md-nav__link">
+  <a href="#create-and-query-graph-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Update API to allow GraphRAG
+      Create and Query Graph Data
     </span>
   </a>
   
@@ -1675,7 +1675,7 @@
         
   
   <span class="md-ellipsis">
-    06
+    6.6 Update APP With GraphRAG
   </span>
   
 
@@ -1835,9 +1835,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update-api-to-allow-graphrag" class="md-nav__link">
+  <a href="#create-and-query-graph-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Update API to allow GraphRAG
+      Create and Query Graph Data
     </span>
   </a>
   
@@ -1861,7 +1861,14 @@
   
 
 
-<h1 id="61-create-and-query-graph-data">6.1  Create and Query Graph Data<a class="headerlink" href="#61-create-and-query-graph-data" title="Permanent link">&para;</a></h1>
+<h1 id="65-set-up-graphrag">6.5 Set Up GraphRAG<a class="headerlink" href="#65-set-up-graphrag" title="Permanent link">&para;</a></h1>
+<ol>
+<li>Add GraphRAG functionality<ol>
+<li>Provide graph nodes for relationships between SOWs, vendors, and invoices. Also, linking invoice line items with milestones and deliverables in SOWs?</li>
+</ol>
+</li>
+</ol>
+<h2 id="create-and-query-graph-data">Create and Query Graph Data<a class="headerlink" href="#create-and-query-graph-data" title="Permanent link">&para;</a></h2>
 <p>With AGE installed, you are ready to start creating and querying graph data using OpenCypher.</p>
 <p>TODO: Expand on the below and provide good examples</p>
 <p>In this example you use OpenCypher and AGE to determine the connections or relationships between the SOWs and vendors and invoices they have submitted.</p>
@@ -1872,8 +1879,6 @@
 <p>Or</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">ag_catalog</span><span class="p">.</span><span class="n">cypher</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="update-api-to-allow-graphrag">Update API to allow GraphRAG<a class="headerlink" href="#update-api-to-allow-graphrag" title="Permanent link">&para;</a></h2>
-<p>TODO: Add a new API endpoint associated with the copilot to allow GraphRAG queries to be executed and relationship nodes returned...</p>
 <h1 id="62-create-nodes">6.2 Create nodes<a class="headerlink" href="#62-create-nodes" title="Permanent link">&para;</a></h1>
 <p>TODO: Fix the <code>graph_name</code> reference above to use a standard one for the solution accelerator so it doesn't need to be updated in the queries...</p>
 <p>Create vendor nodes</p>
@@ -2036,7 +2041,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Apache AGE Extension">
+          <a href="../04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.4 Review GraphRAG">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2046,20 +2051,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Apache AGE Extension
+                6.4 Review GraphRAG
               </div>
             </div>
           </a>
         
         
           
-          <a href="../06/" class="md-footer__link md-footer__link--next" aria-label="Next: 06">
+          <a href="../06/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.6 Update APP With GraphRAG">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                06
+                6.6 Update APP With GraphRAG
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -1621,7 +1621,7 @@
         
   
   <span class="md-ellipsis">
-    6.3 Update Copilot to Use Semantic Ranking
+    6.3 Update Copilot With Semantic Ranking
   </span>
   
 
@@ -1642,7 +1642,7 @@
         
   
   <span class="md-ellipsis">
-    Apache AGE Extension
+    6.4 Review GraphRAG
   </span>
   
 
@@ -1663,7 +1663,7 @@
         
   
   <span class="md-ellipsis">
-    6.1 Create and Query Graph Data
+    6.5 Set Up GraphRAG
   </span>
   
 
@@ -1684,7 +1684,7 @@
         
   
   <span class="md-ellipsis">
-    06
+    6.6 Update APP With GraphRAG
   </span>
   
 
@@ -1880,7 +1880,7 @@
 
 
 <h1 id="61-understand-semantic-ranking">6.1 Understand Semantic Ranking<a class="headerlink" href="#61-understand-semantic-ranking" title="Permanent link">&para;</a></h1>
-<p>In the context of Azure Database for PostgreSQL, <em>semantic ranking</em> can enhance the accuracy and relevance of search results within the database, significantly improving the information retrieval pipelines in Generative AI (GenAI) applications. Unlike vector search, which primarily measures the similarity between two vector embeddings, semantic ranking delves deeper by analyzing the semantic relevance between text strings at the actual text level. This approach ensures that search results are more contextually aligned with user queries, improving information retrieval and higher user satisfaction.</p>
+<p>Semantic ranking improves accuracy of the vector search by re-ranking results using a semantic ranker model, which brings more relevant items to the top of the ranked list. In the context of Azure Database for PostgreSQL, <em>semantic ranking</em> can enhance the accuracy and relevance of search results within the database, significantly improving the information retrieval pipelines in Generative AI (GenAI) applications. Unlike vector search, which primarily measures the similarity between two vector embeddings, semantic ranking delves deeper by analyzing the semantic relevance between text strings at the actual text level. This approach ensures that search results are more contextually aligned with user queries, improving information retrieval and higher user satisfaction.</p>
 <h2 id="reranking-search-results-with-semantic-ranker-models">Reranking Search Results with Semantic Ranker Models<a class="headerlink" href="#reranking-search-results-with-semantic-ranker-models" title="Permanent link">&para;</a></h2>
 <p>Semantic ranker models compare two text strings: the search query and the text of one of the items being searched. The ranker produces a relevance score that indicates how well the text string matches the query, essentially determining if the text holds an answer to the query. Typically, the semantic ranker is a machine learning model, often a variant of the BERT language model fine-tuned for ranking tasks, but it can also be a large language model (LLM). These ranker models, also called cross-encoder models, take two text strings as input and output a relevance score, usually ranging from 0 to 1.</p>
 <h2 id="semantic-ranker-model-inference-from-postgresql">Semantic Ranker Model Inference from PostgreSQL<a class="headerlink" href="#semantic-ranker-model-inference-from-postgresql" title="Permanent link">&para;</a></h2>

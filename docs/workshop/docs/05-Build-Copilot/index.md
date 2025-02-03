@@ -8,7 +8,6 @@ In this section, you will add an AI copilot to the _Woodgrove Bank Contract Mana
 - [ ] Implement and test the Chat endpoint
 - [ ] Refine the copilot prompt using standard prompt engineering techniques
 - [ ] Add and test the Copilot Chat UI component
-- [ ] Redeploy the app to Azure
 
 Following these steps will transform your application into a powerful AI-enhanced platform capable of executing advanced generative AI tasks and providing deeper insights from your data.
 

@@ -14,7 +14,7 @@ Throughout this solution accelerator, you will enhance the application with AI c
 
 ## Application Data Flow
 
-Select each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_
+_Select each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_
 
 === "Data Ingestion & AI Processing"
 
@@ -34,29 +34,29 @@ Select each tab below to learn more about how the movement of data in the contex
 
           2. Should processing errors be detected or system requirements change, documents can be easily reprocessed.
 
-    4. When new documents are added into blob storage, an Event Grid trigger is fired, starting the Data Ingestion Worker Process.
+    4. When new documents are added into blob storage, the Data Ingestion Process on the API is invoked.
 
-          1. The data ingestion worker process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
+          1. The data ingestion process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
 
           2. AI models within the Document Intelligence service are tailored to extract specific data fields, such as payment milestones, due dates, billable amounts, and vendor details. These models are trained to recognize the structure of financial documents, improving data extraction accuracy.
 
           3. Document Intelligence's Semantic Chunking capability recognizes document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences. This ensures that the chunks are of higher quality for use in RAG pattern queries.
 
-    5. The extracted document data is securely stored in Azure Database for PostgreSQL flexible server.
+    5. The extracted document data securely written to Azure Database for PostgreSQL flexible server by the API.
 
     6. As part of the database insert statement, the GenAI capabilities of the `azure_ai` extension are used to:
 
-          1. Generate and save vector embeddings of document text using Azure OpenAI.
+          1. Generate and save vector embeddings of document chunks using Azure OpenAI's `text-embedding-ada-002` model.
 
           2. Create abstractive summaries of SOWs using the Azure AI Language service.
 
-    7. Document data is sent through an AI-driven data validation process that uses Azure OpenAI to analyze the incoming data, ensuring it conforms to expected standards and is accurate based on related data already in the system.
+    7. Document data is then sent through an AI-driven data validation process on the API that uses Azure OpenAI to analyze the data extracted by Document Intelligence, ensuring it conforms to expected standards and is accurate based on related data already in the system.
         
            1. Azure OpenAI's GPT-4o language model reviews all document data, employing natural language understanding to validate and cross-check information and ensure high data integrity.
            
            2. The RAG pattern allows the language model to cross-reference data between invoices and SOWs, evaluating payment milestone completion and billing and preventing issues like payment delays. It also validates that appropriate document sections and required compliance language exist in contracts and SOWs, helping to avoid incomplete contracts and compliance violations.
 
-    8. The data validation results are securely stored in Azure Database for PostgreSQL alongside the analyzed data.
+    8. The data validation results are securely stored in Azure Database for PostgreSQL alongside the analyzed data. The validation result is also vectorized on insert using the `azure_ai` extension.
 
 === "AI Copilot with RAG"
 

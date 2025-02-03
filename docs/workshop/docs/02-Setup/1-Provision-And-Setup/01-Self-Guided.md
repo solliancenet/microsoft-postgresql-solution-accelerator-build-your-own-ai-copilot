@@ -463,6 +463,10 @@ You will need to install the required software locally and provision the Azure i
 
             ![Screenshot of the Connect to Server dialog, with the access token entered into the password box.](../../img/pgadmin-connect-to-server.png)
 
+            !!! note "Do not save password!"
+
+                Ensure the **Save Password** box in the _Connect to Server_ dialog is unchecked. Checking this box can cause your login to fail.
+
         7. Select **OK**.
 
             !!! warning "Access token expiration"

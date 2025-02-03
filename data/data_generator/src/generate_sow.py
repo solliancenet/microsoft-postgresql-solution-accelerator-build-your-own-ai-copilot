@@ -137,5 +137,5 @@ if __name__ == "__main__":
         raise ValueError(f"Start date not found for vendor '{vendor_name}'")
     
     start_date = datetime.strptime(start_date_str, "%B %d, %Y").strftime("%Y%m%d")
-    output_path = f"../output/Statement_of_Work_{name}_Woodgrove_Bank_{start_date}.pdf"
+    output_path = f"../sample_docs/Statement_of_Work_{name}_Woodgrove_Bank_{start_date}.pdf"
     generate_sow_pdf(output_path, vendor_name, config)

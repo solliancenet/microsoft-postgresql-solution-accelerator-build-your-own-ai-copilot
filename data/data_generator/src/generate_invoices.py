@@ -131,6 +131,6 @@ if __name__ == "__main__":
         words = vendor_config['name'].split()
         invoice_prefix = f"{words[0][0]}{words[1][0]}" if len(words) > 1 else words[0][:2]
         invoice_number = f"INV-{invoice_prefix.upper()}2024-{invoice_num:03d}"
-        output_path = f"../output/{invoice_number}.pdf"
+        output_path = f"../sample_docs/{invoice_number}.pdf"
         
         create_invoice(invoice_number, deliverables, vendor_config, client_info, output_path)

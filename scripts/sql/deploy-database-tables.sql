@@ -115,14 +115,14 @@ SELECT 'SOW-2024-070',
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-070');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
-SELECT 'SOW-2024-W-038',
+SELECT 'SOW-2024-038',
        5,
        '2024-05-01',
        '2025-08-31',
        45000.00,
        '5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf',
        '{}'
-WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-W-038');
+WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-038');
 
 -- SOW Chunks table: Holds the content of the SOW in sections
 CREATE TABLE IF NOT EXISTS sow_chunks (

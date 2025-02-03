@@ -1,5 +1,6 @@
 from fpdf import FPDF
 import os
+import sys
 import json
 import argparse
 from collections import defaultdict
@@ -76,9 +77,7 @@ def create_invoice(invoice_number, deliverables, vendor_info, client_info, outpu
         f"Account Name: {vendor_info['name']}\n"
         f"Account Number: {random.randint(10000000, 99999999)}\n"
         f"To help us allocate money correctly, please reference your invoice number: {invoice_number}\n\n"
-        f"Payment Terms\n"
-        f"- Payment is due within 30 days of the invoice date.\n"
-        f"- A penalty of 10% will be applied for late payments."
+        f"Payment Terms:\n{payment_info}\n"
     ))
 
     # Ensure the output directory exists
@@ -88,13 +87,16 @@ def create_invoice(invoice_number, deliverables, vendor_info, client_info, outpu
     pdf.output(output_path)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate Invoices for a Vendor")
+    # Define the argument parser
+    parser = argparse.ArgumentParser(description="Generate invoices for a given vendor.")
     parser.add_argument("vendor_name", type=str, help="The name of the vendor")
+    parser.add_argument("config_file", type=str, nargs='?', default='sow_inv.config', help="The configuration file to use (default: sow_inv.config)")
     args = parser.parse_args()
 
     vendor_name = args.vendor_name
+    config_file = args.config_file
 
-    config_path = 'src/config/sow_inv.config'
+    config_path = f'src/config/{config_file}'
     configs = load_config(config_path)
     
     # Find the vendor configuration by name
@@ -108,6 +110,16 @@ if __name__ == "__main__":
         "contact_email": "chris.green@woodgrovebank.com"
     }
 
+    # Extract payment terms and penalty from the configuration
+    payment_terms = vendor_config['payments']['terms']
+    penalty = vendor_config['payments']['penalty']
+
+    # Use the extracted payment terms and penalty in the formatted strings
+    payment_info = (
+        f"- Payment is due within {payment_terms.split()[1]} days of the invoice date.\n"
+        f"- A penalty of {penalty.split()[0]} will be applied for late payments."
+    )
+
     # Group deliverables by invoice number
     grouped_deliverables = defaultdict(list)
     for deliverable in vendor_config['deliverables']:
@@ -118,7 +130,7 @@ if __name__ == "__main__":
         # Generate the invoice number in the required format
         words = vendor_config['name'].split()
         invoice_prefix = f"{words[0][0]}{words[1][0]}" if len(words) > 1 else words[0][:2]
-        invoice_number = f"INV-{invoice_prefix.upper()}-2024-{invoice_num:03d}"
-        output_path = f"../output/Invoice_{invoice_number}.pdf"
+        invoice_number = f"INV-{invoice_prefix.upper()}2024-{invoice_num:03d}"
+        output_path = f"../sample_docs/{invoice_number}.pdf"
         
         create_invoice(invoice_number, deliverables, vendor_config, client_info, output_path)

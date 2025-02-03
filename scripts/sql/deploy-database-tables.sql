@@ -20,13 +20,13 @@ SELECT v.id, v.name, v.address, v.contact_name, v.contact_email, v.contact_phone
 FROM (
     SELECT 1 as id, 'Adatum Corporation' as name, '789 Goldsmith Road, MainTown City' as address, 'Elizabeth Moore' as contact_name, 'elizabeth.moore@adatum.com' as contact_email, '555-789-7890' as contact_phone, 'http://www.adatum.com' as website, 'Data Engineering' as type
     UNION ALL
-    SELECT 2, 'Contoso, Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
+    SELECT 2, 'Trey Research', '456 Research Avenue, Redmond', 'Serena Davis', 'serena.davis@treyresearch.net', '555-867-5309', 'http://www.treyresearch.net', 'DevOps'
     UNION ALL
     SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Ana Bowman', 'abowman@lucernepublishing.com', '555-654-9870', 'http://www.lucernepublishing.com', 'Graphic Design'
     UNION ALL
     SELECT 4, 'VarArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
     UNION ALL
-    SELECT 5, 'Trey Research', '456 Research Avenue, Redmond', 'Serena Davis', 'serena.davis@treyresearch.net', '555-867-5309', 'http://www.treyresearch.net', 'DevOps'
+    SELECT 5, 'Contoso, Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
     UNION ALL
     SELECT 6, 'Fabrikam, Inc.', '24601 South St., Philadelphia', 'Remy Morris', 'remy.morris@fabrikam.com', '610-321-0987', 'http://www.fabrikam.com', 'AI Services'
     UNION ALL
@@ -85,21 +85,21 @@ SELECT 'SOW-2024-073',
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-073');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
-SELECT 'SOW-2024-052',
+SELECT 'SOW-2024-038',
        2,
-       '2024-06-01',
-       '2025-11-30',
-       75000.00,
-       '2/sow/Statement_of_Work_Contoso_DevOps_Services_Woodgrove_Bank_20240601.pdf',
+       '2024-05-01',
+       '2025-08-31',
+       60000.00,
+       '2/sow/Statement_of_Work_Trey_Research_Woodgrove_Bank_20240501.pdf',
        '{}'
-WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-052');
+WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-038');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
 SELECT 'SOW-2024-081',
        3,
        '2024-12-01',
        '2024-12-31',
-       50000.00,
+       33000.00,
        '3/sow/Statement_of_Work_Lucerne_Publishing_Woodgrove_Bank_20241201.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-081');
@@ -109,20 +109,20 @@ SELECT 'SOW-2024-070',
        4,
        '2024-10-01',
        '2025-09-30',
-       60000.00,
-       '4/sow/Statement_of_Trey_Research_Woodgrove_Bank_20241001.pdf',
+       55000.00,
+       '4/sow/Statement_of_Work_VanArsdel_Ltd_Woodgrove_Bank_20241001.pdf',
        '{}'
 WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-070');
 
 INSERT INTO sows (number, vendor_id, start_date, end_date, budget, document, metadata)
-SELECT 'SOW-2024-038',
+SELECT 'SOW-2024-052',
        5,
-       '2024-05-01',
-       '2025-08-31',
-       45000.00,
-       '5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf',
+       '2024-06-01',
+       '2025-11-30',
+       115000.00,
+       '5/sow/Statement_of_Work_Contoso_Ltd_Woodgrove_Bank_20240601.pdf',
        '{}'
-WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-038');
+WHERE NOT EXISTS (SELECT 1 FROM sows WHERE number = 'SOW-2024-052');
 
 -- SOW Chunks table: Holds the content of the SOW in sections
 CREATE TABLE IF NOT EXISTS sow_chunks (
@@ -163,9 +163,10 @@ VALUES
     (1,'Cost Management','Completed'),
     (1,'Maintenance Practices','Completed'),
     (1,'App Troubleshooting','In Progress'),
-    (2,'CI/CD Pipelines','Completed'),
-    (2,'Containerized Applications','In Progress'),
-    (2,'Cloud Monitoring','In Progress');
+    (2,'DevOps Strategy & Planning','Completed'),
+    (2,'CI/CD Pipeline Implementation','Completed'),
+    (2,'Infrastructure as Code (IaC)','Completed'),
+    (2,'Security, Monitoring & Optimization', 'In Progress');
 
 -- Deliverables table: Holds the deliverables for each milestone
 CREATE TABLE IF NOT EXISTS deliverables (
@@ -178,17 +179,17 @@ CREATE TABLE IF NOT EXISTS deliverables (
     FOREIGN KEY (milestone_id) REFERENCES milestones (id) ON DELETE CASCADE
 );
 
--- Insert starter data for deliverable
-INSERT INTO deliverables (milestone_id, description, status, due_date)
+-- Insert starter data for deliverables
+INSERT INTO deliverables (milestone_id, description, amount, status, due_date)
 VALUES
-(1,'Monitoring of resources','Completed', '2024-11-08'),
-(2,'Implementation of automated scaling','Completed', '2024-11-08'),
-(3,'Cost Management Implementation','Completed', '2024-11-22'),
-(4,'Maintenance and troubleshooting practices','Completed', '2024-11-27'),
-(5,'Identify Azure application issues','In Progress', '2024-11-27'),
-(5,'Resolution of Azure application issues','Completed', '2024-12-13'),
-(6,'Design CI/CD pipelines','Completed', '2024-10-10'),
-(8,'Initial setup of Cloud infrastructure monitoring','In Progress', '2024-10-10');
+(1,'Monitoring of resources',8600.00,'Completed', '2024-11-08'),
+(2,'Implementation of automated scaling',7000.00,'Completed', '2024-11-08'),
+(3,'Cost Management Implementation',7000.00,'Completed', '2024-11-22'),
+(4,'Maintenance and troubleshooting practices',10500.00,'Completed', '2024-11-27'),
+(5,'Identify Azure application issues',2000.00,'In Progress', '2024-11-27'),
+(5,'Resolution of Azure application issues',3500.00,'Completed', '2024-12-13'),
+(5,'Implementation of app monitoring',5000.00,'In Progress', '2024-12-31'),
+(6,'DevOps Roadmap & Report',10000.00,'Completed','2024-11-20');
 
 -- SOW Validation Results table
 CREATE TABLE IF NOT EXISTS sow_validation_results (
@@ -241,11 +242,11 @@ CREATE TABLE IF NOT EXISTS invoices (
 -- Insert starter data for invoices
 INSERT INTO invoices (id, number, vendor_id, sow_id, amount, invoice_date, payment_status, document, content, metadata)
 VALUES
-    (1, 'INV-TWC2024-001', 1, 1, 15600, '2024-12-08', 'Paid', '1/invoice/INV-TWC2024-001.pdf',  '{"Invoice Number: INV-TWC2024-001 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-08 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone  Deliverables Amount Due Date Monitoring Monitoring of resources $8600.00 2024-12-08 Cost Management Cost Mangement Implementation $7000.00 2024-12-08 Total Amount $15600.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 456-123-789 To help us allocate money correctly, please reference your invoice number: INV-TWC2024-001 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments.","Thank you for choosing Adatum Corporation"}', '{}'),
-    (2, 'INV-TWC2024-002', 1, 1, 7000, '2024-12-22', 'Paid', '2/invoice/INV-TWC2024-002.pdf', '{"Invoice Number: INV-TWC2024-002 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-22 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date Resource Scaling Implementation of automated scaling $7000.00 2024-12-22 Total Amount $7000.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 456-123-789 To help us allocate money correctly, please reference your invoice number: INV-TWC2024-002 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments. Thank you for choosing Adatum Corporation"}', '{}'),
-    (3, 'INV-TWC2024-003', 1, 1, 12500, '2024-12-27', 'In Review', '3/invoice/INV-TWC2024-003.pdf',  '{"Invoice Number: INV-TWC2024-003 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-27 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date Maintenance Practices Maintenance and troubleshooting practices $10500.00 2024-12-27 App Troubleshooting Identify Azure application issues $2000.00 2024-12-27 Total Amount $12500.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 456-123-789 To help us allocate money correctly, please reference your invoice number: INV-TWC2024-003 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments.","Thank you for choosing Adatum Corporation"}', '{}'),
-    (4, 'INV-TWC2024-004', 1, 1, 3500, '2024-01-31', 'Pending', '4/invoice/INV-TWC2024-004.pdf',  '{"Invoice Number: INV-TWC2024-004 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-30 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date App Troubleshooting Resolution of Azure application issues $3500.00 2024-12-30 Total Amount $3500.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 456-123-789 To help us allocate money correctly, please reference your invoice number: INV-TWC2024-004 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments. Thank you for choosing Adatum Corporation"}', '{}'),
-    (5, 'INV-WWE2024-001', 5, 2, 36600, '2024-10-10', 'Pending', '5/invoice/INV-WWE2024-001.pdf',  '{"Invoice Number: INV-WWE2024-001 Vendor: Trey Research Address: 123 Innovation Drive, TechVille Contact Name: Serena Davis Contact Email: serena.davis@treyresearch.net Contact Number: 555-967-8543 SOW Number: SOW-2024-W-038 Invoice Date: 2024-10-10 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date CI/CD Pipelines Design CI/CD pipelines $20100.00 2024-11-10 Cloud Monitoring Initial setup of Cloud infrastructure monitoring $16500.00 2024-11-10 Total Amount $36600.00 If paying by Direct Credit please pay into the following bank account: Account Name: Trey Research Account Number: 123-456-789 To help us allocate money correctly, please reference your invoice number: INV-WWE2024-001 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments. Thank you for choosing Trey Research"}', '{}');
+    (1, 'INV-AC2024-001', 1, 1, 15600, '2024-12-08', 'Paid', '1/invoice/INV-AC2024-001.pdf',  '{"Invoice Number: INV-AC2024-001 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-08 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone  Deliverables Amount Due Date Monitoring Monitoring of resources $8600.00 2024-12-08 Cost Management Cost Mangement Implementation $7000.00 2024-12-08 Total Amount $15600.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 99182326 To help us allocate money correctly, please reference your invoice number: INV-AC2024-001 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}'),
+    (2, 'INV-AC2024-002', 1, 1, 7000, '2024-12-22', 'Paid', '2/invoice/INV-AC2024-002.pdf', '{"Invoice Number: INV-AC2024-002 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-22 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date Resource Scaling Implementation of automated scaling $7000.00 2024-12-22 Total Amount $7000.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 99182326 To help us allocate money correctly, please reference your invoice number: INV-AC2024-002 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}'),
+    (3, 'INV-AC2024-003', 1, 1, 12500, '2024-12-27', 'In Review', '3/invoice/INV-AC2024-003.pdf',  '{"Invoice Number: INV-AC2024-003 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-11-27 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date Maintenance Practices Maintenance and troubleshooting practices $10500.00 2024-12-27 App Troubleshooting Identify Azure application issues $2000.00 2024-12-27 Total Amount $12500.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 99182326 To help us allocate money correctly, please reference your invoice number: INV-AC2024-003 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}'),
+    (4, 'INV-AC2024-004', 1, 1, 8500, '2024-01-31', 'Pending', '4/invoice/INV-AC2024-004.pdf',  '{"Invoice Number: INV-AC2024-004 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-12-01 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date App Troubleshooting Resolution of Azure application issues $3500.00 2024-12-31 App Troubleshooting Implementation of app monitoring 5,000.00 2024-12-31 Total Amount $8500.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 99182326 To help us allocate money correctly, please reference your invoice number: INV-AC2024-004 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}'),
+    (5, 'INV-TR2024-001', 2, 2, 10000, '2024-11-20', 'Paid', '5/invoice/INV-TR2024-001.pdf',  '{"Invoice Number: INV-TR2024-001 Vendor: Trey Research Address: 456 Research Avenue, Redmond Contact Name: Serena Davis Contact Email: serena.davis@treyresearch.net Contact Number: 555-867-5309 SOW Number: SOW-2024-038 Invoice Date: 2024-11-20 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date DevOps Strategy DevOps Roadmap & Report $10000.00 2024-12-20 Total Amount $10000.00 If paying by Direct Credit please pay into the following bank account: Account Name: Trey Research Account Number: 41536685 To help us allocate money correctly, please reference your invoice number: INV-TR2024-001 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}');
 
 -- Invoice Line Items table
 CREATE TABLE IF NOT EXISTS invoice_line_items (
@@ -267,9 +268,9 @@ VALUES
 (2,'Implementation of automated scaling',7000,'Completed','2024-12-22'),
 (3,'Maintenance and troubleshooting practices',10500,'Completed','2024-12-27'),
 (3,'Identify Azure application issues',2000,'In Progress','2024-12-27'),
-(4,'Resolution of Azure application issues',3500,'Completed','2024-12-30'),
-(5,'Design CI/CD pipelines',20100,'Completed','2024-12-10'),
-(5,'Initial setup of Cloud infrastructure monitoring',16500,'In Progress','2024-12-10');
+(4,'Resolution of Azure application issues',3500,'Completed','2025-01-31'),
+(4,'Implementation of app monitoring',5000,'In Progress','2025-01-31'),
+(5,'DevOps Roadmap & Report',10000,'Completed','2024-12-20');
 
 -- Invoice Validation Results table
 CREATE TABLE IF NOT EXISTS invoice_validation_results (

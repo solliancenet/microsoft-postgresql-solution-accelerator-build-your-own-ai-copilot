@@ -4,7 +4,7 @@ This project is designed to automate the generation of a Statement of Work (SOW)
 
 ## Project Structure
 
-```
+```plaintext
 sow_invoice_generator
 ├── src
 │   ├── generate_sow.py        # Script to generate the SOW PDF
@@ -61,5 +61,4 @@ Ensure that the configuration file is correctly formatted to facilitate seamless
 
 ## Output
 
-The generated SOW and invoices will be saved in the output directory. You can open them using any PDF viewer.
-
+The generated SOW and invoices will be saved in the ../data/sample_docs directory. You can open them using any PDF viewer.

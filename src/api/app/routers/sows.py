@@ -1,9 +1,10 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Sow, SowEdit, ListResponse, SowValidationResult
+from app.models import Sow, SowEdit, ListResponse, SowAnalyzeResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
 import json
+import traceback
 
 # Initialize the router
 router = APIRouter(
@@ -57,7 +58,7 @@ async def get_by_id(sow_id: int, pool = Depends(get_db_connection_pool)):
     return sow
 
 
-@router.post("/", response_model=Sow)
+@router.post("/", response_model=SowAnalyzeResult)
 async def analyze_sow(
     file: UploadFile = File(...),
     vendor_id: int = Form(...),
@@ -66,82 +67,87 @@ async def analyze_sow(
     doc_intelligence_service = Depends(get_azure_doc_intelligence_service)
 ):
     """Analyze a SOW document and create a new SOW in the database."""
-    
-    # Get vendor_id from vendor_id
-    async with pool.acquire() as conn:
-        vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
-        if vendor_id is None:
-            raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
+    try:
 
-    # Upload file to Azure Blob Storage
-    documentName = await storage_service.save_sow_document(vendor_id, file)
-
-    # Set field defaults
-    sow_number = f"SOW-{datetime.now().strftime('%Y-%m%d')}"
-    start_date = datetime.strptime("2024-01-01", '%Y-%m-%d').date()
-    end_date = datetime.strptime("2024-12-31", '%Y-%m-%d').date()
-    budget = 0
-    metadata = {}
-
-    # Analyze the document
-    document_data = await storage_service.download_blob(documentName)
-
-    analysis_result = await doc_intelligence_service.extract_text_from_sow_document(document_data)
-    full_text = analysis_result.full_text
-
-    metadata = doc_intelligence_service.extract_sow_metadata(full_text)
-
-    # Get SOW ID from metadata
-    sow_number = metadata['sow_number'] or None
-    sow_id = None # metadata['sow_id']
-    if sow_number is not None:
+        # Get vendor_id from vendor_id
         async with pool.acquire() as conn:
-            sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 AND number = $2;', vendor_id, sow_number)
+            vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
+            if vendor_id is None:
+                raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
+
+        # Upload file to Azure Blob Storage
+        documentName = await storage_service.save_sow_document(vendor_id, file)
+
+        # Set field defaults
+        sow_number = f"SOW-{datetime.now().strftime('%Y-%m%d')}"
+        start_date = datetime.strptime("2024-01-01", '%Y-%m-%d').date()
+        end_date = datetime.strptime("2024-12-31", '%Y-%m-%d').date()
+        budget = 0
+        metadata = {}
+
+        # Analyze the document
+        document_data = await storage_service.download_blob(documentName)
+
+        analysis_result = await doc_intelligence_service.extract_text_from_sow_document(document_data)
+        full_text = analysis_result.full_text
+
+        metadata = doc_intelligence_service.extract_sow_metadata(full_text)
+
+        # Get SOW ID from metadata
+        sow_number = metadata['sow_number'] or None
+        sow_id = None # metadata['sow_id']
+        if sow_number is not None:
+            async with pool.acquire() as conn:
+                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 AND number = $2;', vendor_id, sow_number)
                
 
-    # Create SOW in the database
-    async with pool.acquire() as conn:
-        if sow_id is None:
-            # Create new SOW
-            row = await conn.fetchrow('''
-                INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, summary, vendor_id)
-                VALUES (
-                $1, $2, $3, $4, $5, $6, 
-                azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
-                azure_cognitive.summarize_abstractive($7, 'en', 2), --azure_cognitive.summarize_extractive($7, 'en', 2),
-                $8)
-                RETURNING *;
-            ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)
-        else:
-            # Update existing SOW with new document
-            row = await conn.fetchrow('''
-                UPDATE sows
-                SET start_date = $1,
-                    end_date = $2,
-                    budget = $3,
-                    document = $4,
-                    metadata = $5,
-                    embeddings = azure_openai.create_embeddings('embeddings', $6, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
-                    summary = azure_cognitive.summarize_abstractive($6, 'en', 2) --azure_cognitive.summarize_extractive($6, 'en', 2)
-                WHERE id = $7
-                RETURNING *;
-            ''', start_date, end_date, budget, documentName, json.dumps(metadata), full_text, sow_id)
+        # Create SOW in the database
+        async with pool.acquire() as conn:
+            if sow_id is None:
+                # Create new SOW
+                row = await conn.fetchrow('''
+                    INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, summary, vendor_id)
+                    VALUES (
+                    $1, $2, $3, $4, $5, $6, 
+                    azure_openai.create_embeddings('embeddings', $7, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
+                    azure_cognitive.summarize_abstractive($7, 'en', 2), --azure_cognitive.summarize_extractive($7, 'en', 2),
+                    $8)
+                    RETURNING *;
+                ''', sow_number, start_date, end_date, budget, documentName, json.dumps(metadata), full_text, vendor_id)
+            else:
+                # Update existing SOW with new document
+                row = await conn.fetchrow('''
+                    UPDATE sows
+                    SET start_date = $1,
+                        end_date = $2,
+                        budget = $3,
+                        document = $4,
+                        metadata = $5,
+                        embeddings = azure_openai.create_embeddings('embeddings', $6, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000),
+                        summary = azure_cognitive.summarize_abstractive($6, 'en', 2) --azure_cognitive.summarize_extractive($6, 'en', 2)
+                    WHERE id = $7
+                    RETURNING *;
+                ''', start_date, end_date, budget, documentName, json.dumps(metadata), full_text, sow_id)
 
-        if row is None:
-            raise HTTPException(status_code=500, detail=f'An error occurred while creating the SOW.')
+            if row is None:
+                raise HTTPException(status_code=500, detail=f'An error occurred while creating the SOW.')
 
-        sow = parse_obj_as(Sow, dict(row))
-
-
-        # Save the text chunks for the SOW
-        await conn.execute('''DELETE FROM sow_chunks WHERE sow_id = $1''', sow.id)
-        for chunk in analysis_result.text_chunks:
-            await conn.execute('''
-                INSERT INTO sow_chunks (sow_id, heading, content, page_number) VALUES ($1, $2, $3, $4);
-            ''', sow.id, chunk.heading, chunk.content, chunk.page_number)
+            sow = parse_obj_as(Sow, dict(row))
 
 
-    return sow
+            # Save the text chunks for the SOW
+            await conn.execute('''DELETE FROM sow_chunks WHERE sow_id = $1''', sow.id)
+            for chunk in analysis_result.text_chunks:
+                await conn.execute('''
+                    INSERT INTO sow_chunks (sow_id, heading, content, page_number) VALUES ($1, $2, $3, $4);
+                ''', sow.id, chunk.heading, chunk.content, chunk.page_number)
+
+        return SowAnalyzeResult(hasError=False, error=None, message="SOW analyzed successfully.", sow=sow)
+
+    except Exception as e:
+        print(e) # output error to console
+        # return stack trace
+        return SowAnalyzeResult(hasError=True, error=traceback.format_exc(), message=str(e), sow=None)
 
 
 @router.put("/{sow_id}", response_model=Sow)

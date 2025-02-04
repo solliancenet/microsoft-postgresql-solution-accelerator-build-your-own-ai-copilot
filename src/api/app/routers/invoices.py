@@ -1,9 +1,10 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Invoice, InvoiceEdit, ListResponse, InvoiceValidationResult
+from app.models import Invoice, InvoiceEdit, ListResponse, InvoiceAnalyzeResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
 import json
+import traceback
 
 # Initialize the router
 router = APIRouter(
@@ -56,7 +57,7 @@ async def get_by_id(invoice_id: int, pool = Depends(get_db_connection_pool)):
     return invoice
 
 
-@router.post("/", response_model=Invoice)
+@router.post("/", response_model=InvoiceAnalyzeResult)
 async def analyze_invoice(
     file: UploadFile = File(...),
     vendor_id: int = Form(...),
@@ -65,91 +66,96 @@ async def analyze_invoice(
     doc_intelligence_service = Depends(get_azure_doc_intelligence_service)
     ):
     """Analyze an Invoice document and create a new invoice in the database."""
-    # Get vendor_id from vendor_id
-    async with pool.acquire() as conn:
-        vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
-        if vendor_id is None:
-            raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
-
-    # Upload file to Azure Blob Storage
-    documentName = await storage_service.save_invoice_document(vendor_id, file)
-    
-    # Analyze the document
-    document_data = await storage_service.download_blob(documentName)
-    analysis_result = await doc_intelligence_service.extract_text_from_invoice_document(document_data)
-    
-    full_text = analysis_result.full_text
-
-    text_chunks = doc_intelligence_service.semantic_chunking(full_text)
-    metadata = doc_intelligence_service.extract_invoice_metadata(full_text)
-
-    # Incorporate extracted field values, or use default if not found
-    invoice_number = metadata['number'] or f"INV-{datetime.now().strftime('%Y-%m%d')}"
-    amount = metadata['amount'] or 0
-    invoice_date = metadata['invoice_date'] or datetime.now().date()
-    payment_status = metadata['payment_status'] or "Pending"
-    sow_number = metadata['sow_number'] or None
-
-    metadata['invoice_date'] = None # clear this since object of type date is not json serializable
-
-
-    # Get Invoice ID if Invoice Number already exists for this Vendor
-    invoice_id = None
-    if (invoice_number is not None):
+    try:
+        # Get vendor_id from vendor_id
         async with pool.acquire() as conn:
-            invoice_id = await conn.fetchval('SELECT id FROM invoices WHERE vendor_id = $1 AND number = $2;', vendor_id, invoice_number)
+            vendor_id = await conn.fetchval('SELECT id FROM vendors WHERE id = $1;', vendor_id)
+            if vendor_id is None:
+                raise HTTPException(status_code=404, detail=f'A vendor with an id of {vendor_id} was not found.')
+
+        # Upload file to Azure Blob Storage
+        documentName = await storage_service.save_invoice_document(vendor_id, file)
+        
+        # Analyze the document
+        document_data = await storage_service.download_blob(documentName)
+        analysis_result = await doc_intelligence_service.extract_text_from_invoice_document(document_data)
+        
+        full_text = analysis_result.full_text
+
+        text_chunks = doc_intelligence_service.semantic_chunking(full_text)
+        metadata = doc_intelligence_service.extract_invoice_metadata(full_text)
+
+        # Incorporate extracted field values, or use default if not found
+        invoice_number = metadata['number'] or f"INV-{datetime.now().strftime('%Y-%m%d')}"
+        amount = metadata['amount'] or 0
+        invoice_date = metadata['invoice_date'] or datetime.now().date()
+        payment_status = metadata['payment_status'] or "Pending"
+        sow_number = metadata['sow_number'] or None
+
+        metadata['invoice_date'] = None # clear this since object of type date is not json serializable
 
 
-    # Get SOW ID for SOW Number in metadata, if it exists
-    sow_id = 0
-    if sow_number is not None:
+        # Get Invoice ID if Invoice Number already exists for this Vendor
+        invoice_id = None
+        if (invoice_number is not None):
+            async with pool.acquire() as conn:
+                invoice_id = await conn.fetchval('SELECT id FROM invoices WHERE vendor_id = $1 AND number = $2;', vendor_id, invoice_number)
+
+
+        # Get SOW ID for SOW Number in metadata, if it exists
+        sow_id = 0
+        if sow_number is not None:
+            async with pool.acquire() as conn:
+                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 AND number = $2;', vendor_id, sow_number)
+                if sow_id is None:
+                    # Sow not found, so grab the ID of the most recent SOW
+                    sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 ORDER BY id DESC', vendor_id)
+
+
+        # Create invoice in the database
         async with pool.acquire() as conn:
-            sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 AND number = $2;', vendor_id, sow_number)
-            if sow_id is None:
-                # Sow not found, so grab the ID of the most recent SOW
-                sow_id = await conn.fetchval('SELECT id FROM sows WHERE vendor_id = $1 ORDER BY id DESC', vendor_id)
+            if (invoice_id is None):
+                # Create new SOW
+                row = await conn.fetchrow('''
+                INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
+                VALUES (
+                    $1, $2, $3, $4, $5, $6, $7, $8::jsonb,
+                    azure_openai.create_embeddings('embeddings', $9, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+                ) RETURNING *;
+                ''', vendor_id, sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
+            else:
+                # Update existing Invoice with new document
+                row = await conn.fetchrow('''
+                UPDATE invoices
+                SET sow_id = $1,
+                    "number" = $2,
+                    amount = $3,
+                    invoice_date = $4,
+                    payment_status = $5,
+                    document = $6,
+                    metadata = $7::jsonb,
+                    embeddings = azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+                WHERE id = $9
+                RETURNING *;
+                ''', sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text, invoice_id)
 
+            if row is None:
+                raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')
 
-    # Create invoice in the database
-    async with pool.acquire() as conn:
-        if (invoice_id is None):
-            # Create new SOW
-            row = await conn.fetchrow('''
-            INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
-            VALUES (
-                $1, $2, $3, $4, $5, $6, $7, $8::jsonb,
-                azure_openai.create_embeddings('embeddings', $9, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
-            ) RETURNING *;
-            ''', vendor_id, sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
-        else:
-            # Update existing Invoice with new document
-            row = await conn.fetchrow('''
-            UPDATE invoices
-            SET sow_id = $1,
-                "number" = $2,
-                amount = $3,
-                invoice_date = $4,
-                payment_status = $5,
-                document = $6,
-                metadata = $7::jsonb,
-                embeddings = azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
-            WHERE id = $9
-            RETURNING *;
-            ''', sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text, invoice_id)
+            invoice = parse_obj_as(Invoice, dict(row))
 
-        if row is None:
-            raise HTTPException(status_code=500, detail=f'An error occurred while creating the Invoice.')
+            # Save Invoice Line Items
+            await conn.execute('''DELETE FROM invoice_line_items WHERE invoice_id = $1''', invoice.id)
+            for line_item in analysis_result.line_items:
+                await conn.execute('''
+                    INSERT INTO invoice_line_items (invoice_id, description, amount, status, due_date) VALUES ($1, $2, $3, $4, $5);
+                ''', invoice.id, line_item.description, line_item.amount, line_item.status, line_item.due_date)
 
-        invoice = parse_obj_as(Invoice, dict(row))
+        return InvoiceAnalyzeResult(hasError=False, error=None, message="Invoice analyzed successfully.", invoice=invoice)
 
-        # Save Invoice Line Items
-        await conn.execute('''DELETE FROM invoice_line_items WHERE invoice_id = $1''', invoice.id)
-        for line_item in analysis_result.line_items:
-            await conn.execute('''
-                INSERT INTO invoice_line_items (invoice_id, description, amount, status, due_date) VALUES ($1, $2, $3, $4, $5);
-            ''', invoice.id, line_item.description, line_item.amount, line_item.status, line_item.due_date)
-
-    return invoice
+    except Exception as e:
+        print(e) # output error to console
+        return InvoiceAnalyzeResult(hasError=True, error=traceback.format_exc(), message=str(e), invoice=None) 
 
 
 @router.put("/{invoice_id}", response_model=Invoice)

@@ -9,6 +9,7 @@ const InvoiceCreate = () => {
   const [invoiceVendorId, setInvoiceVendorId] = useState(vendorId);
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
+  const [errorDetail, setErrorDetail] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showUpload, setShowUpload] = useState(true);
@@ -23,6 +24,7 @@ const InvoiceCreate = () => {
       } catch (err) {
         console.error(err);
         setError('Error fetching Vendors');
+        setErrorDetail(null);
         setSuccess(null);
       }
     };
@@ -37,16 +39,30 @@ const InvoiceCreate = () => {
   
     var newInvoiceId = 0;
     try {
+      setError(null);
+      setErrorDetail(null);
+      
       setLoading('Analyzing document with AI...');
 
       const result = await api.invoices.analyze(file, { vendor_id: invoiceVendorId });
-      setInvoiceId(result.id);
-      newInvoiceId = result.id
+
+      if (result.hasError) {
+        setError(result.message);
+        setErrorDetail(result.error);
+        setShowUpload(true);
+        setSuccess(null);
+        setLoading(null);
+        return false;
+      }
+
+      setInvoiceId(result.invoice.id);
+      newInvoiceId = result.invoice.id
 
     } catch (err) {
       console.error(err);
       setShowUpload(true);
       setError('Error analyzing document');
+      setErrorDetail(null);
       setSuccess(null);
       setLoading(null);
       return false;
@@ -70,7 +86,12 @@ const InvoiceCreate = () => {
     <div>
       <h1>Create Invoice</h1>
       <hr/>
-      {error && <div className="alert alert-danger">{error}</div>}
+      {error && <div className="alert alert-danger">
+        <p>{error}</p>
+          {errorDetail && (
+            <p style={{ maxHeight: '10em', overflowY: 'scroll', backgroundColor: '#fff', padding: '0.3em', borderRadius: '0.3em' }} dangerouslySetInnerHTML={{ __html: (errorDetail || '').replace(/\n/g, '<br/>') }}></p>
+          )}
+        </div>}
       {success && <div className="alert alert-success">{success}</div>}
 
       {showUpload && (

@@ -88,13 +88,13 @@ Write-Host "Database Permissions Granted to API App Managed Identity"
 
 Write-Host "Uploading Sample Files to Blob Storage..."
 
-az storage blob upload `
-    --auth-mode login `
-    --overwrite true `
-    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
-    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
-    --name "1/sow/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf" `
-    --file "./data/sample_docs/model_training/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf"
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "1/sow/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf" `
+#     --file "./data/sample_docs/model_training/Statement_of_Work_TailWind_Cloud_Solutions_Woodgrove_Bank_20241101.pdf"
 
 # az storage blob upload `
 #     --auth-mode login `
@@ -128,45 +128,45 @@ az storage blob upload `
 #     --name "5/sow/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf" `
 #     --file "./data/sample_docs/model_training/Statement_of_Work_Trey_Research_Inc_Woodgrove_Bank_20240501.pdf"
 
-az storage blob upload `
-    --auth-mode login `
-    --overwrite true `
-    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
-    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
-    --name "1/invoice/INV-TWC2024-001.pdf" `
-    --file "./data/sample_docs/model_training/INV-TWC2024-001.pdf"
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "1/invoice/INV-TWC2024-001.pdf" `
+#     --file "./data/sample_docs/model_training/INV-TWC2024-001.pdf"
 
-az storage blob upload `
-    --auth-mode login `
-    --overwrite true `
-    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
-    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
-    --name "2/invoice/INV-TWC2024-002.pdf" `
-    --file "./data/sample_docs/model_training/INV-TWC2024-002.pdf"
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "2/invoice/INV-TWC2024-002.pdf" `
+#     --file "./data/sample_docs/model_training/INV-TWC2024-002.pdf"
 
-az storage blob upload `
-    --auth-mode login `
-    --overwrite true `
-    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
-    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
-    --name "3/invoice/INV-TWC2024-003.pdf" `
-    --file "./data/sample_docs/model_training/INV-TWC2024-003.pdf"
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "3/invoice/INV-TWC2024-003.pdf" `
+#     --file "./data/sample_docs/model_training/INV-TWC2024-003.pdf"
 
-az storage blob upload `
-    --auth-mode login `
-    --overwrite true `
-    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
-    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
-    --name "4/invoice/INV-TWC2024-004.pdf" `
-    --file "./data/sample_docs/model_training/INV-TWC2024-004.pdf"
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "4/invoice/INV-TWC2024-004.pdf" `
+#     --file "./data/sample_docs/model_training/INV-TWC2024-004.pdf"
 
-az storage blob upload `
-    --auth-mode login `
-    --overwrite true `
-    --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
-    --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
-    --name "5/invoice/INV-WWE2024-001.pdf" `
-    --file "./data/sample_docs/model_training/INV-WWE2024-001.pdf"
+# az storage blob upload `
+#     --auth-mode login `
+#     --overwrite true `
+#     --account-name "${env:AZURE_STORAGE_ACCOUNT_NAME}" `
+#     --container-name "${env:AZURE_STORAGE_CONTAINER_NAME}" `
+#     --name "5/invoice/INV-WWE2024-001.pdf" `
+#     --file "./data/sample_docs/model_training/INV-WWE2024-001.pdf"
 
 Write-Host "Sample Files Uploaded to Blob Storage"
 

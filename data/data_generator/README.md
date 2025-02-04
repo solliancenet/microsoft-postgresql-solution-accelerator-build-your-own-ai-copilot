@@ -61,4 +61,10 @@ Ensure that the configuration file is correctly formatted to facilitate seamless
 
 ## Output
 
-The generated SOW and invoices will be saved in the ../data/sample_docs directory. You can open them using any PDF viewer.
+The generated SOW and invoices will be saved in the
+
+```plaintext
+../data/sample_docs 
+```
+
+directory. You can open them using any PDF viewer.

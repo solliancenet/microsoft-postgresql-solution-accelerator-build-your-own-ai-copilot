@@ -34,6 +34,10 @@ FROM (
 ) as v
 WHERE NOT EXISTS (SELECT 1 FROM vendors);
 
+CREATE SEQUENCE IF NOT EXISTS vendors_id_seq;
+SELECT setval('vendors_id_seq', COALESCE((SELECT MAX(id) FROM vendors), 1) + 1);
+ALTER TABLE vendors ALTER COLUMN id SET DEFAULT nextval('vendors_id_seq');
+
 /* END VENDORS */
 
 /* STATUS */
@@ -54,6 +58,10 @@ INSERT INTO status (id, name, description) VALUES (4, 'Cancelled', 'The process 
 INSERT INTO status (id, name, description) VALUES (5, 'Overdue', 'The invoice has passed the due date without payment');
 INSERT INTO status (id, name, description) VALUES (6, 'Paid', 'The invoice has been fully paid');
 INSERT INTO status (id, name, description) VALUES (7, 'Completed', 'Work has been finished');
+
+CREATE SEQUENCE IF NOT EXISTS status_id_seq;
+SELECT setval('status_id_seq', COALESCE((SELECT MAX(id) FROM status), 1) + 1);
+ALTER TABLE status ALTER COLUMN id SET DEFAULT nextval('status_id_seq');
 
 /* END STATUS */
 
@@ -145,6 +153,9 @@ VALUES
 (1, 'Compliance', '- Data Security: All data transfers between the Service Provider and Client will use secure, encrypted communication protocols. Data at rest will be encrypted using industry-standard encryption algorithms (e.g., AES-256). - Access Control: Access to the Azure resources and sensitive client information will be granted only to authorized personnel. Multi-factor authentication (MFA) will be enforced for all administrative access. - Audit and Monitoring: Adatum Corporation will maintain comprehensive logs of all access and changes to Azure resources. Regular audits will be conducted to ensure compliance with security protocols. - Incident Response: In the event of a security incident, the Service Provider will notify the Client within 24 hours. A detailed incident report will be provided within 48 hours, outlining the root cause, impact, and mitigation steps. - Regulatory Compliance: The project will comply with applicable regulations, including GDPR, PCI DSS, and ISO 27001, as they pertain to the management of Azure resources.', 2),
 (1, 'Project Deliverables', 'Milestone Name Deliverables Amount Due Date 1 Monitoring Monitoring of resources $8,600.00 2024-11-08 2 Resource Scaling Implementation of automated scaling $7,000.00 2024-11-15 3 Cost Management Cost Management Implementation $7,000.00 2024-11-22 4 Maintenance Practices Maintenance & troubleshooting practice $10,500.00 2024-11-27 5 App Troubleshooting Identify Azure application issues $2,000.00 2024-11-27 5 App Troubleshooting Resolution of Azure application issues $3,500.00 2024-12-13 5 App Troubleshooting Implementation of app monitoring $5,000.00 2024-12-31 Total $43,600.00 Signatures (Adatum Corporation - Elizabeth Moore) (Woodgrove Bank - Sora Kim)', 2);
 
+CREATE SEQUENCE IF NOT EXISTS sow_chunks_id_seq;
+SELECT setval('sow_chunks_id_seq', COALESCE((SELECT MAX(id) FROM sow_chunks), 1) + 1);
+ALTER TABLE sow_chunks ALTER COLUMN id SET DEFAULT nextval('sow_chunks_id_seq');
 
 -- Milestones table: Holds the milestones for each SOW
 CREATE TABLE IF NOT EXISTS milestones (
@@ -168,6 +179,10 @@ VALUES
     (2,'Infrastructure as Code (IaC)','Completed'),
     (2,'Security, Monitoring & Optimization', 'In Progress');
 
+CREATE SEQUENCE IF NOT EXISTS milestones_id_seq;
+SELECT setval('milestones_id_seq', COALESCE((SELECT MAX(id) FROM milestones), 1) + 1);
+ALTER TABLE milestones ALTER COLUMN id SET DEFAULT nextval('milestones_id_seq');
+
 -- Deliverables table: Holds the deliverables for each milestone
 CREATE TABLE IF NOT EXISTS deliverables (
     id BIGSERIAL PRIMARY KEY,
@@ -190,6 +205,10 @@ VALUES
 (5,'Resolution of Azure application issues',3500.00,'Completed', '2024-12-13'),
 (5,'Implementation of app monitoring',5000.00,'In Progress', '2024-12-31'),
 (6,'DevOps Roadmap & Report',10000.00,'Completed','2024-11-20');
+
+CREATE SEQUENCE IF NOT EXISTS deliverables_id_seq;
+SELECT setval('deliverables_id_seq', COALESCE((SELECT MAX(id) FROM deliverables), 1) + 1);
+ALTER TABLE deliverables ALTER COLUMN id SET DEFAULT nextval('deliverables_id_seq');
 
 -- SOW Validation Results table
 CREATE TABLE IF NOT EXISTS sow_validation_results (
@@ -218,6 +237,10 @@ VALUES
     (4, CURRENT_TIMESTAMP, 'The required compliance section is missing.', FALSE),
     (4, CURRENT_TIMESTAMP, 'All fields are valid.', TRUE),
     (5, CURRENT_TIMESTAMP, 'All fields are valid.', TRUE);
+
+CREATE SEQUENCE IF NOT EXISTS sow_validation_results_id_seq;
+SELECT setval('sow_validation_results_id_seq', COALESCE((SELECT MAX(id) FROM sow_validation_results), 1) + 1);
+ALTER TABLE sow_validation_results ALTER COLUMN id SET DEFAULT nextval('sow_validation_results_id_seq');
 
 /* END SOWs */
 
@@ -248,6 +271,10 @@ VALUES
     (4, 'INV-AC2024-004', 1, 1, 8500, '2024-01-31', 'Pending', '4/invoice/INV-AC2024-004.pdf',  '{"Invoice Number: INV-AC2024-004 Vendor: Adatum Corporation Address: 789 Goldsmith Road, MainTown City Contact Name: Elizabeth Moore Contact Email: elizabeth.moore@adatum.com Contact Number: 123-789-7890 SOW Number: SOW-2024-073 Invoice Date: 2024-12-01 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date App Troubleshooting Resolution of Azure application issues $3500.00 2024-12-31 App Troubleshooting Implementation of app monitoring 5,000.00 2024-12-31 Total Amount $8500.00 If paying by Direct Credit please pay into the following bank account: Account Name: Adatum Corporation Account Number: 99182326 To help us allocate money correctly, please reference your invoice number: INV-AC2024-004 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}'),
     (5, 'INV-TR2024-001', 2, 2, 10000, '2024-11-20', 'Paid', '5/invoice/INV-TR2024-001.pdf',  '{"Invoice Number: INV-TR2024-001 Vendor: Trey Research Address: 456 Research Avenue, Redmond Contact Name: Serena Davis Contact Email: serena.davis@treyresearch.net Contact Number: 555-867-5309 SOW Number: SOW-2024-038 Invoice Date: 2024-11-20 Client: Woodgrove Bank Address: 123 Financial Avenue, Woodgrove City Milestone Deliverables Amount Due Date DevOps Strategy DevOps Roadmap & Report $10000.00 2024-12-20 Total Amount $10000.00 If paying by Direct Credit please pay into the following bank account: Account Name: Trey Research Account Number: 41536685 To help us allocate money correctly, please reference your invoice number: INV-TR2024-001 Payment Terms - Payment is due within 30 days of the invoice date. - A penalty of 10% will be applied for late payments."}', '{}');
 
+CREATE SEQUENCE IF NOT EXISTS invoices_id_seq;
+SELECT setval('invoices_id_seq', COALESCE((SELECT MAX(id) FROM invoices), 1) + 1);
+ALTER TABLE invoices ALTER COLUMN id SET DEFAULT nextval('invoices_id_seq');
+
 -- Invoice Line Items table
 CREATE TABLE IF NOT EXISTS invoice_line_items (
     id BIGSERIAL PRIMARY KEY,
@@ -271,6 +298,10 @@ VALUES
 (4,'Resolution of Azure application issues',3500,'Completed','2025-01-31'),
 (4,'Implementation of app monitoring',5000,'In Progress','2025-01-31'),
 (5,'DevOps Roadmap & Report',10000,'Completed','2024-12-20');
+
+CREATE SEQUENCE IF NOT EXISTS invoice_line_items_id_seq;
+SELECT setval('invoice_line_items_id_seq', COALESCE((SELECT MAX(id) FROM invoice_line_items), 1) + 1);
+ALTER TABLE invoice_line_items ALTER COLUMN id SET DEFAULT nextval('invoice_line_items_id_seq');
 
 -- Invoice Validation Results table
 CREATE TABLE IF NOT EXISTS invoice_validation_results (
@@ -297,5 +328,10 @@ VALUES
     (3, CURRENT_TIMESTAMP - INTERVAL '2 hours', 'The amount invoiced for fixing application issues was $500 more than allowed by the contract.', FALSE),
     (4, CURRENT_TIMESTAMP - INTERVAL '2 hours', 'Lots of mistakes. Returning to vendor for corrections', FALSE),
     (4, CURRENT_TIMESTAMP, 'Everything fix. All good.', TRUE);
+
+CREATE SEQUENCE IF NOT EXISTS invoice_validation_results_id_seq;
+SELECT setval('invoice_validation_results_id_seq', COALESCE((SELECT MAX(id) FROM invoice_validation_results), 1) + 1);
+ALTER TABLE invoice_validation_results ALTER COLUMN id SET DEFAULT nextval('invoice_validation_results_id_seq');
+
 
 /* END INVOICES */

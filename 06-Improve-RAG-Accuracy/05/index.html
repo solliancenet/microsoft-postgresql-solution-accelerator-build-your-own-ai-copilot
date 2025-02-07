@@ -2044,8 +2044,8 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>Open a new integrated terminal window in VS Code and execute the following Azure CLI command at the prompt.</li>
-</ol>
+<li>
+<p>Open a new integrated terminal window in VS Code and execute the following Azure CLI command at the prompt.</p>
 <div class="admonition note">
 <p class="admonition-title">Ensure you replace the tokens in the command below with the appropriate values from your Azure environment.</p>
 <ul>
@@ -2056,6 +2056,8 @@
 </div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>postgres<span class="w"> </span>flexible-server<span class="w"> </span>parameter<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--resource-group<span class="w"> </span><span class="o">[</span>YOUR_RESOURCE_GROUP<span class="o">]</span><span class="w"> </span>--server-name<span class="w"> </span><span class="o">[</span>YOUR_POSTGRESQL_SERVER<span class="o">]</span><span class="w"> </span>--subscription<span class="w"> </span><span class="o">[</span>YOUR_SUBSCRIPTION_ID<span class="o">]</span><span class="w"> </span>--name<span class="w"> </span>azure.extensions<span class="w"> </span>--value<span class="w"> </span>age
 </code></pre></div></td></tr></table></div>
+</li>
+</ol>
 </div>
 <div class="tabbed-block">
 <ol>
@@ -2083,8 +2085,8 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>In the VS Code integrated terminal window, execute the following Azure CLI command at the prompt.</li>
-</ol>
+<li>
+<p>In the VS Code integrated terminal window, execute the following Azure CLI command at the prompt.</p>
 <div class="admonition note">
 <p class="admonition-title">Ensure you replace the tokens in the command below with the appropriate values from your Azure environment.</p>
 <ul>
@@ -2098,6 +2100,21 @@
 <div class="admonition info">
 <p class="admonition-title"><code>pg_cron</code> and <code>pg_stat_statements</code> are set by default, so they are included in the above command to avoid removing them from the <code>shared_preload_libraries</code> parameter.</p>
 </div>
+</li>
+<li>
+<p>The above command sets the parameter, but your PostgreSQL flexible server requires a restart for the setting to take effect. Run the following command to restart your server:</p>
+<div class="admonition note">
+<p class="admonition-title">Ensure you replace the tokens in the command below with the appropriate values from your Azure environment.</p>
+<ul>
+<li><strong>[YOUR_RESOURCE_GROUP]</strong>: The name of the resource group hosting your Azure Database for PostgreSQL flexible server.</li>
+<li><strong>[YOUR_POSTGRESQL_SERVER]</strong>: The name of your Azure Database for PostgreSQL server.</li>
+<li><strong>[YOUR_SUBSCRIPTION_ID]</strong>: Your Azure subscription ID.</li>
+</ul>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>postgres<span class="w"> </span>flexible-server<span class="w"> </span>restart<span class="w"> </span>--resource-group<span class="w"> </span><span class="o">[</span>YOUR_RESOURCE_GROUP<span class="o">]</span><span class="w"> </span>--name<span class="w"> </span><span class="o">[</span>YOUR_POSTGRESQL_SERVER<span class="o">]</span><span class="w"> </span>--subscription<span class="w"> </span><span class="o">[</span>YOUR_SUBSCRIPTION_ID<span class="o">]</span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
 </div>
 <div class="tabbed-block">
 <ol>

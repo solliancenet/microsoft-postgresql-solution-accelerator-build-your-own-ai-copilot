@@ -1,10 +1,5 @@
 # B. Instructor-Led Workshop Setup
 
-This is the start of the _instructor-guided_ track for this workshop.
-
-!!! tip "Instructor-Cuided Track content coming soon!"
-
-
 Welcome to the Instructor-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](../../0-Prerequisites/#instructor-led-workshop) section if you need more details.
 
 !!! question "WERE YOU LOOKING FOR THE SELF-GUIDED OPTION INSTEAD? [You can find that here.](./03-Self-Guided.md)"

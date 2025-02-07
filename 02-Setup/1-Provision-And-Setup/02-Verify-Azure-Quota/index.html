@@ -12,28 +12,28 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/01-App-Scenario/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Provision-And-Setup/02-Verify-Azure-Quota/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../01-Fork-Repo/">
       
       
-        <link rel="next" href="../02-App-Architecture/">
+        <link rel="next" href="../03-Self-Guided/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.2">
     
     
       
-        <title>1.1 The App Scenario - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>Verify Azure Quota - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d7758b05.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.d7758b05.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +52,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#11-the-app-scenario" class="md-skip">
+        <a href="#verify-azure-quota" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href="../../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../../img/postgresql.svg" alt="logo">
+  <img src="../../../img/postgresql.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1.1 The App Scenario
+              Verify Azure Quota
             
           </span>
         </div>
@@ -224,7 +224,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -239,13 +239,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../01-Introduction/" class="md-tabs__link">
           
   
     
@@ -261,11 +259,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../02-Setup/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -285,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
+        <a href="../../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
@@ -305,7 +305,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../04-Create-AI-Pipeline/" class="md-tabs__link">
+        <a href="../../../04-Create-AI-Pipeline/" class="md-tabs__link">
           
   
     
@@ -325,7 +325,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../05-Build-Copilot/" class="md-tabs__link">
+        <a href="../../../05-Build-Copilot/" class="md-tabs__link">
           
   
     
@@ -345,7 +345,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../06-Improve-RAG-Accuracy/" class="md-tabs__link">
+        <a href="../../../06-Improve-RAG-Accuracy/" class="md-tabs__link">
           
   
     
@@ -365,7 +365,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../07-Redeploy/" class="md-tabs__link">
+        <a href="../../../07-Redeploy/" class="md-tabs__link">
           
   
     
@@ -385,7 +385,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Tear-Down/" class="md-tabs__link">
+        <a href="../../../Tear-Down/" class="md-tabs__link">
           
   
     
@@ -426,9 +426,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href="../../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../../img/postgresql.svg" alt="logo">
+  <img src="../../../img/postgresql.svg" alt="logo">
 
     </a>
     Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide
@@ -455,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -465,6 +465,118 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../01-Introduction/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    01 Introduction
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            01 Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-Introduction/01-App-Scenario/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.1 The App Scenario
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-Introduction/02-App-Architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.2 Application Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -501,183 +613,12 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    01 Introduction
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            01 Introduction
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    1.1 The App Scenario
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    1.1 The App Scenario
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#streamlining-contract-validation-in-financial-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      Streamlining Contract Validation in Financial Services
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started-with-the-woodgrove-bank-application" class="md-nav__link">
-    <span class="md-ellipsis">
-      Getting Started with the Woodgrove Bank Application
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../02-App-Architecture/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    1.2 Application Architecture
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -689,13 +630,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             02 Setup
@@ -734,7 +675,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
+            <a href="../../0-PreRequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -768,6 +709,8 @@
                 
   
   
+    
+  
   
   
     
@@ -797,18 +740,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/1-Provision-And-Setup/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -826,7 +767,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             1 Provision And Setup
@@ -842,7 +783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/00-Install-Software/" class="md-nav__link">
+      <a href="../00-Install-Software/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -864,7 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/01-Fork-Repo/" class="md-nav__link">
+      <a href="../01-Fork-Repo/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -883,10 +824,31 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/02-Verify-Azure-Quota/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Verify Azure Quota
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -896,6 +858,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#select-an-azure-region-for-your-workshop-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select an Azure region for your workshop resources
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-azure-ml-cpu-quota" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify Azure ML CPU Quota
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -908,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/03-Self-Guided/" class="md-nav__link">
+      <a href="../03-Self-Guided/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -930,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/04-Instructor-Led/" class="md-nav__link">
+      <a href="../04-Instructor-Led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -952,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/05-Setup-Dev-Env/" class="md-nav__link">
+      <a href="../05-Setup-Dev-Env/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -974,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/06-Validation/" class="md-nav__link">
+      <a href="../06-Validation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1044,7 +1044,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
+            <a href="../../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1078,7 +1078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1100,7 +1100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1122,7 +1122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1144,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1166,7 +1166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1228,7 +1228,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../04-Create-AI-Pipeline/" class="md-nav__link ">
+            <a href="../../../04-Create-AI-Pipeline/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1262,7 +1262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/01/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1284,7 +1284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/02/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1306,7 +1306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/03/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1328,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/04/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1350,7 +1350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1418,7 +1418,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../05-Build-Copilot/" class="md-nav__link ">
+            <a href="../../../05-Build-Copilot/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1452,7 +1452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/01/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1474,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/02/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1496,7 +1496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/03/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1518,7 +1518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/04/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1540,7 +1540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/05/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1562,7 +1562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/06/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1584,7 +1584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/07/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1606,7 +1606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/08/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/08/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1670,7 +1670,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../06-Improve-RAG-Accuracy/" class="md-nav__link ">
+            <a href="../../../06-Improve-RAG-Accuracy/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1704,7 +1704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Improve-RAG-Accuracy/01/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1726,7 +1726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Improve-RAG-Accuracy/02/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1748,7 +1748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Improve-RAG-Accuracy/03/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1770,7 +1770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Improve-RAG-Accuracy/04/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1792,7 +1792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Improve-RAG-Accuracy/05/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1814,7 +1814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-Improve-RAG-Accuracy/06/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1866,7 +1866,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../07-Redeploy/" class="md-nav__link ">
+            <a href="../../../07-Redeploy/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1925,7 +1925,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../Tear-Down/" class="md-nav__link ">
+            <a href="../../../Tear-Down/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1981,18 +1981,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#streamlining-contract-validation-in-financial-services" class="md-nav__link">
+  <a href="#select-an-azure-region-for-your-workshop-resources" class="md-nav__link">
     <span class="md-ellipsis">
-      Streamlining Contract Validation in Financial Services
+      Select an Azure region for your workshop resources
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started-with-the-woodgrove-bank-application" class="md-nav__link">
+  <a href="#verify-azure-ml-cpu-quota" class="md-nav__link">
     <span class="md-ellipsis">
-      Getting Started with the Woodgrove Bank Application
+      Verify Azure ML CPU Quota
     </span>
   </a>
   
@@ -2017,19 +2017,86 @@
   
 
 
-<h1 id="11-the-app-scenario">1.1 The App Scenario<a class="headerlink" href="#11-the-app-scenario" title="Permanent link">&para;</a></h1>
-<h2 id="streamlining-contract-validation-in-financial-services">Streamlining Contract Validation in Financial Services<a class="headerlink" href="#streamlining-contract-validation-in-financial-services" title="Permanent link">&para;</a></h2>
-<p>In the financial services industry, validating contract-related documents such as Statements of Work (SOWs) and invoices presents unique challenges. Ensuring that invoices align with SOWs, especially for milestone-based payments and specific deliverables, can be a meticulous and error-prone process. Traditionally, this validation involves manual comparison and cross-checking, often leading to delays, errors, and increased operational costs. This accelerator offers a solution that leverages Azure Database for PostgreSQL - Flexible and Azure's comprehensive suite of AI services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.</p>
-<p>The accelerator is designed to demonstrate how an existing financial services application can be enhanced by integrating advanced AI capabilities into Azure Database for PostgreSQL through the Azure AI extension and incorporating Azure OpenAI's GPT-4 model to validate and review contract-related documents.</p>
-<h2 id="getting-started-with-the-woodgrove-bank-application">Getting Started with the Woodgrove Bank Application<a class="headerlink" href="#getting-started-with-the-woodgrove-bank-application" title="Permanent link">&para;</a></h2>
-<p>You have been provided starter code and deployment scripts for the <em>Woodgrove Bank</em> web application. This application comprises an enterprise user portal integrated with a custom backend API. You will enhance this application by integrating Azure AI services throughout this accelerator. Key steps include:</p>
+<h1 id="verify-azure-quota">Verify Azure Quota<a class="headerlink" href="#verify-azure-quota" title="Permanent link">&para;</a></h1>
+<p>This solution contains an Azure Developer CLI <code>azd-template</code> that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single <code>azd up</code> command. On completing this step, you should have:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Selected an Azure region for workshop resources</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Verified your Azure ML CPU quota</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Authenticated with Azure</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Provisioned Azure resources and deployed the starter solution</li>
+</ul>
+<h2 id="select-an-azure-region-for-your-workshop-resources">Select an Azure region for your workshop resources<a class="headerlink" href="#select-an-azure-region-for-your-workshop-resources" title="Permanent link">&para;</a></h2>
+<p>To ensure you can successfully deploy the Azure resources using the <code>azd up</code> command, you must choose a region that supports the required Azure OpenAI <code>gpt-4o</code> and <code>text-embedding-ada-002</code> models.</p>
 <ol>
-<li><strong>Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL</strong>: Use the Azure AI <code>azure_ai</code> and pgvector (<code>vector</code>) extensions to extend your PostgreSQL database with advanced GenAI and vector search capabilities.</li>
-<li><strong>Automating Data Validation with AI:</strong> Enhance the data ingestion process with automated, AI-driven validation using Azure Document Intelligence and Azure AI services.</li>
-<li><strong>Building a Copilot:</strong> Create an intelligent assistant using Azure OpenAI and Azure Database for PostgreSQL - Flexible Server, incorporating the Retrieval Augmented Generation (RAG) design pattern to ensure its responses are based on the private data maintained by the enterprise.</li>
-<li><strong>Adding GraphRAG functionality</strong>: Install the Apache AGE (<code>age</code>) extension to allow your PostgreSQL database to be used as a graph database, providing a comprehensive solution for analyzing interconnected data.</li>
+<li>
+<p>Before deciding on the Azure region you want to use for your workshop resources:</p>
+<ol>
+<li>
+<p>Review the regional availability guidance for the <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-ada-002</a> models in Azure OpenAI.</p>
+</li>
+<li>
+<p>Check the <a href="https://learn.microsoft.com/azure/ai-services/language-service/summarization/region-support#regional-availability-table">text abstractive summarization regional availability</a></p>
+</li>
 </ol>
-<p>This solution accelerator aims to teach you how to integrate AI capabilities into an existing application by leveraging Microsoft Azure's AI services to automate and streamline the validation of contract-related documents in the financial services industry. This integration results in faster, more accurate, and cost-effective processes. Additionally, the copilot will provide intelligent assistance, enabling users to gain actionable insights from data stored in the Azure Database for PostgreSQL, enhancing their overall experience.</p>
+</li>
+<li>
+<p>Choose a region that <strong>supports both Azure OpenAI models</strong> and <strong>Text Abstractive Summarization</strong>.</p>
+</li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">Select a region that supports Azure OpenAI both models!</p>
+</div>
+<p>Choosing a region that doesn't support both Azure OpenAI models will result in deployment failure when running <code>azd up</code>.</p>
+<p>Selecting a region that does not support <em>abstractive summarization</em> will not cause a deployment failure, but will need to make code changes later in the workshop to use <em>extractive summarization</em> in its place.</p>
+<h2 id="verify-azure-ml-cpu-quota">Verify Azure ML CPU Quota<a class="headerlink" href="#verify-azure-ml-cpu-quota" title="Permanent link">&para;</a></h2>
+<p>This solution accelerator contains a section dedicted to setting up and using a Semantic Ranking model directly from your PostgreSQL database. The deployment of this component of the architecture requires sufficient CPU quota (32 cores) in Azure Machine Learning to accomodate the <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">Hugging Face BGE reranker model deployment</a>. In this task, you must verify you have available quota for the target virtual machine (VM) instance type (<code>STANDARD_D16AS_V4</code>), and if not, request additional quota.</p>
+<ol>
+<li>
+<p>To view your available quota, you first need to retrieve your Microsoft Entra ID <strong>Tenant ID</strong> from the <a href="https://portal.azure.com/">Azure portal</a>.</p>
+</li>
+<li>
+<p>In the Azure portal, enter "Microsoft Entra ID" into the search bar, then select <strong>Microsoft Entra ID</strong> from the <strong>Services</strong> list in the results.</p>
+<p><img alt="Microsoft Entra ID is entered into the Azure search bar and it is highlighted in the Services results." src="../../../img/azure-portal-search-entra-id.png" /></p>
+</li>
+<li>
+<p>On the <strong>Overview</strong> page of your Microsoft Entra ID tenant, select the <strong>Copy to clipboard</strong> button for your <strong>Tenant ID</strong>.</p>
+<p><img alt="On the Entra ID tenant overview tab, the copy to clipboard button for the Tenant ID is highlighted with a red box." src="../../../img/azure-portal-entra-id-tenant-overview.png" /></p>
+</li>
+<li>
+<p>Open a new browser window or tab and navigate to the following URL, replacing the <code>&lt;your-tenant-id&gt;</code> token with the Tenant ID you copied from the Entra ID overview page in the Azure portal.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Azure ML Quota page</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>https://ml.azure.com/quota?tid<span class="o">=</span>&lt;your-tenant-id&gt;
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>On the Azure ML <strong>Quota</strong> page, select the subscription you are using for this workshop.</p>
+<p><img alt="Screenshot of the Azure ML quota subscription selection page." src="../../../img/azure-ml-quota-subscription.png" /></p>
+</li>
+<li>
+<p>On the quota page for your selected subscription, select the Azure region you plan to use for this workshop. This should be the region you chose in previous task that supports the required Azure OpenAI models.</p>
+</li>
+<li>
+<p>You should now see a list of CPUs and their quotas within your subscription. Locate <strong>Standard DASv4 Family Cluster Dedicated vCPUs</strong> in the list and inspect the <strong>Quota</strong> available.</p>
+<p><img alt="On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted." src="../../../img/azure-ml-quota-standard-dasv4.png" /></p>
+</li>
+<li>
+<p>If you have 32 cores or more available, you can skip to the <a href="#33-authenticate-with-azure">Authenticate With Azure task</a>. Otherwise, select the <strong>Standard DASv4 Family Cluster Dedicated vCPUs</strong> by checking the box to the left of the name, then scroll up to the top of the page and locate the <strong>Request quota</strong> button.</p>
+<p><img alt="Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box." src="../../../img/azure-ml-request-quota.png" /></p>
+</li>
+<li>
+<p>In the <strong>Request quota</strong> dialog, increase your <strong>New cores limit</strong> value by 32 and then select <strong>Submit</strong>.</p>
+<p><img alt="Screenshot of the Request quota dialog with a value of 32 highlighted in the new cores limit box and the submit button highlighted." src="../../../img/azure-ml-request-quota-dialog.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Your <strong>new cores limit</strong> should be increased to ensure 32 cores are available for a new deployment. For example, if you have zero cores available, your new cores limit should be set to 32. If your core limit is 100 and you are currently using 90, your new cores limit should be set to 122.</p>
+</div>
+</li>
+<li>
+<p>Quota increase requests typically take a few minutes to complete. You will recieve notifications in the Azure portal as the request is processed and when it completes.</p>
+</li>
+<li>
+<p>If your request is denied, you don't have permissions to issue the request, or you prefer not to request additional quota, you have the option to exclude the <strong>Semantic Ranking</strong> model deployment when running the <code>azd up</code> command by setting the <code>deployAMLModel</code> flag to <code>false</code> when prompted.</p>
+</li>
+</ol>
 
 
 
@@ -2067,7 +2134,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+          <a href="../01-Fork-Repo/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fork Repo">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2077,20 +2144,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Introduction
+                Fork Repo
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02-App-Architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: 1.2 Application Architecture">
+          <a href="../03-Self-Guided/" class="md-footer__link md-footer__link--next" aria-label="Next: A. Self-Guided Setup">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                1.2 Application Architecture
+                A. Self-Guided Setup
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2126,12 +2193,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
   <!-- Add scripts that need to run before here -->
   
-      <script src="../../assets/javascripts/bundle.f13b1293.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f13b1293.min.js"></script>
       
     
   <!-- Add scripts that need to run afterwards here -->

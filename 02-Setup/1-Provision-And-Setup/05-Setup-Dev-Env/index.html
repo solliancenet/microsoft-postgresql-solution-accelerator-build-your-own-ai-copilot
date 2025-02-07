@@ -12,13 +12,13 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Provision-And-Setup/01-Self-Guided/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Provision-And-Setup/05-Setup-Dev-Env/">
       
       
-        <link rel="prev" href="../01-Fork-Repo/">
+        <link rel="prev" href="../04-Instructor-Led/">
       
       
-        <link rel="next" href="../02-Instructor-Led/">
+        <link rel="next" href="../06-Validation/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>A. Self-Guided Setup - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>Setup Dev Environment - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#a-self-guided-setup" class="md-skip">
+        <a href="#setup-dev-environment" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              A. Self-Guided Setup
+              Setup Dev Environment
             
           </span>
         </div>
@@ -730,6 +730,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -820,6 +824,72 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-Verify-Azure-Quota/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verify Azure Quota
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Self-Guided/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A. Self-Guided Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Instructor-Led/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    B. Instructor-Led Workshop Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -836,7 +906,7 @@
           
   
   <span class="md-ellipsis">
-    A. Self-Guided Setup
+    Setup Dev Environment
     
   </span>
   
@@ -848,7 +918,7 @@
         
   
   <span class="md-ellipsis">
-    A. Self-Guided Setup
+    Setup Dev Environment
     
   </span>
   
@@ -871,81 +941,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-select-an-azure-region-for-your-workshop-resources" class="md-nav__link">
+  <a href="#create-a-python-virtual-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Select an Azure region for your workshop resources
+      Create a Python virtual environment
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-verify-azure-ml-cpu-quota" class="md-nav__link">
+  <a href="#install-required-python-libraries" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Verify Azure ML CPU Quota
+      Install required Python libraries
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#33-authenticate-with-azure" class="md-nav__link">
+  <a href="#create-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      3.3 Authenticate With Azure
+      Create .env file
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#34-provision-azure-resource-and-deploy-app-ui-and-api" class="md-nav__link">
+  <a href="#connect-to-your-database-from-pgadmin" class="md-nav__link">
     <span class="md-ellipsis">
-      3.4 Provision Azure Resource and Deploy App (UI and API)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#41-create-a-python-virtual-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.1 Create a Python virtual environment
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#42-install-required-python-libraries" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.2 Install required Python libraries
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#43-create-env-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.3 Create .env file
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#44-connect-to-your-database-from-pgadmin" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.4 Connect to your database from pgAdmin
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-validate-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Next → Validate Setup
+      Connect to your database from pgAdmin
     </span>
   </a>
   
@@ -967,29 +992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-Instructor-Led/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    B. Instructor-Led Workshop Setup
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../03-Validation/" class="md-nav__link">
+      <a href="../06-Validation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1996,81 +1999,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-select-an-azure-region-for-your-workshop-resources" class="md-nav__link">
+  <a href="#create-a-python-virtual-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Select an Azure region for your workshop resources
+      Create a Python virtual environment
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-verify-azure-ml-cpu-quota" class="md-nav__link">
+  <a href="#install-required-python-libraries" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Verify Azure ML CPU Quota
+      Install required Python libraries
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#33-authenticate-with-azure" class="md-nav__link">
+  <a href="#create-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      3.3 Authenticate With Azure
+      Create .env file
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#34-provision-azure-resource-and-deploy-app-ui-and-api" class="md-nav__link">
+  <a href="#connect-to-your-database-from-pgadmin" class="md-nav__link">
     <span class="md-ellipsis">
-      3.4 Provision Azure Resource and Deploy App (UI and API)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#41-create-a-python-virtual-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.1 Create a Python virtual environment
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#42-install-required-python-libraries" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.2 Install required Python libraries
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#43-create-env-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.3 Create .env file
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#44-connect-to-your-database-from-pgadmin" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.4 Connect to your database from pgAdmin
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-validate-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Next → Validate Setup
+      Connect to your database from pgAdmin
     </span>
   </a>
   
@@ -2095,167 +2053,7 @@
   
 
 
-<h1 id="a-self-guided-setup">A. Self-Guided Setup<a class="headerlink" href="#a-self-guided-setup" title="Permanent link">&para;</a></h1>
-<p>Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the <a href="../../0-Prerequisites/#self-guided">prerequisites</a> section if you need more details.</p>
-<div class="admonition question">
-<p class="admonition-title">WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? <a href="../02-Instructor-Led/">You can find that here.</a></p>
-</div>
-<hr />
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="3-provision-azure-infrastructure" name="__tabbed_1" type="radio" /><input id="4-setup-dev-environment" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="3-provision-azure-infrastructure">3. Provision Azure infrastructure</label><label for="4-setup-dev-environment">4. Setup dev environment</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>This solution contains an Azure Developer CLI <code>azd-template</code> that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single <code>azd up</code> command. On completing this step, you should have:</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Selected an Azure region for workshop resources</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Verified your Azure ML CPU quota</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Authenticated with Azure</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Provisioned Azure resources and deployed the starter solution</li>
-</ul>
-<h2 id="31-select-an-azure-region-for-your-workshop-resources">3.1 Select an Azure region for your workshop resources<a class="headerlink" href="#31-select-an-azure-region-for-your-workshop-resources" title="Permanent link">&para;</a></h2>
-<p>To ensure you can successfully deploy the Azure resources using the <code>azd up</code> command, you must choose a region that supports the required Azure OpenAI <code>gpt-4o</code> and <code>text-embedding-ada-002</code> models.</p>
-<ol>
-<li>
-<p>Before deciding on the Azure region you want to use for your workshop resources:</p>
-</li>
-<li>
-<p>Review the regional availability guidance for the <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-ada-002</a> models in Azure OpenAI.</p>
-</li>
-<li>
-<p>Check the <a href="https://learn.microsoft.com/azure/ai-services/language-service/summarization/region-support#regional-availability-table">text abstractive summarization regional availability</a></p>
-</li>
-<li>
-<p>Choose a region that <strong>supports both Azure OpenAI models</strong> and <strong>Text Abstractive Summarization</strong>.</p>
-</li>
-</ol>
-<div class="admonition danger">
-<p class="admonition-title">Select a region that supports Azure OpenAI both models!</p>
-<p>Choosing a region that doesn't support both Azure OpenAI models will result in deployment failure when running <code>azd up</code>.</p>
-<p>Selecting a region that does not support <em>abstractive summarization</em> will not cause a deployment failure, but will need to make code changes later in the workshop to use <em>extractive summarization</em> in its place.</p>
-</div>
-<h2 id="32-verify-azure-ml-cpu-quota">3.2 Verify Azure ML CPU Quota<a class="headerlink" href="#32-verify-azure-ml-cpu-quota" title="Permanent link">&para;</a></h2>
-<p>This solution accelerator contains a section dedicted to setting up and using a Semantic Ranking model directly from your PostgreSQL database. The deployment of this component of the architecture requires sufficient CPU quota (32 cores) in Azure Machine Learning to accomodate the <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">Hugging Face BGE reranker model deployment</a>. In this task, you must verify you have available quota for the target virtual machine (VM) instance type (<code>STANDARD_D16AS_V4</code>), and if not, request additional quota.</p>
-<ol>
-<li>
-<p>To view your available quota, you first need to retrieve your Microsoft Entra ID <strong>Tenant ID</strong> from the <a href="https://portal.azure.com/">Azure portal</a>.</p>
-</li>
-<li>
-<p>In the Azure portal, enter "Microsoft Entra ID" into the search bar, then select <strong>Microsoft Entra ID</strong> from the <strong>Services</strong> list in the results.</p>
-<p><img alt="Microsoft Entra ID is entered into the Azure search bar and it is highlighted in the Services results." src="../../../img/azure-portal-search-entra-id.png" /></p>
-</li>
-<li>
-<p>On the <strong>Overview</strong> page of your Microsoft Entra ID tenant, select the <strong>Copy to clipboard</strong> button for your <strong>Tenant ID</strong>.</p>
-<p><img alt="On the Entra ID tenant overview tab, the copy to clipboard button for the Tenant ID is highlighted with a red box." src="../../../img/azure-portal-entra-id-tenant-overview.png" /></p>
-</li>
-<li>
-<p>Open a new browser window or tab and navigate to the following URL, replacing the <code>&lt;your-tenant-id&gt;</code> token with the Tenant ID you copied from the Entra ID overview page in the Azure portal.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Azure ML Quota page</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>https://ml.azure.com/quota?tid<span class="o">=</span>&lt;your-tenant-id&gt;
-</code></pre></div></td></tr></table></div>
-</li>
-<li>
-<p>On the Azure ML <strong>Quota</strong> page, select the subscription you are using for this workshop.</p>
-<p><img alt="Screenshot of the Azure ML quota subscription selection page." src="../../../img/azure-ml-quota-subscription.png" /></p>
-</li>
-<li>
-<p>On the quota page for your selected subscription, select the Azure region you plan to use for this workshop. This should be the region you chose in previous task that supports the required Azure OpenAI models.</p>
-</li>
-<li>
-<p>You should now see a list of CPUs and their quotas within your subscription. Locate <strong>Standard DASv4 Family Cluster Dedicated vCPUs</strong> in the list and inspect the <strong>Quota</strong> available.</p>
-<p><img alt="On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted." src="../../../img/azure-ml-quota-standard-dasv4.png" /></p>
-</li>
-<li>
-<p>If you have 32 cores or more available, you can skip to the <a href="#33-authenticate-with-azure">Authenticate With Azure task</a>. Otherwise, select the <strong>Standard DASv4 Family Cluster Dedicated vCPUs</strong> by checking the box to the left of the name, then scroll up to the top of the page and locate the <strong>Request quota</strong> button.</p>
-<p><img alt="Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box." src="../../../img/azure-ml-request-quota.png" /></p>
-</li>
-<li>
-<p>In the <strong>Request quota</strong> dialog, increase your <strong>New cores limit</strong> value by 32 and then select <strong>Submit</strong>.</p>
-<p><img alt="Screenshot of the Request quota dialog with a value of 32 highlighted in the new cores limit box and the submit button highlighted." src="../../../img/azure-ml-request-quota-dialog.png" /></p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Your <strong>new cores limit</strong> should be increased to ensure 32 cores are available for a new deployment. For example, if you have zero cores available, your new cores limit should be set to 32. If your core limit is 100 and you are currently using 90, your new cores limit should be set to 122.</p>
-</div>
-</li>
-<li>
-<p>Quota increase requests typically take a few minutes to complete. You will recieve notifications in the Azure portal as the request is processed and when it completes.</p>
-</li>
-<li>
-<p>If your request is denied, you don't have permissions to issue the request, or you prefer not to request additional quota, you have the option to exclude the <strong>Semantic Ranking</strong> model deployment when running the <code>azd up</code> command by setting the <code>deployAMLModel</code> flag to <code>false</code> when prompted.</p>
-</li>
-</ol>
-<h2 id="33-authenticate-with-azure">3.3 Authenticate With Azure<a class="headerlink" href="#33-authenticate-with-azure" title="Permanent link">&para;</a></h2>
-<p>Before running the <code>azd up</code> command, you must authenticate your VS Code environment to Azure.</p>
-<ol>
-<li>To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Step 1: Authenticate with <code>az</code> for post-provisioning tasks</p>
-</div>
-<ol>
-<li>
-<p>Log into the Azure CLI <code>az</code> using the command below.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>login
-</code></pre></div></td></tr></table></div>
-</li>
-<li>
-<p>Complete the login process in the browser window that opens.</p>
-<div class="admonition info">
-<p class="admonition-title">If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id> to specify the correct subscription to use.</p>
-</div>
-</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Step 2: Authenticate with <code>azd</code> for provisioning &amp; managing resources</p>
-</div>
-<ol>
-<li>
-<p>Log in to Azure Developer CLI. This is only required once per-install.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>auth<span class="w"> </span>login
-</code></pre></div></td></tr></table></div>
-</li>
-</ol>
-<h2 id="34-provision-azure-resource-and-deploy-app-ui-and-api">3.4 Provision Azure Resource and Deploy App (UI and API)<a class="headerlink" href="#34-provision-azure-resource-and-deploy-app-ui-and-api" title="Permanent link">&para;</a></h2>
-<p>You are now ready to provision your Azure resources and deploy the Woodgrove back solution.</p>
-<ol>
-<li>
-<p>Use <code>azd up</code> to provision your Azure infrastructure and deploy the web application to Azure.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>up
-</code></pre></div></td></tr></table></div>
-<div class="admonition info">
-<p class="admonition-title">You will be prompted for several inputs for the <code>azd up</code> command:</p>
-<ul>
-<li><strong>Enter a new environment name</strong>: Enter a value, such as <code>dev</code>.<ul>
-<li>The environment for the <code>azd up</code> command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.</li>
-<li>Should you need to delete the <code>azd</code> environment, locate and delete the <code>.azure</code> folder at the root of the project in the VS Code Explorer.</li>
-</ul>
-</li>
-<li><strong>Select an Azure Subscription to use</strong>: Select the Azure subscription you are using for this workshop using the up and down arrow keys.</li>
-<li><strong>Select an Azure location to use</strong>: Select the Azure region into which resources should be deployed using the up and down arrow keys.</li>
-<li><strong>Enter a value for the <code>deployAMLModel</code></strong>: Select <code>True</code> if you were able to ensure you have sufficient Azure ML CPU quota avaiable to deploy the model. Otherwise, choose <code>False</code>.<ul>
-<li>If you select <code>False</code>, you will need to skip the optional <strong>Semantic Ranker</strong> section of this accelerator.</li>
-</ul>
-</li>
-<li><strong>Enter a value for the <code>postgresqlAdminPassword</code></strong>: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.<ul>
-<li>Ensure you copy the password in a secure location so you can use it later to access the database.</li>
-</ul>
-</li>
-<li><strong>Enter a value for the <code>resourceGroupName</code></strong>: Enter <code>rg-postgresql-accelerator</code>, or a similar name.</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Wait for the process to complete. It may take 30-45 minutes or more.</p>
-<div class="admonition failure">
-<p class="admonition-title">Not enough subscription CPU quota</p>
-<p>If you did not check your Azure ML CPU quota prior to starting running the <code>azd up</code> command, you may receive a CPU quota error message similar to the following:</p>
-<p><em>(OutOfQuota) Not enough subscription CPU quota. The amount of CPU quota requested is 32 and your maximum amount of quota is [N/A]. Please see troubleshooting guide, available here: https://aka.ms/oe-tsg#error-outofquota</em></p>
-<p>You can still continue with the workshop, but will need to skip the optional <strong>Semantic Ranking</strong> section, as you will not have the deployed model available.</p>
-</div>
-</li>
-<li>
-<p>On successful completion you will see a <code>SUCCESS: ...</code> message on the console.</p>
-</li>
-</ol>
-</div>
-<div class="tabbed-block">
+<h1 id="setup-dev-environment">Setup Dev Environment<a class="headerlink" href="#setup-dev-environment" title="Permanent link">&para;</a></h1>
 <p>In this step, you will configure your Python development environment in Visual Studio Code. At the end of this step, you should have:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Created a Python virtual environment</li>
@@ -2263,7 +2061,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Create and populated a <code>.env</code> file in the <strong>Woodgrove API</strong> project.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Connected to your database using pgAdmin</li>
 </ul>
-<h2 id="41-create-a-python-virtual-environment"><strong>4.1 Create a Python virtual environment</strong><a class="headerlink" href="#41-create-a-python-virtual-environment" title="Permanent link">&para;</a></h2>
+<h2 id="create-a-python-virtual-environment"><strong>Create a Python virtual environment</strong><a class="headerlink" href="#create-a-python-virtual-environment" title="Permanent link">&para;</a></h2>
 <p>Virtual environments in Python are essential for maintaining a clean and organized development space, allowing individual projects to have their own set of dependencies, isolated from others. This prevents conflicts between different projects and ensures consistency in your development workflow. By using virtual environments, you can manage package versions easily, avoid dependency clashes, and keep your projects running smoothly. It's a best practice that keeps your coding environment stable and dependable, making your development process more efficient and less prone to issues.</p>
 <ol>
 <li>
@@ -2334,7 +2132,7 @@
 <p>Execute the command at the terminal prompt to activate your virtual environment.</p>
 </li>
 </ol>
-<h2 id="42-install-required-python-libraries"><strong>4.2 Install required Python libraries</strong><a class="headerlink" href="#42-install-required-python-libraries" title="Permanent link">&para;</a></h2>
+<h2 id="install-required-python-libraries"><strong>Install required Python libraries</strong><a class="headerlink" href="#install-required-python-libraries" title="Permanent link">&para;</a></h2>
 <p>The <code>requirements.txt</code> file in the <code>src\api</code> folder contains the set of Python libraries needed to run the Python components of the solution accelerator.</p>
 <div class="admonition tip">
 <p class="admonition-title">Review required libraries</p>
@@ -2347,7 +2145,7 @@
 </code></pre></div></td></tr></table></div>
 </li>
 </ol>
-<h2 id="43-create-env-file"><strong>4.3 Create <code>.env</code> file</strong><a class="headerlink" href="#43-create-env-file" title="Permanent link">&para;</a></h2>
+<h2 id="create-env-file"><strong>Create <code>.env</code> file</strong><a class="headerlink" href="#create-env-file" title="Permanent link">&para;</a></h2>
 <p>Configuration values, such as connection string and endpoints, that allow your application to interact with Azure services are hosted in an Azure App Configuration service. To enable your application to retrieve these values, you must provide it with the endpoint of that service. You will use a <code>.env</code> file to host the endpoint as an environment variable, which will allow you to run the Woodgrove API locally. The <code>.env</code> file will be created within the <code>src\api\app</code> folder of the project.</p>
 <ol>
 <li>
@@ -2384,7 +2182,7 @@
 <p>Save the <code>.env</code> file.</p>
 </li>
 </ol>
-<h2 id="44-connect-to-your-database-from-pgadmin"><strong>4.4 Connect to your database from pgAdmin</strong><a class="headerlink" href="#44-connect-to-your-database-from-pgadmin" title="Permanent link">&para;</a></h2>
+<h2 id="connect-to-your-database-from-pgadmin"><strong>Connect to your database from pgAdmin</strong><a class="headerlink" href="#connect-to-your-database-from-pgadmin" title="Permanent link">&para;</a></h2>
 <p>You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. The <code>azd up</code> deployment script added your Microsoft Entra ID user as the owner of the database, so you will authenticate with Entra ID to. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:</p>
 <ol>
 <li>
@@ -2410,12 +2208,14 @@
 </li>
 <li>
 <p>Select the <strong>Connection</strong> tab and provide your Azure Database for PostgreSQL flexible server instance details for <strong>Hostname/address</strong> and <strong>Username</strong>.</p>
-</li>
+<ol>
 <li>
 <p>Paste the <strong>Server name</strong> value of your Azure Database for PostgreSQL flexible server into the <strong>Host name/address</strong> field.</p>
 </li>
 <li>
 <p>The <strong>Username</strong> value is your Microsoft Entra ID or email.</p>
+</li>
+</ol>
 </li>
 <li>
 <p>Select <strong>Save</strong>.</p>
@@ -2444,11 +2244,11 @@
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;accessToken&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;expiresOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;subscription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tenant&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tokenType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer&quot;</span>
+<span class="w">    </span><span class="nt">&quot;accessToken&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;expiresOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;subscription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tenant&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tokenType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer&quot;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </li>
@@ -2481,11 +2281,6 @@
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Leave pgAdmin open as you will be using it throughout the remainder of the workshop.</p>
-</div>
-<hr />
-<h2 id="next-validate-setup">Next → <a href="../03-Validation/">Validate Setup</a><a class="headerlink" href="#next-validate-setup" title="Permanent link">&para;</a></h2>
-</div>
-</div>
 </div>
 
 
@@ -2524,7 +2319,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../01-Fork-Repo/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fork Repo">
+          <a href="../04-Instructor-Led/" class="md-footer__link md-footer__link--prev" aria-label="Previous: B. Instructor-Led Workshop Setup">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2534,20 +2329,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Fork Repo
+                B. Instructor-Led Workshop Setup
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02-Instructor-Led/" class="md-footer__link md-footer__link--next" aria-label="Next: B. Instructor-Led Workshop Setup">
+          <a href="../06-Validation/" class="md-footer__link md-footer__link--next" aria-label="Next: Validate Your Setup">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                B. Instructor-Led Workshop Setup
+                Validate Your Setup
               </div>
             </div>
             <div class="md-footer__button md-icon">

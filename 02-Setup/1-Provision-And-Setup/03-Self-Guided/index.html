@@ -2043,7 +2043,7 @@
 <h2 id="authenticate-with-azure">Authenticate With Azure<a class="headerlink" href="#authenticate-with-azure" title="Permanent link">&para;</a></h2>
 <p>Before running the <code>azd up</code> command, you must authenticate your VS Code environment to Azure.</p>
 <ol>
-<li>To create Azure resources, you need to be authenticated from VS Code. Open a new intergated terminal in VS Code. Then, complete the following steps:</li>
+<li>To create Azure resources, you need to be authenticated from VS Code. Open a new integrated terminal in VS Code. Then, complete the following steps:</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Step 1: Authenticate with <code>az</code> for post-provisioning tasks</p>
@@ -2057,7 +2057,7 @@
 <li>
 <p>Complete the login process in the browser window that opens.</p>
 <div class="admonition info">
-<p class="admonition-title">If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id> to specify the correct subscription to use.</p>
+<p class="admonition-title">If you have more than one Azure subscription, you may need to run <code>az account set -s &lt;subscription-id&gt;</code> to specify the correct subscription to use.</p>
 </div>
 </li>
 </ol>
@@ -2086,7 +2086,7 @@
 <li>Should you need to delete the <code>azd</code> environment, locate and delete the <code>.azure</code> folder at the root of the project in the VS Code Explorer.</li>
 <li><strong>Select an Azure Subscription to use</strong>: Select the Azure subscription you are using for this workshop using the up and down arrow keys.</li>
 <li><strong>Select an Azure location to use</strong>: Select the Azure region into which resources should be deployed using the up and down arrow keys.</li>
-<li><strong>Enter a value for the <code>deployAMLModel</code></strong>: Select <code>True</code> if you were able to ensure you have sufficient Azure ML CPU quota avaiable to deploy the model. Otherwise, choose <code>False</code>.</li>
+<li><strong>Enter a value for the <code>deployAMLModel</code></strong>: Select <code>True</code> if you were able to ensure you have sufficient Azure ML CPU quota available to deploy the model. Otherwise, choose <code>False</code>.</li>
 <li>If you select <code>False</code>, you will need to skip the optional <strong>Semantic Ranker</strong> section of this accelerator.</li>
 <li><strong>Enter a value for the <code>postgresqlAdminPassword</code></strong>: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.</li>
 <li>Ensure you copy the password in a secure location so you can use it later to access the database.</li>

@@ -9,6 +9,77 @@ Welcome to the Instructor-Guided Lab Track! You will need a valid Azure subscrip
 
 !!! question "WERE YOU LOOKING FOR THE SELF-GUIDED OPTION INSTEAD? [You can find that here.](./03-Self-Guided.md)"
 
+## Authenticate With Azure
+
+Before running the `azd up` command, you must authenticate your VS Code environment to Azure.
+
+1. To create Azure resources, you need to be authenticated from VS Code. Open a new integrated terminal in VS Code. Then, complete the following steps:
+
+!!! note "Step 1: Authenticate with `az` for post-provisioning tasks"
+
+2. Log into the Azure CLI `az` using the command below.
+
+    ```bash  title=""
+    az login
+    ```
+
+3. Complete the login process in the browser window that opens.
+
+    !!! info "If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id>` to specify the correct subscription to use."
+
+!!! note "Step 2: Authenticate with `azd` for provisioning & managing resources"
+
+4. Log in to Azure Developer CLI. This is only required once per-install.
+
+    ```bash title=""
+    azd auth login
+    ```
+
+## Provision Azure Resource and Deploy App (UI and API)
+
+You are now ready to provision your Azure resources and deploy the Woodgrove back solution.
+
+1. Navigate to the `./workshop` folder within the cloned repo.
+
+    ```bash title=""
+    cd workshop
+    ```
+
+    The `./workshop` folder contains the Instructor-Led version of the infrastructure and Azure Developer CLI templates.
+
+1. Use `azd up` to provision your Azure infrastructure and deploy the web application to Azure.
+
+    ```bash title=""
+    azd up
+    ```
+
+    !!! info "You will be prompted for several inputs for the `azd up` command:"
+
+        - **Enter a new environment name**: Enter a value, such as `dev`.
+        - The environment for the `azd up` command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.
+        - Should you need to delete the `azd` environment, locate and delete the `.azure` folder at the root of the project in the VS Code Explorer.
+        - **Select an Azure Subscription to use**: Select the Azure subscription you are using for this workshop using the up and down arrow keys.
+        - **Select an Azure location to use**: Select the Azure region into which resources should be deployed using the up and down arrow keys.
+        - **Enter a value for the `deployAMLModel`**: Select `True` if you were able to ensure you have sufficient Azure ML CPU quota available to deploy the model. Otherwise, choose `False`.
+        - If you select `False`, you will need to skip the optional **Semantic Ranker** section of this accelerator.
+        - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
+        - Ensure you copy the password in a secure location so you can use it later to access the database.
+        - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
+
+3. Wait for the process to complete. It may take 30-45 minutes or more.
+
+    !!! failure "Not enough subscription CPU quota"
+
+        If you did not check your Azure ML CPU quota prior to starting running the `azd up` command, you may receive a CPU quota error message similar to the following:
+
+        _(OutOfQuota) Not enough subscription CPU quota. The amount of CPU quota requested is 32 and your maximum amount of quota is [N/A]. Please see troubleshooting guide, available here: https://aka.ms/oe-tsg#error-outofquota_
+
+        You can still continue with the workshop, but will need to skip the optional **Semantic Ranking** section, as you will not have the deployed model available.
+
+4. On successful completion you will see a `SUCCESS: ...` message on the console.
+
+!!! tip "When following the Instructor-Led version of this guide, it is required to run all `azd up` and `azd deploy` commands from within the `./workshop` folder."
+
 ---
 
 <!--

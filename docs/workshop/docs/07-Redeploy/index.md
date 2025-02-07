@@ -40,7 +40,7 @@ Because you used `azd` for provisioning and deployment, this is as simple as cal
 
 ---
 
-_You made it! That was a lot to cover - but don't worry! Now that you have a fork of the repo, you can check out the [Self-Guided Workshop](./../02-Setup/1-Provision-And-Setup/01-Self-Guided.md) option to revisit ideas at your own pace! Before you go, there are some important cleanup tasks you need to do!!_
+_You made it! That was a lot to cover - but don't worry! Now that you have a fork of the repo, you can check out the [Self-Guided Workshop](./../02-Setup/1-Provision-And-Setup/03-Self-Guided.md) option to revisit ideas at your own pace! Before you go, there are some important cleanup tasks you need to do!!_
 
 ---
 

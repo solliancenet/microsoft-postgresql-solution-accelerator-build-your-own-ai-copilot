@@ -63,7 +63,7 @@ Select the tab of your chosen track for details about what you need to do before
 
     ???+ info "1. What You Need"   
     
-        The instructor-guided labs are set up with everything you need to get started. To get the most from this session, please review the recommended and preferred knowledge and experience in the blocks below. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/01-Self-Guided.md) instead_.
+        The instructor-guided labs are set up with everything you need to get started. To get the most from this session, please review the recommended and preferred knowledge and experience in the blocks below. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/03-Self-Guided.md) instead_.
             
     ??? info "2. What You Should Know (expand to view)"   
 

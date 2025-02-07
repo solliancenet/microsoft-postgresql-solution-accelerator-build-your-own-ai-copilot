@@ -8,5 +8,5 @@ Before starting, you should:
 
 1. Review the [prerequisites](0-Prerequisites/index.md) for completing the lab.
 2. Select the appropriate provisioning and setup guide
-      - [Self-Guided](1-Provision-And-Setup/01-Self-Guided.md)
-      - [Instructor-Led](1-Provision-And-Setup/02-Instructor-Led.md)
+      - [Self-Guided](1-Provision-And-Setup/03-Self-Guided.md)
+      - [Instructor-Led](1-Provision-And-Setup/04-Instructor-Led.md)

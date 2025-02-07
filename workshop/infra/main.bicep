@@ -47,3 +47,33 @@ module workshopInfra '../../infra/main.bicep' = {
     deployOpenAIModels: false
   }
 }
+
+
+output AZURE_RESOURCE_GROUP string = workshopInfra.outputs.AZURE_RESOURCE_GROUP
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = workshopInfra.outputs.AZURE_CONTAINER_REGISTRY_ENDPOINT
+output AZURE_KEY_VAULT_NAME string = workshopInfra.outputs.AZURE_KEY_VAULT_NAME
+output AZURE_KEY_VAULT_ENDPOINT string = workshopInfra.outputs.AZURE_KEY_VAULT_ENDPOINT
+output AZURE_APP_CONFIG_ENDPOINT string = workshopInfra.outputs.AZURE_APP_CONFIG_ENDPOINT
+
+output AZURE_STORAGE_ACCOUNT_NAME string = workshopInfra.outputs.AZURE_STORAGE_ACCOUNT_NAME
+output AZURE_STORAGE_CONTAINER_NAME string = workshopInfra.outputs.AZURE_STORAGE_CONTAINER_NAME
+
+output STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME string = workshopInfra.outputs.STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME
+
+output POSTGRESQL_SERVER_NAME string = workshopInfra.outputs.POSTGRESQL_SERVER_NAME
+output POSTGRESQL_DATABASE_NAME string = workshopInfra.outputs.POSTGRESQL_DATABASE_NAME
+output POSTGRESQL_ADMIN_LOGIN string = workshopInfra.outputs.POSTGRESQL_ADMIN_LOGIN
+
+output AZURE_OPENAI_ENDPOINT string = workshopInfra.outputs.AZURE_OPENAI_ENDPOINT
+output AZURE_OPENAI_KEY string = workshopInfra.outputs.AZURE_OPENAI_KEY
+
+output DEPLOY_AML_MODEL bool = workshopInfra.outputs.DEPLOY_AML_MODEL
+output AZURE_AML_WORKSPACE_NAME string = workshopInfra.outputs.AZURE_AML_WORKSPACE_NAME
+output AZURE_AML_ENDPOINT_NAME string = workshopInfra.outputs.AZURE_AML_ENDPOINT_NAME
+
+output SERVICE_API_IDENTITY_PRINCIPAL_NAME string = workshopInfra.outputs.SERVICE_API_IDENTITY_PRINCIPAL_NAME
+
+output SERVICE_USERPORTAL_ENDPOINT_URL string = workshopInfra.outputs.SERVICE_USERPORTAL_ENDPOINT_URL
+output SERVICE_API_ENDPOINT_URL string = workshopInfra.outputs.SERVICE_API_ENDPOINT_URL
+
+output RUN_POSTDEPLOY_SCRIPT bool = workshopInfra.outputs.RUN_POSTDEPLOY_SCRIPT

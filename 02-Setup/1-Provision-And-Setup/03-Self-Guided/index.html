@@ -2080,26 +2080,18 @@
 </code></pre></div></td></tr></table></div>
 <div class="admonition info">
 <p class="admonition-title">You will be prompted for several inputs for the <code>azd up</code> command:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>- **Enter a new environment name**: Enter a value, such as `dev`.
-- The environment for the `azd up` command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.
-- Should you need to delete the `azd` environment, locate and delete the `.azure` folder at the root of the project in the VS Code Explorer.
-- **Select an Azure Subscription to use**: Select the Azure subscription you are using for this workshop using the up and down arrow keys.
-- **Select an Azure location to use**: Select the Azure region into which resources should be deployed using the up and down arrow keys.
-- **Enter a value for the `deployAMLModel`**: Select `True` if you were able to ensure you have sufficient Azure ML CPU quota avaiable to deploy the model. Otherwise, choose `False`.
-- If you select `False`, you will need to skip the optional **Semantic Ranker** section of this accelerator.
-- **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
-- Ensure you copy the password in a secure location so you can use it later to access the database.
-- **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
-</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Enter a new environment name</strong>: Enter a value, such as <code>dev</code>.</li>
+<li>The environment for the <code>azd up</code> command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.</li>
+<li>Should you need to delete the <code>azd</code> environment, locate and delete the <code>.azure</code> folder at the root of the project in the VS Code Explorer.</li>
+<li><strong>Select an Azure Subscription to use</strong>: Select the Azure subscription you are using for this workshop using the up and down arrow keys.</li>
+<li><strong>Select an Azure location to use</strong>: Select the Azure region into which resources should be deployed using the up and down arrow keys.</li>
+<li><strong>Enter a value for the <code>deployAMLModel</code></strong>: Select <code>True</code> if you were able to ensure you have sufficient Azure ML CPU quota avaiable to deploy the model. Otherwise, choose <code>False</code>.</li>
+<li>If you select <code>False</code>, you will need to skip the optional <strong>Semantic Ranker</strong> section of this accelerator.</li>
+<li><strong>Enter a value for the <code>postgresqlAdminPassword</code></strong>: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.</li>
+<li>Ensure you copy the password in a secure location so you can use it later to access the database.</li>
+<li><strong>Enter a value for the <code>resourceGroupName</code></strong>: Enter <code>rg-postgresql-accelerator</code>, or a similar name.</li>
+</ul>
 </div>
 </li>
 <li>

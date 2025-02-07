@@ -25,5 +25,5 @@ You can complete it as a **self-guided** workshop at home. Instructor-led worksh
     - [ ] Requires you to use **your own laptop** - keep it charged for the session duration
     - [ ] You have 75 minutes for the entire session - assume 60 mins for the lab alone
 
-    !!! question "Are you currently in a Microsoft AI Tour session? [Go directly to Provision & Setup!](./02-Setup/1-Provision-And-Setup/02-Instructor-Led.md)"
+    !!! question "Are you currently in a Microsoft AI Tour session? [Go directly to Provision & Setup!](./02-Setup/1-Provision-And-Setup/04-Instructor-Led.md)"
 -->

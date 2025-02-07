@@ -9,14 +9,3 @@ To get started building the custom AI-enable Financial Services Industry (FSI) a
 - **VALIDATE** that the setup completed successfully, before diving into the ideation phase.
 
 ---
-
-=== "Self-Guided"
-
-    !!! info "You need to provision the infrastructure yourself! [Jump to the Self-Guided section](./01-Self-Guided.md) now!"  
-
-=== "Instructor-Led"
-
-    !!! info "The instructor led workshop is coming soon!"
-<!--
-    !!! info "You will use a pre-provisioned VM from Skillable! [Jump ahead to the Instructor-Led section.](./02-Instructor-Led.md)"
--->

@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 # Download model from Hugging Face
 Write-Output "Downloading bge-reranker-v2-m3 model from Hugging Face.."
-$MODEL_DIR = "./scripts/aml/model_asset/model"
+$MODEL_DIR = "$PSScriptRoot/../scripts/aml/model_asset/model"
 New-Item -ItemType Directory -Force -Path $MODEL_DIR
 
 
@@ -41,5 +41,5 @@ Write-Output $env:AZURE_AML_WORKSPACE_NAME
 Write-Output "Endpoint:"
 Write-Output $env:AZURE_AML_ENDPOINT_NAME
 $DEPLOYMENT_NAME = "bgev2m3-v1"
-$DEPLOYMENT_YML = "./scripts/aml/model_asset/deployment.yml"
+$DEPLOYMENT_YML = "$PSScriptRoot/../scripts/aml/model_asset/deployment.yml"
 az ml online-deployment create --name "$DEPLOYMENT_NAME" --endpoint "$env:AZURE_AML_ENDPOINT_NAME" -f "$DEPLOYMENT_YML" --all-traffic --resource-group "$env:AZURE_RESOURCE_GROUP" --workspace-name "$env:AZURE_AML_WORKSPACE_NAME"

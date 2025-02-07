@@ -60,7 +60,7 @@ az postgres flexible-server execute `
           --admin-password "$token" `
           --name "${env:POSTGRESQL_SERVER_NAME}" `
           --database-name "${env:POSTGRESQL_DATABASE_NAME}" `
-          --file-path "./scripts/sql/deploy-database-tables.sql"
+          --file-path "$PSScriptRoot/../scripts/sql/deploy-database-tables.sql"
 
 Write-Host "Database Schema Configured"
 
@@ -69,7 +69,7 @@ Write-Host "Database Schema Configured"
 # ##############################################################################
 Write-Host "Granting Database Permissions to API App Managed Identity..."
 # Load script
-$sqlScript = Get-Content -Path "./scripts/sql/grant-table-permissions.sql" -Raw
+$sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-table-permissions.sql" -Raw
 # Replace environment variable placeholders
 $sqlScript = $sqlScript.Replace('${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}', "${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}")
 # Run script
@@ -204,7 +204,7 @@ if ($env:DEPLOY_AML_MODEL -eq $False) {
 } else {
     Write-Host "Deploying Machine Learning Model to Azure ML Workspace..."
 
-    ./scripts/aml/deploy_model.ps1 -ErrorAction Stop
+    & "$PSScriptRoot/../scripts/aml/deploy_model.ps1" -ErrorAction Stop
    
     Write-Host "Machine Learning Model Deployed"
 }

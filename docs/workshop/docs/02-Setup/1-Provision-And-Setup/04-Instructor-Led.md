@@ -75,6 +75,66 @@ You are now ready to provision your Azure resources and deploy the Woodgrove bac
 
 !!! tip "When following the Instructor-Led version of this guide, it is required to run all `azd up` and `azd deploy` commands from within the `./workshop` folder."
 
+## Deploy Azure OpenAI Models
+
+Now that the infrastructure has been provisioned, you are now ready to deploy the completions and embeddings models to Azure OpenAI Service. These models will be used when implementing the AI integration into the application. On completing this step, you will have these models deployed:
+
+- [X] **Completions**: The `gpt-40` model will be used for chat completions for the Copilot implementation.
+- [X] **Embeddings**: The `text-embedding-ada-002` model will be used to generate text embeddings that will be used to implement vector search for the Copilot implementation.
+
+1. Open a new browser tab to navigate to the link below. You may be prompted to login.
+
+    ```text title=""
+    https://portal.azure.com/#browse/resourcegroups
+    ```
+
+2. You may be presented with a "Welcome ot Microsoft Azure" screen. Select **Cancel** (to dismiss it) or click **Get Started** (to take an introductory tour of the Azure Portal).
+
+3. You should be taken directly to the Resource Groups page for your subscription. In the list of resource groups, locate the one named `rg-postgresql-accelerator` (or, if you assigned a different name, find that one). This resource group was created for you as part of the `azd up` resource deployment. It contains all of the Azure resources required to build and deploy your AI-enabled solution.
+
+    !!! tip "You can use the search filter to reduce the number resource groups displayed."
+
+4. Select your resource group.
+
+5. Within the list of resources within the resource group, locate and select the **Azure OpenAI** resource.
+    ![Screenshot of resources in the resource group, with Azure OpenAI service highlighted.](../../img/azure-openai-resource-list.png)
+
+6. In the **Get Started** section of the Azure OpenAI resources **Overview** page, select the **Explore Azure AI Foundry portal** button to open up the Azure AI Foundry. You might be prompted to login the the AI Foundry.
+
+    ![Screenshot of the Azure OpenAI resource, with the Explore Azure AI Foundry portal button highlighted.](../../img/azure-openai-resource-ai-foundry-portal-button.png)
+
+7. In the Azure AI Foundry, select the **Deployments** option in the left-side navigation.
+
+    ![Screenshot of the Azure AI Foundry with the Deployments navigation option highlighted.](../../img/azure-ai-foundry-deployments-option.png)
+
+8. On the **Model deployments** page, select the **Deploy model** button, then select the **Deploy base model** option.
+
+    ![Screenshot of the Model deployments page with the Deploy model button and Deploy base model option highlighted.](../../img/azure-ai-foundry-deployments-deploy-base-model-button.png)
+
+9. On the **Select a model** dialog, select the **gpt-4o** model, then select **Confirm**.
+
+    ![Screenshot of the Select a model dialog with gpt-4o model highlighted.](../../img/azure-ai-foundry-select-model-gpt4o.png)
+
+10. On the **Deploy model gpt-4o** dialog, ensure that `completions` is entered in the **Deployment name** field, then select **Deploy**. This will deploy the OpenAI GPT-4o completions model to the Azure OpenAI service. The name of the deployment must be `completions` for this workshop since the application code depends on this name.
+
+    ![Screenshot of Deploy model gpt-4o dialog with deployment name entered.](../../img/azure-ai-foundry-deploy-model-gpt4o.png)
+
+11. Next, you'll deploy the Embeddings model. In the Azure AI Foundry, select the **Deployments** option in the left-side navigation.
+
+    ![Screenshot of the Azure AI Foundry with the Deployments navigation option highlighted.](../../img/azure-ai-foundry-deployments-option.png)
+
+12. On the **Model deployments** page, select the **Deploy model** button, then select the **Deploy base model** option.
+
+13. On the **Select a model** dialog, select the **text-embedding-ada-002** model, then select **Confirm**.
+
+    ![Screenshot of the Select a model dialog with the text-embedding-ada-002 model highlighted.](../../img/azure-ai-foundry-select-model-text-embedding-ada-002.png)
+
+14. On the **Deploy model gpt-4o** dialog, ensure that `embeddings` is entered in the **Deployment name** field, then select **Deploy**. This will deploy the OpenAI GPT-4o completions model to the Azure OpenAI service. The name of the deployment must be `embeddings` for this workshop since the application code depends on this name.
+
+    ![Screenshot of Deploy model text-embedding-ada-002 dialog with deployment name entered.](../../img/azure-ai-foundry-deploy-model-text-embedding-ada-002.png)
+
+15. You can successfully deployed the `gpt-4o` model that will be used for chat completions, and the `text-embedding-ada-002` model that will be used to generate text embeddings.
+
 ---
 
 <!--

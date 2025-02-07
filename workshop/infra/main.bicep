@@ -27,6 +27,9 @@ param userPortalExists bool
 
 param runPostDeployScript bool
 
+@secure()
+param portalDefinition object
+
 module workshopInfra '../../infra/main.bicep' = {
   name: 'workshop-infra'
   params: {
@@ -38,6 +41,7 @@ module workshopInfra '../../infra/main.bicep' = {
     deployAMLModel: deployAMLModel
     runPostDeployScript: runPostDeployScript
     resourceGroupName: resourceGroupName
+    portalDefinition: portalDefinition
 
     // The workshop deployment doesn't deploy the OpenAI models (this is manual in the guide)
     deployOpenAIModels: false

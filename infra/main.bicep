@@ -33,7 +33,7 @@ param runPostDeployScript bool
 
 param userPortalExists bool
 @secure()
-param portalDefinition object = {}
+param portalDefinition object
 
 param existingOpenAiInstance object = {
   name: ''

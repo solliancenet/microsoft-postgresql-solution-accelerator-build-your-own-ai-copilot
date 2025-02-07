@@ -136,7 +136,6 @@ Now that the infrastructure has been provisioned, you are now ready to deploy th
 
 15. You can successfully deployed the `gpt-4o` model that will be used for chat completions, and the `text-embedding-ada-002` model that will be used to generate text embeddings.
 
----
 
 <!--
 We use the [Skillable VM](https://skillable.com) - a _lab-on-demand_ platform with a built-in Azure subscription and pre-provisioned resources - to give you a fast start.

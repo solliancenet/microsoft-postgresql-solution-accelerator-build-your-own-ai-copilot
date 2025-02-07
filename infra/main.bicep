@@ -14,10 +14,10 @@ param resourceGroupName string
 param principalId string
 
 @description('Name of the PostgreSQL database')
-param postgresqlDatabaseName string
+param postgresqlDatabaseName string = 'contracts'
 
 @description('Administrator Login of the PostgreSQL server')
-param postgresqlAdminLogin string
+param postgresqlAdminLogin string = 'adminUser'
 
 @description('Administrator Password for the PostgreSQL server')
 @secure()
@@ -26,11 +26,14 @@ param postgresqlAdminPassword string
 @description('Determines whether to deploy the Azure Machine Learning model used for Semantic Reranking')
 param deployAMLModel bool
 
+@description('Determines whether to deploy the OpenAI models')
+param deployOpenAIModels bool = true // default to true
+
 param runPostDeployScript bool
 
 param userPortalExists bool
 @secure()
-param portalDefinition object
+param portalDefinition object = {}
 
 param existingOpenAiInstance object = {
   name: ''
@@ -228,7 +231,7 @@ module postgresql './shared/postgresql.bicep' = {
 module openAi './shared/openai.bicep' = if (deployOpenAi) {
   name: 'openai'
   params: {
-    deployments: [
+    deployments: deployOpenAIModels ? [
       {
         name: 'completions'
         sku: {
@@ -251,7 +254,7 @@ module openAi './shared/openai.bicep' = if (deployOpenAi) {
           version: '2'
         }
       }
-    ]
+    ] : []
     keyvaultName: keyVault.outputs.name
     appConfigName: appConfig.outputs.name
     principalId: principalId

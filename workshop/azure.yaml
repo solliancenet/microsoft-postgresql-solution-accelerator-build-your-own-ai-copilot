@@ -1,0 +1,59 @@
+name: react-app
+metadata:
+  subscription: ${AZURE_SUBSCRIPTION_ID}
+  location: ${AZURE_LOCATION}
+workflows:
+  up:
+    steps:
+      - azd: provision
+      - azd: deploy
+
+infra:
+  bicep: ./infra/main.bicep
+
+hooks:
+  postdeploy:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./../azd-hooks/postdeploy.ps1
+    env:
+      RUN_POSTDEPLOY_SCRIPT: ${RUN_POSTDEPLOY_SCRIPT}
+      AZURE_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
+      AZURE_RESOURCE_GROUP: ${AZURE_RESOURCE_GROUP}
+      SERVICE_API_IDENTITY_PRINCIPAL_NAME: ${SERVICE_API_IDENTITY_PRINCIPAL_NAME}
+      POSTGRESQL_SERVER_NAME: ${POSTGRESQL_SERVER_NAME}
+      POSTGRESQL_DATABASE_NAME: ${POSTGRESQL_DATABASE_NAME}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
+      AZURE_OPENAI_KEY: ${AZURE_OPENAI_KEY}
+      AZURE_STORAGE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME}
+      AZURE_STORAGE_CONTAINER_NAME: ${AZURE_STORAGE_CONTAINER_NAME}
+      STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME: ${STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}
+      AZURE_AML_WORKSPACE_NAME: ${AZURE_AML_WORKSPACE_NAME}
+      AZURE_AML_ENDPOINT_NAME: ${AZURE_AML_ENDPOINT_NAME}
+      DEPLOY_AML_MODEL: ${DEPLOY_AML_MODEL}
+
+services:
+  UserPortal:
+    project: ./../src/userportal
+    host: containerapp
+    language: js
+    docker:
+      context: ./
+      registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
+      path: DOCKERFILE
+      buildArgs:
+        - SERVICE_API_ENDPOINT_URL=${SERVICE_API_ENDPOINT_URL}
+    dependsOn:
+      - infra
+
+  API:
+    project: ./../src/api
+    host: containerapp
+    language: python
+    docker:
+      context: ./
+      path: DOCKERFILE
+      registry: ${AZURE_CONTAINER_REGISTRY_ENDPOINT}
+    dependsOn:
+      - infra

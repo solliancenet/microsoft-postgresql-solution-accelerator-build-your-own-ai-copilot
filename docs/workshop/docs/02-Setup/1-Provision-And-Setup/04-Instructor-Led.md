@@ -10,25 +10,25 @@ Before running the `azd up` command, you must authenticate your VS Code environm
 
 1. To create Azure resources, you need to be authenticated from VS Code. Open a new integrated terminal in VS Code. Then, complete the following steps:
 
-!!! note "Step 1: Authenticate with `az` for post-provisioning tasks"
+### Step 1: Authenticate with `az` for post-provisioning tasks
 
-2. Log into the Azure CLI `az` using the command below.
+1. Log into the Azure CLI `az` using the command below.
 
     ```bash  title=""
     az login
     ```
 
-3. Complete the login process in the browser window that opens.
+2. Complete the login process in the browser window that opens.
 
     !!! info "If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id>` to specify the correct subscription to use."
 
-!!! note "Step 2: Authenticate with `azd` for provisioning & managing resources"
+### Step 2: Authenticate with `azd` for provisioning & managing resources
 
-4. Log in to Azure Developer CLI. This is only required once per-install.
+1. Log in to Azure Developer CLI. This is only required once per-install.
 
     ```bash title=""
     azd auth login
-    ```
+        ```
 
 ## Provision Azure Resource and Deploy App (UI and API)
 

@@ -919,6 +919,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#authenticate-with-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticate With Azure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provision-azure-resource-and-deploy-app-ui-and-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provision Azure Resource and Deploy App (UI and API)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-setup-dev-environment" class="md-nav__link">
     <span class="md-ellipsis">
       Next → Setup Dev Environment
@@ -1972,6 +1990,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#authenticate-with-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticate With Azure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provision-azure-resource-and-deploy-app-ui-and-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provision Azure Resource and Deploy App (UI and API)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-setup-dev-environment" class="md-nav__link">
     <span class="md-ellipsis">
       Next → Setup Dev Environment
@@ -2007,6 +2043,82 @@
 <p>Welcome to the Instructor-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the <a href="../../0-Prerequisites/#instructor-led-workshop">prerequisites</a> section if you need more details.</p>
 <div class="admonition question">
 <p class="admonition-title">WERE YOU LOOKING FOR THE SELF-GUIDED OPTION INSTEAD? <a href="../03-Self-Guided/">You can find that here.</a></p>
+</div>
+<h2 id="authenticate-with-azure">Authenticate With Azure<a class="headerlink" href="#authenticate-with-azure" title="Permanent link">&para;</a></h2>
+<p>Before running the <code>azd up</code> command, you must authenticate your VS Code environment to Azure.</p>
+<ol>
+<li>To create Azure resources, you need to be authenticated from VS Code. Open a new integrated terminal in VS Code. Then, complete the following steps:</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Step 1: Authenticate with <code>az</code> for post-provisioning tasks</p>
+</div>
+<ol>
+<li>
+<p>Log into the Azure CLI <code>az</code> using the command below.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>login
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Complete the login process in the browser window that opens.</p>
+<div class="admonition info">
+<p class="admonition-title">If you have more than one Azure subscription, you may need to run <code>az account set -s &lt;subscription-id&gt;</code> to specify the correct subscription to use.</p>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Step 2: Authenticate with <code>azd</code> for provisioning &amp; managing resources</p>
+</div>
+<ol>
+<li>
+<p>Log in to Azure Developer CLI. This is only required once per-install.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>auth<span class="w"> </span>login
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<h2 id="provision-azure-resource-and-deploy-app-ui-and-api">Provision Azure Resource and Deploy App (UI and API)<a class="headerlink" href="#provision-azure-resource-and-deploy-app-ui-and-api" title="Permanent link">&para;</a></h2>
+<p>You are now ready to provision your Azure resources and deploy the Woodgrove back solution.</p>
+<ol>
+<li>
+<p>Navigate to the <code>./workshop</code> folder within the cloned repo.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>workshop
+</code></pre></div></td></tr></table></div>
+<p>The <code>./workshop</code> folder contains the Instructor-Led version of the infrastructure and Azure Developer CLI templates.</p>
+</li>
+<li>
+<p>Use <code>azd up</code> to provision your Azure infrastructure and deploy the web application to Azure.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>up
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">You will be prompted for several inputs for the <code>azd up</code> command:</p>
+<ul>
+<li><strong>Enter a new environment name</strong>: Enter a value, such as <code>dev</code>.</li>
+<li>The environment for the <code>azd up</code> command ensures configuration files, environment variables, and resources are provisioned and deployed correctly.</li>
+<li>Should you need to delete the <code>azd</code> environment, locate and delete the <code>.azure</code> folder at the root of the project in the VS Code Explorer.</li>
+<li><strong>Select an Azure Subscription to use</strong>: Select the Azure subscription you are using for this workshop using the up and down arrow keys.</li>
+<li><strong>Select an Azure location to use</strong>: Select the Azure region into which resources should be deployed using the up and down arrow keys.</li>
+<li><strong>Enter a value for the <code>deployAMLModel</code></strong>: Select <code>True</code> if you were able to ensure you have sufficient Azure ML CPU quota available to deploy the model. Otherwise, choose <code>False</code>.</li>
+<li>If you select <code>False</code>, you will need to skip the optional <strong>Semantic Ranker</strong> section of this accelerator.</li>
+<li><strong>Enter a value for the <code>postgresqlAdminPassword</code></strong>: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.</li>
+<li>Ensure you copy the password in a secure location so you can use it later to access the database.</li>
+<li><strong>Enter a value for the <code>resourceGroupName</code></strong>: Enter <code>rg-postgresql-accelerator</code>, or a similar name.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wait for the process to complete. It may take 30-45 minutes or more.</p>
+<div class="admonition failure">
+<p class="admonition-title">Not enough subscription CPU quota</p>
+<p>If you did not check your Azure ML CPU quota prior to starting running the <code>azd up</code> command, you may receive a CPU quota error message similar to the following:</p>
+<p><em>(OutOfQuota) Not enough subscription CPU quota. The amount of CPU quota requested is 32 and your maximum amount of quota is [N/A]. Please see troubleshooting guide, available here: https://aka.ms/oe-tsg#error-outofquota</em></p>
+<p>You can still continue with the workshop, but will need to skip the optional <strong>Semantic Ranking</strong> section, as you will not have the deployed model available.</p>
+</div>
+</li>
+<li>
+<p>On successful completion you will see a <code>SUCCESS: ...</code> message on the console.</p>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">When following the Instructor-Led version of this guide, it is required to run all <code>azd up</code> and <code>azd deploy</code> commands from within the <code>./workshop</code> folder.</p>
 </div>
 <hr />
 <!--

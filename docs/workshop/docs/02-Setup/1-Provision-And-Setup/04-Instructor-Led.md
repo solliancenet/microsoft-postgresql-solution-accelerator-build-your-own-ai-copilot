@@ -97,6 +97,7 @@ Now that the infrastructure has been provisioned, you are now ready to deploy th
 4. Select your resource group.
 
 5. Within the list of resources within the resource group, locate and select the **Azure OpenAI** resource.
+
     ![Screenshot of resources in the resource group, with Azure OpenAI service highlighted.](../../img/azure-openai-resource-list.png)
 
 6. In the **Get Started** section of the Azure OpenAI resources **Overview** page, select the **Explore Azure AI Foundry portal** button to open up the Azure AI Foundry. You might be prompted to login the the AI Foundry.

@@ -180,6 +180,40 @@ const SOWEdit = () => {
       setSuccess(null);
     }
   };
+
+  const sowChunkColumns = React.useMemo(
+    () => [
+      {
+        Header: 'Page',
+        accessor: 'page_number',
+      },
+      {
+        Header: 'Chunk',
+        accessor: 'content',
+        Cell: ({ row }) => {
+          return (
+            <p>
+              <strong>{row.original.heading}</strong>
+              <p style={{ maxHeight: '8em', overflowY: 'scroll', padding: '0.3em', border: 'solid 0.1em #ccc', borderRadius: '0.3em' }} dangerouslySetInnerHTML={{ __html: (row.original.content || '').replace(/\n/g, '<br/>') }}></p>
+            </p>
+          );
+        }
+      }
+    ],
+    []
+  );
+
+  const fetchSowChunks = async () => {
+    try {
+      const data = await api.sows.getChunks(id);
+      return data;
+    } catch (err) {
+      console.error(err);
+      setError('Error fetching SOW chunks');
+      setSuccess(null);
+    }
+  };
+
   
   const runManualValidation = async () => {
       try {
@@ -409,6 +443,23 @@ const SOWEdit = () => {
           <div>Validating document with AI...</div>
         </Alert>
         )}
+
+
+
+
+
+
+      <hr />
+
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 className="h2">SOW Chunks</h2>
+      </div>
+
+      <PagedTable columns={sowChunkColumns}
+        fetchData={fetchSowChunks}
+        showPagination={false}
+        />
+        
     </div>
   );
 };

@@ -903,6 +903,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Authenticate With Azure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-authenticate-with-az-for-post-provisioning-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Authenticate with az for post-provisioning tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-authenticate-with-azd-for-provisioning-managing-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Authenticate with azd for provisioning &amp; managing resources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1996,6 +2020,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Authenticate With Azure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-authenticate-with-az-for-post-provisioning-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Authenticate with az for post-provisioning tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-authenticate-with-azd-for-provisioning-managing-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Authenticate with azd for provisioning &amp; managing resources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2045,9 +2093,7 @@
 <ol>
 <li>To create Azure resources, you need to be authenticated from VS Code. Open a new integrated terminal in VS Code. Then, complete the following steps:</li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Step 1: Authenticate with <code>az</code> for post-provisioning tasks</p>
-</div>
+<h3 id="step-1-authenticate-with-az-for-post-provisioning-tasks">Step 1: Authenticate with <code>az</code> for post-provisioning tasks<a class="headerlink" href="#step-1-authenticate-with-az-for-post-provisioning-tasks" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>Log into the Azure CLI <code>az</code> using the command below.</p>
@@ -2061,14 +2107,12 @@
 </div>
 </li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Step 2: Authenticate with <code>azd</code> for provisioning &amp; managing resources</p>
-</div>
+<h3 id="step-2-authenticate-with-azd-for-provisioning-managing-resources">Step 2: Authenticate with <code>azd</code> for provisioning &amp; managing resources<a class="headerlink" href="#step-2-authenticate-with-azd-for-provisioning-managing-resources" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>Log in to Azure Developer CLI. This is only required once per-install.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>auth<span class="w"> </span>login
-</code></pre></div></td></tr></table></div>
+<p><code>bash title=""
+azd auth login</code></p>
 </li>
 </ol>
 <h2 id="provision-azure-resource-and-deploy-app-ui-and-api">Provision Azure Resource and Deploy App (UI and API)<a class="headerlink" href="#provision-azure-resource-and-deploy-app-ui-and-api" title="Permanent link">&para;</a></h2>

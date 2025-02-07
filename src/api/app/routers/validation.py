@@ -3,10 +3,9 @@ from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import StructuredTool
 from app.lifespan_manager import get_chat_client, get_db_connection_pool, get_prompt_service
-from app.models import ValidationRequest, Vendor, Milestone, Deliverable, InvoiceLineItem
+from app.models import Deliverable, InvoiceLineItem, InvoiceValidationResult, ListResponse, SowValidationResult, Vendor
 from fastapi import APIRouter, Depends, HTTPException
 from app.models.validation import InvoiceModel, SowModel, MilestoneModel
-from datetime import date
 from pydantic import parse_obj_as
 
 # Initialize the router
@@ -16,6 +15,14 @@ router = APIRouter(
     dependencies = [Depends(get_chat_client)],
     responses = {404: {"description": "Not found"}}
 )
+
+@router.get("/invoice/{id}", response_model=ListResponse[InvoiceValidationResult])
+async def list_invoice_validations(id: int, pool = Depends(get_db_connection_pool)):
+    """Retrieves a list of validation results for an Invoice from the database."""
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM invoice_validation_results WHERE invoice_id = $1 ORDER BY datestamp DESC;', id)
+        validations = parse_obj_as(list[InvoiceValidationResult], [dict(row) for row in rows])
+    return ListResponse(data=validations, total = len(validations), skip = 0, limit = len(validations))
 
 @router.post('/invoice/{id}', response_model = str)
 #async def validate_invoice_by_id(request: ValidationRequest, id: int, llm = Depends(get_chat_client)):
@@ -89,8 +96,6 @@ async def validate_invoice(id: int):
         line_item_rows = await conn.fetch('SELECT * FROM invoice_line_items WHERE invoice_id = $1;', id)
         invoice.line_items = [parse_obj_as(InvoiceLineItem, dict(row)) for row in line_item_rows]
 
-
-
         # Get the SOW
         sow_row = await conn.fetchrow('SELECT * FROM sows WHERE id = $1;', invoice.sow_id)
         sow = parse_obj_as(SowModel, dict(sow_row))
@@ -103,10 +108,16 @@ async def validate_invoice(id: int):
         for milestone in sow.milestones:
             deliverable_rows = await conn.fetch('SELECT * FROM deliverables WHERE milestone_id = $1;', milestone.id)
             milestone.deliverables = parse_obj_as(list[Deliverable], [dict(row) for row in deliverable_rows])
-       
 
     return invoice, sow
 
+@router.get("/sow/{id}", response_model=ListResponse[SowValidationResult])
+async def list_sow_validations(id: int, pool = Depends(get_db_connection_pool)):
+    """Retrieves a list of validation results for a SOW from the database."""
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM sow_validation_results WHERE sow_id = $1 ORDER BY datestamp DESC;', id)
+        validations = parse_obj_as(list[SowValidationResult], [dict(row) for row in rows])
+    return ListResponse(data=validations, total = len(validations), skip = 0, limit = len(validations))
 
 @router.post('/sow/{id}', response_model = str)
 async def validate_sow_by_id(id: int, llm = Depends(get_chat_client), prompt_service = Depends(get_prompt_service)):
@@ -178,5 +189,3 @@ async def validate_sow(id: int):
             milestone.deliverables = parse_obj_as(list[Deliverable], [dict(row) for row in deliverable_rows])
 
     return sow
-
-

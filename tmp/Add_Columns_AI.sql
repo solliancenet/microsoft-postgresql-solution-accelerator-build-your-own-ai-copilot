@@ -16,9 +16,6 @@ SELECT azure_ai.set_setting('azure_cognitive.subscription_key', '{api-key}');
 ALTER TABLE invoices
 ADD content text;
 
-ALTER TABLE invoices
-ADD embeddings vector(1536);
-
 ALTER TABLE sows
 ADD embeddings vector(1536);
 

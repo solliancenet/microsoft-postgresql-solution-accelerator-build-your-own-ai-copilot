@@ -117,10 +117,9 @@ async def analyze_invoice(
             if (invoice_id is None):
                 # Create new SOW
                 row = await conn.fetchrow('''
-                INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, embeddings)
+                INSERT INTO invoices (vendor_id, sow_id, "number", amount, invoice_date, payment_status, document, metadata, content)
                 VALUES (
-                    $1, $2, $3, $4, $5, $6, $7, $8::jsonb,
-                    azure_openai.create_embeddings('embeddings', $9, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+                    $1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9
                 ) RETURNING *;
                 ''', vendor_id, sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text) 
             else:
@@ -134,7 +133,7 @@ async def analyze_invoice(
                     payment_status = $5,
                     document = $6,
                     metadata = $7::jsonb,
-                    embeddings = azure_openai.create_embeddings('embeddings', $8, throw_on_error => FALSE, max_attempts => 1000, retry_delay_ms => 2000)
+                    content = $8
                 WHERE id = $9
                 RETURNING *;
                 ''', sow_id, invoice_number, amount, invoice_date, payment_status, documentName, json.dumps(metadata), full_text, invoice_id)

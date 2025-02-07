@@ -1,7 +1,6 @@
 from app.lifespan_manager import get_db_connection_pool
 from app.models import Deliverable, DeliverableEdit, ListResponse
-from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
-from azure.storage.blob import ContentSettings
+from fastapi import APIRouter, Depends, HTTPException, Form
 from datetime import datetime
 from pydantic import parse_obj_as
 

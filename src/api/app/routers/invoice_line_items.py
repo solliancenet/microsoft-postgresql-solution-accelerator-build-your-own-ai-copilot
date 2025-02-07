@@ -1,9 +1,8 @@
-from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
+from app.lifespan_manager import get_db_connection_pool
 from app.models import InvoiceLineItem, InvoiceLineItemEdit, ListResponse
-from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
+from fastapi import APIRouter, Depends, HTTPException, Form
 from datetime import datetime
 from pydantic import parse_obj_as
-import json
 
 # Initialize the router
 router = APIRouter(

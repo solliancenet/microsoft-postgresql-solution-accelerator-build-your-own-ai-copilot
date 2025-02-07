@@ -21,11 +21,15 @@
          <lastmod>2025-02-07</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/0-Prerequisites/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/0-PreRequisites/</loc>
          <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Provision-And-Setup/</loc>
+         <lastmod>2025-02-07</lastmod>
+    </url>
+    <url>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Provision-And-Setup/00-Install-Tools/</loc>
          <lastmod>2025-02-07</lastmod>
     </url>
     <url>
@@ -150,10 +154,6 @@
     </url>
     <url>
          <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/06-Improve-RAG-Accuracy/06/</loc>
-         <lastmod>2025-02-07</lastmod>
-    </url>
-    <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/06-Improve-RAG-Accuracy/07/</loc>
          <lastmod>2025-02-07</lastmod>
     </url>
     <url>

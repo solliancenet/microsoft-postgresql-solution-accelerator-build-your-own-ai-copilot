@@ -14,7 +14,6 @@ from app.routers import (
     status,
     statuses,
     validation,
-    validation_results,
     vendors,
     webhooks
 )
@@ -51,7 +50,6 @@ app.include_router(sows.router)
 app.include_router(status.router)
 app.include_router(statuses.router)
 app.include_router(validation.router)
-app.include_router(validation_results.router)
 app.include_router(vendors.router)
 app.include_router(webhooks.router)
 

@@ -302,10 +302,10 @@ const Api = {
     },
     validationResults: {
         invoice: async (id) => {
-            return await RESTHelper.get(getUrl(`/validation-results/invoice/${id}`));
+            return await RESTHelper.get(getUrl(`/validation/invoice/${id}`));
         },
         sow: async (id) => {
-            return await RESTHelper.get(getUrl(`/validation-results/sow/${id}`));
+            return await RESTHelper.get(getUrl(`/validation/sow/${id}`));
         },
     },
     vendors: {

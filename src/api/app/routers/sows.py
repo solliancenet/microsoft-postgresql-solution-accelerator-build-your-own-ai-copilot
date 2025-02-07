@@ -1,5 +1,5 @@
 from app.lifespan_manager import get_db_connection_pool, get_storage_service, get_azure_doc_intelligence_service
-from app.models import Sow, SowEdit, ListResponse, SowAnalyzeResult
+from app.models import Sow, SowEdit, SowChunk, ListResponse, SowAnalyzeResult
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Response, Form
 from datetime import datetime
 from pydantic import parse_obj_as
@@ -192,3 +192,12 @@ async def delete_sow(id: int, pool = Depends(get_db_connection_pool), storage_se
         # Delete the SOW
         await conn.execute('DELETE FROM sows WHERE id = $1;', id)
     return sow
+
+
+@router.get("/{sow_id}/chunks", response_model=ListResponse[SowChunk])
+async def get_sow_chunks(sow_id: int, pool = Depends(get_db_connection_pool)):
+    """Retrieves a list of SOW chunks from the database."""
+    async with pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM sow_chunks WHERE sow_id = $1 ORDER BY page_number, heading;', sow_id)
+        sow_chunks = parse_obj_as(list[SowChunk], [dict(row) for row in rows])
+    return ListResponse[SowChunk](data=sow_chunks, total=len(sow_chunks), skip=0, limit=len(sow_chunks))

@@ -290,6 +290,9 @@ const Api = {
         },
         delete: async (id) => {
             return await RESTHelper.delete(getUrl(`/sows/${id}`));
+        },
+        getChunks: async (id) => {
+            return await RESTHelper.get(getUrl(`/sows/${id}/chunks`));
         }
     },
     statuses: {

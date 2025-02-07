@@ -12,28 +12,28 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/06-Improve-RAG-Accuracy/06/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Provision-And-Setup/01-Fork-Repo/">
       
       
-        <link rel="prev" href="../05/">
+        <link rel="prev" href="../00-Install-Software/">
       
       
-        <link rel="next" href="../../07-Redeploy/">
+        <link rel="next" href="../01-Self-Guided/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.2">
     
     
       
-        <title>6.6 Update App With GraphRAG - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>Fork Repo - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d7758b05.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.d7758b05.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +52,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#66-update-app-with-graphrag" class="md-skip">
+        <a href="#fork-repo" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href="../../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-header__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../../img/postgresql.svg" alt="logo">
+  <img src="../../../img/postgresql.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.6 Update App With GraphRAG
+              Fork Repo
             
           </span>
         </div>
@@ -224,7 +224,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -243,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../01-Introduction/" class="md-tabs__link">
+        <a href="../../../01-Introduction/" class="md-tabs__link">
           
   
     
@@ -259,11 +259,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../02-Setup/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -283,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
+        <a href="../../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
@@ -303,7 +305,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../04-Create-AI-Pipeline/" class="md-tabs__link">
+        <a href="../../../04-Create-AI-Pipeline/" class="md-tabs__link">
           
   
     
@@ -323,7 +325,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../05-Build-Copilot/" class="md-tabs__link">
+        <a href="../../../05-Build-Copilot/" class="md-tabs__link">
           
   
     
@@ -339,13 +341,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../06-Improve-RAG-Accuracy/" class="md-tabs__link">
           
   
     
@@ -365,7 +365,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../07-Redeploy/" class="md-tabs__link">
+        <a href="../../../07-Redeploy/" class="md-tabs__link">
           
   
     
@@ -385,7 +385,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Tear-Down/" class="md-tabs__link">
+        <a href="../../../Tear-Down/" class="md-tabs__link">
           
   
     
@@ -426,9 +426,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
+    <a href="../../.." title="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" class="md-nav__button md-logo" aria-label="Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide" data-md-component="logo">
       
-  <img src="../../img/postgresql.svg" alt="logo">
+  <img src="../../../img/postgresql.svg" alt="logo">
 
     </a>
     Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide
@@ -455,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -503,7 +503,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../01-Introduction/" class="md-nav__link ">
+            <a href="../../../01-Introduction/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -537,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/01-App-Scenario/" class="md-nav__link">
+      <a href="../../../01-Introduction/01-App-Scenario/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -559,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/02-App-Architecture/" class="md-nav__link">
+      <a href="../../../01-Introduction/02-App-Architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -585,6 +585,8 @@
       
   
   
+    
+  
   
   
     
@@ -601,21 +603,22 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -627,13 +630,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             02 Setup
@@ -672,7 +675,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
+            <a href="../../0-PreRequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -706,6 +709,8 @@
                 
   
   
+    
+  
   
   
     
@@ -731,18 +736,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/1-Provision-And-Setup/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -760,7 +763,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             1 Provision And Setup
@@ -776,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/00-Install-Software/" class="md-nav__link">
+      <a href="../00-Install-Software/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -795,10 +798,31 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/01-Fork-Repo/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Fork Repo
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -808,6 +832,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-fork-repo-to-your-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Fork Repo To Your Profile
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-clone-the-forked-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Clone the Forked Repo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-fork-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next → Fork Repo
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -820,7 +891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/01-Self-Guided/" class="md-nav__link">
+      <a href="../01-Self-Guided/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -842,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/02-Instructor-Led/" class="md-nav__link">
+      <a href="../02-Instructor-Led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -864,7 +935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Setup/1-Provision-And-Setup/03-Validation/" class="md-nav__link">
+      <a href="../03-Validation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -934,7 +1005,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
+            <a href="../../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -968,7 +1039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -990,7 +1061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1012,7 +1083,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1034,7 +1105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1056,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
+      <a href="../../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1118,7 +1189,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../04-Create-AI-Pipeline/" class="md-nav__link ">
+            <a href="../../../04-Create-AI-Pipeline/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1152,7 +1223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/01/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1174,7 +1245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/02/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1196,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/03/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1218,7 +1289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/04/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1240,7 +1311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-Create-AI-Pipeline/05/" class="md-nav__link">
+      <a href="../../../04-Create-AI-Pipeline/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1308,7 +1379,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../05-Build-Copilot/" class="md-nav__link ">
+            <a href="../../../05-Build-Copilot/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1342,7 +1413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/01/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1364,7 +1435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/02/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1386,7 +1457,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/03/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1408,7 +1479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/04/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1430,7 +1501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/05/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1452,7 +1523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/06/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1474,7 +1545,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/07/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1496,7 +1567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-Build-Copilot/08/" class="md-nav__link">
+      <a href="../../../05-Build-Copilot/08/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1522,8 +1593,6 @@
       
   
   
-    
-  
   
   
     
@@ -1548,22 +1617,21 @@
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../06-Improve-RAG-Accuracy/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1575,13 +1643,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             06 Improve RAG Accuracy
@@ -1597,7 +1665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1619,7 +1687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1641,7 +1709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1663,7 +1731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1685,7 +1753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05/" class="md-nav__link">
+      <a href="../../../06-Improve-RAG-Accuracy/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1704,19 +1772,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../06-Improve-RAG-Accuracy/06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1726,7 +1785,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1769,7 +1827,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../07-Redeploy/" class="md-nav__link ">
+            <a href="../../../07-Redeploy/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1828,7 +1886,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../Tear-Down/" class="md-nav__link ">
+            <a href="../../../Tear-Down/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1877,6 +1935,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-fork-repo-to-your-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Fork Repo To Your Profile
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-clone-the-forked-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Clone the Forked Repo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-fork-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next → Fork Repo
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1894,8 +1987,59 @@
   
 
 
-<h1 id="66-update-app-with-graphrag">6.6 Update App With GraphRAG<a class="headerlink" href="#66-update-app-with-graphrag" title="Permanent link">&para;</a></h1>
-<p>TODO: Add a new API endpoint associated with the copilot to allow GraphRAG queries to be executed and relationship nodes returned...</p>
+<h1 id="fork-repo">Fork Repo<a class="headerlink" href="#fork-repo" title="Permanent link">&para;</a></h1>
+<p>You must create a copy (known as a fork) of the <strong>PostgreSQL Solution Accelerator: Build your own AI Copilot</strong> GitHub repo and then clone that onto your local computer so you can work with its contents. After completing this step, you should have:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Forked the <strong>PostgreSQL Solution Accelerator: Build your own AI Copilot</strong> repo to your personal GitHub profile</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Created a local clone of the repo</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Opened the cloned repo in Visual Studio Code</li>
+</ul>
+<h2 id="21-fork-repo-to-your-profile">2.1 Fork Repo To Your Profile<a class="headerlink" href="#21-fork-repo-to-your-profile" title="Permanent link">&para;</a></h2>
+<p>Forking in GitHub refers to creating a personal copy of a public repository, which allows you to freely experiment with changes without affecting the original project.</p>
+<ol>
+<li>
+<p>To fork the repo, open a new browser window or tab and navigate to <a href="https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot">https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot</a>.</p>
+</li>
+<li>
+<p>Select the <strong>Fork</strong> button to create a copy of the repo in your GitHub profile.</p>
+<p><img alt="The Fork button is highlighted on the GitHub toolbar." src="../../../img/git-hub-toolbar-fork.png" /></p>
+</li>
+<li>
+<p>Login with your GitHub profile, if prompted.</p>
+</li>
+<li>
+<p>On the <strong>Create a new fork</strong> page, select <strong>Create fork</strong> to make a copy of the repo under your GitHub profile.</p>
+<p><img alt="Screenshot of the Create a new fork page in GitHub." src="../../../img/github-create-fork.png" /></p>
+</li>
+<li>
+<p>The forked repo will open within your GitHub profile.</p>
+</li>
+</ol>
+<h2 id="22-clone-the-forked-repo">2.2 Clone the Forked Repo<a class="headerlink" href="#22-clone-the-forked-repo" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>On the GitHub page for your fork, select the <strong>Code</strong> button and then select the <strong>Copy URL to clipboard</strong> button next to the repo's HTTPS clone link:</p>
+<p><img alt="The GitHub Code menu is expanded and the copy button for the HTTPS clone link is highlighted." src="../../../img/github-code-clone-https.png" /></p>
+</li>
+<li>
+<p>Open a new command prompt and change directories to the folder in which you want to clone the repo (e.g., D:\repos).</p>
+</li>
+<li>
+<p>Once in the desired directory, run the following <code>git clone</code> command to download a copy of your fork onto your local machine. Ensure you replace the <code>&lt;url_of_your_forked_repo&gt;</code> token with the clone link you copied in the previous step.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>&lt;url_of_your_forked_repo&gt;
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>Once the repository has been cloned, change directories at the command prompt to the folder of the cloned repo, then run the following command to open the project in Visual Studio Code:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>code<span class="w"> </span>.
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Leave Visual Studio Code open as you will be using it throughout the remainder of the workshop.</p>
+</div>
+<hr />
+<h2 id="next-fork-repo">Next → <a href="./">Fork Repo</a><a class="headerlink" href="#next-fork-repo" title="Permanent link">&para;</a></h2>
 
 
 
@@ -1933,7 +2077,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../05/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.5 Enable AGE">
+          <a href="../00-Install-Software/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Install Software">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1943,20 +2087,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                6.5 Enable AGE
+                Install Software
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../07-Redeploy/" class="md-footer__link md-footer__link--next" aria-label="Next: Redeploy App to Azure">
+          <a href="../01-Self-Guided/" class="md-footer__link md-footer__link--next" aria-label="Next: A. Self-Guided Setup">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Redeploy App to Azure
+                A. Self-Guided Setup
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1992,12 +2136,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.expand", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.indexes", "navigation.top", "toc.follow", "navigation.footer", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
   <!-- Add scripts that need to run before here -->
   
-      <script src="../../assets/javascripts/bundle.f13b1293.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f13b1293.min.js"></script>
       
     
   <!-- Add scripts that need to run afterwards here -->

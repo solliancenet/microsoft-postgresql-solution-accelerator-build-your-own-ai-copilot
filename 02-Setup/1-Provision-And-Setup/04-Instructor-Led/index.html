@@ -2164,9 +2164,10 @@ azd auth login</code></p>
 <p>Now that the infrastructure has been provisioned, you are now ready to deploy the completions and embeddings models to Azure OpenAI Service. These models will be used when implementing the AI integration into the application. On completing this step, you will have these models deployed:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Completions</strong>: The <code>gpt-40</code> model will be used for chat completions for the Copilot implementation.</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Embeddings</strong>: The <code>text-embedding-ada-002</code> model will be used to generate text embeddings that will be used to implement vector search for the Copilot implementation.</p>
-</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <strong>Embeddings</strong>: The <code>text-embedding-ada-002</code> model will be used to generate text embeddings that will be used to implement vector search for the Copilot implementation.</li>
+</ul>
+<p>Follow these steps to deploy the Azure OpenAI models:</p>
+<ol>
 <li>
 <p>Open a new browser tab to navigate to the link below. You may be prompted to login.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>https://portal.azure.com/#browse/resourcegroups
@@ -2226,7 +2227,7 @@ azd auth login</code></p>
 <li>
 <p>You can successfully deployed the <code>gpt-4o</code> model that will be used for chat completions, and the <code>text-embedding-ada-002</code> model that will be used to generate text embeddings.</p>
 </li>
-</ul>
+</ol>
 <!--
 We use the [Skillable VM](https://skillable.com) - a _lab-on-demand_ platform with a built-in Azure subscription and pre-provisioned resources - to give you a fast start.
 

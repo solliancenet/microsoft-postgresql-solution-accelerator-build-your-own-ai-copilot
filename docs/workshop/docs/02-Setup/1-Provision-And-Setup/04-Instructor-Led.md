@@ -383,7 +383,3 @@ This step should take just a few minutes to complete from the commandline.
 !!! success "CONGRATULATIONS. Your Skillable-based Setup is Complete! We'll Validate this, next!"
 
 -->
-
----
-
-## Next → [Setup Dev Environment](./05-Setup-Dev-Env.md)

@@ -82,6 +82,8 @@ Now that the infrastructure has been provisioned, you are now ready to deploy th
 - [X] **Completions**: The `gpt-40` model will be used for chat completions for the Copilot implementation.
 - [X] **Embeddings**: The `text-embedding-ada-002` model will be used to generate text embeddings that will be used to implement vector search for the Copilot implementation.
 
+Follow these steps to deploy the Azure OpenAI models:
+
 1. Open a new browser tab to navigate to the link below. You may be prompted to login.
 
     ```text title=""

@@ -61,10 +61,26 @@ Select the tab of your chosen track for details about what you need to do before
 
     Expand each block below and review the requirements within each.
 
-    ???+ info "1. What You Need"   
+    <!-- ???+ info "1. What You Need"   
     
-        The instructor-guided labs are set up with everything you need to get started. To get the most from this session, please review the recommended and preferred knowledge and experience in the blocks below. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/03-Self-Guided.md) instead_.
-            
+        The instructor-guided labs are set up with everything you need to get started. To get the most from this session, please review the recommended and preferred knowledge and experience in the blocks below. _If you revisit the workshop later at home, use the [Self-Guided version](./../1-Provision-And-Setup/03-Self-Guided.md) instead_. -->
+
+    ???+ info "1. What You Need"   
+
+        1. **Your own computer.**
+            - Any computer capable of running Visual Studio Code, Docker Desktop, and a modern web browser will do.
+            - You must have the ability to install software on the computer.
+            - We recommend installing a recent version of Edge, Chrome, or Safari.
+        2. **A GitHub Account.**
+            - This is required to create a copy (known as a fork) of the sample repository.
+            - We recommend using a personal (vs. enterprise) GitHub account for convenience.
+            - If you don't have a GitHub account, [sign up for a free one](https://github.com/signup) now. (It takes just a few minutes.)
+        3. **An Azure Subscription.**
+            - This is needed to provision the Azure infrastructure for your AI project.
+            - If you don't have an Azure account, [sign up for a free one](https://aka.ms/free) now. (It takes just a few minutes.)
+        4. **Sufficient Azure ML Online Endpoint CPU quota**
+            - To run the solution accelerator's **Semantic Ranker** element, you must have at least 32 **Standard DASv4 Family Cluster Dedicated vCPUs** cores available within your subscription. Detailed instructions are provided in the setup section to verify this in your subscription.
+
     ??? info "2. What You Should Know (expand to view)"   
 
         **Recommended knowledge and experience**

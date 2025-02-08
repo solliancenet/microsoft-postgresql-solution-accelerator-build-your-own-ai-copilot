@@ -2143,6 +2143,23 @@
 </div>
 <hr />
 <h2 id="azure-cost">Azure Cost<a class="headerlink" href="#azure-cost" title="Permanent link">&para;</a></h2>
+<p>The Microsoft Azure resources you deploy will be provisioned within your own Azure Subscription, so you will be responsible for the cost of those services. The cost of the solution will vary depending on the Azure region chosen, as well as which deployment options you choose.</p>
+<p>Most notably, these are the deployment options that will affect the cost:</p>
+<ul>
+<li>Deploy without Azure Machine Learning model for Semantic Ranker: This deployment will cost approximately $50 per day.</li>
+<li>Deploy with Azure Machine Learning model for Semantic Ranker: This deployment will cost approximately $75 per day.</li>
+</ul>
+<p>The Setup section of this guide will tell you when / how to choose this deployment option.</p>
+<p>Here's a breakout of an estimated cost of Azure resources deployed for this solution:</p>
+<ul>
+<li>Azure ML VM (semantic ranking model deployment): ~$19.50/day</li>
+<li>Azure Database for PostgreSQL: ~$3.40/day</li>
+<li>Azure App Configuration: ~$1.20/day</li>
+<li>Azure Container Registry: ~$0.67/day</li>
+<li>Azure OpenAI Service: Dependent upon usage of Copilot, AI-validation, and number of documents processed in the solution.</li>
+<li>Other services are minimal cost.</li>
+</ul>
+<p><img alt="Screenshot of Cost analysis within the Azure Portal for the solution resource group." src="../../img/azure-cost-analysis.png" /></p>
 
 
 

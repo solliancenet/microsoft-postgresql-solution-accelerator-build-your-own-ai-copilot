@@ -335,3 +335,22 @@ ALTER TABLE invoice_validation_results ALTER COLUMN id SET DEFAULT nextval('invo
 
 
 /* END INVOICES */
+
+
+/* COPILOT CHAT HISTORY */
+
+CREATE TABLE IF NOT EXISTS copilot_chat_sessions (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    datestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS copilot_chat_session_history (
+    id BIGSERIAL PRIMARY KEY,
+    copilot_chat_session_id BIGINT NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    content TEXT,
+    datestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+/* END COPILOT CHAT HISTORY */

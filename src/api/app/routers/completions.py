@@ -14,7 +14,7 @@ router = APIRouter(
     responses = {404: {"description": "Not found"}}
 )
 
-@router.post('/chat', response_model = str)
+@router.post('/chat')
 async def generate_chat_completion(
     request: CompletionRequest,
     llm = Depends(get_chat_client),
@@ -29,10 +29,22 @@ async def generate_chat_completion(
     # Provide the copilot with a persona using the system prompt.
     messages = [{ "role": "system", "content": system_prompt }]
 
-    # Add the chat history to the messages list
+    # Get the chat session ID
+    session_id = request.session_id
+
+    # Create a chat session if one does not exist
+    if (session_id == None or session_id <= 0):
+        # if session_id is not provided or -1, create a new chat session
+        async with db_pool.acquire() as conn:
+            session_id = await create_chat_session(conn, request.message[:50])
+
+    # Add the chat history to the messages list for the session
     # Chat history provides context of previous questions and responses for the copilot.
-    for message in request.chat_history[-request.max_history:]:
-        messages.append({"role": message.role, "content": message.content})
+    async with db_pool.acquire() as conn:
+        chat_history = await get_chat_history(conn, session_id)
+        for message in chat_history[-request.max_history:]:
+            messages.append({"role": message.role, "content": message.content})
+   
 
     # Create a chat prompt template
     prompt = ChatPromptTemplate.from_messages(
@@ -75,4 +87,70 @@ async def generate_chat_completion(
     agent = create_openai_functions_agent(llm=llm, tools=tools, prompt=prompt)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, return_intermediate_steps=True)
     completion = await agent_executor.ainvoke({"input": request.message, "chat_history": messages})
-    return completion['output']
+    completionOutput = completion['output']
+
+    # Write the chat history to the database
+    async with db_pool.acquire() as conn:
+        await write_chat_history(conn, session_id, "user", request.message)
+        await write_chat_history(conn, session_id, "assistant", completionOutput)
+
+    # Return the completion output
+    return { session_id: session_id, content: completionOutput }
+
+@router.post('/sessions')
+async def get_chat_sessions(
+    db_pool = Depends(get_db_connection_pool)
+    ):
+    """Retrieves a list of chat sessions."""
+    sessions = []
+    async with db_pool.acquire() as conn:
+        rows = await conn.fetch('SELECT * FROM copilot_chat_sessions ORDER BY datestamp DESC;')
+        for row in rows:
+            sessions.append({"id": row["id"], "name": row["name"]})
+    return sessions
+
+@router.post('/history/{session_id}')
+async def get_chat_history(
+    session_id: int,
+    db_pool = Depends(get_db_connection_pool)
+    ):
+    """Retrieves the chat history for a chat session."""
+    messages = []
+    async with db_pool.acquire() as conn:
+        chat_history = await get_chat_history(conn, session_id)
+        for message in chat_history:
+            messages.append({"role": message.role, "content": message.content})
+    return messages
+
+async def get_chat_history(conn, session_id: int):
+    rows = await conn.fetch(
+        """
+        SELECT role, content
+        FROM copilot_chat_session_history
+        WHERE copilot_chat_session_id = $1
+        ORDER BY datestamp
+        """,
+        session_id
+    )
+    return chat_history
+
+async def create_chat_session(conn, name: str):
+    session_id = await conn.fetchval(
+        """
+        INSERT INTO copilot_chat_sessions
+        (name)
+        VALUES (
+            $1
+        )
+        RETURNING id;
+        """, name)
+    return session_id
+
+async def write_chat_history(conn, session_id: int, role: str, content: str):
+    await conn.execute(
+        """
+        INSERT INTO copilot_chat_session_history (copilot_chat_session_id, role, content)
+        VALUES ($1, $2, $3)
+        """,
+        session_id, role, content
+    )

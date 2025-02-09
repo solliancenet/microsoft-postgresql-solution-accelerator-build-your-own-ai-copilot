@@ -15,13 +15,18 @@ const Api = {
         return await RESTHelper.get(getUrl(`/status`));
     },
     completions: {
-        chat: async (message, history) => {
-            const chat_history = history || [];
+        chat: async (session_id, message) => {
             return await RESTHelper.post(getUrl(`/completions/chat`), {
-                message,
-                chat_history,
+                session_id,
+                message
             });
         },
+        getHistory: async (session_id) => {
+            return await RESTHelper.get(getUrl(`/completions/history/${session_id}`));
+        },
+        getSessions: async() => {
+            return await RESTHelper.get(getUrl(`/completions/sessions`));
+        }
     },
     deliverables: {
         list: async (milestoneId = -1, skip = 0, limit = 10, sortBy = '') => {

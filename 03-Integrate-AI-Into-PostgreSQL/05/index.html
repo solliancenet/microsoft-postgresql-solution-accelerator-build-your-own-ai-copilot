@@ -2142,6 +2142,41 @@
 <div class="admonition danger">
 <p class="admonition-title">Be sure to run the <code>UPDATE</code> statements for each table to create all the embeddings before moving on to the next step.</p>
 </div>
+<div class="admonition info">
+<p class="admonition-title">Generate Embeddings on Database <code>INSERT</code> using a Trigger</p>
+<p>The code for this application performs the calls to the <code>azure_openai</code> extension to generate the vector embedding directly within the database <code>INSERT</code> command. There are times where it's more useful to use an <code>INSERT</code> trigger on the table. The trigger will automatically generate the embeddings anytime a row is inserted into table.</p>
+<p>The following is an example of what an <code>INSERT</code> trigger for generating vector embedding on the <code>sow_chunks</code> table might look:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Example INSERT Trigger to Generate Embeddings</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- create function that generates embeddings</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">sow_chunks_insert_trigger_fn</span><span class="p">()</span>
+<span class="k">RETURNS</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">BEGIN</span>
+<span class="w">  </span><span class="k">IF</span><span class="w"> </span><span class="k">NEW</span><span class="p">.</span><span class="n">content</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">    </span><span class="k">NEW</span><span class="p">.</span><span class="n">embeddings</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">azure_openai</span><span class="p">.</span><span class="n">create_embeddings</span><span class="p">(</span><span class="s1">&#39;embeddings&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NEW</span><span class="p">.</span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">throw_on_error</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">max_attempts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">retry_delay_ms</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="w">  </span><span class="k">RETURN</span><span class="w"> </span><span class="k">NEW</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+<span class="c1">-- setup INSERT TRIGGER to call function</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">sow_chunks_insert_trigger</span>
+<span class="k">BEFORE</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">sow_chunks</span>
+<span class="k">FOR</span><span class="w"> </span><span class="k">EACH</span><span class="w"> </span><span class="k">ROW</span>
+<span class="k">EXECUTE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">sow_chunks_insert_trigger_fn</span><span class="p">();</span>
+</code></pre></div></td></tr></table></div>
+</div>
 
 
 

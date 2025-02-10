@@ -37,7 +37,7 @@ class ChatFunctions:
         """
         query = f"SELECT id FROM invoices WHERE number = '{number}';"
         row = await self.__execute_scalar_query(query)
-        return row.get('id', None)
+        return row['id'] or None
 
     async def get_invoice_line_items(self, invoice_id: int):
         """

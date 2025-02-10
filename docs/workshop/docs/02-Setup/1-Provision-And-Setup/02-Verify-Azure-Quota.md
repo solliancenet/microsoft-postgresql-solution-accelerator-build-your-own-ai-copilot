@@ -67,7 +67,7 @@ This solution accelerator contains a section dedicted to setting up and using a 
 
         Your **new cores limit** should be increased to ensure 32 cores are available for a new deployment. For example, if you have zero cores available, your new cores limit should be set to 32. If your core limit is 100 and you are currently using 90, your new cores limit should be set to 122.
 
-10. Quota increase requests typically take a few minutes to complete. You will recieve notifications in the Azure portal as the request is processed and when it completes.
+10. Quota increase requests typically take a few minutes to complete. You will receive notifications in the Azure portal as the request is processed and when it completes.
 
 11. If your request is denied, you don't have permissions to issue the request, or you prefer not to request additional quota, you have the option to exclude the **Semantic Ranking** model deployment when running the `azd up` command by setting the `deployAMLModel` flag to `false` when prompted.
 

@@ -35,8 +35,9 @@ async def generate_chat_completion(
     # Create a chat session if one does not exist
     if (session_id == None or session_id <= 0):
         # if session_id is not provided or -1, create a new chat session
+        # use the user prompt as the name of the session
         async with db_pool.acquire() as conn:
-            session_id = await create_chat_session(conn, request.message[:50])
+            session_id = await create_chat_session(conn, request.message)
 
     # Add the chat history to the messages list for the session
     # Chat history provides context of previous questions and responses for the copilot.

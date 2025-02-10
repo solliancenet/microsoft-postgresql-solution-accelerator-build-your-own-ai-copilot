@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ConfirmModal from './ConfirmModal'; 
 import api from '../api/Api'; // Adjust the path as necessary
 import './CopilotChat.css';
@@ -142,13 +142,25 @@ const CopilotChat = () => {
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', borderBottom: '1px solid #ccc', cursor: 'pointer' }}
                     onClick={() => setSessionId(session.id)}
                   >
-                    <a>{session.name}</a>
+                    <OverlayTrigger
+                      placement="top"
+                      delay={{ show: 250, hide: 400 }}
+                      overlay={<Tooltip id={`tooltip-${index}`}>{session.name.substring(0, 300)}</Tooltip>}
+                    >
+                      <a alt={session.name}>{session.name}</a>
+                    </OverlayTrigger>
                     <div>
-                      <Button className="btn-danger" style={{ marginRight: '10px' }}
-                        title="Delete Session"
-                        onClick={(e) => { setSessionToDelete(session.id); setShowDeleteModal(true); e.stopPropagation(); }}>
-                        <i className="fas fa-trash"></i>
-                      </Button>
+                      <OverlayTrigger
+                        placement="top"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<Tooltip id={`delete-tooltip-${index}`}>Delete Session</Tooltip>}
+                      >
+                        <Button className="btn-danger" style={{ marginRight: '10px' }}
+                          title="Delete Session"
+                          onClick={(e) => { setSessionToDelete(session.id); setShowDeleteModal(true); e.stopPropagation(); }}>
+                          <i className="fas fa-trash"></i>
+                        </Button>
+                      </OverlayTrigger>
                     </div>
                   </li>
                 ))}

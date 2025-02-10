@@ -2024,92 +2024,233 @@
 <p>A React component, <code>CopilotChat</code>, has been provided to allow you to easily integrate the copilot capability into the UI of the portal application. This component is implemented in the <code>src/userportal/src/components/CopilotChat.jsx</code> file. Open it now in VS Code and explore the code in sections. You can also expand the section below to see the code inline and review the explanations for each line of code.</p>
 <details class="info" open="open">
 <summary>Copilot Chat REACT component code.</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/userportal/src/components/CopilotChat.jsx</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/userportal/src/components/CopilotChat.jsx</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useRef</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="nx">ReactMarkdown</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-markdown&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Row</span><span class="p">,</span><span class="w"> </span><span class="nx">Col</span><span class="p">,</span><span class="w"> </span><span class="nx">Button</span><span class="p">,</span><span class="w"> </span><span class="nx">OverlayTrigger</span><span class="p">,</span><span class="w"> </span><span class="nx">Tooltip</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-bootstrap&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">ConfirmModal</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ConfirmModal&#39;</span><span class="p">;</span><span class="w"> </span>
 <span class="k">import</span><span class="w"> </span><span class="nx">api</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../api/Api&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Adjust the path as necessary</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;./CopilotChat.css&#39;</span><span class="p">;</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">CopilotChat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">sessionId</span><span class="p">,</span><span class="w"> </span><span class="nx">setSessionId</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">setMessages</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">([]);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">input</span><span class="p">,</span><span class="w"> </span><span class="nx">setInput</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">messagesEndRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">setError</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">isThinking</span><span class="p">,</span><span class="w"> </span><span class="nx">setIsThinking</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">sessions</span><span class="p">,</span><span class="w"> </span><span class="nx">setSessions</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">([]);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">sessionToDelete</span><span class="p">,</span><span class="w"> </span><span class="nx">setSessionToDelete</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">showDeleteModal</span><span class="p">,</span><span class="w"> </span><span class="nx">setShowDeleteModal</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSendMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
@@ -2119,16 +2260,29 @@
 
 <span class="w">    </span><span class="nx">setIsThinking</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 
+<span class="w">    </span><span class="c1">// Add the user&#39;s message to the local mesage history</span>
 <span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">userMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="p">};</span>
 <span class="w">    </span><span class="nx">setMessages</span><span class="p">([...</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">userMessage</span><span class="p">]);</span>
 
 <span class="w">    </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">chat</span><span class="p">(</span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">messages</span><span class="p">);</span>
+<span class="w">      </span><span class="c1">// Get the completion from the API</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">chat</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">,</span><span class="w"> </span><span class="nx">prompt</span><span class="p">);</span>
 
-<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">assistantMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="p">};</span>
-<span class="w">      </span><span class="nx">setMessages</span><span class="p">([...</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">userMessage</span><span class="p">,</span><span class="w"> </span><span class="nx">assistantMessage</span><span class="p">]);</span>
+<span class="w">      </span><span class="c1">// make sure request for a different session doesn&#39;t update the messages</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sessionId</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">output</span><span class="p">.</span><span class="nx">session_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Add the assistant&#39;s response to the messages</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">assistantMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">output</span><span class="p">.</span><span class="nx">content</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">setMessages</span><span class="p">([...</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="nx">userMessage</span><span class="p">,</span><span class="w"> </span><span class="nx">assistantMessage</span><span class="p">]);</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="c1">// only update the messages if the session ID is the same</span>
+<span class="w">      </span><span class="c1">// This keeps a processing completion from updating messages after a new session is created</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sessionId</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">sessionId</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">output</span><span class="p">.</span><span class="nx">session_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Update the session ID</span>
+<span class="w">        </span><span class="nx">setSessionId</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">session_id</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error sending message:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
 <span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;Error sending message. Please try again.&#39;</span><span class="p">);</span>
@@ -2138,40 +2292,152 @@
 
 <span class="w">  </span><span class="p">};</span>
 
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">createNewSession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">setSessionId</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">setMessages</span><span class="p">([]);</span>
+<span class="w">    </span><span class="nx">setIsThinking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">refreshSessionList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">getSessions</span><span class="p">();</span>
+<span class="w">      </span><span class="nx">setSessions</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error loading session history:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;Error loading session history. Please try again.&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">loadSessionHistory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">sessionId</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">sessionId</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setMessages</span><span class="p">([]);</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">getHistory</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setMessages</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error loading session history:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;Error loading session history. Please try again.&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">refreshSessionList</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">loadSessionHistory</span><span class="p">();</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">sessionId</span><span class="p">]);</span>
+
 <span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">messagesEndRef</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nx">messagesEndRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">({</span><span class="w"> </span><span class="nx">behavior</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;smooth&#39;</span><span class="w"> </span><span class="p">});</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">messages</span><span class="p">]);</span>
 
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">refreshSessionList</span><span class="p">();</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleDelete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">sessionToDelete</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">deleteSession</span><span class="p">(</span><span class="nx">sessionToDelete</span><span class="p">);</span>
+
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Session deleted:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sessionToDelete</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Current session:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sessionId</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sessionId</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">sessionToDelete</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">setSessionId</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error deleting session:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">setError</span><span class="p">(</span><span class="s1">&#39;Error deleting session. Please try again.&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">setShowDeleteModal</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">refreshSessionList</span><span class="p">();</span>
+<span class="w">  </span><span class="p">};</span>
+
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;ai-chat container mt-4&quot;</span><span class="o">&gt;</span>
-<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;messages mb-3 border p-3&quot;</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;20em&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">maxHeight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;50em&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">overflowY</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;scroll&#39;</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">messages</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">msg</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">          </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`message </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="si">}</span><span class="sb"> mb-2 d-flex </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;justify-content-end&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;justify-content-start&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
-<span class="w">            </span><span class="p">{</span><span class="o">!</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">messages</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span>
-<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`alert </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;alert-primary&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;alert-secondary&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">maxWidth</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;90%&#39;</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span>
-<span class="w">              </span><span class="o">&lt;</span><span class="nx">ReactMarkdown</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">msg</span><span class="p">.</span><span class="nx">content</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/ReactMarkdown&gt;</span>
-<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">Row</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">Col</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10%&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">maxWidth</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10em&#39;</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">Row</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">Button</span><span class="w"> </span><span class="nx">area</span><span class="o">-</span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;New Session&quot;</span><span class="w"> </span><span class="nx">alt</span><span class="o">=</span><span class="s2">&quot;New Session&quot;</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">createNewSession</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">i</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;fas fa-plus&quot;</span><span class="o">&gt;&lt;</span><span class="err">/i&gt; Chat</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/Row&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">Row</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;mt-3&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="nx">Chat</span><span class="w"> </span><span class="nx">History</span><span class="o">&lt;</span><span class="err">/strong&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="o">!</span><span class="nx">sessions</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">No</span><span class="w"> </span><span class="nx">sessions</span><span class="o">&lt;</span><span class="err">/p&gt;}</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">sessions</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">sessions</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ul</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;session-list&quot;</span><span class="o">&gt;</span>
+<span class="w">              </span><span class="p">{</span><span class="nx">sessions</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">session</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                  </span><span class="o">&lt;</span><span class="nx">li</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`session </span><span class="si">${</span><span class="nx">sessionId</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;selected&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">display</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;flex&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">justifyContent</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;space-between&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">alignItems</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10px&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">borderBottom</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;1px solid #ccc&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">cursor</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pointer&#39;</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                    </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setSessionId</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
+<span class="w">                  </span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">OverlayTrigger</span>
+<span class="w">                      </span><span class="nx">placement</span><span class="o">=</span><span class="s2">&quot;top&quot;</span>
+<span class="w">                      </span><span class="nx">delay</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">show</span><span class="o">:</span><span class="w"> </span><span class="mf">250</span><span class="p">,</span><span class="w"> </span><span class="nx">hide</span><span class="o">:</span><span class="w"> </span><span class="mf">400</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                      </span><span class="nx">overlay</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Tooltip</span><span class="w"> </span><span class="nx">id</span><span class="o">=</span><span class="p">{</span><span class="sb">`tooltip-</span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">session</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">300</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/Tooltip&gt;}</span>
+<span class="w">                    </span><span class="o">&gt;</span>
+<span class="w">                      </span><span class="o">&lt;</span><span class="nx">a</span><span class="w"> </span><span class="nx">alt</span><span class="o">=</span><span class="p">{</span><span class="nx">session</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">session</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/a&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="err">/OverlayTrigger&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="w">                      </span><span class="o">&lt;</span><span class="nx">OverlayTrigger</span>
+<span class="w">                        </span><span class="nx">placement</span><span class="o">=</span><span class="s2">&quot;top&quot;</span>
+<span class="w">                        </span><span class="nx">delay</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">show</span><span class="o">:</span><span class="w"> </span><span class="mf">250</span><span class="p">,</span><span class="w"> </span><span class="nx">hide</span><span class="o">:</span><span class="w"> </span><span class="mf">400</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                        </span><span class="nx">overlay</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Tooltip</span><span class="w"> </span><span class="nx">id</span><span class="o">=</span><span class="p">{</span><span class="sb">`delete-tooltip-</span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Delete</span><span class="w"> </span><span class="nx">Session</span><span class="o">&lt;</span><span class="err">/Tooltip&gt;}</span>
+<span class="w">                      </span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="nx">Button</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn-danger&quot;</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">marginRight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;10px&#39;</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                          </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Delete Session&quot;</span>
+<span class="w">                          </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">setSessionToDelete</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span><span class="w"> </span><span class="nx">setShowDeleteModal</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">                          </span><span class="o">&lt;</span><span class="nx">i</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;fas fa-trash&quot;</span><span class="o">&gt;&lt;</span><span class="err">/i&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+<span class="w">                      </span><span class="o">&lt;</span><span class="err">/OverlayTrigger&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">                  </span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+<span class="w">                </span><span class="p">))}</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="err">/ul&gt;}</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/Row&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/Col&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">Col</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;messages mb-3 border p-3&quot;</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;20em&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">maxHeight</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;50em&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">overflowY</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;scroll&#39;</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">messages</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">msg</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`message </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="si">}</span><span class="sb"> mb-2 d-flex </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;justify-content-end&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;justify-content-start&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">{</span><span class="o">!</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">messages</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`alert </span><span class="si">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">role</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;alert-primary&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;alert-secondary&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">maxWidth</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;90%&#39;</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span>
+<span class="w">                  </span><span class="o">&lt;</span><span class="nx">ReactMarkdown</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">msg</span><span class="p">.</span><span class="nx">content</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/ReactMarkdown&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">            </span><span class="p">))}</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert alert-danger&quot;</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;&lt;</span><span class="err">/div&gt;}</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">isThinking</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;d-flex justify-content-center&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;spinner-border text-info&quot;</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="o">&gt;</span>
+<span class="w">                  </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;visually-hidden&quot;</span><span class="o">&gt;</span><span class="nx">Thinking</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="err">/div&gt;}</span>
 <span class="w">          </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
-<span class="w">        </span><span class="p">))}</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">error</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert alert-danger&quot;</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;alert&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;&lt;</span><span class="err">/div&gt;}</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">isThinking</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;d-flex justify-content-center&quot;</span><span class="o">&gt;</span>
-<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;spinner-border text-info&quot;</span><span class="w"> </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="o">&gt;</span>
-<span class="w">              </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;visually-hidden&quot;</span><span class="o">&gt;</span><span class="nx">Thinking</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
-<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
-<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">messagesEndRef</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
-<span class="w">          </span><span class="o">&lt;</span><span class="err">/div&gt;}</span>
-<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
-<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;input-container d-flex&quot;</span><span class="o">&gt;</span>
-<span class="w">        </span><span class="o">&lt;</span><span class="nx">textarea</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control me-2&quot;</span>
-<span class="w">          </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">input</span><span class="p">}</span>
-<span class="w">          </span><span class="nx">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setInput</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
-<span class="w">          </span><span class="nx">onKeyDown</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;Enter&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleSendMessage</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}}</span>
-<span class="w">          </span><span class="nx">placeholder</span><span class="o">=</span><span class="s2">&quot;Type a message...&quot;</span>
-<span class="w">        </span><span class="o">&gt;&lt;</span><span class="err">/textarea&gt;</span>
-<span class="w">        </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-primary&quot;</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSendMessage</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Send</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;input-container d-flex&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">textarea</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control me-2&quot;</span>
+<span class="w">              </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">input</span><span class="p">}</span>
+<span class="w">              </span><span class="nx">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setInput</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
+<span class="w">              </span><span class="nx">onKeyDown</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;Enter&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleSendMessage</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">              </span><span class="nx">placeholder</span><span class="o">=</span><span class="s2">&quot;Type a message...&quot;</span>
+<span class="w">            </span><span class="o">&gt;&lt;</span><span class="err">/textarea&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">Button</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSendMessage</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Send</span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/Col&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/Row&gt;</span>
+
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">ConfirmModal</span>
+<span class="w">        </span><span class="nx">show</span><span class="o">=</span><span class="p">{</span><span class="nx">showDeleteModal</span><span class="p">}</span>
+<span class="w">        </span><span class="nx">handleClose</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setShowDeleteModal</span><span class="p">(</span><span class="kc">false</span><span class="p">)}</span>
+<span class="w">        </span><span class="nx">handleConfirm</span><span class="o">=</span><span class="p">{</span><span class="nx">handleDelete</span><span class="p">}</span>
+<span class="w">        </span><span class="nx">message</span><span class="o">=</span><span class="s2">&quot;Are you sure you want to delete this session?&quot;</span>
+<span class="w">      </span><span class="o">/&gt;</span>
 <span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
 <span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
@@ -2181,28 +2447,37 @@
 </details>
 <ol>
 <li>
-<p><strong>Import components and libraries</strong> (lines 1-3): Required components and libraries are imported.</p>
+<p><strong>Import components and libraries</strong> (lines 1-6): Required components and libraries are imported.</p>
 </li>
 <li>
-<p><strong>Load environment variables</strong> (line 23). The <em>load_dotenv()</em> function imports environment variable values stored in the <code>.env</code> file you created in the <code>src\api\app</code> folder.</p>
+<p><strong>Define the <code>CopilotChat</code> functional component</strong> (line 8). Components in React.js are created using a <em>functional component</em> or <em>class component</em>.</p>
 </li>
 <li>
-<p><strong>Define the <code>CopilotChat</code> functional component</strong> (line 5). Components in React.js are created using a <em>functional component</em> or <em>class component</em>.</p>
+<p><strong>Declare state variables</strong> (lines 9-18): State variables are used to maintain the chat session state, including message history.</p>
 </li>
 <li>
-<p><strong>Declare state variables</strong> (lines 6-10): State variables are used to maintain the chat session state, including message history.</p>
+<p><strong>Provide function for sending messages to the API</strong> (lines 20-58): The <code>handleSendMessage</code> function sends messages asynchronously to the <em>Woodgrove Bank API</em>. This function handles the UI's interaction with the backend <code>/completions/chat</code> endpoint, sending the <em>user query</em> and <em>session id</em> to the API.</p>
 </li>
 <li>
-<p><strong>Provide function for sending messages to the API</strong> (lines 12-37): The <code>handleSendMessage</code> function sends messages asynchronously to the <em>Woodgrove Bank API</em>. This function handles the UI's interaction with the backend <code>/chat</code> endpoint, sending the <em>user query</em> and <em>chat history</em> to the API.</p>
+<p><strong>Provide functions for handling loading chat sessions</strong> (lines 60-89): The <code>createNewSession</code> function sets up the state variables to start a new chat session, the <code>refreshSessionList</code> function handles the UI's interaction with the backend <code>/completions</code> endpoint for loading previous chat sessions, and the <code>loadSessionHistory</code> function handles the UI's interaction with the backend <code>/completions</code> endpoint for loading the chat history for the selected chat session.</p>
 </li>
 <li>
-<p><strong>Handle changes in the messages collection</strong> (lines 39-43): The <code>useEffect</code> hook is used to run code in response to changes in the messages array.</p>
+<p><strong>Handle changes in the Session ID</strong> (lines 91-94): The <code>useEffect</code> hook is used to run code in response to changes in the <em>sessionId</em> to refresh the chat session list and load the chat history for the newly selected chat session.</p>
 </li>
 <li>
-<p><strong>Return the component</strong> (lines 45-75): The return statement renders the component's JSX, defining how it is presented in the web browser.</p>
+<p><strong>Handle changes in the messages collection</strong> (lines 96-100): The <code>useEffect</code> hook is used to run code in response to changes in the messages array.</p>
 </li>
 <li>
-<p><strong>Export the <code>CopilotChat</code> component</strong> (line 77): Exports the <code>CopilotChat</code> component as the default export.</p>
+<p><strong>Handle loading chat session list on page load</strong> (lines 102-104): The <code>useEffect</code> hook is used to run code that loads the list of previous chat sessions into the UI on page load.</p>
+</li>
+<li>
+<p><strong>Provide function for deleting chat session</strong> (lines 106-124): The <code>handleDelete</code> function handles the UI's interaction with the backend <code>/completions</code> endpoint for deleting the chosen chat session.</p>
+</li>
+<li>
+<p><strong>Return the component</strong> (lines 126-208): The return statement renders the component's JSX, defining how it is presented in the web browser.</p>
+</li>
+<li>
+<p><strong>Export the <code>CopilotChat</code> component</strong> (line 210): Exports the <code>CopilotChat</code> component as the default export.</p>
 </li>
 </ol>
 <h2 id="enable-the-copilot-chat-ui">Enable the Copilot Chat UI<a class="headerlink" href="#enable-the-copilot-chat-ui" title="Permanent link">&para;</a></h2>

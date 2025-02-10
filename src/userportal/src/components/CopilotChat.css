@@ -1,0 +1,34 @@
+ul.session-list {
+    list-style-type: none;
+    padding: 0;
+}
+  
+.session {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.8s;
+}
+
+.session a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.session .btn {
+    padding: 0.3em 0.5em;
+    margin: 0 !important;
+}
+
+.session:hover {
+    background-color: #d0e0ff;
+}
+
+.session.selected {
+    color: #fff;
+    background-color: rgb(13, 110, 253);
+    border-color: rgb(13, 110, 253);
+}

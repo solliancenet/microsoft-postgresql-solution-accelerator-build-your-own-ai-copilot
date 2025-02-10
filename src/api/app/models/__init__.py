@@ -1,6 +1,7 @@
 """Models module"""
 from .analyze_result import InvoiceAnalyzeResult, SowAnalyzeResult
 from .completion_request import CompletionRequest
+from .completion_response import CompletionResponse
 from .deliverable import Deliverable, DeliverableEdit
 from .invoice import Invoice, InvoiceEdit
 from .invoice_line_item import InvoiceLineItem, InvoiceLineItemEdit

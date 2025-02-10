@@ -1,11 +1,7 @@
 from pydantic import BaseModel
 
-class ChatItem(BaseModel):
-    role: str
-    content: str
-
 class CompletionRequest(BaseModel):
     """Request model for generating a chat completion."""
+    session_id: int
     message: str
-    chat_history: list[ChatItem]
     max_history: int = 6

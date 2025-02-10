@@ -26,6 +26,9 @@ const Api = {
         },
         getSessions: async() => {
             return await RESTHelper.get(getUrl(`/completions/sessions`));
+        },
+        deleteSession: async(session_id) => {
+            return await RESTHelper.delete(getUrl(`/completions/sessions/${session_id}`));
         }
     },
     deliverables: {

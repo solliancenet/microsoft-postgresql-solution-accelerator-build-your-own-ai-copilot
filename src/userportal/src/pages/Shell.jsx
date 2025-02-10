@@ -126,7 +126,7 @@ const Shell = ({ isDarkTheme }) => {
               </div> */}
             </div>
           </div>
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <main className="col-md-9 ms-sm-auto col-lg-10">
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
               <Route path="/documents" element={<DocumentList />} />

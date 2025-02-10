@@ -1,6 +1,6 @@
 from app.functions.chat_functions import ChatFunctions
 from app.lifespan_manager import get_chat_client, get_db_connection_pool, get_embedding_client, get_prompt_service
-from app.models import CompletionRequest
+from app.models import CompletionRequest, CompletionResponse
 from fastapi import APIRouter, Depends
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -14,7 +14,7 @@ router = APIRouter(
     responses = {404: {"description": "Not found"}}
 )
 
-@router.post('/chat')
+@router.post('/chat', response_model=CompletionResponse)
 async def generate_chat_completion(
     request: CompletionRequest,
     llm = Depends(get_chat_client),
@@ -43,7 +43,7 @@ async def generate_chat_completion(
     async with db_pool.acquire() as conn:
         chat_history = await get_chat_history(conn, session_id)
         for message in chat_history[-request.max_history:]:
-            messages.append({"role": message.role, "content": message.content})
+            messages.append({"role": message["role"], "content": message["content"]})
    
 
     # Create a chat prompt template
@@ -95,9 +95,12 @@ async def generate_chat_completion(
         await write_chat_history(conn, session_id, "assistant", completionOutput)
 
     # Return the completion output
-    return { session_id: session_id, content: completionOutput }
+    return CompletionResponse(
+        session_id = session_id,
+        content = completionOutput
+    )
 
-@router.post('/sessions')
+@router.get('/sessions')
 async def get_chat_sessions(
     db_pool = Depends(get_db_connection_pool)
     ):
@@ -109,7 +112,7 @@ async def get_chat_sessions(
             sessions.append({"id": row["id"], "name": row["name"]})
     return sessions
 
-@router.post('/history/{session_id}')
+@router.get('/history/{session_id}')
 async def get_chat_history(
     session_id: int,
     db_pool = Depends(get_db_connection_pool)
@@ -119,8 +122,19 @@ async def get_chat_history(
     async with db_pool.acquire() as conn:
         chat_history = await get_chat_history(conn, session_id)
         for message in chat_history:
-            messages.append({"role": message.role, "content": message.content})
+            messages.append({"role": message["role"], "content": message["content"]})
     return messages
+
+@router.delete('/sessions/{session_id}')
+async def delete_chat_session(
+    session_id: int,
+    db_pool = Depends(get_db_connection_pool)
+    ):
+    """Deletes a chat session."""
+    async with db_pool.acquire() as conn:
+        await conn.execute('DELETE FROM copilot_chat_session_history WHERE copilot_chat_session_id = $1;', session_id)
+        await conn.execute('DELETE FROM copilot_chat_sessions WHERE id = $1;', session_id)
+    return {"status": "success"}
 
 async def get_chat_history(conn, session_id: int):
     rows = await conn.fetch(
@@ -132,7 +146,7 @@ async def get_chat_history(conn, session_id: int):
         """,
         session_id
     )
-    return chat_history
+    return rows
 
 async def create_chat_session(conn, name: str):
     session_id = await conn.fetchval(

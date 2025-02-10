@@ -129,7 +129,7 @@ const CopilotChat = () => {
         <Col style={{ width: '10%', maxWidth: '10em' }}>
           <Row>
             <Button area-label="New Session" alt="New Session" onClick={createNewSession}>
-              <i className="fas fa-plus"></i> Session
+              <i className="fas fa-plus"></i> Chat
             </Button>
           </Row>
           <Row className="mt-3">

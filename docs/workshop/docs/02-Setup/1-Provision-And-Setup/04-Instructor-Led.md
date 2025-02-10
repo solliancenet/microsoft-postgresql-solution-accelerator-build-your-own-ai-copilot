@@ -28,7 +28,7 @@ Before running the `azd up` command, you must authenticate your VS Code environm
 
     ```bash title=""
     azd auth login
-        ```
+    ```
 
 ## Provision Azure Resource and Deploy App (UI and API)
 

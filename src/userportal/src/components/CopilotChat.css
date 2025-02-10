@@ -9,7 +9,7 @@ ul.session-list {
     border-radius: 0.5em;
     margin: 5px 0;
     cursor: pointer;
-    transition: background-color 0.8s;
+    transition: background-color 0.5s;
 }
 
 .session a {
@@ -18,9 +18,17 @@ ul.session-list {
     white-space: nowrap;
 }
 
-.session .btn {
+.session .btn-danger {
+    background-color: transparent;
+    color: #888;
+    border-color: #888;
     padding: 0.3em 0.5em;
     margin: 0 !important;
+}
+.session .btn-danger:hover {
+    color: #fff;
+    border-color: rgb(220, 53, 69);
+    background-color: rbg(220, 53, 69);
 }
 
 .session:hover {
@@ -31,4 +39,9 @@ ul.session-list {
     color: #fff;
     background-color: rgb(13, 110, 253);
     border-color: rgb(13, 110, 253);
+    transition: background-color 1s;
+}
+.session.selected .btn-danger {
+    border-color: #fff;
+    color: #fff;
 }

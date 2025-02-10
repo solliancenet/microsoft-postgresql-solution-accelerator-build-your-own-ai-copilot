@@ -2019,6 +2019,9 @@
 
 <h2 id="3-clean-up">3. Clean-up<a class="headerlink" href="#3-clean-up" title="Permanent link">&para;</a></h2>
 <p>Once you have completed this workshop, delete the Azure resources you created. You are charged for the configured capacity, not how much the resources are used. Follow these instructions to delete your resource group and all resources you created for this solution accelerator.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="self-guided_1" name="__tabbed_2" type="radio" /><input id="instructor-led" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="self-guided_1">Self-Guided</label><label for="instructor-led">Instructor-Led</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ol>
 <li>
 <p>In VS Code, open a new integrated terminal prompt.</p>
@@ -2035,6 +2038,32 @@
 <p>In the terminal window, you will be shown a list of the resources that will be deleted and prompted about continuing. Enter "y" at the prompt to being the resource deletion.</p>
 </li>
 </ol>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>
+<p>In VS Code, open a new integrated terminal prompt.</p>
+</li>
+<li>
+<p>At the terminal, ensure you are within the <code>./workshop</code> folder of the repository.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>workshop
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>At the terminal prompt, execute the following command to delete the resources created by the deployment script:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>down<span class="w"> </span>--purge
+</code></pre></div></td></tr></table></div>
+<div class="admonition tip">
+<p class="admonition-title">The <code>--purge</code> flag purges the resources that provide soft-delete functionality in Azure, including Azure KeyVault and Azure OpenAI. This flag is required to remove all resources completely.</p>
+</div>
+</li>
+<li>
+<p>In the terminal window, you will be shown a list of the resources that will be deleted and prompted about continuing. Enter "y" at the prompt to being the resource deletion.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <h2 id="4-persist-changes-to-github">4. Persist changes to GitHub<a class="headerlink" href="#4-persist-changes-to-github" title="Permanent link">&para;</a></h2>
 <p>If you want to save any changes you have made to files, use the Source Control tool in VS Code to commit and push your changes to your fork of the GitHub repo.</p>
 

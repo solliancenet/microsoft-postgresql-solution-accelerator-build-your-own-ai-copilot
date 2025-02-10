@@ -1975,6 +1975,9 @@
 <p>In other words, use <code>azd up</code> when setting everything up from the beginning and <code>azd deploy</code> when updating an existing deployment.</p>
 </div>
 <h2 id="deploy-the-updated-app">Deploy the Updated App<a class="headerlink" href="#deploy-the-updated-app" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="self-guided" name="__tabbed_1" type="radio" /><input id="instructor-led" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="self-guided">Self-Guided</label><label for="instructor-led">Instructor-Led</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ol>
 <li>
 <p>Open a new integrated terminal in Visual Studio Code.</p>
@@ -1988,6 +1991,24 @@
 </code></pre></div></td></tr></table></div>
 </li>
 </ol>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>
+<p>Open a new integrated terminal in Visual Studio Code.</p>
+</li>
+<li>
+<p>Ensure you are in the <code>./workshop</code> folder of your repository.</p>
+</li>
+<li>
+<p>Execute this command to deploy your application with changes.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>azd<span class="w"> </span>deploy
+</code></pre></div></td></tr></table></div>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <h2 id="test-the-deployed-app">Test the Deployed App<a class="headerlink" href="#test-the-deployed-app" title="Permanent link">&para;</a></h2>
 <ol>
 <li>

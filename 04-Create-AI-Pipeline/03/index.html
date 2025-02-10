@@ -598,6 +598,8 @@
       
         
       
+        
+      
     
     
       
@@ -925,6 +927,66 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../02-Setup/2-Review-Manual-Process/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 Review Manual Process
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            2 Review Manual Process
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
             
           </ul>
@@ -2244,17 +2306,14 @@ InvalidRequest:<span class="w"> </span>Job<span class="w"> </span>task:<span cla
 <span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Create SOW in the database</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Create SOW in the database</span>
 <span class="k">async</span> <span class="k">with</span> <span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">sow_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Create new SOW</span>
         <span class="n">row</span> <span class="o">=</span> <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">fetchrow</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, embeddings, summary, vendor_id)</span>
+<span class="s1">            INSERT INTO sows (number, start_date, end_date, budget, document, metadata, summary, vendor_id)</span>
 <span class="s1">            VALUES (</span>
 <span class="s1">            $1, $2, $3, $4, $5, $6, </span>
-<span class="s1">            azure_openai.create_embeddings(&#39;embeddings&#39;, $7, throw_on_error =&gt; FALSE, max_attempts =&gt; 1000, retry_delay_ms =&gt; 2000),</span>
 <span class="s1">            azure_cognitive.summarize_abstractive($7, &#39;en&#39;, 2),</span>
 <span class="s1">            $8)</span>
 <span class="s1">            RETURNING *;</span>
@@ -2268,14 +2327,12 @@ InvalidRequest:<span class="w"> </span>Job<span class="w"> </span>task:<span cla
 <span class="s1">                budget = $3,</span>
 <span class="s1">                document = $4,</span>
 <span class="s1">                metadata = $5,</span>
-<span class="s1">                embeddings = azure_openai.create_embeddings(&#39;embeddings&#39;, $6, throw_on_error =&gt; FALSE, max_attempts =&gt; 1000, retry_delay_ms =&gt; 2000),</span>
 <span class="s1">                summary = azure_cognitive.summarize_abstractive($6, &#39;en&#39;, 2)</span>
 <span class="s1">            WHERE id = $7</span>
 <span class="s1">            RETURNING *;</span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">budget</span><span class="p">,</span> <span class="n">documentName</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">metadata</span><span class="p">),</span> <span class="n">full_text</span><span class="p">,</span> <span class="n">sow_id</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>You will also notice this code includes the calls to the <code>azure_ai</code> extension functions for generating the embeddings for the document on database INSERT / UPDATE as well.</p>
 <h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
 <p><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-azure-cognitive#azure_cognitivesummarize_abstractive"><code>azure_ai</code> Extension - Document Abstractive Summarization function</a></p>
 <p><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/generative-ai-azure-cognitive#azure_cognitivesummarize_extractive"><code>azure_ai</code> Extension - Document Extractive Summarization function</a></p>

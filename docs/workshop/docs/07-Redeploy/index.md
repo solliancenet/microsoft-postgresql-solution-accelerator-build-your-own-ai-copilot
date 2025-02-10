@@ -16,15 +16,35 @@ Because you used `azd` for provisioning and deployment, this is as simple as cal
 
 ## Deploy the Updated App
 
-1. Open a new integrated terminal in Visual Studio Code.
+To deploy the updated app, you need to follow the below steps for the _Self-Guided_ or _Instructor-Led_ workshop that matches what you chose during the _Setup_ section of this guide.
 
-2. Ensure you are at the root of your repository.
+=== "Self-Guided"
 
-3. Execute this command to deploy your application with changes.
+    1. Open a new integrated terminal in Visual Studio Code.
+    
+    2. Ensure you are at the root of your repository.
+    
+    3. Execute this command to deploy your application with changes.
+    
+        ```bash title=""
+        azd deploy
+        ```
 
-    ```bash
-    azd deploy
-    ```
+=== "Instructor-Led"
+
+    1. Open a new integrated terminal in Visual Studio Code.
+    
+    2. Ensure you are in the `./workshop` folder of your repository.
+    
+        ```bash title=""
+        cd workshop
+        ```
+    
+    3. Execute this command to deploy your application with changes.
+    
+        ```bash title=""
+        azd deploy
+        ```
 
 ## Test the Deployed App
 

@@ -46,17 +46,41 @@ Check that the right tab is selected for your session, and complete the steps!
 
 Once you have completed this workshop, delete the Azure resources you created. You are charged for the configured capacity, not how much the resources are used. Follow these instructions to delete your resource group and all resources you created for this solution accelerator.
 
-1. In VS Code, open a new integrated terminal prompt.
+To clean-up the deployment, you need to follow the below steps for the _Self-Guided_ or _Instructor-Led_ workshop that matches what you chose during the _Setup_ section of this guide.
 
-2. At the terminal prompt, execute the following command to delete the resources created by the deployment script:
+=== "Self-Guided"
 
-    ```bash title=""
-    azd down --purge
-    ```
+    1. In VS Code, open a new integrated terminal prompt.
+    
+    2. At the terminal prompt, execute the following command to delete the resources created by the deployment script:
+    
+        ```bash title=""
+        azd down --purge
+        ```
+    
+        !!! tip "The `--purge` flag purges the resources that provide soft-delete functionality in Azure, including Azure KeyVault and Azure OpenAI. This flag is required to remove all resources completely."
+    
+    3. In the terminal window, you will be shown a list of the resources that will be deleted and prompted about continuing. Enter "y" at the prompt to being the resource deletion.
 
-    !!! tip "The `--purge` flag purges the resources that provide soft-delete functionality in Azure, including Azure KeyVault and Azure OpenAI. This flag is required to remove all resources completely."
+=== "Instructor-Led"
 
-3. In the terminal window, you will be shown a list of the resources that will be deleted and prompted about continuing. Enter "y" at the prompt to being the resource deletion.
+    1. In VS Code, open a new integrated terminal prompt.
+
+    2. At the terminal, ensure you are within the `./workshop` folder of the repository.
+    
+        ```bash title=""
+        cd workshop
+        ```    
+
+    3. At the terminal prompt, execute the following command to delete the resources created by the deployment script:
+    
+        ```bash title=""
+        azd down --purge
+        ```
+    
+        !!! tip "The `--purge` flag purges the resources that provide soft-delete functionality in Azure, including Azure KeyVault and Azure OpenAI. This flag is required to remove all resources completely."
+    
+    4. In the terminal window, you will be shown a list of the resources that will be deleted and prompted about continuing. Enter "y" at the prompt to being the resource deletion.
 
 ## 4. Persist changes to GitHub
 

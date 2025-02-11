@@ -6,6 +6,15 @@ You can complete it as a **self-guided** workshop at home. Instructor-led worksh
 
 !!! note "CHOOSE THE TAB FOR YOUR SESSION - This becomes the default context site-wide."
 
+To complete this guide, you will need the following:
+
+- [ ] Requires using **your own GitHub account** - you can [get one for free](https://github.com/signup)
+- [ ] Requires using **your own Azure subscription** - you can [get one for free](https://aka.ms/free)
+- [ ] Requires you to **provision the infrastructure** in your Azure subscription - we provide detailed instructions and [Bicep deployment scripts](https://learn.microsoft.com/azure/azure-resource-manager/bicep/deployment-script-bicep)
+- [ ] Requires using **your own computer**
+- [ ] Requires you to **setup a development environment on your computer** - we provide detaled instructions
+
+<!-- 
 === "Self-Guided"
 
     The self-guided version of this workshop allows you complete the lab at your own pace, with no time constraints, using your own computer and Azure subscription. Completing the self-guided workshop:
@@ -14,7 +23,7 @@ You can complete it as a **self-guided** workshop at home. Instructor-led worksh
     - [ ] Requires using **your own Azure subscription** - you can [get one for free](https://aka.ms/free) 
     - [ ] Requires you to **provision the infrastructure** in your Azure subscription - we provide detailed instructions and [Bicep deployment scripts](https://learn.microsoft.com/azure/azure-resource-manager/bicep/deployment-script-bicep)
     - [ ] Requires using **your own computer**
-    - [ ] Requires you to **setup a development environment on your computer** - we provide detaled instructions
+    - [ ] Requires you to **setup a development environment on your computer** - we provide detaled instructions -->
 
 <!--
 === "Instructor-Led Workshop"

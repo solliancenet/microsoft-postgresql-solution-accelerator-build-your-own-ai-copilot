@@ -28,10 +28,6 @@ In this section, you will validate your setup before moving on to the next phase
     https://portal.azure.com/#browse/resourcegroups
     ```
 
-    <!-- ??? question "Doing the Instructor-Led Track?"
-
-        If you are doing the Instructor-Led track and are prompted to sign in, use the `Username` and `Password` from the 'Azure Credentials' section in your Skillable Lab instructions panel. -->
-
 2. You may be presented with a "Welcome to Microsoft Azure" screen. Select **Cancel** (to dismiss it) or click **Get Started** (to take an introductory tour of the Azure Portal).
 
 3. You should be taken directly to the Resource Groups page for your subscription. In the list of resource groups, locate the one named `rg-postgresql-accelerator` (or, if you assigned a different name, find that one). This resource group was created for you as part of the `azd up` resource deployment. It contains all of the Azure resources required to build and deploy your AI-enable solution.

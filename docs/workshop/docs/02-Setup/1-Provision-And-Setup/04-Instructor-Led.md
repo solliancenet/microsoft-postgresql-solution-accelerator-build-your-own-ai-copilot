@@ -57,8 +57,6 @@ You are now ready to provision your Azure resources and deploy the Woodgrove bac
         - **Select an Azure location to use**: Select the Azure region into which resources should be deployed using the up and down arrow keys.
         - **Enter a value for the `deployAMLModel`**: Select `True` if you were able to ensure you have sufficient Azure ML CPU quota available to deploy the model. Otherwise, choose `False`.
         - If you select `False`, you will need to skip the optional **Semantic Ranker** section of this accelerator.
-        - **Enter a value for the `postgresqlAdminPassword`**: Enter the password you want to use for the admin account on your Azure Database for PostgreSQL flexible server.
-        - Ensure you copy the password in a secure location so you can use it later to access the database.
         - **Enter a value for the `resourceGroupName`**: Enter `rg-postgresql-accelerator`, or a similar name.
 
 3. Wait for the process to complete. It may take 30-45 minutes or more.

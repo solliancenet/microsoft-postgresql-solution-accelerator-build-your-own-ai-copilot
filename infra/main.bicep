@@ -16,13 +16,6 @@ param principalId string
 @description('Name of the PostgreSQL database')
 param postgresqlDatabaseName string = 'contracts'
 
-@description('Administrator Login of the PostgreSQL server')
-param postgresqlAdminLogin string = 'adminUser'
-
-@description('Administrator Password for the PostgreSQL server')
-@secure()
-param postgresqlAdminPassword string
-
 @description('Determines whether to deploy the Azure Machine Learning model used for Semantic Reranking')
 param deployAMLModel bool
 
@@ -218,11 +211,8 @@ module postgresql './shared/postgresql.bicep' = {
     skuName: 'Standard_B2ms'
     skuTier: 'Burstable'
     highAvailabilityMode: 'Disabled'
-    administratorLogin: postgresqlAdminLogin
-    administratorLoginPassword: postgresqlAdminPassword
     databaseName: postgresqlDatabaseName
     tags: tags
-    keyvaultName: keyVault.outputs.name
     appConfigName: appConfig.outputs.name
   }
   scope: rg
@@ -351,7 +341,6 @@ output STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME string = eventGridSystemTopicStorage.
 
 output POSTGRESQL_SERVER_NAME string = postgresql.outputs.serverName
 output POSTGRESQL_DATABASE_NAME string = postgresqlDatabaseName
-output POSTGRESQL_ADMIN_LOGIN string = postgresqlAdminLogin
 
 output AZURE_OPENAI_ENDPOINT string = openAi.outputs.endpoint
 output AZURE_OPENAI_KEY string = openAi.outputs.key

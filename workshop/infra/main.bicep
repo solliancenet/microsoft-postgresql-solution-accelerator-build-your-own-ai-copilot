@@ -13,10 +13,6 @@ param location string
 @description('Name of the resource group')
 param resourceGroupName string
 
-@description('Administrator Password for the PostgreSQL server')
-@secure()
-param postgresqlAdminPassword string
-
 @description('Id of the user or app to assign application roles')
 param principalId string
 
@@ -37,7 +33,6 @@ module workshopInfra '../../infra/main.bicep' = {
     location: location
     principalId: principalId
     userPortalExists: userPortalExists
-    postgresqlAdminPassword: postgresqlAdminPassword
     deployAMLModel: deployAMLModel
     runPostDeployScript: runPostDeployScript
     resourceGroupName: resourceGroupName
@@ -62,7 +57,6 @@ output STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME string = workshopInfra.outputs.STORAG
 
 output POSTGRESQL_SERVER_NAME string = workshopInfra.outputs.POSTGRESQL_SERVER_NAME
 output POSTGRESQL_DATABASE_NAME string = workshopInfra.outputs.POSTGRESQL_DATABASE_NAME
-output POSTGRESQL_ADMIN_LOGIN string = workshopInfra.outputs.POSTGRESQL_ADMIN_LOGIN
 
 output AZURE_OPENAI_ENDPOINT string = workshopInfra.outputs.AZURE_OPENAI_ENDPOINT
 output AZURE_OPENAI_KEY string = workshopInfra.outputs.AZURE_OPENAI_KEY

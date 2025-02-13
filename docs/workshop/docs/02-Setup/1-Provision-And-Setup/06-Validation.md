@@ -28,9 +28,9 @@ In this section, you will validate your setup before moving on to the next phase
     https://portal.azure.com/#browse/resourcegroups
     ```
 
-    ??? question "Doing the Instructor-Led Track?"
+    <!-- ??? question "Doing the Instructor-Led Track?"
 
-        If you are doing the Instructor-Led track and are prompted to sign in, use the `Username` and `Password` from the 'Azure Credentials' section in your Skillable Lab instructions panel.
+        If you are doing the Instructor-Led track and are prompted to sign in, use the `Username` and `Password` from the 'Azure Credentials' section in your Skillable Lab instructions panel. -->
 
 2. You may be presented with a "Welcome to Microsoft Azure" screen. Select **Cancel** (to dismiss it) or click **Get Started** (to take an introductory tour of the Azure Portal).
 

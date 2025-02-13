@@ -4,13 +4,6 @@ param location string
 @description('The name of the PostgreSQL server.')
 param serverName string
 
-@description('The administrator username for the PostgreSQL server.')
-param administratorLogin string
-
-@secure()
-@description('The administrator password for the PostgreSQL server.')
-param administratorLoginPassword string
-
 @description('The name of the PostgreSQL database.')
 param databaseName string
 
@@ -39,9 +32,6 @@ param geoRedundantBackup string = 'Disabled'
 
 @description('The tags to apply to the resources.')
 param tags object
-
-@description('The name of the key vault to store the connection string.')
-param keyvaultName string
 
 @description('The name of the app config to store the connection string.')
 param appConfigName string
@@ -77,11 +67,9 @@ resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01'
     tier: skuTier
   }
   properties: {
-    administratorLogin: administratorLogin
-    administratorLoginPassword: administratorLoginPassword
     authConfig: {
       activeDirectoryAuth: 'Enabled'
-      passwordAuth: 'Enabled'
+      passwordAuth: 'Disabled'
       tenantId: subscription().tenantId
     }
     storage: {
@@ -122,28 +110,6 @@ resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases
   properties: {
     charset: 'UTF8'
     collation: 'en_US.utf8'
-  }
-}
-
-resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
-  name: keyvaultName
-}
-
-resource secretAdminUser 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'postgresql-adminuser'
-  parent: keyvault
-  tags: tags
-  properties: {
-    value: administratorLogin
-  }
-}
-
-resource secretAdminPassword 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'postgresql-adminpassword'
-  parent: keyvault
-  tags: tags
-  properties: {
-    value: administratorLoginPassword
   }
 }
 

@@ -134,7 +134,7 @@ Follow these steps to deploy the Azure OpenAI models:
 
     ![Screenshot of Deploy model text-embedding-ada-002 dialog with deployment name entered.](../../img/azure-ai-foundry-deploy-model-text-embedding-ada-002.png)
 
-15. You can successfully deployed the `gpt-4o` model that will be used for chat completions, and the `text-embedding-ada-002` model that will be used to generate text embeddings.
+15. You have deployed the `gpt-4o` model that will be used for chat completions, and the `text-embedding-ada-002` model that will be used to generate text embeddings.
 
 
 <!--

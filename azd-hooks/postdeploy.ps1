@@ -42,13 +42,13 @@ Write-Host "Added Firewall Rule for $publicIpAddress"
 # Add account running AZD as Administrator on PostgreSQL Server,
 # so we have necessary permissions to run the database scripts below
 # ##############################################################################
-az postgres flexible-server ad-admin create `
-    --resource-group "${env:AZURE_RESOURCE_GROUP}" `
-    --server-name "${env:POSTGRESQL_SERVER_NAME}" `
-    --display-name "$username" `
-    --object-id "$(az ad user show --id $username --query id -o tsv)"
+# az postgres flexible-server ad-admin create `
+#     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+#     --server-name "${env:POSTGRESQL_SERVER_NAME}" `
+#     --display-name "$username" `
+#     --object-id "$(az ad user show --id $username --query id -o tsv)"
 
-Write-Host "Added $username as an Admin on PostgreSQL Server"
+# Write-Host "Added $username as an Admin on PostgreSQL Server"
 
 # ##############################################################################
 # Create Database Schema
@@ -215,8 +215,4 @@ if ($env:DEPLOY_AML_MODEL -eq $False) {
 # Update .env file to prevent postdeploy script from running again (this ensures that the script runs only once)
 # ##############################################################################
 
-# write DEPLOY_AML_MODEL = false to .env file for azd environment, by updating the .azure/{env}/.env file
-$envFile = "./.azure/${env:AZURE_ENV_NAME}/.env"
-$envFileContent = Get-Content -Path $envFile
-$envFileContent = $envFileContent -replace 'RUN_POSTDEPLOY_SCRIPT=(.*)', 'RUN_POSTDEPLOY_SCRIPT="false"'
-$envFileContent | Set-Content -Path $envFile
+azd env set "RUN_POSTDEPLOY_SCRIPT" "false"

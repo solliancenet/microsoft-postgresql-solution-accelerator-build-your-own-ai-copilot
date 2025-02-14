@@ -12,6 +12,11 @@ infra:
   bicep: ./infra/main.bicep
 
 hooks:
+  preprovision:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./../azd-hooks/preprovision.ps1
   postdeploy:
     shell: pwsh
     continueOnError: false

@@ -10,8 +10,11 @@ param location string
 @description('Name of the resource group')
 param resourceGroupName string
 
-@description('Id of the user or app to assign application roles')
-param principalId string
+@description('User Principal Name of the user deploying the template')
+param principalName string // this is passed in, since the Bicep 'deployer()' function doesn't make this value available
+
+@description('Principal Type of the user deploying the template')
+param principalType string = 'User'
 
 @description('Name of the PostgreSQL database')
 param postgresqlDatabaseName string = 'contracts'
@@ -33,6 +36,8 @@ param existingOpenAiInstance object = {
   subscriptionId: ''
   resourceGroup: ''
 }
+
+var principalId = deployer().objectId // Set to object id of the user deploying the template
 
 var blobStorageContainerName = 'documents'
 
@@ -211,10 +216,25 @@ module postgresql './shared/postgresql.bicep' = {
     skuName: 'Standard_B2ms'
     skuTier: 'Burstable'
     highAvailabilityMode: 'Disabled'
-    databaseName: postgresqlDatabaseName
     tags: tags
     appConfigName: appConfig.outputs.name
+    
+    principalTenantId: deployer().tenantId
+    principalId: principalId
+    principalName: principalName
+    principalType: principalType
   }
+  scope: rg
+}
+
+module postgresqlDatabase './shared/postgresql_database.bicep' = {
+  name: 'postgresqlDatabase'
+  params: {
+    serverName: postgresql.outputs.serverName
+    databaseName: postgresqlDatabaseName
+    appConfigName: appConfig.outputs.name
+  }
+  dependsOn: [apiAppPostgresqlAdmin] // Be sure to set dependsOn to ensure modules that create server admins are completed before provisioning database (resolves a potential permissions issue)
   scope: rg
 }
 

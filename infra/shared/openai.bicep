@@ -6,6 +6,7 @@ param tags object = {}
 param keyvaultName string = ''
 param appConfigName string = ''
 param principalId string
+param principalType string = 'User'
 
 resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: name
@@ -87,7 +88,7 @@ resource apiAppOpenAIContributorRoleAssignment 'Microsoft.Authorization/roleAssi
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a001fd3d-188f-4b5d-821b-7da978bf7442') // Cognitive Services OpenAI Contributor role ID
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 

@@ -2214,7 +2214,7 @@
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Deployment failed: Postgresql server is not in an accessible state</p>
-<p>It's possible a <code>server is not in an accessible state</code> error may occur when the Azure Bicep deployment attempts to add the PostgreSQL Admin User after the PostgreSQL Server has been provisioned. If you encounter this error, simply re-run the <code>azd up</code> command.</p>
+<p>It's possible a <code>server is not in an accessible state</code> error may occur when the Azure Bicep deployment attempts to add the PostgreSQL Admin User after the PostgreSQL Server has been provisioned. This can occur if the PostgreSQL server is still being provisioned in the Azure backend, but the Deployment returned that it's successful already. If you encounter this error, simply re-run the <code>azd up</code> command.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>

@@ -2513,24 +2513,26 @@
 </li>
 <li>
 <p><strong>Apply Custom Models</strong>:</p>
-</li>
-<li>
-<p>If the pre-built models will not work for your domain-specific documents then you can use custom models trained on your documents to identify sections unique to your use case.
-   <a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/how-to-guides/build-a-custom-model?view=doc-intel-4.0.0">Follow this guide</a></p>
+<ol>
+<li>If the pre-built models will not work for your domain-specific documents then you can use custom models trained on your documents to identify sections unique to your use case.
+   <a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/how-to-guides/build-a-custom-model?view=doc-intel-4.0.0">Follow this guide</a></li>
+</ol>
 </li>
 <li>
 <p><strong>Configure Semantic Rules</strong>:</p>
-</li>
+<ol>
 <li>Define rules or conditions to segment documents based on semantic content.</li>
 <li>Example: Break a contract into "Parties Involved," "Obligations," and "Terms and Conditions" sections.</li>
+</ol>
+</li>
 </ol>
 <hr />
 <h3 id="store-chunks-in-azure-database-for-postgresql">Store Chunks in Azure Database for PostgreSQL<a class="headerlink" href="#store-chunks-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>
 <p>Once documents are semantically chunked, the resulting chunks are stored in <strong>Azure Database for PostgreSQL</strong> for efficient querying and retrieval:</p>
-<ul>
+<ol>
 <li>
 <p><strong>Data Structure</strong>:</p>
-<ul>
+<ol>
 <li>Each chunk is stored as an individual record with metadata for easy identification.</li>
 <li>
 <p>Example Schema:</p>
@@ -2551,37 +2553,35 @@
 <span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </li>
-</ul>
+</ol>
 </li>
 <li>
 <p><strong>Metadata</strong>:</p>
-<ul>
+<ol>
 <li>This can include metadata such as document ID, chunk sequence, and semantic labels for efficient retrieval.</li>
-</ul>
+</ol>
 </li>
-</ul>
+</ol>
 <hr />
 <h3 id="benefits-of-semantic-chunking">Benefits of Semantic Chunking<a class="headerlink" href="#benefits-of-semantic-chunking" title="Permanent link">&para;</a></h3>
-<ul>
+<ol>
+<li><strong>Enhanced Retrieval</strong>:</li>
 <li>
-<p><strong>Enhanced Retrieval</strong>:</p>
-<ul>
-<li>Enables precise querying of specific document sections, improving the accuracy of AI-driven responses.</li>
-</ul>
+<p>Enables precise querying of specific document sections, improving the accuracy of AI-driven responses.</p>
 </li>
 <li>
 <p><strong>Optimized Indexing</strong>:</p>
-<ul>
+<ol>
 <li>Reduces the complexity of indexing large documents by focusing on smaller, meaningful sections.</li>
-</ul>
+</ol>
 </li>
 <li>
 <p><strong>Improved AI Performance</strong>:</p>
-<ul>
+<ol>
 <li>Ensures AI models operate within token limits, avoiding truncation and enhancing output quality.</li>
-</ul>
+</ol>
 </li>
-</ul>
+</ol>
 <hr />
 <h2 id="write-chunks-to-postgresql">Write Chunks to PostgreSQL<a class="headerlink" href="#write-chunks-to-postgresql" title="Permanent link">&para;</a></h2>
 <h3 id="intelligent-data-storage-in-azure-database-for-postgresql">Intelligent Data Storage in Azure Database for PostgreSQL<a class="headerlink" href="#intelligent-data-storage-in-azure-database-for-postgresql" title="Permanent link">&para;</a></h3>

@@ -2212,6 +2212,18 @@
 <p><em>(OutOfQuota) Not enough subscription CPU quota. The amount of CPU quota requested is 32 and your maximum amount of quota is [N/A]. Please see troubleshooting guide, available here: https://aka.ms/oe-tsg#error-outofquota</em></p>
 <p>You can still continue with the workshop, but will need to skip the optional <strong>Semantic Ranking</strong> section, as you will not have the deployed model available.</p>
 </div>
+<div class="admonition failure">
+<p class="admonition-title">Deployment failed: Postgresql server is not in an accessible state</p>
+<p>It's possible a <code>server is not in an accessible state</code> error may occur when the Azure Bicep deployment attempts to add the PostgreSQL Admin User after the PostgreSQL Server has been provisioned. If you encounter this error, simply re-run the <code>azd up</code> command.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>ERROR: error executing step command &#39;provision&#39;: deployment failed: error deploying infrastructure: deploying to subscription:
+
+Deployment Error Details:
+AadAuthOperationCannotBePerformedWhenServerIsNotAccessible: The server &#39;psql-datacvdjta5pfnc5e&#39; is not in an accessible state to perform Azure AD Principal operation. Please make sure the server is accessible before executing Azure AD Principal operations.
+</code></pre></div></td></tr></table></div>
+</div>
 </li>
 <li>
 <p>On successful completion you will see a <code>SUCCESS: ...</code> message on the console.</p>
@@ -2285,7 +2297,7 @@
 <p><img alt="Screenshot of Deploy model text-embedding-ada-002 dialog with deployment name entered." src="../../../img/azure-ai-foundry-deploy-model-text-embedding-ada-002.png" /></p>
 </li>
 <li>
-<p>You can successfully deployed the <code>gpt-4o</code> model that will be used for chat completions, and the <code>text-embedding-ada-002</code> model that will be used to generate text embeddings.</p>
+<p>You have deployed the <code>gpt-4o</code> model that will be used for chat completions, and the <code>text-embedding-ada-002</code> model that will be used to generate text embeddings.</p>
 </li>
 </ol>
 <!--

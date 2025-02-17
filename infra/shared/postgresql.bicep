@@ -66,8 +66,11 @@ resource dnszone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (connectSub
   location: 'global'
 }
 
-resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
+resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-11-01-preview' = {
   name: serverName
+  identity: {
+    type: 'SystemAssigned'
+  }
   location: location
   sku: {
     name: skuName
@@ -113,7 +116,7 @@ module serverAdmin './postgresql_administrator.bicep' = {
   }
 }
 
-resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2023-12-01-preview' = {
+resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2024-11-01-preview' = {
   parent: postgresqlServer
   name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
   properties: {

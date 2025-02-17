@@ -40,6 +40,7 @@ param existingOpenAiInstance object = {
 var principalId = deployer().objectId // Set to object id of the user deploying the template
 
 var blobStorageContainerName = 'documents'
+var graphContainerName = 'graph'
 
 var deployOpenAi = empty(existingOpenAiInstance.name)
 // var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
@@ -218,7 +219,6 @@ module postgresql './shared/postgresql.bicep' = {
     highAvailabilityMode: 'Disabled'
     tags: tags
     appConfigName: appConfig.outputs.name
-    
     principalTenantId: deployer().tenantId
     principalId: principalId
     principalName: principalName
@@ -287,20 +287,21 @@ module storage './shared/storage.bicep' = {
         name: blobStorageContainerName
         publicAccess: 'None'
       }
+      {
+        name: graphContainerName
+        publicAccess: 'None'
+      }
     ]
     files: []
     appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.storageStorageAccounts}${resourceToken}'
     principalId: principalId
+    postgresqlServerName: postgresql.outputs.serverName
     tags: tags
   }
   scope: rg
-  dependsOn: [
-    postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
-  ]
 }
-
 
 module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   name: 'eventGridSystemTopic-Storage'
@@ -312,7 +313,6 @@ module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   }
   scope: rg
 }
-
 
 module documentIntelligence './shared/document-intelligence.bicep' = {
   name: 'documentIntelligence'

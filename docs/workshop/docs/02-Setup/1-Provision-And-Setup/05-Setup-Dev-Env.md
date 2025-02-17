@@ -123,25 +123,13 @@ You will use pgAdmin from your machine to configure various features in the data
 
             1. In VS Code, open a new integrated terminal.
 
-            2. At the integrated terminal prompt, execute the following command:
+            2. At the integrated terminal prompt, execute the following command to generate and output an access token:
 
                 ```bash
-                az account get-access-token --resource-type oss-rdbms
+                az account get-access-token --resource-type oss-rdbms --output json | jq -r '.accessToken'
                 ```
 
-                After authentication is successful, Microsoft Entra ID returns an access token:
-
-                ```json
-                {
-                    "accessToken": "TOKEN",
-                    "expiresOn": "...",
-                    "subscription": "...",
-                    "tenant": "...",
-                    "tokenType": "Bearer"
-                }
-                ```
-
-            3. Copy the `TOKEN` value in the `accessToken` property (without the surrounding quotes).
+            3. Copy the output value.
 
                 !!! info "The token is a Base64 string. It encodes all the information about the authenticated user and is targeted to the Azure Database for PostgreSQL service."
 

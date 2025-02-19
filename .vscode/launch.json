@@ -45,6 +45,19 @@
                 "PYTHONPATH": "${workspaceFolder}/src/api"
             },
             "python": "${workspaceFolder}/src/api/.venv/bin/python",
+        },
+        {
+            "name": "Graph Loader",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/api/app/graph_loader.py",
+            "args": [],
+            "jinja": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src/api"
+            },
+            "python": "${workspaceFolder}/src/api/.venv/Scripts/python.exe",
+            "justMyCode": false
         }
     ]
 }

@@ -8,6 +8,7 @@ async def main():
     """Load data into Azure Database for PostgreSQL Graph Database."""
     # Load environment variables from the .env file
     load_dotenv()
+    print("Loading environment variables...")
 
     # Get environment variables
     server = os.getenv("POSTGRESQL_SERVER_NAME")
@@ -16,9 +17,11 @@ async def main():
     account_name = os.getenv("STORAGE_ACCOUNT_NAME")
 
     # Create an AGEFreigher factory instance to load data from multiple CSV files.
+    print("Creating AGEFreighter factory instance...")
     factory = Factory.create_instance('MultiCSVFreighter')
 
     # Connect to the PostgreSQL database.
+    print("Connecting to the PostgreSQL database...")
     await factory.connect(
         dsn=get_connection_string(server, database, username),
         max_connections=64
@@ -27,9 +30,11 @@ async def main():
     local_data_dir = 'graph_data/'
 
     # Download CSV data files from Azure Blob Storage
+    print("Downloading CSV files from Azure Blob Storage...")
     await download_csvs(account_name, local_data_dir)
 
     # Load data into the graph database
+    print("Loading data into the graph database...")
     await factory.load(
         graph_name='vendor_graph',
         vertex_csv_paths = [
@@ -45,6 +50,8 @@ async def main():
         create_graph=True,
         progress=True
     )
+
+    print("Graph data loaded successfully!")
 
 def get_connection_string(server_name: str, database_name: str, username: str):
     """Get the connection string for the PostgreSQL database."""

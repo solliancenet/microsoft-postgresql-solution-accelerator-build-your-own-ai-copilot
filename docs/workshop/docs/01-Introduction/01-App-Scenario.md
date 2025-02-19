@@ -17,7 +17,7 @@ You have been provided starter code and deployment scripts for the _Woodgrove Ba
 
 This solution accelerator aims to teach you how to integrate AI capabilities into an existing application by leveraging Microsoft Azure's AI services to automate and streamline the validation of contract-related documents in the financial services industry. This integration results in faster, more accurate, and cost-effective processes. Additionally, the copilot will provide intelligent assistance, enabling users to gain actionable insights from data stored in the Azure Database for PostgreSQL, enhancing their overall experience.
 
-!! question "Using your own data?"
+!!! question "Using your own data?"
 
 While the provided scenario utilizes pre-configured vendor, SOW, and invoice data, the framework is designed to be adaptable.
 You can replace these with your own datasets to better align with your specific business needs.

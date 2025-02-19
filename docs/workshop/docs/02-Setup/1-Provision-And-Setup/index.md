@@ -14,19 +14,19 @@ To get started building the custom AI-enable Financial Services Industry (FSI) a
     
     Key Updates Required:
     
-    Database Connection Configuration:
+    1. Database Connection Configuration:
     Update the connection settings to point to your existing PostgreSQL instance.
     Ensure appropriate authentication mechanisms are in place, such as managed identity or database credentials.
-    Managed Identity Setup (if applicable):
+    1. Managed Identity Setup (if applicable):
     If a managed identity is not already configured, you will need to create one.
     Assign the Storage Blob Data Contributor role to the managed identity on the Azure Storage Account to allow secure access to required data.
-    Schema Adjustments:
+    1. Schema Adjustments:
     Modify the database schema if your data structure differs from the provided sample data.
     Ensure necessary indexing and performance optimizations are applied to support AI-driven queries.
-    Data Ingestion and Processing Updates:
+    1. Data Ingestion and Processing Updates:
     Adjust data pipelines and preprocessing steps to work with your data format.
     Review and modify any AI validation logic that references sample datasets.
-    Storage & Permissions:
-    Ensure that your AI processing and database services have the correct access permissions to read and process your data.
+    1. Storage & Permissions:
+    Ensure that your AI processing and database services have the correct access (data contributor) permissions to read and process your data.
 
 ---

@@ -8,4 +8,25 @@ To get started building the custom AI-enable Financial Services Industry (FSI) a
 - **SETUP** your development environment and configure it to work with the infrastructure
 - **VALIDATE** that the setup completed successfully, before diving into the ideation phase.
 
+???+ question "Using your own data?"
+
+    This solution accelerator is designed to work with sample vendor, SOW, and invoice data, but you can also use your own PostgreSQL database. If you choose to do so, some modifications will be necessary to ensure compatibility with the existing architecture.
+    
+    Key Updates Required:
+    
+    Database Connection Configuration:
+    Update the connection settings to point to your existing PostgreSQL instance.
+    Ensure appropriate authentication mechanisms are in place, such as managed identity or database credentials.
+    Managed Identity Setup (if applicable):
+    If a managed identity is not already configured, you will need to create one.
+    Assign the Storage Blob Data Contributor role to the managed identity on the Azure Storage Account to allow secure access to required data.
+    Schema Adjustments:
+    Modify the database schema if your data structure differs from the provided sample data.
+    Ensure necessary indexing and performance optimizations are applied to support AI-driven queries.
+    Data Ingestion and Processing Updates:
+    Adjust data pipelines and preprocessing steps to work with your data format.
+    Review and modify any AI validation logic that references sample datasets.
+    Storage & Permissions:
+    Ensure that your AI processing and database services have the correct access permissions to read and process your data.
+
 ---

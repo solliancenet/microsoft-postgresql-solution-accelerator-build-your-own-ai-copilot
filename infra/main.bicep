@@ -10,8 +10,11 @@ param location string
 @description('Name of the resource group')
 param resourceGroupName string
 
-@description('Id of the user or app to assign application roles')
-param principalId string
+@description('User Principal Name of the user deploying the template')
+param principalName string // this is passed in, since the Bicep 'deployer()' function doesn't make this value available
+
+@description('Principal Type of the user deploying the template')
+param principalType string = 'User'
 
 @description('Name of the PostgreSQL database')
 param postgresqlDatabaseName string = 'contracts'
@@ -34,7 +37,10 @@ param existingOpenAiInstance object = {
   resourceGroup: ''
 }
 
+var principalId = deployer().objectId // Set to object id of the user deploying the template
+
 var blobStorageContainerName = 'documents'
+var graphContainerName = 'graph'
 
 var deployOpenAi = empty(existingOpenAiInstance.name)
 // var azureOpenAiEndpoint = deployOpenAi ? openAi.outputs.endpoint : customerOpenAi.properties.endpoint
@@ -211,10 +217,24 @@ module postgresql './shared/postgresql.bicep' = {
     skuName: 'Standard_B2ms'
     skuTier: 'Burstable'
     highAvailabilityMode: 'Disabled'
-    databaseName: postgresqlDatabaseName
     tags: tags
     appConfigName: appConfig.outputs.name
+    principalTenantId: deployer().tenantId
+    principalId: principalId
+    principalName: principalName
+    principalType: principalType
   }
+  scope: rg
+}
+
+module postgresqlDatabase './shared/postgresql_database.bicep' = {
+  name: 'postgresqlDatabase'
+  params: {
+    serverName: postgresql.outputs.serverName
+    databaseName: postgresqlDatabaseName
+    appConfigName: appConfig.outputs.name
+  }
+  dependsOn: [apiAppPostgresqlAdmin] // Be sure to set dependsOn to ensure modules that create server admins are completed before provisioning database (resolves a potential permissions issue)
   scope: rg
 }
 
@@ -267,20 +287,21 @@ module storage './shared/storage.bicep' = {
         name: blobStorageContainerName
         publicAccess: 'None'
       }
+      {
+        name: graphContainerName
+        publicAccess: 'None'
+      }
     ]
     files: []
     appConfigName: appConfig.outputs.name
     location: location
     name: '${abbrs.storageStorageAccounts}${resourceToken}'
     principalId: principalId
+    postgresqlServerName: postgresql.outputs.serverName
     tags: tags
   }
   scope: rg
-  dependsOn: [
-    postgresql // delay until after postgresql, to prevent permissions issues with appConfig still pending
-  ]
 }
-
 
 module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   name: 'eventGridSystemTopic-Storage'
@@ -292,7 +313,6 @@ module eventGridSystemTopicStorage './shared/eventgrid-system-topic.bicep' = {
   }
   scope: rg
 }
-
 
 module documentIntelligence './shared/document-intelligence.bicep' = {
   name: 'documentIntelligence'

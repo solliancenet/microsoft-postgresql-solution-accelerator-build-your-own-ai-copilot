@@ -13,8 +13,8 @@ param location string
 @description('Name of the resource group')
 param resourceGroupName string
 
-@description('Id of the user or app to assign application roles')
-param principalId string
+@description('User Principal Name of the user or app to assign application roles')
+param principalName string
 
 @description('Determines whether to deploy the Azure Machine Learning model used for Semantic Reranking')
 param deployAMLModel bool
@@ -31,7 +31,7 @@ module workshopInfra '../../infra/main.bicep' = {
   params: {
     environmentName: environmentName
     location: location
-    principalId: principalId
+    principalName: principalName
     userPortalExists: userPortalExists
     deployAMLModel: deployAMLModel
     runPostDeployScript: runPostDeployScript

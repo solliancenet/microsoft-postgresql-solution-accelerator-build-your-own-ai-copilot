@@ -24,7 +24,7 @@ FROM (
     UNION ALL
     SELECT 3, 'Lucerne Publishing', '789 Live Street, Woodgrove', 'Ana Bowman', 'abowman@lucernepublishing.com', '555-654-9870', 'http://www.lucernepublishing.com', 'Graphic Design'
     UNION ALL
-    SELECT 4, 'VarArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
+    SELECT 4, 'VanArsdel, Ltd.', '123 Innovation Drive, TechVille', 'Gabriel Diaz', 'gdiaz@vanarsdelltd.com', '555-321-0987', 'http://www.vanarsdelltd.com', 'Software Engineering'
     UNION ALL
     SELECT 5, 'Contoso, Ltd.', '456 Industrial Road, Scooton City', 'Nicole Wagner', 'nicole@contoso.com', '555-654-3210', 'http://www.contoso.com', 'Software Engineering'
     UNION ALL

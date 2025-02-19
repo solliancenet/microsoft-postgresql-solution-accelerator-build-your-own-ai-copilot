@@ -6,6 +6,8 @@ param keyVaultName string = ''
 @description('The principal ID of the user to assign the App Configuration Data Owner role to')
 param principalId string = ''
 
+param principalType string = 'User'
+
 @allowed([
   'Enabled', 'Disabled'
 ])
@@ -63,7 +65,7 @@ resource appConfigRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-0
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5ae67dd6-50cb-40e7-96ff-dc2bfa4b606b') // App Configuration Data Owner role
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 

@@ -22,6 +22,18 @@ class ChatFunctions:
             rows = await conn.fetch(query)
         return [dict(row) for row in rows]
     
+    async def __execute_graph_query(self, query: str):
+        """
+        Executes a query on the database and returns the results.
+        """
+        # Acquire a connection from the pool and execute the query
+        async with self.pool.acquire() as conn:
+            # Execute a query to set the search path on the connection
+            await conn.execute('SET search_path = ag_catalog, "$user", public;')
+            # Execute the graph query
+            rows = await conn.fetch(query)
+        return [dict(row) for row in rows]
+        
     async def __execute_scalar_query(self, query: str):
         """
         Executes a scalar query on the database and returns the result.
@@ -51,26 +63,18 @@ class ChatFunctions:
         rows = await self.__execute_query(query)
         return [dict(row) for row in rows]
 
-    async def get_invoice_validation_results(self, invoice_id: int = None, vendor_id: int = None, sow_id: int = None):
+    async def get_invoice_validation_results(self, invoice_id: int):
         """
-        Retrieves invoice accuracy and performance validation results for the specified invoice, vendor, or sow.
-        If no invoice_id, vendor_id, or sow_id is provided, return all invoice validation results.
+        Retrieves invoice accuracy and performance validation results for the specified invoice.
+        If no invoice_id is provided, return all invoice validation results.
         """
         # Define the columns to retrieve from the table
         # This excludes the embedding column in results
         columns = ["invoice_id", "datestamp", "result", "validation_passed"]
         query = f'SELECT {", ".join(columns)} FROM invoice_validation_results'
-
-        # Filter the validation results by invoice_id, vendor_id, or sow_id, if provided
+        # Filter the validation results by invoice_id
         if invoice_id is not None:
-             query += ' WHERE invoice_id = {invoice_id}'
-        else:
-            if vendor_id is not None:
-                query += f' WHERE vendor_id = {vendor_id}'
-                if sow_id is not None:
-                    query += f' AND sow_id = {sow_id}'
-            elif sow_id is not None:
-                query += f' WHERE sow_id = {sow_id}'
+            query += f' WHERE invoice_id = {invoice_id}'
 
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
@@ -97,6 +101,20 @@ class ChatFunctions:
                 query += f' WHERE sow_id = {sow_id}'
 
         rows = await self.__execute_query(f'{query};')
+        return [dict(row) for row in rows]
+    
+    async def get_unpaid_invoices_for_vendor(self, vendor_id: int):
+        """
+        Retrieves a list of unpaid invoices for a specific vendor using a graph query.
+        """
+        # Define the graph query
+        graph_query = f"""SELECT * FROM ag_catalog.cypher('vendor_graph', $$
+        MATCH (v:vendor {{id: '{vendor_id}'}})-[rel:has_invoices]->(s:sow)
+        WHERE rel.payment_status <> 'Paid'
+        RETURN v.id AS vendor_id, v.name AS vendor_name, s.id AS sow_id, s.number AS sow_number, rel.id AS invoice_id, rel.number AS invoice_number, rel.payment_status AS payment_status
+        $$) as (vendor_id BIGINT, vendor_name TEXT, sow_id BIGINT, sow_number TEXT, invoice_id BIGINT, invoice_number TEXT, payment_status TEXT);
+        """
+        rows = await self.__execute_graph_query(graph_query)
         return [dict(row) for row in rows]
 
     async def get_sow_id(self, number: str) -> int:
@@ -141,21 +159,18 @@ class ChatFunctions:
         rows = await self.__execute_query(f'{query}')
         return [dict(row) for row in rows]
 
-    async def get_sow_validation_results(self, sow_id: int = None, vendor_id: int = None):
+    async def get_sow_validation_results(self, sow_id: int = None):
         """
         Retrieves SOW accuracy and performance validation results for the specified SOW or vendor.
-        If no sow_id or vendor_id is provided, return all SOW validation results
+        If no sow_id is provided, return all SOW validation results
         """
         # Define the columns to retrieve from the table
         # This excludes the embedding column in results
         columns = ["sow_id", "datestamp", "result", "validation_passed"]
         query = f'SELECT {", ".join(columns)} FROM sow_validation_results'
-
-        # Filter the validation results by sow_id or vendor_id, if provided
+        # Filter the validation results by sow_id
         if sow_id is not None:
             query += f' WHERE sow_id = {sow_id}'
-        elif vendor_id is not None:
-            query += f' WHERE vendor_id = {vendor_id}'
 
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
@@ -245,10 +260,10 @@ class ChatFunctions:
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
 
-    async def find_invoice_validation_results(self, user_query: str, invoice_id: int = None, vendor_id: int = None, sow_id: int = None):
+    async def find_invoice_validation_results(self, user_query: str, invoice_id: int = None):
         """
-        Retrieves invoice accuracy and performance validation results similar to the user query for specified invoice, vendor, or SOW.
-        If no invoice_id, vendor_id, or sow_id is provided, return all similar validation results.
+        Retrieves invoice accuracy and performance validation results similar to the user query for specified invoice.
+        If invoice_id is not provided, return all similar validation results.
         """
         # Define the columns to retrieve from the table
         # Exclude the embedding column in results
@@ -265,23 +280,17 @@ class ChatFunctions:
         
         query = f'SELECT {", ".join(columns)} FROM invoice_validation_results'
 
-        # Filter the validation results by invoice_id, vendor_id, or sow_id, if provided
+        # Filter by invoice_id, if provided
         if invoice_id is not None:
             query += f' WHERE invoice_id = {invoice_id}'
-        else:
-            if vendor_id is not None:
-                query += f' WHERE vendor_id = {vendor_id}'
-                if sow_id is not None:
-                    query += f' AND sow_id = {sow_id}'
-            elif sow_id is not None:
-                query += f' WHERE sow_id = {sow_id}'
-
+        
+        # Order the results by rank
         query += f' ORDER BY rank ASC'
 
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
 
-    async def find_sow_chunks(self, user_query: str, vendor_id: int = None, sow_id: int = None):
+    async def find_sow_chunks(self, user_query: str, sow_id: int = None):
         """
         Retrieves content chunks similar to the user query for the specified SOW.
         """
@@ -301,15 +310,13 @@ class ChatFunctions:
         query = f'SELECT {", ".join(columns)} FROM sow_chunks'
         if sow_id is not None:
             query += f' WHERE sow_id = {sow_id}'
-        elif vendor_id is not None:
-            query += f' WHERE vendor_id = {vendor_id}'
 
         query += f' ORDER BY rank ASC'
 
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
     
-    async def find_sow_chunks_with_semantic_ranking(self, user_query: str, vendor_id: int = None, sow_id: int = None, max_results: int = 3):
+    async def find_sow_chunks_with_semantic_ranking(self, user_query: str, sow_id: int = None, max_results: int = 3):
         """
         Retrieves content chunks similar to the user query for the specified SOW.
         """
@@ -319,7 +326,7 @@ class ChatFunctions:
 
         # Create a vector search query
         cte_query = f"SELECT content FROM sow_chunks"
-        cte_query += f" WHERE sow_id = {sow_id}" if sow_id is not None else f" WHERE vendor_id = {vendor_id}" if vendor_id is not None else ""
+        cte_query += f" WHERE sow_id = {sow_id}" if sow_id is not None else ""
         cte_query += f" ORDER BY embedding <=> '{query_embeddings}'"
         cte_query += f" LIMIT 10"
 
@@ -337,10 +344,10 @@ class ChatFunctions:
         rows = await self.__execute_query(f'{query};')
         return [dict(row) for row in rows]
     
-    async def find_sow_validation_results(self, user_query: str, vendor_id: int = None, sow_id: int = None): 
+    async def find_sow_validation_results(self, user_query: str, sow_id: int = None): 
         """
-        Retrieves SOW accuracy and performance validation results similar to the user query for specified vendor or SOW.
-        If no vendor_id or sow_id is provided, return all similar validation results.
+        Retrieves SOW accuracy and performance validation results similar to the user query for specified SOW.
+        If no sow_id is provided, return all similar validation results.
         """
         # Define the columns to retrieve from the table
         # Exclude the embedding column in results
@@ -361,8 +368,6 @@ class ChatFunctions:
         query = f'SELECT {", ".join(columns)} FROM sow_validation_results'
         if sow_id is not None:
             query += f' WHERE sow_id = {sow_id}'
-        elif vendor_id is not None:
-            query += f' WHERE vendor_id = {vendor_id}'
 
         query += f' ORDER BY rank ASC'
 

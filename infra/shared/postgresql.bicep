@@ -4,9 +4,6 @@ param location string
 @description('The name of the PostgreSQL server.')
 param serverName string
 
-@description('The name of the PostgreSQL database.')
-param databaseName string
-
 @description('The SKU name for the PostgreSQL server.')
 param skuName string = 'Standard_D2ds_v4'
 
@@ -52,6 +49,16 @@ param dnsZoneFqdn string = '${dnsZoneName}.postgres.database.azure.com'
 ])
 param highAvailabilityMode string = 'Disabled'
 
+@description('The principal ID to grant Admin access to the PostgreSQL server.')
+param principalId string
+@description('The principal name to grant Admin access to the PostgreSQL server.')
+param principalName string
+@description('The principal type to grant Admin access to the PostgreSQL server.')
+param principalType string = 'User'
+@description('The tenant id of the principal to grant Admin access to the PostgreSQL server.')
+param principalTenantId string
+
+
 var connectSubnet = !empty(subnetId)
 
 resource dnszone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (connectSubnet) {
@@ -59,8 +66,11 @@ resource dnszone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (connectSub
   location: 'global'
 }
 
-resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
+resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-11-01-preview' = {
   name: serverName
+  identity: {
+    type: 'SystemAssigned'
+  }
   location: location
   sku: {
     name: skuName
@@ -95,21 +105,23 @@ resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01'
   tags: tags
 }
 
-resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2023-12-01-preview' = {
+module serverAdmin './postgresql_administrator.bicep' = {
+  name: 'serverAdmin'
+  params: {
+    postgresqlServerName: postgresqlServer.name
+    principalId: principalId
+    principalName: principalName
+    principalType: principalType
+    principalTenantId: principalTenantId
+  }
+}
+
+resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2024-11-01-preview' = {
   parent: postgresqlServer
   name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
   properties: {
     startIpAddress: '0.0.0.0'
     endIpAddress: '0.0.0.0'
-  }
-}
-
-resource postgresqlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2024-08-01' = {
-  name: databaseName
-  parent: postgresqlServer
-  properties: {
-    charset: 'UTF8'
-    collation: 'en_US.utf8'
   }
 }
 
@@ -125,14 +137,5 @@ resource appConfigPostgresqlServerName 'Microsoft.AppConfiguration/configuration
   }
 }
 
-resource appConfigPostgresqlDatabaseName 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' = if (!empty(appConfigName)) {
-  parent: appConfig
-  name: 'postgresql-database'
-  properties: {
-    value: postgresqlDatabase.name
-  }
-}
-
 output serverName string = postgresqlServer.name
 output fqdn string = postgresqlServer.properties.fullyQualifiedDomainName
-output databaseName string = postgresqlDatabase.name

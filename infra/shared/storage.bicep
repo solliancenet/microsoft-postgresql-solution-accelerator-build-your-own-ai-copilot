@@ -5,6 +5,12 @@ param location string = resourceGroup().location
 param name string
 param tags object = {}
 param principalId string
+param principalType string = 'User'
+param postgresqlServerName string
+
+resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-11-01-preview' existing = {
+  name: postgresqlServerName
+}
 
 resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: name
@@ -74,7 +80,17 @@ resource storageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
+  }
+}
+
+resource postgresStorageBlobDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storage
+  name: guid(subscription().id, resourceGroup().id, postgresqlServer.id, 'sharedStorageBlobDataContributorRole')
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe') // Storage Blob Data Contributor role
+    principalId: postgresqlServer.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 

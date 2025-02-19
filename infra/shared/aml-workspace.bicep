@@ -22,6 +22,8 @@ param containerRegistryName string
 @description('The Principal ID of user to grant Data Contributor/Reader permissions to the storage account.')
 param principalId string
 
+param principalType string = 'User'
+
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
 }
@@ -74,7 +76,7 @@ resource storageBlobDataReaderRole 'Microsoft.Authorization/roleAssignments@2022
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1') // Storage Blob Data Reader role
     principalId: principalId
-    principalType: 'User'
+    principalType: principalType
   }
 }
 

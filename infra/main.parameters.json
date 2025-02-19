@@ -8,8 +8,8 @@
       "location": {
         "value": "${AZURE_LOCATION}"
       },
-      "principalId": {
-        "value": "${AZURE_PRINCIPAL_ID}"
+      "principalName": {
+        "value": "${AZURE_PRINCIPAL_NAME=NotSetYet}"
       },
       "userPortalExists": {
         "value": "${SERVICE_USERPORTAL_RESOURCE_EXISTS=false}"

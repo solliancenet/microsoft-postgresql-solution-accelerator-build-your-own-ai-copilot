@@ -6,6 +6,12 @@ The application has the following architecture:
 
 ![High-level architecture diagram for the solution](../img/solution-architecture-diagram.png)
 
+## Bringing your own data to the solution
+
+This solution accelerator is structured to use sample vendor, SOW, and invoice data, which has been provided for demonstration purposes.
+However, if you want to use it with your own data or augment an existing solution, you will need to modify certain steps.
+Where applicable, notes are provided to indicate key areas where adjustments may be necessary to integrate custom datasets.
+
 ## Learning Objectives
 
 The goal of the solution accelerator is to teach you to how to **add rich AI capabilities** using Azure Database for PostgreSQL and Azure AI Services to your existing applications. You will gain hands-on experience integrating advanced AI validation during data ingestion to ensure financial documents, like invoices, align with their associated statement of work. By leveraging Azure OpenAI for robust data validation and Azure Document Intelligence for comprehensive extraction and analysis, you will improve data quality. By adding a copilot chat feature, you will provide the ability for users to gain deep insights into vendors' invoicing accuracy, timeliness, and quality. This comprehensive approach equips you with the skills to seamlessly enrich your existing applications with AI-enhanced features, boosting their performance and reliability in the financial services industry.

@@ -58,6 +58,10 @@ _Select each tab below to learn more about how the movement of data in the conte
 
     8. The data validation results are securely stored in Azure Database for PostgreSQL alongside the analyzed data. The validation result is also vectorized on insert using the `azure_ai` extension.
 
+!!! question "Using your own data?"
+
+The architecture is designed for flexibility, allowing adaptation to custom datasets beyond the default sample data. If you plan to use your own data, it is recommended to review the database schema, data pipelines, and indexing strategies to ensure compatibility. Suggested changes and guidance for customization are provided in the documentation to help streamline this process.
+
 === "AI Copilot with RAG"
 
     !!! info "How The Custom Copilot Experience Works"

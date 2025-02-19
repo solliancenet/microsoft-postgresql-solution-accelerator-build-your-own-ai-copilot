@@ -39,10 +39,9 @@ async def main():
         graph_name='vendor_graph',
         vertex_csv_paths = [
             f'{local_data_dir}vendors.csv',
-            f'{local_data_dir}sows.csv',
-            f'{local_data_dir}invoice_validation_results.csv'
+            f'{local_data_dir}sows.csv'
         ],
-        vertex_labels = ['vendor', 'sow', 'invoice_validation_result'],
+        vertex_labels = ['vendor', 'sow'],
         edge_csv_paths = [f'{local_data_dir}has_invoices.csv'],
         edge_types = ["has_invoices"],
         use_copy=True,

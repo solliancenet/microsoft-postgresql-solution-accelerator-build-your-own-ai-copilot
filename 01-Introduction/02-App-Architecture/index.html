@@ -2080,6 +2080,10 @@
 
 <h1 id="12-application-architecture">1.2 Application Architecture<a class="headerlink" href="#12-application-architecture" title="Permanent link">&para;</a></h1>
 <p>The <em>Woodgrove Bank Contract Management</em> application automates extracting, validating, and storing data from invoices and SOWs to minimize manual effort and boost operational efficiency while allowing internal application users to gain actionable insights from the data. By focusing on this streamlined flow, the solution effectively automates tedious tasks, reduces errors, and provides valuable insights to internal users, enhancing overall operational efficiency and decision-making.</p>
+<div class="admonition question">
+<p class="admonition-title">Using your own data?</p>
+<p>The architecture is designed for flexibility, allowing adaptation to custom datasets beyond the default sample data. If you plan to use your own data, it is recommended to review the database schema, data pipelines, and indexing strategies to ensure compatibility. Suggested changes and guidance for customization are provided in the documentation to help streamline this process.</p>
+</div>
 <p>Throughout this solution accelerator, you will enhance the application with AI capabilities. The application consists of a REACT single page application (SPA) providing the UX (user experience), a backend API written in Python using FastAPI, and various Azure services. The solution implements the following high-level architecture:</p>
 <p><img alt="High-level architecture diagram for the solution" src="../../img/solution-architecture-diagram.png" /></p>
 <div class="admonition tip">
@@ -2089,7 +2093,7 @@
 <hr />
 <h2 id="application-data-flow">Application Data Flow<a class="headerlink" href="#application-data-flow" title="Permanent link">&para;</a></h2>
 <p><em>Select each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!</em></p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="data-ingestion--ai-processing" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="data-ingestion--ai-processing">Data Ingestion &amp; AI Processing</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="data-ingestion--ai-processing" name="__tabbed_1" type="radio" /><input id="ai-copilot-with-rag" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="data-ingestion--ai-processing">Data Ingestion &amp; AI Processing</label><label for="ai-copilot-with-rag">AI Copilot with RAG</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="admonition info">
@@ -2159,14 +2163,6 @@
 </li>
 </ol>
 </div>
-</div>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Using your own data?</p>
-</div>
-<p>The architecture is designed for flexibility, allowing adaptation to custom datasets beyond the default sample data. If you plan to use your own data, it is recommended to review the database schema, data pipelines, and indexing strategies to ensure compatibility. Suggested changes and guidance for customization are provided in the documentation to help streamline this process.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="ai-copilot-with-rag" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="ai-copilot-with-rag">AI Copilot with RAG</label></div>
-<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="admonition info">
 <p class="admonition-title">How The Custom Copilot Experience Works</p>

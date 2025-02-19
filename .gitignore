@@ -6,3 +6,4 @@ scripts/aml/model_asset/model
 src/*/dist
 node_modules
 src/api/run-local.sh
+graph_data/

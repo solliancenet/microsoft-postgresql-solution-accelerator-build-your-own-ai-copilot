@@ -7,7 +7,7 @@ In this step, you will configure your Python development environment in Visual S
 - [X] Create and populated a `.env` file in the **Woodgrove API** project.
 - [X] Connected to your database using pgAdmin
 
-## **Create a Python virtual environment**
+## Create a Python virtual environment
 
 Virtual environments in Python are essential for maintaining a clean and organized development space, allowing individual projects to have their own set of dependencies, isolated from others. This prevents conflicts between different projects and ensures consistency in your development workflow. By using virtual environments, you can manage package versions easily, avoid dependency clashes, and keep your projects running smoothly. It's a best practice that keeps your coding environment stable and dependable, making your development process more efficient and less prone to issues.
 
@@ -39,7 +39,7 @@ Virtual environments in Python are essential for maintaining a clean and organiz
 
 5. Execute the command at the terminal prompt to activate your virtual environment.
 
-## **Install required Python libraries**
+## Install required Python libraries
 
 The `requirements.txt` file in the `src\api` folder contains the set of Python libraries needed to run the Python components of the solution accelerator.
 
@@ -53,7 +53,7 @@ The `requirements.txt` file in the `src\api` folder contains the set of Python l
     pip install -r requirements.txt
     ```
 
-## **Create `.env` file**
+## Create `.env` file
 
 Configuration values, such as connection string and endpoints, that allow your application to interact with Azure services are hosted in an Azure App Configuration service. To enable your application to retrieve these values, you must provide it with the endpoint of that service. You will use a `.env` file to host the endpoint as an environment variable, which will allow you to run the Woodgrove API locally. The `.env` file will be created within the `src\api\app` folder of the project.
 
@@ -83,7 +83,7 @@ Configuration values, such as connection string and endpoints, that allow your a
 
 5. Save the `.env` file.
 
-## **Connect to your database from pgAdmin**
+## Connect to your database from pgAdmin
 
 You will use pgAdmin from your machine to configure various features in the database and execute queries to test those features. The `azd up` deployment script added your Microsoft Entra ID user as the owner of the database, so you will authenticate with Entra ID to. Please follow the steps below to connect to your Azure Database for PostgreSQL - Flexible Server using pgAdmin:
 

@@ -2004,14 +2004,14 @@ Ensure your PostgreSQL database has the required extensions installed:</p>
 pgvector: Enables vector data storage and similarity searches.
 pg_diskann: Provides efficient vector indexing and searching capabilities.</p>
 <p><em>Note: The pg_diskann extension depends on the vector extension; ensure both are installed.</em></p>
-<p><strong>1. Identify and Modify Relevant Tables</strong>
+<p><strong>2. Identify and Modify Relevant Tables</strong>
 Determine which tables in your existing database will store AI-generated data. For these tables:</p>
 <ul>
 <li>Add Vector Columns: Introduce columns of type vector to store embeddings.
 Example:
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">your_table</span>
-<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span><span class="w"> </span><span class="c1">-- Adjust dimension as needed for your model</span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">1536</span><span class="p">);</span><span class="w"> </span><span class="c1">-- Adjust dimension as needed for your model</span>
 </code></pre></div></td></tr></table></div></li>
 <li>Create DiskANN Indexes: Enhance query performance by indexing the vector columns.
 Example:
@@ -2022,7 +2022,7 @@ Example:
 <span class="w">  </span><span class="k">USING</span><span class="w"> </span><span class="n">diskann</span><span class="w"> </span><span class="p">(</span><span class="n">embedding</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div></li>
 </ul>
-<p><strong>1. Configure Managed Identity and Permissions</strong>
+<p><strong>3. Configure Managed Identity and Permissions</strong>
 Configure the following Azure services:</p>
 <ul>
 <li>Managed Identity: Assign a managed identity to your PostgreSQL server if not already done.</li>

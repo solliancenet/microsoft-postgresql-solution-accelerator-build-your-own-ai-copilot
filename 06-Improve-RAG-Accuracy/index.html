@@ -2021,6 +2021,31 @@
 
 
 <h1 id="improve-rag-accuracy">Improve RAG Accuracy<a class="headerlink" href="#improve-rag-accuracy" title="Permanent link">&para;</a></h1>
+<details class="question">
+<summary>Using your own data?</summary>
+<p>To effectively integrate your own data into the solution accelerator, it's essential to adapt the existing components to align with your specific data structures and relationships.</p>
+<p><strong>1. Customize the Semantic Ranker</strong>
+The semantic ranker enhances search relevance by reordering search results based on contextual understanding. To tailor it to your data:</p>
+<ul>
+<li>Understand the Existing Semantic Ranker: Review the current implementation to comprehend how it processes and ranks data.</li>
+<li>Adapt Ranking Functions: Modify the ranking algorithms to consider the unique attributes and relationships within your data. This may involve adjusting weightings or incorporating additional data fields to improve relevance.</li>
+<li>Test and Validate: After modifications, rigorously test the ranker's performance to ensure it accurately reflects the importance and context of your data elements.</li>
+</ul>
+<p><strong>2. Modify GraphRAG Function Calls</strong>
+Graph Retrieval-Augmented Generation (GraphRAG) combines knowledge graphs with AI models to provide contextually rich responses. To align GraphRAG with your data:</p>
+<ul>
+<li>Analyze Your Data Structure: Identify the nodes (entities) and edges (relationships) that are pertinent to your domain.</li>
+<li>Adjust Function Calls: Modify existing GraphRAG function calls to navigate your specific graph schema effectively. This includes updating queries to traverse the correct nodes and edges that mirror your data's relationships.</li>
+<li>Integrate with AI Models: Ensure that the data retrieved via GraphRAG is appropriately fed into your AI models to enhance response generation with accurate context.</li>
+</ul>
+<p><strong>3. Revise Data Export Procedures</strong>
+Exporting data accurately is crucial for maintaining the integrity of your knowledge graph. To adapt the export process:</p>
+<ul>
+<li>Map Data Relationships: Clearly define how your data entities relate to one another, establishing the nodes and edges that will form your knowledge graph.</li>
+<li>Update Export Scripts: Modify data export scripts to extract information from the appropriate tables and fields that correspond to your defined nodes and edges.</li>
+<li>Validate Exported Data: After exporting, verify that the data correctly represents the intended relationships and entities within your knowledge graph framework.</li>
+</ul>
+</details>
 <p>As Generative AI (GenAI) becomes increasingly integral to modern enterprises, users' trust in these applications is paramount and heavily reliant on the accuracy of their responses. The productivity loss from incorrect answers and the consequent erosion of user trust are issues that cannot be overlooked. For many organizations, the decision to deploy GenAI apps hinges on their ability to elevate the accuracy of the app's responses to an acceptable level.</p>
 <p>In this section, you will use Semantic Ranking and GraphRAG to enhance the accuracy of responses from the <em>Woodgrove Bank Contract Management</em> copilot. Here's what you will accomplish:</p>
 <ul class="task-list">

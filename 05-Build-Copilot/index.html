@@ -2021,6 +2021,20 @@
 
 
 <h1 id="implement-a-copilot">Implement a Copilot<a class="headerlink" href="#implement-a-copilot" title="Permanent link">&para;</a></h1>
+<details class="question">
+<summary>Using your own data?</summary>
+<p>Incorporating your own data into the solution accelerator requires adapting the existing architecture to align with your specific data structures.
+Here are some recommendations:</p>
+<p><strong>1. Implement Design Patterns and LangChain in Your Solution</strong>
+To effectively integrate AI capabilities, you need to incorporate design patterns that facilitate seamless interaction between your data and AI models. Utilizing <a href="https://python.langchain.com/docs/introduction/">LangChain</a> can help in constructing these patterns, enabling efficient data processing and AI orchestration.</p>
+<p><strong>2. Customize the <code>chat_functions.py</code> file</strong>
+The <code>chat_functions.py</code> file serves as a bridge between the user inputs and AI responses. To tailor this to your data:</p>
+<ul>
+<li>Understand the Existing Structure: Review the current implementation to comprehend how data flows and functions are structured.</li>
+<li>Map Your Data: Identify how your data schema aligns with the existing functions.</li>
+<li>Modify Functions: Adjust or rewrite functions to query and process your data appropriately, ensuring that the AI services can accurately interpret and respond based on your dataset.</li>
+</ul>
+</details>
 <p>In this section, you will add an AI copilot to the <em>Woodgrove Bank Contract Management</em> application using Python, the GenAI capabilities of Azure Database for PostgreSQL - Flexible Server, and the Azure AI extension. Using the AI-validated data, the copilot will use RAG to provide insights and answer questions about vendor contract performance and invoicing accuracy, serving as an intelligent assistant for Woodgrove Banks users. Here's what you will accomplish:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explore the API codebase</li>

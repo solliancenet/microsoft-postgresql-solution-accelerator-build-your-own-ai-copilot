@@ -20,7 +20,7 @@
     Example:
     ``` sql
       ALTER TABLE your_table
-      ADD COLUMN embedding vector(3072); -- Adjust dimension as needed for your model
+      ADD COLUMN embedding vector(1536); -- Adjust dimension as needed for your model
     ```
     - Create DiskANN Indexes: Enhance query performance by indexing the vector columns.
     Example:

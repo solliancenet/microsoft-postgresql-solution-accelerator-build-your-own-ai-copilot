@@ -13,7 +13,7 @@
 
     *Note: The pg_diskann extension depends on the vector extension; ensure both are installed.*
 
-    **1. Identify and Modify Relevant Tables**
+    **2. Identify and Modify Relevant Tables**
     Determine which tables in your existing database will store AI-generated data. For these tables:
     
     - Add Vector Columns: Introduce columns of type vector to store embeddings.
@@ -30,7 +30,7 @@
       USING diskann (embedding vector_cosine_ops);
     ```
 
-    **1. Configure Managed Identity and Permissions**
+    **3. Configure Managed Identity and Permissions**
     Configure the following Azure services:
 
     - Managed Identity: Assign a managed identity to your PostgreSQL server if not already done.

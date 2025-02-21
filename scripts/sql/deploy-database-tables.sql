@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS sows (
     end_date DATE NOT NULL,
     budget DECIMAL(18,2) NOT NULL,
     document text NOT NULL,
-    metadata JSONB,
+    metadata JSONB, --  additional metadata
     summary text,
     FOREIGN KEY (vendor_id) REFERENCES vendors (id) ON DELETE CASCADE
 );

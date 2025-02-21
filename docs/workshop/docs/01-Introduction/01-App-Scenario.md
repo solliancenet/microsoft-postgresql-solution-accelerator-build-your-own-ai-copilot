@@ -6,7 +6,7 @@ In the financial services industry, validating contract-related documents such a
 
 The accelerator is designed to demonstrate how an existing financial services application can be enhanced by integrating advanced AI capabilities into Azure Database for PostgreSQL through the Azure AI extension and incorporating Azure OpenAI's GPT-4 model to validate and review contract-related documents.
 
-???+ question "Using your own data?"
+??? question "Using your own data?"
 
     While the provided scenario utilizes pre-configured vendor, SOW, and invoice data, the framework is designed to be adaptable.
     You can replace these with your own datasets to better align with your specific business needs.

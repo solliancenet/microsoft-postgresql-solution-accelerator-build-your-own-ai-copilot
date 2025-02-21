@@ -8,7 +8,7 @@ To get started building the custom AI-enable Financial Services Industry (FSI) a
 - **SETUP** your development environment and configure it to work with the infrastructure
 - **VALIDATE** that the setup completed successfully, before diving into the ideation phase.
 
-???+ question "Using your own data?"
+??? question "Using your own data?"
 
     This solution accelerator is designed to work with sample vendor, SOW, and invoice data, but you can also use your own PostgreSQL database. If you choose to do so, some modifications will be necessary to ensure compatibility with the existing architecture.
     

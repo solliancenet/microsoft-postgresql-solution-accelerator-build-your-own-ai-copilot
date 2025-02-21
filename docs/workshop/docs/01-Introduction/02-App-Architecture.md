@@ -2,7 +2,7 @@
 
 The _Woodgrove Bank Contract Management_ application automates extracting, validating, and storing data from invoices and SOWs to minimize manual effort and boost operational efficiency while allowing internal application users to gain actionable insights from the data. By focusing on this streamlined flow, the solution effectively automates tedious tasks, reduces errors, and provides valuable insights to internal users, enhancing overall operational efficiency and decision-making.
 
-???+ question "Using your own data?"
+??? question "Using your own data?"
 
     The architecture is designed for flexibility, allowing adaptation to custom datasets beyond the default sample data. If you plan to use your own data, it is recommended to review the database schema, data pipelines, and indexing strategies to ensure compatibility. Suggested changes and guidance for customization are provided in the documentation to help streamline this process.
 

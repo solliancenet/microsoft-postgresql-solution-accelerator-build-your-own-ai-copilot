@@ -2283,6 +2283,12 @@
 <ol>
 <li>
 <p>Download and install the latest version of the <a href="https://docs.microsoft.com/cli/azure/?view=azure-cli-latest">Azure CLI</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Update to latest version of Azure CLI</p>
+<p>If you already have the Azure CLI installed, you'll need to be sure to upgrade to the latest version. This guide required v2.69.0 or greater. You can use this command to upgrade to the latest version:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az upgrade
+</code></pre></div></td></tr></table></div>
+</div>
 </li>
 <li>
 <p>Once installed, open a command prompt on your machine and verify the installation by running the following:</p>
@@ -2295,7 +2301,7 @@
 <p class="admonition-title">About the ml extension</p>
 <p>The <code>ml</code> extension to the Azure CLI is the enhanced interface for Azure Machine Learning. It enables you to train and deploy models from the command line, with features that accelerate scaling data science up and out while tracking the model lifecycle.</p>
 </div>
-<p>To install the <code>ml</code> extensinon you should first remove any existing installation of the extension and also the CLI v1 <code>azure-cli-ml</code> extension:</p>
+<p>To install the <code>ml</code> extension you should first remove any existing installation of the extension and also the CLI v1 <code>azure-cli-ml</code> extension:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>az extension remove -n azure-cli-ml
 az extension remove -n ml
@@ -2305,10 +2311,10 @@ az extension remove -n ml
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>Install Azure Developer CLI by following the instructions for your OS at <a href="https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd">https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd</a>.</p>
+<p>Install or upgrade Azure Developer CLI to the latest version by following the instructions for your OS at <a href="https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd">https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Update to latest version of Azure Developer CLI</p>
-<p>If you already have the Azure Developer CLI installed, you'll wan to be sure to upgrade to the newest version. This guide required v1.12 or greater.</p>
+<p>If you already have the Azure Developer CLI installed, you'll need to be sure to upgrade to the latest version. This guide required v1.12 or greater.</p>
 </div>
 </li>
 <li>

@@ -25,7 +25,7 @@ fi
 # -------------- Create any additional RBAC roles required -------------------------
 
 # --- See Azure Built-in Roles first for CONTROL plane
-# https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+# https://learn.microsoft.com/azure/role-based-access-control/built-in-roles
 
 # Get principal id from authenticated account
 PRINCIPAL_ID=$(az ad signed-in-user show --query id -o tsv)
@@ -58,7 +58,7 @@ az role assignment create \
 # ------ See CosmosDB built-in roles for DATA plane
 # https://aka.ms/cosmos-native-rbac
 # Note: Azure CosmosDB data plane roles are distinct from built-in Azure control plane roles
-# See: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-cosmos-db-connection?tabs=arm#step-2-create-a-cosmos-db-data-connection
+# See: https://learn.microsoft.com/azure/data-explorer/ingest-data-cosmos-db-connection?tabs=arm#step-2-create-a-cosmos-db-data-connection
 # See: infra/core/security/role-cosmos.bicep to understand what we need to set
 
 # Gets account name

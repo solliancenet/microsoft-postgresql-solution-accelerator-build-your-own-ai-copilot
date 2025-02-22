@@ -23,7 +23,7 @@ The required development environment uses a Visual Studio (VS) Code editor with 
 
 1. Install or upgrade to the latest version of the [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) by following the instructions for your OS at <https://learn.microsoft.com/cli/azure/install-azure-cli>
 
-    !!! info "Update to latest version of Azure CLI"
+    !!! info "Upgrade to latest version of Azure CLI"
 
         If you already have the Azure CLI installed, you'll need to be sure to upgrade to the latest version. This guide required v2.69.0 or greater. You can use this command to upgrade to the latest version:
 
@@ -58,7 +58,7 @@ The required development environment uses a Visual Studio (VS) Code editor with 
 
 4. Install or upgrade Azure Developer CLI to the latest version by following the instructions for your OS at <https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd>.
 
-    !!! info "Update to latest version of Azure Developer CLI"
+    !!! info "Upgrade to latest version of Azure Developer CLI"
 
         If you already have the Azure Developer CLI installed, you'll need to be sure to upgrade to the latest version. This guide required v1.12 or greater.
 

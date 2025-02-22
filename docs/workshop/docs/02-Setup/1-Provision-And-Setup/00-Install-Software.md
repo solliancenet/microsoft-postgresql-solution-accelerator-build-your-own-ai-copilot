@@ -21,7 +21,15 @@ The required development environment uses a Visual Studio (VS) Code editor with 
     - The Azure CLI enables you to execute Azure CLI commands from a command prompt or VS Code terminal on your local machine.
     - The Azure Developer CLI (`azd`) is an open-source tool that accelerates provisioning and deploying app resources on Azure.
 
-1. Download and install the latest version of the [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest).
+1. Install or upgrade to the latest version of the [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) by following the instructions for your OS at <https://learn.microsoft.com/cli/azure/install-azure-cli>
+
+    !!! info "Update to latest version of Azure CLI"
+
+        If you already have the Azure CLI installed, you'll need to be sure to upgrade to the latest version. This guide required v2.69.0 or greater. You can use this command to upgrade to the latest version:
+
+        ```azurecli title=""
+        az upgrade
+        ```
 
 2. Once installed, open a command prompt on your machine and verify the installation by running the following:
 
@@ -35,7 +43,7 @@ The required development environment uses a Visual Studio (VS) Code editor with 
 
         The `ml` extension to the Azure CLI is the enhanced interface for Azure Machine Learning. It enables you to train and deploy models from the command line, with features that accelerate scaling data science up and out while tracking the model lifecycle.
 
-    To install the `ml` extensinon you should first remove any existing installation of the extension and also the CLI v1 `azure-cli-ml` extension:
+    To install the `ml` extension you should first remove any existing installation of the extension and also the CLI v1 `azure-cli-ml` extension:
 
     ```azurecli title=""
     az extension remove -n azure-cli-ml
@@ -48,7 +56,11 @@ The required development environment uses a Visual Studio (VS) Code editor with 
     az extension add -n ml
     ```
 
-4. Install Azure Developer CLI by following the instructions for your OS at <https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd>.
+4. Install or upgrade Azure Developer CLI to the latest version by following the instructions for your OS at <https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd>.
+
+    !!! info "Update to latest version of Azure Developer CLI"
+
+        If you already have the Azure Developer CLI installed, you'll need to be sure to upgrade to the latest version. This guide required v1.12 or greater.
 
 5. Execute the following command from a terminal prompt to verify the tools were installed:
     

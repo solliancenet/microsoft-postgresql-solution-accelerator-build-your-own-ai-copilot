@@ -5,21 +5,17 @@ from datetime import datetime
 import os
 import textwrap
 
+# Load configuration from the config file
+def load_config(config_path):
+    with open(config_path, 'r') as file:
+        return json.load(file)
+    
 # Function to generate the SOW PDF
-def generate_sow_pdf(output_path, vendor_name,config):
-    # Load configuration from the JSON file
-    with open('src/config/sow_inv.config', 'r') as config_file:
-        configs = json.load(config_file)
-
-    # Find the vendor configuration by name
-    config = next((config for config in configs if config['name'] == vendor_name), None)
-    if not config:
-        raise ValueError(f"Vendor '{vendor_name}' not found in configuration.")
-
+def generate_sow_pdf(output_path, vendor_name, vendor_config):
     # Replace placeholders in compliance section and wrap text
-    for i, item in enumerate(config['compliance']):
-        item = item.replace("{name}", config['name'])
-        config['compliance'][i] = textwrap.fill(item, width=100)
+    for i, item in enumerate(vendor_config['compliance']):
+        item = item.replace("{name}", vendor_config['name'])
+        vendor_config['compliance'][i] = textwrap.fill(item, width=100)
 
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
@@ -33,20 +29,20 @@ def generate_sow_pdf(output_path, vendor_name,config):
 
     # Project Details
     pdf.set_font("Arial", style="B", size=10)
-    pdf.cell(0, 10, txt=f"Project Name: {config['project_name']}", ln=True)
-    pdf.cell(0, 10, txt=f"Effective Date: {config['start_date']}", ln=True)
-    pdf.cell(0, 10, txt=f"Project Completion Date: {config['completion_date']}", ln=True)
-    pdf.cell(0, 10, txt=f"SOW Number: {config['SOW']}", ln=True)
+    pdf.cell(0, 10, txt=f"Project Name: {vendor_config['project_name']}", ln=True)
+    pdf.cell(0, 10, txt=f"Effective Date: {vendor_config['start_date']}", ln=True)
+    pdf.cell(0, 10, txt=f"Project Completion Date: {vendor_config['completion_date']}", ln=True)
+    pdf.cell(0, 10, txt=f"SOW Number: {vendor_config['SOW']}", ln=True)
 
     # Section Headers and Content
     sections = {
-        "Project Scope": config['project_scope'],
-        "Project Objectives": config['project_objectives'],
-        "Tasks": config['tasks'],
-        "Schedules": config['schedules'],
-        "Requirements": config['requirements'],
-        "Payments": config['payments'],
-        "Compliance": config['compliance']
+        "Project Scope": vendor_config['project_scope'],
+        "Project Objectives": vendor_config['project_objectives'],
+        "Tasks": vendor_config['tasks'],
+        "Schedules": vendor_config['schedules'],
+        "Requirements": vendor_config['requirements'],
+        "Payments": vendor_config['payments'],
+        "Compliance": vendor_config['compliance']
     }
 
     for section, content in sections.items():
@@ -86,7 +82,7 @@ def generate_sow_pdf(output_path, vendor_name,config):
 
     # Table Content
     total_amount = 0
-    for deliverable in config['deliverables']:
+    for deliverable in vendor_config['deliverables']:
         pdf.cell(20, 10, txt=str(deliverable['number']), border=1)
         pdf.cell(40, 10, txt=deliverable['name'], border=1)
         pdf.cell(80, 10, txt=deliverable['deliverables'], border=1)
@@ -109,7 +105,7 @@ def generate_sow_pdf(output_path, vendor_name,config):
     pdf.cell(0, 10, txt="Signatures", ln=True)
     pdf.ln(10)
     pdf.set_font("Arial", size=10)
-    pdf.cell(0, 10, txt=f"________________ ({config['name']} - {config['contact_name']})", ln=True)
+    pdf.cell(0, 10, txt=f"________________ ({vendor_config['name']} - {vendor_config['contact_name']})", ln=True)
     pdf.cell(0, 10, txt="________________ (Woodgrove Bank - Chris Green)", ln=True)
 
     # Ensure the output directory exists
@@ -120,22 +116,24 @@ def generate_sow_pdf(output_path, vendor_name,config):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Statement of Work PDF")
     parser.add_argument("vendor_name", type=str, help="The name of the vendor")
+    parser.add_argument("config_file", type=str, nargs='?', default='sow_inv.config', help="The configuration file to use (default: sow_inv.config)")
     args = parser.parse_args()
 
     vendor_name = args.vendor_name
+    config_file = args.config_file
 
-    with open('src/config/sow_inv.config', 'r') as config_file:
-        configs = json.load(config_file)
+    config_path = f'src/config/{config_file}'
+    configs = load_config(config_path)
     
-    config = next((config for config in configs if config['name'] == vendor_name), None)
-    if not config:
+    vendor_config = next((config for config in configs if config['name'] == vendor_name), None)
+    if not vendor_config:
         raise ValueError(f"Vendor '{vendor_name}' not found in configuration.")
     
-    name = config['name'].replace(" ", "_").replace(".", "")
-    start_date_str = config.get('start_date', "")
+    name = vendor_config['name'].replace(" ", "_").replace(".", "")
+    start_date_str = vendor_config.get('start_date', "")
     if not start_date_str:
         raise ValueError(f"Start date not found for vendor '{vendor_name}'")
     
     start_date = datetime.strptime(start_date_str, "%B %d, %Y").strftime("%Y%m%d")
     output_path = f"../sample_docs/Statement_of_Work_{name}_Woodgrove_Bank_{start_date}.pdf"
-    generate_sow_pdf(output_path, vendor_name, config)
+    generate_sow_pdf(output_path, vendor_name, vendor_config)

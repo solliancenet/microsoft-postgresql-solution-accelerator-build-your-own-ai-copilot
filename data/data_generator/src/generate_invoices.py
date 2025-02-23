@@ -75,7 +75,7 @@ def create_invoice(invoice_number, deliverables, vendor_info, client_info, outpu
     pdf.multi_cell(0, 10, txt=(
         f"If paying by Direct Credit please pay into the following bank account:\n"
         f"Account Name: {vendor_info['name']}\n"
-        f"Account Number: {random.randint(10000000, 99999999)}\n"
+        f"Account Number: {vendor_info['account_number']}\n"
         f"To help us allocate money correctly, please reference your invoice number: {invoice_number}\n\n"
         f"Payment Terms:\n{payment_info}\n"
     ))

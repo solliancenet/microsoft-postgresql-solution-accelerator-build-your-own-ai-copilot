@@ -46,18 +46,18 @@ The solution accelerator integrates with **Azure AI services** to extract, valid
 |----------------------------|---------------------------|-------------------------------------------|
 | `content`             | `sow_chunks`, `invoices`             | AI processes this field to extract structured data from raw text. |
 | `embedding`         | `deliverables`, `sow_chunks`, `invoice_line_items`, `invoice_validation_results`, `sow_validation_results` | Used for vector search and similarity retrieval in **semantic search models**. |
-| `due_date`       | `deliverables`, `invoice_line_items`              | AI extracts and validates deadlines. |
-| `amount`            | `invoices`                | AI checks for discrepancies in invoice processing. |
-|`result`            | `sow_validation_results`, `invoice_validation_results`    |        |
-| `validation_passed`        | `sow_validation_results`, `invoice_validation_results` | AI-driven validation results for compliance analysis. |
+| `due_date`       | `deliverables`, `invoice_line_items`              | AI extracts and can validate deadlines. |
+| `amount`            | `invoices`                | AI extracts and detects discrepancies in invoice details. |
+|`result`            | `sow_validation_results`, `invoice_validation_results`    |  AI-generated analysis of compliance for dpcuments processed  |
+| `validation_passed`        | `sow_validation_results`, `invoice_validation_results` | AI-driven validation result for compliance analysis. |
 | `metadata`                 |`invoices`                | JSONB column for storing dynamic, AI-generated insights. |
 
 ### **Graph Relationships**
 
 | **Field Name**              | **Graph**                  | **AI Usage** |
-|----------------------------|---------------------------|-------------------------------------------|
-|`vendor_id`,`vendor_name`    |    `vendor_graph`    |    Used to analyze vendor performance and relationships    |
-|`sow_id`,`sow_number`    |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
+|-------------------------------|---------------------------------|--------------------------------------|
+|`vendor_id`,`vendor_name`   |    `vendor_graph`    |    Used to analyze vendor performance and relationships    |
+|`sow_id`,`sow_number`       |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
 |`payment_status`,`invoice_amount`    |    `vendor_graph`    | Used to validate and process invoices, detect discrepancies, and ensure compliance.    |
 
 ### **Why These Fields Matter**

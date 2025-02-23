@@ -1,0 +1,123 @@
+# Understanding the Table Schema and Artifacts
+
+This section provides an overview of the **table schema and data artifacts** (e.g., **SOW documents, invoices, and validation results**) used in the **solution accelerator**. It highlights **key fields** that enable AI-powered processing and explains why specific fields are used by **AI services**.
+
+---
+
+## 1. Understanding the Table Schema
+
+The accelerator processes **Statements of Work (SOWs), invoices, validation results, and extracted entities** using a structured PostgreSQL schema. Below is an overview of the **key tables** and their roles:
+
+### **Core Tables & Their Purpose**
+
+| **Table**                   | **Description** |
+|-----------------------------|-----------------------------------------------------------|
+| `vendors`                   | Stores vendor details, linking them to associated SOWs and invoices. |
+| `sows`                      | Contains information on Statements of Work, including terms, parties involved, and deliverables. |
+| `sow_chunks`                | Breaks down SOW documents into smaller sections for AI processing. |
+| `milestones`                | Tracks contractual milestones extracted from SOWs. |
+| `deliverables`              | Details key deliverables as defined in SOWs. |
+| `sow_validation_results`    | Stores AI-driven validation results for SOW compliance and consistency. |
+| `invoices`                  | Contains invoice details, such as amounts, due dates, and associated SOWs. |
+| `invoice_line_items`        | Stores individual line items extracted from invoices. |
+| `invoice_validation_results`| Captures AI-driven validation for invoice accuracy and discrepancies. |
+
+### **How These Tables Work Together**
+
+1. **SOW documents** are processed and broken into structured chunks.  
+2. AI services extract key entities (**vendors, deliverables, milestones**).  
+3. The extracted information is validated and stored in **validation tables**.  
+4. **Invoices** are linked to **SOWs** for contract compliance checks.  
+
+When **adapting the accelerator** to a different dataset, users should identify **similar structures in their own database** and **map their entities to these tables**.
+
+---
+
+## 2. Key Fields Used in AI Processing
+
+The solution accelerator integrates with **Azure AI services** to extract, validate, and process information. Below are **key fields** that play a role in AI workflows and why they were selected.
+
+### **Fields Used in AI Services**
+
+| **Field Name**              | **Table**                  | **AI Usage** |
+|----------------------------|---------------------------|-------------------------------------------|
+| `content`             | `sow_chunks`, `invoices`             | AI processes this field to extract structured data from raw text. |
+| `embedding`         | `deliverables`, `sow_chunks`, `invoice_line_items`, `invoice_validation_results`, `sow_validation_results` | Used for vector search and similarity retrieval in **semantic search models**. |
+| `due_date`       | `deliverables`, `invoice_line_items`              | AI extracts and validates deadlines. |
+| `amount`            | `invoices`                | AI checks for discrepancies in invoice processing. |
+|`result`            | `sow_validation_results`, `invoice_validation_results`    |        |
+| `validation_passed`        | `sow_validation_results`, `invoice_validation_results` | AI-driven validation results for compliance analysis. |
+| `metadata`                 |`invoices`                | JSONB column for storing dynamic, AI-generated insights. |
+
+For Graph Data
+
+| **Field Name**              | **Graph**                  | **AI Usage** |
+|----------------------------|---------------------------|-------------------------------------------|
+|`vendor_id`, `vendor_name`    |    `vendor_graph`    |    Used to analyze vendor performance and relationships    |
+|`sow_id`, `sow_number`    |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
+|`payment_status`, `invoice_amount`    |    `vendor_graph`    | Used to validate and process invoices, detect discrepancies, and ensure compliance.    |
+
+### **Why These Fields Matter**
+
+- **Vector embeddings (`embedding`)** enable **semantic search** by allowing **AI-powered retrieval** of similar SOW clauses, contract terms, and invoices.  
+- **Validation fields (`result`, `validation_passed`)** ensure AI-generated extractions meet business rules.  
+- **Graph relationships within `vendor_graph`** supports **GraphRAG (Retrieval-Augmented Generation)** where chosen fields can be utilized in AI models for analysis related to vendors, contracts, and invoices, as well as enhanced AI accuracy.
+- **Flexible JSONB storage (`metadata`)** makes it possible to **extend AI processing without schema changes**.
+
+## Extending the Schema with JSONB
+
+The **JSONB** data type in PostgreSQL allows for flexible storage of JSON data, enabling you to extend the schema without making significant changes to the database structure. This is particularly useful when you need to bring in additional data that doesn't fit neatly into the existing schema.
+
+### **Benefits of Using JSONB**
+
+- **Flexibility**: Store semi-structured data without altering the table schema.
+- **Dynamic Data**: Easily add new fields and data types as needed.
+- **Efficient Storage**: JSONB is stored in a binary format, making it more efficient than plain JSON.
+
+### **Using JSONB to Bring Your Own Data**
+
+When adapting the accelerator to your own data, you can use JSONB fields to store additional information dynamically. This allows you to extend the capabilities of the solution without modifying the core table structures.
+
+### **Example Usage**
+
+```sql
+ALTER TABLE invoices ADD COLUMN metadata JSONB;
+
+-- Insert data into the JSONB column
+UPDATE invoices
+SET metadata = '{"additional_info": "value", "extra_field": 123}'
+WHERE id = 1;
+```
+
+---
+
+??? question "Using your own data?"
+
+        For users **adapting the accelerator** to their own data, this guide helps identify where **modifications** may be required to align with their existing **PostgreSQL schema** and **data structures**.
+    
+        ### **1. Map Your Data to the Existing Schema**
+        
+        - Identify **which of your tables correspond** to `sows`, `invoices`, and `vendors`.  
+        - Ensure your **data can be chunked and processed** similarly to `sow_chunks`.
+        - Leverage a **JSONB** column to store additional data dynamically while keeping the core table structures unchanged.
+        
+        ### **2. Add Vector Embeddings to Enable AI Search**
+        
+        - Create a **vector column (`embedding`)** in relevant tables to store AI-generated embeddings.  
+        - Use **pg_diskann** for efficient AI-powered search.  
+        
+        ### **3. Modify AI Processing Scripts**
+        
+        - Update **data extraction scripts** to reflect your field names.  
+        - Ensure AI models **extract the correct entities** based on your schema.  
+        
+        ### **4. Update Data Export & Relationships**
+        
+        - Modify data export scripts to align with **your table structure**.  
+        - Ensure **GraphRAG relationships** correctly link entities in your database.  
+
+## References
+
+[PostgreSQL JSONB Documentation](https://www.postgresql.org/docs/current/datatype-json.html)
+
+[Overview of AI Services and Data](https://techcommunity.microsoft.com/blog/adforpostgresql/azure-postgresql-with-azure-open-ai-to-innovate-banking-apps-unlocking-the-power/4257561)

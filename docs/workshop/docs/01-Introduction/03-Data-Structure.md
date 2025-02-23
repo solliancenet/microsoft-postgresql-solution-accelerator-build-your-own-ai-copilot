@@ -13,14 +13,17 @@ The accelerator processes **Statements of Work (SOWs), invoices, validation resu
 | **Table**                   | **Description** |
 |-----------------------------|-----------------------------------------------------------|
 | `vendors`                   | Stores vendor details, linking them to associated SOWs and invoices. |
+| `status`                    | Stores various status values that can be used to track the state of different entities within the system. |
 | `sows`                      | Contains information on Statements of Work, including terms, parties involved, and deliverables. |
 | `sow_chunks`                | Breaks down SOW documents into smaller sections for AI processing. |
 | `milestones`                | Tracks contractual milestones extracted from SOWs. |
 | `deliverables`              | Details key deliverables as defined in SOWs. |
-| `sow_validation_results`    | Stores AI-driven validation results for SOW compliance and consistency. |
 | `invoices`                  | Contains invoice details, such as amounts, due dates, and associated SOWs. |
 | `invoice_line_items`        | Stores individual line items extracted from invoices. |
-| `invoice_validation_results`| Captures AI-driven validation for invoice accuracy and discrepancies. |
+| `invoice_validation_results`| Stores AI-driven validation for invoice accuracy and discrepancies. |
+| `sow_validation_results`    | Stores AI-driven validation results for SOW compliance and consistency. |
+| `copilot_chat_sessions`     | Stores information about individual chat sessions. |
+| `copilot_chat_session_history` | Stores the history of messages exchanged during a chat session. |
 
 ### **How These Tables Work Together**
 
@@ -53,16 +56,15 @@ The solution accelerator integrates with **Azure AI services** to extract, valid
 
 | **Field Name**              | **Graph**                  | **AI Usage** |
 |----------------------------|---------------------------|-------------------------------------------|
-|`vendor_id`, `vendor_name`    |    `vendor_graph`    |    Used to analyze vendor performance and relationships    |
-|`sow_id`, `sow_number`    |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
-|`payment_status`, `invoice_amount`    |    `vendor_graph`    | Used to validate and process invoices, detect discrepancies, and ensure compliance.    |
+|`vendor_id`,`vendor_name`    |    `vendor_graph`    |    Used to analyze vendor performance and relationships    |
+|`sow_id`,`sow_number`    |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
+|`payment_status`,`invoice_amount`    |    `vendor_graph`    | Used to validate and process invoices, detect discrepancies, and ensure compliance.    |
 
 ### **Why These Fields Matter**
 
 - **Vector embeddings (`embedding`)** enable **semantic search** by allowing **AI-powered retrieval** of similar SOW clauses, contract terms, and invoices.  
 - **Validation fields (`result`, `validation_passed`)** ensure AI-generated extractions meet business rules.  
 - **Graph relationships within `vendor_graph`** supports **GraphRAG (Retrieval-Augmented Generation)** where chosen fields can be utilized in AI models for analysis related to vendors, contracts, and invoices, as well as enhanced AI accuracy.
-- **Flexible JSONB storage (`metadata`)** makes it possible to **extend AI processing without schema changes**.
 
 ## Extending the Schema with JSONB
 

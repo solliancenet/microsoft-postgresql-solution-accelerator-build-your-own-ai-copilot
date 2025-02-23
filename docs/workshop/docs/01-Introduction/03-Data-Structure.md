@@ -1,4 +1,4 @@
-# Understanding the Table Schema and Artifacts
+# 1.3 Understanding the Table Schema and Artifacts
 
 This section provides an overview of the **table schema and data artifacts** (e.g., **SOW documents, invoices, and validation results**) used in the **solution accelerator**. It highlights **key fields** that enable AI-powered processing and explains why specific fields are used by **AI services**.
 

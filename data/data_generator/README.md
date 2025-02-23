@@ -11,7 +11,8 @@ sow_invoice_generator
 │   ├── generate_invoices.py    # Script to generate invoices for each milestone
 │   └── config
 │       ├── sow_inv.config      # Configuration file with project details
-│       └── bad_sow_inv.config  # Configuration file for generating bad invoices and SOWs  
+│       └── bad_inv.config  # Configuration file for generating bad invoices  
+│       └── bad_sow.config  # Configuration file for generating bad SOWs 
 ├── requirements.txt            # List of dependencies for the project
 └── README.md                   # Documentation for the project
 ```

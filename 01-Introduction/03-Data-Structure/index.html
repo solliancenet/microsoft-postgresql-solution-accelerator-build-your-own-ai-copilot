@@ -2408,6 +2408,10 @@
 <td>Stores vendor details, linking them to associated SOWs and invoices.</td>
 </tr>
 <tr>
+<td><code>status</code></td>
+<td>Stores various status values that can be used to track the state of different entities within the system.</td>
+</tr>
+<tr>
 <td><code>sows</code></td>
 <td>Contains information on Statements of Work, including terms, parties involved, and deliverables.</td>
 </tr>
@@ -2424,10 +2428,6 @@
 <td>Details key deliverables as defined in SOWs.</td>
 </tr>
 <tr>
-<td><code>sow_validation_results</code></td>
-<td>Stores AI-driven validation results for SOW compliance and consistency.</td>
-</tr>
-<tr>
 <td><code>invoices</code></td>
 <td>Contains invoice details, such as amounts, due dates, and associated SOWs.</td>
 </tr>
@@ -2437,7 +2437,19 @@
 </tr>
 <tr>
 <td><code>invoice_validation_results</code></td>
-<td>Captures AI-driven validation for invoice accuracy and discrepancies.</td>
+<td>Stores AI-driven validation for invoice accuracy and discrepancies.</td>
+</tr>
+<tr>
+<td><code>sow_validation_results</code></td>
+<td>Stores AI-driven validation results for SOW compliance and consistency.</td>
+</tr>
+<tr>
+<td><code>copilot_chat_sessions</code></td>
+<td>Stores information about individual chat sessions.</td>
+</tr>
+<tr>
+<td><code>copilot_chat_session_history</code></td>
+<td>Stores the history of messages exchanged during a chat session.</td>
 </tr>
 </tbody>
 </table>
@@ -2510,17 +2522,17 @@
 </thead>
 <tbody>
 <tr>
-<td><code>vendor_id</code>, <code>vendor_name</code></td>
+<td><code>vendor_id</code>,<code>vendor_name</code></td>
 <td><code>vendor_graph</code></td>
 <td>Used to analyze vendor performance and relationships</td>
 </tr>
 <tr>
-<td><code>sow_id</code>, <code>sow_number</code></td>
+<td><code>sow_id</code>,<code>sow_number</code></td>
 <td><code>vendor_graph</code></td>
 <td>Used to track and validate Statements of Work (SOWs)</td>
 </tr>
 <tr>
-<td><code>payment_status</code>, <code>invoice_amount</code></td>
+<td><code>payment_status</code>,<code>invoice_amount</code></td>
 <td><code>vendor_graph</code></td>
 <td>Used to validate and process invoices, detect discrepancies, and ensure compliance.</td>
 </tr>
@@ -2531,7 +2543,6 @@
 <li><strong>Vector embeddings (<code>embedding</code>)</strong> enable <strong>semantic search</strong> by allowing <strong>AI-powered retrieval</strong> of similar SOW clauses, contract terms, and invoices.  </li>
 <li><strong>Validation fields (<code>result</code>, <code>validation_passed</code>)</strong> ensure AI-generated extractions meet business rules.  </li>
 <li><strong>Graph relationships within <code>vendor_graph</code></strong> supports <strong>GraphRAG (Retrieval-Augmented Generation)</strong> where chosen fields can be utilized in AI models for analysis related to vendors, contracts, and invoices, as well as enhanced AI accuracy.</li>
-<li><strong>Flexible JSONB storage (<code>metadata</code>)</strong> makes it possible to <strong>extend AI processing without schema changes</strong>.</li>
 </ul>
 <h2 id="extending-the-schema-with-jsonb">Extending the Schema with JSONB<a class="headerlink" href="#extending-the-schema-with-jsonb" title="Permanent link">&para;</a></h2>
 <p>The <strong>JSONB</strong> data type in PostgreSQL provides a powerful way to store and query semi-structured data, making it ideal for AI-driven applications that require flexibility in handling diverse and evolving datasets. AI services often work with rapidly changing schemas, various data formats, and unstructured metadata. <strong>JSONB</strong> enables these services to integrate additional data points without rigid schema modifications, ensuring adaptability and performance at scale.</p>

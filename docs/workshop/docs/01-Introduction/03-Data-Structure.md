@@ -55,10 +55,10 @@ The solution accelerator integrates with **Azure AI services** to extract, valid
 ### **Graph Relationships**
 
 | **Field Name**              | **Graph**                  | **AI Usage** |
-|----------------------------|------------------------------|----------------------------------------|
-|`vendor_id`,`vendor_name`   |    `vendor_graph&nbsp;`    |    Used to analyze vendor performance and relationships    |
-|`sow_id`,`sow_number`    |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
-|`payment_status`,`invoice_amount`    |    `vendor_graph`    | Used to validate and process invoices, detect discrepancies, and ensure compliance.    |
+|-----------------------------|------------------------------|----------------------------------------|
+|`vendor_id`<br>`vendor_name`   |    `vendor_graph`    |    Used to analyze vendor performance and relationships    |
+|`sow_id`<br>`sow_number`    |    `vendor_graph`       |    Used to track and validate Statements of Work (SOWs)    |
+|`payment_status`<br>`invoice_amount`    |    `vendor_graph`    | Used to validate and process invoices, detect discrepancies, and ensure compliance.    |
 
 ### **Why These Fields Matter**
 

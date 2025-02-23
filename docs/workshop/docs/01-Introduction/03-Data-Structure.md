@@ -37,7 +37,7 @@ When **adapting the accelerator** to a different dataset, users should identify 
 
 The solution accelerator integrates with **Azure AI services** to extract, validate, and process information. Below are **key fields** that play a role in AI workflows and why they were selected.
 
-### **Fields Used in AI Services**
+### **Relational Fields Used in AI Services**
 
 | **Field Name**              | **Table**                  | **AI Usage** |
 |----------------------------|---------------------------|-------------------------------------------|
@@ -49,7 +49,7 @@ The solution accelerator integrates with **Azure AI services** to extract, valid
 | `validation_passed`        | `sow_validation_results`, `invoice_validation_results` | AI-driven validation results for compliance analysis. |
 | `metadata`                 |`invoices`                | JSONB column for storing dynamic, AI-generated insights. |
 
-For Graph Data
+### **Graph Relationships**
 
 | **Field Name**              | **Graph**                  | **AI Usage** |
 |----------------------------|---------------------------|-------------------------------------------|
@@ -66,17 +66,27 @@ For Graph Data
 
 ## Extending the Schema with JSONB
 
-The **JSONB** data type in PostgreSQL allows for flexible storage of JSON data, enabling you to extend the schema without making significant changes to the database structure. This is particularly useful when you need to bring in additional data that doesn't fit neatly into the existing schema.
+The **JSONB** data type in PostgreSQL provides a powerful way to store and query semi-structured data, making it ideal for AI-driven applications that require flexibility in handling diverse and evolving datasets. AI services often work with rapidly changing schemas, various data formats, and unstructured metadata. **JSONB** enables these services to integrate additional data points without rigid schema modifications, ensuring adaptability and performance at scale.
 
-### **Benefits of Using JSONB**
+---
 
-- **Flexibility**: Store semi-structured data without altering the table schema.
-- **Dynamic Data**: Easily add new fields and data types as needed.
-- **Efficient Storage**: JSONB is stored in a binary format, making it more efficient than plain JSON.
+### **Why JSONB is Ideal for AI Services**
 
-### **Using JSONB to Bring Your Own Data**
+- **Schema Evolution**: AI applications frequently introduce new features, models, or metadata. JSONB allows for **seamless schema modifications** without disrupting the existing relational structure.
+- **Handling Unstructured Data**: Many AI workloads ingest **sensor data, user interactions, embeddings, and model predictions** that don’t fit into traditional relational columns.
+- **Efficient Indexing and Querying**: JSONB supports **GIN (Generalized Inverted Index)** and **JSONPath queries**, making it fast and efficient to search for nested data.
+- **Compact Storage and Faster Retrieval**: Unlike plain JSON, JSONB is **binary-optimized**, reducing overhead in AI pipelines that process large volumes of data.
 
-When adapting the accelerator to your own data, you can use JSONB fields to store additional information dynamically. This allows you to extend the capabilities of the solution without modifying the core table structures.
+---
+
+### **Using JSONB for AI-Powered Metadata and Model Outputs**
+
+When integrating AI services into a PostgreSQL-backed system, JSONB can be leveraged to store:
+
+- **Inference results** (e.g., probabilities, classifications, embeddings).
+- **Model metadata** (e.g., hyperparameters, training configurations).
+- **Feature extraction details** (e.g., NLP tokenized words, vector embeddings).
+- **Real-time user interactions** (e.g., chat history, event tracking).
 
 ### **Example Usage**
 
@@ -89,35 +99,40 @@ SET metadata = '{"additional_info": "value", "extra_field": 123}'
 WHERE id = 1;
 ```
 
+By leveraging JSONB, AI services can store, retrieve, and evolve their data structures efficiently. This approach ensures that new AI-driven insights, feature extraction, and model outputs can be incorporated into the system without rigid schema modifications, ultimately accelerating the deployment and scaling of AI solutions within PostgreSQL environments.
+
 ---
 
 ??? question "Using your own data?"
+    For users **adapting the accelerator** to their own data, this guide helps identify where **modifications** may be required to align with their existing **PostgreSQL schema** and **data structures**.
 
-        For users **adapting the accelerator** to their own data, this guide helps identify where **modifications** may be required to align with their existing **PostgreSQL schema** and **data structures**.
-    
-        ### **1. Map Your Data to the Existing Schema**
-        
-        - Identify **which of your tables correspond** to `sows`, `invoices`, and `vendors`.  
-        - Ensure your **data can be chunked and processed** similarly to `sow_chunks`.
-        - Leverage a **JSONB** column to store additional data dynamically while keeping the core table structures unchanged.
-        
-        ### **2. Add Vector Embeddings to Enable AI Search**
-        
-        - Create a **vector column (`embedding`)** in relevant tables to store AI-generated embeddings.  
-        - Use **pg_diskann** for efficient AI-powered search.  
-        
-        ### **3. Modify AI Processing Scripts**
-        
-        - Update **data extraction scripts** to reflect your field names.  
-        - Ensure AI models **extract the correct entities** based on your schema.  
-        
-        ### **4. Update Data Export & Relationships**
-        
-        - Modify data export scripts to align with **your table structure**.  
-        - Ensure **GraphRAG relationships** correctly link entities in your database.  
+    ### **1. Map Your Data to the Existing Schema**
+
+    - Identify **which of your tables correspond** to `sows`, `invoices`, and `vendors`.  
+    - Ensure your **data can be chunked and processed** similarly to `sow_chunks`.
+    - Leverage a **JSONB** column to store additional data dynamically while keeping the core table structures unchanged.
+
+    ### **2. Add Vector Embeddings to Enable AI Search**
+
+    - Create a **vector column (`embedding`)** in relevant tables to store AI-generated embeddings.  
+    - Use **pg_diskann** for efficient AI-powered search.  
+
+    ### **3. Modify AI Processing Scripts**
+
+    - Update **data extraction scripts** to reflect your field names.  
+    - Ensure AI models **extract the correct entities** based on your schema.  
+
+    ### **4. Update Data Export & Relationships**
+
+    - Modify data export scripts to align with **your table structure**.  
+    - Ensure **GraphRAG relationships** correctly link entities in your database.  
 
 ## References
 
+[Overview of AI Services and Data](https://techcommunity.microsoft.com/blog/adforpostgresql/azure-postgresql-with-azure-open-ai-to-innovate-banking-apps-unlocking-the-power/4257561)
+
 [PostgreSQL JSONB Documentation](https://www.postgresql.org/docs/current/datatype-json.html)
 
-[Overview of AI Services and Data](https://techcommunity.microsoft.com/blog/adforpostgresql/azure-postgresql-with-azure-open-ai-to-innovate-banking-apps-unlocking-the-power/4257561)
+[JSONB and Indexing](https://www.postgresql.org/docs/current/datatype-json.html)
+
+[GIN Indexes with JSONB](https://www.postgresql.org/docs/current/gin.html)

@@ -12,13 +12,13 @@
         <meta name="author" content="Solliance">
       
       
-        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/03-Integrate-AI-Into-PostgreSQL/06/">
+        <link rel="canonical" href="https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/03-Data-Structure/">
       
       
-        <link rel="prev" href="../05/">
+        <link rel="prev" href="../02-App-Architecture/">
       
       
-        <link rel="next" href="../../04-Create-AI-Pipeline/">
+        <link rel="next" href="../../02-Setup/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -239,11 +239,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../01-Introduction/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
     
@@ -279,13 +281,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-tabs__link">
           
   
     
@@ -472,6 +472,8 @@
       
   
   
+    
+  
   
   
     
@@ -485,24 +487,27 @@
       
         
       
+        
+      
     
     
+      
+        
+        
       
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../01-Introduction/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -513,13 +518,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             01 Introduction
@@ -535,7 +540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/01-App-Scenario/" class="md-nav__link">
+      <a href="../01-App-Scenario/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -556,7 +561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Introduction/02-App-Architecture/" class="md-nav__link">
+      <a href="../02-App-Architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -565,6 +570,184 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Understanding the Table Schema and Artifacts
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Understanding the Table Schema and Artifacts
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-understanding-the-table-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Understanding the Table Schema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Understanding the Table Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-tables-their-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Tables &amp; Their Purpose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-these-tables-work-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      How These Tables Work Together
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-key-fields-used-in-ai-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Key Fields Used in AI Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Key Fields Used in AI Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fields-used-in-ai-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fields Used in AI Services
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-these-fields-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why These Fields Matter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extending-the-schema-with-jsonb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending the Schema with JSONB
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extending the Schema with JSONB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-using-jsonb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Using JSONB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-jsonb-to-bring-your-own-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using JSONB to Bring Your Own Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -669,11 +852,11 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../02-Setup/0-Prerequisites/" class="md-nav__link ">
+            <a href="../../02-Setup/0-PreRequisites/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
-    0 Prerequisites
+    0 PreRequisites
   </span>
   
 
@@ -684,7 +867,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
-            0 Prerequisites
+            0 PreRequisites
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -993,8 +1176,6 @@
       
   
   
-    
-  
   
   
     
@@ -1014,27 +1195,24 @@
       
         
       
-        
-      
     
     
-      
-        
-        
       
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../03-Integrate-AI-Into-PostgreSQL/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1045,13 +1223,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             03 Integrate AI Into PostgreSQL
@@ -1067,7 +1245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1088,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1109,7 +1287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1130,7 +1308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1151,7 +1329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05/" class="md-nav__link">
+      <a href="../../03-Integrate-AI-Into-PostgreSQL/05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1160,193 +1338,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Understanding the Table Schema and Artifacts
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    Understanding the Table Schema and Artifacts
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-understanding-the-table-schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Understanding the Table Schema
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Understanding the Table Schema">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-tables-their-purpose" class="md-nav__link">
-    <span class="md-ellipsis">
-      Core Tables &amp; Their Purpose
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-these-tables-work-together" class="md-nav__link">
-    <span class="md-ellipsis">
-      How These Tables Work Together
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-key-fields-used-in-ai-processing" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Key Fields Used in AI Processing
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Key Fields Used in AI Processing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fields-used-in-ai-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fields Used in AI Services
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-these-fields-matter" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why These Fields Matter
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-adapting-the-accelerator-to-your-own-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Adapting the Accelerator to Your Own Data
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Adapting the Accelerator to Your Own Data">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-map-your-data-to-the-existing-schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Map Your Data to the Existing Schema
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-add-vector-embeddings-to-enable-ai-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Add Vector Embeddings to Enable AI Search
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-modify-ai-processing-scripts" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Modify AI Processing Scripts
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-update-data-export-relationships" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Update Data Export &amp; Relationships
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2240,46 +2231,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-adapting-the-accelerator-to-your-own-data" class="md-nav__link">
+  <a href="#extending-the-schema-with-jsonb" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Adapting the Accelerator to Your Own Data
+      Extending the Schema with JSONB
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Adapting the Accelerator to Your Own Data">
+    <nav class="md-nav" aria-label="Extending the Schema with JSONB">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-map-your-data-to-the-existing-schema" class="md-nav__link">
+  <a href="#benefits-of-using-jsonb" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Map Your Data to the Existing Schema
+      Benefits of Using JSONB
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-add-vector-embeddings-to-enable-ai-search" class="md-nav__link">
+  <a href="#using-jsonb-to-bring-your-own-data" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Add Vector Embeddings to Enable AI Search
+      Using JSONB to Bring Your Own Data
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-modify-ai-processing-scripts" class="md-nav__link">
+  <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Modify AI Processing Scripts
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-update-data-export-relationships" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Update Data Export &amp; Relationships
+      Example Usage
     </span>
   </a>
   
@@ -2319,10 +2301,6 @@
 
 <h1 id="understanding-the-table-schema-and-artifacts">Understanding the Table Schema and Artifacts<a class="headerlink" href="#understanding-the-table-schema-and-artifacts" title="Permanent link">&para;</a></h1>
 <p>This section provides an overview of the <strong>table schema and data artifacts</strong> (e.g., <strong>SOW documents, invoices, and validation results</strong>) used in the <strong>solution accelerator</strong>. It highlights <strong>key fields</strong> that enable AI-powered processing and explains why specific fields are used by <strong>AI services</strong>.</p>
-<details class="question">
-<summary>Using your own data?</summary>
-<p>For users <strong>adapting the accelerator</strong> to their own data, this guide helps identify where <strong>modifications</strong> may be required to align with their existing <strong>PostgreSQL schema</strong> and <strong>data structures</strong>.</p>
-</details>
 <hr />
 <h2 id="1-understanding-the-table-schema">1. Understanding the Table Schema<a class="headerlink" href="#1-understanding-the-table-schema" title="Permanent link">&para;</a></h2>
 <p>The accelerator processes <strong>Statements of Work (SOWs), invoices, validation results, and extracted entities</strong> using a structured PostgreSQL schema. Below is an overview of the <strong>key tables</strong> and their roles:</p>
@@ -2395,39 +2373,34 @@
 </thead>
 <tbody>
 <tr>
-<td><code>text_content</code></td>
-<td><code>sow_chunks</code></td>
-<td>AI processes this field to extract structured data from raw SOW text.</td>
+<td><code>content</code></td>
+<td><code>sow_chunks</code>, <code>invoices</code></td>
+<td>AI processes this field to extract structured data from raw text.</td>
 </tr>
 <tr>
-<td><code>embedding_vector</code></td>
-<td><code>sow_chunks</code>, <code>invoice_line_items</code></td>
+<td><code>embedding</code></td>
+<td><code>deliverables</code>, <code>sow_chunks</code>, <code>invoice_line_items</code>, <code>invoice_validation_results</code>, <code>sow_validation_results</code></td>
 <td>Used for vector search and similarity retrieval in <strong>semantic search models</strong>.</td>
 </tr>
 <tr>
-<td><code>milestone_due_date</code></td>
-<td><code>milestones</code></td>
-<td>AI extracts and validates contract deadlines.</td>
+<td><code>due_date</code></td>
+<td><code>deliverables</code>, <code>invoice_line_items</code></td>
+<td>AI extracts and validates deadlines.</td>
 </tr>
 <tr>
-<td><code>invoice_total</code></td>
+<td><code>amount</code></td>
 <td><code>invoices</code></td>
 <td>AI checks for discrepancies in invoice processing.</td>
 </tr>
 <tr>
-<td><code>validation_status</code></td>
+<td><code>result</code></td>
+<td><code>sow_validation_results</code>, <code>invoice_validation_results</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>validation_passed</code></td>
 <td><code>sow_validation_results</code>, <code>invoice_validation_results</code></td>
 <td>AI-driven validation results for compliance analysis.</td>
-</tr>
-<tr>
-<td><code>entity_type</code></td>
-<td><code>sow_chunks</code>, <code>invoice_line_items</code></td>
-<td>AI categorizes extracted entities (e.g., company name, service description).</td>
-</tr>
-<tr>
-<td><code>relation_graph</code></td>
-<td><code>vendors</code>, <code>sows</code>, <code>invoices</code></td>
-<td>AI builds relationships between vendors, SOWs, and invoices for <strong>GraphRAG</strong>-based retrieval.</td>
 </tr>
 <tr>
 <td><code>metadata</code></td>
@@ -2436,41 +2409,114 @@
 </tr>
 </tbody>
 </table>
+<p>For Graph Data</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field Name</strong></th>
+<th><strong>Graph</strong></th>
+<th><strong>AI Usage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vendor_id</code>, <code>vendor_name</code></td>
+<td><code>vendor_graph</code></td>
+<td>Used to analyze vendor performance and relationships</td>
+</tr>
+<tr>
+<td><code>sow_id</code>, <code>sow_number</code></td>
+<td><code>vendor_graph</code></td>
+<td>Used to track and validate Statements of Work (SOWs)</td>
+</tr>
+<tr>
+<td><code>payment_status</code>, <code>invoice_amount</code></td>
+<td><code>vendor_graph</code></td>
+<td>Used to validate and process invoices, detect discrepancies, and ensure compliance.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="why-these-fields-matter"><strong>Why These Fields Matter</strong><a class="headerlink" href="#why-these-fields-matter" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Vector embeddings (<code>embedding_vector</code>)</strong> enable <strong>semantic search</strong> by allowing <strong>AI-powered retrieval</strong> of similar SOW clauses, contract terms, and invoices.  </li>
-<li><strong>Validation fields (<code>validation_status</code>)</strong> ensure AI-generated extractions meet business rules.  </li>
-<li><strong>Entity categorization (<code>entity_type</code>)</strong> enables fine-grained AI-driven <strong>query answering</strong>.  </li>
-<li><strong>Graph relationships (<code>relation_graph</code>)</strong> support <strong>GraphRAG (Retrieval-Augmented Generation)</strong> for enhanced AI accuracy. </li>
-<li><strong>Flexible JSONB storage (metadata)</strong> makes it possible to <strong>extend AI processing without schema changes</strong>.</li>
+<li><strong>Vector embeddings (<code>embedding</code>)</strong> enable <strong>semantic search</strong> by allowing <strong>AI-powered retrieval</strong> of similar SOW clauses, contract terms, and invoices.  </li>
+<li><strong>Validation fields (<code>result</code>, <code>validation_passed</code>)</strong> ensure AI-generated extractions meet business rules.  </li>
+<li><strong>Graph relationships within <code>vendor_graph</code></strong> supports <strong>GraphRAG (Retrieval-Augmented Generation)</strong> where chosen fields can be utilized in AI models for analysis related to vendors, contracts, and invoices, as well as enhanced AI accuracy.</li>
+<li><strong>Flexible JSONB storage (<code>metadata</code>)</strong> makes it possible to <strong>extend AI processing without schema changes</strong>.</li>
 </ul>
+<h2 id="extending-the-schema-with-jsonb">Extending the Schema with JSONB<a class="headerlink" href="#extending-the-schema-with-jsonb" title="Permanent link">&para;</a></h2>
+<p>The <strong>JSONB</strong> data type in PostgreSQL allows for flexible storage of JSON data, enabling you to extend the schema without making significant changes to the database structure. This is particularly useful when you need to bring in additional data that doesn't fit neatly into the existing schema.</p>
+<h3 id="benefits-of-using-jsonb"><strong>Benefits of Using JSONB</strong><a class="headerlink" href="#benefits-of-using-jsonb" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Flexibility</strong>: Store semi-structured data without altering the table schema.</li>
+<li><strong>Dynamic Data</strong>: Easily add new fields and data types as needed.</li>
+<li><strong>Efficient Storage</strong>: JSONB is stored in a binary format, making it more efficient than plain JSON.</li>
+</ul>
+<h3 id="using-jsonb-to-bring-your-own-data"><strong>Using JSONB to Bring Your Own Data</strong><a class="headerlink" href="#using-jsonb-to-bring-your-own-data" title="Permanent link">&para;</a></h3>
+<p>When adapting the accelerator to your own data, you can use JSONB fields to store additional information dynamically. This allows you to extend the capabilities of the solution without modifying the core table structures.</p>
+<h3 id="example-usage"><strong>Example Usage</strong><a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="n">JSONB</span><span class="p">;</span>
+
+<span class="c1">-- Insert data into the JSONB column</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">invoices</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;{&quot;additional_info&quot;: &quot;value&quot;, &quot;extra_field&quot;: 123}&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
 <hr />
-<h2 id="3-adapting-the-accelerator-to-your-own-data">3. Adapting the Accelerator to Your Own Data<a class="headerlink" href="#3-adapting-the-accelerator-to-your-own-data" title="Permanent link">&para;</a></h2>
-<p>If you are using your <strong>own PostgreSQL database</strong>, you will need to:  </p>
-<h3 id="1-map-your-data-to-the-existing-schema"><strong>1. Map Your Data to the Existing Schema</strong><a class="headerlink" href="#1-map-your-data-to-the-existing-schema" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Identify <strong>which of your tables correspond</strong> to <code>sows</code>, <code>invoices</code>, and <code>vendors</code>.  </li>
-<li>Ensure your <strong>data can be chunked and processed</strong> similarly to <code>sow_chunks</code>.</li>
-<li>Leverage a <strong>JSONB</strong> column to store additional data dynamically while keeping the core table structures unchanged.</li>
-</ul>
-<h3 id="2-add-vector-embeddings-to-enable-ai-search"><strong>2. Add Vector Embeddings to Enable AI Search</strong><a class="headerlink" href="#2-add-vector-embeddings-to-enable-ai-search" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Create a <strong>vector column (<code>embedding_vector</code>)</strong> in relevant tables to store AI-generated embeddings.  </li>
-<li>Use <strong>pg_diskann</strong> for efficient AI-powered search.  </li>
-</ul>
-<h3 id="3-modify-ai-processing-scripts"><strong>3. Modify AI Processing Scripts</strong><a class="headerlink" href="#3-modify-ai-processing-scripts" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Update <strong>data extraction scripts</strong> to reflect your field names.  </li>
-<li>Ensure AI models <strong>extract the correct entities</strong> based on your schema.  </li>
-</ul>
-<h3 id="4-update-data-export-relationships"><strong>4. Update Data Export &amp; Relationships</strong><a class="headerlink" href="#4-update-data-export-relationships" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Modify data export scripts to align with <strong>your table structure</strong>.  </li>
-<li>Ensure <strong>GraphRAG relationships</strong> correctly link entities in your database.  </li>
-</ul>
+<details class="question">
+<summary>Using your own data?</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code>For users **adapting the accelerator** to their own data, this guide helps identify where **modifications** may be required to align with their existing **PostgreSQL schema** and **data structures**.
+
+### **1. Map Your Data to the Existing Schema**
+
+- Identify **which of your tables correspond** to `sows`, `invoices`, and `vendors`.  
+- Ensure your **data can be chunked and processed** similarly to `sow_chunks`.
+- Leverage a **JSONB** column to store additional data dynamically while keeping the core table structures unchanged.
+
+### **2. Add Vector Embeddings to Enable AI Search**
+
+- Create a **vector column (`embedding`)** in relevant tables to store AI-generated embeddings.  
+- Use **pg_diskann** for efficient AI-powered search.
+
+### **3. Modify AI Processing Scripts**
+
+- Update **data extraction scripts** to reflect your field names.  
+- Ensure AI models **extract the correct entities** based on your schema.
+
+### **4. Update Data Export &amp; Relationships**
+
+- Modify data export scripts to align with **your table structure**.  
+- Ensure **GraphRAG relationships** correctly link entities in your database.
+</code></pre></div></td></tr></table></div>
+</details>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<p><a href="https://www.postgresql.org/docs/current/datatype-json.html">PostgreSQL JSONB Documentation</a>
-<a href="https://techcommunity.microsoft.com/blog/adforpostgresql/azure-postgresql-with-azure-open-ai-to-innovate-banking-apps-unlocking-the-power/4257561">Overview of AI Services and Data</a></p>
+<p><a href="https://www.postgresql.org/docs/current/datatype-json.html">PostgreSQL JSONB Documentation</a></p>
+<p><a href="https://techcommunity.microsoft.com/blog/adforpostgresql/azure-postgresql-with-azure-open-ai-to-innovate-banking-apps-unlocking-the-power/4257561">Overview of AI Services and Data</a></p>
 
 
 
@@ -2508,7 +2554,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../05/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3.5 Vectorize data">
+          <a href="../02-App-Architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 1.2 Application Architecture">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2518,20 +2564,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                3.5 Vectorize data
+                1.2 Application Architecture
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../04-Create-AI-Pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: AI-driven Data Validation">
+          <a href="../../02-Setup/" class="md-footer__link md-footer__link--next" aria-label="Next: Setup">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                AI-driven Data Validation
+                Setup
               </div>
             </div>
             <div class="md-footer__button md-icon">

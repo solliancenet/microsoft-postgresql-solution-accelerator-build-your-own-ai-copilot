@@ -90,6 +90,16 @@ When integrating AI services into a PostgreSQL-backed system, JSONB can be lever
 - **Feature extraction details** (e.g., NLP tokenized words, vector embeddings).
 - **Real-time user interactions** (e.g., chat history, event tracking).
 
+### **Adding indexes for JSONB queries**
+
+GIN (Generalized Inverted Index) is a type of indexing in PostgreSQL that is optimized for handling complex data types, including JSONB. Since JSONB stores data in a binary format and supports rich querying, GIN indexes make it possible to efficiently search within nested JSONB structures.
+
+**Advantages of GIN:**
+
+- Fast Query Performance: GIN significantly speeds up key-value lookups inside JSONB columns.
+- Optimized for Nested Structures: It can efficiently index deeply nested JSON objects and arrays.
+- Supports JSONB Operators: PostgreSQL provides powerful operators (@>, ?, ?&, ?|) that are optimized when used with GIN.
+
 ### **Example Usage**
 
 ```sql
@@ -99,7 +109,16 @@ ALTER TABLE invoices ADD COLUMN metadata JSONB;
 UPDATE invoices
 SET metadata = '{"additional_info": "value", "extra_field": 123}'
 WHERE id = 1;
+
+-- Create a GIN index on the JSONB column
+CREATE INDEX idx_invoices_metadata ON invoices USING GIN (metadata);
+
+-- Query the record based on one of the JSONB elements
+SELECT * FROM invoices
+WHERE metadata @> '{"extra_field": 123}';
 ```
+
+- `@>` checks if model_output contains the specified JSON key-value pair.
 
 By leveraging JSONB, AI services can store, retrieve, and evolve their data structures efficiently. This approach ensures that new AI-driven insights, feature extraction, and model outputs can be incorporated into the system without rigid schema modifications, ultimately accelerating the deployment and scaling of AI solutions within PostgreSQL environments.
 

@@ -26,7 +26,7 @@
     
     
       
-        <title>1.3 Understanding the Table Schema and Artifacts - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
+        <title>1.3 Understand the Table Schema and Artifacts - Build your own AI Copilot for FSI with PostgreSQL: Workshop Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#13-understanding-the-table-schema-and-artifacts" class="md-skip">
+        <a href="#13-understand-the-table-schema-and-artifacts" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1.3 Understanding the Table Schema and Artifacts
+              1.3 Understand the Table Schema and Artifacts
             
           </span>
         </div>
@@ -595,7 +595,7 @@
           
   
   <span class="md-ellipsis">
-    1.3 Understanding the Table Schema and Artifacts
+    1.3 Understand the Table Schema and Artifacts
   </span>
   
 
@@ -606,7 +606,7 @@
         
   
   <span class="md-ellipsis">
-    1.3 Understanding the Table Schema and Artifacts
+    1.3 Understand the Table Schema and Artifacts
   </span>
   
 
@@ -725,6 +725,15 @@
   <a href="#using-jsonb-for-ai-powered-metadata-and-model-outputs" class="md-nav__link">
     <span class="md-ellipsis">
       Using JSONB for AI-Powered Metadata and Model Outputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-indexes-for-jsonb-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding indexes for JSONB queries
     </span>
   </a>
   
@@ -2313,6 +2322,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#adding-indexes-for-jsonb-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding indexes for JSONB queries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
       Example Usage
@@ -2389,7 +2407,7 @@
   
 
 
-<h1 id="13-understanding-the-table-schema-and-artifacts">1.3 Understanding the Table Schema and Artifacts<a class="headerlink" href="#13-understanding-the-table-schema-and-artifacts" title="Permanent link">&para;</a></h1>
+<h1 id="13-understand-the-table-schema-and-artifacts">1.3 Understand the Table Schema and Artifacts<a class="headerlink" href="#13-understand-the-table-schema-and-artifacts" title="Permanent link">&para;</a></h1>
 <p>This section provides an overview of the <strong>table schema and data artifacts</strong> (e.g., <strong>SOW documents, invoices, and validation results</strong>) used in the <strong>solution accelerator</strong>. It highlights <strong>key fields</strong> that enable AI-powered processing and explains why specific fields are used by <strong>AI services</strong>.</p>
 <hr />
 <h2 id="1-understanding-the-table-schema">1. Understanding the Table Schema<a class="headerlink" href="#1-understanding-the-table-schema" title="Permanent link">&para;</a></h2>
@@ -2563,19 +2581,44 @@
 <li><strong>Feature extraction details</strong> (e.g., NLP tokenized words, vector embeddings).</li>
 <li><strong>Real-time user interactions</strong> (e.g., chat history, event tracking).</li>
 </ul>
+<h3 id="adding-indexes-for-jsonb-queries"><strong>Adding indexes for JSONB queries</strong><a class="headerlink" href="#adding-indexes-for-jsonb-queries" title="Permanent link">&para;</a></h3>
+<p>GIN (Generalized Inverted Index) is a type of indexing in PostgreSQL that is optimized for handling complex data types, including JSONB. Since JSONB stores data in a binary format and supports rich querying, GIN indexes make it possible to efficiently search within nested JSONB structures.</p>
+<p><strong>Advantages of GIN:</strong></p>
+<ul>
+<li>Fast Query Performance: GIN significantly speeds up key-value lookups inside JSONB columns.</li>
+<li>Optimized for Nested Structures: It can efficiently index deeply nested JSON objects and arrays.</li>
+<li>Supports JSONB Operators: PostgreSQL provides powerful operators (@&gt;, ?, ?&amp;, ?|) that are optimized when used with GIN.</li>
+</ul>
 <h3 id="example-usage"><strong>Example Usage</strong><a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="n">JSONB</span><span class="p">;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="n">JSONB</span><span class="p">;</span>
 
 <span class="c1">-- Insert data into the JSONB column</span>
 <span class="k">UPDATE</span><span class="w"> </span><span class="n">invoices</span>
 <span class="k">SET</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;{&quot;additional_info&quot;: &quot;value&quot;, &quot;extra_field&quot;: 123}&#39;</span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- Create a GIN index on the JSONB column</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_invoices_metadata</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">invoices</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="w"> </span><span class="p">(</span><span class="n">metadata</span><span class="p">);</span>
+
+<span class="c1">-- Query the record based on one of the JSONB elements</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">invoices</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">@&gt;</span><span class="w"> </span><span class="s1">&#39;{&quot;extra_field&quot;: 123}&#39;</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
+<ul>
+<li><code>@&gt;</code> checks if model_output contains the specified JSON key-value pair.</li>
+</ul>
 <p>By leveraging JSONB, AI services can store, retrieve, and evolve their data structures efficiently. This approach ensures that new AI-driven insights, feature extraction, and model outputs can be incorporated into the system without rigid schema modifications, ultimately accelerating the deployment and scaling of AI solutions within PostgreSQL environments.</p>
 <hr />
 <details class="question">

@@ -1,4 +1,4 @@
-# Install Software
+# A. Install Software
 
 You will need to install the required software locally and provision the Azure infrastructure yourself, as described on the tabs below.
 

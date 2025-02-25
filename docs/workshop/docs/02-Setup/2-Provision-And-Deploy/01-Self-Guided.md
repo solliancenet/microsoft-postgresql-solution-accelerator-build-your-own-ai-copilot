@@ -1,8 +1,8 @@
-# A. Self-Guided Setup
+# Self-Guided Setup
 
 Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](../../0-Prerequisites/#self-guided) section if you need more details.
 
-!!! question "WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? [You can find that here.](./04-Instructor-Led.md)"
+!!! question "WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? [You can find that here.](./02-Instructor-Led.md)"
 
 ## Authenticate With Azure
 
@@ -77,4 +77,4 @@ You are now ready to provision your Azure resources and deploy the Woodgrove bac
 
 ---
 
-## Next → [Setup Dev Environment](./05-Setup-Dev-Env.md)
+## Next → [Validate Your Setup](../3-Validation/index.md)

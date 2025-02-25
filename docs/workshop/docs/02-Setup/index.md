@@ -6,7 +6,7 @@ GitHub repo: [PostgreSQL Solution Accelerator: Build your own AI Copilot](https:
 
 Before starting, you should:
 
-1. Review the [prerequisites](0-Prerequisites/index.md) for completing the lab.
+1. Review the [prerequisites](../02-Setup/0-Prerequisites/index.md) for completing the lab.
 2. Select the appropriate provisioning and setup guide you will follow:
       - Self-Guided
       - Instructor-Led

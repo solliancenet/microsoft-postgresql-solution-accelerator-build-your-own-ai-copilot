@@ -5,8 +5,15 @@ A starter solution has been provided, which you will be modifying to add rich AI
 To get started building the custom AI-enable Financial Services Industry (FSI) application, you need to:
 
 - **PROVISION** the required Azure infrastructure for the resources needed for the application architecture
-- **SETUP** your development environment and configure it to work with the infrastructure
-- **VALIDATE** that the setup completed successfully, before diving into the ideation phase.
+- **VALIDATE** that the Azure deployment completed successfully.
+- **SETUP** your development environment and configure it to work with the infrastructure.
+
+To get started, jump to the guide you are following for this workshop:
+
+- [Self-Guided](../2-Provision-And-Deploy/01-Self-Guided.md)
+- [Instructor-Led](../2-Provision-And-Deploy/02-Instructor-Led.md)
+
+    <!-- !!! info "You will use a pre-provisioned VM from Skillable! [Jump ahead to the Instructor-Led section.](./04-Instructor-Led.md)" -->
 
 ??? question "Using your own data?"
 

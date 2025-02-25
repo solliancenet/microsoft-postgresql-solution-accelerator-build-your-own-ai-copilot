@@ -1,4 +1,4 @@
-# Verify Azure Quota
+# C. Verify Azure Quota
 
 This solution contains an Azure Developer CLI `azd-template` that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single `azd up` command. On completing this step, you should have:
 
@@ -52,10 +52,10 @@ This solution accelerator contains a section dedicted to setting up and using a 
 6. On the quota page for your selected subscription, select the Azure region you plan to use for this workshop. This should be the region you chose in previous task that supports the required Azure OpenAI models.
 
 7. You should now see a list of CPUs and their quotas within your subscription. Locate **Standard DASv4 Family Cluster Dedicated vCPUs** in the list and inspect the **Quota** available.
-    
+
     ![On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted.](../../img/azure-ml-quota-standard-dasv4.png)
 
-8. If you have 32 cores or more available, you can skip to the [Authenticate With Azure task](#33-authenticate-with-azure). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
+8. If you have 32 cores or more available, you can proceed to the [Provision and Deploy section](../2-Provision-And-Deploy/index.md). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
 
     ![Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box.](../../img/azure-ml-request-quota.png)
 
@@ -70,13 +70,3 @@ This solution accelerator contains a section dedicted to setting up and using a 
 10. Quota increase requests typically take a few minutes to complete. You will receive notifications in the Azure portal as the request is processed and when it completes.
 
 11. If your request is denied, you don't have permissions to issue the request, or you prefer not to request additional quota, you have the option to exclude the **Semantic Ranking** model deployment when running the `azd up` command by setting the `deployAMLModel` flag to `false` when prompted.
-
-=== "Self-Guided"
-
-    !!! info "You need to provision the infrastructure yourself! [Jump to the Self-Guided section](./03-Self-Guided.md) now!"  
-
-=== "Instructor-Led"
-
-    !!! info "You will be provisioning the infrastructure during an Instructor-Led Workshop! [Jump ahead to Instructor-Led section.](./04-Instructor-Led.md)"
-
-    <!-- !!! info "You will use a pre-provisioned VM from Skillable! [Jump ahead to the Instructor-Led section.](./04-Instructor-Led.md)" -->

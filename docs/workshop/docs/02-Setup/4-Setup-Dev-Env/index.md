@@ -126,7 +126,8 @@ You will use pgAdmin from your machine to configure various features in the data
             2. At the integrated terminal prompt, execute the following command to generate and output an access token:
 
                 ```bash
-                az account get-access-token --resource-type oss-rdbms --output json | jq -r '.accessToken'
+                $token = az account get-access-token --resource-type oss-rdbms --output json | ConvertFrom-Json
+                $token.accessToken
                 ```
 
             3. Copy the output value.

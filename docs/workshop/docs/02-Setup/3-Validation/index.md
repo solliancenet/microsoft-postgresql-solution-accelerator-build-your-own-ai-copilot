@@ -119,7 +119,7 @@ You will use the Azure AI Foundry portal to verify the `gpt-4o` and `text-embedd
 
 If you chose to deploy the Azure ML semantic ranker model during setup, you will use the Azure Machine Learning Studio to ensure the semantic ranker model was successfully deployed to an online endpoint.
 
-!!! note "You only need to do this step if you chose TRUE for `deployAMLModel` during the `azd up` deployment."
+!!! warning "You only need to do this step if you chose TRUE for `deployAMLModel` during the `azd up` deployment. If you selected FALSE, skip this step."
 
 1. In the Azure portal, return to the resource group containing your resources and select the **Azure Machine Learning Workspace** resoure.
 

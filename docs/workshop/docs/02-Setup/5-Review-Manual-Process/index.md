@@ -22,7 +22,7 @@ Let's review the application UI for SOWs.
 
     ![Screenshot of the Edit Milestone page showing the edit fields and list of deliverables.](../../img/userportal-edit-sow-edit-milestone-edit.png)
 
-5. On the **Edit SOW** page, notice the **Validations** history list. These validations have each been manually entered over time as the SOW has bee updated.
+5. On the **Edit SOW** page, notice the **Validations** history list. These validations have each been manually entered over time as the SOW has been updated.
 
     ![Screenshot of the Edit SOW page scrolled down to show the Validations history list.](../../img/userportal-sow-edit-validations-section.png)
 

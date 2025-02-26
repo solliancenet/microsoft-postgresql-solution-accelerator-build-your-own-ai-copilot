@@ -2229,7 +2229,7 @@
 <div class="admonition note">
 <p class="admonition-title">Select each tab below and execute SQL statements provided to connect to each Azure AI service.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="azure-openai" name="__tabbed_1" type="radio" /><input id="language-service" name="__tabbed_1" type="radio" /><input id="azure-ml" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="azure-openai">Azure OpenAI</label><label for="language-service">Language service</label><label for="azure-ml">Azure ML</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="azure-openai" name="__tabbed_1" type="radio" /><input id="language-service" name="__tabbed_1" type="radio" /><input id="azure-ml-optional" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="azure-openai">Azure OpenAI</label><label for="language-service">Language service</label><label for="azure-ml-optional">Azure ML (Optional)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>The Azure AI extension includes the <code>azure_openai</code> schema, which allows you to integrate the creation of vector representations of text values directly into your database by invoking <a href="https://learn.microsoft.com/azure/ai-services/openai/reference#embeddings">Azure OpenAI embeddings</a>. The vector embeddings can then be used in vector similarity searches.</p>
@@ -2307,6 +2307,9 @@
 </div>
 <div class="tabbed-block">
 <p>The Azure AI extension allows you to invoke any machine learning models deployed on Azure Machine Learning (ML) online endpoints from within SQL. These models can be from the Azure ML catalog or custom models that have been trained and deployed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Only configure the Azure ML endpoint if you selected TRUE to <code>deployAMLModel</code> during the <code>azd up</code> deployment.</p>
+</div>
 <ol>
 <li>
 <p>In the pgAdmin query window, overwrite the previous commands by pasting the following SQL commands to configure the extension's connection to Azure ML. Do not run the commands yet, as you first need to retrieve the endpoint and key for the model deployed on Azure ML.</p>

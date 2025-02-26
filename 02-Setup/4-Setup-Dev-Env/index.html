@@ -2370,7 +2370,9 @@
 </li>
 <li>
 <p>At the integrated terminal prompt, execute the following command to generate and output an access token:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>account<span class="w"> </span>get-access-token<span class="w"> </span>--resource-type<span class="w"> </span>oss-rdbms<span class="w"> </span>--output<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.accessToken&#39;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">$token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>account<span class="w"> </span>get-access-token<span class="w"> </span>--resource-type<span class="w"> </span>oss-rdbms<span class="w"> </span>--output<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json
+<span class="nv">$token</span>.accessToken
 </code></pre></div></td></tr></table></div>
 </li>
 <li>

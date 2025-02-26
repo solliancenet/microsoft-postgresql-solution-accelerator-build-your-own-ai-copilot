@@ -2272,13 +2272,13 @@
 <p>Loading data before indexing creates the index faster and results in a more optimal layout.</p>
 </div>
 <h2 id="index-types">Index Types<a class="headerlink" href="#index-types" title="Permanent link">&para;</a></h2>
-<p>There are three supported vector index types, each with its own pros and cons. You can learn more about the index types using these links:</p>
+<p>There are three supported vector index types, each with its own tradeoffs. You can learn more about the index types using these links:</p>
 <ul>
 <li><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#disk-approximate-nearest-neighbor-diskann">Disk Approximate Nearest Neighbor</a> (DiskANN)</li>
 <li><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#inverted-file-with-flat-compression-ivvflat">Inverted File with Flat Compression</a> (IVVFlat)</li>
 <li><a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-optimize-performance-pgvector#hierarchical-navigable-small-worlds-hnsw">Hierarchical Navigable Small Worlds</a> (HNSW)</li>
 </ul>
-<p>The <code>IVFFlat</code> index has faster build times and uses less memory than <code>HNSW</code>, but it has lower query performance (in terms of the speed-recall tradeoff). <code>DiskANN</code> offers a great balance between highly accurate query performance and fast build times.</p>
+<p>The <code>IVFFlat</code> index has faster build times and uses less memory than <code>HNSW</code>, but it has lower query performance (in terms of the speed-recall tradeoff). <code>DiskANN</code> minimizes these tradeoffs and provides a superior balance between highly accurate query performance and fast build times.</p>
 <details>
 <summary>Index Type Limitations</summary>
 <ul>

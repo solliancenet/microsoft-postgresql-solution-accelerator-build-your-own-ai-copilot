@@ -77,6 +77,19 @@ You are now ready to provision your Azure resources and deploy the Woodgrove bac
         Deployment Error Details:
         AadAuthOperationCannotBePerformedWhenServerIsNotAccessible: The server 'psql-datacvdjta5pfnc5e' is not in an accessible state to perform Azure AD Principal operation. Please make sure the server is accessible before executing Azure AD Principal operations.
         ```
-        
 
 3. On successful completion you will see a `SUCCESS: ...` message on the console.
+
+## Common Errors
+
+**Error**:
+
+```ini title=""
+Note: Running custom 'up' workflow from azure.yaml 'pwsh' is not recognized as an internal or external command, operable program or batch file. ERROR: error executing step command 'provision': failed running pre hooks: 'preprovision' hook failed with exit code: '1', Path: '.\azd-hooks\preprovision.ps1'. : exit code: 1
+```
+
+**Solution**: Ensure “pwsh” is installed and added to PATH env:
+
+1. Run `winget install --id Microsoft.Powershell --source winget` from the command-line.
+2. In CMD, `echo %PATH%`.
+3. Verify `C:\Program Files\PowerShell\7\` is in `%PATH%`.

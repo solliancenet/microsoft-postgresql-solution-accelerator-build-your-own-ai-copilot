@@ -1,4 +1,4 @@
-# C. Verify Azure Quota
+# 2.3 Verify Azure Quota
 
 This solution contains an Azure Developer CLI `azd-template` that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single `azd up` command. On completing this step, you should have:
 
@@ -33,11 +33,11 @@ This solution accelerator contains a section dedicted to setting up and using a 
 
 2. In the Azure portal, enter "Microsoft Entra ID" into the search bar, then select **Microsoft Entra ID** from the **Services** list in the results.
 
-    ![Microsoft Entra ID is entered into the Azure search bar and it is highlighted in the Services results.](../../img/azure-portal-search-entra-id.png)
+    ![Microsoft Entra ID is entered into the Azure search bar and it is highlighted in the Services results.](../img/azure-portal-search-entra-id.png)
 
 3. On the **Overview** page of your Microsoft Entra ID tenant, select the **Copy to clipboard** button for your **Tenant ID**.
 
-    ![On the Entra ID tenant overview tab, the copy to clipboard button for the Tenant ID is highlighted with a red box.](../../img/azure-portal-entra-id-tenant-overview.png)
+    ![On the Entra ID tenant overview tab, the copy to clipboard button for the Tenant ID is highlighted with a red box.](../img/azure-portal-entra-id-tenant-overview.png)
 
 4. Open a new browser window or tab and navigate to the following URL, replacing the `<your-tenant-id>` token with the Tenant ID you copied from the Entra ID overview page in the Azure portal.
 
@@ -47,21 +47,21 @@ This solution accelerator contains a section dedicted to setting up and using a 
 
 5. On the Azure ML **Quota** page, select the subscription you are using for this workshop.
 
-    ![Screenshot of the Azure ML quota subscription selection page.](../../img/azure-ml-quota-subscription.png)
+    ![Screenshot of the Azure ML quota subscription selection page.](../img/azure-ml-quota-subscription.png)
 
 6. On the quota page for your selected subscription, select the Azure region you plan to use for this workshop. This should be the region you chose in previous task that supports the required Azure OpenAI models.
 
 7. You should now see a list of CPUs and their quotas within your subscription. Locate **Standard DASv4 Family Cluster Dedicated vCPUs** in the list and inspect the **Quota** available.
 
-    ![On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted.](../../img/azure-ml-quota-standard-dasv4.png)
+    ![On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted.](../img/azure-ml-quota-standard-dasv4.png)
 
 8. If you have 32 cores or more available, you can proceed to the [Provision and Deploy section](../2-Provision-And-Deploy/index.md). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
 
-    ![Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box.](../../img/azure-ml-request-quota.png)
+    ![Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box.](../img/azure-ml-request-quota.png)
 
 9. In the **Request quota** dialog, increase your **New cores limit** value by 32 and then select **Submit**.
 
-    ![Screenshot of the Request quota dialog with a value of 32 highlighted in the new cores limit box and the submit button highlighted.](../../img/azure-ml-request-quota-dialog.png)
+    ![Screenshot of the Request quota dialog with a value of 32 highlighted in the new cores limit box and the submit button highlighted.](../img/azure-ml-request-quota-dialog.png)
 
     !!! example
 

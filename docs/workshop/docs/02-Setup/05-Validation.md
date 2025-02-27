@@ -1,4 +1,4 @@
-# Validate Your Setup
+# 2.5 Validate Deployment
 
 !!! success "SETUP IS COMPLETE!"
 
@@ -12,13 +12,13 @@
 
 Here's a reminder of the Azure Application Architecture you can reference as you check your provisioned Resource Group to enure these resources were created.
 
-![Solution Architecture](../../img/data-ingestion-validation-architecture-diagram.png)
+![Solution Architecture](../img/data-ingestion-validation-architecture-diagram.png)
 
 In this section, you will validate your setup before moving on to the next phase of solution development.
 
 ---
 
-## 1. Inspect deployed Azure resources
+## Inspect deployed Azure resources
 
 !!! tip "The Azure Portal allows you to view the resources provisioned on Azure and verify that they are setup correctly"
 
@@ -61,7 +61,7 @@ In this section, you will validate your setup before moving on to the next phase
 
         In addition to the above resources, you will also see several other resources, like _Managed Identities_, that are supporting resources for those in the table.
 
-## 2. Ensure the deployed apps are running
+## Ensure the deployed apps are running
 
 The `azd up` command included steps to deploy the Woodgrove Bank application into **Azure Container Apps** (ACA). Two containers were created. One for the Woodgrove Bank portal UI and a second for the backend API that supports it.
 
@@ -69,33 +69,33 @@ The `azd up` command included steps to deploy the Woodgrove Bank application int
 
     ACA is a fully managed serverless platform that allows you to deploy and manage containerized applications effortlessly. They simplify deployment, offer scalability and cost-effectiveness, and make it easier to focus on building applications without worrying about infrastructure management.
 
-### 2.1 Confirm the Woodgrove API Is Running
+### Confirm the Woodgrove API Is Running
 
 1. In the browser window opened to your Azure resource group, select the **Container app** resource whose name starts with **ca-api**.
 
-    ![Screenshot of the resources in the resource group, with the ca-api Container app resource highlighted.](../../img/azure-portal-rg-ca-api.png)
+    ![Screenshot of the resources in the resource group, with the ca-api Container app resource highlighted.](../img/azure-portal-rg-ca-api.png)
 
 2. In the **Essentials** section of the API Container App's **Overview** page, select the **Application Url** to open the deployed Woodgrove Bank API in a new browser tab.
 
-    ![Screenshot of the API container app page in the Azure portal, with the Application Url highlighted.](../../img/azure-portal-api-container-app.png)
+    ![Screenshot of the API container app page in the Azure portal, with the Application Url highlighted.](../img/azure-portal-api-container-app.png)
 
 3. You should see a `Welcome to the Woodgrove Bank API!` message on the screen, which serves as confirmation the API app was deployed successfully.
 
-### 2.2 Open the Woodgrove Portal UI
+### Open the Woodgrove Portal UI
 
 1. In the Azure portal, return to the resource group containing your resources and select the **Container app** resource whose name begins with **ca-portal**.
 
-    ![Screenshot of the resources in the resource group, with the ca-portal Container app resource highlighted.](../../img/azure-portal-rg-ca-portal.png)
+    ![Screenshot of the resources in the resource group, with the ca-portal Container app resource highlighted.](../img/azure-portal-rg-ca-portal.png)
 
 2. In the **Essentials** section of the Portal Container App's **Overview** page, select the **Application Url** to open the deployed Woodgrove Bank Portal in a new browser tab.
 
-    ![Screenshot of the API container app page in the Azure portal, with the Application Url highlighted.](../../img/azure-portal-portal-container-app.png)
+    ![Screenshot of the API container app page in the Azure portal, with the Application Url highlighted.](../img/azure-portal-portal-container-app.png)
 
 3. In the Woodgrove Bank Contract Management Portal, select the **Vendors** page and verify the list of vendors loads correctly.
 
-    ![Screenshot of the Vendors page in the Woodgrove Bank Contract Management Portal](../../img/woodgrove-bank-portal-vendors.png)
+    ![Screenshot of the Vendors page in the Woodgrove Bank Contract Management Portal](../img/woodgrove-bank-portal-vendors.png)
 
-## 3. View Azure OpenAI model deployments in Azure AI Foundry
+## View Azure OpenAI model deployments in Azure AI Foundry
 
 !!! tip "The Azure AI Foundry portal lets you view and manage the Azure AI resources for your app."
 
@@ -103,19 +103,19 @@ You will use the Azure AI Foundry portal to verify the `gpt-4o` and `text-embedd
 
 1. In the Azure portal, return to the resource group containing your resources and select the **Azure OpenAI** resource.
 
-    ![Screenshot of the resources in the resource group, with the Azure OpenAI resource highlighted.](../../img/azure-portal-rg-openai.png)
+    ![Screenshot of the resources in the resource group, with the Azure OpenAI resource highlighted.](../img/azure-portal-rg-openai.png)
 
 2. On the Azure OpenAI resource's **Overview** page, select **Explore Azure AI Foundry portal**.
 
-    ![Screenshot of the Azure OpenAI service's Overview blade, with the Explore Azure AI Foundry portal highlighted with a red box.](../../img/azure-portal-openai-overview.png)
+    ![Screenshot of the Azure OpenAI service's Overview blade, with the Explore Azure AI Foundry portal highlighted with a red box.](../img/azure-portal-openai-overview.png)
 
 3. In **Azure AI Foundry**, select the **Deployments** menu item under **Shared resources** in the left-hand navigation menu.
 
-    ![Screenshot of Azure AI Foundry, with the Deployments menu item highlighted and selected. The completions and embeddings model deployments are displayed.](../../img/azure-ai-foundry-deployments.png)
+    ![Screenshot of Azure AI Foundry, with the Deployments menu item highlighted and selected. The completions and embeddings model deployments are displayed.](../img/azure-ai-foundry-deployments.png)
 
 4. Verify you see a `completions` deployment for the `gpt-4o` model and an `embeddings` deployment for the `text-embedding-ada-002` model.
 
-## 4. Verify Semantic Ranker Model Deployment (optional)
+## Verify Semantic Ranker Model Deployment (optional)
 
 If you chose to deploy the Azure ML semantic ranker model during setup, you will use the Azure Machine Learning Studio to ensure the semantic ranker model was successfully deployed to an online endpoint.
 
@@ -123,20 +123,20 @@ If you chose to deploy the Azure ML semantic ranker model during setup, you will
 
 1. In the Azure portal, return to the resource group containing your resources and select the **Azure Machine Learning Workspace** resoure.
 
-    ![Screenshot of the resources in the resource group, with the Azure Machine Learning Workspace resource highlighted.](../../img/azure-portal-rg-aml-workspace.png)
+    ![Screenshot of the resources in the resource group, with the Azure Machine Learning Workspace resource highlighted.](../img/azure-portal-rg-aml-workspace.png)
 
 2. From the Azure ML workspace page, select the **Launch studio** button to open Azure Machine Learning Studio in a new browser window.
 
-    ![Screenshot of the Launch studio section of the Azure Machine Learning workspace page with the Launch studio button highlighted with a red box.](../../img/azure-ml-workspace-launch-studio.png)
+    ![Screenshot of the Launch studio section of the Azure Machine Learning workspace page with the Launch studio button highlighted with a red box.](../img/azure-ml-workspace-launch-studio.png)
 
 3. Sign into Machine Learning Studio if prompted.
 
 4. In Machine Learning Studio, select **Endpoints** under **Assets** in the left-hand resource menu, then select the endpoint for your `bge-v2-m3-reranker model`:
 
-    ![Screenshot of the Endpoints page in Azure Machine Learning Studio, with the Endpoints menu item highlighted and the reranker model endpoint highlighted.](../../img/aml-studio-endpoints.png)
+    ![Screenshot of the Endpoints page in Azure Machine Learning Studio, with the Endpoints menu item highlighted and the reranker model endpoint highlighted.](../img/aml-studio-endpoints.png)
 
 5. On your endpoint page, ensure the **Provisioning state** for the _bgev2m3-v1_ deployment is **Succeeded**.
 
-    ![Screenshot of the semantic ranker model deployment in Azure ML Studio, with the model's provisioning state of Succeded highlighted.](../../img/aml-studio-endpoints-model-deployment-succeeded.png)
+    ![Screenshot of the semantic ranker model deployment in Azure ML Studio, with the model's provisioning state of Succeded highlighted.](../img/aml-studio-endpoints-model-deployment-succeeded.png)
 
 !!! tip "Leave the Azure Portal open. You will revisit it later."

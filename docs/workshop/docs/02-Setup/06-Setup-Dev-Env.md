@@ -1,4 +1,4 @@
-# Setup Dev Environment
+# 2.6 Setup Dev Environment
 
 In this step, you will configure your Python development environment in Visual Studio Code. At the end of this step, you should have:
 
@@ -79,7 +79,7 @@ Configuration values, such as connection string and endpoints, that allow your a
         
         3. Copy the **Endpoint** value and paste it into the `.env` file.
 
-            ![Screenshot of the App Configuration Access Settings page, with the Endpoint copy button highlighted.](../../img/app-config-access-settings-endpoint.png)
+            ![Screenshot of the App Configuration Access Settings page, with the Endpoint copy button highlighted.](../img/app-config-access-settings-endpoint.png)
 
 5. Save the `.env` file.
 
@@ -91,19 +91,19 @@ You will use pgAdmin from your machine to configure various features in the data
 
 2. On the Azure Database for PostgreSQL - Flexible Server page, copy the **Server name** value from the **Essentials** panel on the **Overview** page by selecting the _Copy to clipboard_ button to the right of the value.
 
-    ![Screenshot of the Azure Database for PostgreSQL - Flexible Server Overview blade in the Azure portal, with the Server name highlighted.](../../img/azure-database-for-postgresql-server-name.png)
+    ![Screenshot of the Azure Database for PostgreSQL - Flexible Server Overview blade in the Azure portal, with the Server name highlighted.](../img/azure-database-for-postgresql-server-name.png)
 
 3. On your development computer, open pgAdmin.
 
 4. In the pgAdmin **Object Explorer**, right-click on **Servers** and in the context menu select **Register >**, then **Server...**.
 
-    ![Screenshot of the pgAdmin Servers context menu, with Register > Server highlighted.](../../img/pgadmin-register-server.png)
+    ![Screenshot of the pgAdmin Servers context menu, with Register > Server highlighted.](../img/pgadmin-register-server.png)
 
 5. In tab of **Register - Server** dialog, follow these steps:
 
     1. On the **General** tab, enter "PostgreSQLSolutionAccelerator" into the **Name** field and clear the **Connect now** option.
 
-        ![Screenshot of the Register Server general tabl with the name and connect now fields highlighted.](../../img/pgadmin-register-server-general-tab.png)
+        ![Screenshot of the Register Server general tabl with the name and connect now fields highlighted.](../img/pgadmin-register-server-general-tab.png)
 
     2. Select the **Connection** tab and provide your Azure Database for PostgreSQL flexible server instance details for **Hostname/address** and **Username**.
 
@@ -115,7 +115,7 @@ You will use pgAdmin from your machine to configure various features in the data
 
     4. Right-click the newly added **PostgreSQLSolutionAccelerator** server in the pgAdmin Object Explorer, and select **Connect Server** in the context menu.
 
-        ![Screenshot of the server context menu, with Connect Server highlighted.](../../img/pgadmin-connect-server.png)
+        ![Screenshot of the server context menu, with Connect Server highlighted.](../img/pgadmin-connect-server.png)
 
     5. In the **Connect to Server** dialog, you will need to provide an access token.
 
@@ -136,7 +136,7 @@ You will use pgAdmin from your machine to configure various features in the data
 
     6. Return to pgAdmin and the **Connect to Server** dialog and paste the access token into the password field.
 
-        ![Screenshot of the Connect to Server dialog, with the access token entered into the password box.](../../img/pgadmin-connect-to-server.png)
+        ![Screenshot of the Connect to Server dialog, with the access token entered into the password box.](../img/pgadmin-connect-to-server.png)
 
         !!! note "Do not save password!"
 

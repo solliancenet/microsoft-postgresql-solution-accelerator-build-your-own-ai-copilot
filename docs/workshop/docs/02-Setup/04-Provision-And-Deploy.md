@@ -1,8 +1,6 @@
-# Self-Guided Setup
+# 2.4 Provision and Deploy
 
-Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](../../0-Prerequisites/#self-guided) section if you need more details.
-
-!!! question "WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? [You can find that here.](./02-Instructor-Led.md)"
+You will need a valid Azure subscription, a GitHub account, and access to relevant Azure OpenAI models to complete this lab. Review the [prerequisites](./00-Prerequisites.md) section if you need more details.
 
 ## Start Docker Desktop
 
@@ -18,7 +16,7 @@ Before running the `azd up` command, you must authenticate your VS Code environm
 
 1. To create Azure resources, you need to be authenticated from VS Code. Open a new integrated terminal in VS Code. Then, complete the following steps:
 
-### Step 1: Authenticate with `az` for post-provisioning tasks
+### Authenticate with `az` for post-provisioning tasks
 
 1. Log into the Azure CLI `az` using the command below.
 
@@ -30,7 +28,7 @@ Before running the `azd up` command, you must authenticate your VS Code environm
 
     !!! info "If you have more than one Azure subscription, you may need to run `az account set -s <subscription-id>` to specify the correct subscription to use."
 
-### Step 2: Authenticate with `azd` for provisioning & managing resources
+### Authenticate with `azd` for provisioning & managing resources
 
 1. Log in to Azure Developer CLI. This is only required once per-install.
 
@@ -82,7 +80,3 @@ You are now ready to provision your Azure resources and deploy the Woodgrove bac
         
 
 3. On successful completion you will see a `SUCCESS: ...` message on the console.
-
----
-
-## Next → [Validate Your Setup](../3-Validation/index.md)

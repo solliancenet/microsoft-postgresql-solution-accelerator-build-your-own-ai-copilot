@@ -14,8 +14,6 @@ Throughout this solution accelerator, you will enhance the application with AI c
 
     Separating app functionality into a dedicated UI and backend API offers several benefits. Firstly, it enhances modularity and maintainability, allowing you to update the UI or backend independently without disrupting the other. REACT and Node.js provide an intuitive and interactive user interface that simplifies user interactions, while the Python API leveraging FastAPI ensures high-performance, asynchronous request handling and data processing. This separation also promotes scalability, as different components can be deployed across multiple servers, optimizing resource usage. Additionally, it enables better security practices, as the backend API can handle sensitive data and authentication separately, reducing the risk of exposing vulnerabilities in the UI layer. This approach leads to a more robust, efficient, and user-friendly application.
 
----
-
 ## Application Data Flow
 
 _Select each tab below to learn more about how the movement of data in the context of the Woodgrove Bank Contract Management application!_
@@ -89,27 +87,3 @@ _Select each tab below to learn more about how the movement of data in the conte
           1. The composite prompt contains the system prompt augmented with context provided by the results of the hybrid search against the PostgreSQL database.
 
     7. The AI-generated completion response is sent back to the user through the browser interface, providing them with actionable insights based on the data stored in the system. The efficient flow of information ensures users can quickly and accurately obtain the information they need.
-
----
-
-## Azure Cost
-
-The Microsoft Azure resources you deploy will be provisioned within your own Azure Subscription, so you will be responsible for the cost of those services. The cost of the solution will vary depending on the Azure region chosen, as well as which deployment options you choose.
-
-Most notably, these are the deployment options that will affect the cost:
-
-- Deploy without Azure Machine Learning model for Semantic Ranker: This deployment will cost approximately $50 per day.
-- Deploy with Azure Machine Learning model for Semantic Ranker: This deployment will cost approximately $75 per day.
-
-The Setup section of this guide will tell you when / how to choose this deployment option.
-
-Here's a breakout of an estimated cost of Azure resources deployed for this solution:
-
-- Azure ML VM (semantic ranking model deployment): ~$19.50/day
-- Azure Database for PostgreSQL: ~$3.40/day
-- Azure App Configuration: ~$1.20/day
-- Azure Container Registry: ~$0.67/day
-- Azure OpenAI Service: Dependent upon usage of Copilot, AI-validation, and number of documents processed in the solution.
-- Other services are minimal cost.
-
-![Screenshot of Cost analysis within the Azure Portal for the solution resource group.](../img/azure-cost-analysis.png)

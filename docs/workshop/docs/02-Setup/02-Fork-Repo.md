@@ -1,6 +1,6 @@
-# B. Fork Repo
+# 2.2 Fork Repo
 
-You must create a copy (known as a fork) of the **PostgreSQL Solution Accelerator: Build your own AI Copilot** GitHub repo and then clone that onto your local computer so you can work with its contents. After completing this step, you should have:
+You must create a copy (known as a fork) of the [PostgreSQL Solution Accelerator: Build your own AI Copilot](https://github.com/solliancenet/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot) GitHub repo and then clone that onto your local computer so you can work with its contents. After completing this step, you should have:
 
 - [X] Forked the **PostgreSQL Solution Accelerator: Build your own AI Copilot** repo to your personal GitHub profile
 - [X] Created a local clone of the repo
@@ -14,21 +14,21 @@ Forking in GitHub refers to creating a personal copy of a public repository, whi
 
 2. Select the **Fork** button to create a copy of the repo in your GitHub profile.
 
-    ![The Fork button is highlighted on the GitHub toolbar.](../../img/git-hub-toolbar-fork.png)
+    ![The Fork button is highlighted on the GitHub toolbar.](../img/git-hub-toolbar-fork.png)
 
 3. Login with your GitHub profile, if prompted.
 
-3. On the **Create a new fork** page, select **Create fork** to make a copy of the repo under your GitHub profile.
+4. On the **Create a new fork** page, select **Create fork** to make a copy of the repo under your GitHub profile.
 
-    ![Screenshot of the Create a new fork page in GitHub.](../../img/github-create-fork.png)
+    ![Screenshot of the Create a new fork page in GitHub.](../img/github-create-fork.png)
 
-4. The forked repo will open within your GitHub profile.
+5. The forked repo will open within your GitHub profile.
 
 ## Clone the Forked Repo
 
 1. On the GitHub page for your fork, select the **Code** button and then select the **Copy URL to clipboard** button next to the repo's HTTPS clone link:
 
-    ![The GitHub Code menu is expanded and the copy button for the HTTPS clone link is highlighted.](../../img/github-code-clone-https.png)
+    ![The GitHub Code menu is expanded and the copy button for the HTTPS clone link is highlighted.](../img/github-code-clone-https.png)
 
 2. Open a new command prompt and change directories to the folder in which you want to clone the repo (e.g., D:\repos).
 
@@ -45,5 +45,3 @@ Forking in GitHub refers to creating a personal copy of a public repository, whi
     ```
 
 !!! tip "Leave Visual Studio Code open as you will be using it throughout the remainder of the workshop."
-
----

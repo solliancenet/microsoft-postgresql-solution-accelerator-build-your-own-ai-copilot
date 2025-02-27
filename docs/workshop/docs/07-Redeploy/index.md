@@ -16,35 +16,17 @@ Because you used `azd` for provisioning and deployment, this is as simple as cal
 
 ## Deploy the Updated App
 
-To deploy the updated app, you need to follow the below steps for the _Self-Guided_ or _Instructor-Led_ workshop that matches what you chose during the _Setup_ section of this guide.
+To deploy the updated app, follow the steps below:
 
-=== "Self-Guided"
+1. Open a new integrated terminal in Visual Studio Code.
 
-    1. Open a new integrated terminal in Visual Studio Code.
-    
-    2. Ensure you are at the root of your repository.
-    
-    3. Execute this command to deploy your application with changes.
-    
-        ```bash title=""
-        azd deploy
-        ```
+2. Ensure you are at the root of your repository.
 
-=== "Instructor-Led"
+3. Execute this command to deploy your application with changes.
 
-    1. Open a new integrated terminal in Visual Studio Code.
-    
-    2. Ensure you are in the `./workshop` folder of your repository.
-    
-        ```bash title=""
-        cd workshop
-        ```
-    
-    3. Execute this command to deploy your application with changes.
-    
-        ```bash title=""
-        azd deploy
-        ```
+    ```bash title=""
+    azd deploy
+    ```
 
 ## Test the Deployed App
 
@@ -60,7 +42,7 @@ To deploy the updated app, you need to follow the below steps for the _Self-Guid
 
 ---
 
-_You made it! That was a lot to cover - but don't worry! Now that you have a fork of the repo, you can check out the [Self-Guided Workshop](./../02-Setup/1-Provision-And-Setup/03-Self-Guided.md) option to revisit ideas at your own pace! Before you go, there are some important cleanup tasks you need to do!!_
+_You made it! That was a lot to cover - but don't worry! Now that you have a fork of the repo, you can revisit ideas at your own pace! Before you go, there are some important cleanup tasks you need to do!!_
 
 ---
 

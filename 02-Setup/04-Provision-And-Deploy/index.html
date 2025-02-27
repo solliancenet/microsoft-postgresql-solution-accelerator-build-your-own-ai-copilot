@@ -885,6 +885,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#common-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Errors
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2007,6 +2016,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#common-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Errors
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2109,6 +2127,16 @@ AadAuthOperationCannotBePerformedWhenServerIsNotAccessible: The server &#39;psql
 <li>
 <p>On successful completion you will see a <code>SUCCESS: ...</code> message on the console.</p>
 </li>
+</ol>
+<h2 id="common-errors">Common Errors<a class="headerlink" href="#common-errors" title="Permanent link">&para;</a></h2>
+<p><strong>Error</strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="na">Note</span><span class="o">:</span><span class="w"> </span><span class="s">Running custom &#39;up&#39; workflow from azure.yaml &#39;pwsh&#39; is not recognized as an internal or external command, operable program or batch file. ERROR: error executing step command &#39;provision&#39;: failed running pre hooks: &#39;preprovision&#39; hook failed with exit code: &#39;1&#39;, Path: &#39;.\azd-hooks\preprovision.ps1&#39;. : exit code: 1</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>Solution</strong>: Ensure “pwsh” is installed and added to PATH env:</p>
+<ol>
+<li>Run <code>winget install --id Microsoft.Powershell --source winget</code> from the command-line.</li>
+<li>In CMD, <code>echo %PATH%</code>.</li>
+<li>Verify <code>C:\Program Files\PowerShell\7\</code> is in <code>%PATH%</code>.</li>
 </ol>
 
 

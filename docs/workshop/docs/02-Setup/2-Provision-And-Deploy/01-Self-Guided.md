@@ -4,6 +4,14 @@ Welcome to the Self-Guided Lab Track! You will need a valid Azure subscription, 
 
 !!! question "WERE YOU LOOKING FOR THE INSTRUCTOR-LED OPTION INSTEAD? [You can find that here.](./02-Instructor-Led.md)"
 
+## Start Docker Desktop
+
+Docker Desktop is used to create and deploy the containers used for runnig the _Woodgrove Bank Portal and API_ applications. It must be running before you begin the deployment process using `azd up`.
+
+1. Launch Docker Desktop from the applications menu on your computer.
+
+2. Look for the Docker icon in your system tray or menu bar to confirm it is running.
+
 ## Authenticate With Azure
 
 Before running the `azd up` command, you must authenticate your VS Code environment to Azure.

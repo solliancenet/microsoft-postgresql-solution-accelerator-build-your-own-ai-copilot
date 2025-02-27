@@ -17,7 +17,11 @@
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/03-Data-Structure/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/03-Azure-Cost/</loc>
+         <lastmod>2025-02-27</lastmod>
+    </url>
+    <url>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/04-Data-Structure/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
@@ -25,43 +29,35 @@
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/0-Prerequisites/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/00-Prerequisites/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Environment-Prep/01-Install-Software/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/01-Install-Software/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Environment-Prep/02-Fork-Repo/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/02-Fork-Repo/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/1-Environment-Prep/03-Verify-Azure-Quota/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/03-Verify-Azure-Quota/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/2-Provision-And-Deploy/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/04-Provision-And-Deploy/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/2-Provision-And-Deploy/01-Self-Guided/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/05-Validation/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/2-Provision-And-Deploy/02-Instructor-Led/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/06-Setup-Dev-Env/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/3-Validation/</loc>
-         <lastmod>2025-02-27</lastmod>
-    </url>
-    <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/4-Setup-Dev-Env/</loc>
-         <lastmod>2025-02-27</lastmod>
-    </url>
-    <url>
-         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/5-Review-Manual-Process/</loc>
+         <loc>https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/02-Setup/07-Review-Manual-Process/</loc>
          <lastmod>2025-02-27</lastmod>
     </url>
     <url>

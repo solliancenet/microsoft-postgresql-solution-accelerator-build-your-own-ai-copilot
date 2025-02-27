@@ -4,4 +4,4 @@ In the financial services industry (FSI), validating financial documents, like c
 
 The documentation for completing the workshop can be found here:
 
-<https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/01-Introduction/01-App-Scenario/>
+<https://solliancenet.github.io/microsoft-postgresql-solution-accelerator-build-your-own-ai-copilot/>

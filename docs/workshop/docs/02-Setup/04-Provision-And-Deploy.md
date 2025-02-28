@@ -84,8 +84,8 @@ You are now ready to provision your Azure resources and deploy the Woodgrove bac
 
 **Error**:
 
-```ini title=""
-Note: Running custom 'up' workflow from azure.yaml 'pwsh' is not recognized as an internal or external command, operable program or batch file. ERROR: error executing step command 'provision': failed running pre hooks: 'preprovision' hook failed with exit code: '1', Path: '.\azd-hooks\preprovision.ps1'. : exit code: 1
+```ini title="Running custom 'up' workflow from azure.yaml"
+'pwsh' is not recognized as an internal or external command, operable program or batch file. ERROR: error executing step command 'provision': failed running pre hooks: 'preprovision' hook failed with exit code: '1', Path: '.\azd-hooks\preprovision.ps1'. : exit code: 1
 ```
 
 **Solution**: Ensure “pwsh” is installed and added to PATH env:

@@ -3,6 +3,7 @@
 The required development environment uses a Visual Studio (VS) Code editor with a Python runtime. To complete this lab on your own computer, you must install the following required software. On completing this step, you should have installed:
 
 - [X] Azure command-line tools
+- [X] PowerShell 7+
 - [X] Git
 - [X] Python 3.11+
 - [X] Node.js
@@ -63,6 +64,32 @@ The required development environment uses a Visual Studio (VS) Code editor with 
     ```bash title=""
     azd version
     ```
+
+## Install PowerShell 7
+
+To run the provision and deployment of the solution accelerator, you will need to have PowerShell 7 installed. By default, Windows 11 does not come with PowerShell 7.
+
+1. Install or upgrade to [PowerShell 7](https://learn.microsoft.com/powershell/scripting/install/installing-powershell?view=powershell-7.5) by following the installation instructions for your OS:
+
+    - [Windows](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5)
+    - [macOS](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-macos?view=powershell-7.5)
+    - [Linux](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-linux?view=powershell-7.5)
+
+2. Once installed, open a command prompt on your machine and verify the installation by running the following:
+
+    ```bash title=""
+    pwsh
+    ```
+
+3. The command prompt should show the version of PowerShell as `7.5.0` or greater.
+
+    ![Screenshot of the command prompt showing the results of the 'pwsh' command.](../img/powershell-verify-installation.png)
+
+!!! failure "Error running `pwsh` command"
+
+    If there's an error running the `pwsh` command, then PowerShell 7+ is not installed.
+
+    ![Screenshot of `pwsh` command error saying it's not a recognized command.](../img/powershell-pwsh-error.png)
 
 ## Install Git
 

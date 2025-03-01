@@ -100,9 +100,9 @@ Docker Desktop is an application that allows you to build, share, and run contai
 
 1. Download and install Docker Desktop for your OS using instructions provided on the <https://docs.docker.com/desktop/>:
 
-        - [Linux](https://docs.docker.com/desktop/setup/install/linux/)
-        - [Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
-        - [Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+    - [Linux](https://docs.docker.com/desktop/setup/install/linux/)
+    - [Mac](https://docs.docker.com/desktop/setup/install/mac-install/)
+    - [Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
 
 ## Install Visual Studio Code (and extensions)
 

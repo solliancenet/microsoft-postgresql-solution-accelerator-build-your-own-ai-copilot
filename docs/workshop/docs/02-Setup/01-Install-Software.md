@@ -3,7 +3,7 @@
 The required development environment uses a Visual Studio (VS) Code editor with a Python runtime. To complete this lab on your own computer, you must install the following required software. On completing this step, you should have installed:
 
 - [X] Azure command-line tools
-- [X] PowerShell 7+
+- [X] PowerShell 7
 - [X] Git
 - [X] Python 3.11+
 - [X] Node.js
@@ -87,7 +87,7 @@ To run the provision and deployment of the solution accelerator, you will need t
 
 !!! failure "Error running `pwsh` command"
 
-    If there's an error running the `pwsh` command, then PowerShell 7+ is not installed.
+    If there's an error running the `pwsh` command, then PowerShell 7 is not installed.
 
     ![Screenshot of `pwsh` command error saying it's not a recognized command.](../img/powershell-pwsh-error.png)
 

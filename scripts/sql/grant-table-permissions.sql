@@ -1,4 +1,4 @@
-DO $$
+BEGIN
 DECLARE
   username text := '${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}';
 BEGIN
@@ -33,4 +33,4 @@ BEGIN
   ELSE
     RAISE NOTICE 'User % does not exist', username;
   END IF;
-END $$ LANGUAGE plpgsql;
+END;

@@ -791,6 +791,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#install-powershell-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install PowerShell 7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#install-git" class="md-nav__link">
     <span class="md-ellipsis">
       Install Git
@@ -2026,6 +2035,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#install-powershell-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install PowerShell 7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#install-git" class="md-nav__link">
     <span class="md-ellipsis">
       Install Git
@@ -2102,6 +2120,7 @@
 <p>The required development environment uses a Visual Studio (VS) Code editor with a Python runtime. To complete this lab on your own computer, you must install the following required software. On completing this step, you should have installed:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Azure command-line tools</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> PowerShell 7+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Git</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Python 3.11+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Node.js</li>
@@ -2160,6 +2179,31 @@ az extension remove -n ml
 </code></pre></div></td></tr></table></div>
 </li>
 </ol>
+<h2 id="install-powershell-7">Install PowerShell 7<a class="headerlink" href="#install-powershell-7" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Install or upgrade to <a href="https://learn.microsoft.com/powershell/scripting/install/installing-powershell?view=powershell-7.5">PowerShell 7</a> by following the installation instructions for your OS:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5">Windows</a></li>
+<li><a href="https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-macos?view=powershell-7.5">macOS</a></li>
+<li><a href="https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-linux?view=powershell-7.5">Linux</a></li>
+</ul>
+</li>
+<li>
+<p>Once installed, open a command prompt on your machine and verify the installation by running the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>pwsh
+</code></pre></div></td></tr></table></div>
+</li>
+<li>
+<p>The command prompt should show the version of PowerShell as <code>7.5.0</code> or greater.</p>
+<p><img alt="Screenshot of the command prompt showing the results of the 'pwsh' command." src="../../img/powershell-verify-installation.png" /></p>
+</li>
+</ol>
+<div class="admonition failure">
+<p class="admonition-title">Error running <code>pwsh</code> command</p>
+<p>If there's an error running the <code>pwsh</code> command, then PowerShell 7+ is not installed.</p>
+<p><img alt="Screenshot of pwsh command error saying it's not a recognized command." src="../../img/powershell-pwsh-error.png" /></p>
+</div>
 <h2 id="install-git">Install Git<a class="headerlink" href="#install-git" title="Permanent link">&para;</a></h2>
 <p>Git enables you to manage your code by tracking changes, maintaining a version history, and facilitating collaboration with others. This helps in organizing and maintaining the integrity of your project's development.</p>
 <ol>

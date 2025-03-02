@@ -69,7 +69,11 @@ Write-Host "Database Schema Configured"
 # ##############################################################################
 Write-Host "Granting Database Permissions to API App Managed Identity..."
 # Load script
-$sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-table-permissions.sql" -Raw
+if ($IsWindows) {
+  $sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-table-permissions-windows.sql" -Raw
+} else { # macOS - $IsMacOS
+  $sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-table-permissions-macos.sql" -Raw
+}
 # Replace environment variable placeholders
 $sqlScript = $sqlScript.Replace('${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}', "${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}")
 # Run script

@@ -197,6 +197,7 @@ module apiApp './app/API.bicep' = {
     secretSettings: []
   }
   scope: rg
+  dependsOn: [ postgresql ]
 }
 
 module apiAppPostgresqlAdmin './shared/postgresql_administrator.bicep' = {
@@ -219,12 +220,21 @@ module postgresql './shared/postgresql.bicep' = {
     highAvailabilityMode: 'Disabled'
     tags: tags
     appConfigName: appConfig.outputs.name
-    principalTenantId: deployer().tenantId
+  }
+  scope: rg
+}
+
+module postgresqlAdmin './shared/postgresql_administrator.bicep' = {
+  name: 'serverAdmin'
+  params: {
+    postgresqlServerName: postgresql.outputs.serverName
     principalId: principalId
     principalName: principalName
     principalType: principalType
+    principalTenantId: deployer().tenantId
   }
   scope: rg
+  dependsOn: [ apiApp ]
 }
 
 module postgresqlDatabase './shared/postgresql_database.bicep' = {
@@ -234,7 +244,7 @@ module postgresqlDatabase './shared/postgresql_database.bicep' = {
     databaseName: postgresqlDatabaseName
     appConfigName: appConfig.outputs.name
   }
-  dependsOn: [apiAppPostgresqlAdmin] // Be sure to set dependsOn to ensure modules that create server admins are completed before provisioning database (resolves a potential permissions issue)
+  dependsOn: [apiAppPostgresqlAdmin, postgresqlAdmin] // Be sure to set dependsOn to ensure modules that create server admins are completed before provisioning database (resolves a potential permissions issue)
   scope: rg
 }
 

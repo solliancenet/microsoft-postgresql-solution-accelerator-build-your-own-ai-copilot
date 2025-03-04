@@ -49,15 +49,6 @@ param dnsZoneFqdn string = '${dnsZoneName}.postgres.database.azure.com'
 ])
 param highAvailabilityMode string = 'Disabled'
 
-@description('The principal ID to grant Admin access to the PostgreSQL server.')
-param principalId string
-@description('The principal name to grant Admin access to the PostgreSQL server.')
-param principalName string
-@description('The principal type to grant Admin access to the PostgreSQL server.')
-param principalType string = 'User'
-@description('The tenant id of the principal to grant Admin access to the PostgreSQL server.')
-param principalTenantId string
-
 
 var connectSubnet = !empty(subnetId)
 
@@ -103,17 +94,6 @@ resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-11-01-
     }
   }
   tags: tags
-}
-
-module serverAdmin './postgresql_administrator.bicep' = {
-  name: 'serverAdmin'
-  params: {
-    postgresqlServerName: postgresqlServer.name
-    principalId: principalId
-    principalName: principalName
-    principalType: principalType
-    principalTenantId: principalTenantId
-  }
 }
 
 resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2024-11-01-preview' = {

@@ -1996,12 +1996,22 @@
 <p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
 </li>
 <li>
-<p>Run the following command to use the <code>azure_storage.account_add()</code> function to define a connection between your storage account and your PostgreSQL database:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_storage</span><span class="p">.</span><span class="n">account_add</span><span class="p">(</span><span class="n">azure_storage</span><span class="p">.</span><span class="n">account_options_managed_identity</span><span class="p">(</span><span class="s1">&#39;[YOUR_STORAGE_ACCOUNT_NAME]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blob&#39;</span><span class="p">));</span>
+<p>Run the following command to use the <code>azure_storage.account_add()</code> function to define a connection between your storage account and your PostgreSQL database. Replace the account name and key tokens with values for your storage account.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_storage</span><span class="p">.</span><span class="n">account_add</span><span class="p">(</span><span class="s1">&#39;[YOUR_STORAGE_ACCOUNT_NAME]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[YOUR_STORAGE_ACCOUNT_KEY]&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<details class="note">
-<summary>About the `account_add() function</summary>
-<p>In the above <code>account_add()</code> function call, the <code>azure_storage.account_options_managed_identity()</code> function is passed as the <code>account_config</code> parameter. This function returns a <em>JSONB</em> object containing the configuration required to authenticate against the storage account using your PostgreSQL database's managed identity. It expects the name of the target storage account and the storage type, which currently only supports <code>blob</code>. Your PostgreSQL database was configured with a system-assigned identity during resource provisioning. That identity was granted the <code>Storage Blob Data Contributor</code> role on your storage account, which allows your database to read and write files from blob storage.</p>
+<details class="tip">
+<summary>Need help finding your storage account key?</summary>
+<p>To get your storage account's access key:</p>
+<ol>
+<li>Navigate to your storage account in the Azure portal.</li>
+<li>Select the <strong>Access keys</strong> menu under <strong>Security + networking</strong> in the navigation menu.</li>
+<li>Select <strong>Show</strong> next to the <strong>Key</strong> value under <strong>key1</strong>.</li>
+<li>Select the <strong>Copy to clipboard</strong> button that appears on the right-hand side of the <strong>Key</strong> box.</li>
+<li>
+<p>Paste the copied key as the <code>[YOUR_STORAGE_ACCOUNT_KEY]</code> value in the above SQL statement.</p>
+<p><img alt="Screenshot of the Storage account access keys page, with the show button highlighted for the key1 Key." src="../../img/storage-account-access-keys.png" /></p>
+</li>
+</ol>
 </details>
 </li>
 </ol>

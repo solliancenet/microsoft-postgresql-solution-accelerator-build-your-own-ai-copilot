@@ -63,7 +63,7 @@ class ChatFunctions:
         rows = await self.__execute_query(query)
         return [dict(row) for row in rows]
 
-    async def get_invoice_validation_results(self, invoice_id: int):
+    async def get_invoice_validation_results(self, invoice_id: int = None):
         """
         Retrieves invoice accuracy and performance validation results for the specified invoice.
         If no invoice_id is provided, return all invoice validation results.

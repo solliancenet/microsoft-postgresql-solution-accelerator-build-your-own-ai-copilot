@@ -2003,13 +2003,18 @@
 </li>
 <li>
 <p>In the <strong>Request body</strong> section, paste the following JSON snippet to request a list of vendors, then select <strong>Execute</strong>.</p>
-<p><code>json
-{
-    "session_id": 0,
-    "message": "What vendors are we working with?",
-    "chat_history": [],
-    "max_history": 6
-}</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;session_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;What vendors are we working with?&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;chat_history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">&quot;max_history&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p><img alt="Screenshot of the request body section, with the above message highlighted in the body textbox and the Execute button highlighted." src="../../img/woodgrove-api-chat-try-it-out-execute.png" /></p>
 </li>
 <li>

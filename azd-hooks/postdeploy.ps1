@@ -28,6 +28,8 @@ Write-Host "Access Token Retrieved for $username"
 # Add local Public IP Address to PostgreSQL Firewall,
 # so we can connect to the PostgreSQL Server and run scripts
 # ##############################################################################
+Write-Host "Adding Firewall Rule for Local Machine IP Address..."
+
 $publicIpAddress =  (Invoke-RestMethod -Uri "http://ipinfo.io/ip")
 az postgres flexible-server firewall-rule create `
     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
@@ -37,18 +39,6 @@ az postgres flexible-server firewall-rule create `
     --end-ip-address $publicIpAddress
 
 Write-Host "Added Firewall Rule for $publicIpAddress"
-
-# ##############################################################################
-# Add account running AZD as Administrator on PostgreSQL Server,
-# so we have necessary permissions to run the database scripts below
-# ##############################################################################
-# az postgres flexible-server ad-admin create `
-#     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
-#     --server-name "${env:POSTGRESQL_SERVER_NAME}" `
-#     --display-name "$username" `
-#     --object-id "$(az ad user show --id $username --query id -o tsv)"
-
-# Write-Host "Added $username as an Admin on PostgreSQL Server"
 
 # ##############################################################################
 # Create Database Schema
@@ -68,14 +58,17 @@ Write-Host "Database Schema Configured"
 # Grant Database Permissions to API Identity
 # ##############################################################################
 Write-Host "Granting Database Permissions to API App Managed Identity..."
-# Load script
-if ($IsWindows) {
-  $sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-table-permissions-windows.sql" -Raw
-} else { # macOS - $IsMacOS
-  $sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-table-permissions-macos.sql" -Raw
-}
-# Replace environment variable placeholders
-$sqlScript = $sqlScript.Replace('${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}', "${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}")
+
+$sqlScript = @"
+GRANT ALL PRIVILEGES ON DATABASE `"${env:POSTGRESQL_DATABASE_NAME}`" TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
+GRANT USAGE ON SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
+"@
+
+Write-Host $sqlScript
+
 # Run script
 az postgres flexible-server execute `
           --admin-user "$username" `
@@ -178,25 +171,25 @@ Write-Host "Sample Files Uploaded to Blob Storage"
 # # Create Event Grid Subscription with BlobCreated & BlobUpdated Webhook
 # # - this must be created after the app is deployed, otherwise the webhook validation will fail
 # # ##############################################################################
-Write-Host "Creating Event Grid 'StorageBlob' Subscription with BlobCreated & BlobUpdated Webhook..."
+# Write-Host "Creating Event Grid 'StorageBlob' Subscription with BlobCreated & BlobUpdated Webhook..."
 
-$eventGridStorageBlobSubscriptionExists = az eventgrid system-topic event-subscription list `
-    --resource-group "${env:AZURE_RESOURCE_GROUP}" `
-    --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
-    --query "[?name=='StorageBlob']" `
-    --output tsv
+# $eventGridStorageBlobSubscriptionExists = az eventgrid system-topic event-subscription list `
+#     --resource-group "${env:AZURE_RESOURCE_GROUP}" `
+#     --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+#     --query "[?name=='StorageBlob']" `
+#     --output tsv
 
-if (-not $eventGridStorageBlobSubscriptionExists) {
-    az eventgrid system-topic event-subscription create `
-        --name "StorageBlob" `
-        --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
-        --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
-        --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
-        --subject-begins-with "/blobServices/default/containers/${env:AZURE_STORAGE_CONTAINER_NAME}/blobs/" `
-        --resource-group "${env:AZURE_RESOURCE_GROUP}"
-}
+# if (-not $eventGridStorageBlobSubscriptionExists) {
+#     az eventgrid system-topic event-subscription create `
+#         --name "StorageBlob" `
+#         --system-topic-name "${env:STORAGE_EVENTGRID_SYSTEM_TOPIC_NAME}" `
+#         --endpoint "${env:SERVICE_API_ENDPOINT_URL}/webhooks/storage-blob" `
+#         --included-event-types "Microsoft.Storage.BlobCreated" "Microsoft.Storage.BlobUpdated" `
+#         --subject-begins-with "/blobServices/default/containers/${env:AZURE_STORAGE_CONTAINER_NAME}/blobs/" `
+#         --resource-group "${env:AZURE_RESOURCE_GROUP}"
+# }
 
-Write-Host "Event Grid Subscription 'StorageBlob' Created"
+# Write-Host "Event Grid Subscription 'StorageBlob' Created"
 
 
 # ##############################################################################

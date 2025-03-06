@@ -62,7 +62,7 @@ Configuration values, such as connection string and endpoints, that allow your a
 
 3. Enter `.env` as the name of the new file within the VS Code **Explorer** panel.
 
-4. In the `.env` file, add the following as the first line, replacing the `{YOUR_APP_CONFIG_ENDPOINT}` with the endpoint for the App Configuration resource in your `rg-postgresql-accelerator` resource group.
+4. In the `.env` file, add the following as the first line, replacing the `{YOUR_APP_CONFIG_ENDPOINT}` with the endpoint for the App Configuration resource in your deployed resource group.
 
     ```ini title=""
     AZURE_APP_CONFIG_ENDPOINT={YOUR_APP_CONFIG_ENDPOINT}

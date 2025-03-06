@@ -1980,6 +1980,9 @@
 <li><strong>[YOUR_SUBSCRIPTION_ID]</strong>: Your Azure subscription ID.</li>
 </ul>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following Azure CLI command!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>postgres<span class="w"> </span>flexible-server<span class="w"> </span>parameter<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--resource-group<span class="w"> </span><span class="o">[</span>YOUR_RESOURCE_GROUP<span class="o">]</span><span class="w">  </span>--server-name<span class="w"> </span><span class="o">[</span>YOUR_POSTGRESQL_SERVER<span class="o">]</span><span class="w"> </span>--subscription<span class="w"> </span><span class="o">[</span>YOUR_SUBSCRIPTION_ID<span class="o">]</span><span class="w"> </span>--name<span class="w"> </span>azure.extensions<span class="w"> </span>--value<span class="w"> </span>azure_ai,pg_diskann,vector
 </code></pre></div></td></tr></table></div>
 </div>
@@ -2017,7 +2020,7 @@
 <p>Right-click the <strong>contracts</strong> database and select <strong>Query Tool</strong> from the context menu.</p>
 </li>
 </ol>
-<div class="admonition note">
+<div class="admonition danger">
 <p class="admonition-title">Select each of the tabs below and execute the <code>CREATE EXTENSION</code> command in the pgAdmin query window to install the extensions.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="azure-ai-extension" name="__tabbed_2" type="radio" /><input id="pgvector-extension" name="__tabbed_2" type="radio" /><input id="diskann-extension" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="azure-ai-extension">Azure AI extension</label><label for="pgvector-extension">pgvector extension</label><label for="diskann-extension">DiskANN extension</label></div>

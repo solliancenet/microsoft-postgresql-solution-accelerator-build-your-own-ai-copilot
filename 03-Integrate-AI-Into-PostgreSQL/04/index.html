@@ -2056,7 +2056,9 @@
 </code></pre></div></td></tr></table></div>
 <h2 id="create-vector-indexes">Create Vector Indexes<a class="headerlink" href="#create-vector-indexes" title="Permanent link">&para;</a></h2>
 <p>In the previous tasks, you added <code>vector</code> columns to several tables in your database and populated them with embeddings using the <code>azure_ai</code> extension and Azure OpenAI. To ensure queries over those embeddings are efficient, you will add <code>diskann</code> indexes to each table to which you added a <code>vector</code> column.</p>
-<p><em>Select the tab for each table below and execute the <code>CREATE INDEX</code> statement to create an <code>diskann</code> index.</em></p>
+<div class="admonition danger">
+<p class="admonition-title"><em>Select the tab for each table below and execute the <code>CREATE INDEX</code> statement to create an <code>diskann</code> index.</em></p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="deliverables" name="__tabbed_1" type="radio" /><input id="invoice_line_items" name="__tabbed_1" type="radio" /><input id="invoice_validation_results" name="__tabbed_1" type="radio" /><input id="sow_chunks" name="__tabbed_1" type="radio" /><input id="sow_validation_results" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="deliverables">deliverables</label><label for="invoice_line_items">invoice_line_items</label><label for="invoice_validation_results">invoice_validation_results</label><label for="sow_chunks">sow_chunks</label><label for="sow_validation_results">sow_validation_results</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

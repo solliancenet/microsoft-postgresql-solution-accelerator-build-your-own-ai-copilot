@@ -2286,6 +2286,9 @@
 </li>
 <li>
 <p>Open the <code>.env</code> file and add the following lines:</p>
+<div class="admonition danger">
+<p class="admonition-title">Update your <code>.env</code> file!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="na">ENTRA_ID_USERNAME</span><span class="o">=</span><span class="s">&quot;{YOUR_ENTRA_ID_USERNAME}&quot;</span>
@@ -2355,11 +2358,17 @@
 </li>
 <li>
 <p>Before you can run cypher queries, you must set the <code>ag_catalog</code> schema in your path:</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ag_catalog</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;$user&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>Now, run the following cypher query to view vendors with open invoices, the details of those invoices, and verify your graph database was loaded correctly:</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>

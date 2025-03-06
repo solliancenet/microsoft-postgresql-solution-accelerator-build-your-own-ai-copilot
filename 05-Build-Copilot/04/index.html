@@ -2216,6 +2216,9 @@
 </li>
 <li>
 <p>Insert the following code at the start of that block (just below the <code># Add routers to API endpoints</code> comment on line 43) to add the <code>completions/chat</code> endpoint to the exposed API.</p>
+<div class="admonition danger">
+<p class="admonition-title">Insert the code below onto line 43 of <code>main.py</code>!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">completions</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </li>

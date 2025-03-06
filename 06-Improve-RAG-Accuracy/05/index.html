@@ -1982,7 +1982,9 @@
 <p>To simplify the extraction of data from your PostgreSQL database into CSV files hosted in Azure Blob Storage, you will also use the <a href="https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-use-pg-azure-storage">Azure Storage extension</a> (<code>azure_storage</code>). This extension allows you to connect directly to an Azure Storage account from your PostgreSQL database, copy data out of the database, and write it into files in blob storage. From your storage account, the CSV files will be used as the data source for your graph database.</p>
 <h2 id="allowlist-the-extensions">Allowlist the extensions<a class="headerlink" href="#allowlist-the-extensions" title="Permanent link">&para;</a></h2>
 <p>Before using <code>age</code> and <code>azure_storage</code> extensions, add them to the PostgreSQL server's <em>allowlist</em>, configure them as shared preloaded libraries, and install them in your database.</p>
-<p><em>Select the tab for the method you want to use for allowlisting the extensions and follow the instructions provided.</em></p>
+<div class="admonition note">
+<p class="admonition-title"><em>Select the tab for the method you want to use for allowlisting the extensions and follow the instructions provided.</em></p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="azure-cli" name="__tabbed_1" type="radio" /><input id="azure-portal" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="azure-cli">Azure CLI</label><label for="azure-portal">Azure portal</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1996,6 +1998,9 @@
 <li><strong>[YOUR_POSTGRESQL_SERVER]</strong>: The name of your Azure Database for PostgreSQL server.</li>
 <li><strong>[YOUR_SUBSCRIPTION_ID]</strong>: Your Azure subscription ID.</li>
 </ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following Azure CLI command!</p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>postgres<span class="w"> </span>flexible-server<span class="w"> </span>parameter<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--resource-group<span class="w"> </span><span class="o">[</span>YOUR_RESOURCE_GROUP<span class="o">]</span><span class="w"> </span>--server-name<span class="w"> </span><span class="o">[</span>YOUR_POSTGRESQL_SERVER<span class="o">]</span><span class="w"> </span>--subscription<span class="w"> </span><span class="o">[</span>YOUR_SUBSCRIPTION_ID<span class="o">]</span><span class="w"> </span>--name<span class="w"> </span>azure.extensions<span class="w"> </span>--value<span class="w"> </span>azure_ai,pg_diskann,vector,age,azure_storage
 </code></pre></div></td></tr></table></div>
@@ -2023,7 +2028,9 @@
 </div>
 <h2 id="load-extensions-on-server-start">Load extensions on server start<a class="headerlink" href="#load-extensions-on-server-start" title="Permanent link">&para;</a></h2>
 <p>Some Postgres libraries need to perform certain operations that can only take place at postmaster start, such as allocating shared memory, reserving lightweight locks, or starting background workers. <code>AGE</code> relies on shared memory for its operations, so it must be loaded at server start. The <code>shared_preload_libraries</code> parameter in PostgreSQL is used to specify libraries that should be loaded at server startup, enabling additional functionalities or extensions before any connections are made.</p>
-<p><em>Select the tab for the method you want to use to update the <code>shared_preload_libraries</code> parameter and follow the instructions provided.</em></p>
+<div class="admonition note">
+<p class="admonition-title"><em>Select the tab for the method you want to use to update the <code>shared_preload_libraries</code> parameter and follow the instructions provided.</em></p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="azure-cli_1" name="__tabbed_2" type="radio" /><input id="azure-portal_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="azure-cli_1">Azure CLI</label><label for="azure-portal_1">Azure portal</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2037,6 +2044,9 @@
 <li><strong>[YOUR_POSTGRESQL_SERVER]</strong>: The name of your Azure Database for PostgreSQL server.</li>
 <li><strong>[YOUR_SUBSCRIPTION_ID]</strong>: Your Azure subscription ID.</li>
 </ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following Azure CLI command!</p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>postgres<span class="w"> </span>flexible-server<span class="w"> </span>parameter<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--resource-group<span class="w"> </span><span class="o">[</span>YOUR_RESOURCE_GROUP<span class="o">]</span><span class="w"> </span>--server-name<span class="w"> </span><span class="o">[</span>YOUR_POSTGRESQL_SERVER<span class="o">]</span><span class="w"> </span>--subscription<span class="w"> </span><span class="o">[</span>YOUR_SUBSCRIPTION_ID<span class="o">]</span><span class="w"> </span>--name<span class="w"> </span>shared_preload_libraries<span class="w"> </span>--value<span class="w"> </span>age,azure_storage,pg_cron,pg_stat_statements
 </code></pre></div></td></tr></table></div>
@@ -2053,6 +2063,9 @@
 <li><strong>[YOUR_POSTGRESQL_SERVER]</strong>: The name of your Azure Database for PostgreSQL server.</li>
 <li><strong>[YOUR_SUBSCRIPTION_ID]</strong>: Your Azure subscription ID.</li>
 </ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following Azure CLI command!</p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az<span class="w"> </span>postgres<span class="w"> </span>flexible-server<span class="w"> </span>restart<span class="w"> </span>--resource-group<span class="w"> </span><span class="o">[</span>YOUR_RESOURCE_GROUP<span class="o">]</span><span class="w"> </span>--name<span class="w"> </span><span class="o">[</span>YOUR_POSTGRESQL_SERVER<span class="o">]</span><span class="w"> </span>--subscription<span class="w"> </span><span class="o">[</span>YOUR_SUBSCRIPTION_ID<span class="o">]</span>
 </code></pre></div></td></tr></table></div>
@@ -2100,6 +2113,9 @@
 </li>
 <li>
 <p>Install the <code>age</code> and <code>azure_storage</code> extensions by running the following <code>CREATE EXTENSION</code> commands in the pgAdmin query window:</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">azure_storage</span><span class="p">;</span>

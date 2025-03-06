@@ -1997,6 +1997,9 @@
 </li>
 <li>
 <p>Run the following command to use the <code>azure_storage.account_add()</code> function to define a connection between your storage account and your PostgreSQL database. Replace the account name and key tokens with values for your storage account.</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">azure_storage</span><span class="p">.</span><span class="n">account_add</span><span class="p">(</span><span class="s1">&#39;[YOUR_STORAGE_ACCOUNT_NAME]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[YOUR_STORAGE_ACCOUNT_KEY]&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <details class="tip">
@@ -2025,6 +2028,9 @@
 </li>
 <li>
 <p>Run the following query using the <code>azure_storage.blob_put()</code> function to write all data from the <code>vendors</code> table into a CSV file named <code>vendors.csv</code> into your storage account's <code>graph</code> container. This data will define the <code>vendor</code> node in your graph database.</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2054,6 +2060,9 @@
 </li>
 <li>
 <p>Execute this query to extract <code>sow</code> node data from the <code>sows</code> table and write it into a CSV file named <code>sows.csv</code> into your storage account's <code>graph</code> container. The query excludes a few columns from the <code>sows</code> table, including the <code>embedding</code> column, as they are unnecessary in the graph database and can cause errors.</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2083,6 +2092,9 @@
 </li>
 <li>
 <p>Finally, run the following query to extract <code>has_invoices</code> edge data from the <code>invoices</code> table and write it into a CSV file named <code>has_invoices.csv</code> into the <code>graph</code> container in your storage account:</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2120,6 +2132,9 @@
 <ol>
 <li>
 <p>Execute the following query in the <strong>Query Tool</strong> in <strong>pgAdmin</strong>. Ensure you replace the <code>[YOUR_STORAGE_ACCOUNT_NAME]</code> token with the name of your storage account.</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the following SQL commands in pgAdmin!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Verify the CSV files were written into blob storage</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">azure_storage</span><span class="p">.</span><span class="n">blob_list</span><span class="p">(</span><span class="s1">&#39;[YOUR_STORAGE_ACCOUNT_NAME]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;graph&#39;</span><span class="p">);</span>

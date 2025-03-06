@@ -1992,6 +1992,9 @@
 </li>
 <li>
 <p>Run the following query, which creates a vector embedding for the <code>result</code> field in the <code>invoice_validation_results</code> table. The <code>deployment_name</code> parameter in the function is set to <code>embeddings</code>, which is the name of the deployment of the <code>text-embedding-ada-002</code> model in your Azure OpenAI service (it was created with that name by the Bicep deployment script):</p>
+<div class="admonition danger">
+<p class="admonition-title">Execute the SQL command below!</p>
+</div>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -2031,7 +2034,9 @@
 <p class="admonition-title">Each table query may take several minutes, depending on the configured TPM limits.</p>
 </div>
 <p>Using <strong>pgAdmin</strong>, execute the SQL statement for each table.</p>
-<p><em>Select the tab for each table below and execute the <code>UPDATE</code> statement to create embeddings for the specified column.</em></p>
+<div class="admonition danger">
+<p class="admonition-title"><em>Select the tab for each table below and execute the <code>UPDATE</code> statement to create embeddings for the specified column.</em></p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="deliverables" name="__tabbed_1" type="radio" /><input id="invoice_line_items" name="__tabbed_1" type="radio" /><input id="invoice_validation_results" name="__tabbed_1" type="radio" /><input id="sow_chunks" name="__tabbed_1" type="radio" /><input id="sow_validation_results" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="deliverables">deliverables</label><label for="invoice_line_items">invoice_line_items</label><label for="invoice_validation_results">invoice_validation_results</label><label for="sow_chunks">sow_chunks</label><label for="sow_validation_results">sow_validation_results</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

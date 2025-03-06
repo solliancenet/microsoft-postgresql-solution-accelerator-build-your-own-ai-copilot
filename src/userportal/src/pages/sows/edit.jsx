@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import { useParams } from 'react-router-dom';
@@ -45,8 +45,12 @@ const SOWEdit = () => {
     }
   }, [useLocation().search]);
 
+  const sowLoaded = useRef(false);
   useEffect(() => {
-    const fetchVendors = async () => {
+    // Fetch data when component mounts
+    if (!sowLoaded.current) {
+       // Load Vendors dropdown options
+       const fetchVendors = async () => {
         try {
           const data = await api.vendors.list(0, -1); // No pagination limit
           setVendors(data.data);
@@ -56,34 +60,35 @@ const SOWEdit = () => {
           setSuccess(null);
         }
       };
-  
       fetchVendors();
 
-      const fetchValidations = async () => {
+      // Load SOW Details
+      const fetchSow = async () => {
         try {
-          const data = await api.validationResults.sow(id);
-          setValidations(data.data);
+          const data = await api.sows.get(id);
+          updateDisplay(data);
         } catch (err) {
           console.error(err);
-          setError('Error fetching Validations');
-          setSuccess(null);
+          setError('Failed to load SOW data');
         }
-      };
-      fetchValidations();
-  }, [id]);
 
-  useEffect(() => {
-    // Fetch data when component mounts
-    const fetchData = async () => {
-      try {
-        const data = await api.sows.get(id);
-        updateDisplay(data);
-      } catch (err) {
-        console.error(err);
-        setError('Failed to load SOW data');
-      }
-    };
-    fetchData();
+        // Load SOW Validations after SOW is loaded
+        const fetchValidations = async () => {
+          try {
+            const data = await api.validationResults.sow(id);
+            setValidations(data.data);
+          } catch (err) {
+            console.error(err);
+            setError('Error fetching Validations');
+            setSuccess(null);
+          }
+        };
+        fetchValidations();
+
+        sowLoaded.current = true;
+      };
+      fetchSow();
+    }
   }, [id]);
 
   const updateDisplay = (data) => {

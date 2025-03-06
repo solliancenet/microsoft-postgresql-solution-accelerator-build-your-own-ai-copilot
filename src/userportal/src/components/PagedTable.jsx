@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Table from './Table';
 
 const PagedTable = ({ columns, fetchData, searchEnabled = false, showPagination = true, reload }) => {
@@ -6,24 +6,30 @@ const PagedTable = ({ columns, fetchData, searchEnabled = false, showPagination 
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(10);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const loadingData = useRef(false);
   const loadData = async (skip, limit, sortBy, searchQuery) => {
-    setLoading(true);
-    try {
-      const sortbyParam = (sortBy && sortBy.length > 0) ? `${sortBy[0].id} ${sortBy[0].desc ? 'desc' : 'asc'}` : '';
-      const response = await fetchData(skip, limit, sortbyParam, searchQuery);
-      setData(response.data);
-      setTotal(response.total);
-      setSkip(response.skip);
-      setLimit(response.limit);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    if (!loadingData.current) {
+      loadingData.current = true;
+      setLoading(true);
+      try {
+        const sortbyParam = (sortBy && sortBy.length > 0) ? `${sortBy[0].id} ${sortBy[0].desc ? 'desc' : 'asc'}` : '';
+        const response = await fetchData(skip, limit, sortbyParam, searchQuery);
+        setData(response.data);
+        setTotal(response.total);
+        setSkip(response.skip);
+        setLimit(response.limit);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+      loadingData.current = false;
     }
   };
 

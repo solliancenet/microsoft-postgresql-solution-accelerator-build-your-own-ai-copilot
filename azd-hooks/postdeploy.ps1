@@ -59,25 +59,17 @@ Write-Host "Database Schema Configured"
 # ##############################################################################
 Write-Host "Granting Database Permissions to API App Managed Identity..."
 
-if ($IsWindows) {
-    $sqlScript = @"
-GRANT ALL PRIVILEGES ON DATABASE ""${env:POSTGRESQL_DATABASE_NAME}"" TO ""${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}"";
-GRANT USAGE ON SCHEMA public TO ""${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}"";
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ""${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}"";
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO ""${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}"";
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO ""${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}"";
-"@
-} else { # macOS / Linux
-    $sqlScript = @"
-GRANT ALL PRIVILEGES ON DATABASE `"${env:POSTGRESQL_DATABASE_NAME}`" TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
-GRANT USAGE ON SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO `"${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}`";
-"@
-}
+Write-Host "Writing grant-permissions.tmp.sql script with API App managed identity name..."
 
-Write-Host $sqlScript
+# Read sql script with environment variable placeholders
+$sqlScript = Get-Content -Path "$PSScriptRoot/../scripts/sql/grant-permissions.sql" -Raw
+
+# Replace environment variable placeholders
+$sqlScript = $sqlScript.Replace('${env:POSTGRESQL_DATABASE_NAME}', $env:POSTGRESQL_DATABASE_NAME)
+$sqlScript = $sqlScript.Replace('${env:SERVICE_API_IDENTITY_PRINCIPAL_NAME}', $env:SERVICE_API_IDENTITY_PRINCIPAL_NAME)
+
+# Write sql file 
+Set-Content -Path "$PSScriptRoot/../scripts/sql/grant-permissions.tmp.sql" -Value $sqlScript
 
 # Run script
 az postgres flexible-server execute `
@@ -85,7 +77,7 @@ az postgres flexible-server execute `
           --admin-password "$token" `
           --name "${env:POSTGRESQL_SERVER_NAME}" `
           --database-name "${env:POSTGRESQL_DATABASE_NAME}" `
-          --querytext $sqlScript
+          --file-path "$PSScriptRoot/../scripts/sql/grant-permissions.tmp.sql"
 
 Write-Host "Database Permissions Granted to API App Managed Identity"
 

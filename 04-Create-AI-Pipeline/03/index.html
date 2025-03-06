@@ -2113,7 +2113,7 @@
 <span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Update the summary column with abstractive summaries</span>
 <span class="k">UPDATE</span><span class="w"> </span><span class="n">sows</span>
 <span class="k">SET</span><span class="w"> </span><span class="n">summary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">azure_cognitive</span><span class="p">.</span><span class="n">summarize_abstractive</span><span class="p">(</span>
-<span class="w">    </span><span class="n">metadata</span><span class="p">,</span>
+<span class="w">    </span><span class="n">metadata</span><span class="p">::</span><span class="nb">text</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;{&quot;max_sentence_count&quot;: 2}&#39;</span>
 <span class="p">);</span>
 </code></pre></div></td></tr></table></div>

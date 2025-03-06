@@ -13,17 +13,16 @@ Virtual environments in Python are essential for maintaining a clean and organiz
 
 1. Return to Visual Studio Code, where you have the **PostgreSQL Solution Accelerator: Build your own AI Copilot** project open.
 
-2. In Visual Studio Code, open a new terminal window and change directories to the `src/api` folder of the repo.
-
-3. Create a virtual environment named `.venv` by running the following command at the terminal prompt:
+2. In Visual Studio Code, open a new terminal window and change directories to the `src/api` folder of the repo, and create a virtual environment named `.venv` by running the following command at the terminal prompt:
 
     ```bash title=""
+    cd src/api
     python -m venv .venv 
     ```
 
     The above command will create a `.venv` folder under the `api` folder, which will provide a dedicated Python environment for the `api` project that can be used throughout this lab.
 
-4. Activate the virtual environment.
+3. Activate the virtual environment.
 
     !!! note "Select the appropriate command for your OS and shell from the table."
 
@@ -37,7 +36,7 @@ Virtual environments in Python are essential for maintaining a clean and organiz
         | | PowerShell | `.venv\Scripts\Activate.ps1` |
         | macOS | bash/zsh | `source .venv/bin/activate` |
 
-5. Execute the command at the terminal prompt to activate your virtual environment.
+4. Execute the command at the terminal prompt to activate your virtual environment.
 
 ## Install required Python libraries
 

@@ -1727,6 +1727,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#woodgrove-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      Woodgrove Graph
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#create-graph-database-with-agefreighter" class="md-nav__link">
     <span class="md-ellipsis">
       Create Graph Database with AGEFreighter
@@ -1951,6 +1960,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#woodgrove-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      Woodgrove Graph
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#create-graph-database-with-agefreighter" class="md-nav__link">
     <span class="md-ellipsis">
       Create Graph Database with AGEFreighter
@@ -2015,6 +2033,11 @@
 
 <h1 id="67-create-graph-database">6.7 Create Graph Database<a class="headerlink" href="#67-create-graph-database" title="Permanent link">&para;</a></h1>
 <p>Hosting graph databases in Azure Database for PostgreSQL using the Apache AGE extension offers a powerful way to analyze relationships within your data. AGE combines graph and relational data seamlessly, leveraging the openCypher query language for efficient graph processing. This integration brings PostgreSQL's scalability, performance, and security to the table while enabling advanced data analysis and management. When incorporated into a copilot, this setup empowers you to evaluate vendor performance of SOW deliverables through invoice validation, ensuring your data-driven decisions are robust and insightful.</p>
+<p>Once you have created your graph database, it will be incorporated into the <em>Woodgrove Bank API</em> as an extra tool available to the copilot, allowing you to improve RAG accuracy when retrieving relevant data. By using another function call, the copilot will be able to execute cypher queries against the graph database hosted in Azure Database for PostgreSQL using AGE while maintaining the existing capabilities of querying data in Postgres.</p>
+<h2 id="woodgrove-graph">Woodgrove Graph<a class="headerlink" href="#woodgrove-graph" title="Permanent link">&para;</a></h2>
+<p>Graph databases allow you to model complex relationships between data using nodes and edges, making it easier to represent and query these relationships. You will build a simple graph using the data you extracted from the Woodgrove Bank database. You will define <code>vendors</code> and <code>sows</code> as nodes in your graph and use <code>invoices</code> as the edge between them. Edges in graph databases define a one-to-one relationship between two entities, defined as nodes. The diagram below provides a high-level representation of the graph database.</p>
+<p><img alt="Diagram of the simple graph database for vendors, invoices, and SOWs." src="../../img/vendors-invoices-sows-graph.png" /></p>
+<p>Edges must include a mapping of related entities through ID mapping and can also include properties, which allow the relationship to be filtered at query time.</p>
 <h2 id="create-graph-database-with-agefreighter">Create Graph Database with AGEFreighter<a class="headerlink" href="#create-graph-database-with-agefreighter" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rioriost/agefreighter/">AGEFreighter</a> is a Python library designed to simplify the process of creating and loading graph databases in Azure Database for PostgreSQL, allowing data to be ingested from various sources, including file formats (CSV, AVRO, and Parquet), Azure Storage, Azure Cosmos DB, and Azure Database for PostgreSQL.</p>
 <h2 id="review-code">Review code<a class="headerlink" href="#review-code" title="Permanent link">&para;</a></h2>

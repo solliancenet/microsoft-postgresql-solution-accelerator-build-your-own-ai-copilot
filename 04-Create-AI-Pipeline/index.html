@@ -1149,7 +1149,7 @@
         
   
   <span class="md-ellipsis">
-    4.2 Configure Semantic Chunking
+    4.2 Configure Structural Element-Based Chunking
   </span>
   
 
@@ -1903,37 +1903,24 @@
 
 <h1 id="ai-driven-data-validation">AI-driven Data Validation<a class="headerlink" href="#ai-driven-data-validation" title="Permanent link">&para;</a></h1>
 <h2 id="building-an-ai-enhanced-data-ingestion-and-processing-pipeline">Building an AI-Enhanced Data Ingestion and Processing Pipeline<a class="headerlink" href="#building-an-ai-enhanced-data-ingestion-and-processing-pipeline" title="Permanent link">&para;</a></h2>
-<p>An end-to-end data pipeline has been created to create an AI-powered solution for advanced data analysis. This pipeline starts with documents uploaded to Azure Blob Storage and employs Azure services for intelligent ingestion, automated validation, semantic analysis, and optimized storage.</p>
-<p>AI-driven Data Validation offers a transformative solution by automating document processing, improving accuracy, and reducing the burden on human reviewers. Through a combination of intelligent document ingestion, machine learning, and natural language processing, AI will revolutionize how contract validation is performed.</p>
-<p>Prior to the integration of AI into the data ingestion workflow, the application would require a lot of manual parsing and input of Invoice and SOW data into the application. This can be a time consuming and labor intensive process.</p>
-<p>In this section, you will review the code that integrates AI components into the solution.</p>
+<p>An end-to-end AI-powered data pipeline has been provided to automate Woodgrove Bank's data ingestion and validation process. This pipeline starts when documents are uploaded to Azure Blob Storage and employs Azure AI services for intelligent ingestion, automated validation, semantic analysis, and optimized storage.</p>
+<p>Before integrating AI into the data ingestion workflow, the application required manual parsing and input of invoice and SOW data into the application. This process was a time-consuming and labor-intensive process.</p>
+<p>This section will review the code that integrates AI components into the solution.</p>
 <h2 id="validate-documents">Validate documents<a class="headerlink" href="#validate-documents" title="Permanent link">&para;</a></h2>
-<p>The document ingestion workflow process performs document text extraction, validation on document parts, comparing milestone pricing with invoiced amounts and work performed, looking for key SOW components such as compliance sections and wording, etc.</p>
+<p>AI-driven Data Validation offers a transformative solution by automating document processing, improving accuracy, and reducing the burden on human reviewers. Through a combination of intelligent document ingestion, machine learning, and natural language processing, AI will revolutionize contract validation.</p>
+<p>The document ingestion workflow performs document text extraction, validation on document parts, comparison of milestone pricing with invoiced amounts and work performed, and looking for key SOW components such as compliance sections and wording. It includes the following steps:</p>
 <ol>
 <li>
-<p>Use Azure AI Document Intelligence to perform document text extraction, and Azure OpenAI to generate text embeddings of document chunks/sections that are inserted into the database.</p>
+<p>Azure AI Document Intelligence performs text extraction and uses Azure OpenAI to generate text embeddings of document chunks/sections inserted into the database.</p>
 </li>
 <li>
-<p>Use Azure OpenAI and GPT-4o model along with PostgreSQL vector extensions to do semantic similarity comparisons between key sections and expected language. Set a threshold similarity score to validate documents contain appropriate language.</p>
-<ul>
-<li>Provide example document(s) with missing sections or incorrect and missing wording to show how these can be identified and flagged.</li>
-<li>Provide good documents.</li>
-</ul>
-</li>
-<li>
-<p>Insert text and associated embeddings into PostgreSQL.</p>
-</li>
-<li>
-<p>Perhaps use a custom ML model to do numerical comparisons/analysis of project milestones + assigned dollar amount against invoices for the project?</p>
-<ul>
-<li>Try with Azure OpenAI first, but it's not so good with numbers...</li>
-</ul>
+<p>The <code>pgvector</code> extension in Azure Database for PostgreSQL performs semantic similarity comparisons between key document sections. Azure OpenAI's GPT-4o model is leveraged for data analysis and vector similarity evaluation. A threshold similarity score is assigned to assess the similarity of document wording and to validate that documents contain appropriate language.</p>
 </li>
 </ol>
 <details class="info" open="open">
 <summary>Document validation worker process architecture</summary>
-<p>The best practice for enterprise systems is to build a background worker process that performs the document validation workflow. Then when a document is uploaded a message is sent using a queue, like Event Grid, that is then handled by the background worker process to perform the document ingestion and validation workflow.</p>
-<p>To make this guide easier to follow, the document validation workflow has been implemented as REST API methods that are called directly by the front-end application. The following sections will guide you through the review of the AI integration code into the application.</p>
+<p>The best practice for enterprise systems is to build a background worker process that performs the document validation workflow. When a document is uploaded, a message is sent using a queue, like Event Grid, which is then handled by the background worker process to perform the document ingestion and validation workflow.</p>
+<p>To make this guide easier to follow, the document validation workflow has been implemented as REST API methods called directly by the front-end application. The following sections will guide you through reviewing the AI integration code into the application.</p>
 </details>
 
 

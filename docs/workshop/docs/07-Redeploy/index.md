@@ -24,6 +24,8 @@ To deploy the updated app, follow the steps below:
 
 3. Execute this command to deploy your application with changes.
 
+    !!! danger "Execute the following Azure Developer CLI command!"
+
     ```bash title=""
     azd deploy
     ```

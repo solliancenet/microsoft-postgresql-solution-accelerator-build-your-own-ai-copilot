@@ -21,6 +21,8 @@ Once you have completed this workshop, delete the Azure resources you created. Y
 
 2. At the terminal prompt, execute the following command to delete the resources created by the deployment script:
 
+    !!! danger "Execute the following Azure Developer CLI command to delete resources!"
+
     ```bash title=""
     azd down --purge
     ```

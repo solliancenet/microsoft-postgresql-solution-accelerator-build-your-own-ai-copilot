@@ -654,6 +654,8 @@
       
         
       
+        
+      
     
     
       
@@ -859,11 +861,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-Verify-Azure-Quota/" class="md-nav__link">
+      <a href="../03-Select-Azure-Region/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.3 Verify Azure Quota
+    2.3 Select an Azure region
   </span>
   
 
@@ -880,11 +882,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-Provision-And-Deploy/" class="md-nav__link">
+      <a href="../04-Verify-Azure-Quota/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.4 Provision and Deploy
+    2.4 Verify Azure Quota
   </span>
   
 
@@ -901,11 +903,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-Validation/" class="md-nav__link">
+      <a href="../05-Provision-And-Deploy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.5 Validate Deployment
+    2.5 Provision and Deploy
   </span>
   
 
@@ -922,11 +924,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-Setup-Dev-Env/" class="md-nav__link">
+      <a href="../06-Validation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.6 Setup Dev Environment
+    2.6 Validate Deployment
   </span>
   
 
@@ -943,11 +945,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../07-Review-Manual-Process/" class="md-nav__link">
+      <a href="../07-Setup-Dev-Env/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    2.7 Review Manual Process
+    2.7 Setup Dev Environment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-Review-Manual-Process/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.8 Review Manual Process
   </span>
   
 
@@ -2050,6 +2073,27 @@
 <li><strong>Sufficient Azure ML Online Endpoint CPU quota</strong><ul>
 <li>To run the solution accelerator's <strong>Semantic Ranker</strong> element, you must have at least 32 <strong>Standard DASv4 Family Cluster Dedicated vCPUs</strong> cores available within your subscription. Detailed instructions are provided in the setup section to verify this in your subscription.</li>
 </ul>
+</li>
+<li>
+<p><strong>An appropriate Azure region for your workshop resources</strong></p>
+<ul>
+<li>To ensure you can successfully complete the workshop and deploy the required Azure resources, you must choose a region that supports those resources.</li>
+<li>Before selecting an Azure region:</li>
+<li>Review the regional availability guidance for the <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-ada-002</a> models in Azure OpenAI.<ul>
+<li>Select a region that <strong>supports the Azure OpenAI <code>gpt-4o</code> and <code>text-embedding-ada-002</code> models</strong>.</li>
+<li>Ensure you have a <strong>at least 10K TPMs of <code>Standard</code> capacity available in the region</strong> for both the <code>gpt-4o</code> and <code>text-embedding-ada-002</code> models. Follow <a href="https://learn.microsoft.com/azure/ai-services/openai/how-to/quota?tabs=rest#view-and-request-quota">these instructions</a> to check your available quota.</li>
+</ul>
+</li>
+<li>Check the <a href="https://learn.microsoft.com/azure/ai-services/language-service/summarization/region-support#regional-availability-table">text abstractive summarization regional availability</a><ul>
+<li>Select a region that supports <em>abstractive summarization</em> and the required Azure OpenAI models!</li>
+<li>Selecting a region that does not support <em>abstractive summarization</em> will not cause a deployment failure, but will require you to make code changes later in the workshop to use <em>extractive summarization</em> in its place.</li>
+</ul>
+</li>
+</ul>
+<p>You must choose a region that supports <strong>both Azure OpenAI models</strong>, has at least 10K TPM of <code>Standard</code> capacity for both models, and <strong>Text Abstractive Summarization</strong>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Choosing a region that doesn't support both Azure OpenAI models will result in deployment failure when running <code>azd up</code>.</p>
+</div>
 </li>
 </ol>
 <h2 id="what-you-should-know">What You Should Know<a class="headerlink" href="#what-you-should-know" title="Permanent link">&para;</a></h2>

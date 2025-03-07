@@ -2103,6 +2103,7 @@
 <p>Run the following command to check whether the Resource Providers are registered on your Azure Subscription:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>az provider list --query &quot;[?namespace==&#39;Microsoft.Cdn&#39; || namespace==&#39;Microsoft.PolicyInsights&#39; || namespace == &#39;Microsoft.MachineLearningServices&#39; || namespace == &#39;Microsoft.ApiManagement&#39;].{Namespace: namespace, RegistrationState: registrationState}&quot; -o table
 </code></pre></div></td></tr></table></div>
+<p>Alternatively, you could also navigate to the <strong>Subscription</strong> within the <strong>Azure Portal</strong>, then navigate to <strong>Resource providers</strong> under <strong>Settings</strong>. This will also allow you to view the registered Resource Providers for the Subscription, as well as register them.</p>
 <p>The console output will look similar to the following:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>

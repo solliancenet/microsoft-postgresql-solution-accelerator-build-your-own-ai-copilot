@@ -1,4 +1,4 @@
-# 2.3 Select an Azure region
+# 2.3 Select An Azure Region
 
 To ensure you can successfully deploy the Azure resources using the `azd up` command, you must choose a region that supports the required Azure OpenAI `gpt-4o` and `text-embedding-ada-002` models, has at least 10K TPM of `Standard` capacity available for each of those models, and supports the Language service's _abstractive summarization_ capability. On completing this step, you should have:
 

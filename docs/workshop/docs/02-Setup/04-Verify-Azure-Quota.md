@@ -1,29 +1,10 @@
-# 2.3 Verify Azure Quota
+# 2.4 Verify Azure Quota
 
-This solution contains an Azure Developer CLI `azd-template` that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single `azd up` command. On completing this step, you should have:
+This solution contains an Azure Developer CLI `azd-template` that provisions the required resources in Azure and deploys the starter app to Azure Container Apps (ACA). The template allows for the infrastructure to be deployed with a single `azd up` command.
 
-- [X] Selected an Azure region for workshop resources
 - [X] Verified your Azure ML CPU quota
 - [X] Authenticated with Azure
 - [X] Provisioned Azure resources and deployed the starter solution
-
-## Select an Azure region for your workshop resources
-
-To ensure you can successfully deploy the Azure resources using the `azd up` command, you must choose a region that supports the required Azure OpenAI `gpt-4o` and `text-embedding-ada-002` models.
-
-1. Before deciding on the Azure region you want to use for your workshop resources:
-
-    1. Review the regional availability guidance for the [gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint) and [text-embedding-ada-002](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI.
-
-    2. Check the [text abstractive summarization regional availability](https://learn.microsoft.com/azure/ai-services/language-service/summarization/region-support#regional-availability-table)
-
-2. Choose a region that **supports both Azure OpenAI models** and **Text Abstractive Summarization**.
-
-!!! danger "Select a region that supports Azure OpenAI both models!"
-
-Choosing a region that doesn't support both Azure OpenAI models will result in deployment failure when running `azd up`.
-
-Selecting a region that does not support _abstractive summarization_ will not cause a deployment failure, but will need to make code changes later in the workshop to use _extractive summarization_ in its place.
 
 ## Verify Azure ML CPU Quota
 
@@ -41,7 +22,7 @@ This solution accelerator contains a section dedicted to setting up and using a 
 
 4. Open a new browser window or tab and navigate to the following URL, replacing the `<your-tenant-id>` token with the Tenant ID you copied from the Entra ID overview page in the Azure portal.
 
-    ```bash title="Azure ML Quota page"
+    ```bash title="Azure ML Quota page" linenums="0"
     https://ml.azure.com/quota?tid=<your-tenant-id>
     ```
 
@@ -63,7 +44,7 @@ This solution accelerator contains a section dedicted to setting up and using a 
 
     ![Screenshot of the Request quota dialog with a value of 32 highlighted in the new cores limit box and the submit button highlighted.](../img/azure-ml-request-quota-dialog.png)
 
-    !!! example
+    !!! example "Quota increase example"
 
         Your **new cores limit** should be increased to ensure 32 cores are available for a new deployment. For example, if you have zero cores available, your new cores limit should be set to 32. If your core limit is 100 and you are currently using 90, your new cores limit should be set to 122.
 

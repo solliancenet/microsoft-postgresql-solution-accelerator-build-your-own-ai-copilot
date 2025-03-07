@@ -6,10 +6,6 @@ This solution contains an Azure Developer CLI `azd-template` that provisions the
 - [X] Authenticated with Azure
 - [X] Provisioned Azure resources and deployed the starter solution
 
-## Verify Azure Resource Providers
-
-
-
 ## Verify Azure ML CPU Quota
 
 This solution accelerator contains a section dedicated to setting up and using a Semantic Ranking model directly from your PostgreSQL database. The deployment of this component of the architecture requires sufficient CPU quota (32 cores) in Azure Machine Learning to accommodate the [Hugging Face BGE reranker model deployment](https://huggingface.co/BAAI/bge-reranker-v2-m3). In this task, you must verify you have available quota for the target virtual machine (VM) instance type (`STANDARD_D16AS_V4`), and if not, request additional quota.
@@ -40,7 +36,7 @@ This solution accelerator contains a section dedicated to setting up and using a
 
     ![On the subscription quota page for the selected region, the Standard DASv4 Family Cluster Dedicated vCPUs items is highlighted and the available quota is highlighted.](../img/azure-ml-quota-standard-dasv4.png)
 
-8. If you have 32 cores or more available, you can proceed to the [Provision and Deploy section](../2-Provision-And-Deploy/index.md). Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
+8. If you have 32 cores or more available, then you do not need to request a quota increase. Otherwise, select the **Standard DASv4 Family Cluster Dedicated vCPUs** by checking the box to the left of the name, then scroll up to the top of the page and locate the **Request quota** button.
 
     ![Screenshot of the Azure ML quota page with the Request quota button highlighted with a red box.](../img/azure-ml-request-quota.png)
 
@@ -55,3 +51,48 @@ This solution accelerator contains a section dedicated to setting up and using a
 10. Quota increase requests typically take a few minutes to complete. You will receive notifications in the Azure portal as the request is processed and when it completes.
 
 11. If your request is denied, you don't have permissions to issue the request, or you prefer not to request additional quota, you have the option to exclude the **Semantic Ranking** model deployment when running the `azd up` command by setting the `deployAMLModel` flag to `false` when prompted.
+
+## Verify Azure Resource Providers
+
+There are a few Azure Resource Providers that will need to be registered on the Azure Subscription for the solution accelerator to successfully deploy the Azure Machine Learning resources.
+
+The required Azure Resource Providers are:
+
+- `Microsoft.Cdn`
+- `Microsoft.PolicyInsights`
+- `Microsoft.MachineLearningServices`
+- `Microsoft.ApiManagement`
+
+Follow these steps to check if the Resource Providers are registered, and if not then you'll register them:
+
+1. Run the following command to check whether the Resource Providers are registered on your Azure Subscription:
+
+    ```azurecli
+    az provider list --query "[?namespace=='Microsoft.Cdn' || namespace=='Microsoft.PolicyInsights' || namespace == 'Microsoft.MachineLearningServices' || namespace == 'Microsoft.ApiManagement'].{Namespace: namespace, RegistrationState: registrationState}" -o table
+    ```
+
+    Alternatively, you could also navigate to the **Subscription** within the **Azure Portal**, then navigate to **Resource providers** under **Settings**. This will also allow you to view the registered Resource Providers for the Subscription, as well as register them.
+
+    The console output will look similar to the following:
+
+    ```text
+    Namespace                          RegistrationState    
+    ---------------------------------  -------------------  
+    Microsoft.MachineLearningServices  NotRegistered        
+    Microsoft.Cdn                      Registered           
+    Microsoft.PolicyInsights           NotRegistered        
+    Microsoft.ApiManagement            NotRegistered        
+    ```
+
+    The console output will show the Resource Provider and the **RegistrationState**. If the **RegistrationState** shows a value of **Registered** then the Resource Provider is registered on the Azure Subscription.
+
+2. To register all the Resource Providers on the Azure Subscription, run the following commands:
+
+    ```azurecli
+    az provider register --namespace Microsoft.MachineLearningServices
+    az provider register --namespace Microsoft.Cdn
+    az provider register --namespace Microsoft.PolicyInsights
+    az provider register --namespace Microsoft.ApiManagement
+    ```
+
+    If one or more of the Resource Providers are already registered, then only run the command for the Resource Providers that are not registered.

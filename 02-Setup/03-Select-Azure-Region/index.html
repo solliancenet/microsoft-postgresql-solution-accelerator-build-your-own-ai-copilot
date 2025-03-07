@@ -1988,7 +1988,11 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Selected an Azure region for workshop resources</li>
 </ul>
 <h2 id="review-regional-availability-and-azure-openai-quotas">Review regional availability and Azure OpenAI quotas<a class="headerlink" href="#review-regional-availability-and-azure-openai-quotas" title="Permanent link">&para;</a></h2>
-<p>There are only a handful of Azure regions that support all of the required resources and capabilities needed to successfully complete this workshop. You must also verify you have the required Azure OpenAI model <code>Standard</code> TPM capacity. Follow the instructions below to review regional availability of the required services, models, and capabilities, and then select one of those for your deployment.</p>
+<p>There are only a handful of Azure regions that support all of the required resources and capabilities needed to successfully complete this workshop.</p>
+<div class="admonition danger">
+<p class="admonition-title">Not selecting an appropriate region will result in a deployment failure!</p>
+</div>
+<p>Follow the instructions below to review regional availability of the required services, models, and capabilities, and then select one of those for your deployment.</p>
 <ol>
 <li>
 <p>Review the regional availability guidance for the <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint">gpt-4o</a> and <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint">text-embedding-ada-002</a> models in Azure OpenAI.</p>

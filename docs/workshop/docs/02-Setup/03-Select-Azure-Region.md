@@ -6,7 +6,11 @@ To ensure you can successfully deploy the Azure resources using the `azd up` com
 
 ## Review regional availability and Azure OpenAI quotas
 
-There are only a handful of Azure regions that support all of the required resources and capabilities needed to successfully complete this workshop. You must also verify you have the required Azure OpenAI model `Standard` TPM capacity. Follow the instructions below to review regional availability of the required services, models, and capabilities, and then select one of those for your deployment.
+There are only a handful of Azure regions that support all of the required resources and capabilities needed to successfully complete this workshop.
+
+!!! danger "Not selecting an appropriate region will result in a deployment failure!"
+
+Follow the instructions below to review regional availability of the required services, models, and capabilities, and then select one of those for your deployment.
 
 1. Review the regional availability guidance for the [gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint) and [text-embedding-ada-002](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI.
 

@@ -50,7 +50,7 @@ _Select each tab below to learn more about how the movement of data in the conte
 
           1. Generate and save vector embeddings of document chunks using Azure OpenAI's `text-embedding-ada-002` model.
 
-          2. Create abstractive summaries of SOWs using the Azure AI Language service.
+          2. Create summaries of SOWs using the Azure AI Language service.
 
     7. Document data is then sent through an AI-driven data validation process on the API that uses Azure OpenAI to analyze the data extracted by Document Intelligence, ensuring it conforms to expected standards and is accurate based on related data already in the system.
         

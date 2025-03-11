@@ -25,7 +25,7 @@ To be able to complete this solution accelerator, you will need:
       - Review the regional availability guidance for the [gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#standard-models-by-endpoint) and [text-embedding-ada-002](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-embeddings#standard-models-by-endpoint) models in Azure OpenAI.
         - Select a region that **supports the Azure OpenAI `gpt-4o` and `text-embedding-ada-002` models**.
         - Ensure you have a **at least 10K TPMs of `Standard` capacity available in the region** for both the `gpt-4o` and `text-embedding-ada-002` models. Follow [these instructions](https://learn.microsoft.com/azure/ai-services/openai/how-to/quota?tabs=rest#view-and-request-quota) to check your available quota.
-      - Check the [text abstractive summarization regional availability](https://learn.microsoft.com/azure/ai-services/language-service/summarization/region-support#regional-availability-table)
+      - Check the [text abstractive summarization regional availability](https://learn.microsoft.com/azure/ai-services/language-service/concepts/regional-support#summarization)
         - Select a region that supports _abstractive summarization_ and the required Azure OpenAI models!
         - Selecting a region that does not support _abstractive summarization_ will not cause a deployment failure, but will require you to make code changes later in the workshop to use _extractive summarization_ in its place.
 

@@ -6,7 +6,7 @@ The _Woodgrove Bank Contract Management_ application automates extracting, valid
 
     The architecture is designed for flexibility, allowing adaptation to custom datasets beyond the default sample data. If you plan to use your own data, it is recommended to review the database schema, data pipelines, and indexing strategies to ensure compatibility. Suggested changes and guidance for customization are provided in the documentation to help streamline this process.
 
-Throughout this solution accelerator, you will enhance the application with AI capabilities. The application consists of a REACT single page application (SPA) providing the UX (user experience), a backend API written in Python using FastAPI, and various Azure services. The solution implements the following high-level architecture:
+Throughout this solution accelerator, you will enhance the application with AI capabilities. The application consists of a REACT single page application (SPA) providing the frontend, and a backend API written in Python using FastAPI, and various Azure services. The solution implements the following high-level architecture:
 
 ![High-level architecture diagram for the solution](../img/solution-architecture-diagram.png)
 
@@ -28,15 +28,15 @@ _Select each tab below to learn more about how the movement of data in the conte
 
     1. SOWs, invoices, and related documents are ingested via the Woodgrove Bank Contract Management Portal, a REACT Single Page Application (SPA) accessed through a web browser. Internal users and external vendors can submit documents via the portal.
 
-    2. The SPA web app sends uploaded documents directly with the backend API's `/documents` endpoint.
+    2. The web app sends uploaded documents directly with the backend API's `/documents` endpoint.
 
-    3. The API, hosted as an [Azure Container App](https://learn.microsoft.com/azure/container-apps/overview) (ACA), saves the uploaded documents into a container in Azure Blob storage.
+    3. The API, hosted as an [Azure Container App](https://learn.microsoft.com/azure/container-apps/overview) (ACA), saves the uploaded documents in Azure Blob storage.
 
           1. Storing the original documents in blob storage allows raw data to be persisted.
 
-          2. Should processing errors be detected or system requirements change, documents can be easily reprocessed.
+          2. If processing errors are detected, or system requirements change, documents can be easily reprocessed.
 
-    4. When new documents are added into blob storage, the Data Ingestion Process on the API is invoked.
+    4. When new documents are added into blob storage:
 
           1. The data ingestion process handles data extraction and processing by sending uploaded documents to the Azure AI Document Intelligence service.
 
@@ -44,7 +44,7 @@ _Select each tab below to learn more about how the movement of data in the conte
 
           3. Document Intelligence's Semantic Chunking capability recognizes document structures, capturing headings and chunking the content body based on semantic coherence, such as paragraphs and sentences. This ensures that the chunks are of higher quality for use in RAG pattern queries.
 
-    5. The extracted document data securely written to Azure Database for PostgreSQL flexible server by the API.
+    5. The extracted document data is securely written to Azure Database for PostgreSQL flexible server by the API.
 
     6. As part of the database insert statement, the GenAI capabilities of the `azure_ai` extension are used to:
 

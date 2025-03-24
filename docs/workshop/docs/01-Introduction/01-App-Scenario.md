@@ -2,7 +2,7 @@
 
 ## Streamlining Contract Validation in Financial Services
 
-In the financial services industry, validating contract-related documents such as Statements of Work (SOWs) and invoices presents unique challenges. Ensuring that invoices align with SOWs, especially for milestone-based payments and specific deliverables, can be a meticulous and error-prone process. Traditionally, this validation involves manual comparison and cross-checking, often leading to delays, errors, and increased operational costs. This accelerator offers a solution that leverages Azure Database for PostgreSQL - Flexible and Azure's comprehensive suite of AI services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
+In the financial services industry, validating contract-related documents such as Statements of Work (SOWs) and invoices presents unique challenges. Ensuring that invoices align with SOWs, especially for milestone-based payments and specific deliverables, can be a meticulous and error-prone process. Traditionally, this validation involves manual comparison and cross-checking, often leading to delays, errors, and increased operational costs. This accelerator offers a solution that leverages Azure Database for PostgreSQL - Flexible Server and Azure's comprehensive suite of AI services to automate and streamline this process, resulting in faster, more accurate, and cost-effective invoice validation.
 
 The accelerator is designed to demonstrate how an existing financial services application can be enhanced by integrating advanced AI capabilities into Azure Database for PostgreSQL through the Azure AI extension and incorporating Azure OpenAI's GPT-4 model to validate and review contract-related documents.
 
@@ -16,7 +16,7 @@ The accelerator is designed to demonstrate how an existing financial services ap
 
 You have been provided starter code and deployment scripts for the _Woodgrove Bank_ web application. This application comprises an enterprise user portal integrated with a custom backend API. You will enhance this application by integrating Azure AI services throughout this accelerator. Key steps include:
 
-1. **Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL**: Use the Azure AI `azure_ai` and pgvector (`vector`) extensions to extend your PostgreSQL database with advanced GenAI and vector search capabilities.
+1. **Integrating Generative AI (GenAI) Capabilities into Azure Database for PostgreSQL**: Use the Azure AI `azure_ai` and pgvector (`vector`) extensions to enhance your PostgreSQL database with advanced GenAI and vector search capabilities.
 2. **Automating Data Validation with AI:** Enhance the data ingestion process with automated, AI-driven validation using Azure Document Intelligence and Azure AI services.
 3. **Building a Copilot:** Create an intelligent assistant using Azure OpenAI and Azure Database for PostgreSQL - Flexible Server, incorporating the Retrieval Augmented Generation (RAG) design pattern to ensure its responses are based on the private data maintained by the enterprise.
 4. **Adding GraphRAG functionality**: Install the Apache AGE (`age`) extension to allow your PostgreSQL database to be used as a graph database, providing a comprehensive solution for analyzing interconnected data.

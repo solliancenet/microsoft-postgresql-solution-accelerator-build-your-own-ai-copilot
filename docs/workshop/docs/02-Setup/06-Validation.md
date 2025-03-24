@@ -30,7 +30,7 @@ In this section, you will validate your setup before moving on to the next phase
 
 2. You may be presented with a "Welcome to Microsoft Azure" screen. Select **Cancel** (to dismiss it) or click **Get Started** (to take an introductory tour of the Azure Portal).
 
-3. You should be taken directly to the Resource Groups page for your subscription. In the list of resource groups, locate the one named `rg-postgresql-accelerator` (or, if you assigned a different name, find that one). This resource group was created for you as part of the `azd up` resource deployment. It contains all of the Azure resources required to build and deploy your AI-enable solution.
+3. You should be taken directly to the Resource Groups page for your subscription. In the list of resource groups, locate the one named `rg-postgresql-accelerator` (or, if you assigned a different name, find that one). This resource group was created for you as part of the `azd up` resource deployment. It contains all of the Azure resources required to build and deploy your AI-enabled solution.
 
     !!! tip "You can use the search filter to reduce the number resource groups displayed."
 
